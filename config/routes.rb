@@ -1,4 +1,16 @@
 Studyhall::Application.routes.draw do
+  get "whiteboards/index"
+
+  get "whiteboards/new"
+
+  get "whiteboards/create"
+
+  get "whiteboards/show"
+
+  get "whiteboards/edit"
+
+  get "whiteboards/update"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
