@@ -1,11 +1,20 @@
 development:
-  twiddla_login: brentmc79
-  twiddla_password: intridea4me
+  whiteboard:
+    service: twiddla
+    login: brentmc79
+    password: intridea4me
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
 
 test:
-  twiddla_login: 
-  twiddla_password: 
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
 
 production:
-  twiddla_login: 
-  twiddla_password: 
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
