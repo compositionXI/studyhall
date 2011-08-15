@@ -1,4 +1,7 @@
 class Poc::WhiteboardsController < ApplicationController
+
+  layout "poc"
+
   def index
   end
 
