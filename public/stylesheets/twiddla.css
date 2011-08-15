@@ -1,0 +1,21 @@
+#skyNav_imgWhiteboardLogo{
+  display:none;
+}
+#skyNav_btnRoomDetail{
+  display:none;
+}
+iframe#frameSubject{
+  overflow-y:hidden;
+}
+#divWelcomeMessage{
+  display:none;
+}
+.fadelabel{
+  display:none;
+}
+.separator{
+  margin-left:0 !important;
+}
+#divSubToolBar{
+  padding-left:0;
+}

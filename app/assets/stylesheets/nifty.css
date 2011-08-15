@@ -73,3 +73,46 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+ul.component_list{
+  display:inline-block;
+  float:left;
+  width:150px;
+  margin:10px 0;
+  padding:0;
+  list-style:none;
+}
+ul.component_list li{
+  padding-left:3px;
+}
+ul.component_list li.custom_css{
+  background:#DDD;
+  border:solid 1px #AAA;
+  padding:3px;
+  margin-bottom:2px;
+}
+
+div.clearfix{
+  float:none;
+  clear:both;
+}
+
+#whiteboard{
+  float:left;
+  opacity:0;
+}
+
+#components{
+  display:inline-block;
+  float:left;
+  width:240px;
+}
+#components h2{
+  margin-left:20px;
+}
+form.edit_poc_whiteboard{
+  margin-left:20px;
+}
+form.edit_poc_whiteboard li.recommended{
+  font-weight:bold;
+}

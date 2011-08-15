@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815161523) do
+ActiveRecord::Schema.define(:version => 20110815212245) do
 
   create_table "poc_whiteboards", :force => true do |t|
     t.string  "session_identifier"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20110815161523) do
     t.boolean "email_component"
     t.boolean "widgets_component"
     t.boolean "math_component"
+    t.boolean "custom_css"
+    t.boolean "fadein_js"
   end
 
 end

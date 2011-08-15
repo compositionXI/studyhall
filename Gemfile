@@ -17,7 +17,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+gem 'httparty'
 gem "nifty-generators", :group => :development
 
 # Use unicorn as the web server
