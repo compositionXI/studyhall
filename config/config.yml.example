@@ -1,0 +1,11 @@
+development:
+  twiddla_login: brentmc79
+  twiddla_password: intridea4me
+
+test:
+  twiddla_login: 
+  twiddla_password: 
+
+production:
+  twiddla_login: 
+  twiddla_password: 
