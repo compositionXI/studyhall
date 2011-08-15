@@ -1,2 +1,13 @@
-<h1>Poc::Whiteboards#edit</h1>
-<p>Find me in app/views/poc/whiteboards/edit.html.erb</p>
+<h1>Poc::Whiteboards#new</h1>
+<p>Find me in app/views/poc/whiteboards/new.html.erb</p>
+<%= form_for @whiteboard do |f| %>
+  <% Poc::Whiteboard::OPTIONAL_COMPONENTS.in_groups_of(4) do |group| %>
+    <ul class="component_list">
+      <% group.compact.each do |component| %>
+        <li><%= f.check_box "#{component}_component".to_sym %><%= f.label "#{component}_component".to_sym, component.capitalize %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="clearfix"></div>
+  <%= f.submit "Start Whiteboard" %>
+<% end %>
