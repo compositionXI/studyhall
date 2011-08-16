@@ -91,6 +91,17 @@ ul.component_list li.custom_css{
   padding:3px;
   margin-bottom:2px;
 }
+form.new_poc_whiteboard ul.custom_components{
+  width:300px;
+  padding-left:0px;
+}
+form.new_poc_whiteboard ul.custom_components li{
+  display:inline;
+  background:#DDD;
+  border:solid 1px #AAA;
+  padding:3px 5px;
+  margin-bottom:2px;
+}
 
 div.clearfix{
   float:none;
@@ -115,4 +126,10 @@ form.edit_poc_whiteboard{
 }
 form.edit_poc_whiteboard li.recommended{
   font-weight:bold;
+}
+a.button{
+  padding:3px 5px;
+  background:#4B7399;
+  color:#FFF;
+  text-decoration:none;
 }

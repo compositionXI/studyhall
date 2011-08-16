@@ -1,8 +1,13 @@
 Studyhall::Application.routes.draw do
 
+  get "poc/index"
+
   namespace :poc do
     resources :whiteboards
   end
+  resources :poc, :only => :index
+
+  root :to => "poc#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

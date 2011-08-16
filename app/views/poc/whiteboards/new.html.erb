@@ -1,5 +1,8 @@
 <h1>Create A New Whiteboard</h1>
+<h2>Select components to include:</h2>
 <%= form_for @whiteboard do |f| %>
+  <a href="#" class="selector all">All</a>&nbsp;|&nbsp;<a href="#" class="selector none">None</a>
+  <div class="clearfix"></div>
   <% Poc::Whiteboard::OPTIONAL_COMPONENTS.in_groups_of(4) do |group| %>
     <ul class="component_list">
       <% group.compact.each do |component| %>
@@ -7,6 +10,11 @@
       <% end %>
     </ul>
   <% end %>
+  <div class="clearfix"></div>
+  <ul class="custom_components">
+    <li class="custom_css"><%= f.check_box :custom_css %><%= f.label :custom_css, "Custom CSS" %></li>
+    <li class="custom_css"><%= f.check_box :fadein_js %><%= f.label :fadein_js, "Custom Javascript" %></li>
+  </ul>
   <div class="clearfix"></div>
   <%= f.submit "Start Whiteboard" %>
 <% end %>
