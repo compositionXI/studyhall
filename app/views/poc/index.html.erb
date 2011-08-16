@@ -1,0 +1,8 @@
+<h1>StudyHall Proof of Concept</h1>
+<h2>Whiteboard Examples</h2>
+<ul>
+  <% @whiteboards.each do |wb| %>
+    <li><%= link_to wb.name, wb %></li>
+  <% end %>
+</ul>
+<%= link_to "New Whiteboard", new_poc_whiteboard_path, :class => "button" %>
