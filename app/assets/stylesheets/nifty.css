@@ -133,3 +133,8 @@ a.button{
   color:#FFF;
   text-decoration:none;
 }
+.column{
+  display:inline-block;
+  width:400px;
+  vertical-align:top;
+}

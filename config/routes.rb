@@ -5,6 +5,9 @@ Studyhall::Application.routes.draw do
   namespace :poc do
     resources :whiteboards
   end
+  namespace :tokbox do
+    resources :rooms
+  end
   resources :poc, :only => :index
 
   root :to => "poc#index"
