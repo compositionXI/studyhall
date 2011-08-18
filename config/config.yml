@@ -1,0 +1,20 @@
+development:
+  whiteboard:
+    service: twiddla
+    login: brentmc79
+    password: intridea4me
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+
+test:
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+
+production:
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math

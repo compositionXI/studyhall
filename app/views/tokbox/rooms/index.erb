@@ -1,0 +1,13 @@
+<h2>Chat Rooms</h2>
+<ul>
+	<% @rooms.each do |r| %>
+		<li><%= link_to r.name, tokbox_room_path(r) %></li>
+	<% end %>
+</ul>
+
+<h2>Create A New Chat Room</h2>
+<%= form_for @new_room, :url => tokbox_rooms_path(@new_room) do |f| %>
+	Name <%= f.text_field :name %><br/>
+	Public <%= f.check_box	:public %> (You'll want to check this.)<br/>
+	<%= submit_tag 'Create' %>
+<% end %>

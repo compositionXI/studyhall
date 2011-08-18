@@ -1,0 +1,2 @@
+module Tokbox::RoomsHelper
+end
