@@ -1,5 +1,7 @@
 class Tokbox::RoomsController < ApplicationController
   
+  layout "poc"
+
   before_filter :init_opentok, :only => ["show", "create"]
   
   def index
