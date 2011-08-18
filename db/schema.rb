@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110817161459) do
-ActiveRecord::Schema.define(:version => 20110815212245) do
+ActiveRecord::Schema.define(:version => 20110817163204) do
 
   create_table "poc_whiteboards", :force => true do |t|
     t.string  "session_identifier"
