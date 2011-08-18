@@ -4,6 +4,7 @@ development:
     login: brentmc79
     password: intridea4me
     hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  host: localhost:3001
 
 test:
   whiteboard:
@@ -18,3 +19,4 @@ production:
     login: 
     password: 
     hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  host: shpoc.heroku.com
