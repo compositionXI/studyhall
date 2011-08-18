@@ -1,4 +1,4 @@
-<h1>Whiteboard Example</h1>
+<h1><%= link_to "Home", root_path %> > Whiteboard Example</h1>
 <iframe id="whiteboard" <%= @whiteboard.fadein_js? ? 'class="fadein" '.html_safe : "" %>src="<%= @whiteboard.url %>" frameborder="1" width="800" height="610"></iframe>
 <div id="components">
   <h2>Included Components</h2>

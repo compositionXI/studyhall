@@ -156,7 +156,7 @@ function hide(id) {
 
 </script>
 
-<h2>Chat Room: <%= @room.name %></h2>
+<h2><%= link_to "Home", root_path %> > Chat Room: <%= @room.name %></h2>
 <div id="opentok_console"></div>
 <div id="links">
 <input type="button" value="Connect" id ="connectLink" onClick="javascript:connect()" />

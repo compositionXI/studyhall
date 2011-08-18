@@ -138,3 +138,16 @@ a.button{
   width:400px;
   vertical-align:top;
 }
+ul.form_fields{
+  width:300px;
+  margin:10px 0;
+  padding:0;
+  list-style:none;
+}
+ul.form_fields li {
+  margin:3px 0;
+}
+ul.form_fields label {
+  width:45px;
+  display:inline-block;
+}
