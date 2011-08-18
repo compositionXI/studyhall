@@ -1,0 +1,6 @@
+<h1>All Whiteboard Examples</h1>
+<ul>
+  <% @whiteboards.each do |wb| %>
+    <li><%= link_to wb.name, wb %></li>
+  <% end %>
+</ul>
