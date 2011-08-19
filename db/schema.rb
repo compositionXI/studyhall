@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20110819163653) do
 
   create_table "poc_study_sessions", :force => true do |t|
     t.string   "name"
-    t.integer  "poc_whitebord_id"
+    t.integer  "poc_whiteboard_id"
     t.integer  "poc_room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -44,8 +44,6 @@ ActiveRecord::Schema.define(:version => 20110819163653) do
     t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "max_participants"
-    t.integer  "total_participants", :default => 0, :null => false
   end
 
 end
