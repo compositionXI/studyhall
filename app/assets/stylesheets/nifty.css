@@ -151,3 +151,8 @@ ul.form_fields label {
   width:45px;
   display:inline-block;
 }
+#video_sidebar {
+  display:inline-block;
+  float:left;
+  width:300px;
+}

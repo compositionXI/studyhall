@@ -25,7 +25,7 @@ class Study::StudySessionsController < ApplicationController
     @room = Poc::Room.new
     @room.sessionId = session.session_id
     @room.save
-    @whiteboard = Poc::Whiteboard.new
+    @whiteboard = Poc::Whiteboard.new(:etherpad_component => true, :documents_component => true, :custom_css => true)
     @whiteboard.save
     @study_session = Poc::StudySession.new(params[:poc_study_session])
     @study_session.poc_whiteboard_id = @whiteboard.id
