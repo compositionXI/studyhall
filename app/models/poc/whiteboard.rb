@@ -47,7 +47,7 @@ class Poc::Whiteboard < ActiveRecord::Base
     params << "hide=#{hidden_components.join(",")}"
     params << "guestname=brent"
     params << "autostart=true"
-    params << "css=http://localhost:3000/stylesheets/twiddla.css" if custom_css?
+    params << "css=http://#{APP_CONFIG["host"]}/stylesheets/twiddla.css" if custom_css?
     full_url = base
     full_url << uri
     full_url << "?" if params.any?
