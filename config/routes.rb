@@ -9,6 +9,10 @@ Studyhall::Application.routes.draw do
     resources :rooms
   end
   resources :poc, :only => :index
+  
+  namespace :study do
+    resources :study_sessions
+  end
 
   root :to => "poc#index"
 

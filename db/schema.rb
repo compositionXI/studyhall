@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110817163204) do
+ActiveRecord::Schema.define(:version => 20110819163653) do
+
+  create_table "poc_study_sessions", :force => true do |t|
+    t.string   "name"
+    t.integer  "poc_whitebord_id"
+    t.integer  "poc_room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "poc_whiteboards", :force => true do |t|
     t.string  "session_identifier"
@@ -36,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20110817163204) do
     t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "max_participants"
+    t.integer  "total_participants", :default => 0, :null => false
   end
 
 end

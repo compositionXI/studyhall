@@ -17,3 +17,12 @@
   </ul>
   <%= link_to "New Video Chat", new_tokbox_room_path, :class => "button" %>
 </div>
+<div class="column">
+  <h2>Study Session Examples</h2>
+  <ul>
+    <% @study_sessions.each do |ss| %>
+      <li><%= link_to ss.name, study_study_session_path(ss) %></li>
+    <% end %>
+  </ul>
+  <%= link_to "New Study Session", new_study_study_session_path, :class => "button" %>
+</div>

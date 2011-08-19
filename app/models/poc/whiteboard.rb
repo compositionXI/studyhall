@@ -1,6 +1,8 @@
 class Poc::Whiteboard < ActiveRecord::Base
   set_table_name :poc_whiteboards
 
+  belongs_to :poc_study_session
+
   before_validation :retrieve_session_identifier
 
   OPTIONAL_COMPONENTS = %w{chat invite profile voice etherpad documents images bottomtray email widgets math}

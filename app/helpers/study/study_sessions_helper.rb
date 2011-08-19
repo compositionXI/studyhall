@@ -1,0 +1,2 @@
+module Study::StudySessionsHelper
+end
