@@ -1,2 +1,3 @@
-module ApplicationHelper
+module ApplicationHelper  
+  roles = ["standard", "moderator", "admin"]
 end
