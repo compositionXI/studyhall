@@ -1,0 +1,21 @@
+<h1>StudyHall Login</h1>
+
+<ul>
+  <%= form_for @user_session, :url => {:action => "create"} do |f| %>
+    <li>
+      <%= f.label :login %>
+      <%= f.text_field :login %>
+    </li>
+    <li>
+      <%= f.label :password%>
+      <%= f.password_field :password%>
+    </li>
+    <li>
+      <%= f.check_box :remember_me%>
+      <%= f.label :remember_me%>
+    </li>
+      <%= f.submit "Login" %>
+  <% end %>
+</ul>
+
+<%= link_to "Create New Account", new_user_path if @current_user.nil? || @current_user.has_role?("Admin") %>

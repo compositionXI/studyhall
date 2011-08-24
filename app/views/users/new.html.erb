@@ -1,14 +1,2 @@
 <h2>Create New User</h2>
-<ul>
-<%= form_for @user do |f| %>
-  <li><%= f.label "Name", :name %> <%= f.text_field :name %></li>
-  <li><%= f.label "Gender", :gender %> <%= select_tag( :extracurriculars, options_for_select([['Male', "male"], ["Female", 'female']]) )%></li>
-  <li><%= f.label "School", :school %> <%= f.text_field :school %></li>
-  <li><%= f.label "Email", :email %> <%= f.text_field :email %></li>
-  <li><%= f.label "Major", :major %> <%= f.text_field :major %></li>
-  <li><%= f.label "GPA", :gpa %> <%= f.text_field :gpa %></li>
-  <li><%= f.label "Fraternity", :fraternity %> <%= f.text_field :fraternity %></li>
-  <li><%= f.label "Sorority", :sorority %> <%= f.text_field :sorority %></li>
-  <%= f.submit "Submit" %>
-<% end %>
-</ul>
+<%= render :partial => "form" %>

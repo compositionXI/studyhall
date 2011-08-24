@@ -1,6 +1,8 @@
 <h2>Users</h2>
+<%= link_to "Create New User", new_user_path %>
+
 <ul>
   <% @users.each do |u| %>
-    <li>u.name</li>
+    <li><%= link_to u.name, user_path(u) %></li>
   <% end %>
 </ul>

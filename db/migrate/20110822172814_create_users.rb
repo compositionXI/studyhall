@@ -4,18 +4,18 @@ class CreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :gender
       t.string :school
-      t.string :email, :null => false
+      t.string :email
       t.string :major
-      t.decimal :gpa
+      t.decimal :gpa, :precision => 4, :scale => 3
       t.string :fraternity
       t.string :sorority
       t.text :extracurriculars
       
-      t.string    :login,               :null => false
-      t.string    :crypted_password,    :null => false
-      t.string    :password_salt,       :null => false
-      t.string    :persistence_token,   :null => false
-      t.string    :perishable_token,    :null => false
+      t.string    :login
+      t.string    :crypted_password
+      t.string    :password_salt
+      t.string    :persistence_token
+      t.string    :perishable_token
 
       t.timestamps
     end
