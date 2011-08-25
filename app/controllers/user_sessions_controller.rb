@@ -21,4 +21,8 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Logout successful!"
     redirect_to login_path
   end
+  
+  def forgot_password
+    
+  end
 end

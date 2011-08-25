@@ -17,5 +17,5 @@
       <%= f.submit "Login" %>
   <% end %>
 </ul>
-
+<%= link_to "Forgot Password", new_password_reset_path %>
 <%= link_to "Create New Account", new_user_path if @current_user.nil? || @current_user.has_role?("Admin") %>
