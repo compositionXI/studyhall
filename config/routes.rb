@@ -1,10 +1,13 @@
 Studyhall::Application.routes.draw do
-  
-  get "user_sessions/new"
 
+  resources :contacts
+  resources :abouts
+  match 'about' => "abouts#show", :as => :about_public
   resources :users
   resources :password_resets
   resources :user_sessions
+  
+  resources :faqs
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   

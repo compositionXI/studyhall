@@ -1,0 +1,14 @@
+// Place all the styles related to the Faqs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clearfix { clear:both; }
+
+#faq-list h3 {
+  float: left;
+}
+
+#faq-list .admin-controls {
+  margin: 15px 0 0 10px;
+  float: left;
+}

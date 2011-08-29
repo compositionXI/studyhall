@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823190940) do
+ActiveRecord::Schema.define(:version => 20110829195135) do
+
+  create_table "abouts", :force => true do |t|
+    t.text     "text"
+    t.boolean  "display"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contacts", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "company_name"
+    t.string   "phone"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "extracurriculars", :force => true do |t|
     t.string   "name"
@@ -23,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20110823190940) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
+  end
+
+  create_table "faqs", :force => true do |t|
+    t.string   "question"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_roles", :force => true do |t|
@@ -37,7 +61,7 @@ ActiveRecord::Schema.define(:version => 20110823190940) do
     t.string   "school"
     t.string   "email"
     t.string   "major"
-    t.decimal  "gpa",               :precision => 10, :scale => 0
+    t.decimal  "gpa",               :precision => 4, :scale => 3
     t.string   "fraternity"
     t.string   "sorority"
     t.text     "extracurriculars"

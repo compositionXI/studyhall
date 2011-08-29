@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
     self.role == role
   end
   
+  def admin?
+    self.role == "Admin"
+  end
+  
   def editable_by?(user)
     (self == user) || (user.role == "Admin")
   end

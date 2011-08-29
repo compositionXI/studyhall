@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @about.text.html_safe %>
+</p>
+
+<%- if current_user && current_user.has_role?("Admin") %>
+  <%= link_to 'Edit', edit_about_path(@about) %> |
+<% end %>
+
+<%- if @current_user && @current_user.admin?%>
+  <%= link_to 'Back', abouts_path %>
+<% end %>
