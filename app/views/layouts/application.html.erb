@@ -8,9 +8,9 @@
 </head>
 <body>
   <div>
-    <%= link_to "Login", login_path if @current_user.nil? %>
+    <%= link_to "Login", root_path if @current_user.nil? %>
     <%= link_to "Logout", logout_path if @current_user %>
-    <%= link_to "About", about_public_path %>
+    <%= link_to "About", about_public_path(about_permalink) %>
     <%= link_to "Contact", new_contact_path %>
     <%= link_to "FAQs", faqs_path %>
   </div>

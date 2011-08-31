@@ -8,7 +8,11 @@ class AboutsController < ApplicationController
   end
 
   def show
-    @about = About.find_by_display 1
+    if @current_user && @current_user.admin? && params[:id]
+      @about = About.find params[:id]
+    else
+      @about = About.on_display.first
+    end
     unless @about
       redirect_to root_path
     end

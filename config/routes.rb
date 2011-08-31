@@ -2,7 +2,7 @@ Studyhall::Application.routes.draw do
 
   resources :contacts
   resources :abouts
-  match 'about' => "abouts#show", :as => :about_public
+  
   resources :users
   resources :password_resets
   resources :user_sessions
@@ -12,6 +12,10 @@ Studyhall::Application.routes.draw do
   match 'logout' => "user_sessions#destroy", :as => :logout
   
   root :to => "user_sessions#new"
+  
+  get '/*about_permalink' => "abouts#show", :as => :about_public
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
