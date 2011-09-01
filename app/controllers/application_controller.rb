@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user
+  before_filter :current_user, :fetch_static_pages
 
   private
   
@@ -53,5 +53,9 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+  
+  def fetch_static_pages
+    @static_pages = StaticPage.all
   end
 end

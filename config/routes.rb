@@ -1,19 +1,17 @@
 Studyhall::Application.routes.draw do
 
-  resources :contacts
-  resources :abouts
-  
+  resources :static_pages
+
+  resources :contacts  
   resources :users
   resources :password_resets
   resources :user_sessions
-  
-  resources :faqs
-  match 'login' => "user_sessions#new",      :as => :login
+    match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
   root :to => "user_sessions#new"
   
-  get '/*about_permalink' => "abouts#show", :as => :about_public
+  get '*path' => "static_pages#show", :as => :page
   
   
   # The priority is based upon order of creation:

@@ -10,9 +10,11 @@
   <div>
     <%= link_to "Login", root_path if @current_user.nil? %>
     <%= link_to "Logout", logout_path if @current_user %>
-    <%= link_to "About", about_public_path(about_permalink) %>
+    <%= link_to "StaticPages", static_pages_path if @current_user && @current_user.admin? %>
     <%= link_to "Contact", new_contact_path %>
-    <%= link_to "FAQs", faqs_path %>
+    <% @static_pages.each do |static_page| %>
+      <%= link_to static_page.title, page_path(static_page.slug) %>
+    <% end %>
   </div>
   <%= yield %>
 
