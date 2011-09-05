@@ -1,20 +1,54 @@
-<ul>
-<%= form_for @user do |f| %>
-  <li><%= f.label "Login", :login %> <%= f.text_field :login %></li>
-  <li><%= f.label "Password", :password %> <%= f.password_field :password %></li>
-  <li><%= f.label "Password Confirmation", :password_confirmation %> <%= f.password_field :password_confirmation %></li>
-  <li><%= f.label "Name", :name %> <%= f.text_field :name %></li>
+<%= form_for @user, :html => {:class => "form-stacked"} do |f| %>
+  <div class="clearfix">
+    <%= f.label "Login", :login %> 
+    <div class="input"><%= f.text_field :login %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Password", :password %> 
+    <div class="input"><%= f.password_field :password %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Password Confirmation", :password_confirmation %>
+    <div class="input"><%= f.password_field :password_confirmation %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Name", :name %>
+    <div class="input"><%= f.text_field :name %></div>
+  </div>
   
   <%- if @current_user && @current_user.has_role?("Admin") %>
-    <li><%= f.label "Role", :role %> <%= f.select( "role", UserRole.all.collect {|r| [r.name]} )%></li>
+    <div class="clearfix">
+      <%= f.label "Role", :role %> 
+      <div class="input"><%= f.select( "role", UserRole.all.collect {|r| [r.name]} )%></div>
+    </div>
   <% end %>
-  <li><%= f.label "Gender", :gender %> <%= f.select( "gender", %w[Male Female] )%></li>
-  <li><%= f.label "School", :school %> <%= f.text_field :school %></li>
-  <li><%= f.label "Email", :email %> <%= f.text_field :email %></li>
-  <li><%= f.label "Major", :major %> <%= f.text_field :major %></li>
-  <li><%= f.label "GPA", :gpa %> <%= f.text_field :gpa %></li>
-  <li><%= f.label "Fraternity", :fraternity %> <%= f.text_field :fraternity %></li>
-  <li><%= f.label "Sorority", :sorority %> <%= f.text_field :sorority %></li>
-  <%= f.submit "Submit" %>
+  <div class="clearfix">
+    <%= f.label "Gender", :gender %>
+    <div class="input"><%= f.select( "gender", %w[Male Female] )%></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "School", :school %>
+    <div class="input"><%= f.text_field :school %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Email", :email %>
+    <div class="input"><%= f.text_field :email %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Major", :major %>
+    <div class="input"><%= f.text_field :major %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "GPA", :gpa %>
+    <div class="input"><%= f.text_field :gpa %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Fraternity", :fraternity %>
+    <div class="input"><%= f.text_field :fraternity %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Sorority", :sorority %>
+    <div class="input"><%= f.text_field :sorority %></div>
+  </div>
+  <%= f.submit "Submit", :class => "btn primary" %>
 <% end %>
-</ul>

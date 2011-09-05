@@ -1,4 +1,4 @@
-<%= form_for(@contact) do |f| %>
+<%= form_for @contact, :html => {:class => "form-stacked"} do |f| %>
   <% if @contact.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input"><%= f.text_field :name %></div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input"><%= f.text_field :email %></div>
   </div>
-  <div class="field">
-    <%= f.label :company_name %><br />
-    <%= f.text_field :company_name %>
+  <div class="clearfix">
+    <%= f.label :company_name %>
+    <div class="input"><%= f.text_field :company_name %></div>
   </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
+  <div class="clearfix">
+    <%= f.label :phone %>
+    <div class="input"><%= f.text_field :phone %></div>
   </div>
-  <div class="field">
-    <%= f.label :message %><br />
-    <%= f.text_area :message %>
+  <div class="clearfix">
+    <%= f.label :message %>
+    <div class="input"><%= f.text_area :message %></div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.submit "Create Contact", :class => "btn primary" %>
   </div>
 <% end %>
