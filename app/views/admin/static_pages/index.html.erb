@@ -20,7 +20,7 @@
         <td><%= static_page.text.html_safe %></td>
         <td><%= static_page.slug %></td>
         <td><%= link_to 'Show', static_page, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_static_page_path(static_page), :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_admin_static_page_path(static_page), :class => "btn" %></td>
         <td><%= link_to 'Destroy', static_page, confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
       </tr>
     <% end %>
@@ -29,4 +29,4 @@
 
 <br />
 
-<%= link_to 'New Static Page', new_static_page_path, :class => "btn" %>
+<%= link_to 'New Static Page', new_admin_static_page_path, :class => "btn" %>

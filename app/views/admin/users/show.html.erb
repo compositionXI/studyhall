@@ -1,0 +1,15 @@
+<fieldset>
+  <legend>User: <%= @user.name %></legend>
+  <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
+</fieldset>
+
+<ul class="unstyled spaced">
+  <li>Role: <%= @user.role %></li>
+  <li>Gender: <%= @user.gender %></li>
+  <li>Email: <%= @user.email %></li>
+  <li>School: <%= @user.school %></li>
+  <li>Major: <%= @user.major %></li>
+  <li>GPA: <%= @user.gpa %></li>
+  <li>Fraternity: <%= @user.fraternity %></li>
+  <li>Sorority: <%= @user.sorority %></li>
+</ul>

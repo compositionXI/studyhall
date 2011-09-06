@@ -1,0 +1,13 @@
+<div class="fill">
+  <div class="container">
+    <h3><%= link_to "StudyHall", root_path %></h3>
+    <ul>
+      <li><%= link_to "Login", root_path if @current_user.nil? %></li>
+      <li><%= link_to "Logout", logout_path if @current_user %></li>
+      <li><%= link_to "Contact", new_contact_path %></li>
+      <% @static_pages.each do |static_page| %>
+        <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
+      <% end %>
+      <%= render :partial => 'layouts/admin_options' if @current_user && @current_user.admin? %>
+  </div>
+</div>

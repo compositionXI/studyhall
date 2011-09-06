@@ -1,7 +1,12 @@
 Studyhall::Application.routes.draw do
 
-  resources :static_pages
+  namespace :admin do
+    resources :users
+    resources :static_pages
+  end
 
+
+  resources :static_pages, :only => [:show]
   resources :contacts  
   resources :users
   resources :password_resets
@@ -11,8 +16,7 @@ Studyhall::Application.routes.draw do
   
   root :to => "user_sessions#new"
   
-  get '*path' => "static_pages#show", :as => :page
-  
+  get '*path' => "static_pages#show", :as => :page  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
