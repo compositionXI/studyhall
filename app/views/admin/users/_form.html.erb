@@ -50,6 +50,10 @@
     <%= f.label :Sorority %>
     <div class="input"><%= f.text_field :sorority %></div>
   </div>
+  <div class="clearfix">
+    <%= f.label :avatar %>
+    <div class="input"><%= f.file_field :avatar %></div>
+  </div>
   <%= f.submit "Submit", :class => "btn primary" %>
   <%= link_to 'Cancel', users_path, :class => "btn" %>
 <% end %>
