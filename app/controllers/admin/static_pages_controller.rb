@@ -1,5 +1,6 @@
 class Admin::StaticPagesController < StaticPagesController
   
+  layout "admin"
   before_filter :require_admin
   before_filter :fetch_page, :only => [:edit, :update, :destroy]
   
