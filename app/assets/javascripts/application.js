@@ -7,3 +7,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+	$("body").bind("click", function (e) {
+		$('.dropdown-toggle, .menu').parent("li").removeClass("open");
+		$('.dropdown-toggle, .menu').parent("li").find(".dropdown-menu").css("display", "none");
+	});
+	$(".dropdown-toggle, .menu").click(function (e) {
+		$(this).parent("li").toggleClass('open');
+		$(this).parent("li").find(".dropdown-menu").css("display", "block");
+		return false;
+	});
+});

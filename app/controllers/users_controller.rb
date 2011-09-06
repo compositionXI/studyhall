@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   
-  layout "application"
-  
   before_filter :require_no_user_or_admin, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy]
@@ -44,6 +42,9 @@ class UsersController < ApplicationController
   end
   
   def destroy
+    @user.destroy
+    flash[:notice] = "Account deleted!"
+    redirect_to admin_users_path
   end
 
   protected

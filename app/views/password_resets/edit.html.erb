@@ -1,10 +1,17 @@
-<h2>Reset Password For <%= @user.name %></h2>
-<ul>
-  <%= form_for @user, :url => password_reset_path do |f| %>
-    <li><%= f.label :password %></li>
-    <li><%= f.password_field :password %></li>
-    <li><%= f.label :password_confirmation %></li>
-    <li><%= f.password_field :password_confirmation %></li>
-    <li><%= f.submit "Submit" %></li>
+<fieldset>
+  <legend>Reset Password For <%= @user.name %></legend>
+
+  <%= form_for @user, :url => password_reset_path, :html => {:class => "form-stacked"} do |f| %>
+    <div class="clearfix">
+      <%= f.label :password %>
+      <div class="input"><%= f.password_field :password %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :password_confirmation %>
+      <div class="input"><%= f.password_field :password_confirmation %></div>
+    </div>
+    <div>
+      <%= f.submit "Submit", :class => "btn primary" %>
+    </div>
   <% end %>
-</ul>
+</fieldset>

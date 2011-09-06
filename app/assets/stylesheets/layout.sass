@@ -2,7 +2,7 @@ html
   background-color: #FAECEC
 
 body
-  padding-top: 40px
+  padding-top: 50px
   background-color: #FAECEC
 
 .container
@@ -21,8 +21,27 @@ body
   h3 a:hover
     color: #000000
   
-  ul li a
-    color: #666666
+  ul 
+    li
+      ul
+        background-color: #D3F4FF
+      a, ul li a
+        outline: none
+        color: #666666
   
-  ul li a:hover
-    color: #000000
+      a:hover, ul li a:hover
+        color: #000000
+      
+      a.menu:after, .dropdown-toggle:after
+        border-left: 4px solid transparent
+        border-right: 4px solid transparent
+        border-top: 4px solid black
+        content: "&darr;"
+        display: inline-block
+        height: 0
+        margin-left: 4px
+        margin-top: 8px
+        opacity: 0.5
+        text-indent: -99999px
+        vertical-align: top
+        width: 0

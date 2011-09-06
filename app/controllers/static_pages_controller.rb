@@ -1,5 +1,4 @@
-class StaticPagesController < ApplicationController
-    
+class StaticPagesController < ApplicationController    
 
   def show
     if @current_user && @current_user.admin? && params[:id]

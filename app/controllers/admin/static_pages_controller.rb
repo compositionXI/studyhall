@@ -49,7 +49,7 @@ class Admin::StaticPagesController < StaticPagesController
     @static_page.destroy
 
     respond_to do |format|
-      format.html { redirect_to static_pages_url }
+      format.html { redirect_to admin_static_pages_url }
     end
   end
   

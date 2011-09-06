@@ -34,7 +34,7 @@
   <div>
     <%= f.submit "Submit", :class => "btn primary" %>
     <%- if @current_user && @current_user.admin?%>
-      <%= link_to 'Cancel', contacts_path, :class => "btn" %>
+      <%= link_to 'Show All', contacts_path, :class => "btn" %>
     <%- else %>
       <%= link_to 'Cancel', root_path, :class => "btn" %>
     <% end %>
