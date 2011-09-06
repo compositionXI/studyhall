@@ -19,7 +19,9 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new params[:user]
-    @user.role = "Student" unless @current_user.has_role? "Admin"
+    
+    # FIXME: Figure out how to handle the case where an admin is creating a user. 
+    @user.role = "Student" # unless current_user.has_role? "Admin"
     if @user.save
       flash[:notice] = "Account registered!"
       redirect_to @user
