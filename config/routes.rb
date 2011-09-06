@@ -5,13 +5,13 @@ Studyhall::Application.routes.draw do
     resources :static_pages
   end
 
-
   resources :static_pages, :only => [:show]
   resources :contacts  
   resources :users
   resources :password_resets
   resources :user_sessions
-    match 'login' => "user_sessions#new",      :as => :login
+  
+  match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
   root :to => "user_sessions#new"
