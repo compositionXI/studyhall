@@ -2,8 +2,4 @@
   <legend>Contact</legend>
 
   <%= render 'form' %>
-
-  <%- if @current_user && @current_user.admin?%>
-    <%= link_to 'Back', contacts_path %>
-  <% end %>
 <fieldset>

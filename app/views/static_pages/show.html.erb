@@ -8,6 +8,6 @@
 </p>
 
 <%- if @current_user && @current_user.admin? %>
-  <%= link_to 'Edit', edit_static_page_path(@static_page) %> |
-  <%= link_to 'Back', static_pages_path %>
+  <%= link_to 'Edit', edit_static_page_path(@static_page), :class => "btn" %>
+  <%= link_to 'Back', static_pages_path, :class => "btn" %>
 <% end %>

@@ -32,6 +32,11 @@
     <div class="input"><%= f.text_area :message %></div>
   </div>
   <div>
-    <%= f.submit "Create Contact", :class => "btn primary" %>
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%- if @current_user && @current_user.admin?%>
+      <%= link_to 'Cancel', contacts_path, :class => "btn" %>
+    <%- else %>
+      <%= link_to 'Cancel', root_path, :class => "btn" %>
+    <% end %>
   </div>
 <% end %>
