@@ -1,0 +1,24 @@
+<fieldset>
+  <legend>Study Sessions</legend>
+</fieldset>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @study_sessions.each do |s| %>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= link_to 'Join', s, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_study_session_path(s), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', s, confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Study Session', new_study_session_path, :class => "btn" %>

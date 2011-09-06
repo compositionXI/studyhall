@@ -10,18 +10,9 @@ Studyhall::Application.routes.draw do
   resources :users
   resources :password_resets
   resources :user_sessions
-  
-  namespace :poc do
-    resources :whiteboards
-  end
-  namespace :tokbox do
-    resources :rooms
-  end
-  resources :poc, :only => :index
-  
-  namespace :study do
-    resources :study_sessions
-  end
+  resources :whiteboards
+  resources :rooms
+  resources :study_sessions
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
@@ -29,8 +20,6 @@ Studyhall::Application.routes.draw do
   root :to => "user_sessions#new"
   
   get '*path' => "static_pages#show", :as => :page  
-  
-  get "poc/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -78,14 +67,10 @@ Studyhall::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  namespace :tokbox do 
-    resources :rooms
-  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
-  root :to => 'tokbox/rooms#index'
 
   # See how all your routes lay out with "rake routes"
 

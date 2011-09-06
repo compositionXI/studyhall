@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20110901161720) do
 
-  create_table "abouts", :force => true do |t|
-    t.text     "text"
-    t.boolean  "display"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "permalink"
-  end
-
   create_table "contacts", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -41,13 +33,12 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  create_table "faqs", :force => true do |t|
-    t.string   "question"
-    t.string   "answer"
+  create_table "rooms", :force => true do |t|
+    t.string   "name"
+    t.string   "sessionId"
+    t.boolean  "public"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,16 +51,16 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.datetime "updated_at"
   end
 
-  create_table "user_roles", :force => true do |t|
+  create_table "study_sessions", :force => true do |t|
     t.string   "name"
+    t.integer  "whiteboard_id"
+    t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "poc_study_sessions", :force => true do |t|
+  create_table "user_roles", :force => true do |t|
     t.string   "name"
-    t.integer  "poc_whiteboard_id"
-    t.integer  "poc_room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.string   "role"
   end
 
-  create_table "poc_whiteboards", :force => true do |t|
+  create_table "whiteboards", :force => true do |t|
     t.string  "session_identifier"
     t.boolean "chat_component"
     t.boolean "invite_component"
@@ -109,16 +100,6 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.boolean "math_component"
     t.boolean "custom_css"
     t.boolean "fadein_js"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "rooms", :force => true do |t|
-    t.string   "name"
-    t.string   "sessionId"
-    t.boolean  "public"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

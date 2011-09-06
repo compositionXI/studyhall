@@ -1,0 +1,15 @@
+<iframe id="whiteboard" <%= @whiteboard.fadein_js? ? 'class="fadein" '.html_safe : "" %>src="<%= @whiteboard.url %>" frameborder="1" width="500" height="610"></iframe>
+<div id="components">
+  <h4>Included Components</h4>
+  <%= form_for @whiteboard do |f| %>
+    <ul class="component_list">
+      <% Whiteboard::OPTIONAL_COMPONENTS.each do |component| %>
+        <li class="<%= Whiteboard::RECOMMENDED_COMPONENTS.include?(component) ? "recommended" : "" %>"><%= f.check_box "#{component}_component".to_sym %><%= f.label "#{component}_component".to_sym, component.capitalize %></li>
+      <% end %>
+      <li class="custom_css recommended"><%= f.check_box :custom_css, :class => "recommended" %><%= f.label :custom_css %></li>
+      <li class="custom_css recommended"><%= f.check_box :fadein_js, :class => "recommended" %><%= f.label :fadein_js, "Custom splash" %></li>
+    </ul>
+    <%= f.submit "Restart Whiteboard", :class => "btn" %>
+  <% end %>
+</div>
+<div class="clearfix"></div>

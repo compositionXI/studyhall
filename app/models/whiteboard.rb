@@ -1,7 +1,7 @@
-class Poc::Whiteboard < ActiveRecord::Base
-  set_table_name :poc_whiteboards
+class Whiteboard < ActiveRecord::Base
+  set_table_name :whiteboards
 
-  belongs_to :poc_study_session
+  belongs_to :study_session
 
   before_validation :retrieve_session_identifier
 

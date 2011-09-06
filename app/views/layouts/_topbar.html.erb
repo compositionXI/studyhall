@@ -14,6 +14,7 @@
             <%= link_to "#{@current_user.name}", "#", :class => "dropdown-toggle"  %>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", @current_user %></li>
+              <li><%= link_to "Study", study_sessions_path %></li>
               <%- if @current_user.admin? %>
                 <%= render :partial => "/layouts/admin_options"%>
               <% end %>

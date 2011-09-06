@@ -131,16 +131,13 @@ PLATFORMS
 DEPENDENCIES
   authlogic
   capistrano
-  jquery-rails
-  mysql2
-  rails (= 3.1.0)
-  rails3-generators
-  coffee-rails (~> 3.1.0.rc)
+  coffee-rails (~> 3.1.0)
   httparty
   jquery-rails
   mysql2
   nifty-generators
   opentok
-  rails (= 3.1.0.rc6)
-  sass-rails (~> 3.1.0.rc)
+  rails (= 3.1.0)
+  rails3-generators
+  sass-rails (~> 3.1.0)
   uglifier

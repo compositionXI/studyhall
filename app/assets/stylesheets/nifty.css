@@ -91,11 +91,11 @@ ul.component_list li.custom_css{
   padding:3px;
   margin-bottom:2px;
 }
-form.new_poc_whiteboard ul.custom_components{
+form.new_whiteboard ul.custom_components{
   width:300px;
   padding-left:0px;
 }
-form.new_poc_whiteboard ul.custom_components li{
+form.new_whiteboard ul.custom_components li{
   display:inline;
   background:#DDD;
   border:solid 1px #AAA;
@@ -121,10 +121,10 @@ div.clearfix{
 #components h2{
   margin-left:20px;
 }
-form.edit_poc_whiteboard{
+form.edit_whiteboard{
   margin-left:20px;
 }
-form.edit_poc_whiteboard li.recommended{
+form.edit_whiteboard li.recommended{
   font-weight:bold;
 }
 a.button{
