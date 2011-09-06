@@ -19,7 +19,7 @@ Studyhall::Application.routes.draw do
   
   root :to => "user_sessions#new"
   
-  get '*path' => "static_pages#show", :as => :page  
+  get ':id' => "static_pages#show", :as => :page  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
