@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901161720) do
+ActiveRecord::Schema.define(:version => 20110902093032) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,41 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.integer "user_id"
   end
 
+  create_table "poc_notes", :force => true do |t|
+    t.string   "name"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "poc_study_sessions", :force => true do |t|
+    t.string   "name"
+    t.integer  "poc_whiteboard_id"
+    t.integer  "poc_room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "poc_whiteboards", :force => true do |t|
+    t.string  "session_identifier"
+    t.boolean "chat_component"
+    t.boolean "invite_component"
+    t.boolean "profile_component"
+    t.boolean "voice_component"
+    t.boolean "etherpad_component"
+    t.boolean "documents_component"
+    t.boolean "images_component"
+    t.boolean "bottomtray_component"
+    t.boolean "email_component"
+    t.boolean "widgets_component"
+    t.boolean "math_component"
+    t.boolean "custom_css"
+    t.boolean "fadein_js"
+  end
+
   create_table "rooms", :force => true do |t|
     t.string   "name"
     t.string   "sessionId"
@@ -47,14 +82,6 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.string   "title"
     t.text     "text"
     t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "study_sessions", :force => true do |t|
-    t.string   "name"
-    t.integer  "whiteboard_id"
-    t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,23 +110,6 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
-  end
-
-  create_table "whiteboards", :force => true do |t|
-    t.string  "session_identifier"
-    t.boolean "chat_component"
-    t.boolean "invite_component"
-    t.boolean "profile_component"
-    t.boolean "voice_component"
-    t.boolean "etherpad_component"
-    t.boolean "documents_component"
-    t.boolean "images_component"
-    t.boolean "bottomtray_component"
-    t.boolean "email_component"
-    t.boolean "widgets_component"
-    t.boolean "math_component"
-    t.boolean "custom_css"
-    t.boolean "fadein_js"
   end
 
 end
