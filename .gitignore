@@ -6,3 +6,4 @@ tmp/
 vendor/bundle
 config/database.yml
 .rvmrc
+config/config.yml

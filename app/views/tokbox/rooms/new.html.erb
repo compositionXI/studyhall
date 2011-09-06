@@ -1,0 +1,9 @@
+<h1><%= link_to "Home", root_path %> > Create A New Video Chat</h1>
+<%= form_for @room, :url => tokbox_rooms_path do |f| %>
+  <ul class="form_fields">
+    <li><%= f.label :name %><%= f.text_field :name %></li>
+    <li><%= f.label :public, "Public" %><%= f.check_box :public %><span> (You'll want to check this.)</span></li>
+  </ul>
+  <div class="clearfix"></div>
+  <%= f.submit "Create Video Chat" %>
+<% end %>

@@ -1,0 +1,16 @@
+<h1><%= link_to "Home", root_path %> > Whiteboard Example</h1>
+<iframe id="whiteboard" <%= @whiteboard.fadein_js? ? 'class="fadein" '.html_safe : "" %>src="<%= @whiteboard.url %>" frameborder="1" width="800" height="610"></iframe>
+<div id="components">
+  <h2>Included Components</h2>
+  <%= form_for @whiteboard do |f| %>
+    <ul class="component_list">
+      <% Poc::Whiteboard::OPTIONAL_COMPONENTS.each do |component| %>
+        <li class="<%= Poc::Whiteboard::RECOMMENDED_COMPONENTS.include?(component) ? "recommended" : "" %>"><%= f.check_box "#{component}_component".to_sym %><%= f.label "#{component}_component".to_sym, component.capitalize %></li>
+      <% end %>
+      <li class="custom_css recommended"><%= f.check_box :custom_css, :class => "recommended" %><%= f.label :custom_css %></li>
+      <li class="custom_css recommended"><%= f.check_box :fadein_js, :class => "recommended" %><%= f.label :fadein_js, "Custom splash" %></li>
+    </ul>
+    <%= f.submit "Restart Whiteboard" %>
+  <% end %>
+</div>
+<div class="clearfix"></div>

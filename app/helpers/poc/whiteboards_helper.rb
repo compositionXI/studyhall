@@ -1,0 +1,2 @@
+module Poc::WhiteboardsHelper
+end

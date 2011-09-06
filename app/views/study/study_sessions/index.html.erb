@@ -1,0 +1,6 @@
+<h1>All Study Session Examples</h1>
+<ul>
+  <% @study_sessions.each do |s| %>
+    <li><%= link_to s.name, study_study_session_path(s) %></li>
+  <% end %>
+</ul>

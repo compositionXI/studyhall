@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "faqs", :force => true do |t|
@@ -64,6 +66,14 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.datetime "updated_at"
   end
 
+  create_table "poc_study_sessions", :force => true do |t|
+    t.string   "name"
+    t.integer  "poc_whiteboard_id"
+    t.integer  "poc_room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "gender"
@@ -82,6 +92,33 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+  end
+
+  create_table "poc_whiteboards", :force => true do |t|
+    t.string  "session_identifier"
+    t.boolean "chat_component"
+    t.boolean "invite_component"
+    t.boolean "profile_component"
+    t.boolean "voice_component"
+    t.boolean "etherpad_component"
+    t.boolean "documents_component"
+    t.boolean "images_component"
+    t.boolean "bottomtray_component"
+    t.boolean "email_component"
+    t.boolean "widgets_component"
+    t.boolean "math_component"
+    t.boolean "custom_css"
+    t.boolean "fadein_js"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rooms", :force => true do |t|
+    t.string   "name"
+    t.string   "sessionId"
+    t.boolean  "public"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

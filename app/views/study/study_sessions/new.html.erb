@@ -1,0 +1,9 @@
+<h2>Create New Study Session</h2>
+
+<%= form_for @study_session, :url => study_study_sessions_path do |f| %>
+  <ul class="form_fields">
+    <li><%= f.label :name, "Name" %> <%= f.text_field :name %></li>
+  </ul>
+  <div class="clearfix"></div>
+  <%= f.submit "Create Study Session" %>
+<% end %>
