@@ -1,11 +1,11 @@
 <fieldset>
-  <legend>User: <%= @user.name %></legend>
+  <legend><%= @user.name %></legend>
 </fieldset>
 
 <section class="grid-system">
   <div class="row show-grid">
     <div class="span5 columns">
-      <%= image_tag @user.avatar_url %>
+      <%= image_tag @user.avatar_url(:medium) %>
     </div>
     <div class="span5 columns">
       <ul class="unstyled spaced">
