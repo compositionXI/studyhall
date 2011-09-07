@@ -1,5 +1,9 @@
 Studyhall::Application.routes.draw do
 
+  resources :notes
+
+  resources :notebooks
+
   namespace :admin do
     resources :users
     resources :static_pages
