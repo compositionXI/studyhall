@@ -13,6 +13,7 @@ Studyhall::Application.routes.draw do
   resources :whiteboards
   resources :rooms
   resources :study_sessions
+  resources :home
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
