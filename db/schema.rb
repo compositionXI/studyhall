@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20110901161720) do
 
+  create_table "abouts", :force => true do |t|
+    t.text     "text"
+    t.boolean  "display"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "permalink"
+  end
+
   create_table "contacts", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -33,6 +41,13 @@ ActiveRecord::Schema.define(:version => 20110901161720) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
+  end
+
+  create_table "faqs", :force => true do |t|
+    t.string   "question"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "rooms", :force => true do |t|
