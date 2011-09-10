@@ -1,7 +1,8 @@
-<%= form_for @user, :html => {:class => "form-stacked", :multipart => true} do |f| %>
-  <section class="grid-system">
-    <div class="row show-grid">
-      <div class="span5 columns">
+<h2>Edit <%= @user.name %></h2>
+<%= form_for @user, :html => {:class => "with_columns", :multipart => true} do |f| %>
+  <div class="row show-grid">
+    <div class="span8 columns">
+      <fieldset>
         <div class="clearfix">
           <%= f.label :Login %> 
           <div class="input"><%= f.text_field :login %></div>
@@ -18,7 +19,7 @@
           <%= f.label :Name %>
           <div class="input"><%= f.text_field :name %></div>
         </div>
-  
+
         <%- if @current_user && @current_user.has_role?("Admin") %>
           <div class="clearfix">
             <%= f.label :Role %> 
@@ -53,8 +54,10 @@
           <%= f.label :Sorority %>
           <div class="input"><%= f.text_field :sorority %></div>
         </div>
-      </div>
-      <div class="span5 columns">
+      </fieldset>
+    </div>
+    <div class="span8 columns">
+      <fieldset>
         <div class="clearfix">
           <%= image_tag @user.avatar_url %>
         </div>
@@ -66,9 +69,15 @@
           <%= f.label "Delete Image" %>
           <div class="input"><%= check_box_tag :delete_avatar %></div>
         </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span15 columns">
+      <div class="actions">
+        <%= f.submit "Submit", :class => "btn primary" %>
+        <%= link_to 'Cancel', users_path, :class => "btn" %>
       </div>
     </div>
-  </section>
-  <%= f.submit "Submit", :class => "btn primary" %>
-  <%= link_to 'Cancel', users_path, :class => "btn" %>
+  </div>
 <% end %>
