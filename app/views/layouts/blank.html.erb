@@ -1,0 +1,13 @@
+<% @layout = "fixed_width" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Studyhall</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name + "-" + action_name %> fixed-width">
+  <%= yield %>
+</body>
+</html>
