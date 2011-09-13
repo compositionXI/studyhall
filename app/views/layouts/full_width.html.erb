@@ -1,4 +1,4 @@
-<% @layout = "fixed_width" %>
+<% @layout = "full_width" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +7,8 @@
   <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="<%= controller_name + "-" + action_name %> fixed-width">
+<body class="<%= controller_name + "-" + action_name %> full-width">
   <%= render :partial => "layouts/topbar"%>
-  <div class="main-content">
-    <div class="container">
-      <div class="fill">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+  <%= yield %>
 </body>
 </html>

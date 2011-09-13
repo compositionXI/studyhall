@@ -1,40 +1,8 @@
-<%= form_for @whiteboard do |f| %>
-  <h4>Select components to include:</h4>
-  <a href="#" class="selector all btn">All</a> <a href="#" class="selector none btn">None</a>
-  <div class="clearfix"></div>
-  <section class="grid-system">
-    <div class="row show-grid">
-      <% Whiteboard::OPTIONAL_COMPONENTS.in_groups_of(4) do |group| %>
-            <div class="span3 columns input">
-                <ul class="inputs-list">
-                  <% group.compact.each do |component| %>
-                    <li>
-                      <label>
-                        <%= f.check_box "#{component}_component".to_sym %>
-                        <%= "#{component.capitalize}" %>
-                      </label>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
-      <% end %>
-    </div>
-  </section>
-  <div class="clearfix"></div>
-  <ul class="inputs-list">
-    <li>
-      <label>
-        <%= f.check_box :custom_css %>
-        Custom CSS
-      </label>
-    </li>
-    <li>
-      <label>
-        <%= f.check_box :fadein_js %>
-        Custom Javascript
-      </label>
-    </li>
-  </ul>
-  <div class="clearfix"></div>
-  <%= f.submit "Start Whiteboard", :class => "btn primary" %>
+<%= form_for Whiteboard.new(:study_session => @study_session) do |f| %>
+  <div class="inner-form">
+    <%= f.hidden_field :study_session_id %>
+    <%= f.file_field :upload %>
+    <br/>
+    <%= f.submit "Upload Document", :class => "btn primary" %>
+  </div>
 <% end %>

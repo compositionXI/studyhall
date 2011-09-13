@@ -1,13 +1,14 @@
-<fieldset>
-  <legend><%= @user.name %></legend>
-</fieldset>
-
-<section class="grid-system">
-  <div class="row show-grid">
-    <div class="span5 columns">
+<section>
+  <div class="row">
+    <div class="span16">
+      <h2><%= @user.name %></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span4 column">
       <%= image_tag @user.avatar_url(:medium) %>
     </div>
-    <div class="span5 columns">
+    <div class="span12 column">
       <ul class="unstyled spaced">
         <li><b>Role:</b> <%= @user.role %></li>
         <li><b>Gender:</b> <%= @user.gender %></li>

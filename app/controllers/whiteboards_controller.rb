@@ -6,12 +6,13 @@ class WhiteboardsController < ApplicationController
 
   def new
     @whiteboard = Whiteboard.new
+    render :layout => "blank"
   end
 
   def create
     @whiteboard = Whiteboard.new(params[:whiteboard])
-    if @whiteboard.save
-      redirect_to @whiteboard
+    if @whiteboard.save && @whiteboard.prepare_embed!
+      redirect_to @whiteboard.study_session
     else
       render :action => :new
     end

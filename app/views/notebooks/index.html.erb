@@ -1,0 +1,29 @@
+<div class="main-content">
+  <div id="menubar" class="topbar">
+    <div class="right">
+      <a href="" class="btn">Filter</a>
+      <div class="btn_group">
+        <a href="" class="btn">Grid</a>
+        <a href="" class="btn">List</a>
+      </div>
+      <a href="" class="btn">Edit</a>
+    </div>
+    <div class="left">
+      <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+      <%= link_to "New Notebook", new_notebook_path, :class => "btn" %>
+    </div>
+    <div class="middle">
+      <span>All Items</span>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <ul class="grid">
+    <% @notebooks.each do |notebook| %>
+      <li class="notebook">
+        <a href="<%= notebook_path(notebook) %>" class="name">
+          <span><%= notebook.name %></span>
+        </a>
+      </li>
+    <% end %>
+  </div>
+</div>
