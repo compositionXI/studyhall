@@ -17,6 +17,7 @@
               <li><%= link_to "Profile", @current_user %></li>
               <li><%= link_to "Study", study_sessions_path %></li>
               <li><%= link_to "Notes", notebooks_path %></li>
+              <li><%= link_to "Classes", classes_path %></li>
               <%- if @current_user.admin? %>
                 <%= render :partial => "/layouts/admin_options"%>
               <% end %>

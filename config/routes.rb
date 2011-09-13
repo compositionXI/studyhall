@@ -1,12 +1,14 @@
 Studyhall::Application.routes.draw do
-
   resources :notes
 
   resources :notebooks
+  resources :classes
 
   namespace :admin do
     resources :users
     resources :static_pages
+    resources :schools
+    resources :course_offering_imports
   end
 
   resources :static_pages, :only => [:show]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912023801) do
+ActiveRecord::Schema.define(:version => 20110913041812) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -19,6 +19,31 @@ ActiveRecord::Schema.define(:version => 20110912023801) do
     t.string   "company_name"
     t.string   "phone"
     t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "course_offering_imports", :force => true do |t|
+    t.integer  "school_id"
+    t.integer  "term_id"
+    t.string   "course_offering_import_file_name"
+    t.string   "course_offering_import_content_type"
+    t.string   "course_offering_import_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", :force => true do |t|
+    t.string   "number"
+    t.string   "title"
+    t.integer  "school_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "offering_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,6 +58,14 @@ ActiveRecord::Schema.define(:version => 20110912023801) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
+  end
+
+  create_table "instructors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notebooks", :force => true do |t|
@@ -52,39 +85,14 @@ ActiveRecord::Schema.define(:version => 20110912023801) do
     t.datetime "updated_at"
   end
 
-  create_table "poc_notes", :force => true do |t|
-    t.string   "name"
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
+  create_table "offerings", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "term_id"
+    t.integer  "school_id"
+    t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "poc_study_sessions", :force => true do |t|
-    t.string   "name"
-    t.integer  "poc_whiteboard_id"
-    t.integer  "poc_room_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "poc_whiteboards", :force => true do |t|
-    t.string  "session_identifier"
-    t.boolean "chat_component"
-    t.boolean "invite_component"
-    t.boolean "profile_component"
-    t.boolean "voice_component"
-    t.boolean "etherpad_component"
-    t.boolean "documents_component"
-    t.boolean "images_component"
-    t.boolean "bottomtray_component"
-    t.boolean "email_component"
-    t.boolean "widgets_component"
-    t.boolean "math_component"
-    t.boolean "custom_css"
-    t.boolean "fadein_js"
+    t.string   "section"
   end
 
   create_table "rooms", :force => true do |t|
@@ -95,12 +103,36 @@ ActiveRecord::Schema.define(:version => 20110912023801) do
     t.datetime "updated_at"
   end
 
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "static_pages", :force => true do |t|
     t.string   "title"
     t.text     "text"
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "study_sessions", :force => true do |t|
+    t.string   "name"
+    t.integer  "whiteboard_id"
+    t.integer  "room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "terms", :force => true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "school_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "year"
   end
 
   create_table "user_roles", :force => true do |t|
@@ -131,6 +163,23 @@ ActiveRecord::Schema.define(:version => 20110912023801) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "whiteboards", :force => true do |t|
+    t.string  "session_identifier"
+    t.boolean "chat_component"
+    t.boolean "invite_component"
+    t.boolean "profile_component"
+    t.boolean "voice_component"
+    t.boolean "etherpad_component"
+    t.boolean "documents_component"
+    t.boolean "images_component"
+    t.boolean "bottomtray_component"
+    t.boolean "email_component"
+    t.boolean "widgets_component"
+    t.boolean "math_component"
+    t.boolean "custom_css"
+    t.boolean "fadein_js"
   end
 
 end

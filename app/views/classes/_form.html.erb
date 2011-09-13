@@ -1,0 +1,23 @@
+<%= form_for @enrollment, :url => classes_path, :html => {:class => "form-stacked"} do |f| %>
+  <% if @enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @enrollment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="clearfix">
+    <%= f.label :Choose_course %>
+    <div class="input"><%= select "enrollment", "offering_id", Offering.all.collect {|o| [o.course.title, o.id]} %></div>
+  </div>
+  <div>
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= link_to 'Show All', contacts_path, :class => "btn" %>
+    <%= link_to 'Cancel', root_path, :class => "btn" %>
+  </div>
+<% end %>
