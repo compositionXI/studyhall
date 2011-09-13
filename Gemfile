@@ -9,7 +9,8 @@ gem 'mysql2'
 gem 'authlogic'
 gem 'rails3-generators'
 gem 'opentok'
-
+gem "paperclip", "~> 2.4"
+gem 'capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.

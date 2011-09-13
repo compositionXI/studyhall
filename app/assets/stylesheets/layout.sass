@@ -23,6 +23,8 @@ body
   
   ul 
     li
+      .avatar_thumb
+        
       ul
         background-color: #D3F4FF
       a, ul li a
@@ -31,7 +33,10 @@ body
   
       a:hover, ul li a:hover
         color: #000000
-      
+      a.dropdown-toggle
+        img
+          vertical-align: middle
+        
       a.menu:after, .dropdown-toggle:after
         border-left: 4px solid transparent
         border-right: 4px solid transparent
@@ -40,7 +45,7 @@ body
         display: inline-block
         height: 0
         margin-left: 4px
-        margin-top: 8px
+        margin-top: 16px
         opacity: 0.5
         text-indent: -99999px
         vertical-align: top

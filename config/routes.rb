@@ -13,13 +13,14 @@ Studyhall::Application.routes.draw do
   resources :whiteboards
   resources :rooms
   resources :study_sessions
+  resources :home
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
   
   root :to => "user_sessions#new"
   
-  get '*path' => "static_pages#show", :as => :page  
+  get ':id' => "static_pages#show", :as => :page  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
