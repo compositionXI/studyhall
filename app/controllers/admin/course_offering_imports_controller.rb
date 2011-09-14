@@ -5,10 +5,6 @@ class Admin::CourseOfferingImportsController < ApplicationController
   def index
     @course_offering_imports = CourseOfferingImport.all
   end
-
-  def show
-    @course_offering_import = CourseOfferingImport.find params[:id]
-  end
   
   def new
     @course_offering_import = CourseOfferingImport.new
@@ -44,8 +40,14 @@ class Admin::CourseOfferingImportsController < ApplicationController
     redirect_to admin_course_offering_imports_path
   end
   
+  def import
+    @course_offering_import = CourseOfferingImport.find params[:id]
+    parse_csv_file @course_offering_import
+    redirect_to admin_course_offering_imports_path
+  end
+  
   private
-    def parse_csv_file(coi)
+    def parse_csv_file(coi) #FIXME Chill, bro, it's only 40 lines!
       require "csv"
       path_to_file = "public/system/course_offering_imports/#{coi.id}/original/#{coi.course_offering_import_file_name}"
       lines = CSV.read path_to_file

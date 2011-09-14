@@ -8,8 +8,14 @@ Studyhall::Application.routes.draw do
     resources :users
     resources :static_pages
     resources :schools
-    resources :course_offering_imports
+    resources :course_offering_imports do
+      member do
+        post "import"
+      end
+    end
     resources :courses
+    resources :instructors
+    resources :offerings
   end
 
   resources :static_pages, :only => [:show]

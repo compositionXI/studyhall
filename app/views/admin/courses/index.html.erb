@@ -1,5 +1,5 @@
 <fieldset>
-  <legend>Course Offering Imports</legend>
+  <legend>Courses</legend>
 </fieldset>
 
 <%= link_to 'New Course', new_admin_course_path, :class => "btn" %>
@@ -14,20 +14,18 @@
       <th>Department</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @admin_courses.each do |admin_course| %>
+    <% @courses.each do |course| %>
       <tr>
-        <td><%= admin_course.number %></td>
-        <td><%= admin_course.title %></td>
-        <td><%= admin_course.school.name %></td>
-        <td><%= admin_course.department %></td>
-        <td><%= link_to 'Show', admin_course_path(admin_course), :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_admin_course_path(admin_course), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', admin_course_path(admin_course), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+        <td><%= course.number %></td>
+        <td><%= course.title %></td>
+        <td><%= course.school.name %></td>
+        <td><%= course.department %></td>
+        <td><%= link_to 'Edit', edit_admin_course_path(course), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_course_path(course), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
       </tr>
     <% end %>
   </tbody>

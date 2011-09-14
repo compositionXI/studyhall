@@ -19,7 +19,7 @@
         <td><%= coi.course_offering_import_file_name %></td>
         <td><%= coi.created_at %></td>
         <td><%= coi.updated_at %></td>
-        <td><%= link_to 'Show', admin_course_offering_import_path(coi), :class => "btn" %></td>
+        <td><%= link_to 'Import', import_admin_course_offering_import_path(coi), method: :post,  :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_admin_course_offering_import_path(coi), :class => "btn" %></td>
         <td><%= link_to 'Destroy', admin_course_offering_import_path(coi), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
       </tr>

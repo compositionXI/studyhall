@@ -1,4 +1,4 @@
-<%= form_for @school, :url => classes_path, :html => {:class => "form-stacked"} do |f| %>
+<%= form_for [:admin, @school], :html => {:class => "form-stacked"} do |f| %>
   <% if @school.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>

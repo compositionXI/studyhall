@@ -6,19 +6,19 @@
 
 <table>
   <thead>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
   </thead>
   <tbody>
     <% @schools.each do |s| %>
-    <tr>
-      <td><%= s.name %></td>
-      <td><%= link_to "Edit", edit_admin_school_path(s), :class => "btn" %></td>
-      <td><%= link_to "Show", admin_school_path(s), :class => "btn" %></td>
-      <td><%= link_to "Destroy", admin_school_path(s), :method => "DELETE", :class => "btn" %></td>
-    </tr>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= link_to "Edit", edit_admin_school_path(s), :class => "btn" %></td>
+        <td><%= link_to "Destroy", admin_school_path(s), :method => "DELETE", :class => "btn" %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
