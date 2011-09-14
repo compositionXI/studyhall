@@ -1,13 +1,14 @@
 <fieldset>
   <legend>Course Offering Imports</legend>
 </fieldset>
+
 <%= link_to "Upload New Course Data", new_admin_course_offering_import_path, :class => "btn" %>
 
 <table>
   <thead>
-    <th>School</th>
-    <th>Term</th>
     <th>File Name</th>
+    <th>Upload Date</th>
+    <th>Last Edit</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,9 +16,9 @@
   <tbody>
     <% @course_offering_imports.each do |coi| %>
       <tr>
-        <td><%= coi.school.name %></td>
-        <td><%= coi.term.name %></td>
         <td><%= coi.course_offering_import_file_name %></td>
+        <td><%= coi.created_at %></td>
+        <td><%= coi.updated_at %></td>
         <td><%= link_to 'Show', admin_course_offering_import_path(coi), :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_admin_course_offering_import_path(coi), :class => "btn" %></td>
         <td><%= link_to 'Destroy', admin_course_offering_import_path(coi), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110913041812) do
+ActiveRecord::Schema.define(:version => 20110913025409) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(:version => 20110913041812) do
   end
 
   create_table "course_offering_imports", :force => true do |t|
-    t.integer  "school_id"
-    t.integer  "term_id"
     t.string   "course_offering_import_file_name"
     t.string   "course_offering_import_content_type"
     t.string   "course_offering_import_file_size"
@@ -37,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20110913041812) do
     t.string   "number"
     t.string   "title"
     t.integer  "school_id"
+    t.string   "department"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,12 +86,11 @@ ActiveRecord::Schema.define(:version => 20110913041812) do
 
   create_table "offerings", :force => true do |t|
     t.integer  "course_id"
-    t.integer  "term_id"
+    t.string   "term"
     t.integer  "school_id"
     t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "section"
   end
 
   create_table "rooms", :force => true do |t|
@@ -123,16 +121,6 @@ ActiveRecord::Schema.define(:version => 20110913041812) do
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "terms", :force => true do |t|
-    t.string   "name"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "school_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "year"
   end
 
   create_table "user_roles", :force => true do |t|
@@ -166,20 +154,14 @@ ActiveRecord::Schema.define(:version => 20110913041812) do
   end
 
   create_table "whiteboards", :force => true do |t|
-    t.string  "session_identifier"
-    t.boolean "chat_component"
-    t.boolean "invite_component"
-    t.boolean "profile_component"
-    t.boolean "voice_component"
-    t.boolean "etherpad_component"
-    t.boolean "documents_component"
-    t.boolean "images_component"
-    t.boolean "bottomtray_component"
-    t.boolean "email_component"
-    t.boolean "widgets_component"
-    t.boolean "math_component"
-    t.boolean "custom_css"
-    t.boolean "fadein_js"
+    t.string   "session_identifier"
+    t.integer  "study_session_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.string   "upload_uuid"
+    t.string   "short_id"
   end
 
 end

@@ -11,19 +11,12 @@
     </div>
   <% end %>
   <div class="clearfix">
-    <%= f.label :school %>
-  <div class="input"><%= select "course_offering_import", "school_id", School.all.collect {|s| [s.name, s.id]} %></div>
-  </div>
-  <div class="clearfix">
-    <%= f.label :term %>
-    <div class="input"><%= select "course_offering_import", "term_id", Term.all.collect {|t| [t.name, t.id]} %></div>
-  </div>
   <div class="clearfix">
     <%= f.label :file %>
     <div class="input"><%= f.file_field :course_offering_import %></div>
   </div>
   <div>
     <%= f.submit "Submit", :class => "btn primary" %>
-    <%= link_to 'Back', admin_static_pages_path, :class => "btn" %>
+    <%= link_to 'Back', admin_course_offering_imports_path, :class => "btn" %>
   </div>
 <% end %>

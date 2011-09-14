@@ -9,6 +9,7 @@ Studyhall::Application.routes.draw do
     resources :static_pages
     resources :schools
     resources :course_offering_imports
+    resources :courses
   end
 
   resources :static_pages, :only => [:show]

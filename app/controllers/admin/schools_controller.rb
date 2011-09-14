@@ -1,5 +1,7 @@
 class Admin::SchoolsController < ApplicationController
   
+  layout "admin"
+  
   def index
     @schools = School.all
   end

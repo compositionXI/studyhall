@@ -1,0 +1,34 @@
+<fieldset>
+  <legend>Course Offering Imports</legend>
+</fieldset>
+
+<%= link_to 'New Course', new_admin_course_path, :class => "btn" %>
+<%= link_to "Upload New Course Data", new_admin_course_offering_import_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Title</th>
+      <th>School</th>
+      <th>Department</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_courses.each do |admin_course| %>
+      <tr>
+        <td><%= admin_course.number %></td>
+        <td><%= admin_course.title %></td>
+        <td><%= admin_course.school.name %></td>
+        <td><%= admin_course.department %></td>
+        <td><%= link_to 'Show', admin_course_path(admin_course), :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_admin_course_path(admin_course), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_course_path(admin_course), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

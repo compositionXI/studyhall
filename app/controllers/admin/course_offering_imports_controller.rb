@@ -1,4 +1,7 @@
 class Admin::CourseOfferingImportsController < ApplicationController
+  
+  layout "admin"
+  
   def index
     @course_offering_imports = CourseOfferingImport.all
   end
@@ -46,18 +49,40 @@ class Admin::CourseOfferingImportsController < ApplicationController
       require "csv"
       path_to_file = "public/system/course_offering_imports/#{coi.id}/original/#{coi.course_offering_import_file_name}"
       lines = CSV.read path_to_file
+      lines = lines[1...lines.length] #skip headers
       
       lines.each do |line|
-        course = Course.where("school_id = ? AND title = ? AND number = ?", coi.school_id, line[1], line[2]).first
-        if course.nil?
-          course = Course.create(number: line[2], title: line[1], school_id: coi.school_id)
+        school_name = line[0].strip
+        course_number = line[1].strip
+        course_title = line[2].strip
+        department = line[3].strip
+        instructor_list = line[5]
+        term = line[6].strip
+        
+        school = School.find_by_name(school_name)
+        if school.nil?
+          school = School.create(name: school_name)
         end
         
-        instructor = Instructor.where("first_name = ? AND last_name = ?", line[5], line[4]).first
-        if instructor.nil?
-          instructor = Instructor.create(last_name: line[4], first_name: line[5])
+        course = Course.where("school_id = ? AND title = ? AND number = ? AND department = ?",
+                                school.id, course_title, course_number, department).first
+        if course.nil?
+          course = Course.create(number: course_number,
+                                  title: course_title,
+                                  school_id: school.id, 
+                                  department: department)
         end
-        Offering.create(course_id: course.id, term_id: coi.term_id, school_id: coi.school_id, instructor_id: instructor.id, section: line[0])
+        
+        instructor_list.split(";").each do |inst_names|
+          inst_names = inst_names.strip.split(/\b/)
+          first_name = inst_names[0]
+          last_name = inst_names[1...inst_names.length].join.strip
+          instructor = Instructor.where("first_name = ? AND last_name = ?", first_name, last_name).first
+          if instructor.nil?
+            instructor = Instructor.create(last_name: last_name, first_name: first_name)
+          end
+          Offering.create(course_id: course.id, school_id: school.id, instructor_id: instructor.id, term: term)
+        end
       end
     end
 end

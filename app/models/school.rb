@@ -7,4 +7,6 @@ class School < ActiveRecord::Base
   
   has_attached_file :import_file
   
+  validates_uniqueness_of :name 
+  
 end
