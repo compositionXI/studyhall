@@ -9,7 +9,6 @@ class StudySessionsController < ApplicationController
   def show
     @study_session = StudySession.find(params[:id])
     @room = Room.find(@study_session.room_id)
-    @whiteboard = Whiteboard.find(@study_session.whiteboard_id)
   end
   
   def new
@@ -23,7 +22,7 @@ class StudySessionsController < ApplicationController
     @room = Room.new
     @room.sessionId = session.session_id
     @room.save
-    @whiteboard = Whiteboard.new(:etherpad_component => true, :documents_component => true, :custom_css => true)
+    @whiteboard = Whiteboard.new()
     @whiteboard.save
     @study_session = StudySession.new(params[:study_session])
     @study_session.whiteboard_id = @whiteboard.id

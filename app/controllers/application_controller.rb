@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
   
   def require_admin
-    unless current_user && current_user.has_role?("Admin")
+    unless current_user && current_user.admin?
       flash[:notice] = "You do not have permission to do that."
       redirect_to login_path
     end

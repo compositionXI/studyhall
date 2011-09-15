@@ -1,57 +1,48 @@
 class Whiteboard < ActiveRecord::Base
-  set_table_name :whiteboards
 
   belongs_to :study_session
+  has_attached_file :upload, 
+                    :storage => :s3, 
+                    :s3_credentials => "#{Rails.root}/config/s3.yml",
+                    :path => ":attachment/:id/:basename.:extension",
+                    :bucket => 'shpoc'
 
-  before_validation :retrieve_session_identifier
+  def embeddable?
+    upload_uuid && short_id
+  end
 
-  OPTIONAL_COMPONENTS = %w{chat invite profile voice etherpad documents images bottomtray email widgets math}
-  RECOMMENDED_COMPONENTS = %w{etherpad documents images}
+  def prepare_embed!
+    retrieve_upload_uuid
+    save!
+  end
+
+  def retrieve_upload_uuid
+    return upload_uuid if upload_uuid.present?
+    begin
+      response = Crocodoc.upload(upload.url)
+      Rails.logger.info("Retrieved UUID: #{response[:uuid]}")
+      self.upload_uuid = response[:uuid]
+      self.short_id = response[:shortId]
+    rescue => e
+      raise e
+      self.errors << "Unable to retrieve UUID"
+    end
+  end
 
   def retrieve_session_identifier
-    return true unless session_identifier.blank?
+    return session_identifier if session_identifier.present?
     begin
-      self.session_identifier = Twiddla.get_whiteboard
-    rescue TwiddlaError => e
+      response = Crocodoc.get_session(upload_uuid)
+      Rails.logger.info("Retrieved session id: #{response[:sessionId]}")
+      puts identifier
+      self.session_identifier = response[:sessionId]
+    rescue => e
       self.errors << "Could not retrieve session identifier"
     end
   end
 
-  def hidden_components
-    OPTIONAL_COMPONENTS.reject do |component|
-      send("#{component}_component?")
-    end
-  end
-
-  def included_components
-    OPTIONAL_COMPONENTS.select do |component|
-      send("#{component}_component?")
-    end
-  end
-
   def name
-    if included_components.empty?
-      "Basic Whiteboard"
-    elsif included_components.size == OPTIONAL_COMPONENTS.size
-      "Fully-featured Whiteboard"
-    else
-      included_components.map(&:capitalize).join(", ")
-    end
+    return upload.file_name if upload.present?
   end
 
-  def url
-    base = "http://www.twiddla.com"
-    uri = "/api/start.aspx"
-    params = []
-    params << "sessionid=#{self.session_identifier}"
-    params << "hide=#{hidden_components.join(",")}"
-    params << "guestname=brent"
-    params << "autostart=true"
-    params << "css=http://#{APP_CONFIG["host"]}/stylesheets/twiddla.css" if custom_css?
-    full_url = base
-    full_url << uri
-    full_url << "?" if params.any?
-    full_url << params.join("&") if params.any?
-    full_url
-  end
 end

@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new params[:user]
-    @user.role = "Student" 
+    @user.roles = Role.find_by_name("Student") if params[:user][:role_ids].nil?
     if @user.save
       flash[:notice] = "Account registered!"
       redirect_to_user
@@ -33,6 +33,7 @@ class UsersController < ApplicationController
   end
   
   def update
+    params[:user][:role_ids] ||= []
     @user.avatar = nil if params[:delete_avatar] == "1"
     if @user.update_attributes params[:user]
       flash[:notice] = "Account updated!"

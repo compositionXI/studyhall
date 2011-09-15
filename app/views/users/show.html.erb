@@ -10,7 +10,7 @@
     </div>
     <div class="span12 column">
       <ul class="unstyled spaced">
-        <li><b>Role:</b> <%= @user.role %></li>
+        <li><b>Role:</b> <%= @user.roles.collect {|r| r.name}.join(" ") %></li>
         <li><b>Gender:</b> <%= @user.gender %></li>
         <li><b>Email:</b> <%= @user.email %></li>
         <li><b>School:</b> <%= @user.school %></li>
