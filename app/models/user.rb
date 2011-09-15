@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    self.roles.include? Role.all.first
+    self.roles.include?(Role.find_by_name "Admin")
   end
   
   def editable_by?(user)
-    (self == user) || (user.roles.include? Role.all.first)
+    (self == user) || (user.roles.include?(Role.find_by_name "Admin"))
   end
   
   def deliver_password_reset_instructions!  
