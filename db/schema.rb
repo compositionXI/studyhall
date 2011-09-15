@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912190725) do
-
-  create_table "abouts", :force => true do |t|
-    t.text     "text"
-    t.boolean  "display"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "permalink"
-  end
+ActiveRecord::Schema.define(:version => 20110914224231) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -43,13 +35,6 @@ ActiveRecord::Schema.define(:version => 20110912190725) do
     t.integer "user_id"
   end
 
-  create_table "faqs", :force => true do |t|
-    t.string   "question"
-    t.string   "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "notebooks", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -63,6 +48,19 @@ ActiveRecord::Schema.define(:version => 20110912190725) do
     t.integer  "user_id"
     t.integer  "notebook_id"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,12 +89,6 @@ ActiveRecord::Schema.define(:version => 20110912190725) do
     t.datetime "updated_at"
   end
 
-  create_table "user_roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "gender"
@@ -114,7 +106,6 @@ ActiveRecord::Schema.define(:version => 20110912190725) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
