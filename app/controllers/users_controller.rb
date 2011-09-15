@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   end
   
   def update
-    params[:user][:role_ids] ||= []
     @user.avatar = nil if params[:delete_avatar] == "1"
     if @user.update_attributes params[:user]
       flash[:notice] = "Account updated!"

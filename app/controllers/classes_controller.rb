@@ -10,6 +10,8 @@ class ClassesController < ApplicationController
   
   def new
     @enrollment = Enrollment.new
+    @offerings = Offering.includes(:course, :school, :instructor)
+    @user = @current_user
   end
   
   def create
@@ -27,5 +29,8 @@ class ClassesController < ApplicationController
   end
   
   def destroy
+    @enrollment = @current_user.enrollments.find_by_offering_id params[:id]
+    @enrollment.destroy
+    redirect_to classes_path
   end
 end

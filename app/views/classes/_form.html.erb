@@ -13,7 +13,7 @@
 
   <div class="clearfix">
     <%= f.label :Choose_course %>
-    <div class="input"><%= select "enrollment", "offering_id", Offering.all.collect {|o| [o.course.title, o.id]} %></div>
+    <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| ["#{o.school.name} - #{o.course.title} - #{o.instructor.full_name} - #{o.term}", o.id]} %></div>
   </div>
   <div>
     <%= f.submit "Submit", :class => "btn primary" %>

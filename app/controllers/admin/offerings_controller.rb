@@ -27,7 +27,7 @@ class Admin::OfferingsController < ApplicationController
     @offering = Offering.new(params[:offering])
 
     respond_to do |format|
-      if @admin_offering.save
+      if @offering.save
         format.html { redirect_to admin_offerings_path, notice: 'Offering was successfully created.' }
       else
         format.html { render action: "new" }
