@@ -23,6 +23,30 @@ ActiveRecord::Schema.define(:version => 20110914224231) do
     t.datetime "updated_at"
   end
 
+  create_table "course_offering_imports", :force => true do |t|
+    t.string   "course_offering_import_file_name"
+    t.string   "course_offering_import_content_type"
+    t.string   "course_offering_import_file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", :force => true do |t|
+    t.string   "number"
+    t.string   "title"
+    t.integer  "school_id"
+    t.string   "department"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "enrollments", :force => true do |t|
+    t.integer  "offering_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "extracurriculars", :force => true do |t|
     t.string   "name"
     t.string   "type"
@@ -33,6 +57,14 @@ ActiveRecord::Schema.define(:version => 20110914224231) do
   create_table "extracurriculars_users", :id => false, :force => true do |t|
     t.integer "extracurricular_id"
     t.integer "user_id"
+  end
+
+  create_table "instructors", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "notebooks", :force => true do |t|
@@ -48,6 +80,15 @@ ActiveRecord::Schema.define(:version => 20110914224231) do
     t.integer  "user_id"
     t.integer  "notebook_id"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "offerings", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "term"
+    t.integer  "school_id"
+    t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +110,12 @@ ActiveRecord::Schema.define(:version => 20110914224231) do
     t.string   "name"
     t.string   "sessionId"
     t.boolean  "public"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "schools", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

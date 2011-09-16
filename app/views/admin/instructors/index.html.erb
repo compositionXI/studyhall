@@ -1,0 +1,27 @@
+<fieldset>
+  <legend>Schools</legend>
+</fieldset>
+
+<%= link_to 'New Instructor', new_admin_instructor_path, :class => "btn" %>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @admin_instructors.each do |admin_instructor| %>
+      <tr>
+        <td><%= admin_instructor.first_name %></td>
+        <td><%= admin_instructor.last_name %></td>
+        <td><%= link_to 'Edit', edit_admin_instructor_path(admin_instructor), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_instructor_path(admin_instructor), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

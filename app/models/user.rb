@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "40x40#" }, :default_url => "/assets/generic_avatar_thumb.png"
   has_many :notebooks
   has_many :notes
+  has_many :enrollments
+  has_many :offerings, :through => :enrollments
   
   validates_presence_of :name
   

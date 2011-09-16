@@ -1,0 +1,24 @@
+<fieldset>
+  <legend>Schools</legend>
+</fieldset>
+
+<%= link_to "Add New School", new_admin_school_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schools.each do |s| %>
+      <tr>
+        <td><%= s.name %></td>
+        <td><%= link_to "Edit", edit_admin_school_path(s), :class => "btn" %></td>
+        <td><%= link_to "Destroy", admin_school_path(s), :method => "DELETE", :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
