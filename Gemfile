@@ -26,6 +26,19 @@ gem 'jquery-rails'
 gem 'httparty'
 gem "nifty-generators", :group => :development
 
+group :test, :development do
+    gem 'rspec-rails'
+end
+
+group :cucumber do
+    gem 'capybara'
+    gem 'database_cleaner'
+    gem 'cucumber-rails'
+    gem 'cucumber'
+    gem 'spork'
+    gem 'launchy'
+end
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
