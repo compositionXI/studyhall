@@ -5,4 +5,4 @@
 $ ->
   $(".masonry_container").masonry
     itemSelector: "masonry_item",
-    columnWidth : 240
+    columnWidth : 150

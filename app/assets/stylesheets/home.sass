@@ -2,10 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.masonry_item
-  width: 220px
-  margin: 10px
-  float: left
+.masonry_container
+  .masonry_item
+    margin: 10px
+    padding: 10px
+    width: 150px
+    float: left
+    border: 1px solid #aaaaaa
 
 .main_content_wrapper
   ul
@@ -45,16 +48,14 @@
     background-color: #dddddd
     width: 240px
 
-#left_sidebar
-  width: 150px
 
-  .friend_list
-    height: 100px
-    
-    ul
-      padding: 10px 0px
-      li
-        margin: 0px
-        margin-right: 5px
-        padding: 0px
-        float: left
+.friend_list
+  height: 100px
+  
+  ul
+    padding: 10px 0px
+    li
+      margin: 0px
+      margin-right: 5px
+      padding: 0px
+      float: left
