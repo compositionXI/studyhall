@@ -2,17 +2,17 @@ set :stages, %w(production staging)
 set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 
-set :application, "set your application name here"
+set :application, "StudyHall"
 set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
 
 set :scm, :git
 
-set :user, "www-data"
-set :group, "www-data"
+set :user, "deploy"
+#set :group, "www-data"
 
 set :deploy_via, :remote_cache
-set :deploy_to, "/var/www/#{application}"
-set :deploy_env, 'production'
+set :deploy_to, "/home/deploy/rails_apps/#{application}"
+set :deploy_env, 'staging'
 
 #role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 #role :app, "your app-server here"                          # This may be the same as your `Web` server
