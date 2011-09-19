@@ -36,6 +36,7 @@
         <% end %>
       </ul>
       <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
+      <%= link_to("Send Message", new_user_message_path(@user), :class => "btn") if @current_user != @user %>
       <%= link_to 'Back', users_path, :class => "btn" if @current_user && @user.admin? %>
     </div>
   </div>

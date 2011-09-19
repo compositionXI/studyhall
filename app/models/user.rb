@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
-    
+  has_mailbox
+
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "60x60#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_thumb.png"

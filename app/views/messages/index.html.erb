@@ -1,0 +1,22 @@
+<fieldset>
+  <legend>Inbox</legend>
+</fieldset>
+
+<table>
+  <thead>
+    <th>From</th>
+    <th>Subject</th>
+    <th>Sent at</th>
+  </thead>
+  <tbody>
+    <% @messages.each do |m| %>
+    <tr class="message">
+      <td><%= m.from.name %></td>
+      <td>
+        <%= message_subject(m) %>
+      </td>
+      <td><%= m.created_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

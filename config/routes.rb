@@ -22,7 +22,10 @@ Studyhall::Application.routes.draw do
 
   resources :static_pages, :only => [:show]
   resources :contacts  
-  resources :users
+  resources :users do
+    resources :messages, only: [:new, :create]
+  end
+  resources :messages, only: [:index, :show]
   resources :password_resets
   resources :user_sessions
   resources :whiteboards

@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<ul class="unstyled spaced">
+  <li><b>From:</b> <%= @message.from.name %></li>
+  <li><b>To:</b> <%= @message.to.name %></li>
+  <li><b>Subject:</b> <%= @message.subject %></li>
+  <li><b>Body:</b> <%= @message.body %></li>
+  <li><b>Sent at:</b> <%= @message.created_at %></li>
+</ul>
+
+<%= link_to 'Reply', new_user_message_path(@message.from), :class => "primary btn" %>
+<%= link_to 'Back', messages_path, :class => "btn" %>
