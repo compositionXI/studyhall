@@ -1,7 +1,9 @@
 Studyhall::Application.routes.draw do
   resources :notes
+  resources :notebooks do
+    resources :notes
+  end
 
-  resources :notebooks
   resources :classes
 
   namespace :admin do
