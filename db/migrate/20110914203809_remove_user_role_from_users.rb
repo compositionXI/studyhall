@@ -1,9 +1,11 @@
 class RemoveUserRoleFromUsers < ActiveRecord::Migration
   def up
-    remove_column  :users, :role
+    if User.column_names.include? "role"
+      remove_column  :users, :role
+    end
   end
 
   def down
-    add_column :users, :user_role_id
+    add_column :users, :role, :string
   end
 end
