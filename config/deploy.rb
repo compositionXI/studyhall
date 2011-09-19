@@ -1,6 +1,8 @@
 set :stages, %w(production staging)
 set :default_stage, "staging"
+
 require 'capistrano/ext/multistage'
+require 'bundler/capistrano'
 
 set :application, "StudyHall"
 set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
