@@ -6,6 +6,12 @@
  *= require full-width
  *= require notebooks
  *= require notes
+ *= require messages
  *= require study_sessions
  *= require bootstrap
 */
+
+.clear {
+	clear: both;
+}
+	

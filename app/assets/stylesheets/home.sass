@@ -2,41 +2,59 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.masonry_item
+  width: 220px
+  margin: 10px
+  float: left
+
 .main_content_wrapper
   ul
     li
       margin: 5px
       padding: 2px
 
-#home_classmate_list
-  ul
-    li
-      margin: 0px
-      margin-right: 5px
-      padding: 0px
-      float: left
+.sub_section
+  border-bottom: 1px solid #aaaaaa
+  padding: 10px 0px 
 
-#home_activity_feed
-  ul
-    li
-      background-color: #FDFBFC
-      border: 1px solid #BFBFAC
-      border-radius: 5px 0 0 5px
-      font-size: 12px
-      
-      img
-        vertical-align: top
-      
-      .feed_post_controls
-        background-color: #F2F2F2
-        margin-top: 5px
-        padding: 2px
-        border-top: 1px solid #BFBFAC
-        
-#home_campus_news_feed
-  ul
-    li
-      min-height: 30px
-      border-top: 1px solid #BFBFAC
-      font-size: 11px
-      
+.homepage_subbar
+  height: 80px
+  
+  div
+    float: left
+    
+  .user_greeting
+    width: 150px
+    position: relative
+    
+    span
+      position: absolute
+      top: 30%
+      font-size: 20px
+      margin-left: 5px
+  
+  .alert_box
+    width: 380px
+    padding: 15px 10px
+    margin: 0px 20px
+    background-color: #dddddd
+  
+  .standard_actions
+    padding: 15px 10px
+    margin: 0px 20px
+    background-color: #dddddd
+    width: 240px
+
+#left_sidebar
+  width: 150px
+
+  .friend_list
+    height: 100px
+    
+    ul
+      padding: 10px 0px
+      li
+        margin: 0px
+        margin-right: 5px
+        padding: 0px
+        float: left

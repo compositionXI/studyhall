@@ -6,24 +6,25 @@
         <a href="" class="btn">Grid</a>
         <a href="" class="btn">List</a>
       </div>
-      <a href="" class="btn">Edit</a>
+      <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
     </div>
     <div class="left">
-      <%= link_to "Take Notes", "/notes/new", :class => "btn" %>
+      <%= link_to "Take Notes", new_notebook_note_path(@notebook), :class => "btn" %>
       <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
     </div>
     <div class="middle">
-      <span>New Notebook</span>
+      <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
     </div>
   </div>
   <div class="container-fluid">
-    <div class="center">
-      <h2><%= @notebook.name %></h2>
-      <ul>
-        <% @notebook.notes.each do |note| %>
-          <li><%= link_to note.created_at, edit_note_path(note) %></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul class="grid">
+      <% @notebook.notes.each do |note| %>
+        <li class="notebook">
+          <a href="<%= notebook_note_path(@notebook, note) %>" class="name">
+            <span><%= note.name %></span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

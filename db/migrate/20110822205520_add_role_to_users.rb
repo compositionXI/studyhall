@@ -4,6 +4,6 @@ class AddRoleToUsers < ActiveRecord::Migration
   end
   
   def self.down
-  remove_column :students, :city
+  remove_column :users, :role
   end
 end

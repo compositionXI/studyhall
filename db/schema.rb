@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914224231) do
+ActiveRecord::Schema.define(:version => 20110919124030) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -67,12 +67,39 @@ ActiveRecord::Schema.define(:version => 20110914224231) do
     t.datetime "updated_at"
   end
 
+  create_table "message_copies", :force => true do |t|
+    t.integer  "sent_messageable_id"
+    t.string   "sent_messageable_type"
+    t.integer  "recipient_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "message_copies", ["sent_messageable_id", "recipient_id"], :name => "outbox_idx"
+
+  create_table "messages", :force => true do |t|
+    t.integer  "received_messageable_id"
+    t.string   "received_messageable_type"
+    t.integer  "sender_id"
+    t.string   "subject"
+    t.text     "body"
+    t.boolean  "opened",                    :default => false
+    t.boolean  "deleted",                   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
+
   create_table "notebooks", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.integer  "order"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id"
   end
 
   create_table "notes", :force => true do |t|

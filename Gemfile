@@ -12,6 +12,7 @@ gem 'opentok'
 gem "paperclip", "~> 2.4"
 gem 'aws-s3'
 gem 'rest-client'
+gem 'has_mailbox'
 
 # Gems used only for assets and not required
 # in production environments by default.

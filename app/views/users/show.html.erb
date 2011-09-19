@@ -10,16 +10,33 @@
     </div>
     <div class="span12 column">
       <ul class="unstyled spaced">
-        <li><b>Role:</b> <%= @user.roles.collect {|r| r.name}.join(" ") %></li>
-        <li><b>Gender:</b> <%= @user.gender %></li>
-        <li><b>Email:</b> <%= @user.email %></li>
-        <li><b>School:</b> <%= @user.school %></li>
-        <li><b>Major:</b> <%= @user.major %></li>
-        <li><b>GPA:</b> <%= @user.gpa %></li>
-        <li><b>Fraternity:</b> <%= @user.fraternity %></li>
-        <li><b>Sorority:</b> <%= @user.sorority %></li>
+        <% unless user_protected_profile? @user, :roles %>
+          <li><b>Role:</b> <%= @user.roles.collect {|r| r.name}.join(" ") %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :gender %>
+          <li><b>Gender:</b> <%= @user.gender %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :email %>
+          <li><b>Email:</b> <%= @user.email %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :school %>
+          <li><b>School:</b> <%= @user.school %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :major %>
+          <li><b>Major:</b> <%= @user.major %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :gpa %>
+          <li><b>GPA:</b> <%= @user.gpa %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :fraternity %>
+          <li><b>Fraternity:</b> <%= @user.fraternity %></li>
+        <% end %>
+        <% unless user_protected_profile? @user, :sorority %>
+          <li><b>Sorority:</b> <%= @user.sorority %></li>
+        <% end %>
       </ul>
       <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
+      <%= link_to("Send Message", new_user_message_path(@user), :class => "btn") if @current_user != @user %>
       <%= link_to 'Back', users_path, :class => "btn" if @current_user && @user.admin? %>
     </div>
   </div>
