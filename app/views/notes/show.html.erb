@@ -1,25 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @note.name %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @note.user_id %>
-</p>
-
-<p>
-  <b>Notebook:</b>
-  <%= @note.notebook_id %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @note.content %>
-</p>
-
-
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+<div class="main-content">
+  <div id="menubar" class="topbar notes">
+    <div class="right">
+      <%= link_to "Edit", edit_note_path(@note), class: "btn" %>
+    </div>
+    <div class="left">
+      <%= link_to "X", (@notebook ? notebook_path(@notebook) : notebooks_path), :class => "btn" %>
+    </div>
+    <div class="middle">
+    </div>
+  </div>
+  <div class="container-fluid">
+    <pre id="note_content"><%= @note.content %></pre>
+  </div>
+</div>

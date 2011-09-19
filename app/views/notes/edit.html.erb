@@ -1,17 +1,19 @@
 <div class="main-content">
-  <div id="menubar" class="topbar notes">
-    <div class="right">
-      <%= collection_select :menubar, :notebook_id, current_user.notebooks, :id, :name %>
-      <a href="" class="btn" id="note_save">Save</a>
+  <%= form_for @note do |f| %>
+    <div id="menubar" class="topbar notes">
+      <div class="right">
+        <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name %>
+        <%= f.submit :id => 'note_save', :class => 'btn' %>
+      </div>
+      <div class="left">
+        <%= link_to "X", edit_note_back_path, :class => "btn" %>
+      </div>
+      <div class="middle">
+        <span><%= @note.name %></span>
+      </div>
     </div>
-    <div class="left">
-      <%= link_to "X", notebooks_path, :class => "btn" %>
+    <div class="container-fluid">
+      <%= f.text_area :content %>
     </div>
-    <div class="middle">
-      <span>Take Notes</span>
-    </div>
-  </div>
-  <div class="container-fluid">
-    <%= render 'form' %>
-  </div>
+  <% end %>
 </div>
