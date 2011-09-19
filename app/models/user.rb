@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :offerings, :through => :enrollments
   
   validates_presence_of :name
+
+  PROTECTED_PROFILE_ATTRBUTES = %w(email)
   
   def has_role?(role)
     self.roles.include? role
