@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.masonry.min.js
 //= require_tree .
 
 $(document).ready(function(){

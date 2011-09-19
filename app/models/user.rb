@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
-  has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "40x40#" }, :default_url => "/assets/generic_avatar_thumb.png"
+  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "60x60#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_thumb.png"
   has_many :notebooks
   has_many :notes
   has_many :enrollments

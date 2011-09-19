@@ -7,8 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Create User Roles
-%w{Student Monitor Admin}.each do |r|
-  UserRole.create(name: r)
+%w{Student Monitor Admin}.each do |role|
+  Role.create(name: role)
 end
 
 # Create Test Users
@@ -21,7 +21,7 @@ User.create(
   gpa: 3.7,
   fraternity: "Delta Kappa Epsilon",
   login: "jsmith",
-  role: "Admin",
+  roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
   password: "1234",
   password_confirmation: "1234"
 )
@@ -35,7 +35,7 @@ User.create(
   gpa: 3.9,
   sorority: "Kappa Kappa Gamma",
   login: "jdoe",
-  role: "Student",
+  roles: [Role.find_by_name("Student")],
   password: "1234",
   password_confirmation: "1234"
 )

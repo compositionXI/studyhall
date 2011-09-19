@@ -9,3 +9,8 @@
  *= require study_sessions
  *= require bootstrap
 */
+
+.clear {
+	clear: both;
+}
+	

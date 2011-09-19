@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new params[:user]
-    @user.roles = Role.find_by_name("Student") if params[:user][:role_ids].nil?
+    @user.roles << Role.find_by_name("Student") if params[:user][:role_ids].nil?
     if @user.save
       flash[:notice] = "Account registered!"
       redirect_to_user

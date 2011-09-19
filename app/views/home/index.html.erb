@@ -1,90 +1,48 @@
-<div class="alert-message block-message success">
-  Welcome to StudyHall.com
+<div class="homepage_subbar sub_section sub_section">
+  <div class="user_greeting">
+    <%= image_tag @current_user.avatar_url("medium")%>
+    <span><%= "Hi, #{@current_user.name}!"%></span>
+  </div>
+  <div class="alert_box">
+    Alert! Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </div>
+  <div class="standard_actions">
+    <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn" %>
+    <%= link_to "Take Notes", notebooks_path, :class => "btn" %>
+  </div>
 </div>
-<section class="grid-system">
-  <div class="row show-grid">
-    <div class="span4 columns" id="home_classmate_list">
-        <h4>Classmates</h4>
-        <ul class="unstyled">
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-        </ul>
-    </div>
-    <div class="span8 columns">
-      <div id="home_activity_feed" class="well">
-        <div id="activity_feed_control_panel">
-          <%= link_to "Filter Options", "#", class: "btn" %>
-        </div>
-        <h4>Activity Feed<h4>
-        <ul class="unstyled">
-          <li>
-            <div>
-              <%= image_tag "/assets/generic_avatar_thumb.png"%> This is such an awesome website!
-            </div>
-            <div class="feed_post_controls">
-              <%= link_to "Comment", "#", class: "btn primary" %>
-              <%= link_to "Hide", "#", class: "btn" %>
-            </div>
-          </li>
-          <li>
-            <div>
-              <%= image_tag "/assets/generic_avatar_thumb.png"%> I slept through class. Does anyone have the notes?
-            </div>
-            <div class="feed_post_controls">
-              <%= link_to "Comment", "#", class: "btn primary" %>
-              <%= link_to "Hide", "#", class: "btn" %>
-            </div>
-          </li>
-          <li>
-            <div>
-              <%= image_tag "/assets/generic_avatar_thumb.png"%> Essay due in 2 hours. Just started. Need help!
-            </div>
-            <div class="feed_post_controls">
-              <%= link_to "Comment", "#", class: "btn primary" %>
-              <%= link_to "Hide", "#", class: "btn" %>
-            </div>
-          </li>
-          <li>
-            <div>
-              <%= image_tag "/assets/generic_avatar_thumb.png"%> Let's start a study session.
-            </div>
-            <div class="feed_post_controls">
-              <%= link_to "Comment", "#", class: "btn primary" %>
-              <%= link_to "Hide", "#", class: "btn" %>
-            </div>
-          </li>
-          <li>
-            <div>
-              <%= image_tag "/assets/generic_avatar_thumb.png"%> This is a post.
-            </div>
-            <div class="feed_post_controls">
-              <%= link_to "Comment", "#", class: "btn primary" %>
-              <%= link_to "Hide", "#", class: "btn" %>
-            </div>
-          </li>
-        </ul>
+
+<div class="clear"></div>
+
+<div id="left_sidebar">
+  <div class="sub_section">
+    <div class="friend_list">
+      <div class="sub_section">
+        Friends
+        <%= link_to "View All >>", "#"%>
       </div>
-    </div>
-    <div class="span3 columns" id="home_campus_news_feed">
-        <h4>Campus News Feed</h4>
-        <ul class="unstyled">
-          <li>News item 1</li>
-          <li>News item 2</li>
-          <li>News item 3</li>
-          <li>News item 4</li>
-          <li>News item 5</li>
-          <li>News item 6</li>
-          <li>News item 7</li>
-          <li>News item 8</li>
-          <li>News item 9</li>
-        </ul>
+      <ul class="unstyled">
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
+      </ul>
     </div>
   </div>
+</div>
+
+<div class="masonry_contrainer">
+  <div class="masonry_item">
+    <div>
+      This is a masonry item
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  
 </div>
