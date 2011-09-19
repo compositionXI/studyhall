@@ -6,10 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Create User Roles
-%w{Student Monitor Admin}.each do |r|
-  UserRole.create(name: r)
-end
 
 # Create Test Users
 User.create(
