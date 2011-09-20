@@ -7,6 +7,7 @@
         <a href="" class="btn">List</a>
       </div>
       <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
+      <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn" %>
     </div>
     <div class="left">
       <%= link_to "Take Notes", new_notebook_note_path(@notebook), :class => "btn" %>

@@ -1,6 +1,16 @@
-<h1>Editing notebook</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @notebook %> |
-<%= link_to 'Back', notebooks_path %>
+<div id="menubar" class="topbar">
+  <div class="right">
+  </div>
+  <div class="left">
+    <%= link_to "Take Notes", "/notes/new", :class => "btn" %>
+    <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
+  </div>
+  <div class="middle">
+    <span>Edit Notebook</span>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="center">
+    <%= render 'form' %>
+  </div>
+</div>

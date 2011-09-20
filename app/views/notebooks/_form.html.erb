@@ -16,10 +16,10 @@
     <div class="input"><%= f.text_field :name %></div>
   </div>
   <div class="clearfix">
-    <%= f.label :school %>
+    <%= f.label :course %>
     <div class="input"><%= collection_select :notebook, :course_id, Course.all, :id, :title, :prompt => true %></div>
   </div>
-  <div class="actions">
+  <div>
     <%= f.submit :class => "btn primary" %>
     <%= link_to 'Cancel', notebooks_path, :class => "btn" %>
   </div>

@@ -4,11 +4,13 @@
 <head>
   <title>Studyhall</title>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js" %>
+  <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js", "jquery.rte.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name + "-" + action_name %> full-width">
   <%= render :partial => "layouts/topbar"%>
-  <%= yield %>
+  <div class="main-content">
+    <%= yield %>
+  </div>
 </body>
 </html>

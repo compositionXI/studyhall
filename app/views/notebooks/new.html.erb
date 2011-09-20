@@ -1,18 +1,16 @@
-<div class="main-content">
-  <div id="menubar" class="topbar">
-    <div class="right">
-    </div>
-    <div class="left">
-      <%= link_to "Take Notes", "/notes/new", :class => "btn" %>
-      <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
-    </div>
-    <div class="middle">
-      <span>New Notebook</span>
-    </div>
+<div id="menubar" class="topbar">
+  <div class="right">
   </div>
-  <div class="container-fluid">
-    <div class="center">
-      <%= render 'form' %>
-    </div>
+  <div class="left">
+    <%= link_to "Take Notes", "/notes/new", :class => "btn" %>
+    <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
+  </div>
+  <div class="middle">
+    <span>New Notebook</span>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="center">
+    <%= render 'form' %>
   </div>
 </div>

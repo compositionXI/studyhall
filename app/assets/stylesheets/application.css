@@ -9,6 +9,7 @@
  *= require messages
  *= require study_sessions
  *= require bootstrap
+ *= require rte
 */
 
 .clear {
