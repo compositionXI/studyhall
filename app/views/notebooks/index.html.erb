@@ -6,7 +6,6 @@
         <a href="" class="btn">Grid</a>
         <a href="" class="btn">List</a>
       </div>
-      <a href="" class="btn">Edit</a>
     </div>
     <div class="left">
       <%= link_to("Take Notes", new_note_path, :class => "btn") unless @notebooks.empty? %>
@@ -17,12 +16,6 @@
     </div>
   </div>
   <div class="masonry_container">
-    <% @notebooks.each do |notebook| %>
-    <a href="<%= notebook_path(notebook) %>" class="name">
-      <div class="masonry_item notebook">    
-          <span><%= notebook.name %></span>
-      </div>
-      </a>
-    <% end %>
+    <%= render :partial => "shared/all_notebook_items" %>
   </div>
 </div>

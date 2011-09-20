@@ -17,7 +17,7 @@
   </div>
   <div class="clearfix">
     <%= f.label :course %>
-    <div class="input"><%= collection_select :notebook, :course_id, Course.all, :id, :title, :prompt => true %></div>
+    <div class="input"><%= select :notebook, :course_id, @current_user.offerings.collect {|o| [o.course.title, o.course.id]}, :prompt => true %></div>
   </div>
   <div>
     <%= f.submit :class => "btn primary" %>
