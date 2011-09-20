@@ -32,7 +32,7 @@ test:
   socket: /tmp/mysql.sock
 
 staging:
-  adapter: posgresql
+  adapter: postgres
   encoding: unicode
   database: demo
   pool: 5
