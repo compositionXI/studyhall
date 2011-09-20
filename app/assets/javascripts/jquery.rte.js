@@ -104,19 +104,18 @@ jQuery.fn.rte = function(css_url, media_url) {
         var tb = $("<div class='rte-toolbar' id='toolbar-"+iframe.title+"'><div>\
             <p>\
                 <select>\
-                    <option value=''>Bloc style</option>\
+                    <option value=''>Block style</option>\
                     <option value='p'>Paragraph</option>\
                     <option value='h3'>Title</option>\
                 </select>\
             </p>\
             <p>\
                 <a href='#' class='bold'></a>\
-                <a href='#' class='italic'><img src='"+media_url+"italic.gif' alt='italic' /></a>\
+                <a href='#' class='italic'></a>\
             </p>\
             <p>\
-                <a href='#' class='unorderedlist'><img src='"+media_url+"unordered.gif' alt='unordered list' /></a>\
-                <a href='#' class='link'><img src='"+media_url+"link.png' alt='link' /></a>\
-                <a href='#' class='image'><img src='"+media_url+"image.png' alt='image' /></a>\
+                <a href='#' class='unorderedlist'></a>\
+                <a href='#' class='image'></a>\
             </p></div></div>");
         $('select', tb).change(function(){
             var index = this.selectedIndex;

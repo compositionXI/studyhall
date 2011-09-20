@@ -7,7 +7,7 @@
         <a href="" class="btn">List</a>
       </div>
       <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
-      <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn" %>
+      <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
     </div>
     <div class="left">
       <%= link_to "Take Notes", new_notebook_note_path(@notebook), :class => "btn" %>
@@ -17,14 +17,13 @@
       <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
     </div>
   </div>
-  <div class="container-fluid">
-    <ul class="grid">
+  <div class="masonry_container">
       <% @notebook.notes.each do |note| %>
-        <li class="notebook">
-          <a href="<%= notebook_note_path(@notebook, note) %>" class="name">
-            <span><%= note.name %></span>
-          </a>
-        </li>
+        <a href="<%= notebook_note_path(@notebook, note) %>" class="name">
+          <div class="masonry_item note">
+              <span><%= note.name %></span>  
+          </div>
+        </a>
       <% end %>
     </ul>
   </div>

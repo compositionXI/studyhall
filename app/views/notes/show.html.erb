@@ -1,11 +1,11 @@
 <div class="main-content">
   <div id="menubar" class="topbar notes">
     <div class="right">
-      <%= link_to "Delete", note_path(@note), method: "DELETE", class: "btn" %>
+      <%= link_to "Delete", note_path(@note), method: "DELETE", class: "btn", :confirm => "Are you sure?" %>
       <%= link_to "Edit", edit_note_path(@note), class: "btn" %>
     </div>
     <div class="left">
-      <%= link_to "Back to #{@note.notebook.name}", (@notebook ? notebook_path(@notebook) : notebooks_path), :class => "btn" %>
+      <%= link_to "X", (@notebook ? notebook_path(@notebook) : notebooks_path), :class => "btn" %>
     </div>
     <div class="middle">
       <%= @note.name %>

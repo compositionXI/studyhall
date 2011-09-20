@@ -9,21 +9,20 @@
       <a href="" class="btn">Edit</a>
     </div>
     <div class="left">
-      <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+      <%= link_to("Take Notes", new_note_path, :class => "btn") unless @notebooks.empty? %>
       <%= link_to "New Notebook", new_notebook_path, :class => "btn" %>
     </div>
     <div class="middle">
       <span>All Items</span>
     </div>
   </div>
-  <div class="container-fluid">
-    <ul class="grid">
+  <div class="masonry_container">
     <% @notebooks.each do |notebook| %>
-      <li class="notebook">
-        <a href="<%= notebook_path(notebook) %>" class="name">
+    <a href="<%= notebook_path(notebook) %>" class="name">
+      <div class="masonry_item notebook">    
           <span><%= notebook.name %></span>
-        </a>
-      </li>
+      </div>
+      </a>
     <% end %>
   </div>
 </div>
