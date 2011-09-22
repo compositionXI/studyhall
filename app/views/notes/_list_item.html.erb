@@ -1,0 +1,8 @@
+<li class="note_list_item">
+  <%= div_for note do %>
+    <a class="name" href="<%= note_path(note) %>">
+      <span><%= note.name %></span>
+    </a>
+    <span class="lock_icon"><%= image_tag "lock.png" unless note.shareable? %></span>
+  <% end %>
+</li>

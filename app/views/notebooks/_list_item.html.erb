@@ -1,0 +1,14 @@
+<li class="notebook_list_item">
+  <%= div_for notebook do %>
+    <a class="name" href="<%= notebook_path(notebook) %>">
+      <span><%= notebook.name %></span>
+    </a>
+    <span class="lock_icon"><%= image_tag "lock.png" unless notebook.shareable? %></span>
+  <% end %>
+
+  <% unless notebook.notes.empty? %>
+    <ol class="note_list">
+      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note %>
+    </ol>
+  <% end %>
+</li>
