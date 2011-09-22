@@ -14,31 +14,26 @@
 
 <div class="clear"></div>
 
-<div class="masonry_container">
-  <div class="masonry_item">
-    <div class="sub_section">
-      <div class="friend_list">
-        <div class="sub_section">
-          Friends
-          <%= link_to "View All >>", "#"%>
-        </div>
-        <ul class="unstyled">
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-          <li><%= image_tag "/assets/generic_avatar_thumb.png"%></li>
-        </ul>
+<div class="sidebar left">
+  <div class="sub_section">
+    <div class="friend_list">
+      <div class="sub_section">
+        <div class="left">Buddies</div>
+        <div class="right"><%= link_to "View All >>", "#"%></div>
+        <div class="clear"></div>
       </div>
+      <ul class="unstyled">
+        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
+        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
+      </ul>
     </div>
   </div>
-  
-  <%= render "shared/all_notebook_items", :notebooks => @notebooks %>
+  <div class="sub_section">
+    <center>Campus News</center>
+  </div>
 </div>
-
-<div class="footer">
   
+  <%= render "shared/notebooks", :notebooks => @notebooks %>
 </div>

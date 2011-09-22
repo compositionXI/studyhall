@@ -18,7 +18,7 @@
   <div class="clear"></div>
   <div class="masonry_container">
     <%= render "shared/notes", :notes => @unsorted_notes %>
-    <%= render "shared/all_notebook_items", :notebooks => @notebooks %>
+    <%= render "shared/notebooks", :notebooks => @notebooks, :show_notes => true %>
     <% if @unsorted_notes.nil? && @unsorted_notes %>
       <div class="centered">
         <center>

@@ -1,9 +1,45 @@
-body
-  color: #9D9D9A
+@import "colors"
 
-.standout_background
-  background-color: #FDFBFC
-  padding: 10px
+html
+  background-color: $standard_background
+  height: 100%
+
+  body
+    background-color: $standard_background
+    color: #9D9D9A
+    height: 100%
+
+.left
+  float: left
+
+.right
+  float: right
+
+.topbar_and_content
+  min-height: 100%
+  height: auto !important
+  height: 100%
+  margin-bottom: -50px
+
+  .main-content
+    padding-top: 70px
+    height: 100%
+    
+    .container
+      background-color: white
+      height: 100%
+      padding: 10px
+    
+  .clearfooter
+    height: 50px
+
+.footer
+  position: relative
+  background-color: $footer_background
+  height: 50px
+  
+  .footer_content
+    padding-top: 15px
 
 form
   background-color: #FDFBFC
@@ -28,7 +64,6 @@ form.with_columns
   margin: 10px
   padding: 10px
   float: left
-  border: 1px solid #aaaaaa
   overflow: hidden
 
 .centered

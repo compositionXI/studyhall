@@ -8,13 +8,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name + "-" + action_name %> fixed-width">
-  <%= render :partial => "layouts/topbar"%>
-  <div class="main-content">
-    <div class="container">
-      <div class="fill">
-        <%= yield %>
+  <div class="topbar_and_content">
+    <%= render :partial => "layouts/topbar" %>
+    <div class="main-content">
+      <div class="container">
+        <div class="fill">
+          <%= yield %>
+        </div>
       </div>
+      <div class="clearfooter"></div>
     </div>
   </div>
+  <%= render "layouts/footer" %>
 </body>
 </html>
