@@ -25,6 +25,9 @@
         display: block
         padding: 10px 5px
 
+    .course, .date, .expand_collapse_icon
+      display: none
+
     .delete_notebook
       position: absolute
 
@@ -45,6 +48,83 @@
 
     .notebook, .note
       float: left
+
+  &.list
+    padding: 0 15px
+
+    ol
+      list-style: none
+      margin-left: 0
+
+      &.note_list
+        border-top: 2px solid #AAA
+        border-bottom: 2px solid #AAA
+        max-height: 300px
+        overflow-y: scroll
+
+        li:last-child
+          border-width: 0
+
+    li
+      border-bottom: 2px dotted #AAA
+
+      &.notebook_list_item
+        border-width: 0
+
+        &.collapsed
+          border-width: 2px
+
+          ol.note_list
+            display: none
+
+    .notebook, .note
+      padding: 10px
+      .wrapper
+        position: relative
+        height: 110px
+
+    .preview
+      display: block
+      position: absolute
+      left: 10px
+      top: 4px
+      height: 100px
+      width: 80px
+      border: solid 1px #AAA
+
+    .lock_icon
+      position: absolute
+      top: 75px
+      left: 65px
+      z-index: 1
+
+    .notebook .preview
+      background: #D8D8D8
+      box-shadow: 5px 5px 5px #AAA
+      -webkit-box-shadow: 5px 5px 5px #aaa
+
+    .note .preview
+      background: #FFF
+
+    .name, .course, .date
+      margin-left: 110px
+      display: block
+      padding: 3px
+      font-size: 1.5em
+
+    .name
+      font-size: 1.6em
+      padding-top: 23px
+
+    .expand_collapse_icon
+      position: absolute
+      display: block
+      top: 50px
+      right: 10px
+      width: 10px
+      height: 10px
+      font-size: 2em
+      font-wiegth: bold
 
 .full-width
   &.notes-new, &.notes-edit
