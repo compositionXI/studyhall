@@ -34,6 +34,10 @@
     <center>Campus News</center>
   </div>
 </div>
-  
-  <%= render "shared/notebooks", :notebooks => @notebooks %>
+
+<div class="notebook_list_container grid">
+  <ol class="notebook_list">
+    <%= render partial: 'notes/list_item', collection: @unsorted_notes, as: :note %>
+    <%= render partial: 'notebooks/list_item', collection: @notebooks, as: :notebook %>
+  </ol>
 </div>

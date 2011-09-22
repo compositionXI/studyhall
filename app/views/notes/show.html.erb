@@ -1,17 +1,15 @@
-<div class="main-content">
-  <div id="menubar" class="topbar notes">
-    <div class="right">
-      <%= link_to "Delete", note_path(@note), method: "DELETE", class: "btn", :confirm => "Are you sure?" %>
-      <%= link_to "Edit", edit_note_path, class: "btn" %>
-    </div>
-    <div class="left">
-      <%= link_to "X", edit_note_back_path, :class => "btn" %>
-    </div>
-    <div class="middle">
-      <%= @note.name %>
-    </div>
+<div id="menubar" class="topbar notes">
+  <div class="right">
+    <%= link_to "Delete", note_path(@note), method: "DELETE", class: "btn", :confirm => "Are you sure?" %>
+    <%= link_to "Edit", edit_note_path, class: "btn" %>
   </div>
-  <div class="container-fluid">
-    <pre id="note_content"><%= @note.content.html_safe %></pre>
+  <div class="left">
+    <%= link_to "X", edit_note_back_path, :class => "btn" %>
   </div>
+  <div class="middle">
+    <%= @note.name %>
+  </div>
+</div>
+<div class="container-fluid">
+  <pre id="note_content"><%= @note.content.html_safe %></pre>
 </div>

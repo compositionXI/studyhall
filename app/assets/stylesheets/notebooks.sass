@@ -1,43 +1,150 @@
-.notebook
-  display: inline-block
-  position: relative
-  height: 110px
-  width: 90px
-  background: #D8D8D8
-  margin: 20px
-  text-align: center
-  border: solid 1px #AAA
-  font-weight: bold
-  box-shadow: 5px 5px 5px #AAA
-  -webkit-box-shadow: 5px 5px 5px #aaa
-  
-  .delete_notebook
-    position: absolute
-  .name
-    display: block
-    padding: 10px 5px
-  
-  .lock_icon
-    position: absolute
-    bottom: 5px
-    right: 5px
+.notebook_list_container
+  &.grid
+    .notebook, .note
+      margin: 10px
+      text-align: center
+      border: solid 1px #AAA
+      .wrapper
+        position: relative
+        height: 110px
+        width: 90px
 
-.note
-  display: inline-block
-  position: relative
-  height: 110px
-  width: 90px
-  background: #FFF
-  margin: 20px
-  text-align: center
-  border: solid 1px #AAA
-  
-  .lock_icon
-    position: absolute
-    bottom: 5px
-    right: 5px
+    .notebook
+      font-weight: bold
+      background: #D8D8D8
+      box-shadow: 5px 5px 5px #AAA
+      -webkit-box-shadow: 5px 5px 5px #aaa
 
-.full-width    
-  .center
-    margin: 0 auto
-    width: 500px
+    .note
+      background: #FFF
+
+    .name
+      display: block
+      width: 100%
+      height: 100%
+      span
+        display: block
+        padding: 10px 5px
+
+    .course, .date, .expand_collapse_icon
+      display: none
+
+    .delete_notebook
+      position: absolute
+
+    .lock_icon
+      position: absolute
+      bottom: 5px
+      right: 5px
+
+    ol
+      list-style: none
+      margin: 0
+      padding: 0
+      overflow: hidden
+      *zoom: 1
+
+    ol, li
+      display: inline
+
+    .notebook, .note
+      float: left
+
+  &.list
+    padding: 0 15px
+
+    ol
+      list-style: none
+      margin-left: 0
+
+      &.note_list
+        border-top: 2px solid #AAA
+        border-bottom: 2px solid #AAA
+        max-height: 300px
+        overflow-y: scroll
+
+        li:last-child
+          border-width: 0
+
+    li
+      border-bottom: 2px dotted #AAA
+
+      &.notebook_list_item
+        border-width: 0
+
+        &.collapsed
+          border-width: 2px
+
+          ol.note_list
+            display: none
+
+    .notebook, .note
+      padding: 10px
+      .wrapper
+        position: relative
+        height: 110px
+
+    .preview
+      display: block
+      position: absolute
+      left: 10px
+      top: 4px
+      height: 100px
+      width: 80px
+      border: solid 1px #AAA
+
+    .lock_icon
+      position: absolute
+      top: 75px
+      left: 65px
+      z-index: 1
+
+    .notebook .preview
+      background: #D8D8D8
+      box-shadow: 5px 5px 5px #AAA
+      -webkit-box-shadow: 5px 5px 5px #aaa
+
+    .note .preview
+      background: #FFF
+
+    .name, .course, .date
+      margin-left: 110px
+      display: block
+      padding: 3px
+      font-size: 1.5em
+
+    .name
+      font-size: 1.6em
+      padding-top: 23px
+
+    .expand_collapse_icon
+      position: absolute
+      display: block
+      top: 50px
+      right: 10px
+      width: 10px
+      height: 10px
+      font-size: 2em
+      font-wiegth: bold
+
+.full-width
+  &.notes-new, &.notes-edit
+    form
+      background: none
+      padding: 0
+      textarea
+        width: 80%
+        margin: 20px 100px
+        padding: 40px
+        border: none
+
+  pre#note_content
+    width: 80%
+    margin: 20px 100px
+    padding: 40px
+    border: none
+    
+    background: white
+    color: black
+  
+  #save_note_modal

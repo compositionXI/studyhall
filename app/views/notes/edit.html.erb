@@ -1,25 +1,23 @@
-<div class="main-content">
-    <div id="menubar" class="topbar notes">
-      <div class="right">
-        <%= link_to "Save", "#", :id => "save_note_btn", :class => 'btn' %>
-      </div>
-      <div class="left">
-        <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
-      </div>
-      <div class="middle">
-      </div>
-    </div>
-    <div class="container-fluid">
-      <%= text_area_tag "content", nil, :id => "rte_area_note_content", :class => "rte_area" %>
-    </div>
-    <div id="save_note_modal">
-      <%= form_for @note do |f| %>
-        <%= f.label "Title" %>
-        <%= f.text_field :name %>
-        <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
-        <%= f.label "Save To A Notebook" %>
-        <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, :include_blank => true %>
-        <%= f.submit "Done", :class => 'btn', :id => "save_note_submit_button" %>
-      <% end %>
-    </div>
+<div id="menubar" class="topbar notes">
+  <div class="right">
+    <%= link_to "Save", "#", :id => "save_note_btn", :class => 'btn' %>
+  </div>
+  <div class="left">
+    <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
+  </div>
+  <div class="middle">
+  </div>
+</div>
+<div class="container-fluid">
+  <%= text_area_tag "content", nil, :id => "rte_area_note_content", :class => "rte_area" %>
+</div>
+<div id="save_note_modal">
+  <%= form_for @note do |f| %>
+    <%= f.label "Title" %>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
+    <%= f.label "Save To A Notebook" %>
+    <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, :include_blank => true %>
+    <%= f.submit "Done", :class => 'btn', :id => "save_note_submit_button" %>
+  <% end %>
 </div>
