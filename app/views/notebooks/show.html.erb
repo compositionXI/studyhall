@@ -2,9 +2,9 @@
   <div id="menubar" class="topbar">
     <div class="right">
       <a href="" class="btn">Filter</a>
-      <div class="btn_group">
-        <a href="" class="btn">Grid</a>
-        <a href="" class="btn">List</a>
+      <div id="items_layout_switcher" class="btn_group">
+        <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+        <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
       </div>
       <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
       <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
@@ -17,15 +17,18 @@
       <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
     </div>
   </div>
-  <% if @notebook.notes %>
-    <div class="masonry_container">
-      <%= render "shared/notes", :notes => @notebook.notes %>
-    </div>
-  <% else %>
-    <div class="centered">
-      <center>
-        Click the "Take Notes" button to begin taking note.
-      </center>
-    </div>
-  <% end %>  
+
+  <div class="notebook_list_container <%= items_layout %>">
+    <% if @notebook.notes.empty? %>
+      <div class="centered">
+        <center>
+          <p>Click the "Take Notes" button to begin taking note.</p>
+        </center>
+      </div>
+    <% else %>
+      <ol class="notebook_list">
+        <%= render partial: 'notes/list_item', collection: @notebook.notes, as: :note %>
+      </ol>
+    <% end %>
+  </div>
 </div>
