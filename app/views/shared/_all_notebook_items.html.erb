@@ -1,18 +1,13 @@
-<% unless @notebooks.nil? %>
-  <% @notebooks.each do |notebook| %>
+<% unless notebooks.nil? %>
+  <% notebooks.each do |notebook| %>
   <a href="<%= notebook_path(notebook) %>" class="name">
     <div class="masonry_item notebook">    
         <span><%= notebook.name %></span>
+        <div class="lock_icon"><%= image_tag "lock.png" unless notebook.shareable? %></div>
     </div>
     </a>
     <% unless notebook.notes.nil? %>
-      <% notebook.notes.each do |note| %>
-        <a href="<%= notebook_note_path(notebook, note) %>" class="name">
-          <div class="masonry_item note">
-              <span><%= note.name %></span>  
-          </div>
-        </a>
-      <% end %>  
+      <%= render "shared/notes", :notes => notebook.notes %>
     <% end %>
   <% end %>
 <% end %>

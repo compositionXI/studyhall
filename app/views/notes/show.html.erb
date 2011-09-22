@@ -2,10 +2,10 @@
   <div id="menubar" class="topbar notes">
     <div class="right">
       <%= link_to "Delete", note_path(@note), method: "DELETE", class: "btn", :confirm => "Are you sure?" %>
-      <%= link_to "Edit", edit_note_path(@note), class: "btn" %>
+      <%= link_to "Edit", edit_note_path, class: "btn" %>
     </div>
     <div class="left">
-      <%= link_to "X", (@notebook ? notebook_path(@notebook) : notebooks_path), :class => "btn" %>
+      <%= link_to "X", edit_note_back_path, :class => "btn" %>
     </div>
     <div class="middle">
       <%= @note.name %>

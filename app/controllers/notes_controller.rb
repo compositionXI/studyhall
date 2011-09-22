@@ -70,8 +70,7 @@ class NotesController < ApplicationController
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notebook_path(@note.notebook.id) }
-      format.json { head :ok }
+      format.html { redirect_to ( @note.notebook ? notebook_path(@note.notebook.id) : notebooks_path ) }
     end
   end
 

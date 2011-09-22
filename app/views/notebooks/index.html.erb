@@ -8,14 +8,25 @@
       </div>
     </div>
     <div class="left">
-      <%= link_to("Take Notes", new_note_path, :class => "btn") unless @notebooks.empty? %>
-      <%= link_to "New Notebook", new_notebook_path, :class => "btn" %>
+      <%= link_to("Take Notes", new_note_path, :class => "btn") %>
+      <%= link_to "New Notebook", "#", :class => "btn", :id => "new_notebook_btn" %>
     </div>
     <div class="middle">
       <span>All Items</span>
     </div>
   </div>
+  <div class="clear"></div>
   <div class="masonry_container">
-    <%= render :partial => "shared/all_notebook_items" %>
+    <%= render "shared/notes", :notes => @unsorted_notes %>
+    <%= render "shared/all_notebook_items", :notebooks => @notebooks %>
+    <% if @unsorted_notes.nil? && @unsorted_notes %>
+      <div class="centered">
+        <center>
+          <p>Taking notes has never been more clean and easy! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
+          <p>Click the "New Notebook" button to begin taking note.</p>
+        </center>
+      </div>  
+    <% end %>
   </div>
+  <div id="new_notebook_modal"></div>
 </div>

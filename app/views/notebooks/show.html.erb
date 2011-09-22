@@ -17,14 +17,15 @@
       <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
     </div>
   </div>
-  <div class="masonry_container">
-      <% @notebook.notes.each do |note| %>
-        <a href="<%= notebook_note_path(@notebook, note) %>" class="name">
-          <div class="masonry_item note">
-              <span><%= note.name %></span>  
-          </div>
-        </a>
-      <% end %>
-    </ul>
-  </div>
+  <% if @notebook.notes %>
+    <div class="masonry_container">
+      <%= render "shared/notes", :notes => @notebook.notes %>
+    </div>
+  <% else %>
+    <div class="centered">
+      <center>
+        Click the "Take Notes" button to begin taking note.
+      </center>
+    </div>
+  <% end %>  
 </div>

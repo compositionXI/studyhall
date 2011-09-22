@@ -31,6 +31,12 @@ class StudySessionsController < ApplicationController
     redirect_to study_session_path(@study_session.id)
   end
   
+  def destroy
+    @study_session = StudySession.find params[:id]
+    @study_session.destroy
+    redirect_to study_sessions_path
+  end
+  
   private
   
   def init_opentok

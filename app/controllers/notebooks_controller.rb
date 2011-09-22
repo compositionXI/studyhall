@@ -6,6 +6,7 @@ class NotebooksController < ApplicationController
 
   def index
     @notebooks = Notebook.all
+    @unsorted_notes = Note.unsorted
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +27,13 @@ class NotebooksController < ApplicationController
     @notebook = Notebook.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html do
+        if request.xhr?
+          render :partial => "form"
+        else
+          render "new"
+        end
+      end
       format.json { render json: @notebook }
     end
   end
