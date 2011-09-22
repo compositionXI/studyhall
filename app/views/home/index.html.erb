@@ -35,8 +35,13 @@
       </div>
     </div>
   </div>
-  
-  <%= render "shared/all_notebook_items", :notebooks => @notebooks %>
+
+  <div class="notebook_list_container grid">
+    <ol class="notebook_list">
+      <%= render partial: 'notes/list_item', collection: @unsorted_notes, as: :note %>
+      <%= render partial: 'notebooks/list_item', collection: @notebooks, as: :notebook %>
+    </ol>
+  </div>
 </div>
 
 <div class="footer">
