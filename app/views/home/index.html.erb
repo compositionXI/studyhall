@@ -1,14 +1,11 @@
-<div class="homepage_subbar sub_section sub_section">
-  <div class="user_greeting">
+<div class="homepage_subbar sub_section">
+  <div class="user_greeting left">
     <%= image_tag @current_user.avatar_url("medium")%>
-    <span><%= "Hi, #{@current_user.name}!"%></span>
+    <span class="name"><h3>Hi, <span class="highligh_text"><%= "#{@current_user.name}"%></span>!</h3></span>
   </div>
-  <div class="alert_box">
-    Alert! Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-  </div>
-  <div class="standard_actions">
+  <div class="standard_actions right">
     <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn" %>
-    <%= link_to "Take Notes", notebooks_path, :class => "btn" %>
+    <%= link_to "Take Notes", new_note_path, :class => "btn" %>
   </div>
 </div>
 
@@ -31,7 +28,14 @@
     </div>
   </div>
   <div class="sub_section">
-    <center>Campus News</center>
+    Campus News
+  </div>
+  <div class="sub_section">
+    <ul class="unstyled">
+      <li>News Item</li>
+      <li>News Item</li>
+      <li>News Item</li>
+    </ul>
   </div>
 </div>
 
