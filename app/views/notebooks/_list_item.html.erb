@@ -3,7 +3,7 @@
     <div class="wrapper">
       <span class="preview"></span>
       <a class="name" href="<%= notebook_path(notebook) %>">
-        <div class="notebook_name"><%= notebook.name %></div>
+        <span><%= notebook.name %></span>
       </a>
       <span class="course"><%= notebook.course.try(:title) %></span>
       <span class="date"><%=l notebook.created_at.to_date %></span>
