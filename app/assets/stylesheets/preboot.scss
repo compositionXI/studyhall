@@ -447,3 +447,19 @@ $analog2:           adjust-hue($baseColor, -22);
     @include gradientBar(#5bc0de, #339bb9);
   }
 }
+/* For image replacement */
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+@mixin ir {
+  display: block; border: 0; 
+  text-indent: -999em; 
+  overflow: hidden; 
+  background-color: transparent; 
+  background-repeat: no-repeat; 
+  text-align: left; 
+  direction: ltr;
+    br { 
+      display: none; 
+    }      
+}
