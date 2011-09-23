@@ -5,17 +5,18 @@
   padding: 20px
 
 .topbar
-  height: 60px
+  position: static
+  height: auto
   .fill
-    background-color: #D3F4FF
-    @include vertical-gradient(#E5F4FF, #D3F4FF)
-  
-  h3 a
-    color: #000000
-  
-  h3 a:hover
-    color: #000000
-  
+    background: transparent url("/assets/header_bg.png") 
+    height: 73px
+    @include box-shadow(0)
+  a.logo
+    @include ir
+    background: transparent url("/assets/logo.png")
+    color: #ffffff
+    height: 38px
+    width: 191px  
   ul 
     li
       .avatar_thumb
@@ -45,6 +46,22 @@
         text-indent: -99999px
         vertical-align: top
         width: 0
+
+.gridbar
+  background: transparent url("/assets/grid_bg.png")
+  height: 62px
+  margin: -7px 0 0 0
+  text-align: center
+  .container
+    position: relative
+  h3
+    color: #ffffff
+    @include body-font(normal, 18px, 62px)
+  .buttons
+    position: absolute
+    right: 0
+    top: 15px
+  
 
 .topbar_and_content
   min-height: 100%
