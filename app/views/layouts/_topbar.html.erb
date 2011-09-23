@@ -1,7 +1,7 @@
 <div class="topbar">
   <div class="fill">
     <div class="container<%= @layout == "full_width" ? "-fluid" : "" %>">
-      <h3><%= link_to image_tag("/assets/small_icon.png", :alt => "StudyHall"), root_path %></h3>
+      <h3><%= link_to "StudyHall Home", root_path, :class=> "logo" %></h3>
       <ul class="nav">
         <li><%= link_to "Contact", new_contact_path %></li>
         <% @static_pages.each do |static_page| %>
@@ -32,4 +32,11 @@
       </ul>
     </div>
   </div>
+</div>
+<div class="gridbar">
+    <div class="container"><h3>Title and action statements</h3>
+    <div class="buttons">
+      <a class="btn small primary" href="#">Primary action</a>
+      <a class="btn small" href="#">Action</a>
+    </div></div>
 </div>
