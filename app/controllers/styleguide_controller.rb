@@ -1,6 +1,6 @@
 class StyleguideController < ApplicationController
   
   def styleguide
-    render "styleguide"
+    render "index"
   end
 end
