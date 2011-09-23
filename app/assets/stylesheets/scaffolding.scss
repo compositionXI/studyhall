@@ -70,11 +70,11 @@
 // -----------------
 
 html, body {
-  background-color: #fff;
+  background-color: $bodyCopy;
 }
 body {
   margin: 0;
-  @include sans-serif-font(normal,$basefont,$baseline);
+  @include body-font(normal,$basefont,$baseline);
   color: $gray;
   text-rendering: optimizeLegibility;
 }

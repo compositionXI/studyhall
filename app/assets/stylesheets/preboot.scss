@@ -41,6 +41,7 @@ $h5LineHeight:      24px;
 $h6:                14px;
 $h6LineHeight:      24px;
 
+$margin:           24px;
 
 // VARIABLES
 // ---------
@@ -85,6 +86,46 @@ $tetra1:            adjust-hue($baseColor, 90);   // Tetra colors
 $tetra2:            adjust-hue($baseColor, -90);
 $analog1:           adjust-hue($baseColor, 22);   // Analogs colors
 $analog2:           adjust-hue($baseColor, -22);
+
+
+// Font Stacks
+@mixin shorthand-font($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+@mixin sans-serif-font($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+@mixin header-font($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-family: "Chennai Slab Medium", "Helvetica Neue", Arial, Sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+
+@mixin body-font($weight: 500, $size: 14px, $lineHeight: 20px) {
+  font-family: "MuseoSans", "Helvetica", Arial, Sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+
+@mixin form-font($weight: normal, $size: 14px, $lineHeight: 20px) {
+  font-family: Arial, Sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
+@mixin monospace-font($weight: normal, $size: 12px, $lineHeight: 20px) {
+  font-family: "Monaco", Courier New, monospace;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+}
 
 
 // MIXINS
@@ -188,45 +229,6 @@ $analog2:           adjust-hue($baseColor, -22);
   ::-webkit-input-placeholder {
     color: $color;
   }
-}
-
-// Font Stacks
-@mixin shorthand-font($weight: normal, $size: 14px, $lineHeight: 20px) {
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
-}
-@mixin sans-serif-font($weight: normal, $size: 14px, $lineHeight: 20px) {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
-}
-@mixin header-font($weight: normal, $size: 14px, $lineHeight: 20px) {
-  font-family: "Chennai Slab Medium", "Helvetica Neue", Arial, Sans-serif;
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
-}
-
-@mixin body-font($weight: normal, $size: 14px, $lineHeight: 20px) {
-  font-family: "Museo Sans", "Helvetica", Arial, Sans-serif;
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
-}
-
-@mixin form-font($weight: normal, $size: 14px, $lineHeight: 20px) {
-  font-family: Arial, Sans-serif;
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
-}
-@mixin monospace-font($weight: normal, $size: 12px, $lineHeight: 20px) {
-  font-family: "Monaco", Courier New, monospace;
-  font-size: $size;
-  font-weight: $weight;
-  line-height: $lineHeight;
 }
 
 // Grid System
