@@ -127,7 +127,6 @@ strong {
   font-style: inherit;
   font-weight: bold;
   line-height: inherit;
-  color: $emphasis;
 }
 em {
   font-style: italic;
@@ -176,8 +175,7 @@ code, pre {
   @include border-radius(3px);
 }
 code {
-  background-color: lighten($orange, 40%);
-  color: rgba(0,0,0,.75);
+
   padding: 1px 3px;
 }
 pre {
