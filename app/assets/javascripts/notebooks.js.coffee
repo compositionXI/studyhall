@@ -8,6 +8,10 @@ class NotebookContainer
     @container = $('.' + className)
 
   setup: ->
+    @setupExpandCollapseIcon()
+    @setupDragNDrop @container
+
+  setupExpandCollapseIcon: ->
     @container.delegate 'a.expand_collapse_icon', 'click', ->
       notebookListItem = $(this).closest('.notebook_list_item')
       if notebookListItem.hasClass 'collapsed'
@@ -18,6 +22,46 @@ class NotebookContainer
         $(this).text('+')
 
       false
+
+  setupDragNDrop: (scope) ->
+    notebookList = $('.notebook_list', @container)
+    notebookContainer = this
+
+    $('.note_list_item', scope).draggable
+      appendTo: notebookList
+      helper: 'clone'
+      scope: 'notes'
+      revert: 'invalid'
+      containment: 'document'
+      scroll: false
+      zIndex: 2700
+    $('.notebook', scope).droppable
+      scope: 'notes'
+      hoverClass: 'ui-state-highlight'
+      drop: (e, ui) ->
+        notebookContainer.moveNoteToNotebook $('.note', ui.draggable), $(this)
+
+  moveNoteToNotebook: (note, notebook) ->
+    notebookContainer = this
+    noteId = note.attr('id').replace('note_', '')
+    notebookId = notebook.attr('id').replace('notebook_', '')
+
+    $.ajax
+      url: ['/notebooks', notebookId, 'notes', noteId, 'move'].join '/'
+      type: 'PUT'
+      success: (data) ->
+        newNotebookItem = $(data.html)
+        notebook.closest('li').replaceWith(newNotebookItem)
+        notebookContainer.setupDragNDrop newNotebookItem
+
+        # remove from old notebook
+        oldNoteList = note.closest('ol.note_list')
+        note.closest('li.note_list_item').remove()
+        if $('li', oldNoteList).length == 0
+          oldNoteList.remove()
+
+      error: ->
+        alert 'Cannot move note to the notebook'
 
   useLayout: (layout) ->
     @container.attr 'class', [className, layout].join(' ')

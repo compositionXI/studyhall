@@ -1,4 +1,12 @@
 .notebook_list_container
+  ol
+    list-style: none
+    padding: 0
+    margin: 0
+  li
+    list-style-type: none
+    list-style-image: none
+
   &.grid
     .notebook, .note
       margin: 10px
@@ -14,6 +22,8 @@
       background: #D8D8D8
       box-shadow: 5px 5px 5px #AAA
       -webkit-box-shadow: 5px 5px 5px #aaa
+      &.ui-state-highlight
+        background: #ffe45c
 
     .note
       background: #FFF
@@ -39,14 +49,11 @@
       right: 5px
 
     ol
-      list-style: none
       margin: 0
       padding: 0
-      overflow: hidden
-      *zoom: 1
 
     ol, li
-      display: inline
+      display: inline-block
 
     .notebook, .note
       float: left
@@ -98,7 +105,6 @@
       position: absolute
       top: 75px
       left: 65px
-      z-index: 1
 
     .notebook .preview
       background: #D8D8D8
