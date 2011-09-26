@@ -3,7 +3,12 @@
   margin: 0 auto
   background-color: #FDF2F3
   padding: 20px
-
+  // <li id="nav_home" class="current"><a href="#">Home</a></li>
+  // <li id="nav_studyhalls"><a href="#">StudyHalls</a></li>
+  // <li id="nav_notes"><a href="#">Take Notes</a></li>
+  // <li id="nav_profie" class="current"><a href="#">Edit Profile</a></li>
+  // <li id="nav_inbix"><a href="#">Inbox</a></li>
+  // <li id="nav_account" class="current"><a href="#">Your Account</a></li>
 .topbar
   position: static
   height: auto
@@ -17,17 +22,57 @@
     color: #ffffff
     height: 38px
     width: 191px  
+  .nav
+    li
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      border-top: 1px solid $navBorderTop
+      border-bottom: 1px solid $navBorderBottom
+      border-left: 1px solid $navBorderLeft
+      border-right: 1px solid $navBorderRight
+      &:first-child a, &:last-child a
+        width: 49px
+      a
+        color: #fff
+        width: 59px
+        span
+          @include ir
+          background: transparent url("/assets/nav_icons.png")
+          height: 30px
+      &.current
+        @include vertical-gradient($navCurrentGradStart, $navCurrentGradEnd)
+        border-top: 1px solid $navCurrentBorder
+        border-bottom: 1px solid $navCurrentGradEnd
+        border-left: none
+        border-right: none
+        height: 32px
+        margin: -1px 0 0 0
+        &:first-child
+          border-left: 1px solid $navCurrentBorder
+        &:last-child
+          border-right: 1px solid $navCurrentBorder
+    #nav_home span
+      background-position: 10px 0px 
+    #nav_studyhalls span
+      background-position: -39px 0px 
+    #nav_notes span
+      background-position: -98px 0px  
+    #nav_profile span
+      background-position: -160px 0px 
+    #nav_inbox span
+      background-position: -227px 0px 
+    #nav_account span
+      background-position: -278px 0px 
+    
+    
   ul 
     li
       .avatar_thumb
-        
       ul
         background-color: #D3F4FF
       a, ul li a
         outline: none
         color: #666666
-  
-      a:hover, ul li a:hover
+      a:hover
         color: #000000
       a.dropdown-toggle
         img
