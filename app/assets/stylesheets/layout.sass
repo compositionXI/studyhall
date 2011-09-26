@@ -29,9 +29,11 @@
       border-bottom: 1px solid $navBorderBottom
       border-left: 1px solid $navBorderLeft
       border-right: 1px solid $navBorderRight
+      position: relative
       &:first-child a, &:last-child a
         width: 49px
       a
+        background: transparent url("/assets/checker_grid.png") repeat
         color: #fff
         width: 59px
         span
@@ -39,6 +41,8 @@
           background: transparent url("/assets/nav_icons.png")
           height: 30px
       &.current
+        a
+          background: none
         @include vertical-gradient($navCurrentGradStart, $navCurrentGradEnd)
         border-top: 1px solid $navCurrentBorder
         border-bottom: 1px solid $navCurrentGradEnd
@@ -62,7 +66,14 @@
       background-position: -227px 0px 
     #nav_account span
       background-position: -278px 0px 
-    
+    small
+      left: 0
+      position: absolute
+      right: 40px
+      text-align: center
+      top: 10px
+      span
+        text-indent: -99999px
     
   ul 
     li
@@ -72,8 +83,6 @@
       a, ul li a
         outline: none
         color: #666666
-      a:hover
-        color: #000000
       a.dropdown-toggle
         img
           vertical-align: middle
