@@ -660,6 +660,18 @@ input[type=submit].btn {
   }
 }
 
+// PATTERN ANIMATIONS
+// ------------------
+
+.fade {
+  $transition: opacity .15s linear;
+  @include transition($transition);
+  @include opacity(0);
+  &.in {
+    @include opacity(100);
+  }
+}
+
 
 // Background clipping
 @mixin background-clip($clip) {
