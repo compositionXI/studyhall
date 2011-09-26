@@ -9,4 +9,13 @@
 //= require jquery_ujs
 //= require jquery.masonry.min.js
 //= require dropdowns.js
+//= require twipsy.js
 //= require_tree .
+
+$(function(){
+  $("a").twipsy(
+    {
+        placement: "below"
+    }
+  );
+});

@@ -4,12 +4,12 @@
       <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
       <nav class="nav">
         <ul>
-          <li id="nav_home" class="current"><a href="#"><span>Home</span></a></li>
-          <li id="nav_studyhalls"><a href="#"><span>StudyHalls</span></a></li>
-          <li id="nav_notes"><a href="#"><span>Take Notes</span></a></li>
-          <li id="nav_profile" class="current"><a href="#"><span>Edit Profile</span></a></li>
-          <li id="nav_inbox"><a href="#"><small>5</small><span>Inbox</span></a></li>
-          <li id="nav_account" class="current"><a href="#"><span>Your Account</span></a></li>
+          <li id="nav_home" class="current"><a href="#" title="Home"><span>Home</span></a></li>
+          <li id="nav_studyhalls"><a href="#"title="StudyHalls"><span>StudyHalls</span></a></li>
+          <li id="nav_notes"><a href="#" title="Take Notes"><span>Take Notes</span></a></li>
+          <li id="nav_profile" class="current"><a href="#" title="Edit Profile"><span>Edit Profile</span></a></li>
+          <li id="nav_inbox"><a href="#" title="Inbox"><small>5</small><span>Inbox</span></a></li>
+          <li id="nav_account" class="current"><a href="#" title="Your Account"><span>Your Account</span></a></li>
         <!-- <li><%= link_to "Contact", new_contact_path %></li>
                 <% @static_pages.each do |static_page| %>
                   <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
@@ -64,7 +64,7 @@
 <div class="gridbar">
     <div class="container"><h3>Title and action statements</h3>
     <div class="buttons">
-      <a class="btn small primary" href="#">Primary action</a>
+      <a class="btn small primary" title="test" href="#">Primary action</a>
       <a class="btn small" href="#">Action</a>
     </div></div>
 </div>
