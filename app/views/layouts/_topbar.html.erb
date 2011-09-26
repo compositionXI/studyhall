@@ -2,12 +2,21 @@
   <div class="fill">
     <div class="container<%= @layout == "full_width" ? "-fluid" : "" %>">
       <h3><%= link_to "StudyHall Home", root_path, :class=> "logo" %></h3>
-      <ul class="nav">
-        <li><%= link_to "Contact", new_contact_path %></li>
-        <% @static_pages.each do |static_page| %>
-          <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
-        <% end %>
+      <nav>
+        <ul class="nav">
+          <li id="nav_home" class="current"><a href="#"><span>Home</span></a></li>
+          <li id="nav_studyhalls"><a href="#"><span>StudyHalls</span></a></li>
+          <li id="nav_notes"><a href="#"><span>Take Notes</span></a></li>
+          <li id="nav_profile" class="current"><a href="#"><span>Edit Profile</span></a></li>
+          <li id="nav_inbox"><a href="#"><span>Inbox</span></a></li>
+          <li id="nav_account" class="current"><a href="#"><span>Your Account</span></a></li>
+        <!-- <li><%= link_to "Contact", new_contact_path %></li>
+                <% @static_pages.each do |static_page| %>
+                  <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
+                <% end %> -->
+        
       </ul>
+      </nav>
       <ul class="nav secondary-nav">
         <li class="avatar_thumb"></li>
         <li class="dropdown">
