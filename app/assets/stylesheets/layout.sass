@@ -165,12 +165,15 @@
       @include vertical-gradient($navGradStart, $navGradEnd)
       @include vertical-gradient-image("/assets/checker_grid.png", $navGradStart, $navGradEnd)
       padding: 3px
+      cursor: pointer
       img
         border: 1px solid $imgBorder
         margin: 0 7px 0 0
       a.dropdown-toggle
         background: none
         display: inline
+        &:active, &:focus
+          outline: 0 none
         img
           vertical-align: middle   
       a.menu:after, .dropdown-toggle:after
@@ -185,6 +188,12 @@
         text-indent: -99999px
         vertical-align: top
         width: 0
+      ul
+        display: none
+      &.open, &:hover 
+        ul
+          display: block
+          
 
 .gridbar
   background: transparent url("/assets/grid_bg.png")
@@ -196,6 +205,7 @@
   h3
     color: #ffffff
     @include body-font(normal, 18px, 62px)
+    text-shadow: 0 1px 0 rgba(0,0,0,1)
   .buttons
     position: absolute
     right: 0
