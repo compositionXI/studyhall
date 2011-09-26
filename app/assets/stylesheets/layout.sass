@@ -10,7 +10,7 @@
   // <li id="nav_inbix"><a href="#">Inbox</a></li>
   // <li id="nav_account" class="current"><a href="#">Your Account</a></li>
 .topbar
-  position: static
+  position: relative
   height: auto
   .fill
     background: transparent url("/assets/header_bg.png") 
@@ -38,6 +38,10 @@
       position: relative
       &:first-child a, &:last-child a
         width: 49px
+      &:first-child
+        @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
+      &:last-child
+        @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
       a
         background: transparent url("/assets/checker_grid.png") repeat
         color: #fff
@@ -57,8 +61,10 @@
         height: 32px
         margin: -1px 0 0 0
         &:first-child
+          @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
           border-left: 1px solid $navCurrentBorder
         &:last-child
+          @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
           border-right: 1px solid $navCurrentBorder
     #nav_home span
       background-position: 10px 0px 
@@ -84,7 +90,7 @@
   form
     background: none
     float: left
-    margin: 10px 0 0 0
+    margin: 7px 0 0 0
     input
       @include border-radius(4px)
       $shadow: 0px 1px 3px rgba(29, 14, 0, 0.9) inset, 0px 1px 2px 0px rgba(255, 255, 255, .15)
@@ -99,6 +105,7 @@
       // border-bottom: 1px solid rgba(255, 255, 255, 0.1)
       // border-left: 1px solid transparent
       padding: 4px 9px
+      height: 24px
       width: 220px 
       &:-moz-placeholder
         color: $grayLighter
@@ -151,29 +158,30 @@
       //           }
       //         }
       //       }    
-    
-  ul 
-    li
-      .avatar_thumb
-      ul
-        background-color: #D3F4FF
-      a, ul li a
-        outline: none
-        color: #666666
+  .secondary-nav 
+    li.dropdown
+      height: 25px
+      @include border-radius( $topbarRadius )
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      @include vertical-gradient-image("/assets/checker_grid.png", $navGradStart, $navGradEnd)
+      padding: 3px
+      img
+        border: 1px solid $imgBorder
+        margin: 0 7px 0 0
       a.dropdown-toggle
+        background: none
+        display: inline
         img
-          vertical-align: middle
-        
+          vertical-align: middle   
       a.menu:after, .dropdown-toggle:after
         border-left: 4px solid transparent
         border-right: 4px solid transparent
-        border-top: 4px solid black
+        border-top: 4px solid white
         content: "&darr;"
         display: inline-block
         height: 0
         margin-left: 4px
-        margin-top: 16px
-        opacity: 0.5
+        margin-top: 11px
         text-indent: -99999px
         vertical-align: top
         width: 0

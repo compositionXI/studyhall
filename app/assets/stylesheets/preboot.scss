@@ -2,7 +2,7 @@
  * Variables and mixins to pre-ignite any new web development project
  * ------------------------------------------------------------------ */
  
-// CUSTOM VARIABLES
+// CUSTOM VARIABLES //INTRIDEA
 // ----------------
 
 // Palette
@@ -35,11 +35,13 @@ $navCurrentBorder:  #4dcee7;
 $navFormGradStart:  #412818;
 $navFormGradEnd:    #4f311e;
 
+$imgBorder:         #4e301c;
 
 
 
 
-// Headers
+
+// Headers //INTRIDEA
 $h1:                48px;
 $h1LineHeight:      48px;
 $h1small:           30px;
@@ -59,11 +61,12 @@ $h5LineHeight:      24px;
 $h6:                14px;
 $h6LineHeight:      24px;
 
-// Topbar
+// Topbar //INTRIDEA
 
 $topbarHeight:      73px;
-
+$topbarRadius:      3px;
 $margin:            24px;
+
 
 
 // VARIABLES From Default Bootstrap
@@ -113,7 +116,7 @@ $analog2:           adjust-hue($baseColor, -22);
 
 
 
-// Font Stacks
+// Font Stacks //INTRIDEA
 
 @font-face {
     font-family: 'ChennaiSlabMedium';
@@ -230,6 +233,18 @@ $analog2:           adjust-hue($baseColor, -22);
   background-image: linear-gradient(top, $startColor, $endColor); // The standard
 }
 
+@mixin vertical-gradient-image ($url: "#", $startColor: #555, $endColor: #333) { //INTRIDEA
+  background-color: $endColor;
+  background-repeat: repeat-x;
+  background-image: url($url),-khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor)); // Konqueror
+  background-image: url($url),-moz-linear-gradient(top, $startColor, $endColor); // FF 3.6+
+  background-image: url($url),-ms-linear-gradient(top, $startColor, $endColor); // IE10
+  background-image: url($url),-webkit-gradient(linear, left top, left bottom, color-stop(0%, $startColor), color-stop(100%, $endColor)); // Safari 4+, Chrome 2+
+  background-image: url($url),-webkit-linear-gradient(top, $startColor, $endColor); // Safari 5.1+, Chrome 10+
+  background-image: url($url),-o-linear-gradient(top, $startColor, $endColor); // Opera 11.10
+  background-image: url($url),linear-gradient(top, $startColor, $endColor); // The standard
+}
+
 @mixin directional-gradient ($startColor: #555, $endColor: #333, $deg: 45deg) {
   background-color: $endColor;
   background-repeat: repeat-x;
@@ -328,6 +343,16 @@ $analog2:           adjust-hue($baseColor, -22);
           border-radius: $radius;
 }
 
+//INTRIDEA
+@mixin multi-radius($radiusTL: 5px, $radiusTR: 5px, $radiusBR: 5px, $radiusBL: 5px) {
+  -moz-border-radius-topleft: $radiusTL;
+  -moz-border-radius-topright: $radiusTR;
+  -moz-border-radius-bottomright: $radiusBR;
+  -moz-border-radius-bottomleft: $radiusBL;
+  -webkit-border-radius: $radiusTL $radiusTR $radiusBR $radiusBL;
+  border-radius: $radiusTL $radiusTR $radiusBR $radiusBL;
+}
+
 // Drop shadows
 @mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
   -webkit-box-shadow: $shadow;
@@ -396,7 +421,7 @@ $analog2:           adjust-hue($baseColor, -22);
     @include gradientBar(#5bc0de, #339bb9);
   }
 }
-/* For image replacement */
+/* For image replacement */ //INTRIDEA
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }
 

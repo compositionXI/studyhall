@@ -21,6 +21,22 @@
         <input type="text" placeholder="Search">
       </form>
       <ul class="nav secondary-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="#" ><img class="avatar_thumb" src="/assets/generic_avatar_thumb.png" height=25px width=25px />You</a>
+            <ul class="dropdown-menu">
+              <li><a>Profile</a></li>
+              <li><a>Study</a></li>
+              <li><a>Notes</a></li>
+              <li><a>Messages</a></li>
+              <li><a>Classes</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Logout</a></li>
+            </ul>
+        </li>
+      </ul>
+      
+      
+      <!-- <ul class="nav secondary-nav">
         <li class="avatar_thumb"></li>
         <li class="dropdown">
           <% if @current_user %>
@@ -41,7 +57,7 @@
             <li><%= link_to "Login", root_path %></li>
           <% end %>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </header>
