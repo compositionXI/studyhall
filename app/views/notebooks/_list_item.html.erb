@@ -1,20 +1,11 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
 <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
   <%= div_for notebook do %>
-    <div class="wrapper">
-      <span class="preview"></span>
-      <a class="name" href="<%= notebook_path(notebook) %>">
-        <span><%= notebook.name %></span>
-      </a>
-      <span class="course"><%= notebook.course.try(:title) %></span>
-      <span class="date"><%=l notebook.created_at.to_date %></span>
-      <% unless notebook.notes.empty? %>
-        <a class="expand_collapse_icon" href="<%= notebook_path(notebook) %>">
-          <%= collapsed ? '+' : 'x' %>
-        </a>
-      <% end %>
-      <span class="lock_icon"><%= image_tag "lock.png" unless notebook.shareable? %></span>
-    </div>
+    <%= render 'notebooks/grid_view.html', notebook: notebook, collapsed: collapsed %>
+    <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed %>
+    <span class="checkbox">
+      <input type="checkbox" name="notebook[][id]" value="<%= notebook.id %>" />
+    </span>
   <% end %>
 
   <% unless notebook.notes.empty? %>

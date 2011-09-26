@@ -10,6 +10,7 @@ class NotebookContainer
   setup: ->
     @setupExpandCollapseIcon()
     @setupDragNDrop @container
+    @setupSelectable()
 
   setupExpandCollapseIcon: ->
     @container.delegate 'a.expand_collapse_icon', 'click', ->
@@ -28,8 +29,14 @@ class NotebookContainer
     notebookContainer = this
 
     $('.note_list_item', scope).draggable
-      appendTo: notebookList
-      helper: 'clone'
+      start: (e, ui) ->
+        $(this).addClass 'dragging_placeholder'
+      stop: (e, ui) ->
+        $(this).removeClass 'dragging_placeholder'
+      helper: ->
+        theHelper = $(this).clone().appendTo(notebookList)
+        theHelper.width($(this).width())
+      handle: '.drag_handle'
       scope: 'notes'
       revert: 'invalid'
       containment: 'document'
@@ -37,9 +44,31 @@ class NotebookContainer
       zIndex: 2700
     $('.notebook', scope).droppable
       scope: 'notes'
-      hoverClass: 'ui-state-highlight'
+      hoverClass: 'draggable_hovering'
       drop: (e, ui) ->
         notebookContainer.moveNoteToNotebook $('.note', ui.draggable), $(this)
+
+  setupSelectable: ->
+    @container.delegate '.preview', 'click', (event) ->
+      container = $(this).closest('.note, .notebook')
+      checkbox = $('.checkbox input', container)
+      unless $(event.target).is('a')
+        if checkbox.prop('checked')
+          checkbox.prop('checked', false)
+          container.removeClass('checked')
+        else
+          checkbox.prop('checked', true)
+          container.addClass('checked')
+
+    @renderSelectable()
+
+  renderSelectable: ->
+    $('.note, .notebook').each ->
+      checkbox = $('.checkbox input', $(this)).hide()
+      if checkbox.prop('checked')
+        $(this).addClass('checked')
+      else
+        $(this).removeClass('checked')
 
   moveNoteToNotebook: (note, notebook) ->
     notebookContainer = this
@@ -53,12 +82,16 @@ class NotebookContainer
         newNotebookItem = $(data.html)
         notebook.closest('li').replaceWith(newNotebookItem)
         notebookContainer.setupDragNDrop newNotebookItem
+        notebookContainer.renderSelectable()
 
         # remove from old notebook
-        oldNoteList = note.closest('ol.note_list')
+        oldNotebook = note.closest('.notebook_list_item')
+        oldNoteList = $('.note_list', oldNotebook)
         note.closest('li.note_list_item').remove()
         if $('li', oldNoteList).length == 0
           oldNoteList.remove()
+          oldNotebook.addClass 'collapsed'
+          $('.expand_collapse_icon', oldNotebook).remove()
 
       error: ->
         alert 'Cannot move note to the notebook'
