@@ -28,10 +28,12 @@ $navBorderRight:    #1a1817;
 $navBorderBottom:   #0a0401;
 $navBorderLeft:     #745d4a;
 
-
 $navCurrentGradStart:#00b8dc;
-$navCurrentGradEnd:  #008bc6;
-$navCurrentBorder:   #4dcee7;
+$navCurrentGradEnd: #008bc6;
+$navCurrentBorder:  #4dcee7;
+
+$navFormGradStart:  #412818;
+$navFormGradEnd:    #4f311e;
 
 
 
@@ -57,7 +59,12 @@ $h5LineHeight:      24px;
 $h6:                14px;
 $h6LineHeight:      24px;
 
-$margin:           24px;
+// Topbar
+
+$topbarHeight:      73px;
+
+$margin:            24px;
+
 
 // VARIABLES From Default Bootstrap
 // ---------
