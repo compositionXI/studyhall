@@ -2,57 +2,6 @@
  * Variables and mixins to pre-ignite any new web development project
  * ------------------------------------------------------------------ */
  
- @font-face {
-     font-family: 'ChennaiSlabMedium';
-     src: url('/assets/chennaislabmedium-webfont.eot');
-     src: url('/assets/chennaislabmedium-webfont.eot?#iefix') format('embedded-opentype'),
-          url('/assets/chennaislabmedium-webfont.woff') format('woff'),
-          url('/assets/chennaislabmedium-webfont.ttf') format('truetype'),
-          url('/assets/chennaislabmedium-webfont.svg#ChennaiSlabMedium') format('svg');
-     font-weight: normal;
-     font-style: normal;
-
- }
-
- @font-face {
-     font-family: 'ChennaiSlabMediumOblique';
-     src: url('/assets/chennaislabmediumoblique-webfont.eot');
-     src: url('/assets/chennaislabmediumoblique-webfont.eot?#iefix') format('embedded-opentype'),
-          url('/assets/chennaislabmediumoblique-webfont.woff') format('woff'),
-          url('/assets/chennaislabmediumoblique-webfont.ttf') format('truetype'),
-          url('/assets/chennaislabmediumoblique-webfont.svg#ChennaiSlabMediumOblique') format('svg');
-     font-weight: normal;
-     font-style: normal;
-
- } 
- 
- @font-face {
-     font-family: 'MuseoSansItalic';
-     src: url('/assets/museosans-500italic-webfont.eot');
-     src: url('/assets/museosans-500italic-webfont.eot?#iefix') format('embedded-opentype'),
-          url('/assets/museosans-500italic-webfont.woff') format('woff'),
-          url('/assets/museosans-500italic-webfont.ttf') format('truetype'),
-          url('/assets/museosans-500italic-webfont.svg#MuseoSansItalic') format('svg');
-     font-weight: normal;
-     font-style: normal;
-
- }
-
- @font-face {
-     font-family: 'MuseoSansRegular';
-     src: url('/assets/museosans-500-webfont.eot');
-     src: url('/assets/museosans-500-webfont.eot?#iefix') format('embedded-opentype'),
-          url('/assets/museosans-500-webfont.woff') format('woff'),
-          url('/assets/museosans-500-webfont.ttf') format('truetype'),
-          url('/assets/museosans-500-webfont.svg#MuseoSansRegular') format('svg');
-     font-weight: normal;
-     font-style: normal;
-
- }
-
-
- 
- 
 // CUSTOM VARIABLES
 // ----------------
 
@@ -71,6 +20,21 @@ $zebraStriping:     #FAFAFA;
 
 $tooltipColor:      #50311d;
 $emphasis:          #e87224;
+
+$navGradStart:      #392619;
+$navGradEnd:        #21140c;
+$navBorderTop:      #7e674f;
+$navBorderRight:    #1a1817;  
+$navBorderBottom:   #0a0401;
+$navBorderLeft:     #745d4a;
+
+
+$navCurrentGradStart:#00b8dc;
+$navCurrentGradEnd:  #008bc6;
+$navCurrentBorder:   #4dcee7;
+
+
+
 
 
 // Headers
@@ -95,7 +59,7 @@ $h6LineHeight:      24px;
 
 $margin:           24px;
 
-// VARIABLES
+// VARIABLES From Default Bootstrap
 // ---------
 
 // Grays
@@ -140,7 +104,58 @@ $analog1:           adjust-hue($baseColor, 22);   // Analogs colors
 $analog2:           adjust-hue($baseColor, -22);
 
 
+
+
 // Font Stacks
+
+@font-face {
+    font-family: 'ChennaiSlabMedium';
+    src: url('/assets/chennaislabmedium-webfont.eot');
+    src: url('/assets/chennaislabmedium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/chennaislabmedium-webfont.woff') format('woff'),
+         url('/assets/chennaislabmedium-webfont.ttf') format('truetype'),
+         url('/assets/chennaislabmedium-webfont.svg#ChennaiSlabMedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'ChennaiSlabMediumOblique';
+    src: url('/assets/chennaislabmediumoblique-webfont.eot');
+    src: url('/assets/chennaislabmediumoblique-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/chennaislabmediumoblique-webfont.woff') format('woff'),
+         url('/assets/chennaislabmediumoblique-webfont.ttf') format('truetype'),
+         url('/assets/chennaislabmediumoblique-webfont.svg#ChennaiSlabMediumOblique') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+} 
+
+@font-face {
+    font-family: 'MuseoSansItalic';
+    src: url('/assets/museosans-500italic-webfont.eot');
+    src: url('/assets/museosans-500italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/museosans-500italic-webfont.woff') format('woff'),
+         url('/assets/museosans-500italic-webfont.ttf') format('truetype'),
+         url('/assets/museosans-500italic-webfont.svg#MuseoSansItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'MuseoSansRegular';
+    src: url('/assets/museosans-500-webfont.eot');
+    src: url('/assets/museosans-500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/museosans-500-webfont.woff') format('woff'),
+         url('/assets/museosans-500-webfont.ttf') format('truetype'),
+         url('/assets/museosans-500-webfont.svg#MuseoSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 @mixin shorthand-font($weight: normal, $size: 14px, $lineHeight: 20px) {
   font-size: $size;
   font-weight: $weight;
