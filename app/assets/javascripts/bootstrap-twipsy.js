@@ -96,6 +96,14 @@
           case 'below':
             tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
+            //Modifications made by Jake Mauer / Intridea Inc.
+          case 'belowRight':
+            tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - this.options.horizontalOffset }
+            break
+          case 'belowLeft':
+            tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - actualWidth + this.options.horizontalOffset}
+            break
+            //End Modifications
           case 'above':
             tp = {top: pos.top - actualHeight - this.options.offset, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
@@ -296,6 +304,7 @@
   , html: false
   , live: false
   , offset: 0
+  , horizontalOffset: 0
   , title: 'title'
   , trigger: 'hover'
   }
