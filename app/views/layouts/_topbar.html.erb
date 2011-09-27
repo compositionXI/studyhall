@@ -1,7 +1,7 @@
 <div class="topbar">
   <div class="fill">
     <div class="container<%= @layout == "full_width" ? "-fluid" : "" %>">
-      <h3><%= link_to image_tag("/assets/small_icon.png", :alt => "StudyHall"), root_path %></h3>
+      <h3><%= link_to image_tag("small_icon.png", :alt => "StudyHall"), root_path %></h3>
       <ul class="nav">
         <li><%= link_to "Contact", new_contact_path %></li>
         <% @static_pages.each do |static_page| %>
