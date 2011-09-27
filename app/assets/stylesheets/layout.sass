@@ -114,51 +114,51 @@
         color: $grayLighter
       
       // Search Form
-      // form {
-      //         float: left;
-      //         margin: 5px 0 0 0;
-      //         position: relative;
-      //         @include opacity(100);
-      //         input {
-      //           background-color: #444;
-      //           background-color: rgba(255,255,255,.3);
+      // form 
+      //         float: left
+      //         margin: 5px 0 0 0
+      //         position: relative
+      //         @include opacity(100)
+      //         input 
+      //           background-color: #444
+      //           background-color: rgba(255,255,255,.3)
       //           
       //           
       //           
       //           
       //           
-      //           border: 1px solid #111;
+      //           border: 1px solid #111
       //           
-      //           $shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0px rgba(255,255,255,.25);
-      //           @include box-shadow($shadow);
-      //           @include transition(none);
+      //           $shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0px rgba(255,255,255,.25)
+      //           @include box-shadow($shadow)
+      //           @include transition(none)
       // 
-      //           // Placeholder text gets special styles; can't be bundled together though for some reason
-      //           &:-moz-placeholder {
-      //             color: $grayLighter;
-      //           }
-      //           &::-webkit-input-placeholder {
-      //             color: $grayLighter;
-      //           }
+      //           // Placeholder text gets special styles can't be bundled together though for some reason
+      //           &:-moz-placeholder 
+      //             color: $grayLighter
+      //           
+      //           &::-webkit-input-placeholder 
+      //             color: $grayLighter
+      //           
       //           // Hover states
-      //           &:hover {
-      //             background-color: $grayLight;
-      //             background-color: rgba(255,255,255,.5);
-      //             color: #fff;
-      //           }
+      //           &:hover 
+      //             background-color: $grayLight
+      //             background-color: rgba(255,255,255,.5)
+      //             color: #fff
+      //           
       //           // Focus states (we use .focused since IE8 and down doesn't support :focus)
       //           &:focus,
-      //           &.focused {
-      //             outline: none;
-      //             background-color: #fff;
-      //             color: $grayDark;
-      //             text-shadow: 0 1px 0 #fff;
-      //             border: 0;
-      //             padding: 5px 10px;
-      //             @include box-shadow(0 0 3px rgba(0,0,0,.15));
-      //           }
-      //         }
-      //       }    
+      //           &.focused 
+      //             outline: none
+      //             background-color: #fff
+      //             color: $grayDark
+      //             text-shadow: 0 1px 0 #fff
+      //             border: 0
+      //             padding: 5px 10px
+      //             @include box-shadow(0 0 3px rgba(0,0,0,.15))
+      //           
+      //         
+      //           
   .secondary-nav 
     li.dropdown
       height: 25px
@@ -181,7 +181,7 @@
         border-left: 4px solid transparent
         border-right: 4px solid transparent
         border-top: 4px solid white
-        content: "&darr;"
+        content: "&darr"
         display: inline-block
         height: 0
         margin-left: 4px
@@ -189,11 +189,97 @@
         text-indent: -99999px
         vertical-align: top
         width: 0
-      ul
-        display: none
-      &.open, &:hover 
+      &.open
         ul
+          @include opacity(100)  
+      ul 
+        @include vertical-gradient(#ffffff, #f8f8f8)
+        @include border-radius(2px)
+        $transition: opacity .15s linear
+        @include transition($transition)
+        @include opacity(0)
+        border: 1px solid $popoverBorder
+        float: left
+        display: block
+        position: absolute
+        top: 42px
+        right: -10px
+        min-width: 90px
+        max-width: 160px
+        _width: 90px
+        margin-left: 0
+        margin-right: 0
+        padding: 5px 0
+        text-align: left
+        zoom: 1      
+        .arrow 
+          @include popover-arrow-below(10px,$popoverColor, -8px, auto, 5px)
+          position: absolute
+          width: 0
+          height: 0
+        .arrow-border
+          @include arrow-border(10px,$popoverBorder, -20px, auto, 5px)          
+        li 
+          float: none
+          clear: both
           display: block
+          background: none
+          font-size: 12px
+          border: none
+          a 
+            background: none
+            display: block
+            padding: 6px 15px
+            clear: both
+            font-size: 12px
+            font-weight: normal
+            line-height: 12px
+            color: $linkColor
+            text-shadow: none
+          // Dividers (basically an hr)
+          &.divider 
+            height: 1px
+            overflow: hidden
+            background: #222
+            background: rgba(0,0,0,.2)
+            border-bottom: 1px solid rgba(255,255,255,.1)
+            margin: 5px 0
+          // Section separaters
+          span 
+            clear: both
+            display: block
+            background: rgba(0,0,0,.2)
+            padding: 6px 15px
+            cursor: default
+            color: $gray
+            border-top: 1px solid rgba(0,0,0,.2)
+          
+        
+      
+      // ul
+      //         display: none
+      //         .inner 
+      //           border: 1px solid $popoverBorder
+      //           overflow: hidden
+      //           width: 410px
+      //           @include border-radius(2px)
+      //           @include box-shadow(0 3px 7px rgba(0,0,0,0.3))
+      //         .title
+      //           padding: 9px 15px
+      //           line-height: 1
+      //           @include border-radius(3px 3px 0 0)
+      //           border-bottom: 1px solid #eeeee
+      //           margin: 0
+      //         .content
+      //           padding: 14px
+      //           @include border-radius(0 0 3px 3px)
+      //           @include background-clip(padding-box)
+      //           p, ul, ol
+      //             margin-bottom: 0
+      //       &.open, &:hover 
+      //         ul 
+      //           display: block
+          
           
 
 .gridbar
