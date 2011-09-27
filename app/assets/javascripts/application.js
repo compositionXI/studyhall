@@ -22,7 +22,7 @@ $(function(){
   
   $('.large-bird').popover({
       content:          "data-content"
-    , placement:        "belowLeft"
+    , placement:        "below-left"
     , horizontalOffset: 25
   });
   

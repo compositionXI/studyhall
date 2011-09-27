@@ -97,10 +97,10 @@
             tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
             //Modifications made by Jake Mauer / Intridea Inc.
-          case 'belowRight':
+          case 'below-right':
             tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - this.options.horizontalOffset }
             break
-          case 'belowLeft':
+          case 'below-left':
             tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - actualWidth + this.options.horizontalOffset}
             break
             //End Modifications

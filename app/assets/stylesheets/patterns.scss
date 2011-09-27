@@ -675,39 +675,17 @@ input[type=submit].btn {
 // POPOVER ARROWS //INTRIDEA
 // --------------
 
-@mixin arrow-border($arrowWidth: 10px, $color: $black, $top: -17px, $xOffset: 30px) {
+@mixin arrow-border($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto) {
   border-color: transparent transparent $color;
   border-style: solid;
   border-width: $arrowWidth;
   height: 0;
-  left: 50%;
+  left: $left;
+  right: $right;
   position: absolute;
   top: $top;
   width: 0;
 }
-
-@mixin arrow-border-right($arrowWidth: 10px, $color: $black, $top: -17px, $xOffset: 30px) {
-  border-color: transparent transparent $color;
-  border-style: solid;
-  border-width: $arrowWidth;
-  height: 0;
-  left: $xOffset;
-  position: absolute;
-  top: $top;
-  width: 0;
-}
-
-@mixin arrow-border-left($arrowWidth: 10px, $color: $black, $top: -17px, $xOffset: 30px) {
-  border-color: transparent transparent $color;
-  border-style: solid;
-  border-width: $arrowWidth;
-  height: 0;
-  right: $xOffset;
-  position: absolute;
-  top: $top;
-  width: 0;
-}
-
 
 @mixin popover-arrow-above($arrowWidth: 5px) {
   bottom: 0;
@@ -727,34 +705,16 @@ input[type=submit].btn {
   border-left: $arrowWidth solid $popoverColor;
 }
 
-@mixin popover-arrow-below($arrowWidth: 5px,$color: $black, $top: 0, $left: 50%) {
+@mixin popover-arrow-below($arrowWidth: 5px,$color: $black, $top: 0, $left: 50%, $right: auto) {
   top: $top;
   left: $left;
-  margin-left: -$arrowWidth;
-  border-left: $arrowWidth solid transparent;
-  border-right: $arrowWidth solid transparent;
-  border-bottom: $arrowWidth solid $color;
-}
-
-@mixin popover-arrow-below-left($arrowWidth: 5px,$color: $black, $top: -17px, $right: 30px) {
-  top: $top;
   right: $right;
   margin-left: -$arrowWidth;
   border-left: $arrowWidth solid transparent;
   border-right: $arrowWidth solid transparent;
   border-bottom: $arrowWidth solid $color;
-  @include arrow-border;
-
 }
 
-@mixin popover-arrow-below-right($arrowWidth: 5px,$color: $black, $top: -17px, $left: 30px) {
-  top: $top;
-  left: $left;
-  margin-left: -$arrowWidth;
-  border-left: $arrowWidth solid transparent;
-  border-right: $arrowWidth solid transparent;
-  border-bottom: $arrowWidth solid $color;
-}
 
 @mixin popover-arrow-right($arrowWidth: 5px) {
   top: 50%;
@@ -828,17 +788,18 @@ input[type=submit].btn {
   top: 0;
   left: 0;
   z-index: 1000;
-  padding: 5px;
   display: none;
+  @include vertical-gradient(#ffffff, #f8f8f8);
+  
   &.above .arrow { @include popover-arrow-above(); }
   &.right .arrow { @include popover-arrow-right(); }
   &.below .arrow { @include popover-arrow-below(); }
   //Modifications in by Jake Mauer / Intridea
-  &.belowLeft .arrow   { @include popover-arrow-below-left(10px,$popoverColor, -2px, 25px); }
-  &.belowRight .arrow   { @include popover-arrow-below-right(10px,$popoverColor, -2px, 25px); }
+  &.below-left .arrow   { @include popover-arrow-below(10px,$popoverColor, -7px, auto, 15px); }  
+  &.below-left .arrow-border  { @include arrow-border(10px,$popoverBorder, -19px, auto, 15px); }
   
-  &.belowLeft .arrow-border  { @include arrow-border-left(10px,$popoverBorder, -14px, 15px); }
-  &.belowRight .arrow-border  { @include arrow-border-right(10px,$popoverBorder, -14px, 15px); }
+  &.below-right .arrow   { @include popover-arrow-below(10px,$popoverColor, -7px, 25px, auto); }
+  &.below-right .arrow-border  { @include arrow-border(10px,$popoverBorder, -19px, 15px, auto); }
   //End Modifications
   &.left .arrow  { @include popover-arrow-left(); }
   .arrow {
@@ -854,7 +815,6 @@ input[type=submit].btn {
     @include box-shadow(0 3px 7px rgba(0,0,0,0.3));
   }
   .title {
-    background-color: #f5f5f5;
     padding: 9px 15px;
     line-height: 1;
     @include border-radius(3px 3px 0 0);
@@ -862,7 +822,6 @@ input[type=submit].btn {
     margin: 0
   }
   .content {
-    background-color: $white;
     padding: 14px;
     @include border-radius(0 0 3px 3px);
     @include background-clip(padding-box);
