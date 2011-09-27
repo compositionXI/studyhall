@@ -683,6 +683,7 @@ input[type=submit].btn {
   left: $left;
   right: $right;
   position: absolute;
+  margin-left: -$arrowWidth;
   top: $top;
   width: 0;
 }
@@ -793,11 +794,11 @@ input[type=submit].btn {
   
   &.above .arrow { @include popover-arrow-above(); }
   &.right .arrow { @include popover-arrow-right(); }
-  &.below .arrow { @include popover-arrow-below(); }
   //Modifications in by Jake Mauer / Intridea
+  &.below .arrow   { @include popover-arrow-below(10px,$popoverColor, -7px, 50%, auto); }  
+  &.below .arrow-border  { @include arrow-border(10px,$popoverBorder, -19px, 50%, auto); }
   &.below-left .arrow   { @include popover-arrow-below(10px,$popoverColor, -7px, auto, 15px); }  
   &.below-left .arrow-border  { @include arrow-border(10px,$popoverBorder, -19px, auto, 15px); }
-  
   &.below-right .arrow   { @include popover-arrow-below(10px,$popoverColor, -7px, 25px, auto); }
   &.below-right .arrow-border  { @include arrow-border(10px,$popoverBorder, -19px, 15px, auto); }
   //End Modifications
