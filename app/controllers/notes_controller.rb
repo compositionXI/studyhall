@@ -65,6 +65,22 @@ class NotesController < ApplicationController
     end
   end
 
+  def move
+    @note.notebook_id = @notebook.id
+
+    respond_to do |format|
+      if @note.save
+        @notebook.reload
+        format.json do
+          html = render_to_string(partial: 'notebooks/list_item.html.erb', locals: { notebook: @notebook, collapsed: false })
+          render json: { html: html }
+        end
+      else
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     @note = current_user.notes.find(params[:id])
     @note.destroy
