@@ -37,6 +37,9 @@ $navFormGradEnd:    #4f311e;
 
 $imgBorder:         #4e301c;
 
+$popoverColor:      #ffffff;
+$popoverTextColor:  #333333;
+
 
 
 
@@ -81,10 +84,44 @@ $grayLighter:       lighten($black, 90%);
 $white:             #fff;
 
 // Accent Colors
-$blue:              #049CDB;
-$blueDark:          #0064CD;
-$green:             #46a546;
-$red:               #9d261d;
+$blue:              #72CEF2;
+$blueDark:          #59BAED;
+$blueBorder:        #20546F;
+$blueText:          #001F2f;
+$blueTextShadow:    #A1DAF6;
+
+$blueDisabled:      #86D5FF;
+$blueDisabledText:  #366882;
+
+$silver:            #F5F5F5;
+$silverDark:        #EEEEEE;
+$silverText:        #282E32;
+$silverTextShadow:  #FFFFFF;
+$silverBorder:      #777777;
+
+$silverDisabled:    #EEEEEE;
+$silverDisabledText:#777B7D;
+
+$red:               #F1716E;
+$redDark:           #EB5856;
+$redBorder:         #7D1311;
+$redText:           #2F0000;
+$redTextShadow:     #F4A1A0;
+
+$aqua:              #6DD2E7;
+$aquaDark:          #55C0DD;
+$aquaBorder:        #1E6B92;
+$aquaText:          #002934;
+$aquaTextShadow:    #9FDDED;   
+
+$green:             #A2D034;
+$greenDark:         #7EBD28;
+$greenBorder:       #1E6B92;
+$greenText:         #2B460C;
+$greenTextShadow:   #BADB83;
+
+
+
 $yellow:            #ffc40d;
 $orange:            #f89406;
 $pink:              #c3325f;
@@ -274,12 +311,23 @@ $analog2:           adjust-hue($baseColor, -22);
          opacity: $opacity / 100;
 }
 
-// Gradient Bar Colors for buttons and allerts
+// Gradient Bar Colors for buttons and alerts
 @mixin gradientBar($primaryColor, $secondaryColor) {
   @include vertical-gradient($primaryColor, $secondaryColor);
   text-shadow: 0 -1px 0 rgba(0,0,0,.25);
   border-color: $secondaryColor $secondaryColor darken($secondaryColor, 15%);
   border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 15%);
+}
+
+//INTRIDEA
+@mixin button-gradient($primaryColor, $secondaryColor, $textColor, $textShadowColor, $borderColor) {
+  @include vertical-gradient($primaryColor, $secondaryColor);
+  color: $textColor;
+  text-shadow: 0px 1px 0px $textShadowColor;
+  border-color: $borderColor;
+  &:hover {
+    @include vertical-gradient( $secondaryColor, $primaryColor);
+  }
 }
 
 // Clearfix for clearing floats like a boss h5bp.com/q
@@ -393,34 +441,6 @@ $analog2:           adjust-hue($baseColor, -22);
   background-clip: padding-box;
 }
 
-// Shared colors for buttons and alerts
-.btn,
-.alert-message {
-  // Set text color
-  &.danger,
-  &.danger:hover,
-  &.error,
-  &.error:hover,
-  &.success,
-  &.success:hover,
-  &.info,
-  &.info:hover {
-    color: $white
-  }
-  // Danger and error appear as red
-  &.danger,
-  &.error {
-    @include gradientBar(#ee5f5b, #c43c35);
-  }
-  // Success appears as green
-  &.success {
-    @include gradientBar(#62c462, #57a957);
-  }
-  // Info appears as a neutral blue
-  &.info {
-    @include gradientBar(#5bc0de, #339bb9);
-  }
-}
 /* For image replacement */ //INTRIDEA
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }

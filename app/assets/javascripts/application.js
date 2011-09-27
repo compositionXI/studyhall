@@ -16,6 +16,7 @@ $(function(){
   $("a").twipsy(
     {
         placement: "below"
+      , offset: 10, 
     }
   );
 });

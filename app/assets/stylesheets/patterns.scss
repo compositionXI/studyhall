@@ -247,34 +247,106 @@ footer {
   border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fade-in(rgba(0,0,0,.1), .15);
 }
 
+//INTRIDEA
+@mixin btnColorDark($primaryColor, $secondaryColor) {
+  @include vertical-gradient($primaryColor, $secondaryColor);
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+  border-color: $secondaryColor $secondaryColor darken($secondaryColor, 15%);
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fade-in(rgba(0,0,0,.1), .15);
+}
+
+// Shared colors for buttons and alerts
+.btn {
+  &.danger:hover,
+  &.error:hover,
+  &.success:hover,
+  &.info:hover {
+    color: $white;
+    text-shadow: 0 1px 0 rgba(34,34,34,.6);
+  }
+  // Danger and error appear as red
+  &.danger,
+  &.error {
+    @include button-gradient($red, $redDark,$redText,$redTextShadow,$redBorder );
+  }
+  // Success appears as green
+  &.success {
+    @include button-gradient($green, $greenDark,$greenText,$greenTextShadow,$greenBorder );
+  }
+  // Info appears as a neutral blue
+  &.info {
+    @include button-gradient($aqua, $aquaDark,$aquaText,$aquaTextShadow,$aquaBorder );
+  }
+}
+.alert-message {
+  // Set text color
+  &.danger,
+  &.danger:hover,
+  &.error,
+  &.error:hover,
+  &.success,
+  &.success:hover,
+  &.info,
+  &.info:hover {
+    color: $white
+  }
+  // Danger and error appear as red
+  &.danger,
+  &.error {
+    @include gradientBar($red, $redDark);
+  }
+  // Success appears as green
+  &.success {
+    @include gradientBar(#62c462, #57a957);
+  }
+  // Info appears as a neutral blue
+  &.info {
+    @include gradientBar(#5bc0de, #339bb9);
+  }
+}
+
 
 // Base .btn styles
 .btn {
   // Button Base
   cursor: pointer;
   display: inline-block;
-  @include vertical-three-colors-gradient(#fff, #fff, 0.25, darken(#fff, 10%));
-  padding: 5px 14px 6px;
-  text-shadow: 0 1px 1px rgba(255,255,255,.75);
-  color: #333;
-  font-size: 13px;
+  @include vertical-gradient($silver, $silverDark);
+  padding: 12px 15px;
+  text-shadow: 0 1px 1px $silverTextShadow;
+  color: $silverText;
+  font-size: 12px;
   line-height: normal;
-  border: 1px solid #ccc;
-  border-bottom-color: #bbb;
-  @include border-radius(4px);
+  border: 1px solid $silverBorder;
+  @include border-radius(2px);
   $shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
   @include box-shadow($shadow);
-
+  text-transform: uppercase;
   &:hover {
-    background-position: 0 -15px;
     color: #333;
     text-decoration: none;
+    @include vertical-gradient($silverDark, $silver);
   }
 
   // Primary Button Type
   &.primary {
-    color:#fff;
-    @include btnColor($blue, $blueDark);
+    color:$blueText;
+    text-shadow: 0 1px 0 $blueTextShadow;
+    border-color: $blueBorder;
+    @include vertical-gradient($blue, $blueDark);
+    &:hover {
+      @include vertical-gradient($blueDark, $blue);
+    }
+    &.disabled{
+      background: $blueDisabled;
+      color: $blueDisabledText;
+      border:1px solid $blueDisabled;
+    }
+    &:disabled{
+      background: $blueDisabled;
+      color: $blueDisabledText;
+      border:1px solid $blueDisabled;
+    }
   }
 
    // Transitions
@@ -284,7 +356,9 @@ footer {
   &.disabled {
     cursor: default;
     background-image: none;
-    @include opacity(65);
+    background: $silverDisabled;
+    color: $silverDisabledText;
+    border:1px solid $silverDisabled;
   }
 
   &:disabled {
@@ -292,7 +366,9 @@ footer {
     // def because IE8 and below will drop it ;_;
     cursor: default;
     background-image: none;
-    @include opacity(65);
+    background: $silverDisabled;
+    color: $silverDisabledText;
+    border:1px solid $silverDisabled;
   }
 
   &:active {
@@ -311,6 +387,7 @@ footer {
   &.small {
     padding: 7px 9px 7px;
     font-size: 11px;
+    line-height: 8px;
   }
 
 }
@@ -589,7 +666,7 @@ input[type=submit].btn {
 }
 
 
-// POPOVER ARROWS
+// POPOVER ARROWS //INTRIDEA
 // --------------
 
 @mixin popover-arrow-above($arrowWidth: 5px) {
@@ -598,7 +675,7 @@ input[type=submit].btn {
   margin-left: -$arrowWidth;
   border-left: $arrowWidth solid transparent;
   border-right: $arrowWidth solid transparent;
-  border-top: $arrowWidth solid #000;
+  border-top: $arrowWidth solid $popoverColor;
 }
 
 @mixin popover-arrow-left($arrowWidth: 5px) {
@@ -607,7 +684,7 @@ input[type=submit].btn {
   margin-top: -$arrowWidth;
   border-top: $arrowWidth solid transparent;
   border-bottom: $arrowWidth solid transparent;
-  border-left: $arrowWidth solid #000;
+  border-left: $arrowWidth solid $popoverColor;
 }
 
 @mixin popover-arrow-below($arrowWidth: 5px) {
@@ -616,7 +693,7 @@ input[type=submit].btn {
   margin-left: -$arrowWidth;
   border-left: $arrowWidth solid transparent;
   border-right: $arrowWidth solid transparent;
-  border-bottom: $arrowWidth solid #000;
+  border-bottom: $arrowWidth solid $popoverColor;
 }
 
 @mixin popover-arrow-right($arrowWidth: 5px) {
@@ -625,11 +702,11 @@ input[type=submit].btn {
   margin-top: -$arrowWidth;
   border-top: $arrowWidth solid transparent;
   border-bottom: $arrowWidth solid transparent;
-  border-right: $arrowWidth solid #000;
+  border-right: $arrowWidth solid $popoverColor;
 }
 
 
-// TWIPSY
+// TWIPSY //INTRIDEA
 // ------
 
 .twipsy {
@@ -646,12 +723,13 @@ input[type=submit].btn {
   &.right .twipsy-arrow   { @include popover-arrow-right(); }
   .twipsy-inner {
     padding: 3px 8px;
-    background-color: #000;
-    color: white;
+    background-color: $popoverColor;
+    color: $popoverTextColor;
     text-align: center;
     max-width: 200px;
     text-decoration: none;
     @include border-radius(4px);
+    text-shadow: 0px 1px 0px rgba(255,255,255,.75);
   }
   .twipsy-arrow {
     position: absolute;
