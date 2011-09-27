@@ -8,15 +8,22 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.masonry.min.js
-//= require dropdowns.js
-//= require twipsy.js
+//= require bootstrap-dropdowns.js
+//= require bootstrap-twipsy.js
+//= require bootstrap-popover.js
+//= require bootstrap-modal.js
 //= require_tree .
 
 $(function(){
-  $("a").twipsy(
-    {
-        placement: "below"
-      , offset: 10, 
-    }
-  );
+  $("a").twipsy({
+      placement: "below"
+    , offset: 10 
+  });
+  
+  $('.large-bird').popover({
+      content:          "data-content"
+    , placement:        "belowLeft"
+    , horizontalOffset: 25
+  });
+  
 });
