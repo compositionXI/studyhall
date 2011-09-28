@@ -1,7 +1,13 @@
 <div class="homepage_subbar sub_section">
   <div class="user_greeting left">
     <%= image_tag @current_user.avatar_url("medium")%>
-    <span class="name"><h3>Hi, <span class="highligh_text"><%= "#{@current_user.name}"%></span>!</h3></span>
+    <span class="name"><h3>Hi, 
+    <%= link_to @current_user do %>
+      <span class="highligh_text">
+        <%= @current_user.name %>
+      </span>
+    <% end %>
+    !</h3></span>
   </div>
   <div class="standard_actions right">
     <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn" %>
