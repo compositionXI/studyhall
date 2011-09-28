@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    render "new", :layout => "blank"
   end
   
   def create
