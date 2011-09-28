@@ -38,4 +38,12 @@ class User < ActiveRecord::Base
   def has_avatar?
     self.avatar_file_name
   end
+  
+  def male?
+    self.gender == "Male"
+  end
+  
+  def female?
+    self.gender == "Female"
+  end
 end

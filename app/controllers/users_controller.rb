@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @notebooks = Notebook.find_by_user_id @user.id
   end
   
   def new
@@ -34,9 +35,21 @@ class UsersController < ApplicationController
   
   def update
     @user.avatar = nil if params[:delete_avatar] == "1"
-    if @user.update_attributes params[:user]
+    if @user.update_attributes! params[:user]
       flash[:notice] = "Account updated!"
-      redirect_to_user
+        if request.xhr?
+          greek_house = @user.male? ? @user.fraternity : @user.sorority
+          render :json => {
+            name: @user.name, 
+            school: @user.school, 
+            greek_house: greek_house, 
+            major: @user.major, 
+            gpa: @user.gpa, 
+            avatar_url: @user.avatar_url(:large)
+          }
+        else
+          redirect_to_user
+        end
     else
       render :action => :edit
     end

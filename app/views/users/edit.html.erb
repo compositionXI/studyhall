@@ -1,5 +1,133 @@
-<fieldset>
-  <legend>Edit User</legend>
-  
-  <%= render 'form' %>
-</fieldset>
+<section>
+  <div class="row">
+      <div class="span4 column sidebar left" id="profile_sidebar">
+        <%= image_tag @user.avatar_url(:large), id: "profile_photo" %>
+        <%= link_to "Change photo", "#", id: "change_profile_photo" %>
+        <%= render "shared/buddies_preview" %>
+        <div>
+          <%= link_to "Delete Profile", user_path, method: :delete, confirm: "Are you sure you want to delete your profile? All of your information will be lost."  %>
+        </div>
+      </div>
+      <div class="span12 column profile_main_content">
+        <div id="profile_personal_info" class="left">
+          <h1><%= @user.name %></h1>
+          <div id="profile_detailed_info" class="profile_edit">
+            A <%= sybling_type %> <span class='highlight_text' id="greek_house"><%= greek_affiliation %></span>, 
+            attends <span class="highlight_text" id="school"><%= "#{@user.school}"%></span>, 
+            majors in <span class="highlight_text" id="major"><%= "#{@user.major}"%></span>
+          </div>
+        </div>
+        <div class="profile_ratings left">
+          <% if @user.gpa %>
+            <div id="profile_edit_gpa" class="rating_block gpa profile_edit left">
+              <span id="gpa"><%= @user.gpa %></span>
+              GPA
+            </div>
+          <% end %>
+          <div class="rating_block rating right">
+            7
+            Rating
+          </div>
+          <div class="clear"></div>
+          <div class="stats">
+              <ul class="unstyled">
+                <li class="sub_section">
+                  <span class="count left">4</span> Hours Spent in Studyhalls 
+                  <div class="clear"></div>
+                </li>
+                <li class="sub_section">
+                  <span class="count left">2</span> Studyhalls Created
+                  <div class="clear"></div>
+                </li>
+                <li class="sub_section">
+                  <span class="count left">15</span> Notebooks Shared 
+                  <div class="clear"></div>
+                </li>
+              </ul>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <div id="profile_user_items">
+          <div id="profile_tabs">
+          	<ul>
+          		<li><a href="#tabs-1">Courses (<%= @user.offerings.count %>)</a></li>
+          		<li><a href="#tabs-2">Notes (<%= @user.notebooks.count %>)</a></li>
+          		<li><a href="#tabs-3">Studyhalls (<%=  %>)</a></li>
+          	</ul>
+          	<div class="tabs_container">
+          	  <div id="tabs-1">
+            	  <div class="notebook_list_container <%= items_layout %> profile_edit">
+            	    <ol class="notebook_list">
+            	      <%= render partial: 'course_list', collection: @user.offerings, as: :offering %>
+                  </ol>
+                </div>
+            	</div>
+            	<div id="tabs-2">
+            	  <div class="notebook_list_container <%= items_layout %> profile_edit">
+            	    <ol class="notebook_list">
+            	      <a href="#">
+            		      <%= render partial: 'notebooks/list_item', collection: @user.notebooks, as: :notebook %>
+            		    </a>
+            		  </ol>
+            		</div>
+            	</div>
+            	<div id="tabs-3">
+        		
+            	</div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<div class="profile_edit_modal edit_personal_info modal_dialog">
+  <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_personal_info_form", :multipart => true} do |f| %>
+  <%= f.label :school %>
+  <%= f.text_field :school %>
+  <% if @user.male? %>
+    <%= f.label :fraternity %>
+    <%= f.text_field :fraternity %>
+  <% elsif @user.female? %>
+    <%= f.label :sorority %>
+    <%= f.text_field :sorority %>
+  <% end %>
+  <%= f.label :major %>
+  <%= f.text_field :major %>
+  <div class="clearfix">
+    <%= f.submit "Save", :class => "btn primary save" %>
+    OR
+    <%= link_to "Cancel", "#", :class => "close_modal" %>
+  </div>
+  <% end %>
+</div>
+
+<div class="profile_edit_modal edit_gpa modal_dialog">
+  <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_gpa_form", :multipart => true} do |f| %>
+    <%= f.label :GPA %>
+    <%= f.text_field :gpa %>
+    <div class="clearfix">
+      <%= f.submit "Save", :class => "btn primary save" %>
+      OR
+      <%= link_to "Cancel", "#", :class => "close_modal" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="profile_edit_modal edit_profile_photo modal_dialog">
+  <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_profile_photo_form", :multipart => true} do |f| %>
+    <%= f.label :avatar %>
+    <%= f.file_field :avatar %>
+    <% if @user.has_avatar? %>
+      <div class="clearfix">
+        <%= f.label "Delete Image" %>
+        <div class="input"><%= check_box_tag :delete_avatar %></div>
+      </div>
+    <% end %>
+    <div class="clearfix">
+      <%= f.submit "Save", :class => "btn primary save" %>
+      OR
+      <%= link_to "Cancel", "#", :class => "close_modal" %>
+    </div>
+  <% end %>
+</div>

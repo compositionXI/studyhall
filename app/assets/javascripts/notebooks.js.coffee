@@ -139,3 +139,16 @@ class NotebooksController
 
 $ ->
   new NotebooksController().setup()
+	
+	newNotebookModal = $("#new_notebook_modal")
+	newNotebookModal.dialog
+  	modal: true
+  	autoOpen: false
+
+  $("#new_notebook_btn").click (e) ->
+    $.get "notebooks/new", (data) ->
+      newNotebookModal.html data
+      newNotebookModal.dialog('open')
+
+  		newNotebookModal.find(".close_modal").click (e) ->
+		  	newNotebookModal.dialog('close')

@@ -1,0 +1,13 @@
+<% collapsed = true unless local_assigns.key? :collapsed %>
+<li class="notebook_list_item<%= ' collapsed' if collapsed %>">
+  <div class="notebook">
+    <div class="grid_view">
+      <div class="preview">
+        <div class="fields">
+          <a class="name" href="<%=  %>">
+            <span><%= offering.course.title %></span>
+          </a>
+        </div>
+      </div>
+  </div>
+</li>
