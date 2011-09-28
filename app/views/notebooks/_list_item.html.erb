@@ -1,6 +1,7 @@
+<% wrapper_class ||= 'wrapper' %>
 <li class="notebook_list_item collapsed">
   <%= div_for notebook do %>
-    <div class="wrapper">
+    <div class="<%= wrapper_class %>">
       <span class="preview"></span>
       <a class="name" href="<%= notebook_path(notebook) %>">
         <span><%= notebook.name %></span>
@@ -16,7 +17,7 @@
 
   <% unless notebook.notes.empty? %>
     <ol class="note_list">
-      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note %>
+      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note, :locals => {:wrapper_class => wrapper_class} %>
     </ol>
   <% end %>
 </li>

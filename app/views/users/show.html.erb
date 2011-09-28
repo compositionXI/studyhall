@@ -1,43 +1,83 @@
 <section>
   <div class="row">
-    <div class="span16">
-      <h2><%= @user.name %></h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span4 column">
-      <%= image_tag @user.avatar_url(:medium) %>
-    </div>
-    <div class="span12 column">
-      <ul class="unstyled spaced">
-        <% unless user_protected_profile? @user, :roles %>
-          <li><b>Role:</b> <%= @user.roles.collect {|r| r.name}.join(" ") %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :gender %>
-          <li><b>Gender:</b> <%= @user.gender %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :email %>
-          <li><b>Email:</b> <%= @user.email %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :school %>
-          <li><b>School:</b> <%= @user.school %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :major %>
-          <li><b>Major:</b> <%= @user.major %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :gpa %>
-          <li><b>GPA:</b> <%= @user.gpa %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :fraternity %>
-          <li><b>Fraternity:</b> <%= @user.fraternity %></li>
-        <% end %>
-        <% unless user_protected_profile? @user, :sorority %>
-          <li><b>Sorority:</b> <%= @user.sorority %></li>
-        <% end %>
-      </ul>
+    <div class="span4 column sidebar left" id="profile_sidebar">
       <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
       <%= link_to("Send Message", new_user_message_path(@user), :class => "btn") if @current_user != @user %>
-      <%= link_to 'Back', users_path, :class => "btn" if @current_user && @user.admin? %>
+      <%= image_tag @user.avatar_url(:large) %>
+      <%= render "shared/buddies_preview" %>
+      <div>
+        <%= link_to "Report this profile", "#" %>
+      </div>
+      <div>
+        <%= link_to "Block Grace", "#" %>
+      </div>
+    </div>
+    <div class="span12 column profile_main_content">
+      <div id="profile_personal_info" class="left">
+        <h1><%= @user.name %></h1>
+        <div id="profile_detailed_info">
+          A <%= sybling_type %> <span class='highlight_text'><%= greek_affiliation %></span>,, 
+          attends <span class="highlight_text"><%= "#{@user.school}"%></span>, 
+          majors in <span class="highlight_text"><%= "#{@user.major}"%></span>
+        </div>
+      </div>
+      <div class="profile_ratings left">
+        <% if @user.gpa %>
+          <div class="rating_block gpa left">
+            <%= @user.gpa %>
+            GPA
+          </div>
+        <% end %>
+        <div class="rating_block rating right">
+          7
+          Rating
+        </div>
+        <div class="clear"></div>
+        <div class="stats">
+            <ul class="unstyled">
+              <li class="sub_section">
+                <span class="count left">4</span> Hours Spent in Studyhalls 
+                <div class="clear"></div>
+              </li>
+              <li class="sub_section">
+                <span class="count left">2</span> Studyhalls Created
+                <div class="clear"></div>
+              </li>
+              <li class="sub_section">
+                <span class="count left">15</span> Notebooks Shared 
+                <div class="clear"></div>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div id="profile_user_items">
+        <div id="profile_tabs">
+        	<ul>
+        		<li><a href="#tabs-1">Courses (<%= @user.offerings.count %>)</a></li>
+        		<li><a href="#tabs-2">Notes (<%= @user.notebooks.count %>)</a></li>
+        		<li><a href="#tabs-3">Studyhalls (<%=  %>)</a></li>
+        	</ul>
+        	<div id="tabs-1">
+        	  <div class="notebook_list_container <%= items_layout %>">
+        	    <ol class="notebook_list">
+        	      <%= render partial: 'course_list', collection: @user.offerings, as: :offering %>
+              </ol>
+            </div>
+            <div class="clear"></div>
+        	</div>
+        	<div id="tabs-2">
+        	  <div class="notebook_list_container <%= items_layout %>">
+        	    <ol class="notebook_list">
+        		    <%= render partial: 'notebooks/list_item', collection: @user.notebooks, as: :notebook %>
+        		  </ol>
+        		</div>
+        	</div>
+        	<div id="tabs-3">
+        		
+        	</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,6 +1,7 @@
 <li class="note_list_item">
   <%= div_for note do %>
-    <div class="wrapper">
+    <% wrapper_class ||= 'wrapper' %>
+    <div class="<%= wrapper_class %>">
       <span class="preview"></span>
       <a class="name" href="<%= note_path(note) %>">
         <span><%= note.name %></span>

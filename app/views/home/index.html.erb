@@ -12,20 +12,16 @@
 <div class="clear"></div>
 
 <div class="sidebar left">
+  <%= render "shared/buddies_preview" %>
   <div class="sub_section">
-    <div class="friend_list">
-      <div class="sub_section">
-        <div class="left">Buddies</div>
-        <div class="right"><%= link_to "View All >>", "#"%></div>
-        <div class="clear"></div>
-      </div>
-      <ul class="unstyled">
-        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-        <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-      </ul>
-    </div>
+    Your Activity
+  </div>
+  <div class="sub_section">
+    <ul class="unstyled">
+      <li>Activity Item</li>
+      <li>Activity Item</li>
+      <li>Activity Item</li>
+    </ul>
   </div>
   <div class="sub_section">
     Campus News
@@ -39,9 +35,8 @@
   </div>
 </div>
 
-<div class="notebook_list_container grid">
+<div class="notebook_list_container <%= items_layout %>">
   <ol class="notebook_list">
-    <%= render partial: 'notes/list_item', collection: @unsorted_notes, as: :note %>
-    <%= render partial: 'notebooks/list_item', collection: @notebooks, as: :notebook %>
+    <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
   </ol>
 </div>
