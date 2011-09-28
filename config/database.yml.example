@@ -31,6 +31,14 @@ test:
   password:
   socket: /tmp/mysql.sock
 
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: demo
+  pool: 5
+  username: deploy
+  password: zEwzNqjerx
+
 production:
   adapter: mysql2
   encoding: utf8

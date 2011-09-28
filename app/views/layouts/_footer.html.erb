@@ -1,8 +1,13 @@
 <div class="footer">
   <div class="container">
     <div class="footer_content">
-      <p>Copyright StudyHall.com All rights reserved.</p>
-    </div>
+      <span class="left">Copyright StudyHall.com All rights reserved.</span>
+      <ul class="unstyled">
+        <li class="left"><%= link_to "Contact", new_contact_path %></li>
+        <% @static_pages.each do |static_page| %>
+          <li class="left"><%= link_to static_page.title, page_path(static_page.slug) %></li>
+        <% end %>
+      </ul>
+    </div>    
   </div>
 <div>
-  

@@ -5,15 +5,22 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+group :test, :development do
+  gem 'mysql2'
+end
+group :staging, :production do
+  gem 'pg'
+end
+
 gem 'authlogic'
 gem 'rails3-generators'
 gem 'opentok'
 gem "paperclip", "~> 2.4"
-gem 'capistrano'
 gem 'aws-s3'
 gem 'rest-client'
 gem 'has_mailbox'
+gem 'execjs'
+gem 'therubyracer'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -45,6 +52,7 @@ end
 
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'capistrano-ext'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

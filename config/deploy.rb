@@ -1,18 +1,20 @@
 set :stages, %w(production staging)
 set :default_stage, "staging"
-require 'capistrano/ext/multistage'
 
-set :application, "set your application name here"
+require 'capistrano/ext/multistage'
+require 'bundler/capistrano'
+
+set :application, "StudyHall"
 set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
 
 set :scm, :git
+set :scm_username, 'brent'
 
-set :user, "www-data"
-set :group, "www-data"
+set :user, "deploy"
+#set :group, "www-data"
 
 set :deploy_via, :remote_cache
-set :deploy_to, "/var/www/#{application}"
-set :deploy_env, 'production'
+set :deploy_to, "/home/deploy/rails_apps/#{application}"
 
 #role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 #role :app, "your app-server here"                          # This may be the same as your `Web` server
@@ -30,3 +32,13 @@ set :deploy_env, 'production'
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
+namespace :deploy do
+  desc "symlink the database yaml"
+  task :symlinkdb, :roles => :app do
+    run <<-CMD
+      ln -s #{shared_path}/system/database.yml #{release_path}/config/database.yml
+    CMD
+  end
+  after "deploy:symlink", "deploy:symlinkdb"
+end
