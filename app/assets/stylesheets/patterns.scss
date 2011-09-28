@@ -135,6 +135,7 @@
         }
       }
     }
+    //Relocated ul li ul li pattern to layout.sass
   }
 }
 
@@ -274,9 +275,9 @@ footer {
     color:$blueText;
     text-shadow: 0 1px 0 $blueTextShadow;
     border-color: $blueBorder;
-    @include vertical-gradient($blue, $blueDark);
+    @include vertical-gradient-image($checkerImage, $blue, $blueDark);
     &:hover {
-      @include vertical-gradient($blueDark, $blue);
+      @include vertical-gradient-image($checkerImage, $blueDark, $blue);
     }
     &.disabled{
       background: $blueDisabled;
