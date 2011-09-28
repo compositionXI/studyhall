@@ -56,7 +56,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to @note, notice: 'Note was successfully updated.' }
+        format.html { redirect_to notebooks_path, notice: 'Note was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
