@@ -10,7 +10,7 @@
 
   <% unless notebook.notes.empty? %>
     <ol class="note_list">
-      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note, :locals => {:wrapper_class => wrapper_class} %>
+      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note %>
     </ol>
   <% end %>
 </li>
