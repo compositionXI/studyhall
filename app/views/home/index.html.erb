@@ -1,24 +1,31 @@
 <div class="homepage_subbar sub_section">
-  <div class="user_greeting left">
-    <%= image_tag @current_user.avatar_url("medium")%>
-    <span class="name"><h3>Hi, 
-    <%= link_to @current_user do %>
-      <span class="highligh_text">
-        <%= @current_user.name %>
-      </span>
+  <div class="row">
+    <div class="user_greeting span4">
+      <%= image_tag @current_user.avatar_url("medium")%>
+      <span class="name"><h3>Hi, 
+      <%= link_to @current_user do %>
+        <span class="highligh_text">
+          <%= @current_user.name %>
+        </span>
+      <% end %>
+      !</h3></span>
+    </div>
+    <% if flash[:notice] %>
+      <div class="alert alert-message success span7">
+          <a class="close" href="#">×</a>
+          <%= flash[:notice] %>
+      </div>
+    <% else %>
+      <div class="span6"></div>
     <% end %>
-    !</h3></span>
-  </div>
-  <div class="alert alert-message success center">
-    <a class="close" href="#">×</a>
-    You did good!
-  </div>
-  <div class="standard_actions right">
-    <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn" %>
-    <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+    <div class="right">
+      <div class="standard_actions span5">
+        <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+        <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn primary" %>
+      </div>
+    </div>
   </div>
 </div>
-
 <div class="clear"></div>
 
 <div class="sidebar left">

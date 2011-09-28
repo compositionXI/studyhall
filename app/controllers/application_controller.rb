@@ -33,7 +33,6 @@ class ApplicationController < ActionController::Base
     logger.debug "ApplicationController::require_no_user"
     if current_user
       store_location
-      flash[:notice] = "You must be logged out to access this page"
       redirect_to home_index_path
       return false
     end
