@@ -4,12 +4,12 @@
       <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
       <nav class="nav">
         <ul>
-          <li id="nav_home" class="current"><%= link_to "Home" %><a href="#" title="Home"><span>Home</span></a></li>
-          <li id="nav_studyhalls"><a href="#"title="StudyHalls"><span>StudyHalls</span></a></li>
-          <li id="nav_notes"><a href="#" title="Take Notes"><span>Take Notes</span></a></li>
-          <li id="nav_profile" class="current"><a href="#" title="Edit Profile"><span>Edit Profile</span></a></li>
-          <li id="nav_inbox"><a href="#" title="Inbox"><small>5</small><span>Inbox</span></a></li>
-          <li id="nav_account" class="current"><a href="#" title="Your Account"><span>Your Account</span></a></li>
+          <li id="nav_home" class="current"><%= link_to home_index_path, title: "Home" do %><span>Home</span><% end %></li>
+          <li id="nav_studyhalls"><%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %></li>
+          <li id="nav_notes"><%= link_to notes_path, title: "Take Notes" do %><span>Take Notes</span><% end %></li>
+          <li id="nav_profile" class="current"><%= link_to edit_user_path(@current_user), title: "Profile" do %><span>Profile</span><% end %></li>
+          <li id="nav_inbox"><%= link_to messages_path, title: "Indox" do %><small>5</small><span>Inbox</span><% end %></li>
+          <li id="nav_account" class="current"><%= link_to @current_user, title: "Your Account" do %><span>Your Account</span><% end %></li>
         <!-- <li><%= link_to "Contact", new_contact_path %></li>
                 <% @static_pages.each do |static_page| %>
                   <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
