@@ -38,7 +38,7 @@
       &:last-child
         @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
       a
-        background: transparent url("/assets/checker_grid.png") repeat
+        background: transparent url($checkerImage) repeat
         color: #fff
         width: 59px
         span
@@ -46,9 +46,9 @@
           background: transparent url("/assets/nav_icons.png")
           height: 30px
       &.current
+        @include vertical-gradient-image( $checkerImage,$navCurrentGradStart, $navCurrentGradEnd)
         a
           background: none
-        @include vertical-gradient($navCurrentGradStart, $navCurrentGradEnd)
         border-top: 1px solid $navCurrentBorder
         border-bottom: 1px solid $navCurrentGradEnd
         border-left: none
