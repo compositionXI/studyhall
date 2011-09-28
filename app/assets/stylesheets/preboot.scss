@@ -51,7 +51,6 @@ $modalGradEnd:      #F8F8F8;
 
 
 
-
 // Headers //INTRIDEA
 $h1:                48px;
 $h1LineHeight:      48px;
@@ -77,6 +76,8 @@ $h6LineHeight:      24px;
 $topbarHeight:      73px;
 $topbarRadius:      3px;
 $margin:            24px;
+
+$checkerImage:      "/assets/checker_grid.png";
 
 
 
@@ -280,7 +281,7 @@ $analog2:           adjust-hue($baseColor, -22);
 
 @mixin vertical-gradient-image ($url: "#", $startColor: #555, $endColor: #333) { //INTRIDEA
   background-color: $endColor;
-  background-repeat: repeat-x;
+  background-repeat: repeat;
   background-image: url($url),-khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor)); // Konqueror
   background-image: url($url),-moz-linear-gradient(top, $startColor, $endColor); // FF 3.6+
   background-image: url($url),-ms-linear-gradient(top, $startColor, $endColor); // IE10
