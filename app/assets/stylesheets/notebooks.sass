@@ -1,5 +1,84 @@
 .notebook_list_container
+  // reset list style
+  ol
+    list-style: none
+    padding: 0
+    margin: 0
+  li
+    list-style-type: none
+    list-style-image: none
+  .hidden
+    display: none
+
+  // choose correct view to display
   &.grid
+    .list_view
+      display: none
+  &.list
+    .grid_view
+      display: none
+
+  // preview icon
+  .preview
+    border: 1px solid #AAA
+
+  .notebook .preview
+    background: #ccc
+    box-shadow: 5px 5px 5px #AAA
+    -webkit-box-shadow: 5px 5px 5px #aaa
+  .notebook.draggable_hovering .preview
+    border: 1px dashed #AAA
+    background: #eee
+
+  .note .preview
+    background: #FFF
+
+  .dragging_placeholder .note .preview
+    border-width: 0
+    background: #EEE
+    box-shadow: 0 0 3px #EEE
+    -webkit-box-shadow: 0 0 3px #EEE
+    div, span, a
+      display: none
+
+  // icons
+  .icon
+    display: block
+    width: 25px
+    height: 25px
+    overflow: hidden
+    text-indent: -9999px
+
+  .lock_icon
+    background: url(/assets/lock.png)
+
+  .drag_handle
+    cursor: move
+
+  .ui-draggable-dragging, .note:hover, .notebook:hover
+    .drag_handle
+      background: url(/assets/move.png)
+
+  .checkbox
+    width: 25px
+    height: 25px
+    overflow: hidden
+    display: block
+
+  .note, .notebook
+    &.checked
+      .checkbox
+        background: url(/assets/checkbox_checked.png)
+
+  // locator
+  .note, .notebook, .grid_view, .list_view
+    position: relative
+
+  &.grid
+    .preview
+      height: 196px
+      width: 158px
+
     .notebook, .note
       margin: 10px
       text-align: center
@@ -18,42 +97,33 @@
 
     .notebook
       font-weight: bold
-      background: #D8D8D8
-      box-shadow: 5px 5px 5px #AAA
-      -webkit-box-shadow: 5px 5px 5px #aaa
 
-    .note
-      background: #FFF
+    .name, .course
+      display: block
 
     .name
-      display: block
-      height: 100%
-      width: 100%
-
-      span
-        display: block
-        padding: 10px 5px
-
-    .course, .date, .expand_collapse_icon
-      display: none
-
-    .delete_notebook
-      position: absolute
+      font-size: 1.2em
+      margin-top: 67px
+      padding: 5px
 
     .lock_icon
       position: absolute
+      left: 5px
       bottom: 5px
-      right: 5px
 
-    ol
-      list-style: none
-      margin: 0
-      padding: 0
-      overflow: hidden
-      *zoom: 1
+    .drag_handle
+      position: absolute
+      left: 45%
+      bottom: 5px
+
+    .checkbox
+      position: absolute
+      right: 5px
+      bottom: 5px
 
     ol, li
-      display: inline
+      // todo: cross browser solution for inline block
+      display: inline-block
 
     .notebook, .note
       float: left
@@ -61,10 +131,16 @@
   &.list
     padding: 0 15px
 
-    ol
-      list-style: none
-      margin-left: 0
+    li.notebook_list_item
+      background: #FDFDE8
+      &.collapsed
+        background: inherit
+    li.note_list_item
+      background: #F2F2F2
+      &.ui-draggable-dragging
+        background: inherit
 
+    ol
       &.note_list
         border-top: 2px solid #AAA
         border-bottom: 2px solid #AAA
@@ -88,52 +164,44 @@
 
     .notebook, .note
       padding: 10px
-      .wrapper
-        position: relative
+      .list_view
         height: 110px
 
     .preview
-      display: block
       position: absolute
       left: 10px
       top: 4px
       height: 100px
       width: 80px
-      border: solid 1px #AAA
 
-    .lock_icon
+    .checkbox
       position: absolute
-      top: 75px
-      left: 65px
-      z-index: 1
+      top: 52.5px
+      left: 47.5px
 
-    .notebook .preview
-      background: #D8D8D8
-      box-shadow: 5px 5px 5px #AAA
-      -webkit-box-shadow: 5px 5px 5px #aaa
-
-    .note .preview
-      background: #FFF
-
-    .name, .course, .date
+    .fields
       margin-left: 110px
-      display: block
-      padding: 3px
       font-size: 1.5em
+
+    .name_wrapper
+      padding-top: 28px
+      a
+        float: left
 
     .name
       font-size: 1.6em
-      padding-top: 23px
+
+    .expand_collapse_icon, .drag_handle
+      position: absolute
+      right: 5px
+      top: 45%
 
     .expand_collapse_icon
-      position: absolute
-      display: block
-      top: 50px
-      right: 10px
-      width: 10px
-      height: 10px
-      font-size: 2em
-      font-wiegth: bold
+      background: url(/assets/collapse.png) no-repeat
+
+    .collapsed .expand_collapse_icon
+      background: url(/assets/expand.png) no-repeat
+      
 
 .full-width
   &.notes-new, &.notes-edit

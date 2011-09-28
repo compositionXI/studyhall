@@ -1,7 +1,11 @@
 Studyhall::Application.routes.draw do
   resources :notes
   resources :notebooks do
-    resources :notes
+    resources :notes do
+      member do
+        put 'move'
+      end
+    end
   end
 
   resources :classes

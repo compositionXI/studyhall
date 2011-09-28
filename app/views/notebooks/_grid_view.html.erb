@@ -1,0 +1,14 @@
+<div class="grid_view">
+  <div class="preview">
+    <div class="fields">
+      <a class="name" href="<%= notebook_path(notebook) %>">
+        <span><%= notebook.name %></span>
+      </a>
+      <span class="course"><%= notebook.course.try(:title) %></span>
+    </div>
+
+    <% unless notebook.shareable? %>
+      <a href="#" class="lock_icon icon">Share</a>
+    <% end %>
+  </div>
+</div>
