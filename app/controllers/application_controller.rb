@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages
+  before_filter :current_user, :fetch_static_pages, :set_action_bar
 
   private
   
@@ -57,5 +57,9 @@ class ApplicationController < ActionController::Base
   
   def fetch_static_pages
     @static_pages = StaticPage.all
+  end
+  
+  def set_action_bar
+    @action_bar = File.exists?("app/views/shared/_#{params[:controller]}_action_bar.html.erb") ? "shared/#{params[:controller]}_action_bar" : nil
   end
 end

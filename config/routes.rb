@@ -1,4 +1,5 @@
 Studyhall::Application.routes.draw do
+  
   resources :notes
   resources :notebooks do
     resources :notes do
@@ -41,6 +42,8 @@ Studyhall::Application.routes.draw do
   match 'logout' => "user_sessions#destroy", :as => :logout
   
   root :to => "user_sessions#new"
+  
+  match "styleguide" => "styleguide#styleguide"
   
   get ':id' => "static_pages#show", :as => :page  
 

@@ -8,16 +8,22 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.masonry.min.js
+//= require bootstrap-dropdowns.js
+//= require bootstrap-twipsy.js
+//= require bootstrap-popover.js
+//= require bootstrap-modal.js
 //= require_tree .
 
-$(document).ready(function(){
-	$("body").bind("click", function (e) {
-		$('.dropdown-toggle, .menu').parent("li").removeClass("open");
-		$('.dropdown-toggle, .menu').parent("li").find(".dropdown-menu").css("display", "none");
-	});
-	$(".dropdown-toggle, .menu").click(function (e) {
-		$(this).parent("li").toggleClass('open');
-		$(this).parent("li").find(".dropdown-menu").css("display", "block");
-		return false;
-	});
+$(function(){
+  $("a").twipsy({
+      placement: "below"
+    , offset: 10 
+  });
+  
+  $('.large-bird').popover({
+      content:          "data-content"
+    , placement:        "below-left"
+    , horizontalOffset: 25
+  });
+  
 });

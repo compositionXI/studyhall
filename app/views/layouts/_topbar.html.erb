@@ -1,19 +1,32 @@
-<div class="topbar">
+<header class="topbar">
   <div class="fill">
     <div class="container<%= @layout == "full_width" ? "-fluid" : "" %>">
-      <h3><%= link_to image_tag("/assets/small_icon.png", :alt => "StudyHall"), root_path %></h3>
-      <ul class="nav">
-        <li><%= link_to "Contact", new_contact_path %></li>
-        <% @static_pages.each do |static_page| %>
-          <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
-        <% end %>
-      </ul>
+      <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
+      <nav class="nav">
+        <ul>
+          <li id="nav_home" class="current"><%= link_to "Home" %><a href="#" title="Home"><span>Home</span></a></li>
+          <li id="nav_studyhalls"><a href="#"title="StudyHalls"><span>StudyHalls</span></a></li>
+          <li id="nav_notes"><a href="#" title="Take Notes"><span>Take Notes</span></a></li>
+          <li id="nav_profile" class="current"><a href="#" title="Edit Profile"><span>Edit Profile</span></a></li>
+          <li id="nav_inbox"><a href="#" title="Inbox"><small>5</small><span>Inbox</span></a></li>
+          <li id="nav_account" class="current"><a href="#" title="Your Account"><span>Your Account</span></a></li>
+        <!-- <li><%= link_to "Contact", new_contact_path %></li>
+                <% @static_pages.each do |static_page| %>
+                  <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
+                <% end %> -->
+        
+        </ul>
+      </nav>
+      <form action="">
+        <input type="text" placeholder="Search">
+      </form>
       <ul class="nav secondary-nav">
-        <li class="avatar_thumb"></li>
-        <li class="dropdown">
+        <li data-dropdown="dropdown" class="dropdown">
           <% if @current_user %>
-            <%= link_to(image_tag(@current_user.avatar_url(:thumb))+"   You", "#", :class => "dropdown-toggle")  %>
+            <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb")+"   You", "#", :class => "dropdown-toggle")  %>
+          <!--a class="dropdown-toggle" href="#" ><img class="avatar_thumb" src="/assets/generic_avatar_thumb.png" height=25px width=25px />You</a-->
             <ul class="dropdown-menu">
+              <div class="arrow-border"></div><div class="arrow"></div>
               <li><%= link_to "Profile", @current_user %></li>
               <li><%= link_to "Study", study_sessions_path %></li>
               <li><%= link_to "Notes", notebooks_path %></li>
@@ -25,11 +38,11 @@
               <li class="divider"></li>
               <li><%= link_to "Logout", logout_path %></li>
             </ul>
-          <% else %>
-            <li><%= link_to "Login", root_path %></li>
-          <% end %>
+            <% else %>
+              <li><%= link_to "Login", root_path %></li>
+            <% end %>
         </li>
       </ul>
     </div>
   </div>
-</div>
+</header>
