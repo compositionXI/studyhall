@@ -5,8 +5,8 @@ class NotebooksController < ApplicationController
   before_filter :require_user
 
   def index
-    @notebooks = Notebook.all
-    @unsorted_notes = Note.unsorted
+    @notebooks = current_user.notebooks.all
+    @unsorted_notes = current_user.notes.unsorted
 
     respond_to do |format|
       format.html # index.html.erb
