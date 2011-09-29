@@ -1,48 +1,52 @@
 <header class="topbar">
   <div class="fill">
     <div class="container<%= @layout == "full_width" ? "-fluid" : "" %>">
-      <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
-      <nav class="nav">
-        <ul>
-          <li id="nav_home" class="current"><%= link_to home_index_path, title: "Home" do %><span>Home</span><% end %></li>
-          <li id="nav_studyhalls"><%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %></li>
-          <li id="nav_notes"><%= link_to notes_path, title: "Take Notes" do %><span>Take Notes</span><% end %></li>
-          <li id="nav_profile" class="current"><%= link_to edit_user_path(@current_user), title: "Profile" do %><span>Profile</span><% end %></li>
-          <li id="nav_inbox"><%= link_to messages_path, title: "Indox" do %><small>5</small><span>Inbox</span><% end %></li>
-          <li id="nav_account" class="current"><%= link_to @current_user, title: "Your Account" do %><span>Your Account</span><% end %></li>
-        <!-- <li><%= link_to "Contact", new_contact_path %></li>
-                <% @static_pages.each do |static_page| %>
-                  <li><%= link_to static_page.title, page_path(static_page.slug) %></li>
-                <% end %> -->
-        
-        </ul>
-      </nav>
-      <form action="">
-        <input type="text" placeholder="Search">
-      </form>
-      <ul class="nav secondary-nav">
-        <li data-dropdown="dropdown" class="dropdown">
-          <% if @current_user %>
-            <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb")+"   You", "#", :class => "dropdown-toggle")  %>
-          <!--a class="dropdown-toggle" href="#" ><img class="avatar_thumb" src="/assets/generic_avatar_thumb.png" height=25px width=25px />You</a-->
-            <ul class="dropdown-menu">
-              <div class="arrow-border"></div><div class="arrow"></div>
-              <li><%= link_to "Profile", @current_user %></li>
-              <li><%= link_to "Study", study_sessions_path %></li>
-              <li><%= link_to "Notes", notebooks_path %></li>
-              <li><%= link_to "Messages", messages_path %></li>
-              <li><%= link_to "Classes", classes_path %></li>
-              <%- if @current_user.admin? %>
-                <%= render :partial => "/layouts/admin_options"%>
-              <% end %>
-              <li class="divider"></li>
-              <li><%= link_to "Logout", logout_path %></li>
+      <div class="row">
+        <div class="span3">
+          <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
+        </div>
+        <nav class="nav" id="topbar_main_nav">
+        <% if logged_in? %>
+            <ul>
+              <li id="nav_home" class="current"><%= link_to home_index_path, title: "Home" do %><span>Home</span><% end %></li>
+              <li id="nav_studyhalls"><%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %></li>
+              <li id="nav_notes"><%= link_to notes_path, title: "Take Notes" do %><span>Take Notes</span><% end %></li>
+              <li id="nav_profile" class="current"><%= link_to edit_user_path(@current_user), title: "Profile" do %><span>Profile</span><% end %></li>
+              <li id="nav_inbox"><%= link_to messages_path, title: "Indox" do %><small>5</small><span>Inbox</span><% end %></li>
+              <li id="nav_account" class="current"><%= link_to @current_user, title: "Your Account" do %><span>Your Account</span><% end %></li>  
             </ul>
-            <% else %>
-              <li><%= link_to "Login", root_path %></li>
-            <% end %>
-        </li>
-      </ul>
+        <% end %>
+        </nav>
+        <div class="span4">
+          <form action="">
+            <input type="text" placeholder="Search">
+          </form>
+        </div>
+        <div class="right">
+          <ul class="nav secondary-nav">
+            <li data-dropdown="dropdown" class="dropdown">
+              <% if @current_user %>
+                <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb")+"   You", "#", :class => "dropdown-toggle")  %>
+                <ul class="dropdown-menu">
+                  <div class="arrow-border"></div><div class="arrow"></div>
+                  <li><%= link_to "Profile", @current_user %></li>
+                  <li><%= link_to "Study", study_sessions_path %></li>
+                  <li><%= link_to "Notes", notebooks_path %></li>
+                  <li><%= link_to "Messages", messages_path %></li>
+                  <li><%= link_to "Classes", classes_path %></li>
+                  <%- if @current_user.admin? %>
+                    <%= render :partial => "/layouts/admin_options"%>
+                  <% end %>
+                  <li class="divider"></li>
+                  <li><%= link_to "Logout", logout_path %></li>
+                </ul>
+                <% else %>
+                  <%= link_to "Login", root_path %>
+                <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </header>
