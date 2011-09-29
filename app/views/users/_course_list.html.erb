@@ -4,9 +4,9 @@
     <div class="grid_view">
       <div class="preview">
         <div class="fields">
-          <a class="name" href="<%=  %>">
+          <%= link_to(class_path(offering), :class => "name") do %>
             <span><%= offering.course.title %></span>
-          </a>
+          <% end %>
         </div>
       </div>
   </div>

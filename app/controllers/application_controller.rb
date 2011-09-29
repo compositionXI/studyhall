@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages, :set_action_bar
+  before_filter :current_user, :fetch_static_pages
 
   private
   
