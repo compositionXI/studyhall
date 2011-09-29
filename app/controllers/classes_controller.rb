@@ -1,11 +1,14 @@
 class ClassesController < ApplicationController
+
+  before_filter :set_action_bar
   
   def index
     @classes = @current_user.offerings
   end
   
   def show
-    
+    @class = @current_user.offerings.find params[:id]
+    @course = @class.course
   end
   
   def new
