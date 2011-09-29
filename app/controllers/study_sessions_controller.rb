@@ -15,6 +15,10 @@ class StudySessionsController < ApplicationController
     @study_session = StudySession.new
     @room = Room.new
     @whiteboard = Whiteboard.new
+    
+    if request.xhr?
+      render :partial => "form"
+    end
   end
   
   def create
