@@ -281,8 +281,55 @@ html
     line-height: 50px
     float: left
     margin: 0 0 0 15px
-    
-    
+
+.sidebar
+  +columns(4)
+  section
+    header
+      @include clearfix
+      @include sidebar-separator
+      h5
+        margin: 0
+      a
+        float: right
+        line-height: 24px
+    ul
+      @include clearfix
+      @include sidebar-separator
+      border-bottom: 1px solid $hr
+      margin: 0 0 12px 0
+      padding: 0 0 12px 0
+    &.buddies
+      li
+        float: left
+        margin: 0 0 0 6px
+        &:first-child
+          margin: 0
+    &.activity
+      header
+        margin: 0
+      a
+        float: left
+      p
+        float: right
+        font-size: 12px
+        margin: 3px 0 0
+        width: 140px
+        a
+          float: none
+          padding: 0
+      ul
+        height: 210px
+        overflow: auto
+        padding: 0
+      li
+        +clearfix
+        border-bottom: 1px solid $zebraBorder
+        padding: 6px
+        &:nth-child(even)
+          background: $zebraStriping
+        &:last-child
+          border: none
     
     
     
