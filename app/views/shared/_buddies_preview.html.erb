@@ -1,12 +1,15 @@
 <section class="buddies">
   <header>
-      <h1 class="left">Buddies <small>(999)</small></h1>
-      <%= link_to "View All >>", "#"%>
+    <h1 class="left">Buddies <small>(999)</small></h1>
+    <%= link_to "View All >>", "#"%>
   </header>
     <ul>
-      <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-      <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-      <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
-      <li><%= image_tag "/assets/generic_avatar_medium.png"%></li>
+      <% if user.buddies.any? %>
+        <% user.buddies.each do |buddy| %>
+          <li><%= link_to image_tag(buddy.avatar.url(:medium)), buddy, :title => buddy.name %></li>
+        <% end %>
+      <% else %>
+        <li></li>
+      <% end %>
     </ul>
 </section>

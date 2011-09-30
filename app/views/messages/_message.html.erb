@@ -1,0 +1,21 @@
+<li id="message_<%= message.id %>" class="message_list_item">
+  <%= link_to image_tag(message.from.avatar.url(:medium)), message.from, :title => message.from.name %>
+  <div class="message_content">
+    <div class="meta">
+      <div class="message_actions">
+        <% if message.deleted %>
+          <%= link_to "Move to Inbox", message_path(message, :deleted => false), :class => "btn", :method => :put, :remote => true%>
+        <% else %>
+          <%= link_to "Mark as read", message_path(message), :class => "btn", :method => :delete, :remote => true %>
+          <%= link_to "Reply", new_user_message_path(message.from, :subject => message.subject), :class => "btn", :remote => true %>
+        <% end %>
+      </div>
+      <strong>From:</strong><%= link_to message.from.name, message.from %>
+      <span><%= time_ago_in_words message.created_at %> ago</span>
+    </div>
+    <div class="subject"><strong>Subject:</strong><%= message_subject(message) %></div>
+    <div class="body">
+      <%= message.body %>
+    </div>
+  </div>
+</li>

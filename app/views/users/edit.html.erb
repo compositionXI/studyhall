@@ -3,7 +3,7 @@
       <div class="span4 column sidebar left" id="profile_sidebar">
         <%= image_tag @user.avatar_url(:large), id: "profile_photo" %>
         <%= link_to "Change photo", "#", id: "change_profile_photo" %>
-        <%= render "shared/buddies_preview" %>
+        <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
         <div>
           <%= link_to "Delete Profile", user_path, method: :delete, confirm: "Are you sure you want to delete your profile? All of your information will be lost."  %>
         </div>

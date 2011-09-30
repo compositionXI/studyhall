@@ -25,3 +25,14 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
+
+def test_user(options={})
+  uid = User.last ? (User.last.id + 1) : 1
+  user = User.create(options.merge({:name => "Test User #{uid}", 
+                             :login => "testlogin#{uid}", 
+                             :email => "test#{uid}@example.com", 
+                             :password => "test", 
+                             :password_confirmation => "test"}))
+  raise "Could not save test user: #{user.errors.full_messages}" if user.new_record?
+  user
+end

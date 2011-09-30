@@ -10,6 +10,9 @@ Studyhall::Application.routes.draw do
   end
 
   resources :classes
+  #resources :followings, :only => [:create, :destroy]
+  post '/followings' => 'followings#create', :as => :follow
+  delete '/following/:id' => 'followings#destroy', :as => :unfollow
 
   namespace :admin do
     resources :users
@@ -27,10 +30,11 @@ Studyhall::Application.routes.draw do
 
   resources :static_pages, :only => [:show]
   resources :contacts  
+  get "/messages/:mailbox" => "messages#index", :as => :mailbox, :constraints => {:mailbox => /(inbox|archive)/}
   resources :users do
     resources :messages, only: [:new, :create]
   end
-  resources :messages, only: [:index, :show]
+  resources :messages, except: [:edit]
   resources :password_resets
   resources :user_sessions
   resources :whiteboards

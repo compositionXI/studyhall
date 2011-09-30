@@ -15,7 +15,7 @@ class NotebooksController < ApplicationController
   end
 
   def show
-    @notebook = current_user.notebooks.find(params[:id])
+    @notebook = Notebook.viewable_by(current_user).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
