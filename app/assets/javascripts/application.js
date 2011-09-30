@@ -15,15 +15,19 @@
 //= require_tree .
 
 $(function(){
-  $("a").twipsy({
-      placement: "below"
-    , offset: 10 
-  });
+  // $("a").twipsy({
+  //       placement: "below"
+  //     , offset: 10 
+  //   });
+  //   
+  //   $('.large-bird').popover({
+  //       content:          "data-content"
+  //     , placement:        "below-left"
+  //     , horizontalOffset: 25
+  //   });
   
-  $('.large-bird').popover({
-      content:          "data-content"
-    , placement:        "below-left"
-    , horizontalOffset: 25
-  });
+  $(".activity-list").jScrollPane();
+  
+  
   
 });

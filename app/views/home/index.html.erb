@@ -20,14 +20,13 @@
       <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn primary" %>
   </div>
 </header>
-<hr>
 <aside class="sidebar left">
   <%= render "shared/buddies_preview" %>
   <section class="activity">
     <header>
-      <h5>Your Activity</h5>
+      <h1>Your Activity</h1>
     </header>
-    <ul class="unstyled">
+    <ul class="activity-list">
       <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
       <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
       <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
@@ -40,11 +39,20 @@
     </ul>
   </section>  
   <section class="news">
-    <header><h5>Campus News</h5></header>
-    <ul class="unstyled">
-      <li>News Item</li>
-      <li>News Item</li>
-      <li>News Item</li>
+    <header><h1>Campus News</h1></header>
+    <h2>Yesterday</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+    </ul>
+    <h2>September 17th</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+    </ul>
+    <h2>September 4thth</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
     </ul>
   </section>
 </aside>
