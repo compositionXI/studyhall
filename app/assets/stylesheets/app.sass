@@ -9,6 +9,7 @@
 @import "forms.sass"
 @import "tables.sass"
 @import "patterns.sass"
+@import "jquery-jscrollpane.sass"
 
 .left
   float: left
@@ -288,14 +289,17 @@ html
     header
       @include clearfix
       @include sidebar-separator
-      h5
+      h1
         margin: 0
+        +h5
       a
         float: right
-        line-height: 24px
+        font-size: 12px
+        padding: 5px 0 0
     ul
       @include clearfix
       @include sidebar-separator
+      list-style: none
       border-bottom: 1px solid $hr
       margin: 0 0 12px 0
       padding: 0 0 12px 0
@@ -330,6 +334,18 @@ html
           background: $zebraStriping
         &:last-child
           border: none
+    &.news
+      ul
+        border: none
+      h2
+        +body-font(500, 12px, 18px)
+        color: $newsDate
+        margin: 0
+        
+      h3
+        +body-font(500, 14px, 18px)
+        +text-overflow
+        margin: 0
     
     
     
