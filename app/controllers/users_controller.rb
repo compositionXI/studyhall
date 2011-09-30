@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   
   before_filter :require_no_user_or_admin, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
-  before_filter :fetch_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard]
   #before_filter :set_action_bar, :except => [:new]
   
   def index
@@ -64,6 +64,9 @@ class UsersController < ApplicationController
     flash[:notice] = "Account deleted!"
     redirect_to admin_users_path
   end
+  
+  def profile_wizard
+  end
 
   protected
   def redirect_to_user
@@ -72,7 +75,7 @@ class UsersController < ApplicationController
   
   private
   def fetch_user
-    @user = User.find params[:id]
+    @user = (params[:id] =~ /^\d+$/) ? User.find(params[:id]) : User.find_by_custom_url(params[:id])
   end
   
   def require_no_user_or_admin

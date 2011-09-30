@@ -28,6 +28,9 @@ Studyhall::Application.routes.draw do
   resources :static_pages, :only => [:show]
   resources :contacts  
   resources :users do
+    member do
+      get 'profile_wizard'
+    end
     resources :messages, only: [:new, :create]
   end
   resources :messages, only: [:index, :show]
@@ -45,7 +48,7 @@ Studyhall::Application.routes.draw do
   
   match "styleguide" => "styleguide#styleguide"
   
-  get ':id' => "static_pages#show", :as => :page  
+  get ':id' => "static_pages#show", :as => :page
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
