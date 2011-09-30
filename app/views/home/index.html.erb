@@ -20,7 +20,7 @@
       <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn primary" %>
   </div>
 </header>
-<aside class="sidebar left">
+<aside class="sidebar">
   <%= render "shared/buddies_preview" %>
   <section class="activity">
     <header>
@@ -57,8 +57,16 @@
   </section>
 </aside>
 
-<div class="notebook_list_container <%= items_layout %>">
+<section class="notebooks <%= items_layout %>">
   <ol class="notebook_list">
+    <li><a href="#"><span>Course 101</span></a></li>
+    <li><a href="#"><span>Course 102</span></a></li>
+    <li><a href="#"><span>Course 103</span></a></li>
+    <li><a href="#"><span>Course 104</span></a></li>
+    <li><a href="#"><span>Course 105</span></a></li>
+    <li><a href="#"><span>Course 106</span></a></li>
+    <li class="add"><a href="#"><span>Add a course</span></a></li>
+    
     <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
   </ol>
-</div>
+</section>
