@@ -10,7 +10,7 @@
 <body class="<%= controller_name + "-" + action_name %> fixed-width">
   <div class="topbar_and_content">
     <%= render :partial => "layouts/topbar" %>
-    <%= render :partial => @action_bar if @action_bar %>
+    <div id="action_bar"><%= content_for?(:action_bar) ? yield(:action_bar) : "" %></div>
     <div class="main-content">
       <div class="container">
         <div class="fill">

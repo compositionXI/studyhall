@@ -1,7 +1,12 @@
 <div class="gridbar">
-    <div class="container"><h3>Title and action statements</h3>
-    <div class="buttons">
-      <a class="btn small primary" title="test" href="#">Primary action</a>
-      <a class="btn small" href="#">Action</a>
-    </div></div>
+    <div class="container">
+      <div class="buttons_left">
+        <a class="btn small primary" title="Follow" href="#">Follow</a>
+        <a class="btn small" title="Message" href="#">Message</a>
+      </div>
+      <h3><%= flash[:action_bar_message] %></h3>
+      <div class="buttons_right">
+        <a class="btn small" title="Invite to a Studyhall" href="#">Invite to a Studyhall</a>
+      </div>
+    </div>
 </div>
