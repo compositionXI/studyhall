@@ -1,13 +1,7 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
 <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
-  <div class="notebook">
-    <div class="grid_view">
-      <div class="preview">
-        <div class="fields">
-          <%= link_to(class_path(offering), :class => "name") do %>
-            <span><%= offering.course.title %></span>
-          <% end %>
-        </div>
-      </div>
-  </div>
+  <%= link_to(class_path(offering), :class => "name") do %>
+    <span><%= offering.course.title %></span>
+  <% end %>
+  <a href="#"><span>Course 101</span></a>
 </li>
