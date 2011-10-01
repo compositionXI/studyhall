@@ -29,21 +29,20 @@ fieldset
 
 // Set font for forms
 
-label,
 input,
 select,
 textarea
-  +form-font(normal, 13px, normal)
+  +form-font(normal, 14px, normal)
 
 // Float labels left
 label
+  +body-font(700, 12px, 18px)
+  color: $gray
+  text-transform: uppercase
   padding-top: 6px
-  font-size: 13px
-  line-height: 18px
   float: left
   width: 130px
   text-align: right
-  color: $grayDark
 
 // Shift over the inside div to align all label's relevant content
 div.input
@@ -69,8 +68,11 @@ select,
   line-height: $baseline
   height: $baseline
   color: $gray
-  border: 1px solid #ccc
-  +border-radius(3px)
+  border-width: 1px 
+  border-style: solid
+  border-color: #CACFE0
+  border-top-color: #b0b5c3
+  +border-radius(2px)
 
 select,
 input[type=file]
@@ -100,7 +102,7 @@ input[type=password],
 select, textarea
   $transition: border linear 0.2s, box-shadow linear 0.2s
   +transition($transition)
-  +box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.1))
+  +box-shadow(inset 0 1px 2px #CACFE0)
 
 input[type=text]:focus,
 input[type=password]:focus,
@@ -115,7 +117,7 @@ form div.error
   background: lighten($red, 57%)
   padding: 10px 0
   margin: -10px 0 10px
-  +border-radius(4px)
+  +border-radius(2px)
   $error-text: desaturate(lighten($red, 25%), 25%)
   > label,
   span.help-inline,
@@ -174,7 +176,7 @@ input.disabled
   margin-bottom: $baseline
   padding: $baseline - 1 20px $baseline 150px
   border-top: 1px solid #ddd
-  +border-radius(0 0 3px 3px)
+  +border-radius(0 0 2px 2px)
   .secondary-action
     float: right
     a
@@ -220,7 +222,7 @@ input.disabled
 .input-append
   input[type=text],
   input[type=password]
-    +border-radius(0 3px 3px 0)
+    +border-radius(0 2px 2px 0)
   .add-on
     background: #f5f5f5
     float: left
@@ -236,7 +238,7 @@ input.disabled
     text-shadow: 0 1px 0 #fff
     border: 1px solid #ccc
     border-right-width: 0
-    +border-radius(3px 0 0 3px)
+    +border-radius(2px 0 0 2px)
   .active
     background: lighten($green, 30)
     border-color: $green
@@ -250,9 +252,9 @@ input.disabled
   input[type=text],
   input[type=password]
     float: left
-    +border-radius(3px 0 0 3px)
+    +border-radius(2px 0 0 2px)
   .add-on
-    +border-radius(0 3px 3px 0)
+    +border-radius(0 2px 2px 0)
     border-right-width: 1px
     border-left-width: 0
 
@@ -265,6 +267,9 @@ input.disabled
     padding: 0
     width: 100%
     label
+      text-transform: none
+      font-weight: 500
+      color: $grayLight
       display: block
       float: none
       width: auto
