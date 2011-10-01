@@ -186,7 +186,11 @@ html
         width: 0
       &.open
         ul
-          @include opacity(100)  
+          @include opacity(100) 
+          display: block 
+          height: auto
+          padding: 5px 0
+          overflow: visible
       ul 
         @include vertical-gradient(#ffffff, #f8f8f8)
         @include border-radius(2px)
@@ -196,16 +200,17 @@ html
         @include opacity(0)
         border: 1px solid $popoverBorder
         float: left
-        display: none
+        display: block
         position: absolute
         top: 42px
         right: -10px
+        height: 0px
         min-width: 90px
         max-width: 160px
         _width: 90px
         margin-left: 0
         margin-right: 0
-        padding: 5px 0
+        overflow: hidden
         text-align: left
         zoom: 1      
         .arrow 
