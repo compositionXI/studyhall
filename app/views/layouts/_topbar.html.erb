@@ -24,7 +24,7 @@
         </div>
         <div class="right">
           <ul class="nav secondary-nav">
-            <li data-dropdown="dropdown" class="dropdown">
+            <li class="dropdown">
               <% if @current_user %>
                 <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb")+"   You", "#", :class => "dropdown-toggle")  %>
                 <ul class="dropdown-menu">
