@@ -32,5 +32,5 @@ $(function(){
   
   $("#sortTableExample").tablesorter();
   
-  
+  $("#styleguide-form select").chosen()
 });
