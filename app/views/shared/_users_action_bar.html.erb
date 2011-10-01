@@ -1,7 +1,15 @@
-<div class="gridbar">
-    <div class="container"><h3>Title and action statements</h3>
-    <div class="buttons">
+<div class="action-bar">
+    <div class="container">
+    <div class="buttons left">
+      <a href="" class="btn">Filter</a>
       <a class="btn small primary" title="test" href="#">Primary action</a>
       <a class="btn small" href="#">Action</a>
-    </div></div>
+    </div
+    <h3>Title and action statements</h3>
+    
+    <div class="buttons right">
+      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
+    </div>
+  </div>
 </div>
