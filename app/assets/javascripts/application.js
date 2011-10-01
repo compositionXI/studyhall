@@ -28,6 +28,7 @@ $(function(){
   
   $(".activity-list").jScrollPane();
   
+  $(".nav").dropdown('.dropdown', true);
   
   
 });
