@@ -233,6 +233,13 @@
       background: $blueDisabled
       color: $blueDisabledText
       border: 1px solid $blueDisabled
+  &.pressed
+    color: $pressedText
+    text-shadow: 0 1px 0 $pressedTextShadow
+    border-color: $pressedBorder
+    +vertical-gradient-image(none, $pressed, $pressedDark)
+    $shadow: inset 0 1px 1px rgba(0, 0, 0, .6), 0 1px 2px rgba(0, 0, 0, 0.05)
+    +box-shadow($shadow)
   // Transitions
   +transition(0.1s linear all)
   // Active and Disabled states
