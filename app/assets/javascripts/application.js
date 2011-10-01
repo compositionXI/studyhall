@@ -15,20 +15,22 @@
 //= require_tree .
 
 $(function(){
-  // $("a").twipsy({
-  //       placement: "below"
-  //     , offset: 10 
-  //   });
-  //   
-  //   $('.large-bird').popover({
-  //       content:          "data-content"
-  //     , placement:        "below-left"
-  //     , horizontalOffset: 25
-  //   });
+  $("a").twipsy({
+        placement: "below"
+      , offset: 10 
+    });
+    
+    $('.large-bird').popover({
+        content:          "data-content"
+      , placement:        "below-left"
+      , horizontalOffset: 25
+    });
   
   $(".activity-list").jScrollPane();
   
   $(".nav").dropdown('.dropdown', true);
+  
+  $("#sortTableExample").tablesorter();
   
   
 });

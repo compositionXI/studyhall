@@ -175,28 +175,6 @@
   &.info
     +button-gradient($aqua, $aquaDark, $aquaText, $aquaTextShadow, $aquaBorder)
 
-.alert-message
-  // Set text color
-  &.danger,
-  &.danger:hover,
-  &.error,
-  &.error:hover,
-  &.success,
-  &.success:hover,
-  &.info,
-  &.info:hover
-    color: $white
-  // Danger and error appear as red
-  &.danger,
-  &.error
-    +gradientBar($red, $redDark)
-  // Success appears as green
-  &.success
-    +gradientBar(#62c462, #57a957)
-  // Info appears as a neutral blue
-  &.info
-    +gradientBar(#5bc0de, #339bb9)
-
 // Base .btn styles
 .btn
   // Button Base
@@ -282,21 +260,40 @@ input[type=submit].btn
 // ERROR STYLES
 // ------------
 
+.alert-message
+  // Danger and error appear as red
+  &.danger,
+  &.error
+    +gradientBar($redAlert, $redAlertDark)
+    border-color: $redAlertBorder
+  // Success appears as green
+  &.success
+    +gradientBar($greenAlert, $greenAlertDark)
+    border-color: $greenAlertBorder
+  // Info appears as a neutral blue
+  &.info
+    +gradientBar($blueAlert, $blueAlertDark)
+    border-color: $blueAlertBorder
+
 // Base alert styles
 .alert-message
-  +btnColor(#fceec1, #eedc94)
+  +btnColor($yellowAlert, $yellowAlertDark)
   margin-bottom: $baseline
   padding: 7px 14px
-  color: $grayDark
+  color: $blockColor
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
   border-width: 1px
   border-style: solid
-  +border-radius(4px)
-  +box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.25))
+  +border-radius(3px)
+  &.info,
+  &.error,
+  &.success
+    color: $white
   // Remove extra margin from content
   h5
     line-height: $baseline
   p
+    +sans-serif-font(normal, 14px, 18px)
     margin-bottom: 0
   div
     margin-top: 5px
@@ -319,9 +316,10 @@ input[type=submit].btn
       +opacity(40)
   &.block-message
     background-image: none
-    background-color: lighten(#fceec1, 5%)
+    background-color: $blockYellow
+    color: $blockColor
     padding: 14px
-    border-color: #fceec1
+    border-color: $blockYellowBorder
     +box-shadow(none)
     p
       margin-right: 30px
@@ -330,17 +328,16 @@ input[type=submit].btn
     &.error,
     &.success,
     &.info
-      color: $grayDark
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5)
-    &.error
-      background-color: lighten(#f56a66, 25%)
-      border-color: lighten(#f56a66, 20%)
+    &.error 
+      background-color: $blockRed
+      border-color: $blockRedBorder
     &.success
-      background-color: lighten(#62c462, 30%)
-      border-color: lighten(#62c462, 25%)
+      background-color: $blockGreen
+      border-color: $blockGreenBorder
     &.info
-      background-color: lighten(#6bd0ee, 25%)
-      border-color: lighten(#6bd0ee, 20%)
+      background-color: $blockBlue
+      border-color: $blockBlueBorder
 
 // NAVIGATION
 // ----------
