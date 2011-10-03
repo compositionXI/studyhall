@@ -39,21 +39,24 @@ class UsersController < ApplicationController
   
   def update
     @user.avatar = nil if params[:delete_avatar] == "1"
+    params[:user][:extracurricular_ids] = @user.split_attribute_list(params[:extracurriculars_list], Extracurricular, :extracurricular_ids)
+    
     if @user.update_attributes! params[:user]
       flash[:notice] = "Account updated!"
-        if request.xhr?
-          greek_house = @user.male? ? @user.fraternity : @user.sorority
-          render :json => {
-            name: @user.name, 
-            school: @user.school, 
-            greek_house: greek_house, 
-            major: @user.major, 
-            gpa: @user.gpa, 
-            avatar_url: @user.avatar_url(:large)
-          }
-        else
-          redirect_to_user
-        end
+      
+      if request.xhr?
+        greek_house = @user.male? ? @user.fraternity : @user.sorority
+        render :json => {
+          name: @user.name, 
+          school: @user.school, 
+          greek_house: greek_house, 
+          major: @user.major, 
+          gpa: @user.gpa, 
+          avatar_url: @user.avatar_url(:large)
+        }
+      else
+        redirect_to_user
+      end
     else
       render :action => :edit
     end
@@ -66,6 +69,18 @@ class UsersController < ApplicationController
   end
   
   def profile_wizard
+  end
+  
+  def extracurriculars
+    if request.xhr?
+      json = []
+      Extracurricular.search(params[:term]).each do |e|
+        json << {id: e.name, label: e.name, value: e.name}
+      end
+      render :json => json
+    else
+      redirect_to root_url
+    end
   end
 
   protected
@@ -81,6 +96,4 @@ class UsersController < ApplicationController
   def require_no_user_or_admin
     require_admin if current_user
   end
-  
-  
 end

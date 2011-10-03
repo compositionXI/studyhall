@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :enrollments
   has_many :offerings, :through => :enrollments
+  belongs_to :school
   
   validates_presence_of :name
 
@@ -45,5 +46,20 @@ class User < ActiveRecord::Base
   
   def female?
     self.gender == "Female"
+  end
+  
+  def split_attribute_list(attributes, model, collection_method)
+    ids = []
+    attributes = attributes.split(",").delete_if {|a| a.strip! == ""}
+    attributes.each do |a|
+      new_record = model.new(name: a.strip)
+      if new_record.save
+        ids << new_record.id
+      else
+        ids << model.find_by_name(a.strip).id
+      end
+    end
+    ids << self.send(collection_method)
+    ids.flatten
   end
 end

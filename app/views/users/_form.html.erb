@@ -25,7 +25,7 @@
         </div>
         <div class="clearfix">
           <%= f.label :School %>
-          <div class="input"><%= f.text_field :school %></div>
+          <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "chzn-select" %></div>
         </div>
         <div class="clearfix">
           <%= f.label :Major %>
@@ -33,27 +33,27 @@
         </div>
         <div class="clearfix">
           <%= f.label :courses %>
-          <div class="input"><%= f.text_field :offerings %></div>
+          <div class="input"><%= f.collection_select :enrollments, Offering.find_all_by_school_id(@user.school), :id, :course_listing, {:selected => selected_courses_for(@user)}, { :multiple => true, :class => "chzn-select", :name => "user[offering_ids][]"} %></div>
         </div>
         <div class="clearfix">
           <%= f.label :GPA %>
           <div class="input"><%= f.text_field :gpa %></div>
         </div>
-        <div class="clearfix">
+        <div class="clearfix gender">
           <%= f.label :Gender %>
-          <div class="input"><%= f.select( "gender", %w[Male Female] )%></div>
+          <div class="input"><%= f.select( "gender", %w[Male Female], :prompt => "Select" )%></div>
         </div>
-        <div class="clearfix">
+        <div class="clearfix fraternity">
           <%= f.label :Fraternity %>
           <div class="input"><%= f.text_field :fraternity %></div>
         </div>
-        <div class="clearfix">
+        <div class="clearfix sorority">
           <%= f.label :Sorority %>
           <div class="input"><%= f.text_field :sorority %></div>
         </div>
         <div class="clearfix">
           <%= f.label :sports_and_clubs %>
-          <div class="input"><%= f.text_field :extracurriculars %></div>
+          <div class="input"><%= text_field_tag "extracurriculars_list" %></div>
         </div>
       </fieldset>
     </div>
@@ -69,3 +69,10 @@
     </div>
   </div>
 <% end %>
+
+<script>
+$(document).ready(function(){
+  $(".chzn-select").chosen()
+});
+
+</script>

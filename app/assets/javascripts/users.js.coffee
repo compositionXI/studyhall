@@ -2,9 +2,27 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+switch_greek_select_box = ()->
+	if ($('.gender select').attr('value') == "Male")
+		$('.fraternity').css("display", "block")
+		$('.sorority').css("display", "none")
+	else
+		$('.sorority').css("display", "block")
+		$('.fraternity').css("display", "none")
+
 $ ->
 	$("#profile_tabs").tabs()
-
+	$(".chzn-select").css({"display": "none"})
+	$(".chzn-select").chosen()
+	$('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
+		$('.chzn-select.appendable').append('<option>'+this.value+'</option>')
+		$('.chzn-select.appendable').trigger('liszt:updated')
+	
+	$('.sorority, .fraternity').css("display", "none")
+	switch_greek_select_box()
+	$('.gender select').change ->
+		switch_greek_select_box()
+	
 	edit_personal_info_modal = $(".edit_personal_info")
 	edit_gpa_modal = $(".edit_gpa")
 	change_profile_photo_modal = $(".edit_profile_photo")
@@ -31,25 +49,56 @@ $ ->
 	edit_profile_photo_modal = $(".edit_profile_photo")
 	editModals = [edit_personal_info_modal[0], edit_gpa_modal[0], edit_profile_photo_modal[0]]
 
-
 	$(editModals).find(".save").click ->
 		modal = $(this).parents(".profile_edit_modal")
 		modal.dialog("close")
-
+	
 	photoSuccess = (result) ->
 		edit_profile_photo_modal.dialog("close")
 		$("#profile_sidebar #profile_photo").attr("src", result.avatar_url)
-
+	
 	$("#edit_profile_photo_form").bind("ajax:success", photoSuccess)
-
+	
 	$("#edit_personal_info_form").bind "ajax:success", (event, response) ->
 		$("#profile_personal_info").animate { opacity: 0 }, 200, ->
 			$("#profile_detailed_info #school").html(response.greek_house)
 			$("#profile_detailed_info #school").html(response.school)
 			$("#profile_detailed_info #major").html(response.major)
 			$(this).animate {opacity: 1}, 200
-
+	
 	$("#edit_gpa_form").bind "ajax:success", (event, response) ->
 		$("#profile_edit_gpa").animate {opacity: 0,}, 200, ->
 			$("#profile_edit_gpa #gpa").html(response.gpa)
 			$(this).animate {opacity: 1}, 200
+			
+	get_extracurriculars = () ->
+		$.getJSON "extracurriculars", (json) ->
+			json.terms
+	
+	split = (val) ->
+		return val.split( /,\s*/ )
+	extractLast = (term) ->
+		return split(term).pop()
+	
+	#Autocomplete for extracurriculars
+	$( "#extracurriculars_list" ).bind "keydown", (event) ->
+		if ( (event.keyCode == $.ui.keyCode.TAB) && $( this ).data( "autocomplete" ).menu.active )
+			event.preventDefault()
+	.autocomplete {
+		source: ( request, response ) ->
+			$.getJSON "extracurriculars", {term: extractLast(request.term)}, response
+		
+		,focus: () -> 
+			return false
+		
+		,select: (event, ui) ->
+			terms = split( this.value )
+			# remove the current input
+			terms.pop()
+			# add the selected item
+			terms.push( ui.item.value )
+			# add placeholder to get the comma-and-space at the end
+			terms.push( "" )
+			this.value = terms.join( ", " )
+			return false
+	}

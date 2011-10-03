@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Studyhall</title>
+  <link href="%22_files/application.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/jquery-ui-custom.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/app.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/full-width.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/notebooks.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/notes.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/messages.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/study_sessions.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/rte.css" media="screen" rel="stylesheet" type="text/css">
+<link href="%22_files/chosen.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="%22_files/application.js" type="text/javascript"></script>
+<script src="%22_files/TB.js" type="text/javascript"></script>
+  <meta content="authenticity_token" name="csrf-param">
+<meta content="EYEIXuGmUVByjh1uRaqpbZ+VXL/i/Px/121hnMK8P0U=" name="csrf-token">
+<style type="text/css" charset="utf-8">/* See license.txt for terms of usage */
+/** reset styling **/
+.firebugResetStyles {
+    z-index: 2147483646 !important;
+    top: 0 !important;
+    left: 0 !important;
+    display: block !important;
+    border: 0 none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    outline: 0 !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    position: fixed !important;
+    -moz-transform: rotate(0deg) !important;
+    -moz-transform-origin: 50% 50% !important;
+    -moz-border-radius: 0 !important;
+    -moz-box-shadow: none !important;
+    background: transparent none !important;
+    pointer-events: none !important;
+}
+
+.firebugBlockBackgroundColor {
+    background-color: transparent !important;
+}
+
+.firebugResetStyles:before, .firebugResetStyles:after {
+    content: "" !important;
+}
+/**actual styling to be modified by firebug theme**/
+.firebugCanvas {
+    display: none !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.firebugLayoutBox {
+    width: auto !important;
+    position: static !important;
+}
+
+.firebugLayoutBoxOffset {
+    opacity: 0.8 !important;
+    position: fixed !important;
+}
+
+.firebugLayoutLine {
+    opacity: 0.4 !important;
+    background-color: #000000 !important;
+}
+
+.firebugLayoutLineLeft, .firebugLayoutLineRight {
+    width: 1px !important;
+    height: 100% !important;
+}
+
+.firebugLayoutLineTop, .firebugLayoutLineBottom {
+    width: 100% !important;
+    height: 1px !important;
+}
+
+.firebugLayoutLineTop {
+    margin-top: -1px !important;
+    border-top: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineRight {
+    border-right: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineBottom {
+    border-bottom: 1px solid #999999 !important;
+}
+
+.firebugLayoutLineLeft {
+    margin-left: -1px !important;
+    border-left: 1px solid #999999 !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.firebugLayoutBoxParent {
+    border-top: 0 none !important;
+    border-right: 1px dashed #E00 !important;
+    border-bottom: 1px dashed #E00 !important;
+    border-left: 0 none !important;
+    position: fixed !important;
+    width: auto !important;
+}
+
+.firebugRuler{
+    position: absolute !important;
+}
+
+.firebugRulerH {
+    top: -15px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 14px !important;
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%13%88%00%00%00%0E%08%02%00%00%00L%25a%0A%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%04%F8IDATx%DA%EC%DD%D1n%E2%3A%00E%D1%80%F8%FF%EF%E2%AF2%95%D0D4%0E%C1%14%B0%8Fa-%E9%3E%CC%9C%87n%B9%81%A6W0%1C%A6i%9A%E7y%0As8%1CT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AATE9%FE%FCw%3E%9F%AF%2B%2F%BA%97%FDT%1D~K(%5C%9D%D5%EA%1B%5C%86%B5%A9%BDU%B5y%80%ED%AB*%03%FAV9%AB%E1%CEj%E7%82%EF%FB%18%BC%AEJ8%AB%FA'%D2%BEU9%D7U%ECc0%E1%A2r%5DynwVi%CFW%7F%BB%17%7Dy%EACU%CD%0E%F0%FA%3BX%FEbV%FEM%9B%2B%AD%BE%AA%E5%95v%AB%AA%E3E5%DCu%15rV9%07%B5%7F%B5w%FCm%BA%BE%AA%FBY%3D%14%F0%EE%C7%60%0EU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5JU%88%D3%F5%1F%AE%DF%3B%1B%F2%3E%DAUCNa%F92%D02%AC%7Dm%F9%3A%D4%F2%8B6%AE*%BF%5C%C2Ym~9g5%D0Y%95%17%7C%C8c%B0%7C%18%26%9CU%CD%13i%F7%AA%90%B3Z%7D%95%B4%C7%60%E6E%B5%BC%05%B4%FBY%95U%9E%DB%FD%1C%FC%E0%9F%83%7F%BE%17%7DkjMU%E3%03%AC%7CWj%DF%83%9An%BCG%AE%F1%95%96yQ%0Dq%5Dy%00%3Et%B5'%FC6%5DS%95pV%95%01%81%FF'%07%00%00%00%00%00%00%00%00%00%F8x%C7%F0%BE%9COp%5D%C9%7C%AD%E7%E6%EBV%FB%1E%E0(%07%E5%AC%C6%3A%ABi%9C%8F%C6%0E9%AB%C0'%D2%8E%9F%F99%D0E%B5%99%14%F5%0D%CD%7F%24%C6%DEH%B8%E9rV%DFs%DB%D0%F7%00k%FE%1D%84%84%83J%B8%E3%BA%FB%EF%20%84%1C%D7%AD%B0%8E%D7U%C8Y%05%1E%D4t%EF%AD%95Q%BF8w%BF%E9%0A%BF%EB%03%00%00%00%00%00%00%00%00%00%B8vJ%8E%BB%F5%B1u%8Cx%80%E1o%5E%CA9%AB%CB%CB%8E%03%DF%1D%B7T%25%9C%D5(%EFJM8%AB%CC'%D2%B2*%A4s%E7c6%FB%3E%FA%A2%1E%80~%0E%3E%DA%10x%5D%95Uig%15u%15%ED%7C%14%B6%87%A1%3B%FCo8%A8%D8o%D3%ADO%01%EDx%83%1A~%1B%9FpP%A3%DC%C6'%9C%95gK%00%00%00%00%00%00%00%00%00%20%D9%C9%11%D0%C0%40%AF%3F%EE%EE%92%94%D6%16X%B5%BCMH%15%2F%BF%D4%A7%C87%F1%8E%F2%81%AE%AAvzr%DA2%ABV%17%7C%E63%83%E7I%DC%C6%0Bs%1B%EF6%1E%00%00%00%00%00%00%00%00%00%80cr%9CW%FF%7F%C6%01%0E%F1%CE%A5%84%B3%CA%BC%E0%CB%AA%84%CE%F9%BF)%EC%13%08WU%AE%AB%B1%AE%2BO%EC%8E%CBYe%FE%8CN%ABr%5Dy%60~%CFA%0D%F4%AE%D4%BE%C75%CA%EDVB%EA(%B7%F1%09g%E5%D9%12%00%00%00%00%00%00%00%00%00H%F6%EB%13S%E7y%5E%5E%FB%98%F0%22%D1%B2'%A7%F0%92%B1%BC%24z3%AC%7Dm%60%D5%92%B4%7CEUO%5E%F0%AA*%3BU%B9%AE%3E%A0j%94%07%A0%C7%A0%AB%FD%B5%3F%A0%F7%03T%3Dy%D7%F7%D6%D4%C0%AAU%D2%E6%DFt%3F%A8%CC%AA%F2%86%B9%D7%F5%1F%18%E6%01%F8%CC%D5%9E%F0%F3z%88%AA%90%EF%20%00%00%00%00%00%00%00%00%00%C0%A6%D3%EA%CFi%AFb%2C%7BB%0A%2B%C3%1A%D7%06V%D5%07%A8r%5D%3D%D9%A6%CAu%F5%25%CF%A2%99%97zNX%60%95%AB%5DUZ%D5%FBR%03%AB%1C%D4k%9F%3F%BB%5C%FF%81a%AE%AB'%7F%F3%EA%FE%F3z%94%AA%D8%DF%5B%01%00%00%00%00%00%00%00%00%00%8E%FB%F3%F2%B1%1B%8DWU%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*UiU%C7%BBe%E7%F3%B9%CB%AAJ%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5J%95*U%AAT%A9R%A5*%AAj%FD%C6%D4%5Eo%90%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5%86%AF%1B%9F%98%DA%EBm%BBV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%ADV%AB%D5j%B5Z%AD%D6%E4%F58%01%00%00%00%00%00%00%00%00%00%00%00%00%00%40%85%7F%02%0C%008%C2%D0H%16j%8FX%00%00%00%00IEND%AEB%60%82") repeat-x !important;
+    border-top: 1px solid #BBBBBB !important;
+    border-right: 1px dashed #BBBBBB !important;
+    border-bottom: 1px solid #000000 !important;
+}
+
+.firebugRulerV {
+    top: 0 !important;
+    left: -15px !important;
+    width: 14px !important;
+    height: 100% !important;
+    background: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%0E%00%00%13%88%08%02%00%00%00%0E%F5%CB%10%00%00%00%04gAMA%00%00%D6%D8%D4OX2%00%00%00%19tEXtSoftware%00Adobe%20ImageReadyq%C9e%3C%00%00%06~IDATx%DA%EC%DD%D1v%A20%14%40Qt%F1%FF%FF%E4%97%D9%07%3BT%19%92%DC%40(%90%EEy%9A5%CB%B6%E8%F6%9Ac%A4%CC0%84%FF%DC%9E%CF%E7%E3%F1%88%DE4%F8%5D%C7%9F%2F%BA%DD%5E%7FI%7D%F18%DDn%BA%C5%FB%DF%97%BFk%F2%10%FF%FD%B4%F2M%A7%FB%FD%FD%B3%22%07p%8F%3F%AE%E3%F4S%8A%8F%40%EEq%9D%BE8D%F0%0EY%A1Uq%B7%EA%1F%81%88V%E8X%3F%B4%CEy%B7h%D1%A2E%EBohU%FC%D9%AF2fO%8BBeD%BE%F7X%0C%97%A4%D6b7%2Ck%A5%12%E3%9B%60v%B7r%C7%1AI%8C%BD%2B%23r%00c0%B2v%9B%AD%CA%26%0C%1Ek%05A%FD%93%D0%2B%A1u%8B%16-%95q%5Ce%DCSO%8E%E4M%23%8B%F7%C2%FE%40%BB%BD%8C%FC%8A%B5V%EBu%40%F9%3B%A72%FA%AE%8C%D4%01%CC%B5%DA%13%9CB%AB%E2I%18%24%B0n%A9%0CZ*Ce%9C%A22%8E%D8NJ%1E%EB%FF%8F%AE%CAP%19*%C3%BAEKe%AC%D1%AAX%8C*%DEH%8F%C5W%A1e%AD%D4%B7%5C%5B%19%C5%DB%0D%EF%9F%19%1D%7B%5E%86%BD%0C%95%A12%AC%5B*%83%96%CAP%19%F62T%86%CAP%19*%83%96%CA%B8Xe%BC%FE)T%19%A1%17xg%7F%DA%CBP%19*%C3%BA%A52T%86%CAP%19%F62T%86%CA%B0n%A9%0CZ%1DV%C6%3D%F3%FCH%DE%B4%B8~%7F%5CZc%F1%D6%1F%AF%84%F9%0F6%E6%EBVt9%0E~%BEr%AF%23%B0%97%A12T%86%CAP%19%B4T%86%CA%B8Re%D8%CBP%19*%C3%BA%A52huX%19%AE%CA%E5%BC%0C%7B%19*CeX%B7h%A9%0C%95%E1%BC%0C%7B%19*CeX%B7T%06%AD%CB%5E%95%2B%BF.%8F%C5%97%D5%E4%7B%EE%82%D6%FB%CF-%9C%FD%B9%CF%3By%7B%19%F62T%86%CA%B0n%D1R%19*%A3%D3%CA%B0%97%A12T%86uKe%D0%EA%B02*%3F1%99%5DB%2B%A4%B5%F8%3A%7C%BA%2B%8Co%7D%5C%EDe%A8%0C%95a%DDR%19%B4T%C66%82fA%B2%ED%DA%9FC%FC%17GZ%06%C9%E1%B3%E5%2C%1A%9FoiB%EB%96%CA%A0%D5qe4%7B%7D%FD%85%F7%5B%ED_%E0s%07%F0k%951%ECr%0D%B5C%D7-g%D1%A8%0C%EB%96%CA%A0%A52T%C6)*%C3%5E%86%CAP%19%D6-%95A%EB*%95q%F8%BB%E3%F9%AB%F6%E21%ACZ%B7%22%B7%9B%3F%02%85%CB%A2%5B%B7%BA%5E%B7%9C%97%E1%BC%0C%EB%16-%95%A12z%AC%0C%BFc%A22T%86uKe%D0%EA%B02V%DD%AD%8A%2B%8CWhe%5E%AF%CF%F5%3B%26%CE%CBh%5C%19%CE%CB%B0%F3%A4%095%A1%CAP%19*Ce%A8%0C%3BO*Ce%A8%0C%95%A12%3A%AD%8C%0A%82%7B%F0v%1F%2FD%A9%5B%9F%EE%EA%26%AF%03%CA%DF9%7B%19*Ce%A8%0C%95%A12T%86%CA%B8Ze%D8%CBP%19*Ce%A8%0C%95%D1ae%EC%F7%89I%E1%B4%D7M%D7P%8BjU%5C%BB%3E%F2%20%D8%CBP%19*Ce%A8%0C%95%A12T%C6%D5*%C3%5E%86%CAP%19*Ce%B4O%07%7B%F0W%7Bw%1C%7C%1A%8C%B3%3B%D1%EE%AA%5C%D6-%EBV%83%80%5E%D0%CA%10%5CU%2BD%E07YU%86%CAP%19*%E3%9A%95%91%D9%A0%C8%AD%5B%EDv%9E%82%FFKOee%E4%8FUe%A8%0C%95%A12T%C6%1F%A9%8C%C8%3D%5B%A5%15%FD%14%22r%E7B%9F%17l%F8%BF%ED%EAf%2B%7F%CF%ECe%D8%CBP%19*Ce%A8%0C%95%E1%93~%7B%19%F62T%86%CAP%19*Ce%A8%0C%E7%13%DA%CBP%19*Ce%A8%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4h%A9%0C%B3E%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%A9%0CZf%8B%16-Z%B4h%D1R%19f%8B%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1R%19%B4%CC%16-Z%B4h%D1%A2%A52%CC%16-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2%A52h%99-Z%B4h%D1%A2EKe%98-Z%B4h%D1%A2EKe%D02%5B%B4h%D1%A2EKe%D02%5B%B4h%D1%A2E%8B%96%CA0%5B%B4h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%96%CA%A0e%B6h%D1%A2E%8B%16-%95a%B6h%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-%95A%CBl%D1%A2E%8B%16-Z*%C3l%D1%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z*%83%96%D9%A2E%8B%16-Z%B4T%86%D9%A2E%8B%16-Z%B4T%06-%B3E%8B%16-Z%B4%AE%A4%F5%25%C0%00%DE%BF%5C'%0F%DA%B8q%00%00%00%00IEND%AEB%60%82") repeat-y !important;
+    border-left: 1px solid #BBBBBB !important;
+    border-right: 1px solid #000000 !important;
+    border-bottom: 1px dashed #BBBBBB !important;
+}
+
+.overflowRulerX > .firebugRulerV {
+    left: 0 !important;
+}
+
+.overflowRulerY > .firebugRulerH {
+    top: 0 !important;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+.fbProxyElement {
+    position: fixed !important;
+    pointer-events: auto !important;
+}</style></head>
+<body class="users-profile_wizard fixed-width">
+  <div class="topbar_and_content">
+    <header class="topbar">
+  <div class="fill">
+    <div class="container">
+      <div class="row">
+        <div class="span3">
+          <h1 class="logo"><a data-original-title="" href="http://localhost:3000/">StudyHall Home</a></h1>
+        </div>
+        <nav class="nav" id="topbar_main_nav">
+            <ul>
+              <li id="nav_home" class="current"><a data-original-title="Home" href="http://localhost:3000/home"><span>Home</span></a></li>
+              <li id="nav_studyhalls"><a data-original-title="Studyhalls" href="http://localhost:3000/study_sessions"><span>StudyHalls</span></a></li>
+              <li id="nav_notes"><a data-original-title="Take Notes" href="http://localhost:3000/notes"><span>Take Notes</span></a></li>
+              <li id="nav_profile" class="current"><a data-original-title="Profile" href="http://localhost:3000/users/1/edit"><span>Profile</span></a></li>
+              <li id="nav_inbox"><a data-original-title="Indox" href="http://localhost:3000/messages"><small>5</small><span>Inbox</span></a></li>
+              <li id="nav_account" class="current"><a data-original-title="Your Account" href="http://localhost:3000/users/1"><span>Your Account</span></a></li>  
+            </ul>
+        </nav>
+        <div class="span4">
+          <form action="">
+            <input placeholder="Search" type="text">
+          </form>
+        </div>
+        <div class="right">
+          <ul class="nav secondary-nav">
+            <li data-dropdown="dropdown" class="dropdown">
+                <a data-original-title="" href="#" class="dropdown-toggle"><img alt="35872_525469892676_71500520_31053031_5990374_n" class="avatar_thumb" src="%22_files/35872_525469892676_71500520_31053031_5990374_n_002.jpg">   You</a>
+                <ul class="dropdown-menu">
+                  <div class="arrow-border"></div><div class="arrow"></div>
+                  <li><a data-original-title="" href="http://localhost:3000/users/1">Profile</a></li>
+                  <li><a data-original-title="" href="http://localhost:3000/study_sessions">Study</a></li>
+                  <li><a data-original-title="" href="http://localhost:3000/notebooks">Notes</a></li>
+                  <li><a data-original-title="" href="http://localhost:3000/messages">Messages</a></li>
+                  <li><a data-original-title="" href="http://localhost:3000/classes">Classes</a></li>
+                    <li class="divider">Admin</li>
+<li><a data-original-title="" href="http://localhost:3000/admin/schools">Schools</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/courses">Courses</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/instructors">Instructors</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/offerings">Course Offerings</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/course_offering_imports">Course Data Import</a></li>
+<li><a data-original-title="" href="http://localhost:3000/rooms">Chat</a></li>
+<li><a data-original-title="" href="http://localhost:3000/whiteboards">Whiteboard</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/static_pages">Static Pages</a></li>
+<li><a data-original-title="" href="http://localhost:3000/contacts">Contacts</a></li>
+<li><a data-original-title="" href="http://localhost:3000/admin/users">Users</a></li>
+                  <li class="divider"></li>
+                  <li><a data-original-title="" href="http://localhost:3000/logout">Logout</a></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <div id="action_bar">  <div class="gridbar">
+      <div class="container">
+        <h3></h3>
+        <div class="buttons_right">
+        </div>
+      </div>
+  </div>
+</div>
+    <div class="main-content">
+      <div class="container">
+        <div class="fill">
+          <div>
+  <h3>Complete Your Profile</h3>
+  <div>
+    <form accept-charset="UTF-8" action="/users/1" class="form-stacked with_columns" enctype="multipart/form-data" id="edit_user_1" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" value="✓" type="hidden"><input name="_method" value="put" type="hidden"><input name="authenticity_token" value="EYEIXuGmUVByjh1uRaqpbZ+VXL/i/Px/121hnMK8P0U=" type="hidden"></div>
+  <div class="row show-grid">
+    <div class="span6 columns offset1">
+      <fieldset>
+        <div class="clearfix">
+          <img alt="35872_525469892676_71500520_31053031_5990374_n" src="%22_files/35872_525469892676_71500520_31053031_5990374_n.jpg">
+        </div>
+        <div class="clearfix">
+          <label for="user_avatar">Avatar</label>
+          <div class="input"><input id="user_avatar" name="user[avatar]" type="file"></div>
+        </div>
+          <div class="clearfix">
+            <label for="user_Delete Image">Delete image</label>
+            <div class="input"><input id="delete_avatar" name="delete_avatar" value="1" type="checkbox"></div>
+          </div>
+        <div class="clearfix">
+          <label for="user_bio">Bio</label> 
+          <div class="input"><textarea cols="40" id="user_bio" name="user[bio]" rows="20"></textarea></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_custom_url">Custom url</label> 
+          <div class="input"><input id="user_custom_url" name="user[custom_url]" size="30" type="text"></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_School">School</label>
+          <div class="input"><select style="display: none;" class="chzn-select chzn-done" id="user_school_id" name="user[school_id]"><option value="1" selected="selected">Alabama A &amp; M University</option></select><div style="width: 210px;" class="chzn-container chzn-container-single" id="user_school_id_chzn"><a data-original-title="" href="javascript:void(0)" class="chzn-single"><span>Alabama A &amp; M University</span><div><b></b></div></a><div class="chzn-drop" style="left: -9000px; width: 208px; top: 28px;"><div class="chzn-search"><input style="width: 173px;" autocomplete="off" type="text"></div><ul class="chzn-results"><li id="user_school_id_chzn_o_0" class="active-result result-selected" style="">Alabama A &amp; M University</li></ul></div></div></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_Major">Major</label>
+          <div class="input"><input id="user_major" name="user[major]" size="30" value="Computer Science" type="text"></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_courses">Courses</label>
+          <!--div class="input"><select class="chzn-select" id="user_offering_ids_" multiple="multiple" name="user[offering_ids][]"><option value="1">203 - Introduction to Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="2">203 - Introduction to Accounting I- N. Nyako, Eric - Fall 11-12</option>
+<option value="3">203 - Introduction to Accounting I- A. Ayokanmbi, Gladys - Fall 11-12</option>
+<option value="4">203 - Introduction to Accounting I- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="5">203 - Introduction to Accounting I- G. Gabre, Helen - Fall 11-12</option>
+<option value="6">203 - Introduction to Accounting I- L. Franklin, Horace - Fall 11-12</option>
+<option value="7">203 - Introduction to Accounting I- D. Word, Larry - Fall 11-12</option>
+<option value="8">203 - Introduction to Accounting I- Jain, Rohit - Fall 11-12</option>
+<option value="9">203 - Introduction to Accounting I- Gilmore, Rufus - Fall 11-12</option>
+<option value="10">203 - Introduction to Accounting I- L. Parker, Sheilah - Fall 11-12</option>
+<option value="11">203 - Introduction to Accounting I- M. Price, Sherrell - Fall 11-12</option>
+<option value="12">204 - Introduction to Accounting II- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="13">204 - Introduction to Accounting II- N. Nyako, Eric - Fall 11-12</option>
+<option value="14">204 - Introduction to Accounting II- B. Wood, Grover - Fall 11-12</option>
+<option value="15">204 - Introduction to Accounting II- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="16">204 - Introduction to Accounting II- G. Gabre, Helen - Fall 11-12</option>
+<option value="17">204 - Introduction to Accounting II- L. Franklin, Horace - Fall 11-12</option>
+<option value="18">204 - Introduction to Accounting II- C. Wang, Hwei - Fall 11-12</option>
+<option value="19">204 - Introduction to Accounting II- D. Word, Larry - Fall 11-12</option>
+<option value="20">204 - Introduction to Accounting II- Jain, Rohit - Fall 11-12</option>
+<option value="21">204 - Introduction to Accounting II- Gilmore, Rufus - Fall 11-12</option>
+<option value="22">219 - Managerial Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="23">219 - Managerial Accounting- N. Nyako, Eric - Fall 11-12</option>
+<option value="24">219 - Managerial Accounting- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="25">219 - Managerial Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="26">219 - Managerial Accounting- Jain, Rohit - Fall 11-12</option>
+<option value="27">301 - Intermediate Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="28">301 - Intermediate Accounting I- Jain, Rohit - Fall 11-12</option>
+<option value="29">301 - Intermediate Accounting I- Gilmore, Rufus - Fall 11-12</option>
+<option value="30">302 - Intermediate Accounting II- N. Nyako, Eric - Fall 11-12</option>
+<option value="31">302 - Intermediate Accounting II- G. Gabre, Helen - Fall 11-12</option>
+<option value="32">302 - Intermediate Accounting II- C. Wang, Hwei - Fall 11-12</option>
+<option value="33">303 - Cost Accounting- G. Geinert, Anita - Fall 11-12</option>
+<option value="34">303 - Cost Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="35">303 - Cost Accounting- N. Nyako, Eric - Fall 11-12</option>
+<option value="36">303 - Cost Accounting- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="37">303 - Cost Accounting- Gilmore, Rufus - Fall 11-12</option>
+<option value="38">306 - Intermediate Accounting III- N. Nyako, Eric - Fall 11-12</option>
+<option value="39">351 - Federal Tax Accounting I- G. Gabre, Helen - N/A</option>
+<option value="40">401 - Independent Study- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="41">421 - Advanced Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="42">421 - Advanced Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="43">421 - Advanced Accounting- Jain, Rohit - Fall 11-12</option>
+<option value="44">441 - Auditing- L. Rucker, Charlie - Fall 11-12</option>
+<option value="45">441 - Auditing- C. Wang, Hwei - Fall 11-12</option>
+<option value="46">450 - Accounting for Non-Profit Org- N. Nyako, Eric - N/A</option>
+<option value="47">461 - Seminar in Intl Accounting- G. Geinert, Anita - Fall 11-12</option>
+<option value="48">461 - Seminar in Intl Accounting- Smith, Aylicia - Fall 11-12</option>
+<option value="49">461 - Seminar in Intl Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="50">461 - Seminar in Intl Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="51">472 - Accounting Information System- G. Geinert, Anita - N/A</option>
+<option value="52">472 - Accounting Information System- G. Gabre, Helen - N/A</option>
+<option value="53">472 - Accounting Information System- C. Wang, Hwei - N/A</option>
+<option value="54">478 - Field Experiences in Acc- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="55">512 - Acc Analysis for Management- G. Gabre, Helen - Fall 11-12</option>
+<option value="56">571 - Tax &amp; Bus Decision Making- G. Gabre, Helen - Fall 11-12</option>
+<option value="57">572 - Accounting Information Systems- G. Geinert, Anita - N/A</option>
+<option value="58">572 - Accounting Information Systems- C. Wang, Hwei - N/A</option>
+<option value="59">577 - Special Topics in Accounting- G. Gabre, Helen - N/A</option>
+<option value="60">102 - Intro to Agriculture Careers- R. Gyawali, Buddhi - N/A</option>
+<option value="61">102 - Intro to Agriculture Careers- Banerjee, Swagata - N/A</option>
+<option value="62">102 - Intro to Agriculture Careers- Befecadu, Yoseph - N/A</option>
+<option value="63">199 - Computers in Agriculture- R. Gyawali, Buddhi - Fall 11-12</option>
+<option value="64">199 - Computers in Agriculture- M. Gapasin, Celedonio - Fall 11-12</option>
+<option value="65">199 - Computers in Agriculture- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="66">199 - Computers in Agriculture- M. Shade, Remus - Fall 11-12</option>
+<option value="67">199 - Computers in Agriculture- J. Cheatham, Willie - Fall 11-12</option>
+<option value="68">211 - Metal Fabrication- M. Shade, Remus - N/A</option>
+<option value="69">212 - Woodworking &amp; Machinery- M. Shade, Remus - N/A</option>
+<option value="70">212 - Woodworking &amp; Machinery- J. Cheatham, Willie - N/A</option>
+<option value="71">221 - Intro to Agricultural Economic- O. Bukenya, James - Fall 11-12</option>
+<option value="72">299 - Quant Appl in Agriculture- O. Bukenya, James - N/A</option>
+<option value="73">299 - Quant Appl in Agriculture- Banerjee, Swagata - N/A</option>
+<option value="74">300 - Agribusiness Statistics- Befecadu, Yoseph - Fall 11-12</option>
+<option value="75">301 - Electrical Systems &amp; Machines- J. Cheatham, Willie - N/A</option>
+<option value="76">302 - Org &amp; Admin of Voc Edu- E. Williams, Edward - Fall 11-12</option>
+<option value="77">302 - Org &amp; Admin of Voc Edu- J. Cheatham, Willie - Fall 11-12</option>
+<option value="78">311 - Small Pow Unit &amp; Equipment- M. Shade, Remus - N/A</option>
+<option value="79">311 - Small Pow Unit &amp; Equipment- J. Cheatham, Willie - N/A</option>
+<option value="80">314 - Small Structure Construction- M. Shade, Remus - Fall 11-12</option>
+<option value="81">314 - Small Structure Construction- J. Cheatham, Willie - Fall 11-12</option>
+<option value="82">322 - Farm Management- S. Jones, Hezekiah - N/A</option>
+<option value="83">322 - Farm Management- Banerjee, Swagata - N/A</option>
+<option value="84">323 - Agricultural Marketing- O. Bukenya, James - Fall 11-12</option>
+<option value="85">323 - Agricultural Marketing- Banerjee, Swagata - Fall 11-12</option>
+<option value="86">330 - Internship in Agribusiness- E. Williams, Edward - Fall 11-12</option>
+<option value="87">330 - Internship in Agribusiness- M. Shade, Remus - Fall 11-12</option>
+<option value="88">330 - Internship in Agribusiness- J. Cheatham, Willie - Fall 11-12</option>
+<option value="89">330 - Internship in Agribusiness- Befecadu, Yoseph - Fall 11-12</option>
+<option value="90">333 - Commodity Marketing- Banerjee, Swagata - Fall 11-12</option>
+<option value="91">401 - Methods of Teaching in Agrisci- J. Cheatham, Willie - Fall 11-12</option>
+<option value="92">405 - Extension Methods- M. Gapasin, Celedonio - Fall 11-12</option>
+<option value="93">405 - Extension Methods- Befecadu, Yoseph - Fall 11-12</option>
+<option value="94">418 - Agricultural Leadership- M. Gapasin, Celedonio - N/A</option>
+<option value="95">418 - Agricultural Leadership- Befecadu, Yoseph - N/A</option>
+<option value="96">421 - Agribusiness Management- Befecadu, Yoseph - N/A</option>
+<option value="97">422 - Agricultural Financing- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="98">422 - Agricultural Financing- Banerjee, Swagata - Fall 11-12</option>
+<option value="99">424 - International Agricultural Dev- Banerjee, Swagata - Fall 11-12</option>
+<option value="100">425 - Agricultural Policies- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="101">430 - Agricultural Prices- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="102">433 - Agricultural Sales- Befecadu, Yoseph - N/A</option>
+<option value="103">443 - Economics of Food Distribution- Banerjee, Swagata - N/A</option>
+<option value="104">445 - Economics of Natural Resources- O. Bukenya, James - Fall 11-12</option>
+<option value="105">453 - Int Agricultural Marketing- O. Bukenya, James - N/A</option>
+<option value="106">490 - Special Problems- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="107">490 - Special Problems- Banerjee, Swagata - Fall 11-12</option>
+<option value="108">490 - Special Problems- Befecadu, Yoseph - Fall 11-12</option>
+<option value="109">495 - Internship- M. Shade, Remus - Fall 11-12</option>
+<option value="110">495 - Internship- J. Cheatham, Willie - Fall 11-12</option>
+<option value="111">495 - Internship- Befecadu, Yoseph - Fall 11-12</option>
+<option value="112">499 - Research in Agribusiness- O. Bukenya, James - Fall 11-12</option>
+<option value="113">505 - PHIL ADM/SUP VOC ED- E. Williams, Edward - Fall 11-12</option>
+<option value="114">505 - PHIL ADM/SUP VOC ED- J. Cheatham, Willie - Fall 11-12</option>
+<option value="115">508 - Plng Org Tchg Agribu Mechanics- M. Shade, Remus - N/A</option>
+<option value="116">508 - Plng Org Tchg Agribu Mechanics- J. Cheatham, Willie - N/A</option>
+<option value="117">509 - Advanced Studies- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="118">509 - Advanced Studies- J. Cheatham, Willie - Fall 11-12</option>
+<option value="119">509 - Advanced Studies- Befecadu, Yoseph - Fall 11-12</option>
+<option value="120">525 - Adv Wood Desgin &amp; Assembly- J. Cheatham, Willie - Fall 11-12</option>
+<option value="121">531 - Agricultural Economics- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="122">531 - Agricultural Economics- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="123">532 - Advanced Farm Management- S. Jones, Hezekiah - N/A</option>
+<option value="124">532 - Advanced Farm Management- Banerjee, Swagata - N/A</option>
+<option value="125">533 - Adv Agricultural Marketing- O. Bukenya, James - N/A</option>
+<option value="126">590 - Research Methods in Agribu- Befecadu, Yoseph - Fall 11-12</option>
+<option value="127">595 - Internship- M. Shade, Remus - Fall 11-12</option>
+<option value="128">595 - Internship- J. Cheatham, Willie - Fall 11-12</option>
+<option value="129">599 - Master's Thesis- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="130">599 - Master's Thesis- J. Cheatham, Willie - Fall 11-12</option>
+<option value="131">599 - Master's Thesis- Befecadu, Yoseph - Fall 11-12</option>
+<option value="132">604 - Seminar in Agribus Education- M. Shade, Remus - Fall 11-12</option>
+<option value="133">604 - Seminar in Agribus Education- J. Cheatham, Willie - Fall 11-12</option>
+<option value="134">608 - Voc Youth Organizations- E. Williams, Edward - Fall 11-12</option>
+<option value="135">608 - Voc Youth Organizations- J. Cheatham, Willie - Fall 11-12</option>
+<option value="136">611 - Intern in Agribus Education- J. Cheatham, Willie - Fall 11-12</option>
+<option value="137">611 - No Title- /A, N - N/A</option>
+<option value="138">623 - Advanced Agribus Management- Befecadu, Yoseph - N/A</option>
+<option value="139">624 - Agric Financial Analysis- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="140">624 - Agric Financial Analysis- Banerjee, Swagata - Fall 11-12</option>
+<option value="141">625 - Advanced Agri Policy- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="142">626 - AG Modeling &amp; Forecasting- M. Chembezi, Duncan - N/A</option>
+<option value="143">698 - Action Research I- J. Cheatham, Willie - N/A</option>
+<option value="144">698 - Action Research I- Befecadu, Yoseph - N/A</option>
+<option value="145">699 - Action Research II- J. Cheatham, Willie - N/A</option>
+<option value="146">699 - Action Research II- Befecadu, Yoseph - N/A</option>
+<option value="147">211L - Basic Metal- M. Shade, Remus - Fall 11-12</option>
+<option value="148">211L - Basic Metal- J. Cheatham, Willie - Fall 11-12</option>
+<option value="149">208 - Ready-to-Wear Apparel Analysis- Y. Young, Patricia - N/A</option>
+<option value="150">302 - Historic Costume- P. Young, Allison - N/A</option>
+<option value="151">302 - Historic Costume- P. Tibbs, Eunice - N/A</option>
+<option value="152">303 - Fashion Merchandising I- Y. Young, Patricia - Fall 11-12</option>
+<option value="153">305 - Housing and Interiors- G. Henderson, Chinella - Fall 11-12</option>
+<option value="154">305 - Housing and Interiors- S. Henderson, Patricia - Fall 11-12</option>
+<option value="155">306 - Fashion Merchandising- Y. Young, Patricia - N/A</option>
+<option value="156">308 - Visual Merchandising- Y. Young, Patricia - N/A</option>
+<option value="157">315 - Consumer Textiles I- P. Young, Allison - Fall 11-12</option>
+<option value="158">315 - Consumer Textiles I- F. Gardner, Linda - Fall 11-12</option>
+<option value="159">315 - Consumer Textiles I- Y. Young, Patricia - Fall 11-12</option>
+<option value="160">410 - Apparel CAD- F. Gardner, Linda - N/A</option>
+<option value="161">411 - Directed Field Experience- S. Henderson, Patricia - Fall 11-12</option>
+<option value="162">419 - Merchandising &amp; Design Seminar- Y. Young, Patricia - Fall 11-12</option>
+<option value="163">421 - Problems &amp; Independent Study- P. Young, Allison - Fall 11-12</option>
+<option value="164">421 - Problems &amp; Independent Study- S. Henderson, Patricia - Fall 11-12</option>
+<option value="165">421 - Problems &amp; Independent Study- Y. Young, Patricia - Fall 11-12</option>
+<option value="166">422 - Fashion Merchandise Study Tour- P. Young, Allison - N/A</option>
+<option value="167">527 - Consumer Textiles- P. Young, Allison - Fall 11-12</option>
+<option value="168">527 - Consumer Textiles- Y. Young, Patricia - Fall 11-12</option>
+<option value="169">528 - Soc Psy &amp; Eco Asp Clothing- F. Gardner, Linda - N/A</option>
+<option value="170">530 - Special Problems- Smith, Cynthia - Fall 11-12</option>
+<option value="171">530 - Special Problems- F. Gardner, Linda - Fall 11-12</option>
+<option value="172">530 - Special Problems- Y. Young, Patricia - Fall 11-12</option>
+<option value="173">533 - Historic Costume- P. Young, Allison - N/A</option>
+<option value="174">533 - Historic Costume- Y. Young, Patricia - N/A</option>
+<option value="175">537 - Fashion Mech Study Tour- P. Young, Allison - N/A</option>
+<option value="176">618 - Textile Economics- F. Gardner, Linda - Fall 11-12</option>
+<option value="177">618 - Textile Economics- Y. Young, Patricia - Fall 11-12</option>
+<option value="178">104L - Art &amp; Design- S. Henderson, Patricia - N/A</option>
+<option value="179">201L - Basic Clothing Construction- P. Tibbs, Eunice - Fall 11-12</option>
+<option value="180">201L - Basic Clothing Construction- F. Gardner, Linda - Fall 11-12</option>
+<option value="181">201L - Basic Clothing Construction- Y. Young, Patricia - Fall 11-12</option>
+<option value="182">203L - Consumer Aspects of Clothing- P. Young, Allison - Fall 11-12</option>
+<option value="183">203L - Consumer Aspects of Clothing- Y. Young, Patricia - Fall 11-12</option>
+<option value="184">204L - Clothing Throughout Life Cycle- P. Tibbs, Eunice - N/A</option>
+<option value="185">307L - Flat Pattern Design- F. Gardner, Linda - Fall 11-12</option>
+<option value="186">316L - Consumer Textiles II- F. Gardner, Linda - N/A</option>
+<option value="187">316L - Consumer Textiles II- Y. Young, Patricia - N/A</option>
+<option value="188">404L - Advanced Clothing &amp; Design- F. Gardner, Linda - N/A</option>
+<option value="189">405L - Functional Clothing Design- F. Gardner, Linda - Fall 11-12</option>
+<option value="190">405L - Functional Clothing Design- S. Henderson, Patricia - Fall 11-12</option>
+<option value="191">406L - Draping- F. Gardner, Linda - N/A</option>
+<option value="192">534L - Advanced Costume Design- Smith, Cynthia - N/A</option>
+<option value="193">101 - Art Appreciation- L. Fuller, Cara - Fall 11-12</option>
+<option value="194">101 - Art Appreciation- W. Washington, Joe - Fall 11-12</option>
+<option value="195">101 - Art Appreciation- Argend-Farlow, Louis - Fall 11-12</option>
+<option value="196">101 - Art Appreciation- E. Bean, Robert - Fall 11-12</option>
+<option value="197">101 - Art Appreciation- L. Smith, Scott - Fall 11-12</option></select></div-->
+          <div class="input"><select style="display: none;" class="chzn-select chzn-done" id="user_enrollments" multiple="multiple" name="user[offering_ids][]"><option value="1" selected="selected">203 - Introduction to Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="2">203 - Introduction to Accounting I- N. Nyako, Eric - Fall 11-12</option>
+<option value="3">203 - Introduction to Accounting I- A. Ayokanmbi, Gladys - Fall 11-12</option>
+<option value="4">203 - Introduction to Accounting I- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="5">203 - Introduction to Accounting I- G. Gabre, Helen - Fall 11-12</option>
+<option value="6">203 - Introduction to Accounting I- L. Franklin, Horace - Fall 11-12</option>
+<option value="7">203 - Introduction to Accounting I- D. Word, Larry - Fall 11-12</option>
+<option value="8">203 - Introduction to Accounting I- Jain, Rohit - Fall 11-12</option>
+<option value="9">203 - Introduction to Accounting I- Gilmore, Rufus - Fall 11-12</option>
+<option value="10">203 - Introduction to Accounting I- L. Parker, Sheilah - Fall 11-12</option>
+<option value="11">203 - Introduction to Accounting I- M. Price, Sherrell - Fall 11-12</option>
+<option value="12" selected="selected">204 - Introduction to Accounting II- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="13">204 - Introduction to Accounting II- N. Nyako, Eric - Fall 11-12</option>
+<option value="14">204 - Introduction to Accounting II- B. Wood, Grover - Fall 11-12</option>
+<option value="15">204 - Introduction to Accounting II- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="16">204 - Introduction to Accounting II- G. Gabre, Helen - Fall 11-12</option>
+<option value="17">204 - Introduction to Accounting II- L. Franklin, Horace - Fall 11-12</option>
+<option value="18">204 - Introduction to Accounting II- C. Wang, Hwei - Fall 11-12</option>
+<option value="19">204 - Introduction to Accounting II- D. Word, Larry - Fall 11-12</option>
+<option value="20">204 - Introduction to Accounting II- Jain, Rohit - Fall 11-12</option>
+<option value="21">204 - Introduction to Accounting II- Gilmore, Rufus - Fall 11-12</option>
+<option value="22">219 - Managerial Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="23">219 - Managerial Accounting- N. Nyako, Eric - Fall 11-12</option>
+<option value="24">219 - Managerial Accounting- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="25">219 - Managerial Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="26">219 - Managerial Accounting- Jain, Rohit - Fall 11-12</option>
+<option value="27" selected="selected">301 - Intermediate Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="28">301 - Intermediate Accounting I- Jain, Rohit - Fall 11-12</option>
+<option value="29">301 - Intermediate Accounting I- Gilmore, Rufus - Fall 11-12</option>
+<option value="30">302 - Intermediate Accounting II- N. Nyako, Eric - Fall 11-12</option>
+<option value="31">302 - Intermediate Accounting II- G. Gabre, Helen - Fall 11-12</option>
+<option value="32">302 - Intermediate Accounting II- C. Wang, Hwei - Fall 11-12</option>
+<option value="33">303 - Cost Accounting- G. Geinert, Anita - Fall 11-12</option>
+<option value="34">303 - Cost Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="35">303 - Cost Accounting- N. Nyako, Eric - Fall 11-12</option>
+<option value="36">303 - Cost Accounting- Khanna, Hareshnarayan - Fall 11-12</option>
+<option value="37">303 - Cost Accounting- Gilmore, Rufus - Fall 11-12</option>
+<option value="38">306 - Intermediate Accounting III- N. Nyako, Eric - Fall 11-12</option>
+<option value="39">351 - Federal Tax Accounting I- G. Gabre, Helen - N/A</option>
+<option value="40">401 - Independent Study- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="41">421 - Advanced Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="42">421 - Advanced Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="43">421 - Advanced Accounting- Jain, Rohit - Fall 11-12</option>
+<option value="44">441 - Auditing- L. Rucker, Charlie - Fall 11-12</option>
+<option value="45">441 - Auditing- C. Wang, Hwei - Fall 11-12</option>
+<option value="46">450 - Accounting for Non-Profit Org- N. Nyako, Eric - N/A</option>
+<option value="47">461 - Seminar in Intl Accounting- G. Geinert, Anita - Fall 11-12</option>
+<option value="48">461 - Seminar in Intl Accounting- Smith, Aylicia - Fall 11-12</option>
+<option value="49">461 - Seminar in Intl Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="50">461 - Seminar in Intl Accounting- G. Gabre, Helen - Fall 11-12</option>
+<option value="51">472 - Accounting Information System- G. Geinert, Anita - N/A</option>
+<option value="52">472 - Accounting Information System- G. Gabre, Helen - N/A</option>
+<option value="53">472 - Accounting Information System- C. Wang, Hwei - N/A</option>
+<option value="54">478 - Field Experiences in Acc- D. Mcquitter-Banks, Bonnie - Fall 11-12</option>
+<option value="55">512 - Acc Analysis for Management- G. Gabre, Helen - Fall 11-12</option>
+<option value="56">571 - Tax &amp; Bus Decision Making- G. Gabre, Helen - Fall 11-12</option>
+<option value="57">572 - Accounting Information Systems- G. Geinert, Anita - N/A</option>
+<option value="58">572 - Accounting Information Systems- C. Wang, Hwei - N/A</option>
+<option value="59">577 - Special Topics in Accounting- G. Gabre, Helen - N/A</option>
+<option value="60">102 - Intro to Agriculture Careers- R. Gyawali, Buddhi - N/A</option>
+<option value="61">102 - Intro to Agriculture Careers- Banerjee, Swagata - N/A</option>
+<option value="62">102 - Intro to Agriculture Careers- Befecadu, Yoseph - N/A</option>
+<option value="63">199 - Computers in Agriculture- R. Gyawali, Buddhi - Fall 11-12</option>
+<option value="64">199 - Computers in Agriculture- M. Gapasin, Celedonio - Fall 11-12</option>
+<option value="65">199 - Computers in Agriculture- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="66">199 - Computers in Agriculture- M. Shade, Remus - Fall 11-12</option>
+<option value="67">199 - Computers in Agriculture- J. Cheatham, Willie - Fall 11-12</option>
+<option value="68">211 - Metal Fabrication- M. Shade, Remus - N/A</option>
+<option value="69">212 - Woodworking &amp; Machinery- M. Shade, Remus - N/A</option>
+<option value="70">212 - Woodworking &amp; Machinery- J. Cheatham, Willie - N/A</option>
+<option value="71">221 - Intro to Agricultural Economic- O. Bukenya, James - Fall 11-12</option>
+<option value="72">299 - Quant Appl in Agriculture- O. Bukenya, James - N/A</option>
+<option value="73">299 - Quant Appl in Agriculture- Banerjee, Swagata - N/A</option>
+<option value="74">300 - Agribusiness Statistics- Befecadu, Yoseph - Fall 11-12</option>
+<option value="75">301 - Electrical Systems &amp; Machines- J. Cheatham, Willie - N/A</option>
+<option value="76">302 - Org &amp; Admin of Voc Edu- E. Williams, Edward - Fall 11-12</option>
+<option value="77">302 - Org &amp; Admin of Voc Edu- J. Cheatham, Willie - Fall 11-12</option>
+<option value="78">311 - Small Pow Unit &amp; Equipment- M. Shade, Remus - N/A</option>
+<option value="79">311 - Small Pow Unit &amp; Equipment- J. Cheatham, Willie - N/A</option>
+<option value="80">314 - Small Structure Construction- M. Shade, Remus - Fall 11-12</option>
+<option value="81">314 - Small Structure Construction- J. Cheatham, Willie - Fall 11-12</option>
+<option value="82">322 - Farm Management- S. Jones, Hezekiah - N/A</option>
+<option value="83">322 - Farm Management- Banerjee, Swagata - N/A</option>
+<option value="84">323 - Agricultural Marketing- O. Bukenya, James - Fall 11-12</option>
+<option value="85">323 - Agricultural Marketing- Banerjee, Swagata - Fall 11-12</option>
+<option value="86">330 - Internship in Agribusiness- E. Williams, Edward - Fall 11-12</option>
+<option value="87">330 - Internship in Agribusiness- M. Shade, Remus - Fall 11-12</option>
+<option value="88">330 - Internship in Agribusiness- J. Cheatham, Willie - Fall 11-12</option>
+<option value="89">330 - Internship in Agribusiness- Befecadu, Yoseph - Fall 11-12</option>
+<option value="90">333 - Commodity Marketing- Banerjee, Swagata - Fall 11-12</option>
+<option value="91">401 - Methods of Teaching in Agrisci- J. Cheatham, Willie - Fall 11-12</option>
+<option value="92">405 - Extension Methods- M. Gapasin, Celedonio - Fall 11-12</option>
+<option value="93">405 - Extension Methods- Befecadu, Yoseph - Fall 11-12</option>
+<option value="94">418 - Agricultural Leadership- M. Gapasin, Celedonio - N/A</option>
+<option value="95">418 - Agricultural Leadership- Befecadu, Yoseph - N/A</option>
+<option value="96">421 - Agribusiness Management- Befecadu, Yoseph - N/A</option>
+<option value="97">422 - Agricultural Financing- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="98">422 - Agricultural Financing- Banerjee, Swagata - Fall 11-12</option>
+<option value="99">424 - International Agricultural Dev- Banerjee, Swagata - Fall 11-12</option>
+<option value="100">425 - Agricultural Policies- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="101">430 - Agricultural Prices- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="102">433 - Agricultural Sales- Befecadu, Yoseph - N/A</option>
+<option value="103">443 - Economics of Food Distribution- Banerjee, Swagata - N/A</option>
+<option value="104">445 - Economics of Natural Resources- O. Bukenya, James - Fall 11-12</option>
+<option value="105">453 - Int Agricultural Marketing- O. Bukenya, James - N/A</option>
+<option value="106">490 - Special Problems- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="107">490 - Special Problems- Banerjee, Swagata - Fall 11-12</option>
+<option value="108">490 - Special Problems- Befecadu, Yoseph - Fall 11-12</option>
+<option value="109">495 - Internship- M. Shade, Remus - Fall 11-12</option>
+<option value="110">495 - Internship- J. Cheatham, Willie - Fall 11-12</option>
+<option value="111">495 - Internship- Befecadu, Yoseph - Fall 11-12</option>
+<option value="112">499 - Research in Agribusiness- O. Bukenya, James - Fall 11-12</option>
+<option value="113">505 - PHIL ADM/SUP VOC ED- E. Williams, Edward - Fall 11-12</option>
+<option value="114">505 - PHIL ADM/SUP VOC ED- J. Cheatham, Willie - Fall 11-12</option>
+<option value="115">508 - Plng Org Tchg Agribu Mechanics- M. Shade, Remus - N/A</option>
+<option value="116">508 - Plng Org Tchg Agribu Mechanics- J. Cheatham, Willie - N/A</option>
+<option value="117">509 - Advanced Studies- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="118">509 - Advanced Studies- J. Cheatham, Willie - Fall 11-12</option>
+<option value="119">509 - Advanced Studies- Befecadu, Yoseph - Fall 11-12</option>
+<option value="120">525 - Adv Wood Desgin &amp; Assembly- J. Cheatham, Willie - Fall 11-12</option>
+<option value="121">531 - Agricultural Economics- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="122">531 - Agricultural Economics- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="123">532 - Advanced Farm Management- S. Jones, Hezekiah - N/A</option>
+<option value="124">532 - Advanced Farm Management- Banerjee, Swagata - N/A</option>
+<option value="125">533 - Adv Agricultural Marketing- O. Bukenya, James - N/A</option>
+<option value="126">590 - Research Methods in Agribu- Befecadu, Yoseph - Fall 11-12</option>
+<option value="127">595 - Internship- M. Shade, Remus - Fall 11-12</option>
+<option value="128">595 - Internship- J. Cheatham, Willie - Fall 11-12</option>
+<option value="129">599 - Master's Thesis- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="130">599 - Master's Thesis- J. Cheatham, Willie - Fall 11-12</option>
+<option value="131">599 - Master's Thesis- Befecadu, Yoseph - Fall 11-12</option>
+<option value="132">604 - Seminar in Agribus Education- M. Shade, Remus - Fall 11-12</option>
+<option value="133">604 - Seminar in Agribus Education- J. Cheatham, Willie - Fall 11-12</option>
+<option value="134">608 - Voc Youth Organizations- E. Williams, Edward - Fall 11-12</option>
+<option value="135">608 - Voc Youth Organizations- J. Cheatham, Willie - Fall 11-12</option>
+<option value="136">611 - Intern in Agribus Education- J. Cheatham, Willie - Fall 11-12</option>
+<option value="137">611 - No Title- /A, N - N/A</option>
+<option value="138">623 - Advanced Agribus Management- Befecadu, Yoseph - N/A</option>
+<option value="139">624 - Agric Financial Analysis- S. Jones, Hezekiah - Fall 11-12</option>
+<option value="140">624 - Agric Financial Analysis- Banerjee, Swagata - Fall 11-12</option>
+<option value="141">625 - Advanced Agri Policy- M. Chembezi, Duncan - Fall 11-12</option>
+<option value="142">626 - AG Modeling &amp; Forecasting- M. Chembezi, Duncan - N/A</option>
+<option value="143">698 - Action Research I- J. Cheatham, Willie - N/A</option>
+<option value="144">698 - Action Research I- Befecadu, Yoseph - N/A</option>
+<option value="145">699 - Action Research II- J. Cheatham, Willie - N/A</option>
+<option value="146">699 - Action Research II- Befecadu, Yoseph - N/A</option>
+<option value="147">211L - Basic Metal- M. Shade, Remus - Fall 11-12</option>
+<option value="148">211L - Basic Metal- J. Cheatham, Willie - Fall 11-12</option>
+<option value="149">208 - Ready-to-Wear Apparel Analysis- Y. Young, Patricia - N/A</option>
+<option value="150">302 - Historic Costume- P. Young, Allison - N/A</option>
+<option value="151">302 - Historic Costume- P. Tibbs, Eunice - N/A</option>
+<option value="152">303 - Fashion Merchandising I- Y. Young, Patricia - Fall 11-12</option>
+<option value="153">305 - Housing and Interiors- G. Henderson, Chinella - Fall 11-12</option>
+<option value="154">305 - Housing and Interiors- S. Henderson, Patricia - Fall 11-12</option>
+<option value="155">306 - Fashion Merchandising- Y. Young, Patricia - N/A</option>
+<option value="156">308 - Visual Merchandising- Y. Young, Patricia - N/A</option>
+<option value="157">315 - Consumer Textiles I- P. Young, Allison - Fall 11-12</option>
+<option value="158">315 - Consumer Textiles I- F. Gardner, Linda - Fall 11-12</option>
+<option value="159">315 - Consumer Textiles I- Y. Young, Patricia - Fall 11-12</option>
+<option value="160">410 - Apparel CAD- F. Gardner, Linda - N/A</option>
+<option value="161">411 - Directed Field Experience- S. Henderson, Patricia - Fall 11-12</option>
+<option value="162">419 - Merchandising &amp; Design Seminar- Y. Young, Patricia - Fall 11-12</option>
+<option value="163">421 - Problems &amp; Independent Study- P. Young, Allison - Fall 11-12</option>
+<option value="164">421 - Problems &amp; Independent Study- S. Henderson, Patricia - Fall 11-12</option>
+<option value="165">421 - Problems &amp; Independent Study- Y. Young, Patricia - Fall 11-12</option>
+<option value="166">422 - Fashion Merchandise Study Tour- P. Young, Allison - N/A</option>
+<option value="167">527 - Consumer Textiles- P. Young, Allison - Fall 11-12</option>
+<option value="168">527 - Consumer Textiles- Y. Young, Patricia - Fall 11-12</option>
+<option value="169">528 - Soc Psy &amp; Eco Asp Clothing- F. Gardner, Linda - N/A</option>
+<option value="170">530 - Special Problems- Smith, Cynthia - Fall 11-12</option>
+<option value="171">530 - Special Problems- F. Gardner, Linda - Fall 11-12</option>
+<option value="172">530 - Special Problems- Y. Young, Patricia - Fall 11-12</option>
+<option value="173">533 - Historic Costume- P. Young, Allison - N/A</option>
+<option value="174">533 - Historic Costume- Y. Young, Patricia - N/A</option>
+<option value="175">537 - Fashion Mech Study Tour- P. Young, Allison - N/A</option>
+<option value="176">618 - Textile Economics- F. Gardner, Linda - Fall 11-12</option>
+<option value="177">618 - Textile Economics- Y. Young, Patricia - Fall 11-12</option>
+<option value="178">104L - Art &amp; Design- S. Henderson, Patricia - N/A</option>
+<option value="179">201L - Basic Clothing Construction- P. Tibbs, Eunice - Fall 11-12</option>
+<option value="180">201L - Basic Clothing Construction- F. Gardner, Linda - Fall 11-12</option>
+<option value="181">201L - Basic Clothing Construction- Y. Young, Patricia - Fall 11-12</option>
+<option value="182">203L - Consumer Aspects of Clothing- P. Young, Allison - Fall 11-12</option>
+<option value="183">203L - Consumer Aspects of Clothing- Y. Young, Patricia - Fall 11-12</option>
+<option value="184">204L - Clothing Throughout Life Cycle- P. Tibbs, Eunice - N/A</option>
+<option value="185">307L - Flat Pattern Design- F. Gardner, Linda - Fall 11-12</option>
+<option value="186">316L - Consumer Textiles II- F. Gardner, Linda - N/A</option>
+<option value="187">316L - Consumer Textiles II- Y. Young, Patricia - N/A</option>
+<option value="188">404L - Advanced Clothing &amp; Design- F. Gardner, Linda - N/A</option>
+<option value="189">405L - Functional Clothing Design- F. Gardner, Linda - Fall 11-12</option>
+<option value="190">405L - Functional Clothing Design- S. Henderson, Patricia - Fall 11-12</option>
+<option value="191">406L - Draping- F. Gardner, Linda - N/A</option>
+<option value="192">534L - Advanced Costume Design- Smith, Cynthia - N/A</option>
+<option value="193">101 - Art Appreciation- L. Fuller, Cara - Fall 11-12</option>
+<option value="194">101 - Art Appreciation- W. Washington, Joe - Fall 11-12</option>
+<option value="195">101 - Art Appreciation- Argend-Farlow, Louis - Fall 11-12</option>
+<option value="196">101 - Art Appreciation- E. Bean, Robert - Fall 11-12</option>
+<option value="197">101 - Art Appreciation- L. Smith, Scott - Fall 11-12</option></select><div style="width: 210px;" class="chzn-container chzn-container-multi" id="user_enrollments_chzn"><ul class="chzn-choices"><li class="search-choice" id="user_enrollments_chzn_c_0"><span>203 - Introduction to Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</span><a data-original-title="" href="javascript:void(0)" class="search-choice-close" rel="0"></a></li><li class="search-choice" id="user_enrollments_chzn_c_11"><span>204 - Introduction to Accounting II- D. Mcquitter-Banks, Bonnie - Fall 11-12</span><a data-original-title="" href="javascript:void(0)" class="search-choice-close" rel="11"></a></li><li class="search-choice" id="user_enrollments_chzn_c_26"><span>301 - Intermediate Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</span><a data-original-title="" href="javascript:void(0)" class="search-choice-close" rel="26"></a></li><li class="search-field"><input class="" autocomplete="off" style="width: 25px;" type="text"></li></ul><div class="chzn-drop" style="left: -9000px; width: 208px; top: 191px;"><ul class="chzn-results"><li id="user_enrollments_chzn_o_0" class="result-selected" style="">203 - Introduction to Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_1" class="active-result" style="">203 - Introduction to Accounting I- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_2" class="active-result" style="">203 - Introduction to Accounting I- A. Ayokanmbi, Gladys - Fall 11-12</li><li id="user_enrollments_chzn_o_3" class="active-result" style="">203 - Introduction to Accounting I- Khanna, Hareshnarayan - Fall 11-12</li><li id="user_enrollments_chzn_o_4" class="active-result" style="">203 - Introduction to Accounting I- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_5" class="active-result" style="">203 - Introduction to Accounting I- L. Franklin, Horace - Fall 11-12</li><li id="user_enrollments_chzn_o_6" class="active-result" style="">203 - Introduction to Accounting I- D. Word, Larry - Fall 11-12</li><li id="user_enrollments_chzn_o_7" class="active-result" style="">203 - Introduction to Accounting I- Jain, Rohit - Fall 11-12</li><li id="user_enrollments_chzn_o_8" class="active-result" style="">203 - Introduction to Accounting I- Gilmore, Rufus - Fall 11-12</li><li id="user_enrollments_chzn_o_9" class="active-result" style="">203 - Introduction to Accounting I- L. Parker, Sheilah - Fall 11-12</li><li id="user_enrollments_chzn_o_10" class="active-result" style="">203 - Introduction to Accounting I- M. Price, Sherrell - Fall 11-12</li><li id="user_enrollments_chzn_o_11" class="result-selected" style="">204 - Introduction to Accounting II- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_12" class="active-result" style="">204 - Introduction to Accounting II- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_13" class="active-result" style="">204 - Introduction to Accounting II- B. Wood, Grover - Fall 11-12</li><li id="user_enrollments_chzn_o_14" class="active-result" style="">204 - Introduction to Accounting II- Khanna, Hareshnarayan - Fall 11-12</li><li id="user_enrollments_chzn_o_15" class="active-result" style="">204 - Introduction to Accounting II- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_16" class="active-result" style="">204 - Introduction to Accounting II- L. Franklin, Horace - Fall 11-12</li><li id="user_enrollments_chzn_o_17" class="active-result" style="">204 - Introduction to Accounting II- C. Wang, Hwei - Fall 11-12</li><li id="user_enrollments_chzn_o_18" class="active-result" style="">204 - Introduction to Accounting II- D. Word, Larry - Fall 11-12</li><li id="user_enrollments_chzn_o_19" class="active-result" style="">204 - Introduction to Accounting II- Jain, Rohit - Fall 11-12</li><li id="user_enrollments_chzn_o_20" class="active-result" style="">204 - Introduction to Accounting II- Gilmore, Rufus - Fall 11-12</li><li id="user_enrollments_chzn_o_21" class="active-result" style="">219 - Managerial Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_22" class="active-result" style="">219 - Managerial Accounting- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_23" class="active-result" style="">219 - Managerial Accounting- Khanna, Hareshnarayan - Fall 11-12</li><li id="user_enrollments_chzn_o_24" class="active-result" style="">219 - Managerial Accounting- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_25" class="active-result" style="">219 - Managerial Accounting- Jain, Rohit - Fall 11-12</li><li id="user_enrollments_chzn_o_26" class="result-selected" style="">301 - Intermediate Accounting I- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_27" class="active-result" style="">301 - Intermediate Accounting I- Jain, Rohit - Fall 11-12</li><li id="user_enrollments_chzn_o_28" class="active-result" style="">301 - Intermediate Accounting I- Gilmore, Rufus - Fall 11-12</li><li id="user_enrollments_chzn_o_29" class="active-result" style="">302 - Intermediate Accounting II- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_30" class="active-result" style="">302 - Intermediate Accounting II- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_31" class="active-result" style="">302 - Intermediate Accounting II- C. Wang, Hwei - Fall 11-12</li><li id="user_enrollments_chzn_o_32" class="active-result" style="">303 - Cost Accounting- G. Geinert, Anita - Fall 11-12</li><li id="user_enrollments_chzn_o_33" class="active-result" style="">303 - Cost Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_34" class="active-result" style="">303 - Cost Accounting- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_35" class="active-result" style="">303 - Cost Accounting- Khanna, Hareshnarayan - Fall 11-12</li><li id="user_enrollments_chzn_o_36" class="active-result" style="">303 - Cost Accounting- Gilmore, Rufus - Fall 11-12</li><li id="user_enrollments_chzn_o_37" class="active-result" style="">306 - Intermediate Accounting III- N. Nyako, Eric - Fall 11-12</li><li id="user_enrollments_chzn_o_38" class="active-result" style="">351 - Federal Tax Accounting I- G. Gabre, Helen - N/A</li><li id="user_enrollments_chzn_o_39" class="active-result" style="">401 - Independent Study- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_40" class="active-result" style="">421 - Advanced Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_41" class="active-result" style="">421 - Advanced Accounting- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_42" class="active-result" style="">421 - Advanced Accounting- Jain, Rohit - Fall 11-12</li><li id="user_enrollments_chzn_o_43" class="active-result" style="">441 - Auditing- L. Rucker, Charlie - Fall 11-12</li><li id="user_enrollments_chzn_o_44" class="active-result" style="">441 - Auditing- C. Wang, Hwei - Fall 11-12</li><li id="user_enrollments_chzn_o_45" class="active-result" style="">450 - Accounting for Non-Profit Org- N. Nyako, Eric - N/A</li><li id="user_enrollments_chzn_o_46" class="active-result" style="">461 - Seminar in Intl Accounting- G. Geinert, Anita - Fall 11-12</li><li id="user_enrollments_chzn_o_47" class="active-result" style="">461 - Seminar in Intl Accounting- Smith, Aylicia - Fall 11-12</li><li id="user_enrollments_chzn_o_48" class="active-result" style="">461 - Seminar in Intl Accounting- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_49" class="active-result" style="">461 - Seminar in Intl Accounting- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_50" class="active-result" style="">472 - Accounting Information System- G. Geinert, Anita - N/A</li><li id="user_enrollments_chzn_o_51" class="active-result" style="">472 - Accounting Information System- G. Gabre, Helen - N/A</li><li id="user_enrollments_chzn_o_52" class="active-result" style="">472 - Accounting Information System- C. Wang, Hwei - N/A</li><li id="user_enrollments_chzn_o_53" class="active-result" style="">478 - Field Experiences in Acc- D. Mcquitter-Banks, Bonnie - Fall 11-12</li><li id="user_enrollments_chzn_o_54" class="active-result" style="">512 - Acc Analysis for Management- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_55" class="active-result" style="">571 - Tax &amp; Bus Decision Making- G. Gabre, Helen - Fall 11-12</li><li id="user_enrollments_chzn_o_56" class="active-result" style="">572 - Accounting Information Systems- G. Geinert, Anita - N/A</li><li id="user_enrollments_chzn_o_57" class="active-result" style="">572 - Accounting Information Systems- C. Wang, Hwei - N/A</li><li id="user_enrollments_chzn_o_58" class="active-result" style="">577 - Special Topics in Accounting- G. Gabre, Helen - N/A</li><li id="user_enrollments_chzn_o_59" class="active-result" style="">102 - Intro to Agriculture Careers- R. Gyawali, Buddhi - N/A</li><li id="user_enrollments_chzn_o_60" class="active-result" style="">102 - Intro to Agriculture Careers- Banerjee, Swagata - N/A</li><li id="user_enrollments_chzn_o_61" class="active-result" style="">102 - Intro to Agriculture Careers- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_62" class="active-result" style="">199 - Computers in Agriculture- R. Gyawali, Buddhi - Fall 11-12</li><li id="user_enrollments_chzn_o_63" class="active-result" style="">199 - Computers in Agriculture- M. Gapasin, Celedonio - Fall 11-12</li><li id="user_enrollments_chzn_o_64" class="active-result" style="">199 - Computers in Agriculture- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_65" class="active-result" style="">199 - Computers in Agriculture- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_66" class="active-result" style="">199 - Computers in Agriculture- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_67" class="active-result" style="">211 - Metal Fabrication- M. Shade, Remus - N/A</li><li id="user_enrollments_chzn_o_68" class="active-result" style="">212 - Woodworking &amp; Machinery- M. Shade, Remus - N/A</li><li id="user_enrollments_chzn_o_69" class="active-result" style="">212 - Woodworking &amp; Machinery- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_70" class="active-result" style="">221 - Intro to Agricultural Economic- O. Bukenya, James - Fall 11-12</li><li id="user_enrollments_chzn_o_71" class="active-result" style="">299 - Quant Appl in Agriculture- O. Bukenya, James - N/A</li><li id="user_enrollments_chzn_o_72" class="active-result" style="">299 - Quant Appl in Agriculture- Banerjee, Swagata - N/A</li><li id="user_enrollments_chzn_o_73" class="active-result" style="">300 - Agribusiness Statistics- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_74" class="active-result" style="">301 - Electrical Systems &amp; Machines- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_75" class="active-result" style="">302 - Org &amp; Admin of Voc Edu- E. Williams, Edward - Fall 11-12</li><li id="user_enrollments_chzn_o_76" class="active-result" style="">302 - Org &amp; Admin of Voc Edu- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_77" class="active-result" style="">311 - Small Pow Unit &amp; Equipment- M. Shade, Remus - N/A</li><li id="user_enrollments_chzn_o_78" class="active-result" style="">311 - Small Pow Unit &amp; Equipment- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_79" class="active-result" style="">314 - Small Structure Construction- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_80" class="active-result" style="">314 - Small Structure Construction- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_81" class="active-result" style="">322 - Farm Management- S. Jones, Hezekiah - N/A</li><li id="user_enrollments_chzn_o_82" class="active-result" style="">322 - Farm Management- Banerjee, Swagata - N/A</li><li id="user_enrollments_chzn_o_83" class="active-result" style="">323 - Agricultural Marketing- O. Bukenya, James - Fall 11-12</li><li id="user_enrollments_chzn_o_84" class="active-result" style="">323 - Agricultural Marketing- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_85" class="active-result" style="">330 - Internship in Agribusiness- E. Williams, Edward - Fall 11-12</li><li id="user_enrollments_chzn_o_86" class="active-result" style="">330 - Internship in Agribusiness- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_87" class="active-result" style="">330 - Internship in Agribusiness- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_88" class="active-result" style="">330 - Internship in Agribusiness- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_89" class="active-result" style="">333 - Commodity Marketing- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_90" class="active-result" style="">401 - Methods of Teaching in Agrisci- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_91" class="active-result" style="">405 - Extension Methods- M. Gapasin, Celedonio - Fall 11-12</li><li id="user_enrollments_chzn_o_92" class="active-result" style="">405 - Extension Methods- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_93" class="active-result" style="">418 - Agricultural Leadership- M. Gapasin, Celedonio - N/A</li><li id="user_enrollments_chzn_o_94" class="active-result" style="">418 - Agricultural Leadership- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_95" class="active-result" style="">421 - Agribusiness Management- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_96" class="active-result" style="">422 - Agricultural Financing- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_97" class="active-result" style="">422 - Agricultural Financing- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_98" class="active-result" style="">424 - International Agricultural Dev- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_99" class="active-result" style="">425 - Agricultural Policies- M. Chembezi, Duncan - Fall 11-12</li><li id="user_enrollments_chzn_o_100" class="active-result" style="">430 - Agricultural Prices- M. Chembezi, Duncan - Fall 11-12</li><li id="user_enrollments_chzn_o_101" class="active-result" style="">433 - Agricultural Sales- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_102" class="active-result" style="">443 - Economics of Food Distribution- Banerjee, Swagata - N/A</li><li id="user_enrollments_chzn_o_103" class="active-result" style="">445 - Economics of Natural Resources- O. Bukenya, James - Fall 11-12</li><li id="user_enrollments_chzn_o_104" class="active-result" style="">453 - Int Agricultural Marketing- O. Bukenya, James - N/A</li><li id="user_enrollments_chzn_o_105" class="active-result" style="">490 - Special Problems- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_106" class="active-result" style="">490 - Special Problems- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_107" class="active-result" style="">490 - Special Problems- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_108" class="active-result" style="">495 - Internship- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_109" class="active-result" style="">495 - Internship- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_110" class="active-result" style="">495 - Internship- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_111" class="active-result" style="">499 - Research in Agribusiness- O. Bukenya, James - Fall 11-12</li><li id="user_enrollments_chzn_o_112" class="active-result" style="">505 - PHIL ADM/SUP VOC ED- E. Williams, Edward - Fall 11-12</li><li id="user_enrollments_chzn_o_113" class="active-result" style="">505 - PHIL ADM/SUP VOC ED- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_114" class="active-result" style="">508 - Plng Org Tchg Agribu Mechanics- M. Shade, Remus - N/A</li><li id="user_enrollments_chzn_o_115" class="active-result" style="">508 - Plng Org Tchg Agribu Mechanics- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_116" class="active-result" style="">509 - Advanced Studies- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_117" class="active-result" style="">509 - Advanced Studies- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_118" class="active-result" style="">509 - Advanced Studies- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_119" class="active-result" style="">525 - Adv Wood Desgin &amp; Assembly- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_120" class="active-result" style="">531 - Agricultural Economics- M. Chembezi, Duncan - Fall 11-12</li><li id="user_enrollments_chzn_o_121" class="active-result" style="">531 - Agricultural Economics- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_122" class="active-result" style="">532 - Advanced Farm Management- S. Jones, Hezekiah - N/A</li><li id="user_enrollments_chzn_o_123" class="active-result" style="">532 - Advanced Farm Management- Banerjee, Swagata - N/A</li><li id="user_enrollments_chzn_o_124" class="active-result" style="">533 - Adv Agricultural Marketing- O. Bukenya, James - N/A</li><li id="user_enrollments_chzn_o_125" class="active-result" style="">590 - Research Methods in Agribu- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_126" class="active-result" style="">595 - Internship- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_127" class="active-result" style="">595 - Internship- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_128" class="active-result" style="">599 - Master's Thesis- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_129" class="active-result" style="">599 - Master's Thesis- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_130" class="active-result" style="">599 - Master's Thesis- Befecadu, Yoseph - Fall 11-12</li><li id="user_enrollments_chzn_o_131" class="active-result" style="">604 - Seminar in Agribus Education- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_132" class="active-result" style="">604 - Seminar in Agribus Education- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_133" class="active-result" style="">608 - Voc Youth Organizations- E. Williams, Edward - Fall 11-12</li><li id="user_enrollments_chzn_o_134" class="active-result" style="">608 - Voc Youth Organizations- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_135" class="active-result" style="">611 - Intern in Agribus Education- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_136" class="active-result" style="">611 - No Title- /A, N - N/A</li><li id="user_enrollments_chzn_o_137" class="active-result" style="">623 - Advanced Agribus Management- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_138" class="active-result" style="">624 - Agric Financial Analysis- S. Jones, Hezekiah - Fall 11-12</li><li id="user_enrollments_chzn_o_139" class="active-result" style="">624 - Agric Financial Analysis- Banerjee, Swagata - Fall 11-12</li><li id="user_enrollments_chzn_o_140" class="active-result" style="">625 - Advanced Agri Policy- M. Chembezi, Duncan - Fall 11-12</li><li id="user_enrollments_chzn_o_141" class="active-result" style="">626 - AG Modeling &amp; Forecasting- M. Chembezi, Duncan - N/A</li><li id="user_enrollments_chzn_o_142" class="active-result" style="">698 - Action Research I- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_143" class="active-result" style="">698 - Action Research I- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_144" class="active-result" style="">699 - Action Research II- J. Cheatham, Willie - N/A</li><li id="user_enrollments_chzn_o_145" class="active-result" style="">699 - Action Research II- Befecadu, Yoseph - N/A</li><li id="user_enrollments_chzn_o_146" class="active-result" style="">211L - Basic Metal- M. Shade, Remus - Fall 11-12</li><li id="user_enrollments_chzn_o_147" class="active-result" style="">211L - Basic Metal- J. Cheatham, Willie - Fall 11-12</li><li id="user_enrollments_chzn_o_148" class="active-result" style="">208 - Ready-to-Wear Apparel Analysis- Y. Young, Patricia - N/A</li><li id="user_enrollments_chzn_o_149" class="active-result" style="">302 - Historic Costume- P. Young, Allison - N/A</li><li id="user_enrollments_chzn_o_150" class="active-result" style="">302 - Historic Costume- P. Tibbs, Eunice - N/A</li><li id="user_enrollments_chzn_o_151" class="active-result" style="">303 - Fashion Merchandising I- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_152" class="active-result" style="">305 - Housing and Interiors- G. Henderson, Chinella - Fall 11-12</li><li id="user_enrollments_chzn_o_153" class="active-result" style="">305 - Housing and Interiors- S. Henderson, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_154" class="active-result" style="">306 - Fashion Merchandising- Y. Young, Patricia - N/A</li><li id="user_enrollments_chzn_o_155" class="active-result" style="">308 - Visual Merchandising- Y. Young, Patricia - N/A</li><li id="user_enrollments_chzn_o_156" class="active-result" style="">315 - Consumer Textiles I- P. Young, Allison - Fall 11-12</li><li id="user_enrollments_chzn_o_157" class="active-result" style="">315 - Consumer Textiles I- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_158" class="active-result" style="">315 - Consumer Textiles I- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_159" class="active-result" style="">410 - Apparel CAD- F. Gardner, Linda - N/A</li><li id="user_enrollments_chzn_o_160" class="active-result" style="">411 - Directed Field Experience- S. Henderson, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_161" class="active-result" style="">419 - Merchandising &amp; Design Seminar- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_162" class="active-result" style="">421 - Problems &amp; Independent Study- P. Young, Allison - Fall 11-12</li><li id="user_enrollments_chzn_o_163" class="active-result" style="">421 - Problems &amp; Independent Study- S. Henderson, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_164" class="active-result" style="">421 - Problems &amp; Independent Study- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_165" class="active-result" style="">422 - Fashion Merchandise Study Tour- P. Young, Allison - N/A</li><li id="user_enrollments_chzn_o_166" class="active-result" style="">527 - Consumer Textiles- P. Young, Allison - Fall 11-12</li><li id="user_enrollments_chzn_o_167" class="active-result" style="">527 - Consumer Textiles- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_168" class="active-result" style="">528 - Soc Psy &amp; Eco Asp Clothing- F. Gardner, Linda - N/A</li><li id="user_enrollments_chzn_o_169" class="active-result" style="">530 - Special Problems- Smith, Cynthia - Fall 11-12</li><li id="user_enrollments_chzn_o_170" class="active-result" style="">530 - Special Problems- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_171" class="active-result" style="">530 - Special Problems- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_172" class="active-result" style="">533 - Historic Costume- P. Young, Allison - N/A</li><li id="user_enrollments_chzn_o_173" class="active-result" style="">533 - Historic Costume- Y. Young, Patricia - N/A</li><li id="user_enrollments_chzn_o_174" class="active-result" style="">537 - Fashion Mech Study Tour- P. Young, Allison - N/A</li><li id="user_enrollments_chzn_o_175" class="active-result" style="">618 - Textile Economics- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_176" class="active-result" style="">618 - Textile Economics- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_177" class="active-result" style="">104L - Art &amp; Design- S. Henderson, Patricia - N/A</li><li id="user_enrollments_chzn_o_178" class="active-result" style="">201L - Basic Clothing Construction- P. Tibbs, Eunice - Fall 11-12</li><li id="user_enrollments_chzn_o_179" class="active-result" style="">201L - Basic Clothing Construction- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_180" class="active-result" style="">201L - Basic Clothing Construction- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_181" class="active-result" style="">203L - Consumer Aspects of Clothing- P. Young, Allison - Fall 11-12</li><li id="user_enrollments_chzn_o_182" class="active-result" style="">203L - Consumer Aspects of Clothing- Y. Young, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_183" class="active-result" style="">204L - Clothing Throughout Life Cycle- P. Tibbs, Eunice - N/A</li><li id="user_enrollments_chzn_o_184" class="active-result" style="">307L - Flat Pattern Design- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_185" class="active-result" style="">316L - Consumer Textiles II- F. Gardner, Linda - N/A</li><li id="user_enrollments_chzn_o_186" class="active-result" style="">316L - Consumer Textiles II- Y. Young, Patricia - N/A</li><li id="user_enrollments_chzn_o_187" class="active-result" style="">404L - Advanced Clothing &amp; Design- F. Gardner, Linda - N/A</li><li id="user_enrollments_chzn_o_188" class="active-result" style="">405L - Functional Clothing Design- F. Gardner, Linda - Fall 11-12</li><li id="user_enrollments_chzn_o_189" class="active-result" style="">405L - Functional Clothing Design- S. Henderson, Patricia - Fall 11-12</li><li id="user_enrollments_chzn_o_190" class="active-result" style="">406L - Draping- F. Gardner, Linda - N/A</li><li id="user_enrollments_chzn_o_191" class="active-result" style="">534L - Advanced Costume Design- Smith, Cynthia - N/A</li><li id="user_enrollments_chzn_o_192" class="active-result" style="">101 - Art Appreciation- L. Fuller, Cara - Fall 11-12</li><li id="user_enrollments_chzn_o_193" class="active-result" style="">101 - Art Appreciation- W. Washington, Joe - Fall 11-12</li><li id="user_enrollments_chzn_o_194" class="active-result" style="">101 - Art Appreciation- Argend-Farlow, Louis - Fall 11-12</li><li id="user_enrollments_chzn_o_195" class="active-result" style="">101 - Art Appreciation- E. Bean, Robert - Fall 11-12</li><li id="user_enrollments_chzn_o_196" class="active-result" style="">101 - Art Appreciation- L. Smith, Scott - Fall 11-12</li></ul></div></div></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_GPA">Gpa</label>
+          <div class="input"><input id="user_gpa" name="user[gpa]" size="30" value="3.2" type="text"></div>
+        </div>
+        <div class="clearfix gender">
+          <label for="user_Gender">Gender</label>
+          <div class="input"><select id="user_gender" name="user[gender]"><option value="Male" selected="selected">Male</option>
+<option value="Female">Female</option></select></div>
+        </div>
+        <div style="display: block;" class="clearfix fraternity">
+          <label for="user_Fraternity">Fraternity</label>
+          <div class="input"><input id="user_fraternity" name="user[fraternity]" size="30" value="Sigma Chi" type="text"></div>
+        </div>
+        <div style="display: none;" class="clearfix sorority">
+          <label for="user_Sorority">Sorority</label>
+          <div class="input"><input id="user_sorority" name="user[sorority]" size="30" type="text"></div>
+        </div>
+        <div class="clearfix">
+          <label for="user_sports_and_clubs">Sports and clubs</label>
+          <!--div class="input"><select class="chzn-select" id="user_extracurricular_id_" multiple="multiple" name="user[extracurricular_id][]"><option value="1">football</option>
+<option value="2">chess club</option>
+<option value="3">dance</option>
+<option value="4">polka</option></select></div-->
+          <!--div class="input" id="extracurriculars"><select class="chzn-select appendable" id="extracurriculars" multiple="multiple" name="user[extracurricular_id][]"><option value="1">football</option>
+<option value="2">chess club</option>
+<option value="3">dance</option>
+<option value="4">polka</option></select></div-->
+          <div class="input"><input value="e" aria-haspopup="true" aria-autocomplete="list" role="textbox" autocomplete="off" class="ui-autocomplete-input ui-autocomplete-loading" id="extracurriculars" name="user[extracurriculars]" size="30" type="text"></div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row show-grid">
+    <div class="span8 columns offset1">
+      <fieldset>
+        <div class="clearfix">
+          <input class="btn primary" name="commit" value="Submit" type="submit">
+          <a data-original-title="" href="http://localhost:3000/users" class="btn">Cancel</a>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</form>
+<script>
+$(document).ready(function(){
+  $(".chzn-select").chosen()
+});
+
+</script>
+
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="clearfooter"></div>
+    </div>
+  </div>
+  <div class="footer">
+  <div class="container">
+    <div class="footer_content">
+      <span class="left">Copyright StudyHall.com All rights reserved.</span>
+      <ul class="unstyled">
+        <li class="left"><a data-original-title="" href="http://localhost:3000/contacts/new">Contact</a></li>
+          <li class="left"><a data-original-title="" href="http://localhost:3000/about-us">About</a></li>
+          <li class="left"><a data-original-title="" href="http://localhost:3000/about-us">FAQs</a></li>
+      </ul>
+    </div>    
+  </div>
+<div>
+
+</div></div><ul style="z-index: 1; top: 0px; left: 0px; display: none;" aria-activedescendant="ui-active-menuitem" role="listbox" class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all"></ul></body></html>

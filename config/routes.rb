@@ -28,6 +28,7 @@ Studyhall::Application.routes.draw do
   resources :static_pages, :only => [:show]
   resources :contacts  
   resources :users do
+    get 'extracurriculars'
     member do
       get 'profile_wizard'
     end

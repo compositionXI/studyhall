@@ -10,4 +10,8 @@ module UsersHelper
   def sybling_type
     @user.male? ? "brother" : "sister"
   end
+  
+  def selected_courses_for(user)
+    user.enrollments.collect {|e| e.offering.id}
+  end
 end

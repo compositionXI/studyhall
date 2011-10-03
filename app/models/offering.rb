@@ -7,4 +7,8 @@ class Offering < ActiveRecord::Base
   has_many :users, :through => :enrollments
   
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
+  
+  def course_listing
+    "#{self.course.number} - #{self.course.title}- #{self.instructor.full_name} - #{self.term}"
+  end
 end
