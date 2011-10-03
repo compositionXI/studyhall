@@ -40,6 +40,7 @@ Studyhall::Application.routes.draw do
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
+  match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
   
   root :to => "user_sessions#new"
   
