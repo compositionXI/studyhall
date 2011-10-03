@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/bigbinary/admin_data.git
+  revision: 4a69c1affada254393a20d655e82ccfca4579143
+  specs:
+    admin_data (1.1.13)
+      will_paginate (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -205,6 +212,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  admin_data!
   authlogic
   aws-s3
   capistrano

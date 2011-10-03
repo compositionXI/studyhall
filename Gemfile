@@ -2,16 +2,15 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 group :test, :development do
   gem 'mysql2'
 end
+
 group :staging, :production do
   gem 'pg'
 end
 
+gem 'admin_data', :git => 'git://github.com/bigbinary/admin_data.git'
 gem 'authlogic'
 gem 'rails3-generators'
 gem 'opentok'
