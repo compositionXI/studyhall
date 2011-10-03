@@ -64,9 +64,9 @@ select,
   display: inline-block
   width: 210px
   padding: 4px
-  font-size: 13px
-  line-height: $baseline
-  height: $baseline
+  font-size: 14px
+  line-height: 27px
+  height: 27px
   color: $gray
   border-width: 1px 
   border-style: solid
@@ -75,9 +75,18 @@ select,
   +border-radius(2px)
 
 select,
-input[type=file]
-  height: $baseline * 1.5
-  line-height: $baseline * 1.5
+input[type=file],
+.file
+  height: 27px
+  line-height: 27px   
+  
+  
+.btn.file-input  
+  display: block
+  height: 33px
+  line-height: 34px
+  padding: 0
+  text-align: center
 
 textarea
   height: auto
@@ -114,11 +123,11 @@ textarea:focus
 
 // Error styles
 form div.error
-  background: lighten($red, 57%)
+  background: $white
   padding: 10px 0
   margin: -10px 0 10px
   +border-radius(2px)
-  $error-text: desaturate(lighten($red, 25%), 25%)
+  $error-text: #c97671
   > label,
   span.help-inline,
   span.help-block
@@ -127,7 +136,8 @@ form div.error
   input[type=password],
   textarea
     border-color: $error-text
-    +box-shadow(0 0 3px rgba(171, 41, 32, 0.25))
+    +box-shadow(inset 0 0 3px rgba(171, 41, 32, 0.25))    
+    color: $error-text
     &:focus
       border-color: darken($error-text, 10%)
       +box-shadow(0 0 6px rgba(171, 41, 32, 0.5))
@@ -232,8 +242,8 @@ input.disabled
     padding: 4px 4px 4px 5px
     color: $grayLight
     font-weight: normal
-    line-height: 18px
-    height: 18px
+    line-height: 27px
+    height: 27px
     text-align: center
     text-shadow: 0 1px 0 #fff
     border: 1px solid #ccc

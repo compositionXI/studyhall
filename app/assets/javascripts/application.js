@@ -32,5 +32,12 @@ $(function(){
   
   $("#sortTableExample").tablesorter();
   
-  $("#styleguide-form select").chosen()
+  $("#styleguide-form select").chosen()  
+  
+  $("input[type=file]").filestyle({ 
+      imageheight : 38,
+      imagewidth : 83,
+      width : 150
+
+  });
 });
