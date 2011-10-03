@@ -12,10 +12,6 @@
     position: absolute
     top: 29px
     left: 0
-    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15)
-    -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15)
-    -o-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15)
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15)
     z-index: 999
 
 /* @end
@@ -37,8 +33,8 @@
     overflow: hidden
     white-space: nowrap
     position: relative
-    height: 26px
-    line-height: 26px
+    height: 35px
+    line-height: 35px
     padding: 0 0 0 8px
     color: #444
     text-decoration: none
@@ -74,22 +70,30 @@
       display: block
       height: 100%
       width: 18px
-      b
-        background: url('chosen-sprite.png') no-repeat 0 1px
-        display: block
-        width: 100%
-        height: 100%
+      &:after
+        border-left: 4px solid transparent
+        border-right: 4px solid transparent
+        border-top: 4px solid $grayLighter
+        content: "&darr"
+        display: inline-block
+        height: 0
+        margin-left: 4px
+        margin-top: 16px
+        text-indent: -99999px
+        vertical-align: top
+        width: 0 
   .chzn-search
     padding: 3px 4px
     position: relative
     margin: 0
     white-space: nowrap
     input
-      background: white url('chosen-sprite.png') no-repeat 100% -22px
       margin: 1px 0
       padding: 4px 20px 4px 5px
       outline: 0
-      border: 1px solid #aaa
+      border: 1px solid #aaa    
+      &:focus
+        +box-shadow(none) 
   .chzn-drop
     +border-radius(2px)
     -moz-background-clip: padding
@@ -221,11 +225,7 @@
     border: 1px solid #5897fb
   .chzn-single-with-drop
     border: 1px solid #aaa
-    -webkit-box-shadow: 0 1px 0 #fff inset
-    -moz-box-shadow: 0 1px 0 #fff inset
-    -o-box-shadow: 0 1px 0 #fff inset
-    box-shadow: 0 1px 0 #fff inset
-    background-color: #eee
+    +box-shadow(inset 0 1px 2px $formBorder) 
     -webkit-border-bottom-left-radius: 0
     -webkit-border-bottom-right-radius: 0
     -moz-border-radius-bottomleft: 0
@@ -235,8 +235,12 @@
     div
       background: transparent
       border-left: none
-      b
-        background-position: -18px 1px
+      &:after     
+        border-left: 4px solid transparent
+        border-right: 4px solid transparent
+        border-bottom: 4px solid $grayLight 
+        border-top: none
+        margin-left: 5px
   .chzn-choices
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3)
@@ -296,7 +300,6 @@
   &.chzn-container-active .chzn-single-with-drop div
     border-right: none
   .chzn-search input
-    background: url('chosen-sprite.png') no-repeat -38px -22px, white
     padding: 4px 5px 4px 20px
 
 /* @end
