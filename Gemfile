@@ -10,7 +10,10 @@ group :staging, :production do
   gem 'pg'
 end
 
-gem 'admin_data', :git => 'git://github.com/bigbinary/admin_data.git'
+gem 'admin_data', :git => 'git://github.com/adamcrown/admin_data.git' 
+# When rails 3.1 pull requests have resolved, you can move this back to: 'git://github.com/bigbinary/admin_data.git'
+
+gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
 gem 'rails3-generators'
 gem 'opentok'
