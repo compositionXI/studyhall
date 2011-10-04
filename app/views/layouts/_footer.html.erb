@@ -1,11 +1,10 @@
 <footer class="footer">
   <div class="container">
-      <p>Copyright StudyHall.com All rights reserved.</p>
-      <ul class="unstyled">
-        <li ><%= link_to "Contact", new_contact_path %></li>
+      <p>Copyright StudyHall.com All rights reserved.
+        <%= link_to "Contact", new_contact_path %>
         <% @static_pages.each do |static_page| %>
-          <li ><%= link_to static_page.title, page_path(static_page.slug) %></li>
-        <% end %>
-      </ul>
+          <%= link_to static_page.title, page_path(static_page.slug) %>
+        <% end %>   
+        </p>      
   </div>
 </footer>
