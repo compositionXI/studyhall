@@ -67,6 +67,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_action_bar
-    @action_bar = File.exists?("app/views/shared/_#{params[:controller]}_action_bar.html.erb") ? "shared/#{params[:controller]}_action_bar" : nil
+    @action_bar = File.exists?("app/views/#{params[:controller]}/_action_bar.html.erb") ? "#{params[:controller]}/action_bar" : nil
+    flash[:action_bar_message] = nil
   end
 end

@@ -56,17 +56,13 @@
     </ul>
   </section>
 </aside>
-
 <section class="courses <%= items_layout %>">
   <ol class="course_list">
-    <li><a href="#"><span>Course 101</span></a></li>
-    <li><a href="#"><span>Course 102</span></a></li>
-    <li><a href="#"><span>Course 103</span></a></li>
-    <li><a href="#"><span>Course 104</span></a></li>
-    <li><a href="#"><span>Course 105</span></a></li>
-    <li><a href="#"><span>Course 106</span></a></li>
-    <li class="add"><a href="#"><span>Add a course</span></a></li>
-    
     <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
+    <li class="add">
+      <a href="#"><span>Add a course</span></a>
+    </li>
+    
+    
   </ol>
 </section>

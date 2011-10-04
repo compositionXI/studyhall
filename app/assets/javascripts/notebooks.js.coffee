@@ -109,46 +109,32 @@ class NotebookContainer
 
 
 class NotebooksController
-  setup: ->
-    @setupModalDialog()
-    @setupNotebookContainer()
+	setup: ->
+		@setupModalDialog()
+		@setupNotebookContainer()
 
+	setupModalDialog: ->
+		newNotebookModal = $("#new_notebook_modal")
+		newNotebookModal.dialog
+			modal: true
+			autoOpen: false
+			open: (event, ui) -> 
+				$(".ui-dialog-titlebar-close", ui.dialog).hide()
+		$("#new_notebook_btn").click (e) ->
+			$.get "notebooks/new", (data) ->
+				newNotebookModal.html data
+				newNotebookModal.dialog('open')
+				newNotebookModal.find(".close_modal").click (e) ->
+					newNotebookModal.dialog('close')
 
-  setupModalDialog: ->
-    $("#new_notebook_modal").dialog
-      modal: true
-      autoOpen: false
+	setupNotebookContainer: ->
+		notebookContainer = new NotebookContainer()
+		notebookContainer.setup()
+		notebookContainer.recoverLayout()
 
-    $("#new_notebook_btn").click (e) ->
-      $.get "notebooks/new", (data) ->
-        newNotebookModal = $("#new_notebook_modal")
-        newNotebookModal.html data
-        newNotebookModal.dialog('open')
-
-        newNotebookModal.find(".close_modal").click (e) ->
-          newNotebookModal.dialog('close')
-
-  setupNotebookContainer: ->
-    notebookContainer = new NotebookContainer()
-    notebookContainer.setup()
-    notebookContainer.recoverLayout()
-
-    $("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
-      notebookContainer.useLayout $(this).data('layout')
-      false
+		$("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
+			notebookContainer.useLayout $(this).data('layout')
+			false
 
 $ ->
-  new NotebooksController().setup()
-	
-	newNotebookModal = $("#new_notebook_modal")
-	newNotebookModal.dialog
-  	modal: true
-  	autoOpen: false
-
-  $("#new_notebook_btn").click (e) ->
-    $.get "notebooks/new", (data) ->
-      newNotebookModal.html data
-      newNotebookModal.dialog('open')
-
-  		newNotebookModal.find(".close_modal").click (e) ->
-		  	newNotebookModal.dialog('close')
+	new NotebooksController().setup()

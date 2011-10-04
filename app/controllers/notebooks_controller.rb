@@ -1,8 +1,9 @@
 class NotebooksController < ApplicationController
 
-  layout "full_width"
+  #layout "full_width"
 
   before_filter :require_user
+  before_filter :set_action_bar
 
   def index
     @notebooks = current_user.notebooks.all
@@ -16,6 +17,7 @@ class NotebooksController < ApplicationController
 
   def show
     @notebook = current_user.notebooks.find(params[:id])
+    @show = true
 
     respond_to do |format|
       format.html # show.html.erb

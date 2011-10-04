@@ -1,0 +1,18 @@
+<div class="action_bar">
+    <div class="container">
+      <% if params[:action] == "show" %>
+        <div class="buttons left">
+          <%= link_to "Follow", "#", :class => "btn small primary", :title => "Follow"%>
+          <%= link_to "Message", "#", :class => "btn small", :title => "Message" %>
+        </div>
+      <% end %>
+      <h3><%= flash[:action_bar_message] %></h3>
+      <div class="buttons right">
+        <% if params[:action] == "show" %>
+          <%= link_to "Invite to a Studyhall", "#", :class => "btn small", :title => "Invite to a Studyhall" %>
+        <% elsif params[:action] == "edit" %>
+          <%= link_to "All Done!", @user, :class => "btn small", :title => "All Done!" %>
+        <% end %>
+      </div>
+    </div>
+</div>

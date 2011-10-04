@@ -1,0 +1,19 @@
+<div class="action_bar">
+    <div class="container">
+      <div class="buttons left">
+      <%= link_to "Take Notes", new_note_path, :class => "btn primary", :title => "Take Notes" %>
+      <%= link_to "Create New Notebook", "#", :class => "btn primary", :id => "new_notebook_btn", :title => "Create New Notebook" %>
+    </div>
+  
+    <h3><%= flash[:action_bar_message] %></h3>
+  
+    <div class="buttons right">
+      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
+      
+      <% if @show %>
+        <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
+        <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
+      <% end %>
+    </div></div>
+</div>

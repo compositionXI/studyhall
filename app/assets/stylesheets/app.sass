@@ -9,7 +9,8 @@
 @import "forms.sass"
 @import "tables.sass"
 @import "patterns.sass"
-@import "jquery-jscrollpane.sass"  
+@import "jquery-jscrollpane.sass"
+@import "jquery-ui-custom.sass" 
 @import "chosen.sass"
 
 .left
@@ -18,8 +19,9 @@
   float: right 
 .clear 
   clear: both
-.highlight-text
+.highlight_text
   color: $highlight_text
+
 
 html
   height: 100%
@@ -262,7 +264,7 @@ html
             border-top: 1px solid rgba(0,0,0,.2)
         
 //Grid Bar
-.action-bar
+.action_bar
   background: transparent url("/assets/grid_bg.png")
   height: 62px
   margin: -7px 0 0 0
@@ -386,7 +388,6 @@ html
       &:hover
         text-decoration: none
       span
-        line-height: 195px
         margin: 0 0 0 20px
     .add
       background: none
@@ -398,6 +399,11 @@ html
         background: none
         span
           margin: 0
+
+          .profile_edit
+            background-color: $editable_background
+            cursor: pointer
+
       
 //Notebooks
 .notebook_list_container
@@ -664,7 +670,7 @@ html
 #profile_sidebar
   margin-top: 17px
 
-.profile_sidebar_content
+.profile_main_content
   margin-top: 42px
 
   #profile_personal_info

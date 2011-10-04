@@ -10,7 +10,7 @@
             <ul>
               <li id="nav_home" class="current"><%= link_to home_index_path, title: "Home" do %><span>Home</span><% end %></li>
               <li id="nav_studyhalls"><%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %></li>
-              <li id="nav_notes"><%= link_to notes_path, title: "Take Notes" do %><span>Take Notes</span><% end %></li>
+              <li id="nav_notes"><%= link_to new_note_path, title: "Take Notes" do %><span>Take Notes</span><% end %></li>
               <li id="nav_profile" class="current"><%= link_to edit_user_path(@current_user), title: "Profile" do %><span>Profile</span><% end %></li>
               <li id="nav_inbox"><%= link_to messages_path, title: "Indox" do %><small>5</small><span>Inbox</span><% end %></li>
               <li id="nav_account" class="current"><%= link_to @current_user, title: "Your Account" do %><span>Your Account</span><% end %></li>  

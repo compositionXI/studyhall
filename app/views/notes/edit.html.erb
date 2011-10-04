@@ -11,13 +11,17 @@
 <div class="container">
   <%= text_area_tag "content", nil, :id => "rte_area_note_content", :class => "rte_area" %>
 </div>
-<div id="save_note_modal">
+<div id="save_note_modal" class="modal_dialog">
   <%= form_for @note do |f| %>
     <%= f.label "Title" %>
     <%= f.text_field :name %>
     <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
     <%= f.label "Save To A Notebook" %>
     <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, :include_blank => true %>
-    <%= f.submit "Done", :class => 'btn', :id => "save_note_submit_button" %>
+    <div class="clearfix">
+      <%= f.submit "Save", :class => "btn primary save", :id => "save_note_submit_button" %>
+      OR
+      <%= link_to "Cancel", "#", :class => "close_modal" %>
+    </div>
   <% end %>
 </div>

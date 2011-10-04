@@ -17,7 +17,7 @@
         <h1><%= @user.name %></h1>
         <div id="profile_detailed_info">
           A <%= sybling_type %> <span class='highlight_text'><%= greek_affiliation %></span>,
-          attends <span class="highlight_text"><%= "#{@user.school}"%></span>, 
+          attends <span class="highlight_text"><%= "#{@user.school.name}"%></span>, 
           majors in <span class="highlight_text"><%= "#{@user.major}"%></span>
         </div>
       </div>
@@ -35,15 +35,15 @@
         <div class="clear"></div>
         <div class="stats">
             <ul class="unstyled">
-              <li class="sub_section">
+              <li>
                 <span class="count left">4</span> Hours Spent in Studyhalls 
                 <div class="clear"></div>
               </li>
-              <li class="sub_section">
+              <li>
                 <span class="count left">2</span> Studyhalls Created
                 <div class="clear"></div>
               </li>
-              <li class="sub_section">
+              <li>
                 <span class="count left">15</span> Notebooks Shared 
                 <div class="clear"></div>
               </li>
@@ -59,11 +59,11 @@
         		<li><a href="#tabs-3">Studyhalls (<%=  %>)</a></li>
         	</ul>
         	<div id="tabs-1">
-        	  <div class="notebook_list_container <%= items_layout %>">
-        	    <ol class="notebook_list">
-        	      <%= render partial: 'course_list', collection: @user.offerings, as: :offering %>
+        	  <section class="courses <%= items_layout %>">
+              <ol class="course_list">
+                <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
               </ol>
-            </div>
+            </section>
             <div class="clear"></div>
         	</div>
         	<div id="tabs-2">
