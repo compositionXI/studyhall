@@ -80,13 +80,18 @@ input[type=file],
   height: 27px
   line-height: 27px   
   
-                           
-.btn.file-input  
-  display: inline-block
-  height: 19px
-  line-height: 20px
-  position: absolute
-  text-align: center
+.fake-file           
+  left: 0
+  position: absolute 
+  top: 0
+  z-index: 1 
+  input, .btn
+    cursor: pointer
+  .btn
+    display: inline-block
+    height: 21px
+    line-height: 24px
+    text-align: center
 
 textarea
   height: auto
