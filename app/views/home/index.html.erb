@@ -1,59 +1,72 @@
-<div class="homepage_subbar sub_section">
-  <div class="row">
-    <div class="user_greeting span4">
-      <%= image_tag @current_user.avatar_url("medium")%>
-      <span class="name"><h3>Hi, 
-      <%= link_to @current_user do %>
-        <span class="highligh_text">
-          <%= @current_user.name %>
-        </span>
-      <% end %>
-      !</h3></span>
-    </div>
-    <% if flash[:notice] %>
-      <div class="alert alert-message success span7">
-          <a class="close" href="#">×</a>
-          <%= flash[:notice] %>
-      </div>
-    <% else %>
-      <div class="span6"></div>
+<header class="home-header row">
+  <div class="user_greeting span4">
+    <!-- <%= image_tag @current_user.avatar_url("medium")%> -->
+    <img src="/assets/generic_avatar_medium.png" />
+    <h3>Hi, 
+    <%= link_to @current_user do %>
+        <%= @current_user.name %>
     <% end %>
-    <div class="right">
-      <div class="standard_actions span5">
-        <%= link_to "Take Notes", new_note_path, :class => "btn" %>
-        <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn primary" %>
-      </div>
+    !</h3>
+  </div>
+  <% if flash[:notice] %>
+    <div class="alert alert-message success span7">
+        <a class="close" href="#">×</a>
+        <%= flash[:notice] %>
     </div>
+  <% else %>
+  <% end %>
+  <div class="standard_actions right">
+      <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+      <%= link_to "Start a Studyhall", new_study_session_path, :class => "btn primary" %>
   </div>
-</div>
-<div class="clear"></div>
-
-<div class="sidebar left">
+</header>
+<aside class="sidebar">
   <%= render "shared/buddies_preview" %>
-  <div class="sub_section">
-    Your Activity
-  </div>
-  <div class="sub_section">
-    <ul class="unstyled">
-      <li>Activity Item</li>
-      <li>Activity Item</li>
-      <li>Activity Item</li>
+  <section class="activity">
+    <header>
+      <h1>Your Activity</h1>
+    </header>
+    <ul class="activity-list">
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
     </ul>
-  </div>
-  <div class="sub_section">
-    Campus News
-  </div>
-  <div class="sub_section">
-    <ul class="unstyled">
-      <li>News Item</li>
-      <li>News Item</li>
-      <li>News Item</li>
+  </section>  
+  <section class="news">
+    <header><h1>Campus News</h1></header>
+    <h2>Yesterday</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
     </ul>
-  </div>
-</div>
+    <h2>September 17th</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+    </ul>
+    <h2>September 4thth</h2>
+    <ul>
+      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
+    </ul>
+  </section>
+</aside>
 
-<div class="notebook_list_container <%= items_layout %>">
-  <ol class="notebook_list">
+<section class="courses <%= items_layout %>">
+  <ol class="course_list">
+    <li><a href="#"><span>Course 101</span></a></li>
+    <li><a href="#"><span>Course 102</span></a></li>
+    <li><a href="#"><span>Course 103</span></a></li>
+    <li><a href="#"><span>Course 104</span></a></li>
+    <li><a href="#"><span>Course 105</span></a></li>
+    <li><a href="#"><span>Course 106</span></a></li>
+    <li class="add"><a href="#"><span>Add a course</span></a></li>
+    
     <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
   </ol>
-</div>
+</section>

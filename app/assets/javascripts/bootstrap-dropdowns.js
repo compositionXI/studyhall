@@ -34,12 +34,15 @@
   /* DROPDOWN PLUGIN DEFINITION
    * ========================== */
 
-  $.fn.dropdown = function ( selector ) {
+  $.fn.dropdown = function ( selector, isParent ) {
     return this.each(function () {
-      $(this).delegate(selector || d, 'click', function (e) {
-        var li = $(this).parent('li')
-          , isActive = li.hasClass('open')
-
+      $(this).delegate(selector || d, 'click', function (e) {        
+        var li = $(this)
+        if (isParent !== true) {
+          li = $(this).parent('li')
+        }
+        var isActive = li.hasClass('open')
+        
         clearMenus()
         !isActive && li.toggleClass('open')
         return false

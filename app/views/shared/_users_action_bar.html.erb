@@ -1,12 +1,15 @@
-<div class="gridbar">
+<div class="action-bar">
     <div class="container">
-      <div class="buttons_left">
-        <a class="btn small primary" title="Follow" href="#">Follow</a>
-        <a class="btn small" title="Message" href="#">Message</a>
-      </div>
-      <h3><%= flash[:action_bar_message] %></h3>
-      <div class="buttons_right">
-        <a class="btn small" title="Invite to a Studyhall" href="#">Invite to a Studyhall</a>
-      </div>
+      <div class="buttons left">
+      <a href="#" class="btn">Filter</a>
+      <a class="btn primary" title="test" href="#">Primary action</a>
+      <a class="btn selected" href="#">Selected</a>
     </div>
+    
+    <h3><%= flash[:action_bar_message] %></h3>
+    
+    <div class="buttons">
+      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
+    </div></div>
 </div>

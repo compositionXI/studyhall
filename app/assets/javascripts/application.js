@@ -16,14 +16,28 @@
 
 $(function(){
   $("a").twipsy({
-      placement: "below"
-    , offset: 10 
-  });
+        placement: "below"
+      , offset: 10 
+    });
+    
+    $('.large-bird').popover({
+        content:          "data-content"
+      , placement:        "below-left"
+      , horizontalOffset: 25
+    });
   
-  $('.large-bird').popover({
-      content:          "data-content"
-    , placement:        "below-left"
-    , horizontalOffset: 25
-  });
+  $(".activity-list").jScrollPane();
   
+  $(".nav").dropdown('.dropdown', true);
+  
+  $("#sortTableExample").tablesorter();
+  
+  $("#styleguide-form select").chosen()  
+  
+  $("input[type=file]").filestyle({ 
+      imageheight : 38,
+      imagewidth : 83,
+      width : 150
+
+  });
 });

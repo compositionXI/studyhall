@@ -1,11 +1,6 @@
-<div id="menubar" class="topbar">
-  <div class="right">
-    <a href="" class="btn">Filter</a>
-    <div id="items_layout_switcher" class="btn_group">
-      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
-      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
-    </div>
-  </div>
+<%= render partial: 'shared/users_action_bar'%>
+
+<!-- <div id="menubar" class="topbar">
   <div class="left">
     <%= link_to("Take Notes", new_note_path, :class => "btn") %>
     <%= link_to "New Notebook", "#", :class => "btn", :id => "new_notebook_btn" %>
@@ -13,23 +8,20 @@
   <div class="middle">
     <span>All Items</span>
   </div>
-</div>
-<div class="clear"></div>
+</div> -->
 
+
+<div class="container">
 <div class="notebook_list_container <%= items_layout %>">
   <% if @unsorted_notes.empty? && @notebooks.empty? %>
-    <div class="centered">
-      <center>
         <p>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
         <p>Click the "New Notebook" button to begin taking note.</p>
-      </center>
-    </div>
   <% else %>
     <ol class="notebook_list">
       <%= render partial: 'notes/list_item', collection: @unsorted_notes, as: :note %>
       <%= render partial: 'notebooks/list_item', collection: @notebooks, as: :notebook %>
     </ol>
   <% end %>
-</div>
+</div></div>
 
 <div id="new_notebook_modal" class="modal_dialog"></div>

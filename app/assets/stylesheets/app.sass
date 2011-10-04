@@ -1,57 +1,705 @@
-@import "colors"
+@import "reset.sass"
+
+// Core
+@import "preboot.sass"
+@import "scaffolding.sass"
+
+// Styled patterns and elements
+@import "type.sass"
+@import "forms.sass"
+@import "tables.sass"
+@import "patterns.sass"
+@import "jquery-jscrollpane.sass"  
+@import "chosen.sass"
+
+.left
+  float: left
+.right
+  float: right 
+.clear 
+  clear: both
+.highlight-text
+  color: $highlight_text
 
 html
-  background-color: $standard_background
   height: 100%
-
   body
     background-color: $standard_background
     color: #9D9D9A
-    height: 100%
-
-html .left
-  float: left
-
-html .right
-  float: right
-  
-html .highlight_text
-  color: $highlight_text
-
+    height: 100% 
+ 
+.main-content
+  > .container
+    @include box-shadow(0 0 5px 2px #EEEEEE)
+    background: $white
+    min-height: 700px
+    padding: 20px
+   
+//Footer
 .footer
+  @include box-shadow(inset 0px 1px 0px 0px #f9f9f9 )
+  background: $footer_background
+  border-top: 1px double $footer_background
+  bottom: 0
+  height: 70px
+  left: 0
+  width: 100%
+  p, ul, li
+    float: left
+
+
+.outer-container
+  width: 980px
+  margin: 0 auto
+  background-color: #FDF2F3
+  padding: 20px
+  
+//Nav
+.topbar
   position: relative
-  background-color: $footer_background
-  height: 50px
+  height: auto
+  z-index: 999
+  .fill
+    background: transparent url("/assets/header_bg.png") 
+    height: 73px
+    @include box-shadow(0)
+  .logo
+    float: left
+    margin: 17px 0 0 0
+    a
+      @include ir
+      background: transparent url("/assets/logo.png")
+      color: #ffffff
+      height: 38px
+      width: 191px  
+    
+  .nav
+    float: left
+    margin: 17px  0 0 50px
+    li
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      border-top: 1px solid $navBorderTop
+      border-bottom: 1px solid $navBorderBottom
+      border-left: 1px solid $navBorderLeft
+      border-right: 1px solid $navBorderRight
+      position: relative
+      &:first-child a, &:last-child a
+        width: 49px
+      &:first-child
+        @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
+      &:last-child
+        @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
+      a
+        background: transparent url($checkerImage) repeat
+        color: #fff
+        width: 59px
+        span
+          @include ir
+          background: transparent url("/assets/nav_icons.png")
+          height: 30px
+      &.current
+        @include vertical-gradient-image( $checkerImage,$navCurrentGradStart, $navCurrentGradEnd)
+        a
+          background: none
+        border-top: 1px solid $navCurrentBorder
+        border-bottom: 1px solid $navCurrentGradEnd
+        border-left: none
+        border-right: none
+        height: 32px
+        margin: -1px 0 0 0
+        &:first-child
+          @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
+          border-left: 1px solid $navCurrentBorder
+        &:last-child
+          @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
+          border-right: 1px solid $navCurrentBorder
+    #nav_home span
+      background-position: 10px 0px 
+    #nav_studyhalls span
+      background-position: -39px 0px 
+    #nav_notes span
+      background-position: -98px 0px  
+    #nav_profile span
+      background-position: -160px 0px 
+    #nav_inbox span
+      background-position: -227px 0px 
+    #nav_account span
+      background-position: -278px 0px 
+    small
+      left: 0
+      position: absolute
+      right: 40px
+      text-align: center
+      top: 10px
+      span
+        text-indent: -99999px 
+    &.messages
+      #nav_inbox span 
+        background-position: -220px 0px
+      small      
+        right: 33px
+        
+  //Nav Search Bar
+  form
+    background: none
+    float: left
+    margin: 7px 0 0 0
+    input
+      @include border-radius(4px)
+      $shadow: 0px 1px 3px rgba(29, 14, 0, 0.9) inset, 0px 1px 2px 0px rgba(255, 255, 255, .15)
+      @include box-shadow( $shadow )
+      @include sans-serif-font(13px, normal, 1)
+      @include vertical-gradient($navFormGradStart, $navFormGradEnd)
+      border: none
+      color: #f8f7e6
+      padding: 4px 9px
+      margin: 11px 0 0 0
+      height: 24px
+      width: 220px 
+      &:-moz-placeholder
+        color: rgba(255,255,255,.75)
+      &::-webkit-input-placeholder
+        color: rgba(255,255,255,.75)
+  .secondary-nav 
+    li.dropdown
+      height: 25px
+      @include border-radius( $topbarRadius )
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      @include vertical-gradient-image($checkerImage, $navGradStart, $navGradEnd)
+      padding: 3px
+      cursor: pointer
+      img
+        border: 1px solid $imgBorder
+        margin: 0 7px 0 0
+      a.dropdown-toggle
+        background: none
+        display: inline
+        &:active, &:focus
+          outline: 0 none
+        img
+          vertical-align: middle   
+      a.menu:after, .dropdown-toggle:after
+        border-left: 4px solid transparent
+        border-right: 4px solid transparent
+        border-top: 4px solid white
+        content: "&darr"
+        display: inline-block
+        height: 0
+        margin-left: 4px
+        margin-top: 11px
+        text-indent: -99999px
+        vertical-align: top
+        width: 0
+      &.open
+        ul
+          @include opacity(100) 
+          display: block 
+          height: auto
+          padding: 5px 0
+          overflow: visible
+      ul 
+        @include vertical-gradient(#ffffff, #f8f8f8)
+        @include border-radius(2px)
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.3))
+        $transition: opacity .15s linear
+        @include transition($transition)
+        @include opacity(0)
+        border: 1px solid $popoverBorder
+        float: left
+        display: block
+        position: absolute
+        top: 42px
+        right: -10px
+        height: 0px
+        min-width: 90px
+        max-width: 160px
+        _width: 90px
+        margin-left: 0
+        margin-right: 0
+        overflow: hidden
+        text-align: left
+        zoom: 1      
+        .arrow 
+          @include popover-arrow-below(10px,$popoverColor, -8px, auto, 5px)
+          position: absolute
+          width: 0
+          height: 0
+        .arrow-border
+          @include arrow-border(10px,$popoverBorder, -20px, auto, 5px)          
+        li 
+          float: none
+          clear: both
+          display: block
+          background: none
+          font-size: 12px
+          border: none
+          a 
+            background: none
+            display: block
+            padding: 6px 15px
+            clear: both
+            font-size: 12px
+            font-weight: normal
+            line-height: 12px
+            color: $linkColor
+            text-shadow: none
+          // Dividers (basically an hr)
+          &.divider 
+            height: 1px
+            overflow: hidden
+            background: #222
+            background: rgba(0,0,0,.2)
+            border-bottom: 1px solid rgba(255,255,255,.1)
+            margin: 5px 0
+          // Section separaters
+          span 
+            clear: both
+            display: block
+            background: rgba(0,0,0,.2)
+            padding: 6px 15px
+            cursor: default
+            color: $gray
+            border-top: 1px solid rgba(0,0,0,.2)
+        
+//Grid Bar
+.action-bar
+  background: transparent url("/assets/grid_bg.png")
+  height: 62px
+  margin: -7px 0 0 0
+  text-align: center
+  .container
+    position: relative
+  h3
+    color: #ffffff
+    @include body-font(normal, 18px, 62px)
+    text-shadow: 0 1px 0 rgba(0,0,0,1)
+  .buttons
+    position: absolute
+    right: 0
+    top: 18px
+    &.left
+      left: 0
+      right: auto 
   
-  .footer_content
-    padding-top: 15px
-
-form
-  background-color: #FDFBFC
-  padding: 10px
   
-  textarea
-    height: 300px
-    width: 400px
-
-table
-  thead
-    color: #C24A3B
-
-ul.spaced
-  li
-    padding: 5px 0
-
-form.with_columns
-  padding: 0
-
-.masonry_item
-  margin: 10px
-  padding: 10px
+  
+  
+  
+  
+//User Page - Home
+.user_greeting
   float: left
-  overflow: hidden
+  margin: 0 0 24px 20px
+  img
+    float: left
+  h3
+    line-height: 50px
+    float: left
+    margin: 0 0 0 15px
 
-.centered
-  margin: 40px auto
-  padding: 10px
-  width: 400px  
+.sidebar
+  +columns(4)
+  float: left
+  section
+    header
+      @include clearfix
+      @include sidebar-separator
+      h1
+        margin: 0
+        +h5
+      a
+        float: right
+        font-size: 12px
+        padding: 5px 0 0
+    ul
+      @include clearfix
+      @include sidebar-separator
+      list-style: none
+      border-bottom: 1px solid $hr
+      margin: 0 0 12px 0
+      padding: 0 0 12px 0
+    &.buddies
+      li
+        float: left
+        margin: 0 0 0 6px
+        &:first-child
+          margin: 0
+    &.activity
+      header
+        margin: 0
+      a
+        float: left
+      p
+        float: right
+        font-size: 12px
+        margin: 3px 0 0
+        width: 140px
+        a
+          float: none
+          padding: 0
+      ul
+        height: 210px
+        overflow: auto
+        padding: 0
+      li
+        +clearfix
+        border-bottom: 1px solid $zebraBorder
+        padding: 6px
+        &:nth-child(even)
+          background: $zebraStriping
+        &:last-child
+          border: none
+    &.news
+      ul
+        border: none
+      h2
+        +body-font(500, 12px, 18px)
+        color: $newsDate
+        margin: 0
+        
+      h3
+        +body-font(500, 14px, 18px)
+        +text-overflow
+        margin: 0
+
+.courses
+  float: right
+  width: 700px
+  ol
+    list-style: none
+    margin: 0
+    li
+      background: $blue
+      float: left
+      margin: 0 0 20px 20px
+      &:first-child, &:nth-child(5n)
+        margin: 0 0 20px 0
+    a
+      background: url("/assets/book.png")
+      color: $white
+      display: block
+      height: 195px
+      font-size: 18px
+      text-align: center
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55)
+      width: 160px
+      &:hover
+        text-decoration: none
+      span
+        line-height: 195px
+        margin: 0 0 0 20px
+    .add
+      background: none
+      border: 2px dashed $notebookBorder
+      +border-radius(2px)
+      height: 191px
+      width: 156px
+      a
+        background: none
+        span
+          margin: 0
+      
+//Notebooks
+.notebook_list_container
+  // reset list style
+  ol
+    list-style: none
+    padding: 0
+    margin: 0
+  li
+    list-style-type: none
+    list-style-image: none
+  .hidden
+    display: none
+
+  // choose correct view to display
+  &.grid
+    .list_view
+      display: none
+  &.list
+    .grid_view
+      display: none
+
+  // preview icon
+  .preview
+    border: 1px solid #AAA
+
+  .notebook .preview
+    background: #ccc
+    box-shadow: 5px 5px 5px #AAA
+    -webkit-box-shadow: 5px 5px 5px #aaa
+  .notebook.draggable_hovering .preview
+    border: 1px dashed #AAA
+    background: #eee
+
+  .note .preview
+    background: #FFF
+
+  .dragging_placeholder .note .preview
+    border-width: 0
+    background: #EEE
+    box-shadow: 0 0 3px #EEE
+    -webkit-box-shadow: 0 0 3px #EEE
+    div, span, a
+      display: none
+
+  // icons
+  .icon
+    display: block
+    width: 25px
+    height: 25px
+    overflow: hidden
+    text-indent: -9999px
+
+  .lock_icon
+    background: url(/assets/lock.png)
+
+  .drag_handle
+    cursor: move
+
+  .ui-draggable-dragging, .note:hover, .notebook:hover
+    .drag_handle
+      background: url(/assets/move.png)
+
+  .checkbox
+    width: 25px
+    height: 25px
+    overflow: hidden
+    display: block
+
+  .note, .notebook
+    &.checked
+      .checkbox
+        background: url(/assets/checkbox_checked.png)
+
+  // locator
+  .note, .notebook, .grid_view, .list_view
+    position: relative
+
+  &.grid
+    .preview
+      height: 196px
+      width: 158px
+
+    .notebook, .note
+      margin: 10px
+      text-align: center
+      border: solid 1px #AAA
+      
+      .wrapper_large, .wrapper
+        position: relative
+      
+      .wrapper_large
+        height: 196px
+        width: 158px
+      
+      .wrapper
+        height: 121px
+        width: 99px
+
+    .notebook
+      font-weight: bold
+
+    .name, .course
+      display: block
+
+    .name
+      font-size: 1.2em
+      margin-top: 67px
+      padding: 5px
+
+    .lock_icon
+      position: absolute
+      left: 5px
+      bottom: 5px
+
+    .drag_handle
+      position: absolute
+      left: 45%
+      bottom: 5px
+
+    .checkbox
+      position: absolute
+      right: 5px
+      bottom: 5px
+
+    ol, li
+      // todo: cross browser solution for inline block
+      display: inline-block
+
+    .notebook, .note
+      float: left
+
+  &.list
+    padding: 0 15px
+
+    li.notebook_list_item
+      background: #FDFDE8
+      &.collapsed
+        background: inherit
+    li.note_list_item
+      background: #F2F2F2
+      &.ui-draggable-dragging
+        background: inherit
+
+    ol
+      &.note_list
+        border-top: 2px solid #AAA
+        border-bottom: 2px solid #AAA
+        max-height: 300px
+        overflow-y: scroll
+
+        li:last-child
+          border-width: 0
+
+    li
+      border-bottom: 2px dotted #AAA
+
+      &.notebook_list_item
+        border-width: 0
+
+        &.collapsed
+          border-width: 2px
+
+          ol.note_list
+            display: none
+
+    .notebook, .note
+      padding: 10px
+      .list_view
+        height: 110px
+
+    .preview
+      position: absolute
+      left: 10px
+      top: 4px
+      height: 100px
+      width: 80px
+
+    .checkbox
+      position: absolute
+      top: 52.5px
+      left: 47.5px
+
+    .fields
+      margin-left: 110px
+      font-size: 1.5em
+
+    .name_wrapper
+      padding-top: 28px
+      a
+        float: left
+
+    .name
+      font-size: 1.6em
+
+    .expand_collapse_icon, .drag_handle
+      position: absolute
+      right: 5px
+      top: 45%
+
+    .expand_collapse_icon
+      background: url(/assets/collapse.png) no-repeat
+
+    .collapsed .expand_collapse_icon
+      background: url(/assets/expand.png) no-repeat
+      
+
+.full-width
+  &.notes-new, &.notes-edit
+    form
+      background: none
+      padding: 0
+      textarea
+        width: 80%
+        margin: 20px 100px
+        padding: 40px
+        border: none
+
+  pre#note_content
+    width: 80%
+    margin: 20px 100px
+    padding: 40px
+    border: none
+    
+    background: white
+    color: black
+//Study Sessions
+.study_sessions-show
+  #video_sidebar
+    float: left
+    width: 270px
+    background: #555
+    margin-right: 15px
+    padding: 10px
+    min-height: 300px
+    #links
+      ul
+        margin: 0
+        padding: 0
+        li
+          list-style: none
+          width: 55px
+          margin-bottom: 5px
+  .container
+    width: 1010px
+  form.new_whiteboard
+    margin-left: 310px
+    width: 700px
+    height: 300px
+    .inner-form
+      margin: 100px 240px
+      width: 700px
+
+
+
+
+// User Settings
+
+
+.profile_edit
+  background-color: $editable_background
+  cursor: pointer
+
+#profile_sidebar
+  margin-top: 17px
+
+.profile_sidebar_content
+  margin-top: 42px
+
+  #profile_personal_info
+    width: 440px
+    margin-right: 20px
+
+  .profile_ratings
+    width: 220px
+
+    .rating_block
+      background-color: $rating_block_background
+      height: 82px
+      width: 61px
+      margin-bottom: 30px
+      padding: 20px
+
+    .profile_edit
+      background-color: $editable_background
+
+    .gpa
+      margin-right: 15px
+
+    .stats
+
+      .count
+        width: 45px
+        padding-right: 15px
+        text-align: right
+
+  #profile_user_items
+
+    #profile_tabs
+      ul
+        border-bottom: 1px solid black
+
+      .tabs_container
+        ol
+          display: block

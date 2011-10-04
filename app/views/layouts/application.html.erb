@@ -3,23 +3,16 @@
 <html>
 <head>
   <title>Studyhall</title>
-  <%= stylesheet_link_tag    "application", :debug => true%>
+  <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name + "-" + action_name %> fixed-width">
-  <div class="topbar_and_content">
-    <%= render :partial => "layouts/topbar" %>
-    <div id="action_bar"><%= content_for?(:action_bar) ? yield(:action_bar) : "" %></div>
-    <div class="main-content">
-      <div class="container">
-        <div class="fill">
-          <%= yield %>
-        </div>
-      </div>
-      <div class="clearfooter"></div>
-    </div>
-  </div>
+  <%= render :partial => "layouts/topbar" %>
+  <%= render :partial => @action_bar if @action_bar %>
+  <section class="main-content">
+    <div class="container"><%= yield %></div>
+  </section>
   <%= render "layouts/footer" %>
 </body>
 </html>
