@@ -83,6 +83,7 @@ class User < ActiveRecord::Base
     self.gender == "Female"
   end
   
+  # TODO: Evaluate for refactor
   def split_attribute_list(attributes, model, collection_method)
     ids = []
     return ids if (attributes.blank? or attributes.empty?)
