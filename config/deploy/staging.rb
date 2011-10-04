@@ -1,5 +1,4 @@
 set :deploy_env, 'staging'
-set :branch, 'staging'
 set :rails_env, 'staging'
 
 set :bundle_without, [:development, :test]
