@@ -121,8 +121,14 @@ html
       background-position: -98px 0px  
     #nav_profile span
       background-position: -160px 0px 
-    #nav_inbox span
-      background-position: -227px 0px 
+    #nav_inbox
+      span
+        background-position: -227px 0px
+      &.messages
+        span 
+          background-position: -220px 0px
+        small      
+          right: 33px
     #nav_account span
       background-position: -278px 0px 
     small
@@ -133,11 +139,6 @@ html
       top: 10px
       span
         text-indent: -99999px 
-    &.messages
-      #nav_inbox span 
-        background-position: -220px 0px
-      small      
-        right: 33px
         
   //Nav Search Bar
   form
