@@ -51,7 +51,7 @@ describe FollowingsController do
     end
 
     it "should destroy any following between two users" do
-      delete :destroy, :id => @user2.id, :format => :js
+      delete :destroy, :id => Following.last.id, :format => :js
       Following.count.should == 0
     end
   end
