@@ -28,7 +28,22 @@ $(function(){
   
   $(".activity-list").jScrollPane();
   
-  $(".nav").dropdown('.dropdown', true);
+  
+  // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
+  
+  var d = 'a.menu, .dropdown-toggle'
+    , clearMenus = function() { 
+        $(d).parent('li').removeClass('open')
+      };
+  $('html').bind("click", clearMenus)
+  $(".secondary-nav .dropdown").click(function(e){     
+     var li = $(this)
+       , isActive = li.hasClass('open')
+  
+     clearMenus()
+     !isActive && li.toggleClass('open')
+     return false
+  });  
   
   $("#sortTableExample").tablesorter();
   
