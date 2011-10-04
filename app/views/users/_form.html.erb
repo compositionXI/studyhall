@@ -1,7 +1,7 @@
 <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
       <fieldset>
         <div class="clearfix">
-          <%= image_tag @user.avatar_url %>
+          <%= image_tag @user.avatar_url(:large) %>
         </div>
         <div class="clearfix">
           <%= f.label :avatar %>
@@ -15,7 +15,7 @@
         <% end %>
         <div class="clearfix">
           <%= f.label :bio %> 
-          <div class="input"><%= f.text_area :bio %></div>
+          <div class="input"><%= f.text_area :bio, :rows => "10" %></div>
         </div>
         <div class="clearfix">
           <%= f.label :custom_url %> 
@@ -23,7 +23,7 @@
         </div>
         <div class="clearfix">
           <%= f.label :School %>
-          <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "chzn-select" %></div>
+          <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {}, {"data-placeholder" => "Choose a school", :class => "chzn-select"} %></div>
         </div>
         <div class="clearfix">
           <%= f.label :Major %>
