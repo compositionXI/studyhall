@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
   before_filter :require_user
   before_filter :find_sender, only: [:new, :create]
   before_filter :find_receiver, only: [:new, :create]
+  before_filter :set_action_bar
   
   def index
     case params[:mailbox]
