@@ -58,7 +58,7 @@
 </aside>
 <section class="courses <%= items_layout %>">
   <ol class="course_list">
-    <li class="notebook_list_item">
+    <!-- <li class="notebook_list_item">
       <a href="#">
         <span>Science - Course 101</span>
       </a>  
@@ -92,7 +92,7 @@
       <a href="#">
         <span>History - Course 202</span>
       </a>  
-    </li>
+    </li>   -->
     <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
     <li class="add">
       <a href="#"><span>Add a course</span></a>
