@@ -21,7 +21,7 @@
   </div>
 </header>
 <aside class="sidebar">
-  <%= render "shared/buddies_preview" %>
+  <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
   <section class="activity">
     <header>
       <h1>Your Activity</h1>
@@ -65,4 +65,8 @@
     
     
   </ol>
+<<<<<<< HEAD
 </section>
+=======
+</div>
+>>>>>>> Update the buddies_preview partial to show/link buddy avatars, fixes #160

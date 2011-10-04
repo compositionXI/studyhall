@@ -123,8 +123,14 @@ html
       background-position: -98px 0px  
     #nav_profile span
       background-position: -160px 0px 
-    #nav_inbox span
-      background-position: -227px 0px 
+    #nav_inbox
+      span
+        background-position: -227px 0px
+      &.messages
+        span 
+          background-position: -220px 0px
+        small      
+          right: 33px
     #nav_account span
       background-position: -278px 0px 
     small
@@ -135,11 +141,6 @@ html
       top: 10px
       span
         text-indent: -99999px 
-    &.messages
-      #nav_inbox span 
-        background-position: -220px 0px
-      small      
-        right: 33px
         
   //Nav Search Bar
   form
@@ -278,10 +279,13 @@ html
   .buttons
     position: absolute
     right: 0
-    top: 18px
+    top: 15px
     &.left
       left: 0
-      right: auto 
+      width: 300px
+      text-align: left
+      a.hidden
+        display: none
   
   
   
@@ -669,6 +673,9 @@ html
 
 #profile_sidebar
   margin-top: 17px
+  #profile_photo
+    max-width: 200px
+    max-height: 200px
 
 .profile_main_content
   margin-top: 42px

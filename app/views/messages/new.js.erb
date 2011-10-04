@@ -1,0 +1,14 @@
+$("#new_message_button").popover({trigger: "click",
+                                  placement: "below",
+                                  offset: 10,
+                                  html: true,
+                                  title: function(){return "Send<%=j @receiver.nil? ? "" : (" "+@receiver.first_name) %> a message";},
+                                  content: function(){return "<%=j render :partial => "messages/form" %>";}});
+$("#new_message_button").popover("show");
+if($("#message_new input[type='text']").val().length > 0)
+  $("#message_new textarea").first().focus();
+else
+  $("#message_new input[type='text']").first().focus();
+$("#message_new").delegate("input[type='submit']","click",function(){
+  $("#message_new #error_explanation").addClass("hidden").html("");
+});

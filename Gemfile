@@ -2,13 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
 
-group :test, :development do
-  gem 'mysql2'
-end
-
-group :staging, :production do
-  gem 'pg'
-end
+gem 'mysql2'
 
 gem 'admin_data', :git => 'git://github.com/adamcrown/admin_data.git' 
 # When rails 3.1 pull requests have resolved, you can move this back to: 'git://github.com/bigbinary/admin_data.git'

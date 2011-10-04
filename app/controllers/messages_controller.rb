@@ -1,15 +1,28 @@
 class MessagesController < ApplicationController
-  before_filter :require_user
 
+  layout "full_width"
+
+  before_filter :require_user
   before_filter :find_sender, only: [:new, :create]
   before_filter :find_receiver, only: [:new, :create]
   
   def index
-    @messages = current_user.inbox
+    case params[:mailbox]
+    when "inbox"
+      @messages = current_user.inbox
+    when "archive"
+      @messages = current_user.trash
+    else
+      raise RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
+    end
   end
 
   def new
-    @message = current_user.sent_messages.new
+    @message = current_user.sent_messages.new(:subject => prepared_subject, :parent_id => params[:parent_id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -23,19 +36,31 @@ class MessagesController < ApplicationController
   def create
     subject = params[:message].try(:[], :subject)
     body = params[:message].try(:[], :body)
-    if @sender.send_message?(subject, body, @receiver)
-      redirect_to messages_path, notice: 'Message was successfully sent.'
-    else
-      render action: 'new'
-    end
+    @success = @sender.send_message?(subject, body, @receiver)
+  end
+
+  def update
+    @message = HasMailbox::Models::Message.find(params[:id])
+    @message.undelete if params[:delete] == false
+    render "destroy"
+  end
+
+  def destroy
+    @message = HasMailbox::Models::Message.find(params[:id])
+    @message.delete
   end
 
   protected
+
+  def prepared_subject
+    params[:subject].blank? ? "" : "Re: #{params[:subject]}"
+  end
+
   def find_sender
     @sender = current_user
   end
 
   def find_receiver
-    @receiver = User.find(params[:user_id])
+    @receiver = User.where(:id => params[:user_id]).first
   end
 end

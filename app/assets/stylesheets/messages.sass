@@ -1,0 +1,39 @@
+#message_new
+  input[type="text"]
+    width: 330px
+  textarea
+    width: 330px
+    height: 150px
+    line-height: 20px
+  #error_explanation
+    margin-right: 13px
+    &.hidden
+      display: none
+  select
+    width: 340px
+
+.messages_list
+  li.message_list_item
+    padding: 14px 0 10px 0
+    border-bottom: 1px dashed #CCC
+    img
+      float: left
+    .message_content
+      margin-left: 55px
+      min-height: 55px
+      .meta
+        height: 19px
+        strong
+          margin-right: 5px
+        span
+          font-size: 11px
+      .subject
+        display: inline
+        width: 400px
+        strong
+          margin-right: 5px
+      .body
+        float: none
+        clear both
+    .message_actions
+      float: right

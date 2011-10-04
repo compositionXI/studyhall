@@ -10,10 +10,45 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :offerings, :through => :enrollments
   belongs_to :school
+  has_many :followings
+  has_many :followed_users, :through => :followings
   
   validates_presence_of :name
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def first_name
+    @first_name ||= name.split(" ").first
+  end
+
+  def can_edit?(ownable)
+    raise ArgumentError.new("User#can_edit? expects an object that includes the Ownable module") unless ownable.class.include?(Ownable)
+    ownable.owner == self
+  end
+
+  #people the follow this user
+  def followers
+    User.where("users.id = followings.user_id AND followings.followed_user_id = ?",self.id).includes(:followings)
+  end
+
+  #does this person follow the give user?
+  def follows?(user)
+    followings.where(:followed_user_id => user.id).count > 0
+  end
+
+  #make this person follow the given user
+  def follow!(user)
+    followings.create(:followed_user_id => user.id)
+  end
+
+  #find the following object joining this user and the given user
+  def following_for(user)
+    followings.where(:followed_user_id => user.id).first
+  end
+
+  def buddies
+    followed_users
+  end
   
   def has_role?(role)
     self.roles.include? role

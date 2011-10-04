@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
+  
+  include Ownable
 
-  belongs_to :user
   belongs_to :notebook
   
   validates_presence_of :user_id

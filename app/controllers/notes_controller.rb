@@ -92,7 +92,7 @@ class NotesController < ApplicationController
 
   protected
   def find_note
-    @note = current_user.notes.find_by_id(params[:id]) || Note.new
+    @note = Note.viewable_by(current_user).find_by_id(params[:id]) || Note.new
   end
 
   def find_notebook
