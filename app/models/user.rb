@@ -85,6 +85,7 @@ class User < ActiveRecord::Base
   
   def split_attribute_list(attributes, model, collection_method)
     ids = []
+    return ids if (attributes.blank? or attributes.empty?)
     attributes = attributes.split(",").delete_if {|a| a.strip! == ""}
     attributes.each do |a|
       new_record = model.new(name: a.strip)
