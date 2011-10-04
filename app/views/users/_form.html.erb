@@ -1,6 +1,4 @@
 <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
-  <div class="row show-grid">
-    <div class="span6 columns offset1">
       <fieldset>
         <div class="clearfix">
           <%= image_tag @user.avatar_url %>
@@ -55,19 +53,12 @@
           <%= f.label :sports_and_clubs %>
           <div class="input"><%= text_field_tag "extracurriculars_list" %></div>
         </div>
-      </fieldset>
-    </div>
   </div>
-  <div class="row show-grid">
-    <div class="span8 columns offset1">
-      <fieldset>
-        <div class="clearfix">
-          <%= f.submit "Submit", :class => "btn primary" %>
-          <%= link_to 'Cancel', users_path, :class => "btn" %>
-        </div>
-      </fieldset>
-    </div>
+  <div class="clearfix">
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= link_to 'Cancel', users_path, :class => "btn" %>
   </div>
+  </fieldset>
 <% end %>
 
 <script>

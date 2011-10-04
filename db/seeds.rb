@@ -11,11 +11,14 @@
   Role.create(name: role)
 end
 
+#Create Schools
+School.create(name: "Harvard University")
+
 # Create Test Users
 User.create(
   name: "Joe Smith",
   gender: "Male",
-  school: "Central University",
+  school: School.first,
   email: "Joe@email.com",
   major: "Electrical Engineering",
   gpa: 3.7,
@@ -29,7 +32,7 @@ User.create(
 User.create(
   name: "Jane Doe",
   gender: "Female",
-  school: "Harvard University",
+  school: School.first,
   email: "Jane@email.com",
   major: "Psychology",
   gpa: 3.9,

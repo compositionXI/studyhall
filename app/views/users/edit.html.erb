@@ -12,9 +12,11 @@
         <div id="profile_personal_info" class="left">
           <h1><%= @user.name %></h1>
           <div id="profile_detailed_info" class="profile_edit">
-            A <%= sybling_type %> <span class='highlight_text' id="greek_house"><%= greek_affiliation %></span>, 
-            attends <span class="highlight_text" id="school"><%= "#{@user.school.name}"%></span>, 
-            majors in <span class="highlight_text" id="major"><%= "#{@user.major}"%></span>
+            <% if @user.school && @user.major %>
+              A <%= sybling_type %> <span class='highlight_text' id="greek_house"><%= greek_affiliation %></span>, 
+              attends <span class="highlight_text" id="school"><%= "#{@user.school.name}"%></span>, 
+              majors in <span class="highlight_text" id="major"><%= "#{@user.major}"%></span>
+            <% end %>
           </div>
         </div>
         <div class="profile_ratings left">
