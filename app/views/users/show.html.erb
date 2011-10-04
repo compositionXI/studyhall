@@ -1,7 +1,6 @@
 <section>
   <div class="row">
     <div class="span4 column sidebar left" id="profile_sidebar">
-      <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
       <%= image_tag @user.avatar_url(:large), :id => "profile_photo" %>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
       <div>
@@ -15,9 +14,7 @@
       <div id="profile_personal_info" class="left">
         <h1><%= @user.name %></h1>
         <div id="profile_detailed_info">
-          A <%= sybling_type %> <span class='highlight_text'><%= greek_affiliation %></span>,
-          attends <span class="highlight_text"><%= "#{@user.school.try(:name)}"%></span>, 
-          majors in <span class="highlight_text"><%= "#{@user.major}"%></span>
+          <%= html_profile_detailed_info_for(@user)%>
         </div>
       </div>
       <div class="profile_ratings left">

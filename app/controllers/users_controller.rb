@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user.roles << Role.find_by_name("Student") if params[:user][:role_ids].nil?
     if @user.save
       flash[:notice] = "Account registered!"
-      redirect_to_user
+      redirect_to :action => "profile_wizard", :id => @user.id
     else
       render :action => :new
     end

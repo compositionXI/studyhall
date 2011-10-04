@@ -80,3 +80,10 @@ $(function(){
    
   
 });
+
+$(document).ready(function(){
+  $("body").delegate("a.cancel_notebook","click",function(e){
+    $("#new_notebook_button").popover("hide");
+    e.preventDefault();
+  });
+});

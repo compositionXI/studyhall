@@ -1,0 +1,8 @@
+$("#new_notebook_button").popover({trigger: "click",
+                                  placement: "below",
+                                  offset: 10,
+                                  html: true,
+                                  title: function(){return "New Notebook";},
+                                  content: function(){return "<%=j render :partial => "notebooks/form" %>";}});
+$("#new_notebook_button").popover("show");
+$("#new_notebook input[type='text']").first().focus();
