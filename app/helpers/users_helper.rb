@@ -32,7 +32,7 @@ module UsersHelper
     output << html_greek_string_for(user) if !greek_affiliation.blank?
     output << html_school_name_for(user) if user.school
     output << html_major_string_for(user) if user.major
-    output.join(', ').capitalize if !output.empty?
+    output.join(', ').capitalize.html_safe if !output.empty?
   end
   
 end
