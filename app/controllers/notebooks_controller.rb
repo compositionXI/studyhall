@@ -36,6 +36,7 @@ class NotebooksController < ApplicationController
           render "new"
         end
       end
+      format.js
       format.json { render json: @notebook }
     end
   end

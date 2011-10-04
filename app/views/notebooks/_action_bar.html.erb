@@ -2,13 +2,15 @@
   <div class="container">
     <div class="buttons left">
       <%= link_to "Take Notes", new_note_path(@notebook), :class => "btn" %>
-      <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
+      <%= link_to 'New Notebook', new_notebook_path, :class => "btn", :id => "new_notebook_button", :remote => true %>
     </div>
     
 
     <% if @notebook %>
       <h3 class="middle">
-        <% if @notebook.owner == current_user %>
+        <% if @notebook.new_record? %>
+          <span>New Notebook</span>
+        <% elsif @notebook.owner == current_user %>
           <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
         <% else %>
           <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
