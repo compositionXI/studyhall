@@ -14,4 +14,25 @@ module UsersHelper
   def selected_courses_for(user)
     user.enrollments.collect {|e| e.offering.id}
   end
+  
+  def html_greek_string_for(user)
+    "a #{sybling_type} #{content_tag(:span, greek_affiliation, :class => 'highlight_text')}"
+  end
+  
+  def html_school_name_for(user)
+    "attends #{content_tag(:span, user.school.try(:name), :class => 'highlight_text')}"
+  end
+  
+  def html_major_string_for(user)
+    "majors in #{content_tag(:span, user.major, :class => 'highlight_text')}"
+  end
+        
+  def html_profile_detailed_info_for(user)
+    output = []
+    output << html_greek_string_for(user) if !greek_affiliation.blank?
+    output << html_school_name_for(user) if user.school
+    output << html_major_string_for(user) if user.major
+    output.join(', ').capitalize if !output.empty?
+  end
+  
 end
