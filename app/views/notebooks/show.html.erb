@@ -1,4 +1,4 @@
-<div id="menubar" class="topbar">
+<!--div id="menubar" class="topbar">
   <div class="right">
     <a href="" class="btn">Filter</a>
     <div id="items_layout_switcher" class="btn_group">
@@ -21,7 +21,7 @@
       <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
     <% end %>
   </div>
-</div>
+</div-->
 
 <div class="notebook_list_container <%= items_layout %>">
   <% if @notebook.notes.viewable_by(current_user).empty? %>
