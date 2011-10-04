@@ -1,7 +1,6 @@
 <section>
   <div class="row">
     <div class="span4 column sidebar left" id="profile_sidebar">
-      <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
       <%= image_tag @user.avatar_url(:large), :id => "profile_photo" %>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
       <div>

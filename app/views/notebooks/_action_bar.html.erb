@@ -1,17 +1,20 @@
 <div class="action_bar">
-    <div class="container">
-      <div class="buttons left">
-        <%= link_to "Take Notes", new_notebook_note_path(@notebook), :class => "btn" %>
-        <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
+  <div class="container">
+    <div class="buttons left">
+      <%= link_to "Take Notes", new_note_path(@notebook), :class => "btn" %>
+      <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
     </div>
     
-    <h3 class="middle">
-      <% if @notebook.owner == current_user %>
-        <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
-      <% else %>
-        <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
-      <% end %>
-    </h3>
+
+    <% if @notebook %>
+      <h3 class="middle">
+        <% if @notebook.owner == current_user %>
+          <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
+        <% else %>
+          <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
+        <% end %>
+      </h3>
+    <% end %>
   
     <div class="buttons right">
        <a href="" class="btn">Filter</a>
