@@ -10,8 +10,8 @@ $ ->
 	#	open: (event, ui) -> 
 	#		$(".ui-dialog-titlebar-close", ui.dialog).hide()
   #
-	$("#new_study_session_btn").click (e) ->
-		$.get "/study_sessions/new"
+	#$("#new_study_session_btn").click (e) ->
+	#	$.get "/study_sessions/new"
 	#		newStudyhallModal.html data
 	#		newStudyhallModal.dialog('open')
   #    
