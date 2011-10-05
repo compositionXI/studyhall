@@ -9,6 +9,8 @@ class ClassesController < ApplicationController
   def show
     @class = @current_user.offerings.find params[:id]
     @course = @class.course
+    
+    flash[:action_bar_message] = @course.title
   end
   
   def new

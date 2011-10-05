@@ -1,8 +1,8 @@
 <%= form_for @study_session, :html => {:class => "form-stacked"} do |f| %>
-  <ul class="form_fields">
+  <ul class="form_fields unstyled">
     <li><%= f.label :name, "Name" %> <%= f.text_field :name %></li>
   </ul>
   <div class="clearfix"></div>
-  <%= f.submit :class => "btn primary" %>
+  <%= f.submit "Create Studyhall", :class => "btn primary" %>
   <%= link_to 'Cancel', study_sessions_path, :class => "btn close_modal" %>
 <% end %>
