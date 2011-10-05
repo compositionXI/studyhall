@@ -2,7 +2,7 @@
   <div class="container">
     <div class="buttons left">
       <%= link_to "Take Notes", new_note_path(@notebook), :class => "btn" %>
-      <%= link_to "New Notebook", "#", :class => "btn", :id => "new_notebook_btn" %>
+      <%= link_to "New Notebook", new_notebook_path, :class => "btn popover_button", :id => "new_notebook_button", :remote => true %>
     </div>
     
 

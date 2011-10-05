@@ -82,8 +82,8 @@ $(function(){
 });
 
 $(document).ready(function(){
-  $("body").delegate("a.cancel_notebook","click",function(e){
-    var button = $("#new_notebook_button");
+  $("body").delegate("a.cancel_popover","click",function(e){
+    var button = $(".popover_button");
     button.popover("hide");
     //replacing the button with a clone of itself solves the problem where
     //once the popover is initialized, you can't change it's content. This way,
