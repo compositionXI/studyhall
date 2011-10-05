@@ -1,0 +1,11 @@
+$("#new_study_session_btn").popover = null;
+$("#new_study_session_btn").popover({
+	trigger: "manual",
+	placement: "below",
+	offset: 10,
+	html: true,
+	title: function(){return "New Studyhall";},
+	content: function(){return "<%=j render :partial => "study_sessions/form" %>";}
+});
+$("#new_study_session_btn").popover("show");
+$("#new_study_session input[type='text']").first().focus();
