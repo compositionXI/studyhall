@@ -28,7 +28,22 @@ $(function(){
   
   $(".activity-list").jScrollPane();
   
-  $(".nav").dropdown('.dropdown', true);
+  
+  // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
+  
+  var d = 'a.menu, .dropdown-toggle'
+    , clearMenus = function() { 
+        $(d).parent('li').removeClass('open')
+      };
+  $('html').bind("click", clearMenus)
+  $(".secondary-nav .dropdown").click(function(e){     
+     var li = $(this)
+       , isActive = li.hasClass('open')
+  
+     clearMenus()
+     !isActive && li.toggleClass('open')
+     return false
+  });  
   
   $("#sortTableExample").tablesorter();
   
@@ -64,4 +79,17 @@ $(function(){
   
    
   
+});
+
+$(document).ready(function(){
+  $("body").delegate("a.cancel_popover","click",function(e){
+    var button = $(".popover_button");
+    button.popover("hide");
+    //replacing the button with a clone of itself solves the problem where
+    //once the popover is initialized, you can't change it's content. This way,
+    //the button is replaced with a clone of itself, but without the already
+    //initialized popover
+    button.replaceWith(button.clone());
+    e.preventDefault();
+  });
 });

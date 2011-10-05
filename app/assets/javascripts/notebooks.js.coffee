@@ -114,18 +114,18 @@ class NotebooksController
 		@setupNotebookContainer()
 
 	setupModalDialog: ->
-		newNotebookModal = $("#new_notebook_modal")
-		newNotebookModal.dialog
-			modal: true
-			autoOpen: false
-			open: (event, ui) -> 
-				$(".ui-dialog-titlebar-close", ui.dialog).hide()
-		$("#new_notebook_btn").click (e) ->
-			$.get "notebooks/new", (data) ->
-				newNotebookModal.html data
-				newNotebookModal.dialog('open')
-				newNotebookModal.find(".close_modal").click (e) ->
-					newNotebookModal.dialog('close')
+		#newNotebookModal = $("#new_notebook_modal")
+		#newNotebookModal.dialog
+		#	modal: true
+		#	autoOpen: false
+		#	open: (event, ui) -> 
+		#		$(".ui-dialog-titlebar-close", ui.dialog).hide()
+		#$("#new_notebook_btn").click (e) ->
+		#	$.get "notebooks/new", (data) ->
+		#		newNotebookModal.html data
+		#		newNotebookModal.dialog('open')
+		#		newNotebookModal.find(".close_modal").click (e) ->
+		#			newNotebookModal.dialog('close')
 
 	setupNotebookContainer: ->
 		notebookContainer = new NotebookContainer()
