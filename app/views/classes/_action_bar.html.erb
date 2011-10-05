@@ -1,12 +1,14 @@
 <div class="action_bar">
   <div class="container">
     <div class="buttons left">
-      <%=link_to "Start A Studyhall", new_study_session_path, :class => "btn primary", :title => "Start A Studyhall" %>
-      <a class="btn" title="Take Notes" href="#">Take Notes</a>
+      <%= link_to "Start A Studyhall", new_study_session_path, :class => "btn primary", :id => "new_study_session_btn", :remote => true %>
+      <%= link_to "Take Notes", new_note_path, :class => "btn " %>
     </div>
-    <h3>Title and action statements</h3>
+    <h3><%= flash[:action_bar_message] %></h3>
     <div class="buttons right">
       <a class="btn" title="Filter" href="#">Filter</a>
     </div>
   </div>
 </div>
+
+<div id="new_study_session_modal" class="modal_dialog"></div>

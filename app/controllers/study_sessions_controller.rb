@@ -16,8 +16,15 @@ class StudySessionsController < ApplicationController
     @room = Room.new
     @whiteboard = Whiteboard.new
     
-    if request.xhr?
-      render :partial => "form"
+    respond_to do |format|
+      format.html do
+        if request.xhr?
+          render :partial => "form"
+        else
+          render "new"
+        end
+      end
+      format.js
     end
   end
   

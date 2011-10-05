@@ -1,6 +1,6 @@
 class NotebooksController < ApplicationController
 
-  #layout "full_width"
+  layout "full_width"
 
   before_filter :require_user
   before_filter :set_action_bar
