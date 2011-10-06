@@ -49,7 +49,7 @@ $(function(){
   
   $("#sortTableExample").tablesorter();
   
-  $("#styleguide-form select").chosen()  
+  // $("select").chosen()  
                         
   // Code for styling file upload inputs. Needs to be extracted and pluginified
    
@@ -70,7 +70,7 @@ $(function(){
     });  
     
     var buttonWidth = $(".fake-file .btn").outerWidth()
-    ,   finalWidth = origWidth - buttonWidth - 5;
+    ,   finalWidth = origWidth - buttonWidth + 4;
     
     $(".fake-file input").css({width : finalWidth });
     

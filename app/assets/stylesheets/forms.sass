@@ -10,6 +10,7 @@ form
 
 // Groups of fields with labels on top (legends)
 fieldset
+  > div
   margin-bottom: $baseline
   padding-top: $baseline
   legend
@@ -29,6 +30,12 @@ fieldset
 
 // Set font for forms
 
+select
+  box-sizing: content-box
+  -ms-box-sizing: content-box
+  -moz-box-sizing: content-box
+  -webkit-box-sizing: content-box
+
 input,
 select,
 textarea
@@ -39,7 +46,6 @@ label
   +body-font(700, 12px, 18px)
   color: $gray
   text-transform: uppercase
-  padding-top: 6px
   float: left
   width: 130px
   text-align: right
@@ -165,7 +171,9 @@ form div.error
 
 .input-large, input.large, textarea.large, select.large
   width: 210px
-
+.xlarge
+  input, textarea, select
+    @extend .input-xlarge
 .input-xlarge, input.xlarge, textarea.xlarge, select.xlarge
   width: 270px
 
