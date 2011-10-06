@@ -452,31 +452,36 @@ html
     .grid_view
       display: none
 
-  // preview icon
-  .preview
-    border: 1px solid #AAA
+  .notebook 
+    .preview
+      background: url("/assets/notebook-brown.png") transparent no-repeat
+    &.draggable_hovering
+      .preview
+        background: url("/assets/notebook-drop.png") transparent
 
-  .notebook .preview
-    background: #ccc
-    box-shadow: 5px 5px 5px #AAA
-    -webkit-box-shadow: 5px 5px 5px #aaa
-  .notebook.draggable_hovering .preview
-    border: 1px dashed #AAA
-    background: #eee
-
-  .note .preview
-    background: #FFF
-
-  .dragging_placeholder .note .preview
-    border-width: 0
-    background: #EEE
-    box-shadow: 0 0 3px #EEE
-    -webkit-box-shadow: 0 0 3px #EEE
-    div, span, a
-      display: none
+  .note 
+    .preview
+      background: url("/assets/notebook-page.png") transparent  no-repeat
+      
+  
+  .note, .notebook 
+    +sans-serif-font(500, 12px, 12px)
+    color: #333 
+    &.checked
+      .checkbox
+        background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+  .dragging_placeholder 
+    .note 
+      .preview 
+        +box-shadow(0 0 5px #ededed)
+        border-width: 0
+        background-color: #ededed
+        div, span, a
+          display: none 
 
   // icons
   .icon
+    background-image: url(/assets/notebook-icons.png) no-repeat
     display: block
     width: 25px
     height: 25px
@@ -484,14 +489,14 @@ html
     text-indent: -9999px
 
   .lock_icon
-    background: url(/assets/lock.png)
+    background-position: -100px 0
 
   .drag_handle
     cursor: move
 
   .ui-draggable-dragging, .note:hover, .notebook:hover
     .drag_handle
-      background: url(/assets/move.png)
+      background: url(/assets/notebook-icons.png) -200px 0 no-repeat
 
   .checkbox
     width: 25px
@@ -499,25 +504,28 @@ html
     overflow: hidden
     display: block
 
-  .note, .notebook
-    &.checked
-      .checkbox
-        background: url(/assets/checkbox_checked.png)
-
   // locator
   .note, .notebook, .grid_view, .list_view
     position: relative
 
   &.grid
+    .selected 
+      .preview
+        background: url(/assets/notebook-page-selected.png) 0 0
+    .deselected 
+      .preview
+        background: url(/assets/notebook-page-deselected.png) 0 0
+    .dragging_placeholder
+      .preview
+        background: #ededed
     .preview
-      height: 196px
-      width: 158px
-
-    .notebook, .note
-      margin: 10px
-      text-align: center
-      border: solid 1px #AAA
-      
+      height: 125px
+      width: 104px
+      margin: 9px 0px 5px 9px
+      padding: 0 8px 3px 0
+      .notebook, .note
+        text-align: center
+        
       .wrapper_large, .wrapper
         position: relative
       
@@ -536,8 +544,8 @@ html
       display: block
 
     .name
-      font-size: 1.2em
-      margin-top: 67px
+      font-size: 1.2em 
+      line-height: 100%
       padding: 5px
 
     .lock_icon
@@ -557,7 +565,7 @@ html
 
     ol, li
       // todo: cross browser solution for inline block
-      display: inline-block
+      float: left
 
     .notebook, .note
       float: left
@@ -601,7 +609,7 @@ html
       .list_view
         height: 110px
 
-    .preview
+    .preview 
       position: absolute
       left: 10px
       top: 4px
@@ -634,7 +642,7 @@ html
       background: url(/assets/collapse.png) no-repeat
 
     .collapsed .expand_collapse_icon
-      background: url(/assets/expand.png) no-repeat
+      background: url(/assets/expand.png) no-repeat 
       
 
 .full-width
