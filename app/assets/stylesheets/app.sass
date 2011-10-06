@@ -719,10 +719,59 @@ html
 
     .rating_block
       background-color: $rating_block_background
-      height: 82px
-      width: 61px
+      height: 102px
+      width: 81px
       margin-bottom: 30px
-      padding: 20px
+      padding: 10px
+      &.gpa
+        text-align: center
+        .gpa_score
+          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
+          font-size: 26px
+          margin: 20px
+          color: #444
+        span
+          display: block
+          margin-bottom: 10px
+        a.help
+          opacity: 0.5
+          display: inline-block
+          height: 16px
+          width: 16px
+          margin: 0 12px
+          background-image: url("../assets/help_bw.png")
+
+      &.rating
+        text-align: center
+        .net_rating
+          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
+          font-size: 26px
+          margin: 20px
+          color: #444
+        span
+          margin-bottom: 10px
+          display: block
+        .vote_actions
+          a
+            opacity: 0.5
+            display: inline-block
+            height: 16px
+            width: 16px
+            &.current_vote
+              opacity: 1
+            &:hover
+              opacity: 1
+            &.downvote
+              background-image: url("../assets/delete_bw.png")
+              &:hover
+                background-image: url("../assets/delete.png")
+            &.help
+              margin: 0 12px
+              background-image: url("../assets/help_bw.png")
+            &.upvote
+              background-image: url("../assets/add_bw.png")
+              &:hover
+                background-image: url("../assets/add.png")
 
     .profile_edit
       background-color: $editable_background

@@ -5,6 +5,34 @@ describe User do
     User.new.should be_an_instance_of(User)
   end
   
+  context "#voted_for?" do
+    before(:all) do
+      @user1 = test_user
+      @user2 = test_user
+    end
+
+    it "should return true if a user has voted FOR another" do
+      @user1.vote_for(@user2)
+      @user1.voted_for?(@user2).should == true
+    end
+
+    it "should return false if a user has not voted on another" do
+      Vote.destroy_all
+      @user1.voted_for?(@user2).should == false
+    end
+
+    it "should return false if a user has voted AGAINST another" do
+      Vote.destroy_all
+      @user1.vote_against(@user2)
+      @user1.voted_for?(@user2).should == false
+    end
+
+    after(:all) do
+      @user1.destroy
+      @user2.destroy
+    end
+  end
+
   context "#follow!" do
     before(:all) do
       @user1 = test_user

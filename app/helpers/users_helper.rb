@@ -1,4 +1,9 @@
 module UsersHelper
+
+  def vote_help_text
+    "Students can up or down vote their classmates to give others an idea of how helpful they are as a study buddy."
+  end
+
   def user_protected_profile?(user, attrubute)
     User::PROTECTED_PROFILE_ATTRBUTES.include? attrubute.to_s
   end

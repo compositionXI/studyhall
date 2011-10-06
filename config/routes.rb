@@ -39,6 +39,8 @@ Studyhall::Application.routes.draw do
       get 'profile_wizard'
     end
     resources :messages, only: [:new, :create]
+    post '/votes' => 'votes#create', :as => :upvote
+    delete '/votes' => 'votes#destroy', :as => :downvote
   end
   resources :messages, except: [:edit]
   resources :password_resets

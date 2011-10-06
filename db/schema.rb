@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930202219) do
+ActiveRecord::Schema.define(:version => 20111006033303) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20110930202219) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
@@ -189,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20110930202219) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -196,6 +198,20 @@ ActiveRecord::Schema.define(:version => 20110930202219) do
     t.string   "custom_url"
     t.text     "bio"
   end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",          :default => false
+    t.integer  "voteable_id",                      :null => false
+    t.string   "voteable_type",                    :null => false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
+  add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
 
   create_table "whiteboards", :force => true do |t|
     t.string   "session_identifier"
