@@ -38,4 +38,13 @@ class ClassesController < ApplicationController
     @enrollment.destroy
     redirect_to classes_path
   end
+  
+  def offerings_for_school
+    @school = School.find(params[:school_id], :include => :offerings)
+    @offerings = @school.offerings(:include => [:course, :instructor])
+    
+    if request.xhr?
+      render :json => { :offerings => @offerings.collect {|o| o.course_listing}, :offering_ids => @school.offering_ids }
+    end
+  end
 end

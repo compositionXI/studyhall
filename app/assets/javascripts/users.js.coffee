@@ -14,9 +14,10 @@ $ ->
 	$("#profile_tabs").tabs()
 	$(".chzn-select").css({"display": "none"})
 	$(".chzn-select").chosen()
-	$('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
-		$('.chzn-select.appendable').append('<option>'+this.value+'</option>')
-		$('.chzn-select.appendable').trigger('liszt:updated')
+	
+	#$('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
+	#	$('.chzn-select.appendable').append('<option>'+this.value+'</option>')
+	#	$('.chzn-select.appendable').trigger('liszt:updated')
 	
 	$('.sorority, .fraternity').css("display", "none")
 	switch_greek_select_box()
@@ -102,3 +103,27 @@ $ ->
 			this.value = terms.join( ", " )
 			return false
 	}
+	
+	#$("body").delegate "#user_school_id_chzn ul.chzn-results li", "click", (e) ->
+	#	e.preventDefault()
+	#	school_id = $(this).
+	#	$.get "/courses/offerings_for_school", (response) ->
+	#		$("#user_enrollments option").each (index) ->
+	#			$(this).attr("value", response.offering_ids[i])
+	#			$(this).html(response.offerings[i])
+	
+	getSelectedValue = (options) ->
+		value = ""
+		options.each ->
+			if this.selected
+				value = this.value
+		value
+
+	$("#user_school_id").chosen().change ->
+		school_id = getSelectedValue $(this).find("option")
+		$.get "/classes/0/offerings_for_school/#{school_id}", (response) ->
+			$("#user_enrollments option").remove()
+			newOptions = ""
+			$(response.offerings).each (index) ->
+				newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
+			$("#user_enrollments").html(newOptions).trigger("liszt:updated")

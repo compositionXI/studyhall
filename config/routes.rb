@@ -9,7 +9,9 @@ Studyhall::Application.routes.draw do
     end
   end
 
-  resources :classes
+  resources :classes do
+    get "offerings_for_school/:school_id", :action => "offerings_for_school"
+  end
   #resources :followings, :only => [:create, :destroy]
   post '/followings' => 'followings#create', :as => :follow
   delete '/following/:id' => 'followings#destroy', :as => :unfollow
