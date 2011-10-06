@@ -99,6 +99,12 @@ class NotebookContainer
   useLayout: (layout) ->
     @container.attr 'class', [className, layout].join(' ')
     window.location.hash = [HASH_PREFIX, layout].join('/')
+    editAllHref = $(".action_bar a#edit_all").attr("href")
+    if ~ editAllHref.indexOf("&layout=")
+      newHref = editAllHref.replace(/&layout=\w*/, "&layout=#{layout}")
+      $(".action_bar a#edit_all").attr("href", newHref)
+    else
+      $(".action_bar a#edit_all").attr("href", "#{editAllHref}&layout=#{layout}")
 
   recoverLayout: ->
     # recover layout from hash
@@ -123,3 +129,6 @@ class NotebooksController
 
 $ ->
 	new NotebooksController().setup()
+	
+	$("#select_all").click ->
+		$(".notebook, .note").addClass "checked"

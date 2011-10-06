@@ -31,14 +31,14 @@
           <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
           <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
         </span>
-        <%= link_to "Edit", notebooks_path(:edit_all => true), :class => "btn" %>
+        <%= link_to "Edit", notebooks_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
       <% end %>
       <% if @show && current_user.can_edit?(@notebook) %>
         <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
         <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
       <% end %>
       <% if @edit_all %>
-        <%= link_to "Select All", "#", :class => "btn" %>
+        <%= link_to "Select All", "#", :class => "btn", :id => "select_all"%>
         <%= link_to "Save", "#", method: :delete, :class => "btn", :confirm => "Are you sure?" %>
       <% end %>
     </div></div>
