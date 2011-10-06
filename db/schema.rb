@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(:version => 20111006033303) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "parent_id"
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
@@ -190,7 +189,6 @@ ActiveRecord::Schema.define(:version => 20111006033303) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
