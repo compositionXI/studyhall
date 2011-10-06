@@ -9,6 +9,8 @@
     <% unless note.shareable? %>
       <a href="#" class="lock_icon icon">Share</a>
     <% end %>
-    <span class="drag_handle icon">+</span>
+    <% if @edit_all %>
+      <span class="drag_handle icon">+</span>
+    <% end %>
   </div>
 </div>

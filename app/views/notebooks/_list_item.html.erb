@@ -3,52 +3,50 @@
   <%= div_for notebook do %>
     <%= render 'notebooks/grid_view.html', notebook: notebook, collapsed: collapsed %>
     <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed %>
-    <span class="checkbox">
-      <input type="checkbox" name="notebook[][id]" value="<%= notebook.id %>" />
-    </span>
+    <% if @edit_all %>
+      <span class="checkbox">
+        <input type="checkbox" name="notebook[][id]" value="<%= notebook.id %>" />
+      </span>
+    <% end %>
   <% end %>
 
   <% unless notebook.notes.empty? %>
     <ol class="note_list">
-      <%= render partial: 'notes/list_item', collection: notebook.notes, as: :note %>
+      <%= render partial: 'notes/list_item.html.erb', collection: notebook.notes, as: :note %>
     </ol>
   <% end %>
 </li>  
-<li class="notebook_list_item collapsed">
+<!--li class="notebook_list_item collapsed">
   <div id="notebook_1" class="notebook ui-droppable">
     <div class="grid_view">
-  <div class="preview">
-    <div class="fields">
-      <a href="/notebooks/1" class="name" data-original-title="">
-        <span>Test</span>
-      </a>
-      <span class="course"></span>
-    </div>
-
-      <a class="lock_icon icon" href="#" data-original-title="">Share</a>
-  </div>
-</div>
-    <div class="list_view">
-  <div class="preview">
-  </div>
-
-  <div class="fields">
-    <div class="name_wrapper">
-      <a href="/notebooks/1" class="name" data-original-title="">
-        <span>Test</span>
-      </a>
+      <div class="preview">
+        <div class="fields">
+          <a href="/notebooks/1" class="name" data-original-title="">
+            <span>Test</span>
+          </a>
+          <span class="course"></span>
+        </div>
         <a class="lock_icon icon" href="#" data-original-title="">Share</a>
+      </div>
     </div>
-    <div class="course clear"></div>
-    <div class="date">2011-09-30</div>
+    <div class="list_view">
+      <div class="preview"></div>
+      <div class="fields">
+        <div class="name_wrapper">
+          <a href="/notebooks/1" class="name" data-original-title="">
+            <span>Test</span>
+          </a>
+        <a class="lock_icon icon" href="#" data-original-title="">Share</a>
+      </div>
+      <div class="course clear"></div>
+      <div class="date">2011-09-30</div>
+    </div>
   </div>
-
-
+  <span class="checkbox">
+    <input type="checkbox" value="1" name="notebook[][id]" style="display: none;">
+  </span>
 </div>
-    <span class="checkbox">
-      <input type="checkbox" value="1" name="notebook[][id]" style="display: none;">
-    </span>
-</div>
+
 </li><li class="notebook_list_item collapsed">
   <div id="notebook_2" class="notebook ui-droppable draggable_hovering">
     <div class="grid_view">
@@ -203,4 +201,4 @@
 
 
     </ol>
-</li>
+</li-->

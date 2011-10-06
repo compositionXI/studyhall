@@ -67,6 +67,7 @@ class NotesController < ApplicationController
 
   def move
     @note.notebook_id = @notebook.id
+    @edit_all = true
 
     respond_to do |format|
       if @note.save

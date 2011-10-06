@@ -6,9 +6,13 @@ class NotebooksController < ApplicationController
   before_filter :set_action_bar
 
   def index
-    @notebooks = current_user.notebooks.all
+    @notebooks = current_user.notebooks
     @unsorted_notes = current_user.notes.unsorted
-
+    if params[:edit_all] == "true"
+      @edit_all = true
+    else
+      @index = true
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @notebooks }
