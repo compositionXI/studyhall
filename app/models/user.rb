@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
+  acts_as_voter
+  acts_as_voteable
   has_mailbox
 
   has_and_belongs_to_many :extracurriculars
@@ -19,6 +21,11 @@ class User < ActiveRecord::Base
 
   def first_name
     @first_name ||= name.split(" ").first
+  end
+
+  def voted_for?(user)
+    vote = user.votes.where(:voter_id => self).first
+    vote.nil? ? false : vote.vote
   end
 
   def can_edit?(ownable)

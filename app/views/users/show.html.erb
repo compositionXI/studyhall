@@ -20,19 +20,17 @@
       <div class="profile_ratings left">
         <% if @user.gpa %>
           <div class="rating_block gpa left">
-            <%= @user.gpa %>
-            GPA
+            <div class="gpa_score"><%= @user.gpa %></div>
+            <span>GPA</span>
+            <%= link_to "", "", :class => "help" %>
           </div>
         <% end %>
-        <div class="rating_block rating right">
-          7
-          Rating
-        </div>
+        <%= render :partial => "votes/rating", :locals => {:user => @user} %>
         <div class="clear"></div>
         <div class="stats">
             <ul class="unstyled">
               <li>
-                <span class="count left">4</span> Hours Spent in Studyhalls 
+                <span class="count left">4</span> Hours in Studyhalls 
                 <div class="clear"></div>
               </li>
               <li>
