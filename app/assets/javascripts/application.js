@@ -36,13 +36,15 @@ $(function(){
         $(d).parent('li').removeClass('open')
       };
   $('html').bind("click", clearMenus)
-  $(".secondary-nav .dropdown").click(function(e){     
+  $(".secondary-nav .dropdown").click(function(e){
      var li = $(this)
        , isActive = li.hasClass('open')
   
-     clearMenus()
-     !isActive && li.toggleClass('open')
+     // clearMenus()
+     li.toggleClass('open')
      return false
+  }).find(".dropdown-menu a").click(function(e){
+    e.stopPropagation();
   });  
   
   $("#sortTableExample").tablesorter();
