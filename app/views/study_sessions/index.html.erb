@@ -2,11 +2,13 @@
 <div class="notebook_list_container <%= items_layout %>">
   <% if @study_sessions.empty? %>
         <p>With study halls you can collaborate with other students, video chat, and edit documents together!</p>
+        <p>
+          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button2"), :remote => true, :id => "new_study_session_button2" %>
+           now!
+        </p>
   <% else %>
     <ol class="notebook_list">
       <%= render partial: 'list_item', collection: @study_sessions, as: :study_session %>
     </ol>
   <% end %>
 </div></div>
-
-<div id="new_study_session_modal" class="modal_dialog"></div>
