@@ -16,7 +16,9 @@
           <% end %>
         </div>
       <% end %>
-      <h3><%= flash[:action_bar_message] %></h3>
+      <h3>
+        <%= flash[:action_bar_message] %>
+      </h3>
       <div class="buttons right">
         <% if params[:action] == "show" && @user && @user != current_user %>
           <%= link_to "Invite to a Studyhall", "#", :class => "btn small", :title => "Invite to a Studyhall" %>

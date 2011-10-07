@@ -54,6 +54,8 @@ class UsersController < ApplicationController
           gpa: @user.gpa, 
           avatar_url: @user.avatar_url(:large)
         }
+      elsif params[:commit] == "Do This Later"
+          redirect_to home_index_path
       else
         redirect_to_user
       end
