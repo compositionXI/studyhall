@@ -6,8 +6,25 @@
 // -----------
 
 form
-  margin-bottom: $baseline
+  margin-bottom: $baseline 
 
+.profile_wizard
+  .avatar
+    margin: 0 30px 0 150px
+  img              
+    width: 100%
+  .delete_avatar
+    margin: 1px 0 0 0
+    width: auto
+.buttons
+  width: 429px
+  .btn
+    float: right 
+    width: auto
+  .primary
+    margin: 0 0 0 5px
+    padding: 5px 9px 4px
+  
 // Groups of fields with labels on top (legends)
 fieldset
   > div
@@ -29,13 +46,6 @@ fieldset
   margin-bottom: $baseline
 
 // Set font for forms
-
-select
-  box-sizing: content-box
-  -ms-box-sizing: content-box
-  -moz-box-sizing: content-box
-  -webkit-box-sizing: content-box
-
 input,
 select,
 textarea
@@ -79,6 +89,9 @@ select,
   border-color: $formBorder
   border-top-color: #b0b5c3
   +border-radius(2px)
+
+select
+  padding: 0
 
 select,
 input[type=file],
@@ -171,11 +184,13 @@ form div.error
 
 .input-large, input.large, textarea.large, select.large
   width: 210px
-.xlarge
-  input, textarea, select
-    @extend .input-xlarge
-.input-xlarge, input.xlarge, textarea.xlarge, select.xlarge
-  width: 270px
+
+$xlarge:   270px  
+  
+.input-xlarge, input.xlarge, textarea.xlarge, .xlarge input, .xlarge textarea
+  width: $xlarge                              
+select.xlarge, .xlarge select
+  width: $xlarge + 10px     
 
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge
   width: 530px
