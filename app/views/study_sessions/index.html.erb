@@ -1,24 +1,12 @@
-<fieldset>
-  <legend>Study Sessions</legend>
-</fieldset>
+<div class="container">
+<div class="notebook_list_container <%= items_layout %>">
+  <% if @study_sessions.empty? %>
+        <p>With study halls you can collaborate with other students, video chat, and edit documents together!</p>
+  <% else %>
+    <ol class="notebook_list">
+      <%= render partial: 'list_item', collection: @study_sessions, as: :study_session %>
+    </ol>
+  <% end %>
+</div></div>
 
-<table>
-  <thead>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @study_sessions.each do |s| %>
-      <tr>
-        <td><%= s.name %></td>
-        <td><%= link_to 'Join', s, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_study_session_path(s), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', s, confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= link_to 'New Study Session', new_study_session_path, :class => "btn" %>
+<div id="new_study_session_modal" class="modal_dialog"></div>
