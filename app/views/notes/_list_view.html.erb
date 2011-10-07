@@ -14,7 +14,8 @@
     <div class="course clear"><%= note.notebook.try(:course).try(:title) %></div>
     <div class="date"><%=l note.created_at.to_date %></div>
   </div>
-
-  <span class="drag_handle icon">+</span>
+  <% if @edit_all %>
+    <span class="drag_handle icon">+</span>
+  <% end %>
 
 </div>

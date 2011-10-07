@@ -93,23 +93,12 @@ $ ->
 		
 		,select: (event, ui) ->
 			terms = split( this.value )
-			# remove the current input
 			terms.pop()
-			# add the selected item
 			terms.push( ui.item.value )
-			# add placeholder to get the comma-and-space at the end
 			terms.push( "" )
 			this.value = terms.join( ", " )
 			return false
 	}
-	
-	#$("body").delegate "#user_school_id_chzn ul.chzn-results li", "click", (e) ->
-	#	e.preventDefault()
-	#	school_id = $(this).
-	#	$.get "/courses/offerings_for_school", (response) ->
-	#		$("#user_enrollments option").each (index) ->
-	#			$(this).attr("value", response.offering_ids[i])
-	#			$(this).html(response.offerings[i])
 	
 	getSelectedValue = (options) ->
 		value = ""
@@ -126,3 +115,7 @@ $ ->
 			$(response.offerings).each (index) ->
 				newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
 			$("#user_enrollments").html(newOptions).trigger("liszt:updated")
+	
+	$("#do_this_later").click (e) ->
+		$('<input />').attr('type', 'hidden').attr('name', "do_this_later").attr('value', "true").appendTo('form')
+		true

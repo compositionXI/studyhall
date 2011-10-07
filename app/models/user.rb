@@ -106,4 +106,16 @@ class User < ActiveRecord::Base
     ids << self.send(collection_method)
     ids.flatten
   end
+  
+  def profile_completion_percentage
+    percentage = 0
+    [self.avatar, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].collect do |member|
+      percentage += 10 unless member.try(:nil?) || member.try(:empty?)
+    end
+    percentage
+  end
+  
+  def profile_complete?
+    self.profile_completion_percentage >= 100
+  end
 end

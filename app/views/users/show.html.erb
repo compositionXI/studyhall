@@ -55,7 +55,7 @@
         	<div id="tabs-1">
         	  <section class="courses <%= items_layout %>">
               <ol class="course_list">
-                <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
+                <%= render partial: 'users/course_list', collection: @user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
               </ol>
             </section>
             <div class="clear"></div>

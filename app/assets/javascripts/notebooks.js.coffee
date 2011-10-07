@@ -28,7 +28,7 @@ class NotebookContainer
     notebookList = $('.notebook_list', @container)
     notebookContainer = this
 
-    $('.note_list_item', scope).draggable
+    $('.note_list_item.edit_mode', scope).draggable
       start: (e, ui) ->
         $(this).addClass 'dragging_placeholder'
       stop: (e, ui) ->
@@ -99,6 +99,12 @@ class NotebookContainer
   useLayout: (layout) ->
     @container.attr 'class', [className, layout].join(' ')
     window.location.hash = [HASH_PREFIX, layout].join('/')
+    editAllHref = $(".action_bar a#edit_all").attr("href")
+    if ~ editAllHref.indexOf("&layout=")
+      newHref = editAllHref.replace(/&layout=\w*/, "&layout=#{layout}")
+      $(".action_bar a#edit_all").attr("href", newHref)
+    else
+      $(".action_bar a#edit_all").attr("href", "#{editAllHref}&layout=#{layout}")
 
   recoverLayout: ->
     # recover layout from hash
@@ -110,22 +116,7 @@ class NotebookContainer
 
 class NotebooksController
 	setup: ->
-		@setupModalDialog()
 		@setupNotebookContainer()
-
-	setupModalDialog: ->
-		#newNotebookModal = $("#new_notebook_modal")
-		#newNotebookModal.dialog
-		#	modal: true
-		#	autoOpen: false
-		#	open: (event, ui) -> 
-		#		$(".ui-dialog-titlebar-close", ui.dialog).hide()
-		#$("#new_notebook_btn").click (e) ->
-		#	$.get "notebooks/new", (data) ->
-		#		newNotebookModal.html data
-		#		newNotebookModal.dialog('open')
-		#		newNotebookModal.find(".close_modal").click (e) ->
-		#			newNotebookModal.dialog('close')
 
 	setupNotebookContainer: ->
 		notebookContainer = new NotebookContainer()
@@ -138,3 +129,6 @@ class NotebooksController
 
 $ ->
 	new NotebooksController().setup()
+	
+	$("#select_all").click ->
+		$(".notebook, .note").addClass "checked"
