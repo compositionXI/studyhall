@@ -56,8 +56,8 @@ $(function(){
   $(".input-file").each(function(){    
     var $this = $(this)
     ,   origWidth = $this.outerWidth()
-    ,   $fakeyInput = $("<div id='thing' class='fake-file'><input type='text'><span class='btn'>Browse</span>");
-
+    ,   $fakeyInput = $("<div class='fake-file'><input type='text'><span class='btn'>Browse</span>");
+  
     $this.parent('.input').css({ position: "relative" });
     
     $this.after( $fakeyInput ).css({    
@@ -73,11 +73,13 @@ $(function(){
     ,   finalWidth = origWidth - buttonWidth + 4;
     
     $(".fake-file input").css({width : finalWidth });
-    
+    $(".fake-file").click(function(e){
+       $(this).siblings('input').click();
+    });
     $this.change( function () {    
       $this.siblings('.fake-file').find('input').val( this.value )      
     });                           
-  });
+  }); 
   
    
   
