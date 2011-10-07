@@ -8,22 +8,28 @@
 form
   margin-bottom: $baseline 
 
-.profile_wizard
-  .avatar
-    margin: 0 30px 0 150px
-  img              
-    width: 100%
-  .delete_avatar
-    margin: 1px 0 0 0
-    width: auto
-.buttons
-  width: 429px
-  .btn
-    float: right 
-    width: auto
-  .primary
-    margin: 0 0 0 5px
-    padding: 5px 9px 4px
+  &.profile_wizard
+    background-color: $formBg
+    border-radius: 3px 
+    padding: 30px 0 10px 40px
+    input, textarea
+      width: 370px
+    .avatar
+      width: 280px
+    img              
+      width: 100%
+    .delete_avatar
+      margin: 1px 0 0 0
+      width: auto
+  .buttons
+    a
+      line-height: 23px
+      
+    .primary
+      float: left
+      margin: 0 5px 0 0
+      padding: 5px 9px 4px
+      width: auto     
   
 // Groups of fields with labels on top (legends)
 fieldset
@@ -97,7 +103,8 @@ select,
 input[type=file],
 .file
   height: 27px
-  line-height: 27px   
+  line-height: 27px 
+  text-align: right  
   
 .fake-file           
   left: 0
@@ -189,8 +196,6 @@ $xlarge:   270px
   
 .input-xlarge, input.xlarge, textarea.xlarge, .xlarge input, .xlarge textarea
   width: $xlarge                              
-select.xlarge, .xlarge select
-  width: $xlarge + 10px     
 
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge
   width: 530px
