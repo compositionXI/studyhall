@@ -180,12 +180,21 @@ html
         color: rgba(255,255,255,.75)
   .secondary-nav 
     li.dropdown
-      height: 25px
       @include border-radius( $topbarRadius )
       @include vertical-gradient($navGradStart, $navGradEnd)
       @include vertical-gradient-image($checkerImage, $navGradStart, $navGradEnd)
+      height: 25px
       padding: 3px
       cursor: pointer
+      &:hover, &:focus, &:active
+        $shadow: inset 0 1px 0 $navBorderTop 
+        +box-shadow($shadow)
+        border-top: none
+        border-bottom: 1px solid $navBorderBottom
+        border-left: 1px solid $navBorderTop
+        border-right: 1px solid $navBorderRight
+        margin: 0
+        border-radius: 3px
       img
         border: 1px solid $imgBorder
         margin: 0 7px 0 0
@@ -245,13 +254,20 @@ html
         .arrow-border
           @include arrow-border(10px,$popoverBorder, -20px, auto, 5px)          
         li 
+          +box-shadow(none)
           float: none
           clear: both
           display: block
           background: none
           font-size: 12px
           border: none
+          padding: 0 
+          &:hover, &:active, &:focus
+            height: auto
+            margin: 0
+            
           a 
+            @include vertical-gradient( none)
             background: none
             display: block
             padding: 6px 15px
@@ -261,6 +277,8 @@ html
             line-height: 12px
             color: $linkColor
             text-shadow: none
+            
+              
           // Dividers (basically an hr)
           &.divider 
             height: 1px
