@@ -4,5 +4,5 @@
   </ul>
   <div class="clearfix"></div>
   <%= f.submit "Create Studyhall", :class => "btn primary" %>
-  <%= link_to 'Cancel', "#", :class => "btn cancel_popover" %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
 <% end %>

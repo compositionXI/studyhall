@@ -1,6 +1,7 @@
 class StudySessionsController < ApplicationController
   
   before_filter :init_opentok, :only => ["show", "create"]
+  before_filter :set_action_bar
   
   def index
     @study_sessions = StudySession.all
@@ -24,6 +25,7 @@ class StudySessionsController < ApplicationController
           render "new"
         end
       end
+      @modal_link_id = params[:link_id]
       format.js
     end
   end

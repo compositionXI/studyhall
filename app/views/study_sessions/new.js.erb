@@ -1,11 +1,26 @@
-$("#new_study_session_btn").popover = null;
-$("#new_study_session_btn").popover({
+linkElement = $("#<%=j @modal_link_id %>");
+linkElement.popover = null;
+$("#<%= @modal_link_id %>").popover({
 	trigger: "manual",
 	placement: "below",
 	offset: 10,
 	html: true,
 	title: function(){return "New Studyhall";},
-	content: function(){return "<%=j render :partial => "study_sessions/form" %>";}
+	content: function(){return "<%=j render :partial => 'form' %>";}
 });
-$("#new_study_session_btn").popover("show");
+$("#<%= @modal_link_id %>").popover("show");
 $("#new_study_session input[type='text']").first().focus();
+
+//linkElement = $("#<%=j @modal_link_id %>")
+//linkElement.popover = null;
+//linkElement.popover({
+//	trigger: "manual",
+//	placement: "below",
+//	offset: 10,
+//	html: true,
+//	title: function(){return "New Studyhall";},
+//	content: function(){return "<%=j render :partial => "study_sessions/form" %>";}
+//});
+//linkElement.attr("data-link-id", "<%= @modal_link_id %>");
+//linkElement.popover("show");
+//$("#new_study_session input[type='text']").first().focus();

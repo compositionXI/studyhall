@@ -11,12 +11,12 @@ switch_greek_select_box = ()->
 		$('.fraternity').css("display", "none")
 
 $ ->
-  $("#profile_tabs").tabs()
-  # $(".chzn-select").css({"display": "none"})
-  $("select").chosen()
-	# $('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
-	#	$('.chzn-select.appendable').append('<option>'+this.value+'</option>')
-	#	$('.chzn-select.appendable').trigger('liszt:updated')
+	$("#profile_tabs").tabs()
+	# $(".chzn-select").css({"display": "none"})
+	$("select").chosen()
+	$('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
+	$('.chzn-select.appendable').append('<option>'+this.value+'</option>')
+	$('.chzn-select.appendable').trigger('liszt:updated')
 	
 	$('.sorority, .fraternity').css("display", "none")
 	switch_greek_select_box()
