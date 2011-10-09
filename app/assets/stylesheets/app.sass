@@ -179,6 +179,9 @@ html
       &::-webkit-input-placeholder
         color: rgba(255,255,255,.75)
   .secondary-nav 
+    li:last-child
+      &:hover, &:active, &:focus
+        border: 0
     li.dropdown
       @include border-radius( $topbarRadius )
       @include vertical-gradient($navGradStart, $navGradEnd)
@@ -335,6 +338,8 @@ html
     position: absolute
     right: 266px
     top: 0
+    a
+      text-shadow: none         
 .user_greeting.span4
   float: left
   margin-left: 0
