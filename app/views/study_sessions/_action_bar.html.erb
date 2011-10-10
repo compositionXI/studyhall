@@ -1,7 +1,11 @@
 <div class="action_bar">
   <div class="container">
     <div class="buttons left">
-      <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button", :id => "new_study_session_button1", :remote => true %>
+      <% if @index %>
+        <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button", :id => "new_study_session_button1", :remote => true %>
+      <% elsif @show %>
+        <%= link_to "X", study_sessions_path, :class => "btn" %>
+      <% end %>
     </div>
     <h3><%= flash[:action_bar_message] %></h3>
     <div class="buttons right">
@@ -13,13 +17,8 @@
         </span>
         <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
       <% end %>
-      <% if @show && current_user.can_edit?(@study_session) %>
-        <%= link_to "Edit", edit_study_session_path(@study_session), :class => "btn" %>
-        <%= link_to "Delete", study_session_path(@study_session), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
-      <% end %>
-      <% if @edit_all %>
-        <%= link_to "Select All", "#", :class => "btn", :id => "select_all"%>
-        <%= link_to "Save", "#", method: :delete, :class => "btn", :confirm => "Are you sure?" %>
+      <% if @show %>
+        <%= link_to "Save", edit_study_session_path(@study_session), :class => "btn" %>
       <% end %>
     </div>
   </div>

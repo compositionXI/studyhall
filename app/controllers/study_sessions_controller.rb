@@ -5,11 +5,13 @@ class StudySessionsController < ApplicationController
   
   def index
     @study_sessions = StudySession.all
+    @index = true
   end
   
   def show
     @study_session = StudySession.find(params[:id])
     @room = Room.find(@study_session.room_id)
+    @show = true
   end
   
   def new
