@@ -53,7 +53,7 @@ $(function(){
                         
   // Code for styling file upload inputs. Needs to be extracted and pluginified
    
-  $(".input-file").each(function(){    
+  $(".input-file, input:file").each(function(){    
     var $this = $(this)
     ,   origWidth = $this.outerWidth()
     ,   $fakeyInput = $("<div class='fake-file'><input type='text'><span class='btn'>Browse</span>");
