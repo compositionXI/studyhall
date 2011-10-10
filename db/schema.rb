@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111006033303) do
+ActiveRecord::Schema.define(:version => 20111010140432) do
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -195,6 +195,7 @@ ActiveRecord::Schema.define(:version => 20111006033303) do
     t.datetime "avatar_updated_at"
     t.string   "custom_url"
     t.text     "bio"
+    t.boolean  "active",                                            :default => false, :null => false
   end
 
   create_table "votes", :force => true do |t|

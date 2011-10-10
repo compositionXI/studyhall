@@ -21,9 +21,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     @user.roles << Role.find_by_name("Student") if params[:user][:role_ids].nil?
-    if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_to :action => "profile_wizard", :id => @user.id
+    if @user.save_without_session_maintenance
+      @user.deliver_activation_instructions!
+      flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email."  
+      redirect_to root_url
     else
       render :action => :new
     end
