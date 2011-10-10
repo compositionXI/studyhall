@@ -1,20 +1,38 @@
 class Notifier < ActionMailer::Base
   default :from => 'no-reply@example.com', :return_path => 'system@example.com'
   
-  default_url_options[:host] = ""
+  default_url_options[:host] = "localhost:3000"
 
+  def activation_instructions(user)
+    @user = user
+    @url = activate_url(@user.perishable_token)
+
+    mail(
+      :subject => "Activation Instructions",
+      :from => "StudyHall.com",
+      :to => @user.email
+    )
+  end
+  
   def welcome(user)
-    @account = user
-    mail(:to => user.email, :bcc => ["bcc@example.com", "Order Watcher <watcher@example.com>"])
+    @user = user
+    @url = login_url
+    mail(
+      :subject => "Welcome to StudyHall",
+      :from => "StudyHall.com",
+      :to => @user.email,
+      :bcc => ["bcc@example.com", "Order Watcher <watcher@example.com>"]
+    )
   end
 
-  def password_reset_instructions(user)  
+  def password_reset_instructions(user)
+    @user = user
+    @url = edit_password_reset_url(@user.perishable_token)
     mail(
       :subject => "Password Reset Instructions",
       :from => "StudyHall.com",
-      :to => user.email,
-      :date => Time.now, 
-      :body => edit_password_reset_path(user.perishable_token)
+      :to => @user.email,
+      :date => Time.now
     )
   end
 end
