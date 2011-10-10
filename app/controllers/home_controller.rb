@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  before_filter :require_user
+
   def index
     @notebooks = @current_user.notebooks
     @unsorted_notes = @current_user.notes.unsorted
