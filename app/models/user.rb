@@ -68,10 +68,25 @@ class User < ActiveRecord::Base
   def editable_by?(user)
     (self == user) || (user.roles.include?(Role.find_by_name "Admin"))
   end
+
+  def activate!
+    self.active = true
+    save
+  end
   
   def deliver_password_reset_instructions!  
     reset_perishable_token!  
     Notifier.password_reset_instructions(self).deliver
+  end
+
+  def deliver_activation_instructions!
+    reset_perishable_token!
+    Notifier.activation_instructions(self).deliver
+  end
+
+  def deliver_welcome!
+    reset_perishable_token!
+    Notifier.welcome(self).deliver
   end
   
   def avatar_url(size = nil)

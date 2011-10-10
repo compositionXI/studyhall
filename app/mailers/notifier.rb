@@ -3,6 +3,17 @@ class Notifier < ActionMailer::Base
   
   default_url_options[:host] = "localhost:3000"
 
+  def activation_instructions(user)
+    @user = user
+    @url = activate_url(@user.perishable_token)
+
+    mail(
+      :subject => "Activation Instructions",
+      :from => "StudyHall.com",
+      :to => @user.email
+    )
+  end
+  
   def welcome(user)
     @user = user
     @url = login_url
