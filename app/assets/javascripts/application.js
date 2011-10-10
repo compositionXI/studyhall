@@ -14,6 +14,40 @@
 //= require bootstrap-modal.js
 //= require_tree .
 
+// Code for styling file upload inputs. Needs to be extracted and pluginified
+var styleFileInputs = function(){
+  $(".input-file,input:file").each(function(){    
+    if(!$(this).hasClass("styled")){
+      var $this = $(this)
+      ,   origWidth = $this.outerWidth()
+      ,   $fakeyInput = $("<div class='fake-file'><input type='text'><span class='btn'>Browse</span>");
+    
+      $this.parent('.input').css({ position: "relative" });
+      
+      $this.after( $fakeyInput ).css({    
+        cursor : "pointer"
+        , height : 37
+        , padding : "0 5px 0 0"
+        , opacity : 0 
+        , position : "relative"
+        , "z-index" : 5
+      });  
+      
+      var buttonWidth = $(".fake-file .btn").outerWidth()
+      ,   finalWidth = origWidth - buttonWidth + 4;
+      
+      $(".fake-file input").css({width : finalWidth });
+      $(".fake-file").click(function(e){
+         $(this).siblings('input').click();
+      });
+      $this.change( function () {    
+        $this.siblings('.fake-file').find('input').val( this.value )      
+      });                           
+      $(this).addClass("styled");
+    }
+  }); 
+};
+
 $(function(){
   $("a").twipsy({
         placement: "below"
@@ -50,42 +84,10 @@ $(function(){
   $("#sortTableExample").tablesorter();
   
   // $("select").chosen()  
-                        
-  // Code for styling file upload inputs. Needs to be extracted and pluginified
-   
-  $(".input-file, input:file").each(function(){    
-    var $this = $(this)
-    ,   origWidth = $this.outerWidth()
-    ,   $fakeyInput = $("<div class='fake-file'><input type='text'><span class='btn'>Browse</span>");
-  
-    $this.parent('.input').css({ position: "relative" });
-    
-    $this.after( $fakeyInput ).css({    
-      cursor : "pointer"
-      , height : 37
-      , padding : "0 5px 0 0"
-      , opacity : 0 
-      , position : "relative"
-      , "z-index" : 5
-    });  
-    
-    var buttonWidth = $(".fake-file .btn").outerWidth()
-    ,   finalWidth = origWidth - buttonWidth + 4;
-    
-    $(".fake-file input").css({width : finalWidth });
-    $(".fake-file").click(function(e){
-       $(this).siblings('input').click();
-    });
-    $this.change( function () {    
-      $this.siblings('.fake-file').find('input').val( this.value )      
-    });                           
-  }); 
-  
-   
-  
 });
 
 $(document).ready(function(){
+  $("select.chzn-select").chosen();
   $("body").delegate("a.cancel_popover","click",function(e){
 		var linkId = $(this).attr("data-link-id"); //needed for pages that have multiple popovers.
     var button = linkId ? $("#"+linkId) : $(".popover_button");
@@ -97,4 +99,5 @@ $(document).ready(function(){
     button.replaceWith(button.clone());
     e.preventDefault();
   });
+  styleFileInputs();
 });

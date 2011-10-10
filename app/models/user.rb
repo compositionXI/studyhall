@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
   has_many :followings
   has_many :followed_users, :through => :followings
   has_many :authentications, :dependent => :destroy
-  
+  has_many :session_invites
+  has_many :study_sessions, :through => :session_invites
+
   validates_presence_of :name
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)

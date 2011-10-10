@@ -1,27 +1,28 @@
 <%= render :partial => "tokbox_code" %>
-<fieldset>
-  <legend><%= @room.name %></legend>
-</fieldset>
+<div id="menubar" class="topbar notes">
+  <div class="right">
+    <%= link_to "Save", "#", :id => "save_note_btn", :class => 'btn' %>
+  </div>
+  <div class="left">
+    <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
+  </div>
+  <div class="middle">
+  </div>
+</div>
+<div class="clearfix"></div>
 <div id="video_sidebar">
   <div id="opentok_console"></div>
   <div id="links">
-    <ul>
-      <li><a class="btn" value="Connect" id ="connectLink" onClick="javascript:connect()" style="width:55px">Connect</a></li>
-      <li><a class="btn" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" style="width:55px">Leave</a></li>
-      <li><a class="btn" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()" style="width:75px">Start Sharing</a></li>
-      <li><a class="btn" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()" style="width:75px">Stop Sharing</a></li>
-    </ul>
+    <a class="btn" value="Connect" id ="connectLink" onClick="javascript:connect()">Connect</a>
+    <a class="btn" value="Leave" id ="disconnectLink" onClick="javascript:disconnect()" >Leave</a>
+    <a class="btn" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()">Start Sharing</a>
+    <a class="btn" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()">Stop Sharing</a>
   </div>
   <div id="myCamera" class="publisherContainer"></div>
   <div id="subscribers"></div>
 </div>
 
-<% if @study_session.whiteboard && @study_session.whiteboard.embeddable? %>
-  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.whiteboard.short_id %>?embedded=true" frameborder="1" width="700" height="550"></iframe>
-<% else %>
-  <%= render :partial => "whiteboards/form" %>
-  <!--<iframe id="whiteboard" data-url="<%= new_whiteboard_path %>" src="" width="400" height="300"></iframe>-->
-<% end %>
+  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="700" height="550"></iframe>
 <div class="clearfix"></div>
 
 <script>

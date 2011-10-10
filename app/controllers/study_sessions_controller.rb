@@ -1,62 +1,45 @@
 class StudySessionsController < ApplicationController
   
-  before_filter :init_opentok, :only => ["show", "create"]
-  before_filter :set_action_bar
+  before_filter :require_user
+  before_filter :set_action_bar, except: [:show]
+  before_filter :augment_study_session_params, only: [:create]
   
   def index
-    @study_sessions = StudySession.all
+    @study_sessions = current_user.study_sessions
     @index = true
   end
   
   def show
     @study_session = StudySession.find(params[:id])
-    @room = Room.find(@study_session.room_id)
     @show = true
   end
   
   def new
+    @modal_link_id = params[:link_id]
     @study_session = StudySession.new
-    @room = Room.new
-    @whiteboard = Whiteboard.new
-    
-    respond_to do |format|
-      format.html do
-        if request.xhr?
-          render :partial => "form"
-        else
-          render "new"
-        end
-      end
-      @modal_link_id = params[:link_id]
-      format.js
-    end
+    @study_session.buddy_ids = [params[:id]]
+    @study_session.session_files.build
   end
   
   def create
-    session = @opentok.create_session request.remote_addr
-    @room = Room.new
-    @room.sessionId = session.session_id
-    @room.save
-    @whiteboard = Whiteboard.new()
-    @whiteboard.save
-    @study_session = StudySession.new(params[:study_session])
-    @study_session.whiteboard_id = @whiteboard.id
-    @study_session.room_id = @room.id
-    @study_session.save
-    redirect_to study_session_path(@study_session.id)
+    @study_session = current_user.study_sessions.new(params[:study_session])
+    if @study_session.save
+      redirect_to @study_session
+    else
+      render action: "new"
+    end
   end
   
   def destroy
-    @study_session = StudySession.find params[:id]
-    @study_session.destroy
+    @study_session.destroy(params[:id])
     redirect_to study_sessions_path
   end
   
   private
   
-  def init_opentok
-    if @opentok.nil?
-      @opentok = OpenTok::OpenTokSDK.new 3277692, "8905050f8367fa22748f910906d6a1dfe3b035f8"
-    end
+  def augment_study_session_params
+    params[:study_session][:remote_addr] = request.remote_addr
+    params[:study_session][:user_id] = current_user.id
   end
+
 end

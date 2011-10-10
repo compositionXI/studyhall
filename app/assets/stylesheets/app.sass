@@ -735,6 +735,7 @@ form
     
     background: white
     color: black
+
 //Study Sessions
 .study_sessions-show
   #video_sidebar
@@ -744,14 +745,11 @@ form
     margin-right: 15px
     padding: 10px
     min-height: 300px
+    color: green
     #links
-      ul
-        margin: 0
-        padding: 0
-        li
-          list-style: none
-          width: 55px
-          margin-bottom: 5px
+      text-align: left
+      a.btn
+        float: left
   .container
     width: 1010px
   form.new_whiteboard
@@ -766,7 +764,15 @@ form
   .preview
     border: 1px solid grey
 
-
+.popover #new_study_session
+  p
+    margin-top: 5px
+  label
+    margin-top: 10px
+  input[type="file"]
+    width: 300px
+  select
+    width: 312px
 
 
 // User Settings

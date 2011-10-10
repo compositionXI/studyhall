@@ -1,13 +1,21 @@
-linkElement = $("#<%=j @modal_link_id %>");
-linkElement.popover = null;
-$("#<%= @modal_link_id %>").popover({
-  trigger: "manual",
-  placement: "below-right",
-  offset: 10,
-  horizontalOffset: 25,
-  html: true,
-  title: function(){return "New Studyhall";},
-  content: function(){return "<%=j render :partial => 'form' %>";}
-});
-$("#<%= @modal_link_id %>").popover("show");
-$("#new_study_session input[type='text']").first().focus();
+var button = $("#<%=j @modal_link_id %>");
+
+var placement = null;
+if(button.parent().hasClass("right"))
+  placement = "below-left";
+else
+  placement = "below-right";
+
+button.popover({trigger: "manual",
+                placement: placement,
+                offset: 10,
+                horizontalOffset: 25,
+                html: true,
+                title: function(){return "Start A Study Hall";},
+                content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+
+styleFileInputs();
+$("#new_study_session .fake-file").css({position: "relative", top: "-34px"});

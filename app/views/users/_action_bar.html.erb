@@ -21,7 +21,7 @@
       </h3>
       <div class="buttons right">
         <% if params[:action] == "show" && @user && @user != current_user %>
-          <%= link_to "Invite to a Studyhall", "#", :class => "btn small", :title => "Invite to a Studyhall" %>
+          <%= link_to "Invite to a Studyhall", new_study_session_path(:id => @user, :link_id => "new_study_session_button"), :id => "new_study_session_button", :class => "btn small", :remote => true %>
         <% elsif params[:action] == "edit" %>
           <%= link_to "All Done!", @user, :class => "btn small", :title => "All Done!" %>
         <% end %>

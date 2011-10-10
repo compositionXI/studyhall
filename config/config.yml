@@ -1,22 +1,22 @@
 development:
-  whiteboard:
-    service: twiddla
-    login: brentmc79
-    password: intridea4me
-    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
   host: localhost:3001
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
 
 test:
-  whiteboard:
-    service: twiddla
-    login: 
-    password: 
-    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+
+staging:
+  host: studyhall.intridea.com
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
 
 production:
-  whiteboard:
-    service: twiddla
-    login: 
-    password: 
-    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
   host: shpoc.heroku.com
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
