@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
+  rescue_from User::NotAuthorized, with: :deny_access
+
   private
   
   def record_not_found
@@ -78,4 +80,10 @@ class ApplicationController < ActionController::Base
     @action_bar = File.exists?("app/views/#{params[:controller]}/_action_bar.html.erb") ? "#{params[:controller]}/action_bar" : nil
     flash[:action_bar_message] = nil
   end
+  
+  def deny_access
+    path = request.referrer || root_path
+    redirect_to path, error: "You don't have permissoin to view that page"
+  end
+
 end

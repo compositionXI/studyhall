@@ -144,3 +144,5 @@ class User < ActiveRecord::Base
     self.extracurriculars.collect {|e| e.name}.join(",")
   end
 end
+
+class User::NotAuthorized < StandardError; end

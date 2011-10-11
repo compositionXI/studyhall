@@ -17,6 +17,10 @@ class StudySession < ActiveRecord::Base
 
   attr_accessor :remote_addr, :buddy_ids
 
+  def joinable_by?(user)
+    users.include?(user)
+  end
+
   def init_opentok
     begin
       opentok = OpenTok::OpenTokSDK.new(APP_CONFIG["opentok"]["key"], APP_CONFIG["opentok"]["secret"])

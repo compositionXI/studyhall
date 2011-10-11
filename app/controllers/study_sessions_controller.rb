@@ -11,6 +11,7 @@ class StudySessionsController < ApplicationController
   
   def show
     @study_session = StudySession.find(params[:id])
+    raise User::NotAuthorized unless @study_session.joinable_by?(current_user)
     @show = true
   end
   
