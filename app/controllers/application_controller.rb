@@ -4,8 +4,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
   
   before_filter :current_user, :fetch_static_pages
+  
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   private
+  
+  def record_not_found
+    flash[:action_bar_message] = "Page Not Found!"
+    @action_bar = "/shared/error_action_bar"
+    render "public/404.html", :status => 404
+  end
   
   def current_user_session
     logger.debug "ApplicationController::current_user_session"
