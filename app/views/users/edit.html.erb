@@ -22,8 +22,8 @@
         <div class="profile_ratings left">
           <% if @user.gpa %>
             <div id="profile_edit_gpa" class="rating_block gpa profile_edit left">
-              <span id="gpa"><%= @user.gpa %></span>
-              GPA
+            <div class="gpa_score"><%= @user.gpa %></div>
+            <span>GPA</span> 
             </div>
           <% end %>
           <div class="rating_block rating right">
