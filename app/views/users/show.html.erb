@@ -16,6 +16,9 @@
         <div id="profile_detailed_info">
           <%= html_profile_detailed_info_for(@user)%>
         </div>
+        <div id="profile_bio" class="left">
+          <span id="bio"><%= @user.bio %></span>
+        </div>
       </div>
       <div class="profile_ratings left">
         <% if @user.gpa %>
