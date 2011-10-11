@@ -1,12 +1,12 @@
 <%= render :partial => "tokbox_code" %>
 <div id="menubar" class="topbar notes">
   <div class="right">
-    <%= link_to "Save", "#", :id => "save_note_btn", :class => 'btn' %>
   </div>
   <div class="left">
     <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
   </div>
   <div class="middle">
+    <h3>StudyHall - <%= @study_session.created_at.strftime("%d/%m/%y") %></h3>
   </div>
 </div>
 <div class="clearfix"></div>
@@ -22,7 +22,7 @@
   <div id="subscribers"></div>
 </div>
 
-  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="700" height="550"></iframe>
+  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="700" height="650"></iframe>
 <div class="clearfix"></div>
 
 <script>
