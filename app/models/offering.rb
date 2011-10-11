@@ -9,6 +9,6 @@ class Offering < ActiveRecord::Base
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
   
   def course_listing
-    "#{self.course.number} - #{self.course.title}- #{self.instructor.full_name} - #{self.term}"
+    "#{self.course.department} - #{self.course.number} - #{self.course.title} - #{self.instructor.full_name}"
   end
 end
