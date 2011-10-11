@@ -38,6 +38,7 @@ class StudySessionsController < ApplicationController
   private
   
   def augment_study_session_params
+    params[:study_session] ||= {}
     params[:study_session][:remote_addr] = request.remote_addr
     params[:study_session][:user_id] = current_user.id
   end

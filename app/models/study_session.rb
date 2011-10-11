@@ -32,6 +32,7 @@ class StudySession < ActiveRecord::Base
   end
 
   def associate_users
+    buddy_ids ||= []
     buddy_ids << user.id unless user.nil?
     buddy_ids.uniq.each do |buddy_id|
       self.users << User.find(buddy_id)
