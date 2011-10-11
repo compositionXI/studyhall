@@ -37,30 +37,31 @@ $ ->
     switch_greek_select_box()
   
   edit_personal_info_modal = $(".edit_personal_info")
+  edit_bio_modal = $(".edit_bio")
   edit_gpa_modal = $(".edit_gpa")
-  change_profile_photo_modal = $(".edit_profile_photo")
+  edit_profile_photo_modal = $(".edit_profile_photo")
   
   $(".profile_edit_modal").dialog
     modal: true
     autoOpen: false
     open: (event, ui) -> $(".ui-dialog-titlebar-close", ui.dialog).hide()
   
-  $("#profile_personal_info").click (e) ->
-    edit_personal_info_modal.dialog("open")	
+  $("#profile_detailed_info").click (e) ->
+    edit_personal_info_modal.dialog("open")
+  
+  $("#profile_bio").click (e) ->
+    edit_bio_modal.dialog("open")
   
   $("#profile_edit_gpa").click (e) ->
     edit_gpa_modal.dialog("open")
   
   $("#change_profile_photo").click (e) ->
-    change_profile_photo_modal.dialog("open")
+    edit_profile_photo_modal.dialog("open")
   
   $(".close_modal").click (e) ->
     $(this).parents(".profile_edit_modal").dialog("close")
-  
-  edit_personal_info_modal = $(".edit_personal_info")
-  edit_gpa_modal = $(".edit_gpa")
-  edit_profile_photo_modal = $(".edit_profile_photo")
-  editModals = [edit_personal_info_modal[0], edit_gpa_modal[0], edit_profile_photo_modal[0]]
+    
+  editModals = [edit_personal_info_modal[0], edit_gpa_modal[0], edit_profile_photo_modal[0], edit_bio_modal[0]]
   
   $(editModals).find(".save").click ->
     modal = $(this).parents(".profile_edit_modal")
@@ -74,7 +75,7 @@ $ ->
   
   $("#edit_personal_info_form").bind "ajax:success", (event, response) ->
     $("#profile_personal_info").animate { opacity: 0 }, 200, ->
-      $("#profile_detailed_info #school").html(response.greek_house)
+      $("#profile_detailed_info #greek_house").html(response.greek_house)
       $("#profile_detailed_info #school").html(response.school)
       $("#profile_detailed_info #major").html(response.major)
       $(this).animate {opacity: 1}, 200
@@ -82,6 +83,11 @@ $ ->
   $("#edit_gpa_form").bind "ajax:success", (event, response) ->
     $("#profile_edit_gpa").animate {opacity: 0,}, 200, ->
       $("#profile_edit_gpa #gpa").html(response.gpa)
+      $(this).animate {opacity: 1}, 200
+  
+  $("#edit_bio_form").bind "ajax:success", (event, response) ->
+    $("#profile_bio").animate {opacity: 0,}, 200, ->
+      $("#profile_bio #bio").html(response.bio)
       $(this).animate {opacity: 1}, 200
   
   get_extracurriculars = () ->

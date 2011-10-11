@@ -49,11 +49,12 @@ class UsersController < ApplicationController
         greek_house = @user.male? ? @user.fraternity : @user.sorority
         render :json => {
           name: @user.name, 
-          school: @user.school, 
+          school: @user.school.name,
           greek_house: greek_house, 
           major: @user.major, 
           gpa: @user.gpa, 
-          avatar_url: @user.avatar_url(:large)
+          avatar_url: @user.avatar_url(:large),
+          bio: @user.bio
         }
       elsif params[:commit] == "Do This Later"
           redirect_to home_index_path

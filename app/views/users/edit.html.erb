@@ -18,6 +18,9 @@
               majors in <span class="highlight_text" id="major"><%= "#{@user.major}"%></span>
             <% end %>
           </div>
+          <div id="profile_bio" class="profile_edit left">
+            <span id="bio"><%= @user.bio == "" ? "Tell your Studyhall buddies about yourself!" : @user.bio %></span>
+          </div>
         </div>
         <div class="profile_ratings left">
           <% if @user.gpa %>
@@ -109,6 +112,18 @@
   <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_gpa_form", :multipart => true} do |f| %>
     <%= f.label :GPA %>
     <%= f.text_field :gpa %>
+    <div class="clearfix">
+      <%= f.submit "Save", :class => "btn primary save" %>
+      OR
+      <%= link_to "Cancel", "#", :class => "close_modal" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="profile_edit_modal edit_bio modal_dialog">
+  <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_bio_form", :multipart => true} do |f| %>
+    <%= f.label :bio %>
+    <%= f.text_area :bio, :rows => 10 %>
     <div class="clearfix">
       <%= f.submit "Save", :class => "btn primary save" %>
       OR
