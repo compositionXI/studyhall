@@ -841,10 +841,22 @@ form
     .gpa
       margin-right: 15px
 
-    .stats
+    .stats 
+      li
+        background-color: $zebraStriping
+        border-bottom: 1px solid $zebraBorder
+        font-size: 12px
+        font-weight: 300
+        line-height: 37px
 
-      .count
-        width: 45px
+        &:nth-child(even) 
+          background-color: $white
+        &:last-child
+          border: none
+        
+      .count 
+        font-size: 14px
+        width: 35px
         padding-right: 15px
         text-align: right
 
