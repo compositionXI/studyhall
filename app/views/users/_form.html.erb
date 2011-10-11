@@ -1,61 +1,58 @@
 <%= form_for @user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
-      <fieldset>
-        <div class="clearfix avatar">
-          <%= image_tag @user.avatar_url(:large) %>
-        </div>
-        <div class="clearfix">
-          <%= f.label :avatar %>
-          <div class="input"><%= f.file_field :avatar, :class => "input-file" %></div>
-        </div>
-        <% if @user.has_avatar? %>
-          <div class="clearfix">
-            <%= f.label "Delete Image" %>
-            <div class="input"><%= check_box_tag :delete_avatar, 0, false, {:class => "delete_avatar"} %></div>
-          </div>
-        <% end %>
-        <div class="clearfix">
-          <%= f.label :bio %> 
-          <div class="input"><%= f.text_area :bio, :class => "xlarge", :rows => 6 %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :custom_url %> 
-          <div class="input"><%= f.text_field :custom_url %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :School %>
-          <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {}, {"data-placeholder" => "Choose a school"} %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :Major %>
-          <div class="input"><%= f.text_field :major %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :courses %>
-          <div class="input"><%= f.collection_select :enrollments, Offering.find_all_by_school_id(@user.school), :id, :course_listing, {:selected => selected_courses_for(@user)}, { :multiple => true, :name => "user[offering_ids][]"} %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :GPA %>
-          <div class="input"><%= f.text_field :gpa %></div>
-        </div>
-        <div class="clearfix gender">
-          <%= f.label :Gender %>
-          <div class="input"><%= f.select( "gender", %w[Male Female], :prompt => "Select" )%></div>
-        </div>
-        <div class="clearfix fraternity">
-          <%= f.label :Fraternity %>
-          <div class="input"><%= f.text_field :fraternity %></div>
-        </div>
-        <div class="clearfix sorority">
-          <%= f.label :Sorority %>
-          <div class="input"><%= f.text_field :sorority %></div>
-        </div>
-        <div class="clearfix">
-          <%= f.label :sports_and_clubs %>
-          <div class="input"><%= text_field_tag "extracurriculars_list" %></div>
-        </div>
-        <div class="clearfix buttons">
-          <%= f.submit "Submit", :class => "btn primary" %>
-          or <%= link_to 'Do This Later', home_index_path %>
-        </div>
+  <div id="profile_completion_meter">
+    <%= @user.profile_completion_percentage %>% Complete
+  </div>
+  <fieldset>
+    <div class="clearfix avatar" <%= "data-default-url='true'" if @user.avatar_file_size.nil? %> >
+      <%= image_tag @user.avatar_url(:large) %>
+    </div>
+    <div class="clearfix">
+      <%= f.label :avatar %>
+      <div class="input"><%= f.file_field :avatar, :class => "input-file", "data-counted" => true %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :bio %> 
+      <div class="input"><%= f.text_area :bio, :class => "xlarge", :rows => 6, "data-counted" => true %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :custom_url %> 
+      <div class="input"><%= f.text_field :custom_url, "data-counted" => true %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :School %>
+      <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {:prompt => "Choose a school"}, {"data-placeholder" => "Choose a school", "data-counted" => true} %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :Major %>
+      <div class="input"><%= f.text_field :major, "data-counted" => true %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :courses %>
+      <div class="input"><%= f.collection_select :enrollments, Offering.find_all_by_school_id(@user.school), :id, :course_listing, {:selected => selected_courses_for(@user), :prompt => "Choose courses"}, {"data-placeholder" => "Choose courses", :multiple => true, :name => "user[offering_ids][]", "data-counted" => true} %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :GPA %>
+      <div class="input"><%= f.text_field :gpa, "data-counted" => true%></div>
+    </div>
+    <div class="clearfix gender">
+      <%= f.label :Gender %>
+      <div class="input"><%= f.select( "gender", %w[Male Female], {:prompt => "Select"}, {"data-counted" => true})%></div>
+    </div>
+    <div class="clearfix fraternity">
+      <%= f.label :Fraternity %>
+      <div class="input"><%= f.text_field :fraternity %></div>
+    </div>
+    <div class="clearfix sorority">
+      <%= f.label :Sorority %>
+      <div class="input"><%= f.text_field :sorority %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :sports_and_clubs %>
+      <div class="input"><%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, "data-counted" => true %></div>
+    </div>
+    <div class="clearfix buttons">
+      <%= f.submit "Submit", :class => "btn primary" %>
+      or <%= link_to 'Do This Later', home_index_path %>
+    </div>
   </fieldset>
 <% end %>

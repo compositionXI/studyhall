@@ -123,14 +123,20 @@ class User < ActiveRecord::Base
   end
   
   def profile_completion_percentage
-    percentage = 0
-    [self.avatar, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].collect do |member|
-      percentage += 10 unless member.try(:nil?) || member.try(:empty?)
+    count = 0.0
+    total = 0.0
+    [self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
+      count += 1 unless member.nil? || member == "/assets/generic_avatar_thumb.png" || member == [] || member == ""
+      total += 1
     end
-    percentage
+    (count/total * 100).to_i
   end
   
   def profile_complete?
     self.profile_completion_percentage >= 100
+  end
+  
+  def extracurriculars_list
+    self.extracurriculars.collect {|e| e.name}.join(",")
   end
 end

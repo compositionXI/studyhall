@@ -461,13 +461,26 @@ html
         background: none
         color: $linkColor
         padding: 0 30px
-        text-shadow: 0 1px 0 rgba(255,255,255, 0.55)   
+        text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
         
         span
           margin: 0
           .profile_edit
             background-color: $editable_background
             cursor: pointer
+
+form
+  position: relative
+  
+  #profile_completion_meter
+    position: absolute
+    right: 0
+    top: 0
+    width: 100px
+    height: 20px
+    margin-right: -120px
+    padding: 10px
+    border: 1px solid grey
 
       
 //Notebooks

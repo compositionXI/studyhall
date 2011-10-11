@@ -74,6 +74,10 @@ class UsersController < ApplicationController
   def profile_wizard
   end
   
+  def completion_percentage
+    
+  end
+  
   def extracurriculars
     if request.xhr?
       json = []

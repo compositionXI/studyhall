@@ -37,6 +37,7 @@ Studyhall::Application.routes.draw do
     get 'extracurriculars'
     member do
       get 'profile_wizard'
+      get "completion_percentage"
     end
     resources :messages, only: [:new, :create]
     post '/votes' => 'votes#create', :as => :upvote
