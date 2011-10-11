@@ -762,7 +762,7 @@ form
 
 .profile_edit
   background-color: $editable_background
-  cursor: pointer
+  cursor: pointer 
 
 #profile_sidebar
   margin-top: 17px
@@ -789,13 +789,12 @@ form
       &.gpa
         text-align: center
         .gpa_score
-          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
-          font-size: 26px
-          margin: 20px
-          color: #444
+
         span
+          +h3 
           display: block
-          margin-bottom: 10px
+          margin: 30px 0 0 0
+          color: $headings  
         a.help
           opacity: 0.5
           display: inline-block
@@ -807,10 +806,10 @@ form
       &.rating
         text-align: center
         .net_rating
-          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
-          font-size: 26px
-          margin: 20px
-          color: #444
+          +h3 
+          display: block
+          margin: 30px 0 0 0
+          color: $headings 
         span
           margin-bottom: 10px
           display: block
