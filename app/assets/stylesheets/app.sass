@@ -65,7 +65,11 @@ html
   .topbar .nav li 
     border-top: 1px solid $navBorderTop
   
-//Nav
+//Nav 
+
+header.topbar
+  z-index: 1000
+
 .topbar
   position: relative
   height: auto
@@ -573,11 +577,20 @@ form
     .dragging_placeholder
       .preview
         background: #ededed
-    .preview
+    .preview 
+      +body-font(500, 12px, 12px)
+      color: $white
       height: 125px
       width: 104px
       margin: 9px 0px 5px 9px
       padding: 0 8px 3px 0
+      .name
+        text-shadow: 0 1px 0 rgba(0,0,0, .25)
+        color: #FFFFFF
+        font-size: 12px
+        line-height: 100%
+        padding: 59px 0 0 18px
+        text-align: center
       .notebook, .note
         text-align: center
         
@@ -758,7 +771,7 @@ form
 
 .profile_edit
   background-color: $editable_background
-  cursor: pointer
+  cursor: pointer 
 
 #profile_sidebar
   margin-top: 17px
@@ -788,28 +801,25 @@ form
       &.gpa
         text-align: center
         .gpa_score
-          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
-          font-size: 26px
-          margin: 20px
-          color: #444
-        span
+          +h3 
           display: block
-          margin-bottom: 10px
+          margin: 30px 0 0 0
+          color: $headings 
         a.help
           opacity: 0.5
           display: inline-block
           height: 16px
           width: 16px
-          margin: 0 12px
+          margin: 10px 31px 0
           background-image: url("../assets/help_bw.png")
 
       &.rating
         text-align: center
         .net_rating
-          font-family: "ChennaiSlabMedium", "Helvetica Neue", Arial, Sans-serif
-          font-size: 26px
-          margin: 20px
-          color: #444
+          +h3 
+          display: block
+          margin: 30px 0 0 0
+          color: $headings 
         span
           margin-bottom: 10px
           display: block
@@ -841,10 +851,22 @@ form
     .gpa
       margin-right: 15px
 
-    .stats
+    .stats 
+      li
+        background-color: $zebraStriping
+        border-bottom: 1px solid $zebraBorder
+        font-size: 12px
+        font-weight: 300
+        line-height: 37px
 
-      .count
-        width: 45px
+        &:nth-child(even) 
+          background-color: $white
+        &:last-child
+          border: none
+        
+      .count 
+        font-size: 14px
+        width: 35px
         padding-right: 15px
         text-align: right
 
@@ -853,7 +875,9 @@ form
     #profile_tabs
       ul
         border-bottom: 1px solid black
-
+      .ui-state-active
+        a 
+          color: $headings
       .tabs_container
         ol
           display: block
