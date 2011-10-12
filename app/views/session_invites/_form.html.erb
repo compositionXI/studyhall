@@ -1,0 +1,10 @@
+<%= form_for @session_invite, url: study_session_invites_path(@study_session), remote: true, html: {class: 'form-stacked'} do |f| %>
+  <%= f.hidden_field :sender_id %>
+  <%= f.label :user_id, "Select a buddy to invite" %>
+  <%= f.collection_select :user_id, current_user.buddies.other_than(@study_session.users), :id, :name, {}, class: 'chzn-select', 'data-placeholder' => 'Select a buddy' %>
+  <%= f.label :message %>
+  <%= f.text_area :message, rows: 5, cols: 60 %>
+  <div class="clearfix"></div>
+  <%= f.submit "Send Invite", class: 'btn primary' %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => "invite_button" %>
+<% end %>

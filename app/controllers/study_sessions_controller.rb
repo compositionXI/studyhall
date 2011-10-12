@@ -2,7 +2,7 @@ class StudySessionsController < ApplicationController
   
   before_filter :require_user
   before_filter :set_action_bar, except: [:show]
-  before_filter :augment_study_session_params, only: [:create]
+  before_filter :augment_study_session_params, only: [:create, :update]
   
   def index
     @study_sessions = current_user.study_sessions
@@ -29,6 +29,12 @@ class StudySessionsController < ApplicationController
     else
       render action: "new"
     end
+  end
+
+  def update
+    @study_session = current_user.study_sessions.find(params[:id])
+    @study_session.update_attributes(params[:study_session])
+    redirect_to @study_session
   end
   
   def destroy

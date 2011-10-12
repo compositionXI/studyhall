@@ -10,7 +10,7 @@ class StudySession < ActiveRecord::Base
   scope :for_user, lambda {|user| where(:id => (select(:id).where(:user_id => user.id).map(&:id) + user.session_invites.map(&:study_session_id))) }
 
   before_create :init_opentok
-  after_create :upload_session_files
+  after_save :upload_session_files
   after_create :associate_users
 
   accepts_nested_attributes_for :session_files
@@ -32,7 +32,9 @@ class StudySession < ActiveRecord::Base
   end
 
   def upload_session_files
-    session_files.each(&:prepare_embed!)
+    session_files.each do |sf|
+      sf.prepare_embed! unless sf.already_uploaded?
+    end
   end
 
   def associate_users

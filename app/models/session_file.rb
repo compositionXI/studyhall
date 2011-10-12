@@ -18,6 +18,10 @@ class SessionFile < ActiveRecord::Base
     save!
   end
 
+  def already_uploaded?
+    embeddable?
+  end
+
   def retrieve_upload_uuid
     return upload_uuid if upload_uuid.present?
     begin

@@ -10,11 +10,7 @@
     <h3><%= flash[:action_bar_message] %></h3>
     <div class="buttons right">
       <% if @index%>
-        <a href="" class="btn">Filter</a>
-        <span id="items_layout_switcher">
-          <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
-          <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
-        </span>
+        <%= link_to "Filter", study_sessions_path, id: "filter_button", class: "btn" %>
         <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
       <% end %>
     </div>

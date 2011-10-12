@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
     when "archive"
       @messages = current_user.trash
     else
-      raise RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
+      raise ActiveRecord::RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
     end
   end
 

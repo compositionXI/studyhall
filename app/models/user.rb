@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :session_invites
   has_many :study_sessions, :through => :session_invites
 
+  scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
+
   validates_presence_of :name
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)

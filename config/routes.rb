@@ -48,7 +48,9 @@ Studyhall::Application.routes.draw do
   resources :user_sessions
   resources :whiteboards
   resources :rooms
-  resources :study_sessions
+  resources :study_sessions do
+    resources :session_invites, as: "invites"
+  end
   resources :home
 
   resources :authentications
