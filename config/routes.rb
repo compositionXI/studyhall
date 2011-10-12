@@ -50,6 +50,11 @@ Studyhall::Application.routes.draw do
   resources :rooms
   resources :study_sessions
   resources :home
+
+  resources :authentications
+  match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/failure' => 'user_sessions#new'
+  match '/auth/:provider', to: lambda{|env| [404,{},["Not Found"]]}
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout

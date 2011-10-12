@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   belongs_to :school
   has_many :followings
   has_many :followed_users, :through => :followings
+  has_many :authentications, :dependent => :destroy
   
   validates_presence_of :name
 
