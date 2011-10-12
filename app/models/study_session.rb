@@ -32,6 +32,12 @@ class StudySession < ActiveRecord::Base
     end
   end
 
+  def generate_token(user)
+    return 'devtoken' if Rails.env.development?
+    opentok = OpenTok::OpenTokSDK.new(APP_CONFIG["opentok"]["key"], APP_CONFIG["opentok"]["secret"])
+    opentok.generate_token :settion_id => tokbox_session_id, :connection_data => "name=#{user.name}"
+  end
+
   def upload_session_files
     session_files.each do |sf|
       sf.prepare_embed! unless sf.already_uploaded?
