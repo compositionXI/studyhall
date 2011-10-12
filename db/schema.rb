@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
@@ -152,18 +153,28 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
     t.datetime "updated_at"
   end
 
-  create_table "rooms", :force => true do |t|
-    t.string   "name"
-    t.string   "sessionId"
-    t.boolean  "public"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "session_files", :force => true do |t|
+    t.integer  "study_session_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.string   "session_identifier"
+    t.string   "upload_uuid"
+    t.string   "short_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "session_invites", :force => true do |t|
+    t.integer "study_session_id"
+    t.integer "user_id"
   end
 
   create_table "static_pages", :force => true do |t|
@@ -180,6 +191,8 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tokbox_session_id"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -199,6 +212,7 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -221,16 +235,5 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
   add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
   add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
-
-  create_table "whiteboards", :force => true do |t|
-    t.string   "session_identifier"
-    t.integer  "study_session_id"
-    t.string   "upload_file_name"
-    t.string   "upload_content_type"
-    t.integer  "upload_file_size"
-    t.datetime "upload_updated_at"
-    t.string   "upload_uuid"
-    t.string   "short_id"
-  end
 
 end
