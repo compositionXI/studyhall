@@ -18,6 +18,9 @@
     <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
     <%= f.label "Save To A Notebook" %>
     <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, :include_blank => true %>
+    <div>
+      Share: <%= f.check_box :shareable, {:checked => @note.shareable? ? "checked" : "" } %>
+    </div>
     <div class="clearfix">
       <%= f.submit "Save", :class => "btn primary save", :id => "save_note_submit_button" %>
       OR
