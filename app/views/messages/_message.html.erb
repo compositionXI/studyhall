@@ -15,7 +15,7 @@
     </div>
     <div class="subject"><strong>Subject:</strong><%= message_subject(message) %></div>
     <div class="body">
-      <%= message.body %>
+      <%= message.body.html_safe %>
     </div>
   </div>
 </li>
