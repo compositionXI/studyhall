@@ -26,7 +26,8 @@ User.create(
   login: "jsmith",
   roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
   password: "1234",
-  password_confirmation: "1234"
+  password_confirmation: "1234",
+  active: true
 )
 
 User.create(
@@ -40,7 +41,8 @@ User.create(
   login: "jdoe",
   roles: [Role.find_by_name("Student")],
   password: "1234",
-  password_confirmation: "1234"
+  password_confirmation: "1234",
+  active: true
 )
 
 # Create About and FAQs static pages
