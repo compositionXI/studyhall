@@ -16,16 +16,16 @@
                 <%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %>
               </li>
               <li id="nav_notes" <% if controller?("notebooks") %> class='current' <% end %>>
-                <%= link_to notebooks_path, title: "Take Notes" do %><span>Take Notes</span><% end %>
+                <%= link_to notebooks_path, title: "Notebooks" do %><span>Take Notes</span><% end %>
               </li>
               <li id="nav_profile" <% if controller?("users") %> class='current' <% end %>>
-                <%= link_to edit_user_path(@current_user), title: "Profile" do %><span>Profile</span><% end %>
+                <%= link_to user_path(current_user), title: "Profile" do %><span>Profile</span><% end %>
               </li>
               <li id="nav_inbox" <% if controller?("messages") %> class="current {inbox_class}" <% end %> >
                 <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %><small><%= inbox_count %></small><span>Inbox</span><% end %>
               </li>
               <li id="nav_account" >
-                <%= link_to @current_user, title: "Your Account" do %><span>Your Account</span><% end %>
+                <%= link_to current_user, title: "Your Account" do %><span>Your Account</span><% end %>
               </li>  
             </ul>
         <% end %>
