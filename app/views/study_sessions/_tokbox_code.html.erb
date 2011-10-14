@@ -1,14 +1,8 @@
-<%= 
-  javascript_tag do
-    "
-    var apiKey = 3277692;
-    var sessionId = '#{ @study_session.tokbox_session_id }';
-    var token = 'devtoken';
-    "
-  end
-%>
-
 <script>  
+
+var apiKey = 3277692;
+var sessionId = '<%= @study_session.tokbox_session_id %>';
+var token = 'devtoken';
 
 var session;
 var publisher;
@@ -16,7 +10,7 @@ var subscribers = {};
 
 // Un-comment either of the following to set automatic logging and exception handling.
 // See the exceptionHandler() method below.
-// TB.setLogLevel(TB.DEBUG);
+TB.setLogLevel(TB.DEBUG);
 
 TB.addEventListener('exception', exceptionHandler);
 
@@ -128,7 +122,7 @@ If you un-comment the call to TB.setLogLevel(), above, OpenTok automatically dis
 */
 
 function exceptionHandler(event) {
-  alert("Exception: " + event.code + "::" + event.message);
+  console.log("Exception: " + event.code + "::" + event.message);
 }
 
 //--------------------------------------
