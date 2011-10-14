@@ -134,7 +134,7 @@
 
 <div class="profile_edit_modal edit_profile_photo modal_dialog">
   <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_profile_photo_form", :multipart => true} do |f| %>
-    <%= f.label :avatar %>
+    <%= f.label :Your_photo %>
     <%= f.file_field :avatar %>
     <% if @user.has_avatar? %>
       <div class="clearfix">
