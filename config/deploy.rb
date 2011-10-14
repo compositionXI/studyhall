@@ -35,10 +35,13 @@ set :deploy_to, "/home/deploy/rails_apps/#{application}"
 
 namespace :deploy do
   desc "symlink the database yaml"
-  task :symlinkdb, :roles => :app do
+  task :symlinkconfigs, :roles => :app do
     run <<-CMD
       ln -s #{shared_path}/system/database.yml #{release_path}/config/database.yml
     CMD
+    run <<-CMD
+      ln -s #{shared_path}/system/s3.yml #{release_path}/config/s3.yml
+    CMD
   end
-  after "deploy:symlink", "deploy:symlinkdb"
+  after "deploy:symlink", "deploy:symlinkconfigs"
 end

@@ -5,7 +5,7 @@ class SessionFile < ActiveRecord::Base
                     :storage => :s3, 
                     :s3_credentials => "#{Rails.root}/config/s3.yml",
                     :path => ":attachment/:id/:basename.:extension",
-                    :bucket => 'shpoc'
+                    :bucket => "studyhall#{Rails.env}"
 
   after_create :prepare_embed!
 
