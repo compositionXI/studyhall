@@ -7,3 +7,4 @@ $("#new_notebook_button").popover({trigger: "manual",
                                   content: function(){return "<%=j render :partial => "notebooks/form" %>";}});
 $("#new_notebook_button").popover("show");
 $("#new_notebook input[type='text']").first().focus();
+$("#notebook_course_id").chosen();
