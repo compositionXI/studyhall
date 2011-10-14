@@ -16,6 +16,12 @@ class MessagesController < ApplicationController
     else
       raise ActiveRecord::RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
     end
+    
+    if request.xhr?
+      params[:message].delete :opened if params[:message][:opened] == "all"
+      @messages = current_user.inbox.where(params[:message])
+      render partial: "messages/message", collection: @messages
+    end
   end
 
   def new
@@ -49,6 +55,13 @@ class MessagesController < ApplicationController
   def destroy
     @message = HasMailbox::Models::Message.find(params[:id])
     @message.delete
+  end
+
+  def filter
+    @modal_link_id = params[:link_id]
+    respond_to do |format|
+      format.js
+    end
   end
 
   protected

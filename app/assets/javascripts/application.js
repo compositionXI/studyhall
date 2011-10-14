@@ -88,6 +88,7 @@ $(function(){
 
 $(document).ready(function(){
   $("select.chzn-select").chosen();
+  $("body").delegate("select.chzn-select", "change", function(){$(this).chosen();});
   $("body").delegate("a.cancel_popover","click",function(e){
 		var linkId = $(this).attr("data-link-id"); //needed for pages that have multiple popovers.
     var button = linkId ? $("#"+linkId) : $(".popover_button");

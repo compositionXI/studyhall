@@ -13,4 +13,8 @@ $(document).ready(function(){
     button.replaceWith(button.clone())
     e.preventDefault();
   });
+  
+  $("body").delegate("#filter_messages_form", "ajax:success", function(evt, data, status, xhr){
+    $('.messages_list').html(xhr.responseText);
+  });
 });

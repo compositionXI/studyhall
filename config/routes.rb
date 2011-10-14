@@ -44,6 +44,7 @@ Studyhall::Application.routes.draw do
     delete '/votes' => 'votes#destroy', :as => :downvote
   end
   resources :messages, except: [:edit]
+  get "filter_messages" => "messages#filter"
   resources :password_resets
   resources :user_sessions
   resources :whiteboards
