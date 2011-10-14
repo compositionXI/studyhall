@@ -48,7 +48,7 @@ class MessagesController < ApplicationController
 
   def update
     @message = HasMailbox::Models::Message.find(params[:id])
-    @message.undelete if params[:delete] == false
+    @message.undelete if params[:deleted] == "false"
     render "destroy"
   end
 
