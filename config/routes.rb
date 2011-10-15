@@ -11,6 +11,7 @@ Studyhall::Application.routes.draw do
 
   resources :classes do
     get "offerings_for_school/:school_id", :action => "offerings_for_school"
+    get "classmates"
   end
   #resources :followings, :only => [:create, :destroy]
   post '/followings' => 'followings#create', :as => :follow
@@ -35,6 +36,7 @@ Studyhall::Application.routes.draw do
   get "/messages/:mailbox" => "messages#index", :as => :mailbox, :constraints => {:mailbox => /(inbox|archive)/}
   resources :users do
     get 'extracurriculars'
+    get "buddies"
     member do
       get 'profile_wizard'
       get "completion_percentage"

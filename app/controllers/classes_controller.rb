@@ -9,6 +9,7 @@ class ClassesController < ApplicationController
   def show
     @class = @current_user.offerings.find params[:id]
     @course = @class.course
+    @classmates = @class.classmates(current_user)
     
     flash[:action_bar_message] = @course.title
   end
@@ -46,5 +47,10 @@ class ClassesController < ApplicationController
     if request.xhr?
       render :json => { :offerings => @offerings.collect {|o| o.course_listing}, :offering_ids => @school.offering_ids }
     end
+  end
+  
+  def classmates
+    @class = @current_user.offerings.find(params[:class_id])
+    render :partial => "shared/buddy_list", :locals => {buddies: @class.classmates(current_user)}
   end
 end

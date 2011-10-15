@@ -88,9 +88,11 @@ $(function(){
 
 $(document).ready(function(){
   $("select.chzn-select").chosen();
+  
   $("body").delegate("select.chzn-select", "change", function(){$(this).chosen();});
+  
   $("body").delegate("a.cancel_popover","click",function(e){
-		var linkId = $(this).attr("data-link-id"); //needed for pages that have multiple popovers.
+    var linkId = $(this).attr("data-link-id"); //needed for pages that have multiple popovers.
     var button = linkId ? $("#"+linkId) : $(".popover_button");
     button.popover("hide");
     //replacing the button with a clone of itself solves the problem where
@@ -101,4 +103,8 @@ $(document).ready(function(){
     e.preventDefault();
   });
   styleFileInputs();
+  
+  $(".modal-footer .close_modal").click(function(e){
+    $(".modal").modal("hide");
+  });
 });

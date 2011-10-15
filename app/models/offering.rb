@@ -11,4 +11,8 @@ class Offering < ActiveRecord::Base
   def course_listing
     "#{self.course.department} - #{self.course.number} - #{self.course.title} - #{self.instructor.full_name}"
   end
+  
+  def classmates(current_user)
+    self.users.sort_by(&:name) - [current_user]
+  end
 end

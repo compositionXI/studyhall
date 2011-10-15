@@ -3,18 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-	#newStudyhallModal = $("#new_study_session_modal")
-	#newStudyhallModal.dialog
-	#	modal: true
-	#	autoOpen: false
-	#	open: (event, ui) -> 
-	#		$(".ui-dialog-titlebar-close", ui.dialog).hide()
-  #
-	#$("#new_study_session_btn").click (e) ->
-	#	$.get "/study_sessions/new"
-	#		newStudyhallModal.html data
-	#		newStudyhallModal.dialog('open')
-  #    
-	#		newStudyhallModal.find(".close_modal").click (e) ->
-	#			e.preventDefault()
-	#			newStudyhallModal.dialog('close')
+  classmate_list_modal = $('#classmate_list_modal')
+  classmate_list_modal.modal {backdrop: true}
+  classmate_list_modal.modal("hide")
+  
+  $(".modal_button").bind "ajax:success", (evt, data, status, xhr) ->
+    classmate_list_modal.find(".modal-body").html xhr.responseText
+    classmate_list_modal.modal("show")

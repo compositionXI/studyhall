@@ -90,6 +90,10 @@ class UsersController < ApplicationController
       redirect_to root_url
     end
   end
+  
+  def buddies
+    render :partial => "shared/buddy_list", :locals => {buddies: @current_user.buddies.sort_by(&:name)}
+  end
 
   protected
   def redirect_to_user
