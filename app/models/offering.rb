@@ -5,6 +5,7 @@ class Offering < ActiveRecord::Base
   belongs_to :instructor
   has_many :enrollments
   has_many :users, :through => :enrollments
+  has_many :posts
   
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012111326) do
+ActiveRecord::Schema.define(:version => 20111015151635) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -135,6 +135,20 @@ ActiveRecord::Schema.define(:version => 20111012111326) do
     t.string   "term"
     t.integer  "school_id"
     t.integer  "instructor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "offering_id"
+    t.text     "text"
+    t.integer  "notebook_id"
+    t.integer  "study_session_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.string   "upload_file_size"
+    t.string   "upload_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

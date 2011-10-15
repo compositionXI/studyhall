@@ -10,7 +10,7 @@ class ClassesController < ApplicationController
     @class = @current_user.offerings.find params[:id]
     @course = @class.course
     @classmates = @class.classmates(current_user)
-    
+    @posts = @class.posts
     flash[:action_bar_message] = @course.title
   end
   
