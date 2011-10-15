@@ -51,6 +51,8 @@ class ClassesController < ApplicationController
   
   def classmates
     @class = @current_user.offerings.find(params[:class_id])
-    render :partial => "shared/buddy_list", :locals => {buddies: @class.classmates(current_user)}
+    @users = @class.classmates(current_user)
+    @title = "Classmates"
+    render "shared/users_list.js.erb"
   end
 end

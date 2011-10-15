@@ -103,8 +103,4 @@ $(document).ready(function(){
     e.preventDefault();
   });
   styleFileInputs();
-  
-  $(".modal-footer .close_modal").click(function(e){
-    $(".modal").modal("hide");
-  });
 });

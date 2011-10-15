@@ -1,0 +1,13 @@
+if($('#users_list_modal').length == 0){ // Check if it alreay exists
+  $('body').append("<div id='users_list_modal' class='modal'></div>");
+}
+users_list_modal = $("#users_list_modal")
+users_list_modal.modal({backdrop: true});
+users_list_modal.modal("hide");
+
+users_list_modal.html("<%=j render :partial => "shared/buddy_list", :locals => {users: @users, title: @title} %>");
+users_list_modal.modal("show");
+users_list_modal.find('.close_modal').click(function(e){
+  e.preventDefault();
+  $(".modal").modal("hide");
+});

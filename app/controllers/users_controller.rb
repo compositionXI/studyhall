@@ -92,7 +92,9 @@ class UsersController < ApplicationController
   end
   
   def buddies
-    render :partial => "shared/buddy_list", :locals => {buddies: @current_user.buddies.sort_by(&:name)}
+    @users = @current_user.buddies.sort_by(&:name)
+    @title = "Buddies"
+    render "shared/users_list.js.erb"
   end
 
   protected
