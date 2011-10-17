@@ -3,20 +3,24 @@ development:
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
 
 test:
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
 
 staging:
   host: studyhall.intridea.com
   opentok:
-    key: 3277692
-    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    key: 5822951
+    secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
+    js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
 
 production:
-  host: shpoc.heroku.com
+  host: studyhall.intridea.com
   opentok:
-    key: 3277692
-    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    key: 5822951
+    secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
+    js_src: https://swww.tokbox.com/v0.91/js/TB.min.js

@@ -7,7 +7,7 @@
     <%= link_to "Invite Others to Study", new_study_session_invite_path(@study_session), id: "invite_button", class: "btn", remote: true %>
   </div>
   <div class="left">
-    <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
+    <%= link_to("X", study_sessions_path, :class => "btn") %>
   </div>
 </div>
 <div class="clearfix"></div>
