@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       if request.xhr?
-        @posts = Offering.find(params[:class_id]).posts
+        @posts = Offering.find(params[:class_id]).posts.recent
         render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts}
       end
     end
