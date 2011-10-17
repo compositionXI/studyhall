@@ -24,8 +24,7 @@ class StudySession < ActiveRecord::Base
 
   def init_opentok
     begin
-      opentok = OpenTok::OpenTokSDK.new(APP_CONFIG["opentok"]["key"], APP_CONFIG["opentok"]["secret"])
-      opentok_session = opentok.create_session(remote_addr)
+      opentok_session = OPENTOK.create_session(remote_addr)
       self.tokbox_session_id = opentok_session.session_id
     rescue SocketError => e
       Rails.logger.error(e.message)
@@ -34,8 +33,7 @@ class StudySession < ActiveRecord::Base
 
   def generate_token(user)
     return 'devtoken' if Rails.env.development?
-    opentok = OpenTok::OpenTokSDK.new(APP_CONFIG["opentok"]["key"], APP_CONFIG["opentok"]["secret"])
-    opentok.generate_token :settion_id => tokbox_session_id, :connection_data => "name=#{user.name}"
+    OPENTOK.generate_token :settion_id => tokbox_session_id, :connection_data => "name=#{user.name}"
   end
 
   def upload_session_files
