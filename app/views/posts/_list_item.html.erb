@@ -1,19 +1,21 @@
 <ul class="unstyled">
   <% posts.each do |post| %>
     <li class="clearfix class_post">
-      <div class="left">
+      <div class="user_photo left">
         <%= link_to image_tag(post.user.avatar.url(:medium)), post.user, :title => post.user.name %>
       </div>
-      <div class="left">
-        <%= link_to post.user.name, post.user %> <%= post.created_at %> <br/>
+      <div class="post_details left">
+        <%= link_to post.user.name, post.user %> - <%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %> <br/>
         <%= post.text %>
         <div>
-          <%= link_to(post.notebook.name, notebook_path(post.notebook)) if post.notebook_id %>
+          <% if post.notebook_id %>
+            Notebook: <%= link_to(post.notebook.name, notebook_path(post.notebook)) %>
+          <% end %>
+          <% if post.study_session_id %>
+            Studyhall: <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) %>
+          <% end %>
         </div>
-        <div>
-          <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) if post.study_session_id %>
-        </div>
-      <div>
+      </div>
     </li>
   <% end %>
 </ul>
