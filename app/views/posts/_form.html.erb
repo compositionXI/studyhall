@@ -1,0 +1,26 @@
+<%= form_for post, :url => class_posts_path, :remote => true, :html => {:class => "form-stacked", :id => "post_form_button", :"data-type" => "html"} do |f| %>
+  <div class="clearfix">
+    <%= f.label :text, "Comment" %>
+    <div class="input"><%= f.text_area :text, :rows => 5, :cols => 15 %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :notebook_id %>
+  <div class="input">
+    <%= f.collection_select :notebook_id, post.user.notebooks, :id, :name, {}, {:class => "chzn-select", "data-placeholder" => "Select a notebook"} %>
+  </div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :study_session_id %>
+    <div class="input">
+      <%= f.collection_select :study_session_id, post.user.study_sessions, :id, :created_at_formatted, {}, {:class => "chzn-select", "data-placeholder" => "Select a studyhall"} %>
+    </div>
+  </div>
+  <div class="clearfix">
+  <%= f.label :upload, "Upload A File" %>
+  <div class="input"><%= f.file_field :upload, :class => "input-file" %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.submit "Share with class", :class => "btn primary" %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+  </div>
+<% end %>

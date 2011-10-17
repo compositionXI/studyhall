@@ -4,6 +4,7 @@ class StudySession < ActiveRecord::Base
   has_many :session_files
   has_many :session_invites
   has_many :users, :through => :session_invites
+  has_many :posts
 
   scope :as_host, lambda {|user| where(:user_id => user.id) }
   scope :as_guest, lambda {|user| user.study_sessions.where(StudySession.arel_table[:user_id].does_not_match(user.id)) }
@@ -44,5 +45,8 @@ class StudySession < ActiveRecord::Base
       self.users << User.find(buddy_id)
     end
   end
-    
+  
+  def created_at_formatted(format="%d/%m/%Y")
+    self.created_at.strftime(format)
+  end
 end

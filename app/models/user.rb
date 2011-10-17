@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :session_invites
   has_many :study_sessions, :through => :session_invites
+  has_many :posts
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
 

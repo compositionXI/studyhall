@@ -4,5 +4,6 @@ class Notebook < ActiveRecord::Base
 
   belongs_to :course
   has_many :notes, :dependent => :destroy
+  has_many :post
 
 end

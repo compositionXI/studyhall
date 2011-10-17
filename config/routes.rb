@@ -1,5 +1,5 @@
 Studyhall::Application.routes.draw do
-  
+
   resources :notes
   resources :notebooks do
     resources :notes do
@@ -8,10 +8,13 @@ Studyhall::Application.routes.draw do
       end
     end
   end
-
   resources :classes do
+    resources :posts
     get "offerings_for_school/:school_id", :action => "offerings_for_school"
     get "classmates"
+    member do
+      post "share"
+    end
   end
   #resources :followings, :only => [:create, :destroy]
   post '/followings' => 'followings#create', :as => :follow

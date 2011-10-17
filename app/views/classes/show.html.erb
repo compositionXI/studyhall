@@ -30,9 +30,9 @@
 </aside>
 <section class="course_activity">
   <header>
-    <h1 class="left">Course Activity</h1><%= link_to "SHARE WITH THE CLASS", "#", :class => "btn small right" %>
+    <h1 class="left">Course Activity</h1><%= link_to "SHARE WITH THE CLASS", new_class_post_path(:class_id => @class.id, :user_id => current_user.id), :class => "btn small right", :id => "class_share_button", :remote => true %>
   </header>
   <div class="course_activity_list">
-    
+    <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts} %>
   </div>
 </section>
