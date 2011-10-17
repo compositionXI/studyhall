@@ -1,19 +1,28 @@
 <div class="action_bar">
   <div class="container">
-    <div class="buttons left">
-      <% if @index %>
+    <% if @index %>
+      <div class="buttons left">
         <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button", :id => "new_study_session_button1", :remote => true %>
-      <% elsif @show %>
-        <%= link_to "X", study_sessions_path, :class => "btn" %>
-      <% end %>
-    </div>
-    <h3><%= flash[:action_bar_message] %></h3>
-    <div class="buttons right">
-      <% if @index%>
-        <%= link_to "Filter", study_sessions_path, id: "filter_button", class: "btn" %>
+      </div>
+      <h3><%= flash[:action_bar_message] || "Your StudyHalls" %></h3>
+      <div class="buttons right">
+        <%= link_to "Filter", study_sessions_path, id: "filter_button", class: "btn", :remote => true %>
         <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
-      <% end %>
-    </div>
+      </div>
+    <% elsif @show %>
+      <div class="buttons left">
+        <%= link_to "X", study_sessions_path, :class => "btn" %>
+      </div>
+      <h3><%= flash[:action_bar_message] %></h3>
+      <div class="buttons right">
+      </div>
+    <% else %>
+      <div class="buttons left">
+      </div>
+      <h3><%= flash[:action_bar_message] %></h3>
+      <div class="buttons right">
+      </div>
+    <% end %>
   </div>
 </div>
 
