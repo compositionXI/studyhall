@@ -40,6 +40,7 @@ Studyhall::Application.routes.draw do
   resources :users do
     get 'extracurriculars'
     get "buddies"
+    delete "drop_class/:offering_id", :action => "drop_class", :as => "drop_class"
     member do
       get 'profile_wizard'
       get "completion_percentage"

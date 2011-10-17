@@ -96,6 +96,12 @@ class UsersController < ApplicationController
     @title = "Buddies"
     render "shared/users_list.js.erb"
   end
+  
+  def drop_class
+    enrollment = @current_user.enrollments.find_by_offering_id params[:offering_id]
+    enrollment.delete
+    redirect_to root_path
+  end
 
   protected
   def redirect_to_user
