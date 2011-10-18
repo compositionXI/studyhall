@@ -5,12 +5,13 @@ class SessionInvite < ActiveRecord::Base
 
   after_create :send_message
 
-  attr_accessor :message, :sender_id
+  attr_accessor :message, :sender_id, :send_email
 
   def send_message
     return true unless message.present? && sender_id.present?
     sender = User.find(sender_id)
     subject = "#{sender.name} has invited you to a study session"
+    Notifier.study_session_invite(sender, user, self).deliver if send_email
     sender.send_message?(subject, message, user)
   end
 

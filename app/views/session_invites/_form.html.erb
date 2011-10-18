@@ -5,6 +5,9 @@
   <%= f.label :message %>
   <%= f.text_area :message, rows: 5, cols: 60 %>
   <div class="clearfix"></div>
+  <%= f.check_box :send_email %>
+  <%= f.label :send_email, "Send as email also?", :style => "display:inline" %>
+  <div class="clearfix"></div>
   <%= f.submit "Send Invite", class: 'btn primary' %>
   <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => "invite_button" %>
 <% end %>
