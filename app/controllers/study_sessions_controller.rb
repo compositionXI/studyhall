@@ -1,11 +1,13 @@
 class StudySessionsController < ApplicationController
+
+  include ActionView::Helpers::TextHelper
   
   before_filter :require_user
   before_filter :set_action_bar, except: [:show]
   before_filter :augment_study_session_params, only: [:create, :update]
   
   def index
-    @study_sessions = current_user.study_sessions
+    @study_sessions = find_study_sessions
     @index = true
   end
   
@@ -45,6 +47,18 @@ class StudySessionsController < ApplicationController
   
   private
   
+  def find_study_sessions
+    if params[:user_ids]
+      users = User.select(:name).where(:id => params[:user_ids]).all
+      flash.now[:action_bar_message] = "StudyHalls with #{truncate(users.map(&:name).to_sentence, :length => 50)}"
+      @filtered_results = true
+      current_user.study_sessions.with_users(params[:user_ids])
+    else
+      @filtered_results = false
+      current_user.study_sessions
+    end
+  end
+
   def augment_study_session_params
     params[:study_session] ||= {}
     params[:study_session][:remote_addr] = request.remote_addr
