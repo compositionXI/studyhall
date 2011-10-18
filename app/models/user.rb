@@ -51,17 +51,41 @@ class User < ActiveRecord::Base
   end
 
   #make this person follow the given user
-  def follow!(user)
-    followings.create(:followed_user_id => user.id)
+  def follow!(user, attributes = {})
+    attributes[:followed_user_id] = user.id
+    followings.create(attributes)
   end
 
   #find the following object joining this user and the given user
   def following_for(user)
     followings.where(:followed_user_id => user.id).first
   end
+  
+  def block!(user)
+    following = Following.where( :user_id => self.id, :followed_user_id => user.id).first
+    if following.nil?
+      follow!(user, :blocked => true)
+    else
+      following.update_attributes :blocked => true
+    end
+  end
+  
+  def blocked?(user)
+    following = Following.where( :user_id => self.id, :followed_user_id => user.id).first
+    following.blocked? unless following.nil?
+  end
+  
+  def unblock!(user)
+    following = Following.where :user_id => self.id, :followed_user_id => user.id
+    following.first.update_attributes :blocked => false
+  end
+  
+  def blocked_users
+    User.find followings.blocked.collect { |f| f.followed_user_id }
+  end
 
   def buddies
-    followed_users
+    followed_users - blocked_users
   end
   
   def has_role?(role)

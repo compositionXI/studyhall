@@ -1,21 +1,35 @@
 <ul class="unstyled">
   <% posts.each do |post| %>
-    <li class="clearfix class_post">
-      <div class="user_photo left">
-        <%= link_to image_tag(post.user.avatar.url(:medium)), post.user, :title => post.user.name %>
-      </div>
-      <div class="post_details left">
-        <%= link_to post.user.name, post.user %> - <%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %> <br/>
-        <%= post.text %>
-        <div>
-          <% if post.notebook_id %>
-            Notebook: <%= link_to(post.notebook.name, notebook_path(post.notebook)) %>
-          <% end %>
-          <% if post.study_session_id %>
-            Studyhall: <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) %>
-          <% end %>
+    <% unless current_user.blocked?(post.user)%>
+      <li class="clearfix class_post">
+        <div class="user_photo left">
+          <%= link_to image_tag(post.user.avatar.url(:medium)), post.user, :title => post.user.name %>
         </div>
-      </div>
-    </li>
+        <div class="post_details left">
+          <%= link_to post.user.name, post.user %> - <%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %> <br/>
+          <%= post.text %>
+          <div>
+            <% if post.notebook_id %>
+              Notebook: <%= link_to(post.notebook.name, notebook_path(post.notebook)) %>
+            <% end %>
+            <% if post.study_session_id %>
+              Studyhall: <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="post_options right">
+          <ul class="nav secondary-nav unstyled">
+            <li class="dropdown" data-dropdown="dropdown">
+              <%=link_to image_tag( "drop-down-arrow.png"), "#", :class => "dropdown-toggle" %>
+                <ul class="dropdown-menu">
+                  <div class="arrow-border"></div><div class="arrow"></div>
+                  <li><%= link_to "Block", user_block_path(:user_id => current_user, :blocked_user_id => post.user.id) %></li>
+                  <li><%= link_to "Report", "#", %></li>
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </li>
+    <% end %>
   <% end %>
 </ul>
