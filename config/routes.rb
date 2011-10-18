@@ -60,6 +60,7 @@ Studyhall::Application.routes.draw do
     resources :session_invites, as: "invites"
   end
   resources :home
+  resources :filters, only: [:new, :create]
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

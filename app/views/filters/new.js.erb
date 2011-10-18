@@ -1,0 +1,12 @@
+var button = $("#filter_button");
+button.popover({trigger: "manual",
+  placement: "below-left",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "<%= @filter.title %>";},
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
