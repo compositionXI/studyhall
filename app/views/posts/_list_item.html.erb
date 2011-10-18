@@ -17,8 +17,17 @@
             <% end %>
           </div>
         </div>
-        <div class="post_options">
-          <%= link_to "Block", user_block_path(:user_id => current_user, :blocked_user_id => post.user.id) %>
+        <div class="post_options right">
+          <ul class="nav secondary-nav unstyled">
+            <li class="dropdown" data-dropdown="dropdown">
+              <%=link_to image_tag( "drop-down-arrow.png"), "#", :class => "dropdown-toggle" %>
+                <ul class="dropdown-menu">
+                  <div class="arrow-border"></div><div class="arrow"></div>
+                  <li><%= link_to "Block", user_block_path(:user_id => current_user, :blocked_user_id => post.user.id) %></li>
+                  <li><%= link_to "Report", "#", %></li>
+                </ul>
+            </li>
+          </ul>
         </div>
       </li>
     <% end %>

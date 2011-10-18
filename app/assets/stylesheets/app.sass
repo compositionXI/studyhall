@@ -956,6 +956,8 @@ section.course_activity
       margin: 0
       +h5
 .course_activity_list
+  max-height: 600px
+  overflow-y: scroll
   .class_post
     padding-bottom: 10px
     margin-bottom: 10px
@@ -966,3 +968,91 @@ section.course_activity
     margin-right: 5px
   .post_details
     +columns(10)
+  .post_options
+    .secondary-nav 
+      position: relative
+      li:last-child
+        &:hover, &:active, &:focus
+      li.dropdown
+        height: 25px
+        padding: 3px
+        cursor: pointer
+        &:hover, &:focus, &:active
+        img
+          margin: 0 7px 0 0
+          
+        a.dropdown-toggle
+          background: none
+          display: inline
+          &:active, &:focus
+          img
+            vertical-align: middle
+        a.menu:after, .dropdown-toggle:after
+          display: inline-block
+          height: 0
+          margin-left: 4px
+          margin-top: 11px
+          text-indent: -99999px
+          vertical-align: top
+          width: 0
+        &.open
+          ul
+            @include opacity(100) 
+            display: block 
+            height: auto
+            padding: 5px 0
+            overflow: visible
+        ul
+          z-index: 1000
+          @include vertical-gradient(#ffffff, #f8f8f8)
+          @include border-radius(2px)
+          @include box-shadow(0 3px 7px rgba(0,0,0,0.3))
+          $transition: opacity .15s linear
+          @include transition($transition)
+          @include opacity(0)
+          border: 1px solid $popoverBorder
+          float: left
+          display: block
+          position: absolute
+          top: 30px
+          right: 3px
+          height: 0px
+          min-width: 90px
+          max-width: 160px
+          _width: 90px
+          margin-left: 0
+          margin-right: 0
+          overflow: hidden
+          text-align: left
+          zoom: 1      
+          .arrow 
+            @include popover-arrow-below(10px,$popoverColor, -8px, auto, 5px)
+            position: absolute
+            width: 0
+            height: 0
+          .arrow-border
+            @include arrow-border(10px,$popoverBorder, -20px, auto, 5px)          
+          li 
+            +box-shadow(none)
+            float: none
+            clear: both
+            display: block
+            background: none
+            font-size: 12px
+            border: none
+            padding: 0 
+            &:hover, &:active, &:focus
+              height: auto
+              margin: 0
+
+            a 
+              @include vertical-gradient( none)
+              background: none
+              display: block
+              padding: 6px 15px
+              clear: both
+              font-size: 12px
+              font-weight: normal
+              line-height: 12px
+              color: $linkColor
+              text-shadow: none
