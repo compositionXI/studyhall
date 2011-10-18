@@ -99,8 +99,17 @@ class UsersController < ApplicationController
   
   def drop_class
     enrollment = @current_user.enrollments.find_by_offering_id params[:offering_id]
+    offering = Offering.find params[:offering_id]
+    offering.posts.create(:user_id => current_user.id, :text => "#{@current_user.name} dropped this class.")
     enrollment.delete
-    redirect_to root_path
+    redirect_to root_path flash[:action_bar_message]
+  end
+
+  def block
+    store_location
+    blocked_user = User.find params[:blocked_user_id]
+    current_user.block!(blocked_user)
+    redirect_to request.referer
   end
 
   protected
