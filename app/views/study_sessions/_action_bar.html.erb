@@ -1,7 +1,7 @@
 <div class="action_bar">
   <div class="container">
     <% if @index %>
-      <div class="buttons left">
+      <div class="buttons left narrow">
         <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button", :id => "new_study_session_button1", :remote => true %>
       </div>
       <% if @filtered_results %>
