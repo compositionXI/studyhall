@@ -1,0 +1,11 @@
+<%= form_for comment, :url => class_comments_path(class_id), :remote => true, :html => {:class => "form-stacked comment_form_button", :"data-type" => "html"} do |f| %>
+  <%= f.hidden_field :parent_id %>
+  <div class="clearfix">
+    <%= f.label :text, "Comment" %>
+    <div class="input"><%= f.text_area :text, :rows => 2 %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.submit "Comment", :class => "btn primary" %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel"%>
+  </div>
+<% end %>
