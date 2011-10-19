@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017202057) do
+ActiveRecord::Schema.define(:version => 20111018175045) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20111017202057) do
     t.string   "upload_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   create_table "roles", :force => true do |t|

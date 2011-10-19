@@ -962,12 +962,29 @@ section.course_activity
     padding-bottom: 10px
     margin-bottom: 10px
     border-bottom: 1px solid #E6E6E6
+    display: table
   .user_photo
     +columns(2)
     width: 50px
     margin-right: 5px
+  
   .post_details
     +columns(10)
+  
+  .post_comment
+    margin-top: 5px
+  
+  .comment_list
+    margin-left: 60px
+    
+    .post_details
+      +columns(9)
+  .comment_form
+    display: none
+    
+    textarea
+      width: 500px
+    
   .post_options
     .secondary-nav 
       position: relative
