@@ -13,6 +13,7 @@ set :scm_username, 'brent'
 set :user, "deploy"
 #set :group, "www-data"
 
+set :keep_releases, 5
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/deploy/rails_apps/#{application}"
 
@@ -34,7 +35,7 @@ set :deploy_to, "/home/deploy/rails_apps/#{application}"
 # end
 
 namespace :deploy do
-  desc "symlink the database yaml"
+  desc "symlink config files and the solr/ directory"
   task :symlinkconfigs, :roles => :app do
     run <<-CMD
       ln -s #{shared_path}/system/database.yml #{release_path}/config/database.yml
@@ -42,6 +43,12 @@ namespace :deploy do
     run <<-CMD
       ln -s #{shared_path}/system/s3.yml #{release_path}/config/s3.yml
     CMD
+    run <<-CMD
+      ln -s #{shared_path}/system/solr #{release_path}/solr
+    CMD
   end
-  after "deploy:symlink", "deploy:symlinkconfigs"
+  after "bundle:install", "deploy:symlinkconfigs"
+
+  before "deploy:update_code","sunspot:solr:stop"
+  after "deploy:symlinkconfigs","sunspot:solr:start"
 end
