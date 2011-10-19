@@ -44,10 +44,10 @@ namespace :deploy do
       ln -s #{shared_path}/system/s3.yml #{release_path}/config/s3.yml
     CMD
     run <<-CMD
-      ln -s #{shared_path}/system/solr #{release_path}/solr
+      rm -rf #{release_path}/solr && ln -s #{shared_path}/system/solr #{release_path}/solr
     CMD
   end
-  after "bundle:install", "deploy:symlinkconfigs"
+  after "deploy:symlink", "deploy:symlinkconfigs"
 
   namespace :solr do
     desc "Stop solr"
