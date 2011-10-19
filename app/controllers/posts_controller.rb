@@ -12,9 +12,25 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       if request.xhr?
-        @posts = Offering.find(params[:class_id]).posts.recent
-        render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts}
+        render_posts
       end
     end
+  end
+  
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes params[:post]
+      Notifier.report_post(current_user, @post).deliver if params[:reported]
+      if request.xhr?
+        render_posts
+      end
+    end
+  end
+  
+  private
+  
+  def render_posts
+    @posts = Offering.find(params[:class_id]).posts.recent.top_level
+    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts}
   end
 end

@@ -65,10 +65,9 @@ $(function(){
   
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
   
-  var d = 'a.menu, .dropdown-toggle'
-    , clearMenus = function() { 
-        $(d).parent('li').removeClass('open')
-      };
+  var d = 'a.menu, .dropdown-toggle', clearMenus = function() { 
+    $(d).parent('li').removeClass('open')
+  };
   $('html').bind("click", clearMenus)
   $("body").delegate(".secondary-nav .dropdown", "click", function(e){
      var li = $(this), isActive = li.hasClass('open')

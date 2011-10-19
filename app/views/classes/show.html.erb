@@ -26,7 +26,7 @@
       </ul>
   </section>
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
-  <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete %>
+  <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?" %>
 </aside>
 <section class="course_activity">
   <header>
