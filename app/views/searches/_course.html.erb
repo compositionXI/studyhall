@@ -1,0 +1,19 @@
+<li class="search_result course">
+  <span class="course_book"><%= course.title %></span>
+  <h3><%= course.title %></h3>
+  <dl class="info narrow">
+    <dt>Department</dt>
+    <dd><%= course.department %></dd>
+    <dt>Course Number</dt>
+    <dd><%= course.number %></dd>
+    <dt>Offerings</dt>
+    <dd>
+      <ul class="offerings">
+        <% offerings_list(course).each do |offering| %>
+          <li><%= offering.html_safe %></li>
+        <% end %>
+      </ul>
+    </dd>
+  </dl>
+  <div class="clearfix"></div>
+</li>

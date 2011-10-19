@@ -31,9 +31,9 @@
         <% end %>
         </nav>
         <div class="span4">
-          <form action="">
-            <input type="text" placeholder="Search">
-          </form>
+          <%= form_for Search.new do |f| %>
+            <%= f.text_field :query, :placeholder => "Search" %>
+          <% end %>
         </div>
         <div class="right">
           <ul class="nav secondary-nav">

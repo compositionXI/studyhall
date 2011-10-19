@@ -23,4 +23,9 @@ module ApplicationHelper
   def inbox_class
       inbox_count > 0 ? 'no_messages' : 'messages'
   end
+
+  def activate(active_key, key)
+    active_key == key ? " active" : ""
+  end
+      
 end
