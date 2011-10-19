@@ -49,6 +49,21 @@ namespace :deploy do
   end
   after "bundle:install", "deploy:symlinkconfigs"
 
-  before "deploy:update_code","sunspot:solr:stop"
-  after "deploy:symlinkconfigs","sunspot:solr:start"
+  namespace :solr do
+    desc "Stop solr"
+    task :stop, :roles => :app do
+      run <<-CMD
+        cd #{deploy_to}/current && #{rake} sunspot:solr:stop RAILS_ENV=#{rails_env}
+      CMD
+    end
+    desc "Start solr"
+    task :start, :roles => :app do
+      run <<-CMD
+        cd #{deploy_to}/current && #{rake} sunspot:solr:start RAILS_ENV=#{rails_env}
+      CMD
+    end
+
+    before "deploy:update_code","deploy:solr:stop"
+    after "deploy:symlinkconfigs","deploy:solr:start"
+  end
 end
