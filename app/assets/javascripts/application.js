@@ -84,8 +84,15 @@ $(function(){
 });
 
 $(document).ready(function(){
+  //Disable following any anchor tag with the "disabled" class
+  $("body").delegate("a,input[type='submit']","click", function(e){
+    if($(this).hasClass("disabled")){
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  });
+
   $("select.chzn-select").chosen();
-  
   $("body").delegate("select.chzn-select", "change", function(){$(this).chosen();});
   
   $("body").delegate("a.cancel_popover","click",function(e){

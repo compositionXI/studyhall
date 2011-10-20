@@ -69,6 +69,7 @@ Studyhall::Application.routes.draw do
   end
   resources :home
   resources :filters, only: [:new, :create]
+  resources :group_deletes, only: [:new, :create]
   resources :searches
 
   resources :authentications

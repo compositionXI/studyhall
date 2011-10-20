@@ -2,16 +2,23 @@
   <div class="container">
     <% if @index %>
       <div class="buttons left narrow">
-        <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button", :id => "new_study_session_button1", :remote => true %>
+        <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button non_edit", :id => "new_study_session_button1", :remote => true %>
+        <%= link_to "Share", "", id: "share_button", class: "btn edit", style: "display:none", remote: true %>
+        <%= link_to "Delete", new_group_delete_path, id: "delete_button", class: "btn edit", style: "display:none", remote: true %>
       </div>
       <% if @filtered_results %>
         <h3><%= link_to "All", study_sessions_path %> &raquo; <%= flash[:action_bar_message] %></h3>
       <% else %>
         <h3><%= flash[:action_bar_message] || "Your StudyHalls" %></h3>
       <% end %>
+      <h3 class="edit" style="display:none">Select, share or delete StudyHalls, or double-click to edit</h3>
       <div class="buttons right">
-        <%= link_to "Filter", new_filter_path(:model_name => "study_sessions"), id: "filter_button", class: "btn", :remote => true %>
-        <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
+        <%= link_to "Filter", new_filter_path(:model_name => "study_sessions"), id: "filter_button", class: "btn non_edit", :remote => true %>
+        <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn non_edit", :id => "edit_all" %>
+        <%= link_to "Select All", "", id: "select_all", class: "btn edit select", style: "display:none" %>
+        <%= link_to "Select None", "", id: "select_none", class: "btn edit select", style: "display:none" %>
+        <%= link_to "Save", "", class: "btn primary edit", style: "display:none" %>
+        <%= link_to "Cancel", "", class: "btn edit", id: "cancel_edit", style: "display:none" %>
       </div>
     <% elsif @show %>
       <div class="buttons left">
@@ -29,5 +36,3 @@
     <% end %>
   </div>
 </div>
-
-<div id="popover_container" class="modal_dialog"></div>
