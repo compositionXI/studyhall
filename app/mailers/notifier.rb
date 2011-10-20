@@ -1,5 +1,7 @@
 class Notifier < ActionMailer::Base
   default :from => 'no-reply@studyhall.com', :return_path => 'system@studyhall.com'
+
+  default_url_options[:host] = APP_CONFIG["host"]
   
   def activation_instructions(user)
     @user = user
