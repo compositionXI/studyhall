@@ -9,6 +9,8 @@ class Post < ActiveRecord::Base
   
   scope :recent, :limit => 20, :order => 'updated_at DESC'
   scope :top_level, lambda {where :parent_id => nil}
+  scope :for_offering, lambda {|offering| where :offering_id => offering.id}
+  scope :by_user, lambda { |user| where :user_id => user.id}
   
   def comment?
     self.class.name == "Comment"

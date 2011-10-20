@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111019135228) do
+ActiveRecord::Schema.define(:version => 20111019173932) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -173,6 +173,9 @@ ActiveRecord::Schema.define(:version => 20111019135228) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "rss_link"
+    t.string   "domain_name"
+    t.boolean  "active"
   end
 
   create_table "session_files", :force => true do |t|

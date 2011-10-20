@@ -1,4 +1,22 @@
 class PostsController < ApplicationController
+  
+  def index
+    # get matching user
+    # if user, look for that user's posts, else all posts for that class
+    # then looks for posts with those post params
+    @users = User.where(params[:user])
+    @class = Offering.find params[:class_id]
+    @posts = []
+    if @users
+      @users.each do |user|
+        @posts << Post.for_offering(@class).by_user(user).where(params[:post]).recent.top_level
+      end
+    else
+      @posts = Posts.where(params[:post]).recent.top_level
+    end
+    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts.flatten}
+  end
+  
   def new
     @class = Offering.find params[:class_id]
     @post = @class.posts.new(:user_id => params[:user_id])
@@ -24,6 +42,14 @@ class PostsController < ApplicationController
       if request.xhr?
         render_posts
       end
+    end
+  end
+  
+  def filter
+    @modal_link_id = params[:link_id]
+    @class = Offering.find params[:class_id], :include => :posts
+    respond_to do |format|
+      format.js
     end
   end
   

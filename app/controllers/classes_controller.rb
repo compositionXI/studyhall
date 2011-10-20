@@ -7,7 +7,7 @@ class ClassesController < ApplicationController
   end
   
   def show
-    @class = @current_user.offerings.find params[:id]
+    @class = @current_user.offerings.find(params[:id])
     @course = @class.course
     @classmates = @class.classmates(current_user)
     @posts = @class.posts.recent.top_level

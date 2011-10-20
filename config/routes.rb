@@ -9,7 +9,11 @@ Studyhall::Application.routes.draw do
     end
   end
   resources :classes do
-    resources :posts
+    resources :posts do
+      member do
+        get "filter"
+      end
+    end
     resources :comments
     get "offerings_for_school/:school_id", :action => "offerings_for_school"
     get "classmates"

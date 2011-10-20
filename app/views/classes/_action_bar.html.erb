@@ -6,7 +6,7 @@
     </div>
     <h3><%= flash[:action_bar_message] %></h3>
     <div class="buttons right">
-      <a class="btn" title="Filter" href="#">Filter</a>
+      <%= link_to "Filter", filter_class_post_path(@class.id, :link_id => "filter_posts_button"), remote: true, :class => "btn", :title => "Filter", :id => "filter_posts_button" %>
     </div>
   </div>
 </div>
