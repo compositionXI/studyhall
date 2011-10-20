@@ -1,8 +1,6 @@
 class Notifier < ActionMailer::Base
-  default :from => 'no-reply@example.com', :return_path => 'system@example.com'
+  default :from => 'no-reply@studyhall.com', :return_path => 'system@studyhall.com'
   
-  default_url_options[:host] = "localhost:3000"
-
   def activation_instructions(user)
     @user = user
     @url = activate_url(@user.perishable_token)
