@@ -19,7 +19,7 @@ staging:
     js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
 
 production:
-  host: studyhall.intridea.com
+  host: studyhall.com
   opentok:
     key: 5822951
     secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d

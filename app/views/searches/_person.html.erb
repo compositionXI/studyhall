@@ -1,0 +1,13 @@
+<li class="search_result person">
+  <%= link_to image_tag(user.avatar_url(:medium)), user, :class => "avatar" %>
+  <h3><%= link_to user.name, user %></h3>
+  <dl class="info narrow">
+    <dt>Rating</dt><dd><%= user.plusminus %></dd>
+    <dt>Shared Notes</dt><dd><%= user.notes.shared.count %></dd>
+  </dl>
+  <dl class="info">
+    <dt>School</dt><dd><%= user.school.name %></dd>
+    <dt>Courses</dt><dd><%= courses_list(user) %><dd>
+  </dl>
+  <div class="clearfix"></div>
+</li>

@@ -7,7 +7,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery.masonry.min.js
+//= require jquery.expander.min.js
 //= require bootstrap-dropdowns.js
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js

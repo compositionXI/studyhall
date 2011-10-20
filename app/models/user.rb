@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :enrollments
   has_many :offerings, :through => :enrollments
+  has_many :courses, :through => :offerings
   belongs_to :school
   has_many :followings
   has_many :followed_users, :through => :followings
@@ -24,6 +25,12 @@ class User < ActiveRecord::Base
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
 
   validates_presence_of :name
+
+  searchable do
+    text :name
+    integer :school_id
+    integer :plusminus
+  end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
 

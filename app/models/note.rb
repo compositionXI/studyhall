@@ -7,5 +7,10 @@ class Note < ActiveRecord::Base
   validates_presence_of :user_id
   
   scope :unsorted, lambda { Note.where(:notebook_id => nil) }
+
+  searchable do
+    text :name, :content
+    boolean :shareable
+  end
   
 end

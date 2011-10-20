@@ -1,0 +1,53 @@
+<h2>Search results for "<%= @search.query %>"</h2>
+<ul class="tabs">
+  <li class="<%= activate(@results.first_group,"people") %>"><a data-rel="people_tab" href="#">People (<%= @results.users_count %>)</a></li>
+  <li class="<%= activate(@results.first_group,"courses") %>"><a data-rel="courses_tab" href="#">Courses (<%= @results.courses_count %>)</a></li>
+  <li class="<%= activate(@results.first_group,"notes") %>"><a data-rel="notes_tab" href="#">Notes (<%= @results.notes_count %>)</a></li>
+</ul>
+<ul id="people_tab" class="people search_results">
+  <% if @results.users_count > 0 %>
+    <% @results.users.results.each do |search_result| %>
+      <%= render :partial => "person", :locals => {:user => search_result} %>
+    <% end %>
+  <% else %>
+    <p>No relevant results were found.</p>
+  <% end %>
+</ul>
+<ul id="courses_tab" class="courses search_results">
+  <% if @results.courses_count > 0 %>
+    <% @results.courses.results.each do |search_result| %>
+      <%= render :partial => "course", :locals => {:course => search_result} %>
+    <% end %>
+  <% else %>
+    <p>No relevant results were found.</p>
+  <% end %>
+</ul>
+<ul id="notes_tab" class="notes search_results">
+  <% if @results.notes_count > 0 %>
+    <% @results.notes.results.each do |search_result| %>
+      <%= render :partial => "note", :locals => {:note => search_result} %>
+    <% end %>
+  <% else %>
+    <p>No relevant results were found.</p>
+  <% end %>
+</ul>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".search_results").hide();
+    $(".tabs li").each(function(){
+      var li = $(this);
+      var link = li.children().first();
+      if(li.hasClass("active"))
+        $("#"+link.data("rel")).show();
+      link.click(function(e){
+        var clicked_link = $(this);
+        $(".tabs li").removeClass("active");
+        clicked_link.parent().addClass("active");
+        $(".search_results").hide();
+        $("#"+clicked_link.data("rel")).show();
+        e.preventDefault();
+      });
+    });
+    $(".note_content").expander();
+  });
+</script>

@@ -1,0 +1,12 @@
+<li class="search_result note">
+  <%= link_to note.name, note, :class => "note_book" %>
+  <div class="info_container">
+    <dl class="info narrow">
+      <dt>Owner</dt>
+      <dd><%= link_to note.user.name, note.user %></dd>
+      <dt>Content</dt>
+      <dd><div class="note_content"><%= note.content.html_safe %></div></dd>
+    </dl>
+  </div>
+  <div class="clearfix"></div>
+</li>

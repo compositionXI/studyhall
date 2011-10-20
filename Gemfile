@@ -19,6 +19,8 @@ gem 'has_mailbox'
 gem 'execjs'
 gem 'therubyracer'
 gem 'thumbs_up'
+gem 'kaminari'
+gem 'sunspot_rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
