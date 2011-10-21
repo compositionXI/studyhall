@@ -3,8 +3,14 @@ class PostsController < ApplicationController
   def index
     # get matching user
     # if user, look for that user's posts, else all posts for that class
-    # then looks for posts with those post params
+    # then looks for posts with those post params 
+    # TODO refactor
+    @users, @users_with_extras = [], []
+    @users = User.where(params[:user]) if params[:user]
+    @users_with_extras = User.has_extracurricular(params[:extracurricular_id].first.to_i) if params[:extracurricular_id]
+    @users = @users.concat(@users_with_extras)
     @users = User.where(params[:user])
+    
     @class = Offering.find params[:class_id]
     @posts = []
     if @users

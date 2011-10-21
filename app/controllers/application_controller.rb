@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :current_user, :fetch_static_pages
   
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  #rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   rescue_from User::NotAuthorized, with: :deny_access
 
