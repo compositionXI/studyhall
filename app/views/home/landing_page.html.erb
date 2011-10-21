@@ -1,0 +1,82 @@
+<header class="header">
+  <h1 class="ir">StudyHall.com</h1>
+  <%= link_to "Log In", login_path, class: "login-button" %>
+  <div class="browser-quad"></div> 
+  <div class="browser-main"></div>
+  <div class="zigzag"></div> 
+</header>
+
+<section class="signup">
+  <div class="container">
+    <h1>The Official place to study online.</h1>
+    <%= form_for @user, url: new_user_path, html: {class: "quick-signup form-stacked"} do |f| %>
+      <div class="input email-container">
+        <%= f.label :name, "Your Name" %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="input password-container">
+        <%= f.label :login, "Your Username" %>
+        <%= f.text_field :login %>
+      </div>
+      <div class="input url-container">
+        <%= f.label :email, "Your Email Address" %>
+        <%= f.text_field :email %>
+        <%= f.submit "Reserve your seat", class: "btn primary" %>
+      </div>
+    <% end %>
+    <!--<form action="#" class="quick-signup form-stacked">
+      <div class="input email-container">
+        <label for="email">Your Email Address</label>
+        <input id="email" name="email" type="text" />
+      </div>
+      <div class="input password-container">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" />
+      </div>
+      <div class="input url-container">
+        <label for="url">Your Email Address</label>
+        <input id="url" name="url" type="text" />
+        <submit class="btn primary" type="submit" value="Reserve your seat">Reserve your seat</submit>
+      </div>   
+    </form>-->
+  </div>
+</section>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#new_user input:submit").click(function(e){
+      console.log("boom");
+      window.location = "/users/new?"+$("#new_user").serialize();
+      e.preventDefault();
+    });
+  });
+</script>
+
+<section class="reasons">
+  <header class="container">
+    <a href="#" class="btn close">x</a>
+    <h1>Check out why StudyHall is awesome</h1>
+    <a class="btn primary small" href="#share">Share</a>
+  </header>
+  <section class="content container">
+    <ul class="postits">
+      <li class="notes"><p>Take notes during and after class</p></li>
+      <li class="start"><p>Start and online study group</p><p>Secure your notes in a digital locker</p>
+      <li class="share"><p>Share your notes with buddies or whoever...<br>(sports, clubs, frats, and sororities)</p></li>
+      <li class="work"><p>Work on group projects</p><p>Post lecture notes and questions to classmates</p></li>
+      <li class="meet"><p>Meet up online with people you never though you'd study with</p></li>
+      <li class="login"><p>Log in using your Facebook account and connect with your friends</p></li>
+      <li class="collaborate"><p>Collaborate in real-time with your buddies</p><p>View profiles and meet a new study buddy :)</p></li>
+      <li class="free"><p>:) It's free!</p></li>
+    </ul>
+    <video>Video goes here</video>
+  </section>
+</section>
+<footer class="footer">
+  <div class="container">
+      <p>Copyright StudyHall.com All rights reserved.
+        <a href="/contacts/new" data-original-title="">Contact</a>
+          <a href="/about-us" data-original-title="">About</a>
+          <a href="/about-us" data-original-title="">FAQs</a>
+        </p>      
+  </div>
+</footer>

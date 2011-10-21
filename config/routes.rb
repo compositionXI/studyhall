@@ -83,7 +83,7 @@ Studyhall::Application.routes.draw do
   match '/activate/:id' => 'activations#create', :as => :activate
   match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
   
-  root :to => "user_sessions#new"
+  root :to => "home#landing_page"
   
   match "styleguide" => "styleguide#styleguide"
   
