@@ -5,7 +5,7 @@
     <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed %>
     <% if @edit_all %>
       <span class="checkbox">
-        <input type="checkbox" name="notebook[][id]" value="<%= notebook.id %>" />
+        <%= check_box_tag "notebook_ids[]", notebook.id  %>
       </span>
     <% end %>
   <% end %>

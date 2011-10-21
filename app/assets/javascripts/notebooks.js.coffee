@@ -115,20 +115,32 @@ class NotebookContainer
 
 
 class NotebooksController
-	setup: ->
-		@setupNotebookContainer()
+  setup: ->
+    @setupNotebookContainer()
 
-	setupNotebookContainer: ->
-		notebookContainer = new NotebookContainer()
-		notebookContainer.setup()
-		notebookContainer.recoverLayout()
-
-		$("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
-			notebookContainer.useLayout $(this).data('layout')
-			false
+  setupNotebookContainer: ->
+    notebookContainer = new NotebookContainer()
+    notebookContainer.setup()
+    notebookContainer.recoverLayout()
+  
+    $("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
+      notebookContainer.useLayout $(this).data('layout')
+      false
 
 $ ->
-	new NotebooksController().setup()
-	
-	$("#select_all").click ->
-		$(".notebook, .note").addClass "checked"
+  new NotebooksController().setup()
+  
+  $("#select_all").click ->
+    $(".notebook, .note").addClass "checked"
+  
+  $("#delete_multiple_notebooks_notes").click ->
+    data = {notebook_ids : [], note_ids : []}
+    $(".notebook input[type='checkbox']").each ->
+      data.notebook_ids.push $(this).attr("value") if $(this).is(":checked")
+    $(".note input[type='checkbox']").each ->
+      data.note_ids.push $(this).attr("value") if $(this).is(":checked")
+    
+    data.view_type = if ($(".grid_view").css("display") == "none") then "grid" else "list"
+    if confirm "Are you sure?"
+      $.post "/notebooks/delete_multiple", data, (response) ->
+        $("body").html response

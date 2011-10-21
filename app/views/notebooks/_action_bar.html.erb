@@ -7,7 +7,7 @@
       <% end %>
       <% if @edit_all %>
         <%= link_to "Share", "#", :class => "btn primary" %>
-        <%= link_to "Delete", "#", method: :delete, :class => "btn", :confirm => "Are you sure?" %>
+        <%= link_to "Delete", "#", :id => "delete_multiple_notebooks_notes", :class => "btn" %>
       <% end %>
     </div>
     
@@ -39,7 +39,7 @@
       <% end %>
       <% if @edit_all %>
         <%= link_to "Select All", "#", :class => "btn", :id => "select_all"%>
-        <%= link_to "Save", "#", method: :delete, :class => "btn", :confirm => "Are you sure?" %>
+        <%= link_to "Save", "#", :class => "btn", :confirm => "Are you sure?" %>
       <% end %>
     </div></div>
 </div>

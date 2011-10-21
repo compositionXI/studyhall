@@ -4,10 +4,9 @@ class NotebooksController < ApplicationController
 
   before_filter :require_user
   before_filter :set_action_bar
+  before_filter :get_notebooks_and_notes, :only => [:index]
 
   def index
-    @notebooks = current_user.notebooks
-    @unsorted_notes = current_user.notes.unsorted
     if params[:edit_all] == "true"
       @edit_all = true
     else
@@ -85,5 +84,29 @@ class NotebooksController < ApplicationController
       format.html { redirect_to notebooks_url }
       format.json { head :ok }
     end
+  end
+  
+  def delete_multiple
+    if params[:notebook_ids]
+      @notebooks = current_user.notebooks.find(params[:notebook_ids])
+      @notebooks.each {|notebook| notebook.destroy}
+    end
+    if params[:note_ids]
+      @notes = current_user.notes.find(params[:note_ids])
+      @note.each {|note| note.destroy}
+    end
+    
+    get_notebooks_and_notes
+    if request.xhr?
+      @index = true
+      render "index"
+    end
+  end
+  
+  private
+  
+  def get_notebooks_and_notes
+    @notebooks = current_user.notebooks
+    @unsorted_notes = current_user.notes.unsorted
   end
 end

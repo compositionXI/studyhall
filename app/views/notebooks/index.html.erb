@@ -1,14 +1,3 @@
-<!-- <div id="menubar" class="topbar">
-  <div class="left">
-    <%= link_to("Take Notes", new_note_path, :class => "btn") %>
-    <%= link_to "New Notebook", "#", :class => "btn", :id => "new_notebook_btn" %>
-  </div>
-  <div class="middle">
-    <span>All Items</span>
-  </div>
-</div> -->
-
-
 <div class="container">
 <div class="notebook_list_container <%= items_layout %>">
   <% if @unsorted_notes.empty? && @notebooks.empty? %>
