@@ -58,44 +58,11 @@
 </aside>
 <section class="courses <%= items_layout %>">
   <ol class="course_list">
-    <!-- <li class="notebook_list_item">
-      <a href="#">
-        <span>Science - Course 101</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item blue">
-      <a href="#">
-        <span>Physics - Course 102</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item green">
-      <a href="#">
-        <span>History - Course 202</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item">
-      <a href="#">
-        <span>Science - Course 101</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item">
-      <a href="#">
-        <span>Science - Course 101</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item">
-      <a href="#">
-        <span>Science - Course 101</span>
-      </a>  
-    </li>
-    <li class="notebook_list_item green">
-      <a href="#">
-        <span>History - Course 202</span>
-      </a>  
-    </li>   -->
     <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
     <li class="add">
-      <a href="#"><span>Add a course</span></a>
+      <%= link_to new_class_path(:link_id => "add_course_button"), :id => "add_course_button", :remote => true do %>
+        <span>Add a course</span>
+      <% end %>
     </li>
     
     

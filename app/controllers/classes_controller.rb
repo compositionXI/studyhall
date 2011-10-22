@@ -18,6 +18,12 @@ class ClassesController < ApplicationController
     @enrollment = Enrollment.new
     @offerings = Offering.includes(:course, :school, :instructor)
     @user = @current_user
+    respond_to do |format|
+      if request.xhr?
+        @modal_link_id = params[:link_id]
+      end
+      format.js
+    end
   end
   
   def create
@@ -25,7 +31,12 @@ class ClassesController < ApplicationController
     @enrollment.user_id = @current_user.id
     
     if @enrollment.save
-      redirect_to classes_path
+      if request.xhr?
+        render partial: 'users/course_list', collection: current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"}
+      else
+        redirect_to classes_path
+      end
+      
     else
       render action: "new"
     end
