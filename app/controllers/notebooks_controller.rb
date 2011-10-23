@@ -5,6 +5,7 @@ class NotebooksController < ApplicationController
   before_filter :require_user
   before_filter :set_action_bar
   before_filter :get_notebooks_and_notes, :only => [:index]
+  before_filter :fetch_notebooks_notes, :only => [:delete_multiple, :update_multiple]
 
   def index
     if params[:edit_all] == "true"
@@ -87,14 +88,19 @@ class NotebooksController < ApplicationController
   end
   
   def delete_multiple
-    if params[:notebook_ids]
-      @notebooks = current_user.notebooks.find(params[:notebook_ids])
-      @notebooks.each {|notebook| notebook.destroy}
+    @notebooks.each {|notebook| notebook.destroy} if @notebooks
+    @note.each {|note| note.destroy} if @notes
+    
+    get_notebooks_and_notes
+    if request.xhr?
+      @index = true
+      render "index"
     end
-    if params[:note_ids]
-      @notes = current_user.notes.find(params[:note_ids])
-      @note.each {|note| note.destroy}
-    end
+  end
+  
+  def share_multiple
+    @notebooks.each {|notebook| notebook.destroy}
+    @note.each {|note| note.destroy}
     
     get_notebooks_and_notes
     if request.xhr?
@@ -104,6 +110,11 @@ class NotebooksController < ApplicationController
   end
   
   private
+  
+  def fetch_notebooks_notes
+    @notebooks = current_user.notebooks.find(params[:notebook_ids]) if params[:notebook_ids]
+    @notes = current_user.notes.find(params[:note_ids])  if params[:note_ids]
+  end
   
   def get_notebooks_and_notes
     @notebooks = current_user.notebooks

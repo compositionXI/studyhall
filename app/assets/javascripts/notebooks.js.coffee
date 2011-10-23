@@ -125,6 +125,7 @@ class NotebooksController
   
     $("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
       notebookContainer.useLayout $(this).data('layout')
+      console.log $(this).data('layout')
       false
 
 $ ->
@@ -144,3 +145,6 @@ $ ->
     if confirm "Are you sure?"
       $.post "/notebooks/delete_multiple", data, (response) ->
         $("body").html response
+  
+  $("#share_multiple_notebooks_notes").click ->
+    

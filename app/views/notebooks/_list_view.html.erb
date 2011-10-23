@@ -7,7 +7,7 @@
         <span><%= notebook.name %></span>
       </a>
       <% unless notebook.shareable? %>
-        <a href="#" class="lock_icon icon">Share</a>
+        <%= image_tag "lock.png", :class => "lock_icon icon" %>
       <% end %>
     </div>
     <div class="course clear"><%= notebook.course.try(:title) %></div>

@@ -8,7 +8,7 @@
         <span><%= note.name %></span>
       </a>
       <% unless note.shareable? %>
-        <a href="#" class="lock_icon icon">Share</a>
+        <%= image_tag "lock.png", :class => "lock_icon icon" %>
       <% end %>
     </div>
     <div class="course clear"><%= note.notebook.try(:course).try(:title) %></div>

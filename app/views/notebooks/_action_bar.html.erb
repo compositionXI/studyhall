@@ -6,7 +6,7 @@
         <%= link_to "New Notebook", new_notebook_path, :class => "btn popover_button", :id => "new_notebook_button", :remote => true %>
       <% end %>
       <% if @edit_all %>
-        <%= link_to "Share", "#", :class => "btn primary" %>
+        <%= link_to "Share", "#", :class => "btn primary", :id => "share_multiple_notebooks_notes" %>
         <%= link_to "Delete", "#", :id => "delete_multiple_notebooks_notes", :class => "btn" %>
       <% end %>
     </div>

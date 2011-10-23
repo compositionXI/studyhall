@@ -1,6 +1,6 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
 <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
-  <%= div_for notebook do %>
+  <%= div_for notebook  do %>
     <%= render 'notebooks/grid_view.html', notebook: notebook, collapsed: collapsed %>
     <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed %>
     <% if @edit_all %>

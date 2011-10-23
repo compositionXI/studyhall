@@ -4,11 +4,9 @@
         <p>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
         <p>Click the "New Notebook" button to begin taking note.</p>
   <% else %>
-    <ol class="notebook_list">
+    <ol class="notebook_list <%= 'edit_notebook' if @edit_all %>">
       <%= render partial: 'notes/list_item', collection: @unsorted_notes, as: :note %>
       <%= render partial: 'notebooks/list_item', collection: @notebooks, as: :notebook %>
     </ol>
   <% end %>
 </div></div>
-
-<div id="new_notebook_modal" class="modal_dialog"></div>

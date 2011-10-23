@@ -509,6 +509,10 @@ form
   &.list
     .grid_view
       display: none
+  
+  .edit_notebook
+    .checkbox
+      background: url(/assets/notebook-icons.png) -25px 0 no-repeat
 
   .notebook 
     .preview
@@ -524,13 +528,11 @@ form
   
   .note, .notebook 
     +sans-serif-font(500, 12px, 12px)
-    color: #333 
+    color: #333
     &.checked
       .checkbox
         background: url(/assets/notebook-icons.png) -50px 0 no-repeat
-      &:hover
-        .checkbox
-          background: url(/assets/notebook-icons.png) -75px 0 no-repeat
+  
   .dragging_placeholder 
     .note 
       .preview 
@@ -623,8 +625,8 @@ form
 
     .lock_icon
       position: absolute
-      right: 10px
-      bottom: 5px
+      right: 130px
+      bottom: 10px
 
     .drag_handle
       position: absolute
@@ -633,12 +635,20 @@ form
 
     .checkbox
       position: absolute
-      right: 5px
-      bottom: 5px
+      right: 20px
+      bottom: 15px
 
     ol, li
       // todo: cross browser solution for inline block
       float: left
+    
+    li
+      &.notebook_list_item
+        &.collapsed
+          border-width: 2px
+
+          ol.note_list
+            display: none
 
     .notebook, .note
       float: left
