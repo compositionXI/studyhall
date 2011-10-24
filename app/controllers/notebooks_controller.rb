@@ -48,6 +48,10 @@ class NotebooksController < ApplicationController
 
   def edit
     @notebook = current_user.notebooks.find(params[:id])
+    @modal_link_id = params[:link_id]
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -66,10 +70,17 @@ class NotebooksController < ApplicationController
 
   def update
     @notebook = current_user.notebooks.find(params[:id])
-
     respond_to do |format|
       if @notebook.update_attributes(params[:notebook])
-        format.html { redirect_to @notebook, notice: 'Notebook was successfully updated.' }
+        format.html { 
+          if request.xhr?
+            @offerings_for_user = Offering.find_all_by_school_id(current_user.school)
+            @edit_all = true
+            render partial: "list_item", locals: {notebook: @notebook, collapsed: true}
+          else
+            redirect_to @notebook, notice: 'Notebook was successfully updated.'
+          end
+        }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

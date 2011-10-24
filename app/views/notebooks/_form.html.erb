@@ -1,4 +1,4 @@
-<%= form_for @notebook, :html => {:class => "form-stacked"} do |f| %>
+<%= form_for @notebook, :remote => true, :html => {:class => "form-stacked", :id => "edit_notebook_form", :'data-type' => "html"} do |f| %>
   <% if @notebook.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@notebook.errors.count, "error") %> prohibited this notebook from being saved:</h2>
@@ -32,6 +32,6 @@
   </div>
   <div>
     <%= f.submit :class => "btn primary" %>
-    <%= link_to 'Cancel', "#", :class => "btn close_modal cancel_popover" %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
   </div>
 <% end %>

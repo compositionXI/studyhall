@@ -148,11 +148,7 @@ $ ->
   
   $("#share_multiple_notebooks_notes").click ->
   
-  $("#save_multiple_notebooks_notes").click ->
-    $("#save_multiple_notebooks_notes_form").submit()
-  
-  $(".fields .editable").click ->
-    $(".list_view .fields .editable").css "display", "block"
-    $(".notebook_edit_fields").css "display", "none"
-    $(this).toggle "display"
-    $(this).parent().find(".notebook_edit_fields").toggle "display"
+  $("body").delegate "#edit_notebook_form", "ajax:success", (evt, data, status, xhr) ->
+    link_id = $(".cancel_popover").attr("data-link-id")
+    $("##{link_id}").popover("hide")
+    $("##{link_id}").closest(".notebook_list_item").replaceWith xhr.responseText

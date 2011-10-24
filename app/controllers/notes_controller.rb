@@ -35,6 +35,10 @@ class NotesController < ApplicationController
 
   def edit
     @note = current_user.notes.find(params[:id])
+    @modal_link_id = params[:link_id]
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -56,7 +60,14 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to notebooks_path, notice: 'Note was successfully updated.' }
+        format.html { 
+          if request.xhr?
+            @edit_all = true
+            render partial: "list_item", locals: {note: @note, collapsed: true}
+          else
+            redirect_to notebooks_path, notice: 'Note was successfully updated.' 
+          end
+        }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

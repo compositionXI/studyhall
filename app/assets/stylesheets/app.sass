@@ -510,9 +510,23 @@ form
 
   // choose correct view to display
   &.grid
+    .edit_notebook_link
+      position: absolute
+      height: 160px
+      width: 170px
+      top: 10px
+      left: 10px
+      z-index: 2
     .list_view
       display: none
   &.list
+    .edit_notebook_link
+      position: absolute
+      height: 130px
+      width: 500px
+      top: 10px
+      left: 110px
+      z-index: 2
     .grid_view
       display: none
   
@@ -548,7 +562,7 @@ form
         border-width: 0
         background-color: #ededed
         div, span, a
-          display: none 
+          display: none
 
   // icons
   .icon

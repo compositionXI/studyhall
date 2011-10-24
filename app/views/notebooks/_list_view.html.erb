@@ -1,34 +1,22 @@
 <div class="list_view">
   <div class="preview"></div>
-
+  
   <div class="fields">
-    <div class="<%= 'editable' if @edit_all %>">
-      <div class="name_wrapper">
+    <div class="name_wrapper">
+      <% if @edit_all %>
+        <span><%= notebook.name %></span>
+      <% else %>
         <a class="name" href="<%= notebook_path(notebook) %>">
           <span><%= notebook.name %></span>
         </a>
-        <% unless notebook.shareable? %>
-          <a href="#" class="lock_icon icon">Share</a>
-        <% end %>
-      </div>
-      <div class="course clear"><%= notebook.course.try(:title) %></div>
-      <div class="date"><%=l notebook.created_at.to_date %></div>
+      <% end %>
+      
+      <% unless notebook.shareable? %>
+        <a href="#" class="lock_icon icon">Share</a>
+      <% end %>
     </div>
-    <% if @edit_all %>
-        <div class="notebook_edit_fields">
-          <div class="name_wrapper">
-            <span>
-              <%= notebook_fields.text_field :name %>
-            </span>
-            <% unless notebook.shareable? %>
-              <%= image_tag "lock.png", :class => "lock_icon icon" %>
-            <% end %>
-          </div>
-          <div class="course">
-            <%= collection_select "notebooks[#{notebook.id}]", :course_id, @offerings_for_user, :id, :course_listing, {:selected => selected_courses_for(current_user), :prompt => "Choose a course"}, {:class => "chzn-select", :id => "notebooks_#{notebook.id}_course_id_list", "data-placeholder" => "Choose a course"} %>
-          </div>
-        </div>
-    <% end %>
+    <div class="course clear"><%= notebook.course.try(:title) %></div>
+    <div class="date"><%=l notebook.created_at.to_date %></div>
   </div>
 
   <% unless notebook.notes.empty? %>

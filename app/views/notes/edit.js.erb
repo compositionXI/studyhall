@@ -1,0 +1,10 @@
+var button = $("#<%=j @modal_link_id %>");
+button.popover({trigger: "manual",
+  offset: 10,
+  html: true,
+  title: function(){return "Edit this note";},
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+button.popover("show");
+$("#edit_note_form input[type='text']").first().focus();
+$(".chzn-select").chosen();
