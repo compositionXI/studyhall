@@ -14,7 +14,7 @@
         <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed, notebook_fields: notebook_fields %>
       <% end %>
       <% unless notebook.shareable? %>
-        <%= image_tag "lock.png", :class => "lock_icon icon" %>
+        <%= link_to image_tag("lock.png", :class => "lock_icon icon"), "#"%>
       <% end %>
     <% end %>
 

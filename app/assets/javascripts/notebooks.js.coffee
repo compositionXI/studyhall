@@ -152,3 +152,12 @@ $ ->
     link_id = $(".cancel_popover").attr("data-link-id")
     $("##{link_id}").popover("hide")
     $("##{link_id}").closest(".notebook_list_item").replaceWith xhr.responseText
+  
+  share_button = $(".lock_icon.icon")
+  share_button.popover {
+    trigger: "click",
+    offset: 10,
+    html: true,
+    title: -> "New Notebook"
+    content: -> $("#share_form")
+  }
