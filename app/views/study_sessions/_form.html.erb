@@ -5,7 +5,7 @@
   <%= f.label :name, "Give it a name" %>
   <%= f.text_field :name %>
   <%= f.label :buddy_ids, "Invite Your Buddies" %>
-  <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name,{:multiple => true},{:multiple => "multiple", :id => "buddy_id_select_#{study_session.id}", :class => "chzn-select buddy_id_select", "data-placeholder" => "Select buddies"} %>
+  <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name,{:multiple => true},{:multiple => "multiple", :id => "buddy_id_select_#{study_session.id || 0}", :class => "chzn-select buddy_id_select", "data-placeholder" => "Select buddies"} %>
   <%= f.fields_for :session_files do |sf| %>
     <%= sf.label :upload, "Upload A File" %>
     <div style="position:relative">
