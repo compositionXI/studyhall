@@ -147,4 +147,12 @@ $ ->
         $("body").html response
   
   $("#share_multiple_notebooks_notes").click ->
-    
+  
+  $("#save_multiple_notebooks_notes").click ->
+    $("#save_multiple_notebooks_notes_form").submit()
+  
+  $(".fields .editable").click ->
+    $(".list_view .fields .editable").css "display", "block"
+    $(".notebook_edit_fields").css "display", "none"
+    $(this).toggle "display"
+    $(this).parent().find(".notebook_edit_fields").toggle "display"

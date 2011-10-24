@@ -1,18 +1,31 @@
 <div class="list_view">
-  <div class="preview">
-  </div>
+  <div class="preview"></div>
 
   <div class="fields">
-    <div class="name_wrapper">
-      <a class="name" href="<%= note_path(note) %>">
-        <span><%= note.name %></span>
-      </a>
-      <% unless note.shareable? %>
-        <%= image_tag "lock.png", :class => "lock_icon icon" %>
-      <% end %>
+    <div class="<%= 'editable' if @edit_all %>">
+      <div class="name_wrapper">
+        <a class="name" href="<%= note_path(note) %>">
+          <span><%= note.name %></span>
+        </a>
+        <% unless note.shareable? %>
+          <%= image_tag "lock.png", :class => "lock_icon icon" %>
+        <% end %>
+      </div>
+      <div class="course clear"><%= note.notebook.try(:course).try(:title) %></div>
+      <div class="date"><%=l note.created_at.to_date %></div>
     </div>
-    <div class="course clear"><%= note.notebook.try(:course).try(:title) %></div>
-    <div class="date"><%=l note.created_at.to_date %></div>
+    <% if @edit_all %>
+        <div class="notebook_edit_fields">
+          <div class="name_wrapper">
+            <span>
+              <%= note_fields.text_field :name %>
+            </span>
+            <% unless note.shareable? %>
+              <%= image_tag "lock.png", :class => "lock_icon icon" %>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
   </div>
   <% if @edit_all %>
     <span class="drag_handle icon">+</span>

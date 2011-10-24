@@ -1,11 +1,13 @@
-<li class="note_list_item <%= 'edit_mode' if @edit_all %>">
-  <%= div_for note do %>
-    <%= render 'notes/grid_view.html', note: note %>
-    <%= render 'notes/list_view.html', note: note %>
-    <% if @edit_all %>
-      <div class="checkbox">
-        <input type="checkbox" name="note[][id]" value="<%= note.id %>" />
-      </div>
+<%= fields_for "notes[]", note do |note_fields| %>
+  <li class="note_list_item <%= 'edit_mode' if @edit_all %>">
+    <%= div_for note do %>
+      <%= render 'notes/grid_view.html', note: note, note_fields: note_fields %>
+      <%= render 'notes/list_view.html', note: note, note_fields: note_fields %>
+      <% if @edit_all %>
+        <div class="checkbox">
+          <input type="checkbox" name="note[][id]" value="<%= note.id %>" />
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</li>
+  </li>
+<% end %>

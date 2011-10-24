@@ -1,18 +1,20 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
-<li class="notebook_list_item<%= ' collapsed' if collapsed %>">
-  <%= div_for notebook  do %>
-    <%= render 'notebooks/grid_view.html', notebook: notebook, collapsed: collapsed %>
-    <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed %>
-    <% if @edit_all %>
-      <span class="checkbox">
-        <%= check_box_tag "notebook_ids[]", notebook.id  %>
-      </span>
+<%= fields_for "notebooks[]", notebook do |notebook_fields| %>
+  <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
+    <%= div_for notebook do %>
+      <%= render 'notebooks/grid_view.html', notebook: notebook, collapsed: collapsed, notebook_fields: notebook_fields %>
+      <%= render 'notebooks/list_view.html', notebook: notebook, collapsed: collapsed, notebook_fields: notebook_fields %>
+      <% if @edit_all %>
+        <span class="checkbox">
+          <%= check_box_tag "notebook_ids[]", notebook.id  %>
+        </span>
+      <% end %>
     <% end %>
-  <% end %>
 
-  <% unless notebook.notes.empty? %>
-    <ol class="note_list">
-      <%= render partial: 'notes/list_item.html.erb', collection: notebook.notes, as: :note %>
-    </ol>
-  <% end %>
-</li>
+    <% unless notebook.notes.empty? %>
+      <ol class="note_list">
+          <%= render partial: 'notes/list_item.html.erb', collection: notebook.notes, as: :note %>
+      </ol>
+    <% end %>
+  </li>
+<% end %>

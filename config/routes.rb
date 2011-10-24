@@ -4,6 +4,7 @@ Studyhall::Application.routes.draw do
   resources :notebooks do
     collection do
       post "delete_multiple"
+      post "update_multiple"
     end
     resources :notes do
       member do

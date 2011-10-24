@@ -10,6 +10,7 @@ class NotebooksController < ApplicationController
   def index
     if params[:edit_all] == "true"
       @edit_all = true
+      @offerings_for_user = Offering.find_all_by_school_id(current_user.school)
     else
       @index = true
     end
@@ -107,6 +108,12 @@ class NotebooksController < ApplicationController
       @index = true
       render "index"
     end
+  end
+  
+  def update_multiple
+    @notebooks = Notebook.update(params[:notebooks].keys, params[:notebooks].values).reject { |n| n.errors.empty? }
+    @notes = Note.update(params[:notes].keys, params[:notes].values).reject { |n| n.errors.empty? }
+    redirect_to :action => "index"
   end
   
   private
