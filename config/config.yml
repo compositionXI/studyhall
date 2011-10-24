@@ -4,12 +4,18 @@ development:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 235310463190965
+    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
 
 test:
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 235310463190965
+    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
 
 staging:
   host: studyhall.intridea.com
@@ -17,6 +23,9 @@ staging:
     key: 5822951
     secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
     js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 178338135584982
+    app_secret: 32979dcdcb2f545df4488dc28899ba1e
 
 production:
   host: studyhall.com
@@ -24,3 +33,6 @@ production:
     key: 5822951
     secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
     js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 
+    app_secret: 
