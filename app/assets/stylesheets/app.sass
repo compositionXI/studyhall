@@ -64,7 +64,13 @@ html
 .ie8
   .topbar .nav li 
     border-top: 1px solid $navBorderTop
+
+a.disabled
+  opacity: .7
   
+.modal-backdrop.fade.in
+  opacity: 0.6
+
 //Nav 
 
 header.topbar
@@ -806,32 +812,48 @@ form
 
 .study_sessions-index
   .study_session
-    .preview
-      height: 155px
-      width: 145px
-      margin-right: 20px
-      margin-bottom: 20px
-      background: #eee
-      a.name
-        text-align: center
-        margin-top: 10px
-        padding: 0
-      ul.attendees
-        float: left
+    background-image: url(../assets/study_session_icon.png)
+    background-repeat: no-repeat
+    float: left
+    width: 97px
+    height: 150px
+    text-align: center
+    padding: 0 10px
+    position: relative
+    .attendees
+      margin: 15px auto 0
+      width: 85px
+      text-align: center
+      padding-right: 5px
+      li
+        margin: 0 1px
+    .name
+      @include body-font(normal, 14px, 16px)
+      margin-left: -5px
+      padding-bottom: 2px
+    .date
+      @include body-font(normal, 11px, 14px)
+    .checkbox
+      display: none
+      position: absolute
+      right: 14px
+      bottom: 25px
+    &.edit
+      .checkbox
         display: block
-        width: 30px
-        height: 100px
-        background: #555
-        margin: 7px
-        li
-          list-style: none
-          padding: 3px
-      .document
-        background-image: url(../assets/document.png)
-        display: block
-        width: 118px
-        height: 125px
-        margin-left: 30px
+        background: url(/assets/notebook-icons.png) -25px 0 no-repeat
+      &:hover
+        .checkbox
+          opacity: .7
+          background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+    &.checked
+      .checkbox
+        background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+      &:hover
+        .checkbox
+          opacity: 1
+          background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+
 
 .popover #new_study_session
   p
@@ -842,6 +864,8 @@ form
     width: 300px
   select
     width: 312px
+  input[type="text"]
+    width: 300px
 
 
 // User Settings

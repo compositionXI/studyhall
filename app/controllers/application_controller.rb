@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   
   def set_action_bar
     @action_bar = File.exists?("app/views/#{params[:controller]}/_action_bar.html.erb") ? "#{params[:controller]}/action_bar" : nil
-    flash[:action_bar_message] = nil
+    flash[:action_bar_message] ||= nil
   end
   
   def deny_access

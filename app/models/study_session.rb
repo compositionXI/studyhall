@@ -43,10 +43,14 @@ class StudySession < ActiveRecord::Base
     end
   end
 
+  def buddy_ids
+    users.map(&:id)
+  end
+
   def associate_users
-    buddy_ids ||= []
-    buddy_ids << user.id unless user.nil?
-    buddy_ids.uniq.each do |buddy_id|
+    @buddy_ids ||= []
+    @buddy_ids << user.id unless user.nil?
+    @buddy_ids.uniq.each do |buddy_id|
       self.users << User.find(buddy_id)
     end
   end

@@ -1,10 +1,16 @@
 <%= form_for study_session, :html => {:class => "form-stacked"} do |f| %>
-  <p>Make sure that your microphone and camera work before you begin.</p>
+  <% if study_session.new_record? %>
+    <p>Make sure that your microphone and camera work before you begin.</p>
+  <% end %>
+  <%= f.label :name, "Give it a name" %>
+  <%= f.text_field :name %>
   <%= f.label :buddy_ids, "Invite Your Buddies" %>
   <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name, {:multiple => true}, {:multiple => "multiple", :class => "chzn-select", "data-placeholder" => "Select buddies"} %>
   <%= f.fields_for :session_files do |sf| %>
     <%= sf.label :upload, "Upload A File" %>
-    <%= sf.file_field :upload, :class => "input-file" %>
+    <div style="position:relative">
+      <%= sf.file_field :upload, :class => "input-file" %>
+    </div>
   <% end %>
   <div class="clearfix"></div>
   <%= f.submit "Start Studying", :class => "btn primary" %>

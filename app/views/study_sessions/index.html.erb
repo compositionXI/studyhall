@@ -1,18 +1,91 @@
 <div class="container">
-<div class="notebook_list_container <%= items_layout %>">
-  <% if @study_sessions.empty? %>
-    <% if @filtered_results %>
-      <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+  <div class="notebook_list_container <%= items_layout %>">
+    <% if @study_sessions.empty? %>
+      <% if @filtered_results %>
+        <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+      <% else %>
+        <p>With study halls you can collaborate with other students, video chat, and edit documents together!</p>
+        <p>
+          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button2"), :remote => true, :id => "new_study_session_button2" %>
+           now!
+        </p>
+      <% end %>
     <% else %>
-      <p>With study halls you can collaborate with other students, video chat, and edit documents together!</p>
-      <p>
-        <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button2"), :remote => true, :id => "new_study_session_button2" %>
-         now!
-      </p>
+      <ol class="notebook_list">
+        <%= render @study_sessions %>
+      </ol>
     <% end %>
-  <% else %>
-    <ol class="notebook_list">
-      <%= render partial: 'list_item', collection: @study_sessions, as: :study_session %>
-    </ol>
-  <% end %>
-</div></div>
+  </div>
+</div>
+<% @study_sessions.each do |study_session| %>
+  <div id="study_session_<%= study_session.id %>_modal" data-rel="study_session_<%= study_session.id %>" class="study_session_modal modal hide fade" style="display:none">
+    <div class="modal-header">
+      <h2>Edit your StudyHall</h2>
+    </div>
+    <div class="modal-body">
+      <%= render :partial => "form", :locals => {:study_session => study_session} %>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var toggleActionButtons = function(){
+      if($(".study_session.checked").length > 0){
+        $("#share_button, #delete_button").removeClass("disabled");
+      }else{
+        $("#share_button, #delete_button").addClass("disabled");
+      }
+    }
+    $("body").delegate(".container","click",function(){
+      toggleActionButtons();
+    });
+
+    $("body.study_sessions-index").delegate(".study_session.edit","dblclick",function(){
+      var modal_id = "#" + $(this).prop("id") + "_modal";
+      $(modal_id).modal({keyboard: true,
+                         show: true,
+                         backdrop: true});
+    });
+    
+    var closeModal = function(modal){
+      modal.modal("hide");
+    };
+
+    $(".study_session_modal a.cancel_popover").click(function(e){
+      var button = $(this);
+      var modal = button.closest(".study_session_modal");
+      closeModal(modal);
+      e.preventDefault();
+    });
+
+    $("#select_all").click(function(e){
+      $(".study_session").addClass("checked");
+      $(".buttons .select").toggle();
+      e.preventDefault();
+    });
+    $("#select_none").click(function(e){
+      $(".study_session").removeClass("checked");
+      $(".buttons .select").toggle();
+      e.preventDefault();
+    });
+    $("#edit_all").click(function(e){
+      $("a.edit").show();
+      $("a.non_edit,#select_none").hide();
+      $(".study_session").addClass("edit");
+      $(".study_session").click(function(e){
+        $(this).toggleClass("checked");
+        e.preventDefault();
+      });
+      $("h3").toggle();
+      e.preventDefault();
+    });
+    $("#cancel_edit").click(function(e){
+      $("a.edit").hide();
+      $("a.non_edit").show();
+      $(".study_session").removeClass("edit").removeClass("checked");
+      $(".study_session a").unbind("click");
+      $("h3").toggle();
+      e.preventDefault();
+    });
+  });
+</script>
