@@ -15,7 +15,7 @@ button.popover({trigger: "manual",
                 content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}});
 
 button.popover("show");
-var select = $("#study_session_buddy_ids");
+var select = $(".buddy_id_select");
 select.chosen({no_results_text: "No results matched"});
 select.chosen().change(function(){
   if(select.val().length > 1){

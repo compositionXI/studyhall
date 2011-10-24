@@ -1,3 +1,5 @@
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
 <%= form_for @user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
   <div id="profile_completion_meter">
     <%= @user.profile_completion_percentage %>% Complete
@@ -50,9 +52,39 @@
       <%= f.label :sports_and_clubs %>
       <div class="input"><%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, "data-counted" => true %></div>
     </div>
+    <div class="clearfix">
+      <label>Invite your friends to StudyHall</label>
+      <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg" %></a>
+    </div>
     <div class="clearfix buttons">
       <%= f.submit "Submit", :class => "btn primary" %>
       or <%= link_to 'Do This Later', home_index_path %>
     </div>
   </fieldset>
 <% end %>
+<script>
+  FB.init({
+    appId  : '<%= APP_CONFIG["facebook"]["app_id"] %>',
+    status : true,
+    cookie : true,
+    oauth: true
+  });
+
+  function sendRequestToManyRecipients() {
+    FB.ui({method: 'apprequests',
+      message: 'Join me on StudyHall!'
+    }, requestCallback);
+  }
+  
+  function requestCallback(response) {
+    // Handle callback here
+  }
+
+  $(document).ready(function(){
+    $("#facebook_invite").click(function(e){
+      console.log("invite!");
+      sendRequestToManyRecipients();
+      e.preventDefault();
+    });
+  });
+</script>
