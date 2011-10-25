@@ -24,21 +24,6 @@
         <%= f.submit "Reserve your seat", class: "btn primary" %>
       </div>
     <% end %>
-    <!--<form action="#" class="quick-signup form-stacked">
-      <div class="input email-container">
-        <label for="email">Your Email Address</label>
-        <input id="email" name="email" type="text" />
-      </div>
-      <div class="input password-container">
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
-      </div>
-      <div class="input url-container">
-        <label for="url">Your Email Address</label>
-        <input id="url" name="url" type="text" />
-        <submit class="btn primary" type="submit" value="Reserve your seat">Reserve your seat</submit>
-      </div>   
-    </form>-->
   </div>
 </section>
 <script type="text/javascript">
@@ -53,9 +38,9 @@
 
 <section class="reasons">
   <header class="container">
-    <a href="#" class="btn close">x</a>
+    <a href="#" class="btn close" id="close_reasons">x</a>
     <h1>Check out why StudyHall is awesome</h1>
-    <a class="btn primary small" href="#share">Share</a>
+    <a class="btn primary small" target="_blank" href="http://twitter.com?status=Check%20out%20StudyHall%20<%= url_encode(root_url) %>">Share</a>
   </header>
   <section class="content container">
     <ul class="postits">
@@ -80,3 +65,11 @@
         </p>      
   </div>
 </footer>
+<script type="text/javascript">
+  $(document).ready(function(e){
+    $("a#close_reasons").click(function(e){
+      $(".reasons").slideUp();
+      e.preventDefault();
+    });
+  });
+</script>
