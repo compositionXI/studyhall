@@ -1,5 +1,7 @@
 var button = $("#<%=j @modal_link_id %>");
-button.popover({trigger: "manual",
+button.popover({
+  trigger: "manual",
+  placement: "below",
   offset: 10,
   html: true,
   title: function(){return "Edit this notebook";},

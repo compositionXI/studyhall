@@ -1,7 +1,14 @@
-<%= form_for @note, :remote => true, :html => {:class => "form-stacked", :id => "edit_note_form", :'data-type' => "html"} do |f| %>
+<%= form_for @note, :remote => @remote, :html => {:class => "form-stacked", :id => "edit_note_form", :'data-type' => "html"} do |f| %>
+  <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
   <div class="clearfix">
     <%= f.label :name %>
     <div class="input"><%= f.text_field :name %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Save To Notebook" %>
+    <div class="input">
+      <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:include_blank => true}, {:class => "chzn-select"} %>
+    </div>
   </div>
   <div class="clearfix">
     <div class="input">

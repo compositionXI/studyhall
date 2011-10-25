@@ -1,8 +1,8 @@
 <section>
   <div class="row">
     <div class="span4 column sidebar left" id="profile_sidebar">
-      <%= image_tag @user.avatar_url(:large), :id => "profile_photo" %>
-      <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
+        <%= image_tag @user.avatar_url(:large), :id => "profile_photo" %>
+        <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
       <div>
         <%= link_to "Report this profile", "#" %>
       </div>
@@ -53,7 +53,7 @@
         	<ul>
         		<li><a href="#tabs-1">Courses (<%= @user.offerings.count %>)</a></li>
         		<li><a href="#tabs-2">Notes (<%= @user.notebooks.count %>)</a></li>
-        		<li><a href="#tabs-3">Studyhalls (<%=  %>)</a></li>
+        		<li><a href="#tabs-3">Studyhalls (<%= @user.study_sessions.count %>)</a></li>
         	</ul>
         	<div id="tabs-1">
         	  <section class="courses <%= items_layout %>">
@@ -71,7 +71,11 @@
         		</div>
         	</div>
         	<div id="tabs-3">
-        		
+        		<div class="notebook_list_container <%= items_layout %>">
+        	    <ol class="notebook_list">
+        		    <%= render @user.study_sessions %>
+        		  </ol>
+        		</div>
         	</div>
         </div>
       </div>

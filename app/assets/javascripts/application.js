@@ -79,8 +79,6 @@ $(function(){
   });
   
   $("#sortTableExample").tablesorter();
-  
-  // $("select").chosen()  
 });
 
 $(document).ready(function(){

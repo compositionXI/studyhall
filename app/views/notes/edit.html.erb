@@ -1,6 +1,10 @@
 <div id="menubar" class="topbar notes">
   <div class="right">
-    <%= link_to "Save", "#", :id => "save_note_btn", :class => 'btn' %>
+    <% if @note.new_record? %>
+      <%= link_to "Save", new_note_path(:link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
+    <% else %>
+      <%= link_to "Save", edit_note_path(:id => @note.id, :link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
+    <% end %>
   </div>
   <div class="left">
     <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
@@ -10,21 +14,4 @@
 </div>
 <div class="container">
   <%= text_area_tag "content", nil, :id => "rte_area_note_content", :class => "rte_area" %>
-</div>
-<div id="save_note_modal" class="modal_dialog">
-  <%= form_for @note do |f| %>
-    <%= f.label "Title" %>
-    <%= f.text_field :name %>
-    <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
-    <%= f.label "Save To A Notebook" %>
-    <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, :include_blank => true %>
-    <div>
-      Share: <%= f.check_box :shareable, {:checked => @note.shareable? ? "checked" : "" } %>
-    </div>
-    <div class="clearfix">
-      <%= f.submit "Save", :class => "btn primary save", :id => "save_note_submit_button" %>
-      OR
-      <%= link_to "Cancel", "#", :class => "close_modal" %>
-    </div>
-  <% end %>
 </div>

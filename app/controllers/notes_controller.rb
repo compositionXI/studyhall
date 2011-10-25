@@ -27,8 +27,12 @@ class NotesController < ApplicationController
   end
 
   def new
+    @note = Note.new
+    @modal_link_id = params[:link_id]
+    @remote = false
     respond_to do |format|
-      format.html { render action: :edit }
+      format.html { render "edit" }
+      format.js
       format.json { render json: @note }
     end
   end
@@ -36,8 +40,10 @@ class NotesController < ApplicationController
   def edit
     @note = current_user.notes.find(params[:id])
     @modal_link_id = params[:link_id]
+    @remote = true
     respond_to do |format|
       format.js
+      format.html
     end
   end
 

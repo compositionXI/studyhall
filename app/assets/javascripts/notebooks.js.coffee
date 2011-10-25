@@ -125,7 +125,6 @@ class NotebooksController
   
     $("#items_layout_switcher").delegate 'a[data-layout]', 'click', ->
       notebookContainer.useLayout $(this).data('layout')
-      console.log $(this).data('layout')
       false
 
 $ ->
@@ -161,3 +160,13 @@ $ ->
     title: -> "New Notebook"
     content: -> $("#share_form")
   }
+  
+  $(".checkbox").click ->
+    checkbox = $(this).find("input")
+    container = $(this).closest('.note, .notebook')
+    if checkbox.prop('checked')
+      checkbox.prop('checked', false)
+      container.removeClass('checked')
+    else
+      checkbox.prop('checked', true)
+      container.addClass('checked')
