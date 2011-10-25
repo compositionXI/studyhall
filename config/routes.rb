@@ -74,6 +74,7 @@ Studyhall::Application.routes.draw do
   resources :study_sessions do
     resources :session_invites, as: "invites"
   end
+  resources :session_sharings, only: [:new, :create]
   resources :home do
     collection do
       get "landing_page"
@@ -81,6 +82,7 @@ Studyhall::Application.routes.draw do
   end
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
+  resources :sharings, only: [:new, :create]
   post "/searches" => "searches#create", :as => "search", :format => :html
   get "/searches" => "searches#create", :as => "search", :format => :js
 

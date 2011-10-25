@@ -1,0 +1,7 @@
+<p><%= @sender.name %> wants to share something with you.</p>
+<p>"<%= @sharing.message %>"</p>
+<ul>
+  <% @object_urls_array.each do |object| %>
+    <li><%= link_to object.first.name, object.last %></li>
+  <% end %>
+</ul>

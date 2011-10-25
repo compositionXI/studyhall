@@ -24,4 +24,8 @@ module Ownable
   def can_edit?(_user)
     self.user == _user
   end
+
+  def share!
+    self.update_attribute(:shareable, true)
+  end
 end

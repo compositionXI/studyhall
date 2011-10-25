@@ -217,6 +217,12 @@ form div.error
 .input-mini, input.mini, textarea.mini, select.mini
   width: 60px
 
+.input-mini-full, input.mini-full, textarea.mini-full, select.mini-full
+  width: 185px
+
+.input-mini-xfull, input.mini-xfull, textarea.mini-xfull, select.mini-xfull
+  width: 245px
+
 .input-small, input.small, textarea.small, select.small
   width: 90px
 
@@ -228,7 +234,7 @@ form div.error
 
 $xlarge:   270px  
   
-.input-xlarge, input.xlarge, textarea.xlarge, .xlarge input, .xlarge textarea
+.input-xlarge, input.xlarge, textarea.xlarge, .xlarge input, .xlarge textarea, select.xlarge
   width: $xlarge                              
 
 .input-xxlarge, input.xxlarge, textarea.xxlarge, select.xxlarge
@@ -419,3 +425,12 @@ input.disabled
         width: 235px !important
   h2, h3
     margin-bottom: 0
+
+form#new_sharing
+  .right
+    float: right
+  .recipient_toggle
+    color: $linkColor
+    &:hover
+      text-decoration: underline
+      cursor: pointer

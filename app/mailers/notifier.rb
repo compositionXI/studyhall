@@ -3,6 +3,18 @@ class Notifier < ActionMailer::Base
 
   default_url_options[:host] = APP_CONFIG["host"]
   
+  def sharing(sharing, user)
+    @sharing = sharing
+    @sender = user
+    @object_urls_array = @sharing.objects.map {|o| [o,url_for(o)] }
+    mail(
+      subject: "#{user.name} wants to share with you",
+      from: "noreply@studyhall.com",
+      bcc: @sharing.email_addresses,
+      date: Time.now
+    )
+  end
+
   def activation_instructions(user)
     @user = user
     @url = activate_url(@user.perishable_token)
