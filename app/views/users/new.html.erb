@@ -3,6 +3,7 @@
     <h3>Sign Up</h3>
     <div>
       <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
+        <%= f.error_messages %>
         <div class="clearfix">
           <%= f.label :name %> 
           <div class="input"><%= f.text_field :name %></div>

@@ -8,6 +8,7 @@
 <fieldset>
   <legend>Login</legend>
 <%= form_for @user_session, :url => {:action => "create"}, :html => {:class => "form-stacked"} do |f| %>
+  <%= f.error_messages %>
     <div class="clearfix">
       <%= f.label :login %>
       <div class="input"><%= f.text_field :login %></div>
