@@ -4,7 +4,7 @@ class StudySession < ActiveRecord::Base
   has_many :session_files
   has_many :session_invites
   has_many :users, :through => :session_invites
-  has_many :posts
+  has_many :posts, :dependent => :destroy
 
   scope :as_host, lambda {|user| where(:user_id => user.id) }
   scope :as_guest, lambda {|user| user.study_sessions.where(StudySession.arel_table[:user_id].does_not_match(user.id)) }

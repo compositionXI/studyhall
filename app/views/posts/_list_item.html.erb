@@ -11,7 +11,7 @@
             <%= post.text %>
             <div>
               <% if post.notebook_id %>
-                Notebook: <%= link_to(post.notebook.name, notebook_path(post.notebook)) %>
+                Notebook: <%= link_to(post.notebook.try(:name), notebook_path(post.notebook)) %>
               <% end %>
               <% if post.study_session_id %>
                 Studyhall: <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) %>
