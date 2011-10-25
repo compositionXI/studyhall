@@ -68,7 +68,11 @@ Studyhall::Application.routes.draw do
   resources :study_sessions do
     resources :session_invites, as: "invites"
   end
-  resources :home
+  resources :home do
+    collection do
+      get "landing_page"
+    end
+  end
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
   resources :searches
@@ -83,7 +87,7 @@ Studyhall::Application.routes.draw do
   match '/activate/:id' => 'activations#create', :as => :activate
   match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
   
-  root :to => "home#landing_page"
+  root :to => "home#index"
   
   match "styleguide" => "styleguide#styleguide"
   
