@@ -101,7 +101,7 @@ class NotebooksController < ApplicationController
   
   def delete_multiple
     @notebooks.each {|notebook| notebook.destroy} if @notebooks
-    @note.each {|note| note.destroy} if @notes
+    @notes.each {|note| note.destroy} if @notes
     
     get_notebooks_and_notes
     if request.xhr?
