@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_user, only: [:index]
 
   def index
     @notebooks = @current_user.notebooks
@@ -9,4 +9,10 @@ class HomeController < ApplicationController
       flash[:notice] = "Your profile is only #{current_user.profile_completion_percentage}% complete!"
     end
   end
+
+  def landing_page
+    @user = User.new
+    render layout: "landing"
+  end
+
 end

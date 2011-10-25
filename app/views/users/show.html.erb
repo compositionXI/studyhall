@@ -52,8 +52,8 @@
         <div id="profile_tabs">
         	<ul>
         		<li><a href="#tabs-1">Courses (<%= @user.offerings.count %>)</a></li>
-        		<li><a href="#tabs-2">Notes (<%= @user.notebooks.count %>)</a></li>
-        		<li><a href="#tabs-3">Studyhalls (<%= @user.study_sessions.count %>)</a></li>
+        		<li><a href="#tabs-2">Notes (<%= @user.notebooks.viewable_by(current_user).count %>)</a></li>
+        		<li><a href="#tabs-3">Studyhalls (<%= @user.study_sessions.viewable_by(current_user).count %>)</a></li>
         	</ul>
         	<div id="tabs-1">
         	  <section class="courses <%= items_layout %>">
@@ -73,7 +73,7 @@
         	<div id="tabs-3">
         		<div class="notebook_list_container <%= items_layout %>">
         	    <ol class="notebook_list">
-        		    <%= render @user.study_sessions %>
+        		    <%= render @user.study_sessions.viewable_by(current_user) %>
         		  </ol>
         		</div>
         	</div>

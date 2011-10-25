@@ -12,6 +12,7 @@
 @import "jquery-jscrollpane.sass"
 @import "jquery-ui-custom.sass" 
 @import "chosen.sass"
+@import "animate.sass"
 
 .left
   float: left
@@ -36,6 +37,8 @@ html
     background: $white
     min-height: 700px
     padding: 20px
+    &.narrow
+      width: 480px
    
 //Footer
 .footer
@@ -334,10 +337,35 @@ header.topbar
         width: 150px
       a.hidden
         display: none
-  
-// Popovers
-.popover .inner
-  overflow: visible
+
+.user_sessions-new  
+  .container.narrow
+    margin-top: 40px
+    min-height: 285px
+    margin-bottom: 400px
+  fieldset
+    position: relative
+  legend
+    margin-left: 0px
+  form#new_user_session
+    border: 1px solid #DDD
+    padding: 20px 80px
+    input[type="text"], input[type="password"]
+      width: 300px
+    input[type="submit"]
+      width: 100px
+      margin-right: 10px
+    .input.checkbox
+      float: left
+      input
+        margin: 5px 4px 0 0
+  #forgot_link
+    float: right
+    margin: 5px 5px 0 0
+  #facebook_login
+    position: absolute
+    right: 0
+    top: 0
   
 //User Page - Home
 .home-header
@@ -833,6 +861,7 @@ form
     text-align: center
     padding: 0 10px
     position: relative
+    cursor: pointer
     .attendees
       margin: 15px auto 0
       width: 85px
@@ -852,6 +881,7 @@ form
       right: 14px
       bottom: 25px
     &.edit
+      cursor: inherit
       .checkbox
         display: block
         background: url(/assets/notebook-icons.png) -25px 0 no-repeat
@@ -867,7 +897,7 @@ form
           opacity: 1
           background: url(/assets/notebook-icons.png) -50px 0 no-repeat
 
-
+// Popovers
 .popover #new_study_session
   p
     margin-top: 5px
@@ -879,7 +909,24 @@ form
     width: 312px
   input[type="text"]
     width: 300px
+    
+.popover .inner
+  overflow: visible
 
+.study_session_modal
+  p
+    margin-top: 5px
+  label
+    margin-top: 10px
+  input[type="file"]
+    width: 280px
+  select
+    width: 312px
+  input[type="text"]
+    width: 300px
+  input[type="checkbox"]
+    margin: 17px 5px 0 0
+    
 
 // User Settings
 
@@ -1128,3 +1175,241 @@ section.course_activity
               line-height: 12px
               color: $linkColor
               text-shadow: none
+// LANDING PAGE
+
+=center-width($width)
+  left: 50%
+  margin-left: - ($width / 2)
+  position: absolute
+  width: $width  
+
+.awesome-landing
+  h1
+    text-align: center
+    text-shadow: 0 1px 0 $white
+  .primary //button style override
+    color: $white
+    font-weight: 900
+    text-shadow: 0 1px 2px rgba(0,0,0, .5)
+  .header 
+    background: image-url("landing/texture.jpg")
+    height: 520px
+    position: relative
+    overflow: hidden
+    width: 100%
+    h1, .browser-quad, .browser-main, .glow, .zigzag
+      position: absolute
+    h1, .browser-quad, .browser-main, .glow
+      background-repeat: no-repeat
+      background-position: center center
+      background-color: transparent
+    h1 
+      +center-width(584px)
+      background: image-url("landing/masthead.png")
+      height: 118px 
+      top: 57px
+      z-index: 50
+    .login-button
+      +border-radius( $topbarRadius )
+      $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
+      +box-shadow($shadow)               
+      +sans-serif-font(bold, 13px, 13px)
+      +vertical-gradient($navGradStart, $navGradEnd)
+      border-top: none
+      border-bottom: 1px solid $navBorderBottom
+      border-left: 1px solid $navBorderTop
+      border-right: 1px solid $navBorderRight
+      color: #ffffff    
+      right: 50%
+      margin-right: -470px
+      padding: 10px 15px
+      position: absolute
+      text-shadow: 0 1px 0 rgba(0,0,0, .3)
+      top: 15px 
+      &:hover, &:focus
+        text-decoration: none        
+    .browser-main
+      +center-width(398px) 
+      +box-shadow(0px 0 10px rgba(0,0,0, .33))
+      background: image-url("landing/browser-main.jpg")
+      bottom: 10px         
+      height: 313px
+      z-index: 40
+    .browser-quad
+      +center-width(1112px)
+      background: image-url("landing/browser-quad.png")
+      bottom: -15px
+      height: 333px
+      z-index: 20
+    .zigzag     
+      background: image-url("landing/zigzag.png")
+      bottom: 0
+      height: 50px
+      width: 100%
+      z-index: 30
+    .glow
+      +center-width(1280px)
+      background: image-url("landing/glow.png")
+      height: 491px
+      z-index: 10
+  .signup 
+    height: 175px
+    h1
+      +header-font(medium, 40px, 40px)
+    .quick-signup
+      padding: 0
+    .input
+      float: left
+      margin-left: 0
+    .email-container, .password-container
+      margin-right: 10px                 
+    .input
+      width: 240px
+      input
+        width: 220px
+    .url-container
+      position: absolute
+      right: 0
+      width: 440px
+      input
+        float: left
+      input[type="submit"]
+        width: 160px
+        margin-left: 20px
+    #url, .primary
+      display: block
+      float: left
+    #url
+      width: 189px
+    .primary
+      height: 37px
+      margin: 0 0 0 -2px
+      padding: 12px 9px 
+  .reasons                                   
+    +box-shadow(inset 0 10px 15px rgba(0,0,0, .33))
+    background: image-url("landing/grid.png")      
+    header
+      height: 110px 
+      position: relative
+    h1
+      +header-font(medium, 30px, 43px) 
+      background: image-url("landing/arrows.png") no-repeat left 0px transparent  
+      color: $white
+      cursor: pointer 
+      height: 43px   
+      padding: 0 0 0 55px     
+      position: absolute
+      left: 50%
+      margin-left: -280px
+      text-shadow: 0 1px 1px rgba(0,0,0, .4)
+      top: 30px
+    .close, .primary
+      position: absolute
+      top: 40px
+    .close  
+      left: 0 
+      padding: 7px 15px
+    .primary
+      right: 0
+    .content
+      background: $white
+      height: 700px
+      position: relative
+    .postits
+      li
+        +ir // Image replacement class
+        background: image-url('landing/postits.png') no-repeat center center transparent
+        cursor: pointer
+        position: absolute
+      .notes
+        background-position: 0 0
+        height: 245px
+        left: 40px
+        top: 126px
+        width: 242px 
+        z-index: 100        
+      .start
+        background-position: -245px 0
+        height: 260px 
+        left: 255px
+        top: 115px
+        width: 257px
+        z-index: 90  
+      .share
+        background-position: -503px 0
+        height: 242px 
+        left: 475px
+        top: 60px
+        width: 235px    
+        z-index: 80 
+      .work 
+        background-position: -750px 0
+        height: 240px 
+        left: 680px
+        top: 96px
+        width: 250px
+        z-index: 70 
+      .meet
+        background-position: 0 -250px
+        height: 240px
+        left: 36px
+        top: 313px
+        width: 245px   
+        z-index: 60    
+      .login
+        background-position: -243px -260px
+        height: 240px
+        left: 249px
+        top: 349px
+        width: 260px 
+        z-index: 50  
+      .collaborate
+        background-position: -500px -238px
+        height: 263px
+        left: 460px
+        top: 356px
+        width: 260px 
+        z-index: 30
+      .free
+        background-position: -753px -238px
+        height: 270px
+        left: 686px
+        top: 326px
+        width: 260px 
+        z-index: 40
+      
+      
+.open
+  .reasons
+    h1
+      background-position: left -106px  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

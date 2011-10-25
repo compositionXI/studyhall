@@ -90,11 +90,11 @@ class User < ActiveRecord::Base
   end
   
   def blocked_users
-    User.find followings.blocked.collect { |f| f.followed_user_id }
+    User.includes(:followings).where("followings.blocked = ?",true)
   end
 
   def buddies
-    followed_users - blocked_users
+    User.includes(:followings).where("followings.blocked = ?",false)
   end
   
   def has_role?(role)

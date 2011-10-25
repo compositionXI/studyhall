@@ -8,6 +8,9 @@ class StudySessionsController < ApplicationController
   
   def index
     @study_sessions = find_study_sessions
+    @study_sessions.each do |study_session|
+      study_session.session_files.build
+    end
     @index = true
   end
   
