@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111019173932) do
+ActiveRecord::Schema.define(:version => 20111025172713) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20111019173932) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"
@@ -212,6 +213,7 @@ ActiveRecord::Schema.define(:version => 20111019173932) do
     t.datetime "updated_at"
     t.string   "tokbox_session_id"
     t.integer  "user_id"
+    t.boolean  "shareable"
   end
 
   create_table "users", :force => true do |t|
@@ -231,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20111019173932) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
