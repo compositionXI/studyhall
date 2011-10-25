@@ -1,0 +1,22 @@
+<% @layout = "fixed_width" %>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <title>Studyhall</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name + "-" + action_name %> fixed-width">
+  <%= render :partial => "layouts/topbar" %>
+  <section class="main-content">
+    <div class="narrow container"><%= yield %></div>
+  </section>
+  <%= render "layouts/footer" %>
+</body>
+</html>

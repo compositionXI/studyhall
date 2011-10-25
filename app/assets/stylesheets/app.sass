@@ -37,6 +37,8 @@ html
     background: $white
     min-height: 700px
     padding: 20px
+    &.narrow
+      width: 480px
    
 //Footer
 .footer
@@ -336,9 +338,34 @@ header.topbar
       a.hidden
         display: none
   
-  
-  
-  
+.user_sessions-new  
+  .container.narrow
+    margin-top: 40px
+    min-height: 285px
+    margin-bottom: 400px
+  fieldset
+    position: relative
+  legend
+    margin-left: 0px
+  form#new_user_session
+    border: 1px solid #DDD
+    padding: 20px 80px
+    input[type="text"], input[type="password"]
+      width: 300px
+    input[type="submit"]
+      width: 100px
+      margin-right: 10px
+    .input.checkbox
+      float: left
+      input
+        margin: 5px 4px 0 0
+  #forgot_link
+    float: right
+    margin: 5px 5px 0 0
+  #facebook_login
+    position: absolute
+    right: 0
+    top: 0
   
   
 //User Page - Home
