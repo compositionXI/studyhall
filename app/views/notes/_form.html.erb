@@ -7,7 +7,7 @@
   <div class="clearfix">
     <%= f.label "Save To Notebook" %>
     <div class="input">
-      <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:include_blank => true}, {:class => "chzn-select"} %>
+      <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:prompt => "Choose a notebook", :include_blank => true}, {:class => "chzn-select", "data-placeholder" => "Choose a notebook"} %>
     </div>
   </div>
   <div class="clearfix">

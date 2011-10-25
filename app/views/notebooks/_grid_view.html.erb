@@ -17,7 +17,7 @@
         <div class="notebook_edit_fields">
           <span><%= notebook_fields.text_field :name %></span>
           <div class="course">
-            <%= collection_select "notebooks[#{notebook.id}]", :course_id, @offerings_for_user, :id, :course_listing, {:selected => selected_courses_for(current_user), :prompt => "Choose a course"}, {:class => "chzn-select", :id => "notebooks_#{notebook.id}_course_id_grid", "data-placeholder" => "Choose a course"} %>
+            <%= collection_select "notebooks[#{notebook.id}]", :course_id, Offering.find_all_by_school_id(current_user.school), :id, :course_listing, {:selected => selected_courses_for(current_user), :prompt => "Choose a course"}, {:class => "chzn-select", :id => "notebooks_#{notebook.id}_course_id_grid", "data-placeholder" => "Choose a course"} %>
           </div>
         </div>
       <% end %>
