@@ -11,6 +11,7 @@ button.popover({trigger: "manual",
                 offset: 10,
                 horizontalOffset: 25,
                 html: true,
+                help: function(){return "<%=j render :partial => 'help' %>";},
                 title: function(){return "Start A Study Hall";},
                 content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}});
 
@@ -29,3 +30,12 @@ select.chosen().change(function(){
 
 styleFileInputs();
 $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
+
+$(".popover").delegate("a.help_button","click",function(e){
+  button.popover("showHelp");
+  e.preventDefault();
+});
+$(".popover").delegate("a.close_help_button","click",function(e){
+  button.popover("hideHelp");
+  e.preventDefault();
+});

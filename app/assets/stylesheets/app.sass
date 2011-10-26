@@ -912,6 +912,44 @@ form
     
 .popover .inner
   overflow: visible
+  background: #fff
+
+.popover 
+  .help_button
+    @include border-radius(10px)
+    position: absolute
+    top: 15px
+    right: 15px
+    color: #FFF
+    background: #DDD
+    padding: 2px 7px 0 7px
+    cursor: pointer
+    text-decoration: none
+  .help
+    position: absolute
+    top: 0
+    width: 300px
+    height: inherit
+    background: #FAFAFA
+    border: 1px solid $popoverBorder
+    margin-top: 5px
+    padding: 10px
+    z-index: -1001
+    &.right
+      right: 410px
+    &.left
+      left: 410px
+    .close_help_button
+      @include border-radius(10px)
+      position: absolute
+      top: 15px
+      right: 19px
+      color: #FFF
+      background: #DDD
+      padding: 0 6px 1px 6px
+      cursor: pointer
+      text-decoration: none
+      font-size: 15px
 
 .study_session_modal
   p

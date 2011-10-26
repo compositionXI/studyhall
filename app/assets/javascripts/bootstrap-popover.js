@@ -36,6 +36,7 @@
       var $tip = this.tip()
       $tip.find('.title')[this.options.html ? 'html' : 'text'](this.getTitle())
       $tip.find('.content p')[this.options.html ? 'html' : 'text'](this.getContent())
+      $tip.find('.help')[this.options.html ? 'html' : 'text'](this.getHelp())
       $tip[0].className = 'popover'
     }
 
@@ -52,10 +53,41 @@
       return content
     }
 
+  , getHelp: function () {
+      var help
+       , $e = this.$element
+       , o = this.options
+
+      if (typeof this.options.help == 'string') {
+        help = $e.attr(o.help)
+      } else if (typeof this.options.help == 'function') {
+        help = this.options.help.call(this.$element[0])
+      }
+      return help
+    }
+
+  , showHelp: function () {
+      var $tip = this.tip();
+      var $help_div = $tip.find('.help');
+      if(this.options.placement == "left" || this.options.placement == "below-left")
+        $help_div.animate({right: '410px'});
+      else
+        $help_div.animate({left: '410px'});
+    }
+
+  , hideHelp: function () {
+      var $tip = this.tip();
+      var $help_div = $tip.find('.help');
+      if(this.options.placement == "left" || this.options.placement == "below-left")
+        $help_div.animate({right: '0px'});
+      else
+        $help_div.animate({left: '0px'});
+    }
+
   , tip: function() {
       if (!this.$tip) {
         this.$tip = $('<div class="popover" />')
-          .html('<div class="arrow-border"></div><div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
+          .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><a href="#" class="help_button">?</a><div class="content"><p></p></div></div>')
       }
       return this.$tip
     }
