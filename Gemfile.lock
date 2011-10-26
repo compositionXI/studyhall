@@ -218,6 +218,7 @@ GEM
       thor (~> 0.14.6)
     rake (0.9.2)
     rdoc (3.9.4)
+    remotipart (1.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rsolr (0.12.1)
@@ -314,6 +315,7 @@ DEPENDENCIES
   paperclip (~> 2.4)
   rails (= 3.1.0)
   rails3-generators
+  remotipart (~> 1.0)
   rest-client
   rspec-rails
   sass-rails (~> 3.1.0)
