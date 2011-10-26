@@ -50,35 +50,66 @@
       <div class="clear"></div>
       <div id="profile_user_items">
         <div id="profile_tabs">
-        	<ul>
-        		<li><a href="#tabs-1">Courses (<%= @user.offerings.count %>)</a></li>
-        		<li><a href="#tabs-2">Notes (<%= @user.notebooks.viewable_by(current_user).count %>)</a></li>
-        		<li><a href="#tabs-3">Studyhalls (<%= @user.study_sessions.viewable_by(current_user).count %>)</a></li>
-        	</ul>
-        	<div id="tabs-1">
-        	  <section class="courses <%= items_layout %>">
-              <ol class="course_list">
-                <%= render partial: 'users/course_list', collection: @user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
-              </ol>
-            </section>
-            <div class="clear"></div>
-        	</div>
-        	<div id="tabs-2">
-        	  <div class="notebook_list_container <%= items_layout %>">
-        	    <ol class="notebook_list">
-        		    <%= render partial: 'notebooks/list_item', collection: @user.notebooks.viewable_by(current_user), as: :notebook %>
-        		  </ol>
-        		</div>
-        	</div>
-        	<div id="tabs-3">
-        		<div class="notebook_list_container <%= items_layout %>">
-        	    <ol class="notebook_list">
-        		    <%= render @user.study_sessions.viewable_by(current_user) %>
-        		  </ol>
-        		</div>
-        	</div>
+          <ul class="tabs">
+            <li class="active"><a data-rel="courses_tab" href="#">Courses (<%= @user.offerings.count %>)</a></li>
+            <li><a data-rel="notes_tab" href="#">Notes (<%= @user.notebooks.viewable_by(current_user).count %>)</a></li>
+            <li><a data-rel="studyhalls_tab" href="#">Studyhalls (<%= @user.study_sessions.viewable_by(current_user).count %>)</a></li>
+          </ul>
+          <ul id="courses_tab" class="courses course_list tab_contents">
+            <% @user.offerings.each do |course| %>
+              <li data-rel="<%= class_url(course) %>" class="linked_item course">
+                <span><%= course.course.title %></span>
+              </li>
+            <% end %>
+          </ul>
+          <ul id="notes_tab" class="notes notebook_list tab_contents" style="display:none">
+            <% @user.notebooks.viewable_by(current_user).each do |notebook| %>
+              <li data-rel="<%= url_for(notebook) %>" class="linked_item notebook">
+                <span><%= notebook.name %></span>
+              </li>
+            <% end %>
+          </ul>
+          <ul id="studyhalls_tab" class="studyhalls notebook_list tab_contents" style="display:none">
+            <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
+              <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
+                <div class="attendees">
+                  <% study_session.users.first(3).each do |user| %>
+                    <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+                  <% end %>
+                </div>
+                <% if study_session.name.blank? %>
+                  <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
+                <% else %>
+                  <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
+                  <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 </section>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".tabs li").each(function(){
+      var li = $(this);
+      var link = li.children().first();
+      if(li.hasClass("active"))
+        $("#"+link.data("rel")).show();
+      link.click(function(e){
+        var clicked_link = $(this);
+        $(".tabs li").removeClass("active");
+        clicked_link.parent().addClass("active");
+        $(".tab_contents").hide();
+        $("#"+clicked_link.data("rel")).show();
+        e.preventDefault();
+      });
+    });
+    $(".course_list").jScrollPane();
+    $(".linked_item").click(function(e){
+      window.location = $(this).data("rel");
+    });
+  });
+</script>

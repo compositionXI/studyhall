@@ -24,11 +24,11 @@ completion_percentage = () ->
   Math.round( count/total_fields * 100 )
 
 $ ->
-  $("#profile_tabs").tabs()
+  #$("#profile_tabs").tabs()
   # $(".chzn-select").css({"display": "none"})
   $('#user_extracurriculars_chzn.chzn-container .chzn-choices .search-field').change ->
-  $('.chzn-select.appendable').append('<option>'+this.value+'</option>')
-  $('.chzn-select.appendable').trigger('liszt:updated')
+    $('.chzn-select.appendable').append('<option>'+this.value+'</option>')
+    $('.chzn-select.appendable').trigger('liszt:updated')
   
   $('.sorority, .fraternity').css("display", "none")
   switch_greek_select_box()

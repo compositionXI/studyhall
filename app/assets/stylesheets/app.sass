@@ -1077,13 +1077,39 @@ form
 
     #profile_tabs
       ul
-        border-bottom: 1px solid black
-      .ui-state-active
-        a 
-          color: $headings
-      .tabs_container
-        ol
-          display: block
+        float: none
+        width: auto
+        margin-left: 5px
+        &.tabs
+          border-bottom: 1px solid #C6C0BC
+          li a:hover
+            border-bottom: none
+        &.tab_contents
+          &.course_list
+            height: 400px
+            overflow-y: scroll
+          .linked_item
+            float: left
+            display: block
+            height: 155px
+            width: 140px
+            text-align: center
+            padding: 40px 5px 0 10px
+            cursor: pointer
+            margin: 0 5px 5px 5px
+            &.course
+              background: url("../assets/BigGrayBook.png")
+            &.notebook
+              background: url("../assets/notebook-brown.png")
+            &.study_session
+              height: 130px
+              width: 100px
+              padding-top: 15px
+            span
+              color: #FFF
+            &:hover
+              span, a.name
+                text-decoration: underline
 
 // Course Detail
 section.course_activity
