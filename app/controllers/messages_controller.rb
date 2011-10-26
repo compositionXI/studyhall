@@ -44,6 +44,11 @@ class MessagesController < ApplicationController
     subject = params[:message].try(:[], :subject)
     body = params[:message].try(:[], :body)
     @success = @sender.send_message?(subject, body, @receiver)
+    @message_copy = MessageCopy.find(@sender.sent_messages.first.id)
+    @message_copy.update_attributes(params[:message])
+    @message = Message.find(@receiver.inbox.first.id)
+    @message.update_attributes(params[:message])
+    @success
   end
 
   def update
