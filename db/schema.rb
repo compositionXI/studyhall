@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20111026175927) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -240,6 +241,7 @@ ActiveRecord::Schema.define(:version => 20111026175927) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
