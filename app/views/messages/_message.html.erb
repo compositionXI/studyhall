@@ -21,7 +21,20 @@
       </div>
     <% end %>
     <div class="body">
-      <%= message.body.html_safe %>
+    <% if long_message(message) %>
+      <div class="expand_message">
+        <div class="message_preview">
+          <%= message_body_preview(message) %>
+        </div>
+      <div class="full_message hide">
+        <%= message.body %>
+      </div>
+    </div>
+    <% else %>
+      <div class="full_message">
+        <%= message.body %>
+      </div>
+    <% end %>
     </div>
   </div>
   <div class="reply_fields"></div>

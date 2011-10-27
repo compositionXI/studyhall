@@ -18,4 +18,14 @@ module MessagesHelper
       "Your Messages"
     end
   end
+  
+  def long_message(message)
+    message.body.length > 125
+  end
+  
+  def message_body_preview(message)
+    message_body = message.body
+    message_body = long_message(message) ? message_body.slice(0, 125).strip << "..." : message_body
+    message_body
+  end
 end

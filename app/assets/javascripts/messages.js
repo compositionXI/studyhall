@@ -28,4 +28,9 @@ $(document).ready(function(){
     $(this).closest("#message_new").remove();
     return false;
   });
+  
+  $(".message_content .expand_message").click(function(){
+    $(this).closest(".message_content").find(".full_message").toggleClass("hide");
+    $(this).closest(".message_content").find(".message_preview").toggleClass("hide");
+  });
 });
