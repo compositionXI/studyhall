@@ -16,7 +16,6 @@ class MessagesController < ApplicationController
     else
       raise ActiveRecord::RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
     end
-    
     if request.xhr?
       params[:message].delete :opened if params[:message][:opened] == "all"
       @messages = current_user.inbox.where(params[:message])
@@ -27,7 +26,7 @@ class MessagesController < ApplicationController
   def new
     @message = current_user.sent_messages.new(:subject => prepared_subject, :parent_id => params[:parent_id])
     respond_to do |format|
-      format.html
+      format.html { render :partial => "reply_form" }
       format.js
     end
   end

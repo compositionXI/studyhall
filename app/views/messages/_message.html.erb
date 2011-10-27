@@ -7,7 +7,7 @@
           <%= link_to "Move to Inbox", message_path(message, :deleted => false), :class => "btn", :method => :put, :remote => true %>
         <% else %>
           <%= link_to "Mark as read", message_path(message), :class => "btn", :method => :delete, :remote => true %>
-          <%= link_to "Reply", new_user_message_path(message.from, :subject => message.subject), :class => "btn", :remote => true %>
+          <%= link_to "Reply", new_user_message_path(message.from, :subject => message.subject), :class => "btn reply_button", :remote => true, :'data-type' => "html" %>
         <% end %>
       </div>
       <strong>From:</strong><%= link_to message.from.name, message.from %>
@@ -17,11 +17,12 @@
     <% if message.attachment? %>
       <div class="attachment">
         <strong>Attachment:</strong>
-        <%=link_to message.attachment_file_name, message.attachment.url(:original, false) %>
+        <%=link_to message.attachment_file_name, message.attachment.url(:original, false)%>
       </div>
     <% end %>
     <div class="body">
       <%= message.body.html_safe %>
     </div>
   </div>
+  <div class="reply_fields"></div>
 </li>

@@ -1,7 +1,14 @@
+var formContainer = $("#message_new").parent()
+
+function showHideSuccessMessage(){
+  $(formContainer).find(".alert-message").fadeOut(500, function(){$(formContainer).find(".alert-message").remove()});
+  $("#new_message_button").popover("hide");
+}
+
 <% if @success %>
   $("#message_new").animate({opacity: 0},1000)
   setTimeout(function(){$("#message_new").parent().html("<div class=\"alert-message success\">Your message was sent.</div>")}, 500);
-  setTimeout(function(){$("#new_message_button").popover("hide")},2000);
+  setTimeout(function(){showHideSuccessMessage()},2000);
 <% else %>
   $("#message_new #error_explanation").html("<p><strong>Uh-oh!</strong> There was a problem. Please fill out all fields and try again.</p>");
   $("#message_new #error_explanation").removeClass("hidden");

@@ -1,0 +1,41 @@
+<%= form_for @message, :as => 'message', :url => find_new_message_path(@receiver), :remote => true, :html => {:class => "form-stacked", :multipart => true} do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <div id="error_explanation" class="hidden alert-message block-message error">
+      <h2></h2>
+      <ul>
+        <li></li>
+      </ul>
+    </div>
+  <% end %>
+  <% if @receiver.nil? %>
+    <div class="clearfix">
+      <label>To</label>
+      <%= collection_select "", :user_id, current_user.buddies, :id, :name, {}, :class => "chzn-select" %>
+    </div>
+  <% end %>
+  <div class="clearfix">
+    <div class="input"><%= f.hidden_field :subject %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :body %>
+    <div class="input"><%= f.text_area :body, :class => "reply_body"%></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :attachment %>
+    <div class="input"><%= f.file_field :attachment, :class => "input-file" %></div>
+  </div>
+  <div>
+    <%= f.submit "Send", :class => "btn primary" %>
+    <%= link_to 'Cancel', messages_path, :class => "btn cancel_message" %>
+  </div>
+<% end %>
