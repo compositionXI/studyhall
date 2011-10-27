@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
 
   searchable do
     text :name
+    string :name
     integer :school_id
     integer :plusminus
   end

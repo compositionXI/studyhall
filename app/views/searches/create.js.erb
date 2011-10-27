@@ -1,0 +1,5 @@
+var html = "<%=j render partial: "quick_search" %>";
+if($("#quick_search").length > 0)
+  $("#quick_search").replaceWith(html);
+else
+  $("#new_search").append(html);

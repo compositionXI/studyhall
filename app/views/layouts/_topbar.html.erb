@@ -31,8 +31,8 @@
         <% end %>
         </nav>
         <div class="span4">
-          <%= form_for Search.new do |f| %>
-            <%= f.text_field :query, :placeholder => "Search" %>
+          <%= form_for Search.new, :url => search_path do |f| %>
+            <%= f.text_field :query, :placeholder => "Search", autocomplete: "off" %>
           <% end %>
         </div>
         <div class="right">

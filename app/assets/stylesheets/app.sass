@@ -192,6 +192,36 @@ header.topbar
         color: rgba(255,255,255,.75)
       &::-webkit-input-placeholder
         color: rgba(255,255,255,.75)
+    ul#quick_search
+      background: #FFF
+      padding: 5px
+      margin-left: 5px
+      @include box-shadow(0 2px 6px 2px #888)
+      li.user_search_result
+        width: 205px
+        background: #FAFAFA
+        border-bottom: 1px solid #EDECEB
+        padding: 5px
+        margin-top: 5px
+        .clearfix
+          margin-bottom: 0
+        .photo
+          float: left
+        .meta
+          margin-left: 55px
+          span
+            font-size: 11px
+          a
+            color: $linkColor
+            text-decoration: none
+            line-height: inherit
+            font-weight: inherit
+            text-shadow: none
+            line-height: 24px
+            &:hover
+              color: $linkColorHover
+              text-decoration: underline
+    
   .secondary-nav 
     li:last-child
       &:hover, &:active, &:focus
