@@ -20,7 +20,7 @@
   <% if @receiver.nil? %>
     <div class="clearfix">
       <label>To</label>
-      <%= collection_select "", :user_id, current_user.buddies, :id, :name, :class => "chzn-select" %>
+      <%= collection_select "", :user_id, current_user.buddies, :id, :name, {}, :class => "chzn-select" %>
     </div>
   <% end %>
   <div class="clearfix">
@@ -33,7 +33,7 @@
   </div>
   <div class="clearfix">
     <%= f.label :attachment %>
-    <div class="input"><%= f.file_field :attachment %></div>
+    <div class="input"><%= f.file_field :attachment, :class => "input-file" %></div>
   </div>
   <div>
     <%= f.submit "Send", :class => "btn primary" %>
