@@ -40,26 +40,14 @@ class UsersController < ApplicationController
   
   def update
     @user.avatar = nil if params[:delete_avatar] == "1"
-    params[:user][:extracurricular_ids] = @user.split_attribute_list(params[:extracurriculars_list], Extracurricular, :extracurricular_ids)
+    params[:user][:extracurricular_ids] = @user.split_attribute_list(params[:extracurriculars_list], Extracurricular, :extracurricular_ids) if params[:extracurriculars_list].present?
     
-    if @user.update_attributes! params[:user]
+    if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
-      
-      if request.xhr?
-        greek_house = @user.male? ? @user.fraternity : @user.sorority
-        render :json => {
-          name: @user.name, 
-          school: @user.school.name,
-          greek_house: greek_house, 
-          major: @user.major, 
-          gpa: @user.gpa, 
-          avatar_url: @user.avatar_url(:large),
-          bio: @user.bio
-        }
-      elsif params[:commit] == "Do This Later"
-          redirect_to home_index_path
-      else
-        redirect_to_user
+      @success = true
+      respond_to do |format|
+        format.html { redirect_to @user }
+        format.js
       end
     else
       render :action => :edit
@@ -102,7 +90,11 @@ class UsersController < ApplicationController
     offering = Offering.find params[:offering_id]
     offering.posts.create(:user_id => current_user.id, :text => "#{@current_user.name} dropped this class.")
     enrollment.delete
-    redirect_to root_path flash[:action_bar_message]
+    @course_id = params[:offering_id]
+    respond_to do |format|
+      format.html { redirect_to root_path flash[:action_bar_message] }
+      format.js
+    end
   end
 
   def block

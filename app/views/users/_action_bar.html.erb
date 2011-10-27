@@ -12,7 +12,7 @@
             <% end %>
             <%= link_to("Message #{@user.first_name}", new_user_message_path(@user), :class => "btn", :id => "new_message_button", "data-title" => "Send #{@user.first_name} a message", :remote => true) %>
           <% else %>
-            <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
+            <%= link_to("Edit", edit_user_path(@user), :class => "btn editable edit_button") if @current_user && @user.editable_by?(@current_user) %> 
           <% end %>
         </div>
       <% end %>
@@ -22,8 +22,8 @@
       <div class="buttons right">
         <% if params[:action] == "show" && @user && @user != current_user %>
           <%= link_to "Invite to a Studyhall", new_study_session_path(:id => @user, :link_id => "new_study_session_button"), :id => "new_study_session_button", :class => "btn small", :remote => true %>
-        <% elsif params[:action] == "edit" %>
-          <%= link_to "All Done!", @user, :class => "btn small", :title => "All Done!" %>
+        <% elsif params[:action] == "show" %>
+          <%= link_to "All Done!", @user, :class => "btn small editable edit_button edit" %>
         <% end %>
       </div>
     </div>

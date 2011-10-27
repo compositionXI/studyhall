@@ -1,8 +1,10 @@
 <section>
   <div class="row">
     <div class="span4 column sidebar left" id="profile_sidebar">
-        <%= image_tag @user.avatar_url(:large), :id => "profile_photo" %>
-        <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
+      <div id="photo_section" class="editable profile_photo" data-placement="right" data-title="Change your photo" data-form="photo_form">
+        <%= render partial: "photo", locals: {user: @user} %>
+      </div>
+      <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
       <div>
         <%= link_to "Report this profile", "#" %>
       </div>
@@ -13,21 +15,17 @@
     <div class="span12 column profile_main_content">
       <div id="profile_personal_info" class="left">
         <h1><%= @user.name %></h1>
-        <div id="profile_detailed_info">
-          <%= html_profile_detailed_info_for(@user)%>
+        <div id="affiliations_section" class="editable" data-placement="below" data-title="Affiliation Details" data-form="affiliations_form">
+          <%= render partial: "affiliations", locals: {user: @user} %>
         </div>
-        <div id="profile_bio" class="left">
-          <span id="bio"><%= @user.bio %></span>
+        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form">
+          <%= render partial: "bio", locals: {user: @user} %>
         </div>
       </div>
       <div class="profile_ratings left">
-        <% if @user.gpa %>
-          <div class="rating_block gpa left">
-            <div class="gpa_score"><%= @user.gpa %></div>
-            <span>GPA</span>
-            <%= link_to "", "", :class => "help" %>
-          </div>
-        <% end %>
+        <div id="gpa_section" class="rating_block gpa left editable" data-placement="left" data-title="Update Your GPA" data-form="gpa_form">
+          <%= render partial: "gpa", locals: {user: @user} %>
+        </div>
         <%= render :partial => "votes/rating", :locals => {:user => @user} %>
         <div class="clear"></div>
         <div class="stats">
@@ -55,10 +53,11 @@
             <li><a data-rel="notes_tab" href="#">Notes (<%= @user.notebooks.viewable_by(current_user).count %>)</a></li>
             <li><a data-rel="studyhalls_tab" href="#">Studyhalls (<%= @user.study_sessions.viewable_by(current_user).count %>)</a></li>
           </ul>
-          <ul id="courses_tab" class="courses course_list tab_contents">
+          <ul id="courses_tab" class="courses course_list tab_contents editable">
             <% @user.offerings.each do |course| %>
-              <li data-rel="<%= class_url(course) %>" class="linked_item course">
+              <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
                 <span><%= course.course.title %></span>
+                <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
               </li>
             <% end %>
           </ul>
@@ -91,8 +90,114 @@
     </div>
   </div>
 </section>
+<div id="profile_forms" style="display:none">
+  <div class="form" id="affiliations_form">
+    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_personal_info_form", :multipart => true} do |f| %>
+      <input type="hidden" name="form_id" value="affiliations_form">
+      <div class="input">
+        <%= f.label :School %>
+        <%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "chzn-select" %>
+      </div>
+      <div class="input">
+        <% if @user.male? %>
+          <%= f.label :fraternity %>
+          <%= f.text_field :fraternity %>
+        <% elsif @user.female? %>
+          <%= f.label :sorority %>
+          <%= f.text_field :sorority %>
+        <% end %>
+      </div>
+      <div class="input">
+        <%= f.label :major %>
+        <%= f.text_field :major %>
+      </div>
+      <div class="input clearfix">
+        <%= f.submit "Save", :class => "btn primary save" %>
+        OR
+        <%= link_to "Cancel", "#", :class => "close_modal" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form" id="gpa_form">
+    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_gpa_form", :multipart => true} do |f| %>
+      <input type="hidden" name="form_id" value="gpa_form">
+      <div class="input">
+        <%= f.label :GPA %>
+        <%= f.text_field :gpa %>
+      </div>
+      <div class="input clearfix">
+        <%= f.submit "Save", :class => "btn primary save" %>
+        OR
+        <%= link_to "Cancel", "#", :class => "close_modal" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form" id="bio_form">
+    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_bio_form", :multipart => true} do |f| %>
+      <input type="hidden" name="form_id" value="bio_form">
+      <div class="input">
+        <%= f.label :bio %>
+        <%= f.text_area :bio, :rows => 10 %>
+      </div>
+      <div class="input clearfix">
+        <%= f.submit "Save", :class => "btn primary save" %>
+        OR
+        <%= link_to "Cancel", "#", :class => "close_modal" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form" id="photo_form">
+    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_profile_photo_form", :multipart => true} do |f| %>
+      <input type="hidden" name="form_id" value="photo_form">
+      <div class="input">
+        <%= f.label :Your_photo %>
+        <%= f.file_field :avatar %>
+      </div>
+      <% if @user.has_avatar? %>
+        <div class="input clearfix">
+          <%= f.label "Delete Image" %>
+          <div class="input"><%= check_box_tag :delete_avatar %></div>
+        </div>
+      <% end %>
+      <div class="input clearfix">
+        <%= f.submit "Save", :class => "btn primary save" %>
+        OR
+        <%= link_to "Cancel", "#", :class => "close_modal" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% @user.offerings.each do |course| %>
+  <div id="course_<%= course.id %>_modal" data-rel="course_<%= course.id %>" class="course_modal modal hide fade" style="display:none">
+    <div class="modal-header">
+      <h2>Are you sure?</h2>
+    </div>
+    <div class="modal-body">
+      <p>Do you want to drop <%= course.course.title %>?</p>
+      <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
+      OR
+      <%= link_to "Cancel", "#", :class => "close_modal", "data-id" => "course_#{course.id}_modal" %>
+    </div>
+  </div>
+<% end %>
 <script type="text/javascript">
+  var hidePopovers = function(){
+    $(".editable.edit.active").each(function(){
+      $(this).popover("hide");
+    });
+  }
+
+  var cloneForm = function(editable){
+    var form_id = $(editable).data("form");
+    var form = $("#"+form_id).clone();
+    return form.first().html();
+  }
+
   $(document).ready(function(){
+
     $(".tabs li").each(function(){
       var li = $(this);
       var link = li.children().first();
@@ -107,9 +212,53 @@
         e.preventDefault();
       });
     });
+
     $(".course_list").jScrollPane();
+
+    $(".users-show").delegate(".edit .drop_course_link","click",function(e){
+      var modal_id = "#course_" + $(this).data("course_id") + "_modal";
+      $(modal_id).modal({keyboard: true,
+                         show: true,
+                         backdrop: true});
+      e.stopPropagation();
+      e.preventDefault();
+    });
+
     $(".linked_item").click(function(e){
-      window.location = $(this).data("rel");
+      if(!$(this).closest(".editable").hasClass("edit"))
+        window.location = $(this).data("rel");
+      else
+        e.preventDefault();
+    });
+
+    $(".edit_button").click(function(e){
+      hidePopovers();
+      $(".editable").toggleClass("edit");
+      e.preventDefault();
+    });
+
+    $(".users-show").delegate(".editable.edit","click",function(e){
+      if(!$(this).hasClass("tab_contents")){
+        var editable = $(this);
+        hidePopovers();
+        editable.addClass("active");
+        editable.popover({trigger: "manual",
+                          placement: editable.data("placement"),
+                          html: true,
+                          offset: 10,
+                          horizontalOffset: 10,
+                          title: function(){return editable.data("title")},
+                          content: function(){ return cloneForm(editable)}});
+        editable.popover("show");
+        e.stopPropagation();
+      }
+      e.preventDefault();
+    });
+
+    $(".users-show").delegate("a.close_modal","click",function(e){
+      hidePopovers();
+      console.log($(this).data("id"));
+      $("#"+$(this).data("id")).modal("hide");
     });
   });
 </script>

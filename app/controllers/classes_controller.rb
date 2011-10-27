@@ -48,7 +48,10 @@ class ClassesController < ApplicationController
   def destroy
     @enrollment = @current_user.enrollments.find_by_offering_id params[:id]
     @enrollment.destroy
-    redirect_to classes_path
+    respond_to do |format|
+      format.html { redirect_to classes_path }
+      format.js
+    end
   end
   
   def offerings_for_school

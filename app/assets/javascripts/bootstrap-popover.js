@@ -36,7 +36,8 @@
       var $tip = this.tip()
       $tip.find('.title')[this.options.html ? 'html' : 'text'](this.getTitle())
       $tip.find('.content p')[this.options.html ? 'html' : 'text'](this.getContent())
-      $tip.find('.help')[this.options.html ? 'html' : 'text'](this.getHelp())
+      if(this.options.help != undefined)
+        $tip.find('.help')[this.options.html ? 'html' : 'text'](this.getHelp())
       $tip[0].className = 'popover'
     }
 
@@ -86,8 +87,12 @@
 
   , tip: function() {
       if (!this.$tip) {
-        this.$tip = $('<div class="popover" />')
-          .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><a href="#" class="help_button">?</a><div class="content"><p></p></div></div>')
+        if (this.options.help != undefined)
+          this.$tip = $('<div class="popover" />')
+            .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><a href="#" class="help_button">?</a><div class="content"><p></p></div></div>')
+        else
+          this.$tip = $('<div class="popover" />')
+            .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
       }
       return this.$tip
     }

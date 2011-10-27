@@ -1,0 +1,7 @@
+console.log("wtf mang?");
+console.log("<%=j @course_id %>");
+var modal_id = "<%=j @course_id %>";
+console.log(modal_id);
+console.log(modal_id);
+$("#course_"+modal_id+"_modal").modal("hide");
+$("#course_<%=j @course_id %>").remove();

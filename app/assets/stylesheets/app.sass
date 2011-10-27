@@ -32,6 +32,7 @@ html
     height: 100% 
  
 .main-content
+  margin-top: 10px
   > .container
     @include box-shadow(0 0 5px 2px #EEEEEE)
     background: $white
@@ -897,6 +898,20 @@ form
           opacity: 1
           background: url(/assets/notebook-icons.png) -50px 0 no-repeat
 
+.users-show
+  .popover
+    .input
+      margin-left: 0
+      margin-right: 20px
+      margin-bottom: 10px
+      input[type='text']
+        width: 250px
+      textarea
+        width: 300px
+        height: 150px
+      select
+        width: 250px
+
 // Popovers
 .popover #new_study_session
   p
@@ -913,6 +928,7 @@ form
 .popover .inner
   overflow: visible
   background: #fff
+  width: inherit
 
 .popover 
   .help_button
@@ -976,11 +992,30 @@ form
 .sidebar_photo
   text-align: center
 
+.edit_button
+  display: inline
+  &.edit
+    display: none
+
 #profile_sidebar
   margin-top: 17px
-  #profile_photo
-    max-width: 200px
-    max-height: 200px
+  .profile_photo
+    text-align: center
+    padding: 10px 10px 5px 10px
+    .photo_wrapper
+      width: 200px
+      height: 200px
+      overflow-y: hidden
+      margin-bottom: 5px
+      img
+        width: 200px
+    a
+      display: none
+    &.edit
+      background: $editable_background
+      margin-bottom: 5px
+      a
+        display: block
 
 .profile_main_content
   margin-top: 42px
@@ -988,9 +1023,24 @@ form
   #profile_personal_info
     width: 440px
     margin-right: 20px
+    &.edit
+      background: $editable_background
+      padding: 5px
   
-  #profile_detailed_info
+  #affiliations_section
     margin-bottom: 10px
+    &.edit
+      background: $editable_background
+      padding: 5px
+      width: 440px
+      min-height: 50px
+
+  #bio_section
+    &.edit
+      background: $editable_background
+      padding: 5px
+      width: 440px
+      min-height: 100px
 
   .profile_ratings
     width: 220px
@@ -1003,6 +1053,8 @@ form
       padding: 10px
       &.gpa
         text-align: center
+        &.edit
+          background: $editable_background
         .gpa_score
           +h3 
           display: block
@@ -1085,9 +1137,6 @@ form
           li a:hover
             border-bottom: none
         &.tab_contents
-          &.course_list
-            height: 400px
-            overflow-y: scroll
           .linked_item
             float: left
             display: block
@@ -1110,6 +1159,26 @@ form
             &:hover
               span, a.name
                 text-decoration: underline
+          &.course_list
+            height: 400px
+            padding: 10px
+            width: 675px
+            overflow-y: scroll
+            .course
+              a
+                display: none
+            &.edit
+              background-color: $editable_background
+              .course
+                position: relative
+                a
+                  display: block
+                  width: 16px
+                  height: 16px
+                  background: url("../assets/delete.png")
+                  position: absolute
+                  bottom: 5px
+                  right: 5px
 
 // Course Detail
 section.course_activity
