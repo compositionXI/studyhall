@@ -92,7 +92,7 @@
             .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><a href="#" class="help_button">?</a><div class="content"><p></p></div></div>')
         else
           this.$tip = $('<div class="popover" />')
-            .html('<div class="arrow-border"></div><div class="arrow"></div><div class="help"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
+            .html('<div class="arrow-border"></div><div class="arrow"></div><div class="inner"><h3 class="title"></h3><div class="content"><p></p></div></div>')
       }
       return this.$tip
     }
