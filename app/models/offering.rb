@@ -16,4 +16,8 @@ class Offering < ActiveRecord::Base
   def classmates(current_user)
     self.users.sort_by(&:name) - [current_user]
   end
+
+  def name
+    course.title
+  end
 end

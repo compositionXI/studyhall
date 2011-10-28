@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026175927) do
+ActiveRecord::Schema.define(:version => 20111028140416) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20111026175927) do
     t.string   "tokbox_session_id"
     t.integer  "user_id"
     t.boolean  "shareable"
+    t.integer  "offering_id"
   end
 
   create_table "users", :force => true do |t|
