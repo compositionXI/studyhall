@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028140416) do
+ActiveRecord::Schema.define(:version => 20111028181149) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -235,7 +235,6 @@ ActiveRecord::Schema.define(:version => 20111028140416) do
     t.string   "fraternity"
     t.string   "sorority"
     t.text     "extracurriculars"
-    t.string   "login"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
