@@ -87,14 +87,12 @@ var quickSearch = function(){
   var input = $("#search_query");
   var form = input.closest("form");
   var url = form.prop("action")+".js?"+form.serialize()+"&models=user";
-  if(input.val().length > 2){
+  $("#quick_search").remove();
+  if(input.val().trim().length > 2){
     $.ajax({
       type: "GET",
       dataType: "script",
-      url: url,
-      beforeSend: function(){
-        $("#quick_search").remove();
-      }
+      url: url
     });
   }
 }
@@ -126,9 +124,13 @@ $(document).ready(function(){
 
   var timer = null;
   $("#search_query").keyup(function(){
-    if($(this).val().length > 2){
-      clearTimeout(timer);
-      timer = setTimeout(quickSearch, 750);
-    }
+    clearTimeout(timer);
+    timer = setTimeout(quickSearch, 750);
+  });
+  $("#search_query").blur(function(){
+    setTimeout(function(){
+      $("#quick_search").slideUp();
+    }, 500);
   });
 });
+
