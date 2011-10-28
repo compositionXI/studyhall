@@ -32,7 +32,7 @@
         </nav>
         <div class="span4">
           <%= form_for Search.new, :url => search_path do |f| %>
-            <%= f.text_field :query, :placeholder => "Search", autocomplete: "off" %>
+            <%= f.text_field :query, :placeholder => "Find a friend...or whatever", autocomplete: "off" %>
           <% end %>
         </div>
         <div class="right">
