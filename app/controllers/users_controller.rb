@@ -24,9 +24,10 @@ class UsersController < ApplicationController
     if @user.save_without_session_maintenance
       @user.deliver_activation_instructions!
       flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email."  
-      redirect_to login_url
-    else
-      render :action => :new
+    end
+    respond_to do |format|
+      format.html { @user.new_record? ? render(action: :new) : redirect_to(login_url) }
+      format.js
     end
   end
   
