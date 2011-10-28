@@ -2,7 +2,7 @@
   <% @results.users.results.each do |user| %>
     <li class="user_search_result">
       <div class="photo">
-        <%= image_tag(user.avatar.url(:medium)) %>
+        <%= image_tag(user.photo_url(:medium)) %>
       </div>
       <div class="meta">
         <%= link_to user.name, user %>

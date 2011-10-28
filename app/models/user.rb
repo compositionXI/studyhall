@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
 
+  def photo_url(size = :medium)
+    if avatar.file?
+      avatar.url(size)
+    else
+      "/assets/generic_avatar_#{size.to_s}.png"
+    end
+  end
+
   def first_name
     @first_name ||= name.split(" ").first
   end
