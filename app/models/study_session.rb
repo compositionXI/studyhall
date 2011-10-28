@@ -3,6 +3,7 @@ class StudySession < ActiveRecord::Base
   include Ownable
 
   belongs_to :user
+  belongs_to :offering
   has_many :session_files
   has_many :session_invites
   has_many :users, :through => :session_invites

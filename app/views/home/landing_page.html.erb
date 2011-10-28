@@ -9,33 +9,40 @@
 <section class="signup">
   <div class="container">
     <h1>The Official place to study online.</h1>
-    <%= form_for @user, url: new_user_path, html: {class: "quick-signup form-stacked"} do |f| %>
-      <div class="input email-container">
-        <%= f.label :name, "Your Name" %>
-        <%= f.text_field :name %>
+    <div style="position:relative;width:940px">
+      <%= form_for @user, remote: true, html: {class: "quick-signup form-stacked"} do |f| %>
+        <div class="input email-container">
+          <%= f.label :email, "Your Email" %>
+          <%= f.text_field :email, :title => "Email is taken or invalid", :class => "input_field" %>
+        </div>
+        <div class="input password-container">
+          <%= f.label :password, "Your Password" %>
+          <%= f.password_field :password, :title => "Not a valid password", :class => "input_field" %>
+        </div>
+        <div class="input url-container">
+          <%= f.label :custom_url, "Your URL" %>
+          <%= f.text_field :custom_url, :title => "URL is taken or invalid", :class => "input_field" %>
+          <%= f.submit "Reserve your seat", class: "btn primary" %>
+        </div>
+      <% end %>
+      <div class="alert-message success fade in" id="success_message" data-alert="close">
+        <p><strong>Great!</strong> Now watch your inbox for an account activation email...</p>
       </div>
-      <div class="input password-container">
-        <%= f.label :login, "Your Username" %>
-        <%= f.text_field :login %>
-      </div>
-      <div class="input url-container">
-        <%= f.label :email, "Your Email Address" %>
-        <%= f.text_field :email %>
-        <%= f.submit "Reserve your seat", class: "btn primary" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </section>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#new_user input:submit").click(function(e){
-      console.log("boom");
-      window.location = "/users/new?"+$("#new_user").serialize();
-      e.preventDefault();
+    $("#new_user input[type='submit']").click(function(){
+      var form = $(this).closest("form");
+      form.find(".input_field").each(function(){
+        var input = $(this);
+        if(input.twipsy(true) != null)
+          input.twipsy("hide");
+      });
     });
   });
 </script>
-
 <section class="reasons">
   <header class="container">
     <a href="#" class="btn close" id="close_reasons">x</a>

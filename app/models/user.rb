@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
-  acts_as_authentic
+  acts_as_authentic do |config|
+    config.require_password_confirmation = false
+  end
   acts_as_voter
   acts_as_voteable
   has_mailbox
@@ -25,15 +27,25 @@ class User < ActiveRecord::Base
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
 
-  validates_presence_of :name
+  validates_presence_of :name, :unless => lambda {|u| u.new_record?}
+  validates_format_of :custom_url, :with => /[a-z]{5,}/
 
   searchable do
     text :name
+    string :name
     integer :school_id
     integer :plusminus
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def photo_url(size = :medium)
+    if avatar.file?
+      avatar.url(size)
+    else
+      "/assets/generic_avatar_#{size.to_s}.png"
+    end
+  end
 
   def first_name
     @first_name ||= name.split(" ").first

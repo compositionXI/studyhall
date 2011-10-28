@@ -6,6 +6,8 @@
   <%= f.text_field :name %>
   <%= f.label :buddy_ids, "Invite Your Buddies" %>
   <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name,{:multiple => true},{:multiple => "multiple", :id => "buddy_id_select_#{study_session.id || 0}", :class => "chzn-select buddy_id_select", "data-placeholder" => "Select buddies"} %>
+  <%= f.label :offering_id, "Course" %>
+  <%= f.collection_select :offering_id, current_user.offerings, :id, :name,{:include_blank => true},{:class => "chzn-select buddy_id_select", "data-placeholder" => "No course"} %>
   <% if study_session.session_files.count > 1 %>
     <label>Uploaded File</label>
     <p><%= study_session.session_files.reject(&:new_record?).last.upload.file_name %></p>

@@ -4,7 +4,7 @@
       <li class="clearfix">
         <div class="class_post">
           <div class="user_photo left">
-            <%= link_to image_tag(post.user.avatar.url(:medium)), post.user %>
+            <%= link_to image_tag(post.user.photo_url(:medium)), post.user %>
           </div>
           <div class="post_details left">
             <%= link_to post.user.name, post.user %> - <%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %> <br/>

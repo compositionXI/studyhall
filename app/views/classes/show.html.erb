@@ -18,7 +18,7 @@
       <ul>
         <% if @classmates.any? %>
           <% @classmates.each do |mate| %>
-            <li><%= link_to image_tag(mate.avatar.url(:medium)), mate, :title => mate.name %></li>
+            <li><%= link_to image_tag(mate.photo_url(:medium)), mate, :title => mate.name %></li>
           <% end %>
         <% else %>
           <li></li>

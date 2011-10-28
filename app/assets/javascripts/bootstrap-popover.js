@@ -70,10 +70,12 @@
   , showHelp: function () {
       var $tip = this.tip();
       var $help_div = $tip.find('.help');
+      $help_div.css({height: $tip.find(".title").height()+$tip.find(".content").height()});
+      var width = $tip.find(".inner").width();
       if(this.options.placement == "left" || this.options.placement == "below-left")
-        $help_div.animate({right: '410px'});
+        $help_div.animate({right: width});
       else
-        $help_div.animate({left: '410px'});
+        $help_div.animate({left: width});
     }
 
   , hideHelp: function () {

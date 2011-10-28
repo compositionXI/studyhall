@@ -1,0 +1,14 @@
+<ul id="quick_search">
+  <% @results.users.results.each do |user| %>
+    <li class="user_search_result">
+      <div class="photo">
+        <%= image_tag(user.photo_url(:medium)) %>
+      </div>
+      <div class="meta">
+        <%= link_to user.name, user %>
+        <span><%= user.school.name if user.school %></span>
+      <div class="clearfix"></div>
+      </div>
+    </li>
+  <% end %>
+</ul>
