@@ -28,4 +28,19 @@ module MessagesHelper
     message_body = long_message(message) ? message_body.slice(0, 125).strip << "..." : message_body
     message_body
   end
+  
+  def message_action_options(message)
+    options = []
+    if message.deleted
+      options << ["Move to Inbox", message_path(message, :deleted => false), {:class => "unarchive"}]
+    else
+      options << ["Archive", message_path(message), {:class => "archive"}]
+    end
+    if message.opened?
+      options << ["Mark as unread", message_path(message), {:class => "mark_unread"}]
+    else
+      options << ["Mark as read", message_path(message), {:class => "mark_read"}]
+    end
+    options
+  end
 end

@@ -19,29 +19,38 @@
 
 .messages_list
   li.message_list_item
-    padding: 14px 0 10px 0
-    border-bottom: 1px dashed #CCC
+    border-bottom: 1px solid #D4D4D4
     img
       float: left
-    .message_content
-      margin-left: 55px
+    .full_message
       min-height: 55px
-      .meta
-        height: 19px
-        strong
-          margin-right: 5px
-        span
-          font-size: 11px
-      .subject
-        display: inline
-        width: 400px
-        strong
-          margin-right: 5px
-      .body
-        float: none
-        clear both
-        border: solid 1px #DDD
-        padding: 10px
-        margin: 5px
-    .message_actions
-      float: right
+      padding-left: 70px
+      border-top: 1px solid #D4D4D4
+    .collapsed_message
+      padding: 14px 14px 10px
+      &.unread
+        background-color: #F8F8F8
+      &:hover
+        cursor: pointer
+        background-color: #FDFDE0
+      &.highlighted
+        background-color: #FDFDE0
+      .message_actions
+        padding-top: 10px
+      .message_content
+        margin-left: 55px
+        min-height: 55px
+        .meta
+          strong
+            margin-right: 5px
+          span
+            font-size: 11px
+          &.expand_message
+        .subject
+          strong
+            margin-right: 5px
+    .body
+      float: none
+      clear both
+      padding-top: 10px
+      padding-bottom: 10px
