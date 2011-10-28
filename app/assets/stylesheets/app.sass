@@ -1316,6 +1316,30 @@ section.course_activity
   position: absolute
   width: $width  
 
+.js .awesome-landing
+  .header
+    h1
+      +transition(top .5s ease 1s)
+      top: -120px
+      &.drop
+        top: 57px
+    .login-button
+      +transition(top .5s ease 1s )
+      top: -35px
+      &.drop
+        top: 15px 
+    .browser-main
+      +transition(all .95s ease 1s ) 
+      bottom: 530px
+      &.drop 
+        bottom: 10px
+    .browser-quad
+      +transition(bottom .75s ease 1s) 
+      bottom: 500px
+      // bottom: -275px
+      &.drop
+        bottom: -10px
+
 .awesome-landing
   h1
     text-align: center
