@@ -5,25 +5,31 @@ class landingPage
     @supportTransitions = false
   
     @awesome = $('.awesome-landing')
+    
+    #header elements
     @header = $('.header', @awesome)
     @headerElements = $('h1, .login-button, .browser-quad, .browser-main', @header)
     @header_h1 = $('h1', @header)
     @header_login = $('.login-button', @header)
     @header_quad = $('.browser-quad', @header)
-    @header_main = $('.browser-main', @header) 
+    @header_main = $('.browser-main', @header)
+    
+    #reasons elements 
     @reasons = $('.reasons')
-    @reasonsh1 = $('h1', @reasons)    
-    @browser_main = $('.browser-main', @landing)
+    @reasons_h1 = $('h1', @reasons)    
+    @reasons_content = $('.content', @reasons)
     
     if @supportTransitions
       @animateHeaderCSS()
-      @reasonsh1.click (e) -> 
-        @animateReasons(this)
+      @reasons_h1.click (e) => 
+        @animateReasonsCSS()
     else
       window.setTimeout =>  
         @animateHeader()  
       , 100
-      
+      @reasons_h1.toggle @openReasons, @closeReasons
+  
+  #Header animations    
   animateHeader: ->
     @header_h1.animate
       'top' : 57
@@ -40,11 +46,34 @@ class landingPage
   
   animateHeaderCSS: ->
     @headerElements.addClass 'drop'
+   
+  #Reasons section animations
+  openReasons: =>
+    @awesome.animate
+      'margin-top' : '-570px'
+    , 1000 
+    @reasons_content.stop().animate
+      'height' : 700
+    , 1000
+    @scroll()
+    
   
-  animateReasonsCSS: (element) ->
-    if @supportTransitions
-       @awesome.toggleClass 'open' 
-
+  closeReasons: =>
+    @awesome.animate
+      'margin-top' : '0'
+    ,1000 
+    @reasons_content.animate
+      'height' : 0   
+  
+  animateReasonsCSS: ->
+    @awesome.toggleClass 'open'
+    @scroll() 
+  
+  scroll: ->
+    $('html').animate
+      scrollTop : 0
+    , 900
+    
 $ -> 
   landing = new landingPage  
   landing.setup()  
