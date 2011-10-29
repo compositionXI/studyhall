@@ -1315,30 +1315,6 @@ section.course_activity
   position: absolute
   width: $width  
 
-.js .awesome-landing 
-  .header
-    h1
-      +transition(top .5s ease 1s)
-      top: -120px
-      &.drop
-        top: 57px
-    .login-button
-      +transition(top .5s ease 1s )
-      top: -35px
-      &.drop
-        top: 15px 
-    .browser-main
-      +transition(all .95s ease 1s ) 
-      bottom: 530px
-      &.drop 
-        bottom: 10px
-    .browser-quad
-      +transition(bottom .75s ease 1s) 
-      bottom: 500px
-      // bottom: -275px
-      &.drop
-        bottom: -10px
-
 .awesome-landing 
   background-color: #E9E9E9
   h1
@@ -1349,7 +1325,6 @@ section.course_activity
     font-weight: 900
     text-shadow: 0 1px 2px rgba(0,0,0, .5)
   .header 
-    +transition(margin 1s ease )
     background: image-url("landing/texture.jpg")
     height: 520px
     position: relative
@@ -1410,9 +1385,10 @@ section.course_activity
       background: image-url("landing/glow.png")
       height: 491px
       z-index: 10
-  .signup
+  .signup 
     background: #F1F7FB
-    height: 175px
+    height: 155px 
+    margin: 0
     h1
       +header-font(medium, 40px, 40px)
     .quick-signup
@@ -1451,7 +1427,6 @@ section.course_activity
       height: 110px 
       position: relative 
       .btn
-        +transition(opacity 1s ease)
         +opacity(0)
         visibility: hidden
     h1
@@ -1475,7 +1450,6 @@ section.course_activity
     .primary
       right: 0
     .content 
-      +transition(height 1s ease)
       background: $white  
       height: 0px
       position: relative
@@ -1543,10 +1517,38 @@ section.course_activity
         width: 260px 
         z-index: 40
       
-      
-.open
+
+.js .awesome-landing 
   .header
-    margin: -520px 0 0 0 
+    h1
+      +transition(top .5s ease .5s)
+      top: -120px
+      &.drop
+        top: 57px 
+    .login-button
+      +transition(top .5s ease 1s )
+      top: -35px
+      &.drop
+        top: 15px 
+    .browser-main
+      +transition(bottom .75s ease 1s ) 
+      bottom: 530px
+      &.drop 
+        bottom: 10px
+    .browser-quad
+      +transition(bottom .85s ease 1s) 
+      bottom: 500px
+      // bottom: -275px
+      &.drop
+        bottom: -10px
+
+body.awesome-landing
+  +transition(margin 1s ease )
+  .content
+    +transition(height 1s ease .6s)
+    
+.open
+  margin: -570px 0 0 0 
   .reasons
     header
       .btn

@@ -11,15 +11,15 @@
     <h1>The official place to study online.</h1>
     <%= form_for @user, url: new_user_path, html: {class: "quick-signup form-stacked"} do |f| %>
       <div class="input email-container">
-        <%= f.label :name, "Your Name" %>
-        <%= f.text_field :name %>
+        <%= f.label :email, "Your Name" %>
+        <%= f.text_field :email %>
       </div>
       <div class="input password-container">
         <%= f.label :login, "Your Username" %>
         <%= f.text_field :login %>
       </div>
       <div class="input url-container">
-        <%= f.label :email, "Your Email Address" %>
+        <%= f.label :email, "Your URL" %>
         <%= f.text_field :email %>
         <%= f.submit "Reserve your seat", class: "btn primary" %>
       </div>
