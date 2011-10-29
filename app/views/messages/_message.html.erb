@@ -1,6 +1,6 @@
 <li id="message_<%= message.id %>" class="message_list_item">
   <div class="collapsed_message <%= 'unread' unless message.opened? %>", data-message-reply-url="<%= new_user_message_path(message.from, :subject => message.subject) %>">
-    <%= link_to image_tag(message.from.avatar.photo_url(:medium)), message.from, :title => message.from.name %>
+    <%= link_to image_tag(message.from.photo_url(:medium)), message.from, :title => message.from.name %>
     <div class="message_content">
       <div class="meta expand_message">
         <%= link_to message.from.name, message.from, :class => "inner_link" %> - 
