@@ -2,24 +2,38 @@ var hide_message = function(selector){
   $("#"+selector).delay(400).slideUp(1000);
 }
 
-var ajaxUpdateMessageRead = function(url, message_list_item, read){
+var hideShowMessage = function(message_list_item_id){
+  var message_list_item = $("#"+message_list_item_id);
+  message_list_item.find(".collapsed_message").toggleClass("highlighted");
+  message_list_item.find(".message_actions").toggleClass("hide");
+  message_list_item.find(".full_message, .message_preview").toggleClass("hide");
+}
+
+var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
+  async = typeof async != 'undefined' ? async : true;
   $.ajax({
-    url: url, 
+    url: url,
     data: {message : {opened : read}},
     type: "PUT",
     dataType: "html",
+    async: async,
     success: function(response){
       message_list_item.replaceWith(response)
     }
   });
 }
 
-var ajaxGetReplyForm = function(url, message_list_item){
-  $.get(url, function(response){
+var ajaxGetReplyForm = function(url, message_list_item_id, async){
+  async = typeof async != 'undefined' ? async : true;
+  var message_list_item = $("#"+message_list_item_id);
+  $.ajax({
+    url: url,
+    async: async,
+    success: function(response){
     message_list_item.find(".reply_fields").html(response);
     styleFileInputs();
     $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
-  });
+  }});
 }
 
 $(document).ready(function(){
@@ -56,21 +70,18 @@ $(document).ready(function(){
   $("body").delegate(".collapsed_message", "click", function(){
     var message_list_item = $(this).closest(".message_list_item");
     var message_list_item_id = message_list_item.attr("id");
-    $(this).toggleClass("highlighted");
-    if($(this).closest(".message_list_item").find(".full_message").hasClass("hide")){
-      var url = $(this).attr("data-message-reply-url");
-      //message_list_item.find("option.mark_read").trigger("click");
-      //message_list_item.find("option.mark_read").ajaxComplete(function() {
-      //  var message_list_item = $("#"+message_list_item_id);
-      //});
-      ajaxGetReplyForm(url, message_list_item);
+    if (message_list_item.find(".collapsed_message").hasClass("unread")){
+      var updateUrl = message_list_item.find("option.mark_read").attr("value");
+      ajaxUpdateMessageRead(updateUrl, message_list_item, true, false);
+    }
+    if (message_list_item.find(".full_message").hasClass("hide")){
+      var replyUrl = $(this).attr("data-message-reply-url");
+      ajaxGetReplyForm(replyUrl, message_list_item_id, false);
     }
     else {
       message_list_item.find(".cancel_reply").trigger("click");
     }
-    $(this).find(".message_actions").toggleClass("hide");
-    message_list_item.find(".full_message").toggleClass("hide");
-    message_list_item.find(".message_preview").toggleClass("hide");
+    hideShowMessage(message_list_item_id);
   });
   
   $("body").delegate(".message_actions select option.archive", "click", function(){
