@@ -10,7 +10,8 @@ class ActivationsController < ApplicationController
       @user.deliver_welcome!
       redirect_to profile_wizard_user_url(@user.id)
     else
-      render :action => :new
+      flash[:error] = 'There was a problem activating your account.'
+      redirect_to login_path
     end
   end
 

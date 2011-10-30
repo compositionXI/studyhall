@@ -22,13 +22,14 @@ class User < ActiveRecord::Base
   has_many :session_invites
   has_many :study_sessions, :through => :session_invites
   has_many :posts
+  has_many :activity_messages
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
 
-  validates_presence_of :name, :unless => lambda {|u| u.new_record?}
   validates_format_of :custom_url, :with => /[a-z]{5,}/
+  validate :name_should_be_present
 
   searchable do
     text :name
@@ -38,6 +39,14 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def name_should_be_present
+    self.errors[:name] = "cannot be blank" if (name.blank? && read_attribute(:active) == true)
+  end
+
+  def activity
+    activity_messages.order('created_at DESC')
+  end
 
   def photo_url(size = :medium)
     if avatar.file?
@@ -106,7 +115,7 @@ class User < ActiveRecord::Base
   end
 
   def buddies
-    User.includes(:followings).where("followings.blocked = ?",false)
+    User.includes(:followings).where("followings.blocked = ?",false).where("users.id != ?",self.id)
   end
   
   def has_role?(role)
@@ -122,8 +131,7 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    self.active = true
-    save
+    update_attribute(:active, true)
   end
   
   def deliver_password_reset_instructions!  
