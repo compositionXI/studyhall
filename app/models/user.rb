@@ -28,8 +28,8 @@ class User < ActiveRecord::Base
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
 
-  validates_presence_of :name, :unless => lambda {|u| u.new_record?}
   validates_format_of :custom_url, :with => /[a-z]{5,}/
+  validate :name_should_be_present
 
   searchable do
     text :name
@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def name_should_be_present
+    self.errors[:name] = "cannot be blank" if (name.blank? && read_attribute(:active) == true)
+  end
 
   def activity
     activity_messages.order('created_at DESC')
@@ -127,8 +131,7 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    self.active = true
-    save
+    update_attribute(:active, true)
   end
   
   def deliver_password_reset_instructions!  
