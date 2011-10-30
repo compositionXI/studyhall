@@ -1,0 +1,4 @@
+<li class="activity_message">
+  <%= link_to image_tag(user.profile_photo(:medium)), user, title: user.name %>
+  <p><%= link_to user.name, user %> asked you to join a <%= link_to "StudyHall", studyhall %></p>
+</li>

@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :session_invites
   has_many :study_sessions, :through => :session_invites
   has_many :posts
+  has_many :activity_messages
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
@@ -38,6 +39,10 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def activity
+    activity_messages.order('created_at DESC')
+  end
 
   def photo_url(size = :medium)
     if avatar.file?
@@ -106,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def buddies
-    User.includes(:followings).where("followings.blocked = ?",false)
+    User.includes(:followings).where("followings.blocked = ?",false).where("users.id != ?",self.id)
   end
   
   def has_role?(role)
