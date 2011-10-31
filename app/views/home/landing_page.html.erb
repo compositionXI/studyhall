@@ -52,8 +52,22 @@
       <li class="login"><p>Log in using your Facebook account and connect with your friends</p></li>
       <li class="collaborate"><p>Collaborate in real-time with your buddies</p><p>View profiles and meet a new study buddy :)</p></li>
       <li class="free"><p>:) It's free!</p></li>
-    </ul>
-    <video>Video goes here</video>
+    </ul> 
+    <video id="studyhall_video" width="700" height="393" poster="/assets/video-placeholder.jpg" controls="controls" preload="none">
+    	<!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+    	<source type="video/mp4" src="/video/studyhall.mp4" />
+    	<!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
+    	<source type="video/webm" src="/video/studyhall.webm" />
+    	<!-- Ogg/Vorbis for older Firefox and Opera versions -->
+    	<source type="video/ogg" src="/video/studyhall.theora.ogv" />
+    	<!-- Flash fallback for non-HTML5 browsers without JavaScript -->	
+    	<object id="studyhall_video_flash" width="700" height="393" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+    		<param name="movie" value="flashmediaelement.swf" />
+    		<param name="flashvars" value="controls=true&poster=myvideo.jpg&file=myvideo.mp4" />
+    		<!-- Image as a last resort -->
+    		<img src="/assets/video-placeholder.jpg" width="700" height="393" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+    	</object>
+    </video>
   </section>
 </section>
 <footer class="footer">
