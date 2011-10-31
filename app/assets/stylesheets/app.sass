@@ -49,16 +49,18 @@ html
   background: $footer_background
   border-top: 1px double $footer_background
   bottom: 0
-  height: 70px
+  height: 100%
   left: 0
   width: 100%
-  p  
+  p,a  
     +sans-serif-font(normal, 12px, 18px)
     text-align: center  
     line-height: 70px  
     margin: 0
     font-size: 12px
     color: #aaaaaa
+    a
+      margin-left: 20px
       
 .outer-container
   width: 980px
@@ -399,6 +401,12 @@ header.topbar
     right: 0
     top: 0
   
+.alert-message.success
+  a
+    color: #FFF
+    font-weight: bold
+    text-decoration: underline
+
 //User Page - Home
 .home-header
   @include sidebar-separator 
@@ -420,7 +428,19 @@ header.topbar
     line-height: 40px
     float: left
     margin: 0 0 0 15px
-
+    width: 150px
+    font-size: 30px
+.home-index
+  .notebook_list_item
+    a
+      span
+        +header-font(normal, $basefont, $baseline)
+        font-size: 20px
+  li.add
+    a
+      +header-font(normal, $basefont, $baseline)
+      font-size: 20px
+      
 .sidebar
   +columns(4)
   float: left

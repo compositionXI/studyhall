@@ -63,7 +63,7 @@ $(function(){
       , horizontalOffset: 25
     });
   
-  $(".activity-list").jScrollPane();
+  $(".activity-list").jScrollPane({hideFocus: true});
   
   
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
