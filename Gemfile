@@ -32,6 +32,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'mediaelement_rails'
 gem 'httparty'
 gem "nifty-generators", :group => :development
 

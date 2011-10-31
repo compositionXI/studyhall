@@ -7,5 +7,7 @@
  *= require rte
  *= require messages
  *= require search
+ *= require mediaelement_rails
+ *= require mediaelement_rails/mejs-skins
 */
 	

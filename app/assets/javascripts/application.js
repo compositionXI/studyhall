@@ -14,6 +14,7 @@
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js
 //= require bootstrap-modal.js
+//= require mediaelement_rails
 //= require_tree .
 
 // Code for styling file upload inputs. Needs to be extracted and pluginified
