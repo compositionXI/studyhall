@@ -5,6 +5,7 @@ class landingPage
     @supportTransitions = false
   
     @awesome = $('.awesome-landing')
+    @speed = 1000
     
     #header elements
     @header = $('.header', @awesome)
@@ -26,10 +27,19 @@ class landingPage
     else
       window.setTimeout =>  
         @animateHeader()  
-      , 100
+      , @speed 
       @reasons_h1.toggle @openReasons, @closeReasons
   
-  #Header animations    
+  
+  #CSS3 Animations
+  animateHeaderCSS: ->
+    @headerElements.addClass 'drop'
+    
+  animateReasonsCSS: ->
+    @scroll()
+    @awesome.toggleClass 'open'
+ 
+  #Pure JS Animations
   animateHeader: ->
     @header_h1.animate
       'top' : 57
@@ -38,42 +48,34 @@ class landingPage
       'top' : 15
     , 500
     @header_quad.animate
-      'bottom' : 10
+      'bottom' : -10
     , 650
     @header_main.animate
-      'bottom' : "-10px"
+      'bottom' : "10px"
     , 750
-  
-  animateHeaderCSS: ->
-    @headerElements.addClass 'drop'
    
-  #Reasons section animations
   openReasons: =>
+    @scroll()
     @awesome.animate
       'margin-top' : '-570px'
-    , 1000 
+    , @speed     
     @reasons_content.stop().animate
       'height' : 700
-    , 1000
-    @scroll()
-    
+    , @speed
   
   closeReasons: =>
     @awesome.animate
       'margin-top' : '0'
-    ,1000 
+    , @speed 
     @reasons_content.animate
-      'height' : 0   
-  
-  animateReasonsCSS: ->
-    @awesome.toggleClass 'open'
-    @scroll() 
+      'height' : 0
+    , @speed  
   
   scroll: ->
     $('html').animate
       scrollTop : 0
-    , 900
+    , @speed
     
 $ -> 
   landing = new landingPage  
-  landing.setup()  
+  landing.setup()
