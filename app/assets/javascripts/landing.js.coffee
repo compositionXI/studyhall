@@ -58,7 +58,6 @@ class landingPage
   postitCleanup: ->
     that = this
     # @postits.removeClass(@postit_classes)
-    @video.css('opacity', ".2")
     @video[0].pause()  
   
   animatePostit: (element) ->
