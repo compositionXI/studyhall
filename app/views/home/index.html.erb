@@ -2,10 +2,8 @@
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), edit_user_path(@current_user) %>
     <h3>Hi, 
-    <%= link_to @current_user do %>
-        <%= @current_user.name %>
-    <% end %>
-    !</h3>
+    <%= link_to @current_user.name.split.first, @current_user %>!
+    </h3>
   </div>
   <% if flash[:notice] %>
     <div class="alert alert-message success span7">
@@ -27,15 +25,13 @@
       <h1>Your Activity</h1>
     </header>
     <ul class="activity-list">
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
-      <li><a href="#"><img src="/assets/generic_avatar_buddies.png" /></a><p><a href="#">Brent Collier </a>asked you to join a <a href="#">StudyHall</a></p></li>
+      <% if current_user.activity.any? %>
+        <% current_user.activity.each do |message| %>
+          <%= message.body.html_safe %>
+        <% end %>
+      <% else %>
+        <li><p>No recent activity</p></li>
+      <% end %>
     </ul>
   </section>  
   <section class="news">

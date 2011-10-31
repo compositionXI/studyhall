@@ -75,7 +75,8 @@ Studyhall::Application.routes.draw do
   end
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
-  resources :searches
+  post "/searches" => "searches#create", :as => "search", :format => :html
+  get "/searches" => "searches#create", :as => "search", :format => :js
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

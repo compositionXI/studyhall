@@ -52,8 +52,13 @@ class MessagesController < ApplicationController
 
   def update
     @message = HasMailbox::Models::Message.find(params[:id])
-    @message.undelete if params[:deleted] == "false"
-    render "destroy"
+    if params[:deleted] == "false"
+      @message.undelete 
+      render "destroy"
+    else
+      @message.update_attributes params[:message]
+      render partial: "messages/message", :locals => {message: @message}
+    end
   end
 
   def destroy
@@ -71,7 +76,13 @@ class MessagesController < ApplicationController
   protected
 
   def prepared_subject
-    params[:subject].blank? ? "" : "Re: #{params[:subject]}"
+    if params[:subject].nil?
+      ""
+    elsif params[:subject].index("Re:") == 0
+      "#{params[:subject]}"
+    else
+      "Re: #{params[:subject]}"
+    end
   end
 
   def find_sender

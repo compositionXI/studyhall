@@ -6,7 +6,7 @@
     <% users.each do |user| %>
       <li class="clearfix">
         <div class="left">
-          <%= link_to image_tag(user.avatar.url(:medium)), user, :title => user.name %>
+          <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
         </div>
         <div class="left">
           <%= link_to user.name, user %> <br/>

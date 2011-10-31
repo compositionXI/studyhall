@@ -1,6 +1,6 @@
 $("#new_message_button").popover({
   trigger: "manual",
-  placement: "below",
+  placement: "below-right",
   offset: 10,
   html: true,
   title: function(){return "Send<%=j @receiver.nil? ? "" : (" "+@receiver.first_name) %> a message";},

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
-  acts_as_authentic
+  acts_as_authentic do |config|
+    config.require_password_confirmation = false
+  end
   acts_as_voter
   acts_as_voteable
   has_mailbox
@@ -20,20 +22,39 @@ class User < ActiveRecord::Base
   has_many :session_invites
   has_many :study_sessions, :through => :session_invites
   has_many :posts
+  has_many :activity_messages
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
 
-  validates_presence_of :name
+  validates_format_of :custom_url, :with => /[a-z]{5,}/
+  validate :name_should_be_present
 
   searchable do
     text :name
+    string :name
     integer :school_id
     integer :plusminus
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def name_should_be_present
+    self.errors[:name] = "cannot be blank" if (name.blank? && read_attribute(:active) == true)
+  end
+
+  def activity
+    activity_messages.order('created_at DESC')
+  end
+
+  def photo_url(size = :medium)
+    if avatar.file?
+      avatar.url(size)
+    else
+      "/assets/generic_avatar_#{size.to_s}.png"
+    end
+  end
 
   def first_name
     @first_name ||= name.split(" ").first
@@ -94,7 +115,7 @@ class User < ActiveRecord::Base
   end
 
   def buddies
-    User.includes(:followings).where("followings.blocked = ?",false)
+    User.includes(:followings).where("followings.blocked = ?",false).where("users.id != ?",self.id)
   end
   
   def has_role?(role)
@@ -110,8 +131,7 @@ class User < ActiveRecord::Base
   end
 
   def activate!
-    self.active = true
-    save
+    update_attribute(:active, true)
   end
   
   def deliver_password_reset_instructions!  
