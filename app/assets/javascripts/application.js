@@ -10,6 +10,7 @@
 //= require jquery.remotipart
 //= require jquery.expander.min.js
 //= require jquery.remotipart
+//= require jquery.cleditor
 //= require bootstrap-dropdowns.js
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js

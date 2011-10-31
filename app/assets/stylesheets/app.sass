@@ -834,7 +834,27 @@ form
       
 
 .full-width
-  &.notes-new, &.notes-edit
+  #menubar
+    a:hover
+      color: #404040
+    .middle
+      text-align: center
+  &.notes-new, &.notes-edit, &.notes-show
+    #menubar
+      .middle
+        color: #ffffff
+        @include body-font(normal, 18px, 32px)
+        text-shadow: 0 1px 0 rgba(0,0,0,1)
+    section.main-content
+      background: url(/assets/note-taking-bg.jpeg) repeat-x
+      margin-top: -10px
+      .clearfix.flat
+        margin-bottom: 5px
+      .container
+        background: transparent
+        box-shadow: none
+        .cleditorToolbar
+          padding-left: 70px
     form
       background: none
       padding: 0
@@ -844,14 +864,23 @@ form
         padding: 40px
         border: none
 
-  pre#note_content
-    width: 80%
-    margin: 20px 100px
-    padding: 40px
+  div#note_content
+    padding: 60px 120px
     border: none
-    
-    background: white
-    color: black
+    background: #FEFDF8
+    color: #424240
+    min-height: 700px
+    font-family: "MuseoSansRegular", "Helvetica", Arial, Sans-serif
+    font-weight: 300
+    line-height: 20px
+    ul,ol
+      margin-left: -10px
+      padding-left: 0
+      li
+        font-weight: 100
+        list-style: none
+      li:before
+        content: "\00BB \0020"
 
 //Study Sessions
 .study_sessions-show
