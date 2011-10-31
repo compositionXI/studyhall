@@ -395,19 +395,109 @@
   -moz-animation-name: hinge
   -ms-animation-name: hinge
   animation-name: hinge 
-  
-@-moz-keyframes hinge-f-r
+
+@-webkit-keyframes hinge-right
+  0%
+    -webkit-transform: rotate(0) translateY(0)
+    -webkit-transform-origin: top left
+    -webkit-animation-timing-function: ease-in-out
+  100%
+    -webkit-transform: rotate(35deg) translateY(850px)
+    -webkit-transform-origin: top left
+    -webkit-animation-timing-function: ease-in-out
+
+
+// @-moz-keyframes hinge-right
+//   0%
+//     -moz-transform: rotate(0) translateY(0)
+//     -moz-transform-origin: top left
+//     -moz-animation-timing-function: ease-in
+//   40%, 60%
+//     -moz-transform: rotate(30deg) translateY(-20px) translateX(-35px)
+//     -moz-transform-origin: top left
+//     -moz-animation-timing-function: ease-in
+//   100%
+//     -moz-transform: rotate(-10deg) translateY(850px)
+//     -moz-transform-origin: top left
+//     -moz-animation-timing-function: ease-out
+
+@-moz-keyframes hinge-right
   0%
     -moz-transform: rotate(0) translateY(0)
-    -moz-transform-origin: top center
-    opacity: 1 
+    -moz-transform-origin: top left
     -moz-animation-timing-function: ease-in-out
-  100% 
-    -moz-transform: rotate(40deg) 
-    -moz-transform-origin: top center
+  100%
+    -moz-transform: rotate(35deg) translateY(850px)
+    -moz-transform-origin: top left
     -moz-animation-timing-function: ease-in-out
-    -moz-transform: translateY(250px)
-    opacity: 0
+
+
+@-ms-keyframes hinge-right
+  0%
+    -ms-transform: rotate(0) translateY(0)
+    -ms-transform-origin: top left
+    -ms-animation-timing-function: ease-in-out
+  100%
+    -ms-transform: rotate(35deg) translateY(850px)
+    -ms-transform-origin: top left
+    -ms-animation-timing-function: ease-in-out
+
+
+@keyframes hinge-right
+  0%
+    transform: rotate(0) translateY(0)
+    transform-origin: top left
+    animation-timing-function: ease-in-out
+  100%
+    transform: rotate(35deg) translateY(850px)
+    transform-origin: top left
+    animation-timing-function: ease-in-out
 
 .hinge-fall-right 
-  +animate(hinge-f-r, 1s, ease)
+  +animate(hinge-right, 1.5s, ease)
+
+
+  
+@-webkit-keyframes hinge-left
+  0%
+    -webkit-transform: rotate(0) translateY(0)
+    -webkit-transform-origin: top right
+    -webkit-animation-timing-function: ease-in-out
+  100%
+    -webkit-transform: rotate(-35deg) translateY(850px)
+    -webkit-transform-origin: top right
+    -webkit-animation-timing-function: ease-in-out
+
+@-moz-keyframes hinge-left
+  0%
+    -moz-transform: rotate(0) translateY(0)
+    -moz-transform-origin: top right
+    -moz-animation-timing-function: ease-in-out
+  100%
+    -moz-transform: rotate(-35deg) translateY(850px)
+    -moz-transform-origin: top right
+    -moz-animation-timing-function: ease-in-out
+
+
+@-ms-keyframes hinge-left
+  0%
+    -ms-transform: rotate(0) translateY(0)
+    -ms-transform-origin: top right
+    -ms-animation-timing-function: ease-in-out
+  100%
+    -ms-transform: rotate(-35deg) translateY(850px)
+    -ms-transform-origin: top right
+    -ms-animation-timing-function: ease-in-out
+
+
+@keyframes hinge-left
+  0%
+    transform: rotate(0) translateY(0)
+    transform-origin: top right
+    animation-timing-function: ease-in-out
+  100%
+    transform: rotate(-35deg) translateY(850px)
+    transform-origin: top right
+    animation-timing-function: ease-in-out
+.hinge-fall-left
+  +animate(hinge-left, 1.5s, ease) 

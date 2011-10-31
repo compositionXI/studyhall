@@ -70,10 +70,10 @@ html
     border-top: 1px solid $navBorderTop
 
 a.disabled
-  opacity: .7
+  +opacity(70)
   
 .modal-backdrop.fade.in
-  opacity: 0.6
+  +opacity(60)
 
 //Nav 
 
@@ -887,14 +887,14 @@ form
         background: url(/assets/notebook-icons.png) -25px 0 no-repeat
       &:hover
         .checkbox
-          opacity: .7
+          +opacity(70)
           background: url(/assets/notebook-icons.png) -50px 0 no-repeat
     &.checked
       .checkbox
         background: url(/assets/notebook-icons.png) -50px 0 no-repeat
       &:hover
         .checkbox
-          opacity: 1
+          +opacity(100)
           background: url(/assets/notebook-icons.png) -50px 0 no-repeat
 
 .users-show
@@ -1060,7 +1060,7 @@ form
           margin: 30px 0 0 0
           color: $headings 
         a.help
-          opacity: 0.5
+          +opacity(50)
           display: inline-block
           height: 16px
           width: 16px
@@ -1079,14 +1079,14 @@ form
           display: block
         .vote_actions
           a
-            opacity: 0.5
+            +opacity(50)
             display: inline-block
             height: 16px
             width: 16px
             &.current_vote
-              opacity: 1
+              +opacity(100)
             &:hover
-              opacity: 1
+              +opacity(100)
             &.downvote
               background-image: url("../assets/delete_bw.png")
               &:hover
@@ -1440,7 +1440,7 @@ section.course_activity
       left: 50%
       margin-left: -280px
       text-shadow: 0 1px 1px rgba(0,0,0, .4)
-      top: 30px
+      top: 30px 
     .close, .primary
       position: absolute
       top: 40px
@@ -1449,11 +1449,19 @@ section.course_activity
       padding: 7px 15px
     .primary
       right: 0
+    
     .content 
       background: $white  
-      height: 0px
+      height: 0
       position: relative
       overflow: hidden
+    
+    video
+      // +opacity(20)
+      position: absolute
+      left: 120px
+      top: 125px
+    
     .postits
       li
         +ir // Image replacement class
@@ -1541,6 +1549,14 @@ section.course_activity
       // bottom: -275px
       &.drop
         bottom: -10px
+  .mejs-container
+    +opacity(20)
+    position: absolute
+    left: 120px
+    top: 125px
+    video
+      +opacity(100)
+      position: static
 
 body.awesome-landing
   // +transition(margin 1s ease )
@@ -1558,7 +1574,14 @@ body.awesome-landing
         background-position: left -106px  
     .content
       height: 700px
-      
+
+.reasons
+  header.up
+    h1
+      background-position: left -106px
+    .btn
+      +opacity(100)
+      visibility: visible
       
       
       

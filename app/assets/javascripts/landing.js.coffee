@@ -16,10 +16,23 @@ class landingPage
     @header_main = $('.browser-main', @header)
     
     #reasons elements 
-    @reasons = $('.reasons')
-    @reasons_h1 = $('h1', @reasons)    
+    @reasons = $('.reasons') 
+    @reasons_header = $('header', @reasons)
+    @reasons_h1 = $('h1', @reasons) 
+    @reasons_close = $('#close_reasons')   
     @reasons_content = $('.content', @reasons)
     
+    #Post-its
+    @postits = $('.postits li', @reasons)
+    @postit_count = 0
+    @postit_classes = ['hinge-fall-left','hinge-fall-right']
+        
+    #Video       
+    @video = $('#studyhall_video', @awesome).mediaelementplayer(
+      features: ['playpause','progress','current','duration','tracks','volume']
+    )
+    @video_container = $('.mejs-container') || @video 
+          
     if @supportTransitions
       @animateHeaderCSS()
       @reasons_h1.click (e) => 
@@ -30,6 +43,35 @@ class landingPage
       , @speed 
       @reasons_h1.toggle @openReasons, @closeReasons
   
+  #Post-its animations
+  postitSetup: ->
+    that = this
+    @reasons_close.click (e) ->
+      @closeReasons
+      e.preventDefault()
+    @reasons_content.mouseleave ->
+      $(this).  unbind('mouseleave')
+      that.postits.each ->
+        $(this).mouseenter -> 
+          that.animatePostit(this)
+          
+  postitCleanup: ->
+    that = this
+    # @postits.removeClass(@postit_classes)
+    @video.css('opacity', ".2")
+    @video[0].pause()  
+  
+  animatePostit: (element) ->
+    that = this
+    $postit = $(element)
+    rand = Math.floor(Math.random() * 2)  
+    $postit.addClass(that.postit_classes[rand]).delay(1200).fadeOut 300, ->
+      that.postit_count++
+      if that.postit_count == 8
+        that.video_container.animate
+          opacity: 100
+        , 1000, ->
+        that.video[0].player.play()
   
   #CSS3 Animations
   animateHeaderCSS: ->
@@ -55,15 +97,16 @@ class landingPage
     , 750
    
   openReasons: =>
-    @scroll()
-    @awesome.animate
-      'margin-top' : '-570px'
-    , @speed     
+    @postitSetup()
+    @reasons_header.addClass('up')
+    @scroll()   
     @reasons_content.stop().animate
       'height' : 700
     , @speed
   
   closeReasons: =>
+    @postitCleanup()
+    @reasons_header.removeClass('up')
     @awesome.animate
       'margin-top' : '0'
     , @speed 
@@ -72,8 +115,9 @@ class landingPage
     , @speed  
   
   scroll: ->
-    $('html').animate
+    $('body').animate
       scrollTop : 0
+      'margin-top' : '-570px'
     , @speed
     
 $ -> 
