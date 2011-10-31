@@ -1,11 +1,12 @@
 class landingPage
 
   setup: ->
-    # @supportTransitions = Modernizr.csstransitions
-    @supportTransitions = false
+    @transitions = Modernizr.csstransitions
+    @animations = Modernizr.cssanimations
+    
+    @speed = 1000
   
     @awesome = $('.awesome-landing')
-    @speed = 1000
     
     #header elements
     @header = $('.header', @awesome)
@@ -16,7 +17,7 @@ class landingPage
     @header_main = $('.browser-main', @header)
     
     #reasons elements 
-    @reasons = $('.reasons') 
+    @reasons = $('.reasons').data('state', 'closed') 
     @reasons_header = $('header', @reasons)
     @reasons_h1 = $('h1', @reasons) 
     @reasons_close = $('#close_reasons')   
@@ -32,25 +33,19 @@ class landingPage
       features: ['playpause','progress','current','duration','tracks','volume']
     )
     @video_container = $('.mejs-container') || @video 
-          
-    if @supportTransitions
-      @animateHeaderCSS()
-      @reasons_h1.click (e) => 
-        @animateReasonsCSS()
-    else
-      window.setTimeout =>  
-        @animateHeader()  
-      , @speed 
-      @reasons_h1.toggle @openReasons, @closeReasons
+    
+    @animateHeader()
+    @reasons_h1.click (e) => 
+      @animateReasons()
   
   #Post-its animations
   postitSetup: ->
     that = this
     @reasons_close.click (e) ->
       @closeReasons
-      e.preventDefault()
+      false
     @reasons_content.mouseleave ->
-      $(this).  unbind('mouseleave')
+      $(this).unbind('mouseleave')
       that.postits.each ->
         $(this).mouseenter -> 
           that.animatePostit(this)
@@ -72,52 +67,70 @@ class landingPage
         , 1000, ->
         that.video[0].player.play()
   
-  #CSS3 Animations
-  animateHeaderCSS: ->
-    @headerElements.addClass 'drop'
-    
-  animateReasonsCSS: ->
-    @scroll()
-    @awesome.toggleClass 'open'
- 
-  #Pure JS Animations
   animateHeader: ->
-    @header_h1.animate
-      'top' : 57
-    , 500
-    @header_login.animate
-      'top' : 15
-    , 500
-    @header_quad.animate
-      'bottom' : -10
-    , 650
-    @header_main.animate
-      'bottom' : "10px"
-    , 750
-   
-  openReasons: =>
-    @postitSetup()
-    @reasons_header.addClass('up')
-    @scroll()   
-    @reasons_content.stop().animate
-      'height' : 700
-    , @speed
-  
-  closeReasons: =>
-    @postitCleanup()
-    @reasons_header.removeClass('up')
-    @awesome.animate
-      'margin-top' : '0'
-    , @speed 
-    @reasons_content.animate
-      'height' : 0
-    , @speed  
+    if @transitions
+      @headerElements.addClass 'drop'
+    else
+      window.setTimeout =>  
+        @header_h1.animate
+          'top' : 57
+        , 500
+        @header_login.animate
+          'top' : 15
+        , 500
+        @header_quad.animate
+          'bottom' : -10
+        , 650
+        @header_main.animate
+          'bottom' : "10px"
+        , 750  
+      , @speed     
+      
+  animateReasons: ->  
+    if @reasons.data('state') == 'closed'
+      if @transitions
+        @awesome.addClass 'open'
+      else
+        @reasons_header.addClass('up')
+        @reasons_content.stop().animate
+          'height' : 700
+        , @speed
+      
+      @reasons.data('state' , 'open')
+      @postitSetup()
+      @scroll()    
+    else
+      if @transitions
+        @awesome.removeClass 'open'
+      else
+        @reasons_header.removeClass('up')
+        @awesome.animate
+          'margin-top' : '0'
+        , @speed 
+        @reasons_content.animate
+          'height' : 0
+        , @speed
+      @reasons.data('state' , 'closed')
+      @postitCleanup()
   
   scroll: ->
-    $('body').animate
-      scrollTop : 0
-      'margin-top' : '-570px'
-    , @speed
+    $body = $('body')
+    $html = $('html')
+    
+    if $body.scrollTop() != 0 and $html.scrollTop() == 0
+      element = $body
+    else
+      element = $html
+    
+    if @animations  
+      element.animate
+        scrollTop : 0
+      , @speed
+    else 
+      element.animate
+        scrollTop : 0
+        'margin-top' : '-570px'
+      , @speed
     
 $ -> 
   landing = new landingPage  
