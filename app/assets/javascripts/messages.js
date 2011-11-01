@@ -37,14 +37,11 @@ var ajaxGetReplyForm = function(url, message_list_item_id, async){
     async: async,
     success: function(response){
     message_list_item.find(".reply_fields").html(response);
-    styleFileInputs();
     $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
   }});
 }
 
 $(document).ready(function(){
-  
-  
   
   $("body").delegate("a.cancel_message","click",function(e){
     var button = $("#new_message_button");
@@ -129,5 +126,15 @@ $(document).ready(function(){
     updateMultipleForm.append($(attribute));
     updateMultipleForm.append($(attribiteValue));
     updateMultipleForm.submit();
+  });
+  
+  $("body").delegate(".attachment_link", "click", function(e){
+    e.preventDefault();
+    $(this).closest(".reply_fields").find(".input-file").trigger("click");
+  });
+  
+  $("body").delegate("#message_attachment", "change", function(){
+    var file = $(this).attr("value");
+    $(".file_upload_name").html(file);
   });
 });
