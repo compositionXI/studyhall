@@ -78,7 +78,6 @@ class landingPage
     rand = Math.floor(Math.random() * 2)  
     $postit.addClass(that.postit_classes[rand]).delay(1200).fadeOut 300, ->
       that.postit_count++
-      console.log that.postit_count
       if that.postit_count == 8
         that.video_container.animate
           opacity: 100
@@ -159,7 +158,8 @@ class landingPage
    
 $ -> 
   landing = new landingPage  
-  landing.setup()
+  if $('body').hasClass('home-landing_page')
+    landing.setup()
   
-  landing.form_submit.click ->
-    landing.formValidation(this)
+    landing.form_submit.click ->
+      landing.formValidation(this)
