@@ -15,6 +15,15 @@ class landingPage
     @header_login = $('.login-button', @header)
     @header_quad = $('.browser-quad', @header)
     @header_main = $('.browser-main', @header)
+    @header_video = $('video', @header).mediaelementplayer(
+        defaultVideoWidth: 383
+        defaultVideoHeight: 313
+        loop: true
+        enableAutosize: false
+        features: []
+    )
+    $('.mejs-controls', @header).css('display', 'none')
+    
     
     #reasons elements 
     @reasons = $('.reasons').data('state', 'closed') 
@@ -43,12 +52,11 @@ class landingPage
     that = this
     @reasons_close.click (e) ->
       @closeReasons
-      false
     @reasons_content.mouseleave ->
       $(this).unbind('mouseleave')
       that.postits.each ->
         $(this).mouseenter -> 
-          that.animatePostit(this)
+          that.animatePostit(this) 
           
   postitCleanup: ->
     that = this
