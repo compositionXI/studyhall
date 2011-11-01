@@ -10,10 +10,12 @@
 //= require jquery.remotipart
 //= require jquery.expander.min.js
 //= require jquery.remotipart
+//= require jquery.cleditor
 //= require bootstrap-dropdowns.js
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js
 //= require bootstrap-modal.js
+//= require mediaelement_rails
 //= require_tree .
 
 // Code for styling file upload inputs. Needs to be extracted and pluginified
@@ -62,7 +64,7 @@ $(function(){
       , horizontalOffset: 25
     });
   
-  $(".activity-list").jScrollPane();
+  $(".activity-list").jScrollPane({hideFocus: true});
   
   
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
