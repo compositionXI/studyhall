@@ -1,13 +1,16 @@
 <div class="action_bar">
   <div class="container">
     <div class="buttons left">
-      <%= link_to("New Message", new_message_path, :class => "btn", :id => "new_message_button", "data-title" => "Send a message", :remote => true) %>
+      <%= link_to("New Message", new_message_path, :class => "btn primary", :id => "new_message_button", "data-title" => "Send a message", :remote => true) %>
     </div>
     <div class="buttons right">
       <div class="default_message_buttons right">
         <%= link_to "Filter", filter_messages_path(:link_id => "filter_message_button"), :class => "btn", :id => "filter_message_button", :remote => true %>
-        <%= link_to "Inbox", mailbox_path(mailbox: "inbox"), :class => "btn#{params[:mailbox] == "inbox" ? " primary" : ""}" %>
-        <%= link_to "Archive", mailbox_path(mailbox: "archive"), :class => "btn#{params[:mailbox] == "archive" ? " primary" : ""}" %>
+        <% if params[:mailbox] == "inbox" %>
+          <%= link_to "Archive", mailbox_path(mailbox: "archive"), :class => "btn" %>
+        <% else %>
+          <%= link_to "Inbox", mailbox_path(mailbox: "inbox"), :class => "btn" %>
+        <% end %>
       </div>
     </div>
     <h3><%= mailbox_title %></h3>
