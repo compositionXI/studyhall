@@ -1,0 +1,27 @@
+@font-face{
+  font-family: 'MuseoSansRegular';
+  src: url("/assets/museosans-500-webfont.eot");
+  src: url("/assets/museosans-500-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/museosans-500-webfont.woff") format("woff"), url("/assets/museosans-500-webfont.ttf") format("truetype"), url("/assets/museosans-500-webfont.svg#MuseoSansRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  font-family: "MuseoSansRegular", "Helvetica", Arial, Sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  background: #FEFDF8;
+  line-height: 20px;
+  color: #424240;
+}
+ul,ol{
+  margin-left: -10px;
+  padding-left: 0;
+}
+li{
+  font-weight: 100;
+  list-style: none;
+}
+li:before{
+  content: "\00BB \0020";
+}

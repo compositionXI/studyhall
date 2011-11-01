@@ -1,6 +1,6 @@
 <section class="buddies">
   <header>
-    <h1 class="left">Buddies <small>(<%= user.buddies.count %>)</small></h1>
+    <h1 class="left">Your Buddies <small>(<%= user.buddies.count %>)</small></h1>
     <%= link_to "View All >>", user_buddies_path(current_user), :remote => true, :class => "modal_button" %>
   </header>
     <ul>

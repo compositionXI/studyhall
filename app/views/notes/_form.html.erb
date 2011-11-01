@@ -1,4 +1,4 @@
-<%= form_for @note, :remote => @remote, :html => {:class => "form-stacked", :id => "edit_note_form", :'data-type' => "html"} do |f| %>
+<%= form_for @note, url: note_path(@note, :format => (@remote ? :js : :html)), :remote => @remote, :html => {:class => "form-stacked", :id => "edit_note_form", :'data-type' => "html"} do |f| %>
   <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
   <div class="clearfix">
     <%= f.label :name %>

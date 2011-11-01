@@ -10,6 +10,7 @@
 //= require jquery.remotipart
 //= require jquery.expander.min.js
 //= require jquery.remotipart
+//= require jquery.cleditor
 //= require bootstrap-dropdowns.js
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js
@@ -63,7 +64,7 @@ $(function(){
       , horizontalOffset: 25
     });
   
-  $(".activity-list").jScrollPane();
+  $(".activity-list").jScrollPane({hideFocus: true});
   
   
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.

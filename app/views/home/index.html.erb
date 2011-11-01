@@ -14,15 +14,15 @@
   <% else %>
   <% end %>
   <div class="standard_actions right">
-      <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
       <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :id => "new_study_session_button1", :class => "btn primary large popover_button", :remote => true %>
+      <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
   </div>
 </header>
 <aside class="sidebar">
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
   <section class="activity">
     <header>
-      <h1>Your Activity</h1>
+      <h1>Your Activity <small>(<%= current_user.activity.count %>)</small></h1>
     </header>
     <ul class="activity-list">
       <% if current_user.activity.any? %>
