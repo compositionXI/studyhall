@@ -22,7 +22,7 @@
                 <%= link_to user_path(current_user), title: "Profile" do %><span>Profile</span><% end %>
               </li>
               <li id="nav_inbox" <% if controller?("messages") %> class="current {inbox_class}" <% end %> >
-                <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %><small><%= inbox_count %></small><span>Inbox</span><% end %>
+                <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %><small class="inbox_message_count"><%= inbox_count %></small><span>Inbox</span><% end %>
               </li>
               <li id="nav_account" >
                 <%= link_to current_user, title: "Your Account" do %><span>Your Account</span><% end %>

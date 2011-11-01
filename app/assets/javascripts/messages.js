@@ -18,6 +18,13 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
     async: async,
     success: function(response){
       message_list_item.replaceWith(response)
+      var inboxCount = parseInt($(".inbox_message_count").html());
+      if (read) {
+        $(".inbox_message_count").html(inboxCount - 1);
+      }
+      else {
+        $(".inbox_message_count").html(inboxCount + 1);
+      }
     }
   });
 }
@@ -36,6 +43,9 @@ var ajaxGetReplyForm = function(url, message_list_item_id, async){
 }
 
 $(document).ready(function(){
+  
+  
+  
   $("body").delegate("a.cancel_message","click",function(e){
     var button = $("#new_message_button");
     button.popover("hide");
