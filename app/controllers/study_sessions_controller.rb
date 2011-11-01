@@ -40,7 +40,11 @@ class StudySessionsController < ApplicationController
   def update
     @study_session = current_user.study_sessions.find(params[:id])
     @study_session.update_attributes(params[:study_session])
-    redirect_to study_sessions_path
+    if params[:source] == "show_view"
+      redirect_to @study_session
+    else
+      redirect_to study_sessions_path
+    end
   end
   
   def destroy
