@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101125204) do
+ActiveRecord::Schema.define(:version => 20111101185103) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(:version => 20111101125204) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "parent_id"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -238,7 +237,7 @@ ActiveRecord::Schema.define(:version => 20111101125204) do
     t.integer  "school_id"
     t.string   "email"
     t.string   "major"
-    t.decimal  "gpa",                 :precision => 4, :scale => 3
+    t.decimal  "gpa",                  :precision => 4, :scale => 3
     t.string   "fraternity"
     t.string   "sorority"
     t.text     "extracurriculars"
@@ -248,14 +247,19 @@ ActiveRecord::Schema.define(:version => 20111101125204) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "custom_url"
     t.text     "bio"
-    t.boolean  "active",                                            :default => false, :null => false
+    t.boolean  "active",                                             :default => false, :null => false
+    t.boolean  "shares_with_everyone",                               :default => true,  :null => false
+    t.boolean  "googleable",                                         :default => true,  :null => false
+    t.boolean  "notify_on_follow",                                   :default => true,  :null => false
+    t.boolean  "notify_on_comment",                                  :default => true,  :null => false
+    t.boolean  "notify_on_share",                                    :default => true,  :null => false
+    t.boolean  "notify_on_invite",                                   :default => true,  :null => false
   end
 
   create_table "votes", :force => true do |t|

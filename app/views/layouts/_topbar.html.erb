@@ -18,15 +18,15 @@
               <li id="nav_notes" <% if controller?("notebooks") %> class='current' <% end %>>
                 <%= link_to notebooks_path, title: "Notebooks" do %><span>Take Notes</span><% end %>
               </li>
-              <li id="nav_profile" <% if controller?("users") %> class='current' <% end %>>
+              <li id="nav_profile" <% if controller?("users") && action?("show") %> class='current' <% end %>>
                 <%= link_to user_path(current_user), title: "Profile" do %><span>Profile</span><% end %>
               </li>
               <li id="nav_inbox" <% if controller?("messages") %> class="current {inbox_class}" <% end %> >
                 <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %><small class="inbox_message_count"><%= inbox_count %></small><span>Inbox</span><% end %>
               </li>
-              <li id="nav_account" >
-                <%= link_to current_user, title: "Your Account" do %><span>Your Account</span><% end %>
-              </li>  
+              <li id="nav_account" <% if controller?("users") && action?("account") %> class="current {inbox_class}" <% end %> >
+                <%= link_to user_account_path(current_user), title: "Your Account" do %><span>Your Account</span><% end %>
+              </li>
             </ul>
         <% end %>
         </nav>

@@ -51,6 +51,7 @@ Studyhall::Application.routes.draw do
     get "buddies"
     delete "drop_class/:offering_id", :action => "drop_class", :as => "drop_class"
     get "block/:blocked_user_id", :action => "block", :as => "block"
+    get "account"
     member do
       get 'profile_wizard'
       get "completion_percentage"

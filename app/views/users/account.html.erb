@@ -1,0 +1,109 @@
+<div id="user_account_page_wrapper">
+  <% if flash[:notice] %>
+    <div class="alert alert-message success span7">
+      <a class="close" href="#">×</a>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <div class="form_header">
+      <h2 class="left">Your Account</h2>
+      <%= link_to "Delete your account", current_user, method: :delete, :confirm => "Are you sure?", :class => "delete_account right" %>
+    </div>
+    <div class="clearfix"></div>
+    <div id="user_account_page_inner_wrapper">
+      <%= form_for @current_user, :html => {:class => "form-stacked", method: :put} do |f| %>
+        <%= f.error_messages %>
+        <div class="clearfix">
+          <%= f.label :password %>
+          <div class="input"><%= f.password_field :password %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :custom_url %> 
+          <div class="input-prepend">
+            <span class="add-on">www.Studyhall.com/users/</span>
+            <div class="input custom_url"><%= f.text_field :custom_url %></div>
+          </div>
+        </div>
+        <div class="clearfix">
+          <label>GLOBAL SHARING OPTIONS</label>
+          <div class="input">
+            <ul class="inputs-list">
+              <li>
+                <label>
+                  <%= f.radio_button :shares_with_everyone, "1", :checked => @current_user.shares_with_everyone? %>
+                  <span>Share your content with everyone</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <%= f.radio_button :shares_with_everyone, "0", :checked => !@current_user.shares_with_everyone? %>
+                  <span>Share only with your followers and those you follow</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="clearfix">
+          <label>PRIVACY SETTINGS</label>
+          <div class="input">
+            <ul class="inputs-list">
+              <li>
+                <label>
+                  <%= f.radio_button :googleable, "1", :checked => @current_user.googleable? %>
+                  <span>Allow my account to be seen by Google</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <%= f.radio_button :googleable, "0", :checked => !@current_user.googleable? %>
+                  <span>Only people I follow can see my profile</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="clearfix">
+          <label>EMAIL YOU WHEN SOMEONE:</label>
+          <div class="input">
+            <ul class="inputs-list">
+              <li>
+                <label>
+                  <%= f.hidden_field :notify_on_follow, :value => "0" %>
+                  <%= check_box_tag( "user[notify_on_follow]", "1", @current_user.notify_on_follow?)%>
+                  <span>Follows you</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <%= f.hidden_field :notify_on_comment, :value => "0" %>
+                  <%= check_box_tag( "user[notify_on_comment]", "1", @current_user.notify_on_comment?)%>
+                  <span>Comments on your posts</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <%= f.hidden_field :notify_on_share, :value => "0" %>
+                  <%= check_box_tag( "user[notify_on_share]", "1", @current_user.notify_on_share?)%>
+                  <span>Shares content with you</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <%= f.hidden_field :notify_on_invite, :value => "0" %>
+                  <%= check_box_tag( "user[notify_on_invite]", "1", @current_user.notify_on_invite?)%>
+                  <span>Invites you to a StudyHall</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <%= f.submit "Save", :class => "btn primary" %>
+          <%= link_to "Cancel", @current_user, :class => "btn" %>
+        </div>
+      <% end %>
+    </div>
+  </fieldset>
+</div>

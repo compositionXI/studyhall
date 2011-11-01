@@ -51,7 +51,7 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      render :action => :edit
+      render :action => :account
     end
   end
   
@@ -61,11 +61,13 @@ class UsersController < ApplicationController
     redirect_to admin_users_path
   end
   
+  def account
+  end
+  
   def profile_wizard
   end
   
   def completion_percentage
-    
   end
   
   def extracurriculars
