@@ -1,28 +1,41 @@
-<li id="message_<%= message.id %>" class="message_list_item">
-  <div class="collapsed_message <%= 'unread' unless message.opened? %>", data-message-reply-url="<%= new_user_message_path(message.from, :subject => message.subject) %>">
-    <%= link_to image_tag(message.from.photo_url(:medium)), message.from, :title => message.from.name %>
-    <div class="message_content">
-      <div class="meta expand_message">
-        <%= link_to message.from.name, message.from, :class => "inner_link" %> - 
-        <%= link_to message.subject, message_path(message), :class => "inner_link" %> - 
-        <span><%= time_ago_in_words message.created_at %> ago</span>
-      </div>
-      <div class="message_actions hide">
-        <%= select_tag nil, options_for_select(message_action_options((message))), :class => "inner_link" %>
-      </div>
-      <% if message.attachment? %>
-        <div class="attachment">
-          <strong>Attachment:</strong>
-          <%=link_to message.attachment_file_name, message.attachment.url(:original, false)%>
+<%= fields_for "messages[]", message do |message_fields| %>
+  <li id="message_<%= message.id %>" class="message_list_item">
+    <div class="collapsed_message <%= 'unread' unless message.opened? %>", data-message-reply-url="<%= new_user_message_path(message.from, :subject => message.subject) %>">
+      <%= link_to image_tag(message.from.photo_url(:medium)), message.from, :title => message.from.name %>
+      <div class="message_content">
+        <div class="meta expand_message">
+          <%= link_to message.from.name, message.from, :class => "inner_link" %> - 
+          <%= link_to message.subject, message_path(message), :class => "inner_link" %> - 
+          <span><%= time_ago_in_words message.created_at %> ago</span>
+          <span class="message_actions">
+            &nbsp;-&nbsp;
+            <% if message.deleted %>
+              <%= link_to "Move to Inbox", "#", :class => "message_action unarchive inner_link", :'data-url' => message_path(message, :deleted => false) %>
+            <% else %>
+              <%= link_to "Archive", "#", :class => "message_action archive inner_link", :'data-url' => message_path(message) %>
+            <% end %>
+            &nbsp;-&nbsp;
+            <% if message.opened? %>
+              <%= link_to "Mark as unread", "#", :class => "message_action mark_unread inner_link", :'data-url' => message_path(message) %>
+            <% else %>
+              <%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %>
+            <% end %>
+          </span>
         </div>
-      <% end %>
-      <div class="body message_preview">
-        <%= message_body_preview(message) %>
+        <% if message.attachment? %>
+          <div class="attachment">
+            <strong>Attachment:</strong>
+            <%=link_to message.attachment_file_name, message.attachment.url(:original, false) %>
+          </div>
+        <% end %>
+        <div class="body message_preview">
+          <%= message_body_preview(message) %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="body full_message hide">
-    <%= message.body %>
-    <div class="reply_fields"></div>
-  </div>
-</li>
+    <div class="body full_message hide">
+      <%= message.body %>
+      <div class="reply_fields"></div>
+    </div>
+  </li>
+<% end %>
