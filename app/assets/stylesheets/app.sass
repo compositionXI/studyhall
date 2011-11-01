@@ -92,7 +92,7 @@ header.topbar
   height: auto
   z-index: 999
   .fill
-    background: transparent url("/assets/header_bg.png") 
+    background: transparent url(asset-path('header_bg.png','image')) 
     height: 73px
     @include box-shadow(0)
   .logo
@@ -100,7 +100,7 @@ header.topbar
     margin: 17px 0 0 0
     a
       @include ir
-      background: transparent url("/assets/logo.png")
+      background: transparent url(asset-path('logo.png','image'))
       color: #ffffff
       height: 38px
       width: 191px  
@@ -130,7 +130,7 @@ header.topbar
         width: 59px
         span
           @include ir
-          background: transparent url("/assets/nav_icons.png")
+          background: transparent url(asset-path('nav_icons.png','image'))
           height: 30px
       &.current, &:hover, &:active
         $shadow: (0 1px 0 rgba(0,0,0,.25))
@@ -352,7 +352,7 @@ header.topbar
         
 //Grid Bar
 .action_bar
-  background: transparent url("/assets/grid_bg.png")
+  background: transparent url(asset-path('grid_bg.png','image'))
   height: 62px
   margin: -7px 0 0 0
   text-align: center
@@ -520,7 +520,7 @@ header.topbar
       &:first-child, &:nth-child(5n)
         margin: 0 0 20px 0
     a
-      background: url("/assets/BigGrayBook.png")
+      background: url(asset-path('BigGrayBook.png','image'))
       color: $white
       display: block
       height: 195px
@@ -536,11 +536,11 @@ header.topbar
         height: 195px
         vertical-align: middle
     .blue a
-      background: url("/assets/BigBlueBook.png") 
+      background: url(asset-path('BigBlueBook.png','image')) 
       color: $darkBookText
       text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
     .green a
-      background: url("/assets/BigGreenBook.png")
+      background: url(asset-path('BigGreenBook.png','image'))
       color: $darkBookText
       text-shadow: 0 1px 0 rgba(255,255,255, 0.55)   
     .add
@@ -612,20 +612,20 @@ form
   
   .edit_notebook
     .checkbox
-      background: url(/assets/notebook-icons.png) -25px 0 no-repeat
+      background: url(asset-path('notebook-icons.png','image')) -25px 0 no-repeat
 
   .notebook 
     .preview
-      background: url("/assets/notebook-brown.png") transparent no-repeat
+      background: url(asset-path('notebook-brown.png','image')) transparent no-repeat
     &.draggable_hovering
       .preview
-        background: url("/assets/notebook-drop.png") transparent
+        background: url(asset-path('notebook-drop.png','image')) transparent
   .notebook_edit_fields
     display: none
 
   .note 
     .preview
-      background: url("/assets/notebook-page.png") transparent  no-repeat
+      background: url(asset-path('notebook-page.png','image')) transparent  no-repeat
       .fields
         margin: 0 20px 0 30px
         text-align: center
@@ -636,7 +636,7 @@ form
     color: #333
     &.checked
       .checkbox
-        background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+        background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
   
   .dragging_placeholder 
     .note 
@@ -649,7 +649,7 @@ form
 
   // icons
   .icon
-    background-image: url(/assets/notebook-icons.png) no-repeat
+    background-image: url(asset-path('notebook-icons.png','image')) no-repeat
     display: block
     width: 25px
     height: 25px
@@ -665,7 +665,7 @@ form
 
   .ui-draggable-dragging, .note:hover, .notebook:hover
     .drag_handle
-      background: url(/assets/notebook-icons.png) -200px 0 no-repeat
+      background: url(asset-path('notebook-icons.png','image')) -200px 0 no-repeat
 
   .checkbox
     width: 25px
@@ -684,10 +684,10 @@ form
       text-shadow: 0 1px 0 rgba(255,255,255, .25) 
     .selected 
       .preview
-        background: url(/assets/notebook-page-selected.png) 0 0
+        background: url(asset-path('notebook-page-selected.png','image')) 0 0
     .deselected 
       .preview
-        background: url(/assets/notebook-page-deselected.png) 0 0
+        background: url(asset-path('notebook-page-deselected.png','image')) 0 0
     .dragging_placeholder
       .preview
         background: #ededed
@@ -830,10 +830,10 @@ form
       top: 45%
 
     .expand_collapse_icon
-      background: url(/assets/collapse.png) no-repeat
+      background: url(asset-path('collapse.png','image')) no-repeat
 
     .collapsed .expand_collapse_icon
-      background: url(/assets/expand.png) no-repeat 
+      background: url(asset-path('expand.png','image')) no-repeat 
       
 
 .full-width
@@ -849,7 +849,7 @@ form
         @include body-font(normal, 18px, 32px)
         text-shadow: 0 1px 0 rgba(0,0,0,1)
     section.main-content
-      background: url(/assets/note-taking-bg.jpeg) repeat-x
+      background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x
       margin-top: -10px
       .clearfix.flat
         margin-bottom: 5px
@@ -910,7 +910,7 @@ form
         @include body-font(normal, 18px, 32px)
         text-shadow: 0 1px 0 rgba(0,0,0,1)
   section.main-content
-    background: url(/assets/note-taking-bg.jpeg) repeat-x
+    background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x
     margin-top: -10px
     .clearfix.flat
       margin-bottom: 5px
@@ -973,7 +973,7 @@ form
 
 .study_sessions-index, .users-show
   .study_session
-    background-image: url(../assets/study_session_icon.png)
+    background-image: url(asset-path('study_session_icon.png','image'))
     background-repeat: no-repeat
     float: left
     width: 97px
@@ -1004,18 +1004,18 @@ form
       cursor: inherit
       .checkbox
         display: block
-        background: url(/assets/notebook-icons.png) -25px 0 no-repeat
+        background: url(asset-path('notebook-icons.png','image')) -25px 0 no-repeat
       &:hover
         .checkbox
           +opacity(70)
-          background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+          background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
     &.checked
       .checkbox
-        background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+        background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
       &:hover
         .checkbox
           +opacity(100)
-          background: url(/assets/notebook-icons.png) -50px 0 no-repeat
+          background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
 
 .users-show
   .popover
@@ -1202,7 +1202,7 @@ form
           height: 16px
           width: 16px
           margin: 10px 31px 0
-          background-image: url("../assets/help_bw.png")
+          background-image: url(asset-path('help_bw.png','image'))
 
       &.rating
         text-align: center
@@ -1225,16 +1225,16 @@ form
             &:hover
               +opacity(100)
             &.downvote
-              background-image: url("../assets/delete_bw.png")
+              background-image: url(asset-path('delete_bw.png','image'))
               &:hover
-                background-image: url("../assets/delete.png")
+                background-image: url(asset-path('delete.png','image'))
             &.help
               margin: 0 12px
-              background-image: url("../assets/help_bw.png")
+              background-image: url(asset-path('help_bw.png','image'))
             &.upvote
-              background-image: url("../assets/add_bw.png")
+              background-image: url(asset-path('add_bw.png','image'))
               &:hover
-                background-image: url("../assets/add.png")
+                background-image: url(asset-path('add.png','image'))
 
     .profile_edit
       background-color: $editable_background
@@ -1283,9 +1283,9 @@ form
             cursor: pointer
             margin: 0 5px 5px 5px
             &.course
-              background: url("../assets/BigGrayBook.png")
+              background: url(asset-path('BigGrayBook.png','image'))
             &.notebook
-              background: url("../assets/notebook-brown.png")
+              background: url(asset-path('notebook-brown.png','image'))
             &.study_session
               height: 130px
               width: 100px
@@ -1311,7 +1311,7 @@ form
                   display: block
                   width: 16px
                   height: 16px
-                  background: url("../assets/delete.png")
+                  background: url(asset-path('delete.png','image'))
                   position: absolute
                   bottom: 5px
                   right: 5px
@@ -1462,7 +1462,7 @@ section.course_activity
     font-weight: 900
     text-shadow: 0 1px 2px rgba(0,0,0, .5)
   .header 
-    background: #483323 image-url("landing/header-bg.jpg") repeat-x center center
+    background: #483323 image-url(asset-path('landing/header-bg.jpg','image')) repeat-x center center
     height: 520px
     position: relative
     overflow: hidden
@@ -1475,7 +1475,7 @@ section.course_activity
       background-color: transparent
     h1 
       +center-width(584px)
-      background: image-url("landing/masthead.png")
+      background: image-url(asset-path('landing/masthead.png','image'))
       height: 118px 
       top: 57px
       z-index: 50
@@ -1506,19 +1506,19 @@ section.course_activity
       z-index: 40
     .browser-quad
       +center-width(1112px)
-      background: image-url("landing/browser-quad.png")
+      background: image-url(asset-path('landing/browser-quad.png','image'))
       bottom: -15px
       height: 333px
       z-index: 20
     .zigzag     
-      background: image-url("landing/zigzag.png")
+      background: image-url(asset-path('landing/zigzag.png','image'))
       bottom: 0
       height: 50px
       width: 100%
       z-index: 30
     .glow
       +center-width(1280px)
-      background: image-url("landing/glow.png")
+      background: image-url(asset-path('landing/glow.png','image'))
       height: 491px
       z-index: 10
   .signup 
@@ -1574,7 +1574,7 @@ section.course_activity
       width: 400px  
   .reasons                                   
     +box-shadow(inset 0 10px 15px rgba(0,0,0, .33))
-    background: image-url("landing/grid.png")      
+    background: image-url(asset-path('landing/grid.png','image'))      
     position: relative
     overflow: hidden
     
@@ -1586,7 +1586,7 @@ section.course_activity
         visibility: hidden
     h1
       +header-font(medium, 30px, 43px) 
-      background: image-url("landing/arrows.png") no-repeat left 0px transparent  
+      background: image-url(asset-path('landing/arrows.png','image')) no-repeat left 0px transparent  
       color: $white
       cursor: pointer 
       height: 43px   
@@ -1618,7 +1618,7 @@ section.course_activity
     .postits
       li
         +ir // Image replacement class
-        background: image-url('landing/postits.png') no-repeat center center transparent
+        background: image-url(asset-path('landing/postits.png','image')) no-repeat center center transparent
         cursor: pointer
         position: absolute 
         left: 50%
