@@ -22,7 +22,7 @@ class landingPage
         enableAutosize: false
         features: []
     )
-    $('.mejs-controls', @header).css('display', 'none')
+    # $('.mejs-controls', @header).css('display', 'none')
     
     #Sign-up Form
     @form = $('#new_user')
@@ -42,28 +42,29 @@ class landingPage
         
     #Video       
     @video = $('#studyhall_video', @awesome).mediaelementplayer(
+      defaultVideoWidth: 700
+      defaultVideoHeight: 393
       features: ['playpause','progress','current','duration','tracks','volume']
     )
-    @video_container = $('.mejs-container') || @video 
-    
+    @video_container = $('.mejs-container', @reasons) || @video 
+    $('.mejs-overlay', @video_container).remove()
     
     #Startup the page
-    
     @animateHeader()
-    
-
-    @reasons_h1.click (e) => 
+    @header_video[0].player.play()
+    @reasons_h1.add(@reasons_close).click (e) => 
       @animateReasons()
-  
+      e.preventDefault()
+    @postitSetup()
+    
   #Post-its animations
   postitSetup: ->
     that = this
-    @reasons_close.click (e) ->
-      @closeReasons
     @reasons_content.mouseleave ->
       $(this).unbind('mouseleave')
       that.postits.each ->
-        $(this).mouseenter -> 
+        $(this).mouseenter ->
+          $(this).unbind('mouseenter') 
           that.animatePostit(this) 
           
   postitCleanup: ->
@@ -77,6 +78,7 @@ class landingPage
     rand = Math.floor(Math.random() * 2)  
     $postit.addClass(that.postit_classes[rand]).delay(1200).fadeOut 300, ->
       that.postit_count++
+      console.log that.postit_count
       if that.postit_count == 8
         that.video_container.animate
           opacity: 100
@@ -103,7 +105,8 @@ class landingPage
       , @speed     
       
   animateReasons: ->  
-    if @reasons.data('state') == 'closed'
+    if @reasons.data('state') == 'closed' 
+      @header_video[0].player.pause()
       if @transitions
         @awesome.addClass 'open'
       else
@@ -113,9 +116,9 @@ class landingPage
         , @speed
       
       @reasons.data('state' , 'open')
-      @postitSetup()
       @scroll()    
     else
+      @header_video[0].player.play()
       if @transitions
         @awesome.removeClass 'open'
       else

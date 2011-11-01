@@ -3,14 +3,14 @@
   <%= link_to "Log In", login_path, class: "login-button" %>
   <div class="browser-quad"></div> 
   <div class="browser-main">
-    <video id="browser_video" width="398" height="313" poster="/assets/landing/browser-main.jpg" autoplay="autoplay" controls="false" preload="true">
+    <video id="browser_video" width="398" height="313" poster="/assets/landing/browser-main.jpg" autoplay="autoplay" controls="controls" preload="true">
     	<source type="video/mp4" src="/video/landing.mp4" />
     	<source type="video/webm" src="/video/landing.webm" />
     	<source type="video/ogg" src="/video/landing.theora.ogv" />
     	<object id="studyhall_video_flash" width="398" height="313" type="application/x-shockwave-flash" data="flashmediaelement.swf">
     		<param name="movie" value="flashmediaelement.swf" />
     		<param name="flashvars" value="controls=false&poster=/assets/landing/browser-main.jpg&file=/video/landing.mp4" />
-    		<img src="/assets/browser-main.jpg" width="398" height="313" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+    		<img src="/assets/landing/browser-main.jpg" width="398" height="313" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
     	</object>
     </video>
   </div>
@@ -46,18 +46,6 @@
     </div>
   </div>
 </section>
-<script type="text/javascript">
-  $(document).ready(function(){
-    $("#new_user input[type='submit']").click(function(){
-      var form = $(this).closest("form");
-      form.find(".input_field").each(function(){
-        var input = $(this);
-        if(input.twipsy(true) != null)
-          input.twipsy("hide");
-      });
-    });
-  });
-</script>
 <section class="reasons">
   <header class="container">
     <a href="#" class="btn close" id="close_reasons">x</a>
@@ -75,17 +63,13 @@
       <li class="collaborate"><p>Collaborate in real-time with your buddies</p><p>View profiles and meet a new study buddy :)</p></li>
       <li class="free"><p>:) It's free!</p></li>
     </ul> 
-    <video id="studyhall_video" width="700" height="393" poster="/assets/video-placeholder.jpg" controls="controls" preload="none">
-    	<!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
+    <video id="studyhall_video" width="700" height="393" poster="/assets/video-placeholder.jpg" controls="controls" preload="true">
     	<source type="video/mp4" src="/video/studyhall.mp4" />
-    	<!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
     	<source type="video/webm" src="/video/studyhall.webm" />
-    	<!-- Ogg/Vorbis for older Firefox and Opera versions -->
     	<source type="video/ogg" src="/video/studyhall.theora.ogv" />
-    	<!-- Flash fallback for non-HTML5 browsers without JavaScript -->	
     	<object id="studyhall_video_flash" width="700" height="393" type="application/x-shockwave-flash" data="flashmediaelement.swf">
     		<param name="movie" value="flashmediaelement.swf" />
-    		<param name="flashvars" value="controls=true&poster=myvideo.jpg&file=myvideo.mp4" />
+    		<param name="flashvars" value="controls=true&poster=/assets/video-placeholder.jpg&file=/video/studyhall.mp4" />
     		<!-- Image as a last resort -->
     		<img src="/assets/video-placeholder.jpg" width="700" height="393" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
     	</object>

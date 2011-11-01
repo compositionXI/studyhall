@@ -1605,11 +1605,11 @@ section.course_activity
   .reasons           
     .mejs-container
       +opacity(20)
-      display: none
       position: absolute
       left: 50% 
       margin: 0 0 0 -350px
       top: 235px
+      visibility: hidden
       video
         +opacity(100)
         position: static
@@ -1617,7 +1617,7 @@ section.course_activity
     .content
       +transition(height 1s ease ) 
     .postits
-      display: none
+      visibility: hidden
                       
 .open
   margin: -570px 0 0 0 
@@ -1631,8 +1631,7 @@ section.course_activity
     .content
       height: 700px
       .mejs-container, .postits
-        display: block
-
+        visibility: visible
 .reasons
   header.up
     h1
