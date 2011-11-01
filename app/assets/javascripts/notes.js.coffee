@@ -1,5 +1,5 @@
 $ ->
-  $('.rte_area').cleditor({width: 936, height: 700, bodyStyle: "padding:50px 130px", useCSS: true, docCSSFile: "/stylesheets/cleditor.css"})
+  $('.rte_area').cleditor({width: 936, height: 700, bodyStyle: "padding:50px 130px", useCSS: true, docCSSFile: "/stylesheets/cleditor.css"}).focus()
   $('.cleditorToolbar').hide();
   
   $("body").delegate "#edit_note_form", "ajax:success", (evt, data, status, xhr) ->
