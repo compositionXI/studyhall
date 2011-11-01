@@ -1,7 +1,24 @@
 <div class="container">
+  <% if @messages.empty? %>
+    <center>
+      <div class="messages_landing_wrapper">
+        <%= image_tag "/assets/MailIconBig.png"%>
+        <p>
+          <h1>Get in touch with your buddies</h1>
+        </p>
+        <p>
+          <h2>
+          With StudyHall.com, you can stay in the know and keep in touch with friends and study buddies
+          </h2>
+        </p>
+        <p>Click "New Message" to begin.</p>
+      </div>
+    </center>
+  <% else %>
   <div class="messages_list_container list">
     <ul class="unstyled messages_list">
       <%= render partial: "messages/message", collection: @messages %>
     </ul>
   </div>
+  <% end %>
 </div>
