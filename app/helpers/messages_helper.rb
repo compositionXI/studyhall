@@ -13,7 +13,7 @@ module MessagesHelper
   
   def mailbox_title
     if params[:mailbox]
-      "Your #{params[:mailbox].capitalize}"
+      "Your Inbox #{'>> ' + params[:mailbox].capitalize if params[:mailbox] == "archive"}"
     else
       "Your Messages"
     end
