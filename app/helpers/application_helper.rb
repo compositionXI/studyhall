@@ -8,7 +8,10 @@ module ApplicationHelper
   end
 
   def inbox_count
-    count = current_user.inbox.count
+    count = 0
+    current_user.inbox.each do |m|
+      count += 1 unless m.opened?
+    end
     count > 0 ? count > 99 ? "*" : count : ""
   end
   
