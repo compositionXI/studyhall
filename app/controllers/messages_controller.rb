@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   before_filter :require_user
   before_filter :find_sender, only: [:new, :create]
-  before_filter :find_receiver, only: [:new, :create]
+  before_filter :find_receiver, only: [:new]
   before_filter :set_action_bar
   
   def index
@@ -40,13 +40,25 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @receiver = []
+    if params[:user_id].is_a?(Array)
+      params[:user_id].each do |i|
+        @receiver << User.find(i)
+      end
+    else
+      @receiver << User.find(params[:user_id])
+    end
     subject = params[:message].try(:[], :subject)
     body = params[:message].try(:[], :body)
-    @success = @sender.send_message?(subject, body, @receiver)
-    @message_copy = MessageCopy.find(@sender.sent_messages.first.id)
-    @message_copy.update_attributes(params[:message])
-    @message = Message.find(@receiver.inbox.first.id)
-    @message.update_attributes(params[:message])
+    @success = @sender.send_message?(subject, body, *@receiver)
+    if @success
+      @receiver.each_with_index do |r, index|
+        @message_copy = MessageCopy.find(@sender.sent_messages[index])
+        @message_copy.update_attributes(params[:message])
+        @message = Message.find(r.inbox.first.id)
+        @message.update_attributes(params[:message])
+      end
+    end
     @success
   end
 

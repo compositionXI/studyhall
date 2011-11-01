@@ -20,7 +20,7 @@
   <% if @receiver.nil? %>
     <div class="clearfix">
       <label>To</label>
-      <%= collection_select "", :user_id, current_user.buddies, :id, :name, {}, :class => "chzn-select" %>
+      <%= collection_select "", :user_id, current_user.buddies, :id, :name, {:multiple => true}, :multiple => "multiple", :class => "chzn-select", "data-placeholder" => "Select buddies" %>
     </div>
   <% end %>
   <div class="clearfix">
@@ -28,7 +28,7 @@
     <div class="input"><%= f.text_field :subject %></div>
   </div>
   <div class="clearfix">
-    <%= f.label :body %>
+    <%= f.label :message %>
     <div class="input"><%= f.text_area :body %></div>
   </div>
   <div class="clearfix">

@@ -5,7 +5,6 @@ var hide_message = function(selector){
 var hideShowMessage = function(message_list_item_id){
   var message_list_item = $("#"+message_list_item_id);
   message_list_item.find(".collapsed_message").toggleClass("highlighted");
-  message_list_item.find(".message_actions").toggleClass("hide");
   message_list_item.find(".full_message, .message_preview").toggleClass("hide");
 }
 
@@ -19,6 +18,13 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
     async: async,
     success: function(response){
       message_list_item.replaceWith(response)
+      var inboxCount = parseInt($(".inbox_message_count").html());
+      if (read) {
+        $(".inbox_message_count").html(inboxCount - 1);
+      }
+      else {
+        $(".inbox_message_count").html(inboxCount + 1);
+      }
     }
   });
 }
@@ -37,6 +43,9 @@ var ajaxGetReplyForm = function(url, message_list_item_id, async){
 }
 
 $(document).ready(function(){
+  
+  
+  
   $("body").delegate("a.cancel_message","click",function(e){
     var button = $("#new_message_button");
     button.popover("hide");
@@ -52,12 +61,6 @@ $(document).ready(function(){
     $('.messages_list').html(xhr.responseText);
   });
   
-  //$("body").delegate(".reply_button", "ajax:success", function(evt, data, status, xhr){
-  //  $(this).closest(".message_list_item").find(".reply_fields").html(xhr.responseText);
-  //  styleFileInputs();
-  //  $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
-  //});
-  
   $("body").delegate(".cancel_reply", "click", function(){
     $(this).closest("#message_new").remove();
     return false;
@@ -65,13 +68,14 @@ $(document).ready(function(){
   
   $("body").delegate( ".message_list_item .inner_link", "click", function(event){
     event.stopPropagation();
+    return false;
   });
   
   $("body").delegate(".collapsed_message", "click", function(){
     var message_list_item = $(this).closest(".message_list_item");
     var message_list_item_id = message_list_item.attr("id");
     if (message_list_item.find(".collapsed_message").hasClass("unread")){
-      var updateUrl = message_list_item.find("option.mark_read").attr("value");
+      var updateUrl = message_list_item.find(".mark_read").attr("data-url");
       ajaxUpdateMessageRead(updateUrl, message_list_item, true, false);
     }
     if (message_list_item.find(".full_message").hasClass("hide")){
@@ -84,31 +88,46 @@ $(document).ready(function(){
     hideShowMessage(message_list_item_id);
   });
   
-  $("body").delegate(".message_actions select option.archive", "click", function(){
-    var url = $(this).attr("value");
+  $("body").delegate(".message_actions .archive", "click", function(){
+    var url = $(this).attr("data-url");
     $.ajax({
       url: url,
       type: "DELETE"
     });
   });
   
-  $("body").delegate(".message_actions select option.unarchive", "click", function(){
-    var url = $(this).attr("value");
+  $("body").delegate(".message_actions .unarchive", "click", function(){
+    var url = $(this).attr("data-url");
     $.ajax({
       url: url,
       type: "PUT"
     });
   });
   
-  $("body").delegate(".message_actions select option.mark_read", "click", function(){
+  $("body").delegate(".message_actions .mark_read", "click", function(){
     var message = $(this).closest(".message_list_item")
-    var url = $(this).attr("value");
+    var url = $(this).attr("data-url");
     ajaxUpdateMessageRead(url, message, true);
   });
   
-  $("body").delegate(".message_actions select option.mark_unread", "click", function(){
+  $("body").delegate(".message_actions .mark_unread", "click", function(){
     var message_list_item = $(this).closest(".message_list_item")
-    var url = $(this).attr("value");
+    var url = $(this).attr("data-url");
     ajaxUpdateMessageRead(url, message_list_item, false);
+  });
+  
+  $(".edit_messages, .cancel_message_edit").click(function(){
+    $(".edit_messages, .edit_message_buttons, .default_message_buttons, .edit_checkbox").toggleClass("hide");
+  });
+  
+  $(".update_messages").click(function(){
+    var updateAttribute = $(this).attr("data-update-attribute");
+    var updateAttributeValue = $(this).attr("data-attribute-value");
+    var updateMultipleForm = $("#save_multiple_messages_notes_form");
+    var attribute = $("<input>").attr("type", "hidden").attr("name", "attribute").val(updateAttribute);
+    var attribiteValue = $("<input>").attr("type", "hidden").attr("name", "attribute_value").val(updateAttributeValue);
+    updateMultipleForm.append($(attribute));
+    updateMultipleForm.append($(attribiteValue));
+    updateMultipleForm.submit();
   });
 });

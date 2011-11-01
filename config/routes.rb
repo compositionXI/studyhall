@@ -59,7 +59,11 @@ Studyhall::Application.routes.draw do
     post '/votes' => 'votes#create', :as => :upvote
     delete '/votes' => 'votes#destroy', :as => :downvote
   end
-  resources :messages, except: [:edit]
+  resources :messages, except: [:edit] do
+    collection do
+      post "update_multiple"
+    end
+  end
   get "filter_messages" => "messages#filter"
   resources :password_resets
   resources :user_sessions
