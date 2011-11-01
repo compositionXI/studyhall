@@ -24,6 +24,9 @@ class landingPage
     )
     $('.mejs-controls', @header).css('display', 'none')
     
+    #Sign-up Form
+    @form = $('#new_user')
+    @form_submit = $("input[type='submit']", @form)
     
     #reasons elements 
     @reasons = $('.reasons').data('state', 'closed') 
@@ -43,7 +46,12 @@ class landingPage
     )
     @video_container = $('.mejs-container') || @video 
     
+    
+    #Startup the page
+    
     @animateHeader()
+    
+
     @reasons_h1.click (e) => 
       @animateReasons()
   
@@ -139,7 +147,16 @@ class landingPage
         scrollTop : 0
         'margin-top' : '-570px'
       , @speed
-    
+  
+  formValidation: (element) ->
+    @form.find(".input_field").each ->
+      input = $(element)
+      if input.twipsy(true) != null
+        input.twipsy("hide")
+   
 $ -> 
   landing = new landingPage  
   landing.setup()
+  
+  landing.form_submit.click ->
+    landing.formValidation(this)
