@@ -11,6 +11,7 @@ class MessagesController < ApplicationController
     case params[:mailbox]
     when "inbox"
       @messages = current_user.inbox
+      @inbox = true
     when "archive"
       @messages = current_user.trash
     else
