@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |config|
     config.require_password_confirmation = false
+    config.perishable_token_valid_for = 5.days
   end
   acts_as_voter
   acts_as_voteable

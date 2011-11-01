@@ -19,17 +19,22 @@
     <a class="btn" value="Start Publishing" id ="publishLink" onClick="javascript:startPublishing()">Start Sharing</a>
     <a class="btn" value="Stop Publishing" id ="unpublishLink" onClick="javascript:stopPublishing()">Stop Sharing</a>
   </div>
-  <div id="myCamera" class="publisherContainer"></div>
-  <div id="subscribers"></div>
+  <div id="myCamera" class="publisherContainer">
+    <p>Click "START SHARING" to join the video chat.</p>
+  </div>
+  <div id="subscribers">
+    <p>Your study buddies' video feeds will show up here.</p>
+  </div>
 </div>
 
 <% if @study_session.session_files.any? %>
-  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="700" height="650"></iframe>
+  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="710" height="650"></iframe>
 <% else %>
   <% @study_session.session_files.build %>
   <div id="upload_form">
     <%= form_for @study_session, :html => {:class => "form-stacked"} do |f| %>
       <%= f.fields_for :session_files do |sf| %>
+        <%= hidden_field_tag :source, :show_view %>
         <%= f.label :upload, "Upload a File" %>
         <%= sf.file_field :upload %>
         <%= f.submit "Upload", :class => "btn primary" %>
@@ -45,6 +50,7 @@
     hide("disconnectLink");
     hide("publishLink");
     hide("unpublishLink");
+    setTimeout("connect()",1000);
     var wb = $("#whiteboard");
     wb.attr("src", wb.data("url"));
   });
