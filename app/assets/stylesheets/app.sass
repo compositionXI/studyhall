@@ -1721,26 +1721,26 @@ section.course_activity
     .postits
       visibility: hidden
                       
-.open
-  margin: -570px 0 0 0 
+  &.open
+    margin: -570px 0 0 0 
+    .reasons
+      header
+        .btn
+          +opacity(100)
+          visibility: visible
+        h1
+          background-position: left -106px  
+      .content
+        height: 700px
+        .mejs-container, .postits
+          visibility: visible 
   .reasons
-    header
+    header.up
+      h1
+        background-position: left -106px
       .btn
         +opacity(100)
         visibility: visible
-      h1
-        background-position: left -106px  
-    .content
-      height: 700px
-      .mejs-container, .postits
-        visibility: visible
-.reasons
-  header.up
-    h1
-      background-position: left -106px
-    .btn
-      +opacity(100)
-      visibility: visible
       
       
       
