@@ -9,8 +9,15 @@ class SessionFile < ActiveRecord::Base
 
   after_create :prepare_embed!
 
+  attr_accessor :session_identifier
+
   def embeddable?
-    upload_uuid && short_id
+    upload_uuid && short_id && session_identifier
+  end
+
+  def embed_url
+    return nil if session_identifier.blank?
+    "http://crocodoc.com/view/?sessionId=#{session_identifier}&embedded=true"
   end
 
   def prepare_embed!
@@ -35,15 +42,16 @@ class SessionFile < ActiveRecord::Base
     end
   end
 
-  def retrieve_session_identifier
+  def retrieve_session_identifier(user)
     return session_identifier if session_identifier.present?
     begin
-      response = Crocodoc.get_session(upload_uuid)
+      response = Crocodoc.get_session(upload_uuid, :name => user.name, :private => true, :admin => study_session.user == user)
       Rails.logger.info("Retrieved session id: #{response[:sessionId]}")
       self.session_identifier = response[:sessionId]
     rescue => e
       self.errors << "Could not retrieve session identifier"
     end
+    return self
   end
 
   def name

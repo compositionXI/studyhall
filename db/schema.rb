@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102193810) do
+ActiveRecord::Schema.define(:version => 20111102225352) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -216,7 +216,6 @@ ActiveRecord::Schema.define(:version => 20111102193810) do
     t.string   "upload_content_type"
     t.integer  "upload_file_size"
     t.datetime "upload_updated_at"
-    t.string   "session_identifier"
     t.string   "upload_uuid"
     t.string   "short_id"
     t.datetime "created_at"
