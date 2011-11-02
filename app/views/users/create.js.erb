@@ -4,5 +4,7 @@
     $("#user_<%= attr.to_s %>").twipsy("show");
   <% end %>
 <% else %>
-  $("#new_user").animate({right: 2000});$("#success_message").animate({left:"50%"})
+  $("#user_email, #user_passsword, #user_custom_url").twipsy("hide");
+  $("#new_user").fadeOut();
+  $("#success_message").fadeIn();
 <% end %>

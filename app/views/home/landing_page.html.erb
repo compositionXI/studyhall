@@ -34,6 +34,7 @@
           <%= f.label :custom_url, "Your URL" %>
           <%= f.text_field :custom_url, :title => "URL is taken or invalid", :class => "input_field" %>
           <%= f.submit "Reserve your seat", class: "btn primary" %>
+          <div class="url-prefix">studyhall.com/</div>
         </div>
       <% end %>
       <div class="alert-message success fade in" id="info_message" data-alert="close">
