@@ -19,7 +19,13 @@ class MessagesController < ApplicationController
     end
     if request.xhr?
       params[:message].delete :opened if params[:message][:opened] == "all"
-      @messages = current_user.inbox.where(params[:message])
+      if params[:message][:deleted]
+        results_from_trash = current_user.inbox.where(params[:message])
+        results_from_inbox = current_user.trash.where(params[:message])
+        @messages = results_from_trash + results_from_inbox
+      else
+        @messages = current_user.inbox.where(params[:message])
+      end
       render partial: "messages/message", collection: @messages
     end
   end
@@ -69,8 +75,15 @@ class MessagesController < ApplicationController
       @message.undelete 
       render "destroy"
     else
-      @message.update_attributes params[:message]
-      render partial: "messages/message", :locals => {message: @message}
+      @message.update_attributes(params[:message])
+      if params[:message][:abuse]
+        Notifier.report_message(current_user, @message).deliver
+        @message.update_attribute(:abuse, true)
+      elsif params[:message][:spam]
+        Notifier.report_message(current_user, @message).deliver 
+        @message.update_attribute(:spam, true)
+      end
+      render partial: "messages/message", :locals => {message: @message} unless @message.spam? || @message.abuse?
     end
   end
 

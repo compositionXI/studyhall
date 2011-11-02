@@ -17,6 +17,16 @@
             <%= radio_button_tag "message[opened]", 0, false %><span>Unread</span>
           </label>
         </li>
+        <li>
+          <label>
+            <%= radio_button_tag "message[deleted]", 1, false %><span>Archived</span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <%= radio_button_tag "message[deleted]", 0, false %><span>Unarchived</span>
+          </label>
+        </li>
       </ul>
     </div>
   </div>

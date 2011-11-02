@@ -14,12 +14,14 @@
   <div class="topbar">
     <%= render :partial => "layouts/topbar"%>
   </div>
-  <div class="container">
-    <div class="fill">
-      ADMIN
-      <%= yield %>
+  <section class="main-content">
+    <div class="container admin">
+      <div class="fill">
+        <h2>Course Data Import</h2>
+        <%= yield %>
+      </div>
     </div>
-  </div>
+  </section>
 
 </body>
 </html>

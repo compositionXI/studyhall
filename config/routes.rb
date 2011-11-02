@@ -1,5 +1,7 @@
 Studyhall::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
   resources :notes
   resources :notebooks do
     collection do
@@ -29,18 +31,12 @@ Studyhall::Application.routes.draw do
   post '/followings' => 'followings#create', :as => :follow
   delete '/following/:id' => 'followings#destroy', :as => :unfollow
 
-  namespace :admin do
-    resources :users
-    resources :static_pages
-    resources :schools
-    resources :course_offering_imports do
+  namespace :import do
+    resources :course_data do
       member do
         post "import"
       end
     end
-    resources :courses
-    resources :instructors
-    resources :offerings
   end
 
   resources :static_pages, :only => [:show]

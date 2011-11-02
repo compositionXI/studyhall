@@ -1,18 +1,11 @@
-<fieldset>
-  <legend>Users</legend>
-</fieldset>
 <%= link_to "Create New User", new_admin_user_path, :class => "btn" %>
 
-<table>
+<table class="zebra-striped">
   <thead>
     <th>Name</th>
     <th>Email</th>
     <th>Gender</th>
     <th>School</th>
-    <th>Major</th>
-    <th>GPA</th>
-    <th>Fraternity</th>
-    <th>Sorority</th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,11 +16,7 @@
         <td><%= u.name%></td>
         <td><%= u.email %></td>
         <td><%= u.gender %></td>
-        <td><%= u.school %></td>
-        <td><%= u.major %></td>
-        <td><%= u.gpa %></td>
-        <td><%= u.fraternity %></td>
-        <td><%= u.sorority %></td>
+        <td><%= u.school.try(:name) %></td>
         <td><%= link_to 'Show', admin_user_path(u), :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_admin_user_path(u), :class => "btn" %></td>
         <td><%= link_to 'Destroy', admin_user_path(u), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
