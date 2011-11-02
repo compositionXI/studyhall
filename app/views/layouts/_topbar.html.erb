@@ -6,7 +6,7 @@
           <h1 class="logo"><%= link_to "StudyHall Home", root_path %></h1>
         </div>
         <% controller_name %>
-        <nav class="nav" id="topbar_main_nav">
+        <nav class="primary-nav" id="topbar_main_nav">
         <% if logged_in? %>
             <ul>
               <li id="nav_home" <% if controller?("home") %> class='current' <% end %> >
