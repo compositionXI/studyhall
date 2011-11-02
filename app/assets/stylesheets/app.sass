@@ -1481,14 +1481,12 @@ section.course_activity
       z-index: 50
     .login-button
       +border-radius( $topbarRadius )
-      $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
-      +box-shadow($shadow)               
+      // $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
+      // +box-shadow($shadow)               
       +sans-serif-font(bold, 13px, 13px)
       +vertical-gradient($navGradStart, $navGradEnd)
-      border-top: none
-      border-bottom: 1px solid $navBorderBottom
-      border-left: 1px solid $navBorderTop
-      border-right: 1px solid $navBorderRight
+      border-top: 1px solid #5C4932
+      border-bottom: 1px solid #0a0401 
       color: #ffffff    
       right: 50%
       margin-right: -470px
