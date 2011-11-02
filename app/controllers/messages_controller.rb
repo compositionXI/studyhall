@@ -75,8 +75,15 @@ class MessagesController < ApplicationController
       @message.undelete 
       render "destroy"
     else
-      @message.update_attributes params[:message]
-      render partial: "messages/message", :locals => {message: @message}
+      @message.update_attributes(params[:message])
+      if params[:message][:abuse]
+        Notifier.report_message(current_user, @message).deliver
+        @message.update_attribute(:abuse, true)
+      elsif params[:message][:spam]
+        Notifier.report_message(current_user, @message).deliver 
+        @message.update_attribute(:spam, true)
+      end
+      render partial: "messages/message", :locals => {message: @message} unless @message.spam? || @message.abuse?
     end
   end
 

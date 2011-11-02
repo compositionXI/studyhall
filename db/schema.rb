@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101185103) do
+ActiveRecord::Schema.define(:version => 20111102044741) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_updated_at"
+    t.boolean  "spam",                    :default => false, :null => false
+    t.boolean  "abuse",                   :default => false, :null => false
   end
 
   add_index "message_copies", ["sent_messageable_id", "recipient_id"], :name => "outbox_idx"
@@ -122,6 +124,8 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_updated_at"
+    t.boolean  "spam",                      :default => false, :null => false
+    t.boolean  "abuse",                     :default => false, :null => false
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"

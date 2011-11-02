@@ -1,3 +1,12 @@
+var updateMessage = function(url, data, requestType){
+  requestType = typeof requestType != 'undefined' ? requestType : "PUT";
+  $.ajax({
+    url: url,
+    data: data,
+    type: requestType
+  });
+}
+
 var hide_message = function(selector){
   $("#"+selector).delay(400).slideUp(1000);
 }
@@ -85,32 +94,31 @@ $(document).ready(function(){
     hideShowMessage(message_list_item_id);
   });
   
-  $("body").delegate(".message_actions .archive", "click", function(){
+  $("body").delegate(".message_actions .archive, .message_actions .unarchive", "click", function(){
     var url = $(this).attr("data-url");
-    $.ajax({
-      url: url,
-      type: "DELETE"
-    });
+    var requestType = $(this).hasClass("archive") ? "DELETE" : "PUT";
+    var data = {};
+    if($(this).hasClass("report_spam")){
+      data = {"message[spam]": true};
+    }
+    else if ($(this).hasClass("report_abuse")){
+      data = {"message[abuse]": true};
+    }
+    updateMessage(url, data, requestType);
   });
   
-  $("body").delegate(".message_actions .unarchive", "click", function(){
+  $("body").delegate(".message_actions .report_spam, .message_actions .report_abuse", "click", function(){
     var url = $(this).attr("data-url");
-    $.ajax({
-      url: url,
-      type: "PUT"
-    });
+    var data = $(this).hasClass("report_spam") ? {"message[spam]": true} : {"message[abuse]": true};
+    if( confirm("Are you sure?") ){
+      updateMessage(url, data);
+    }
   });
   
-  $("body").delegate(".message_actions .mark_read", "click", function(){
-    var message = $(this).closest(".message_list_item")
-    var url = $(this).attr("data-url");
-    ajaxUpdateMessageRead(url, message, true);
-  });
-  
-  $("body").delegate(".message_actions .mark_unread", "click", function(){
+  $("body").delegate(".message_actions .mark_read, .message_actions .mark_unread", "click", function(){
     var message_list_item = $(this).closest(".message_list_item")
     var url = $(this).attr("data-url");
-    ajaxUpdateMessageRead(url, message_list_item, false);
+    ajaxUpdateMessageRead(url, message_list_item, $(this).hasClass("mark_read"));
   });
   
   $(".edit_messages, .cancel_message_edit").click(function(){
