@@ -1,4 +1,4 @@
-<header class="header">
+<div id="landing"><header class="header">
   <h1 class="ir">StudyHall.com</h1>
   <%= link_to "Log In", login_path, class: "login-button" %>
   <div class="browser-quad"></div> 
@@ -7,8 +7,8 @@
     	<source type="video/mp4" src="/video/landing.mp4" />
     	<source type="video/webm" src="/video/landing.webm" />
     	<source type="video/ogg" src="/video/landing.theora.ogv" />
-    	<object id="studyhall_video_flash" width="398" height="313" type="application/x-shockwave-flash" data="flashmediaelement.swf">
-    		<param name="movie" value="flashmediaelement.swf" />
+    	<object id="studyhall_video_flash" width="398" height="313" type="application/x-shockwave-flash" data="/assets/mediaelement_rails/flashmediaelement.swf">
+    		<param name="movie" value="/assets/mediaelement_rails/flashmediaelement.swf" />
     		<param name="flashvars" value="controls=false&poster=/assets/landing/browser-main.jpg&file=/video/landing.mp4" />
     		<img src="/assets/landing/browser-main.jpg" width="398" height="313" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
     	</object>
@@ -86,3 +86,4 @@
         </p>      
   </div>
 </footer>
+</div>

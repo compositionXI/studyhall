@@ -6,24 +6,16 @@ class landingPage
     
     @speed = 1000
   
-    @awesome = $('.awesome-landing')
+    @landing = $('#landing')
     
     #header elements
-    @header = $('.header', @awesome)
+    @header = $('.header', @landing)
     @headerElements = $('h1, .login-button, .browser-quad, .browser-main', @header)
     @header_h1 = $('h1', @header)
     @header_login = $('.login-button', @header)
     @header_quad = $('.browser-quad', @header)
     @header_main = $('.browser-main', @header)
-    @header_video = $('video', @header).mediaelementplayer(
-        defaultVideoWidth: 383
-        defaultVideoHeight: 313
-        loop: true
-        enableAutosize: false
-        features: []
-    )
-    # $('.mejs-controls', @header).css('display', 'none')
-    
+   
     #Sign-up Form
     @form = $('#new_user')
     @form_submit = $("input[type='submit']", @form)
@@ -40,52 +32,68 @@ class landingPage
     @postits = $('.postits li', @reasons)
     @postit_count = 0
     @postit_classes = ['hinge-fall-left','hinge-fall-right']
-        
-    #Video       
-    @video = $('#studyhall_video', @awesome).mediaelementplayer(
-      defaultVideoWidth: 700
-      defaultVideoHeight: 393
-      features: ['playpause','progress','current','duration','tracks','volume']
-    )
-    @video_container = $('.mejs-container', @reasons) || @video 
-    $('.mejs-overlay', @video_container).remove()
-    
+         
     #Startup the page
     @animateHeader()
-    @header_video[0].player.play()
+    
     @form_prefix.click ->
       $(this).siblings('.input_field').focus()  
+    
     @reasons_h1.add(@reasons_close).click (e) => 
       @animateReasons()
-      e.preventDefault()
+      e.preventDefault()  
+    
+    @videoSetup()
     @postitSetup()
     
+  
+  #Video Setup
+  videoSetup: ->
+    @header_video = $('video', @header).mediaelementplayer(
+        defaultVideoWidth: 383
+        defaultVideoHeight: 313
+        loop: true
+        features: ['playpause']
+        enableAutosize: false
+    )
+    @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
+      defaultVideoWidth: 700
+      defaultVideoHeight: 393
+      startVolume: 0.4
+      features: ['playpause','progress','current','duration','tracks','volume']
+    )
+    @video_container = $('.mejs-container', @reasons) || @reasons_video 
+    
+    $('.mejs-layers, .mejs-controls', @header).remove()
+    @header_video[0].player.play()
+  
   #Post-its animations
   postitSetup: ->
-    that = this
+    self = this
     @reasons_content.mouseleave ->
       $(this).unbind('mouseleave')
-      that.postits.each ->
+      self.postits.each ->
         $(this).mouseenter ->
           $(this).unbind('mouseenter') 
-          that.animatePostit(this) 
+          self.animatePostit(this) 
           
   postitCleanup: ->
-    that = this
-    # @postits.removeClass(@postit_classes)
-    @video[0].pause()  
+    self = this   
+    # @postits.removeClass(@postit_classes.join(' '))
+    @postit_count = 0
+    @reasons_video[0].pause()  
   
   animatePostit: (element) ->
-    that = this
+    self = this
     $postit = $(element)
     rand = Math.floor(Math.random() * 2)  
-    $postit.addClass(that.postit_classes[rand]).delay(1200).fadeOut 300, ->
-      that.postit_count++
-      if that.postit_count == 8
-        that.video_container.animate
+    $postit.addClass(self.postit_classes[rand]).delay(1200).fadeOut 300, ->
+      self.postit_count++
+      if self.postit_count == 8
+        self.video_container.animate
           opacity: 100
         , 1000, ->
-        that.video[0].player.play()
+        self.reasons_video[0].player.play()
   
   animateHeader: ->
     if @transitions
@@ -110,22 +118,24 @@ class landingPage
     if @reasons.data('state') == 'closed' 
       @header_video[0].player.pause()
       if @transitions
-        @awesome.addClass 'open'
+        @landing.addClass 'slide-open'
       else
         @reasons_header.addClass('up')
+        @landing.animate
+          'margin-top' : '-570px'
+        , @speed
         @reasons_content.stop().animate
           'height' : 700
-        , @speed
-      
+        , @speed   
       @reasons.data('state' , 'open')
       @scroll()    
     else
       @header_video[0].player.play()
       if @transitions
-        @awesome.removeClass 'open'
+        @landing.removeClass 'slide-open'
       else
         @reasons_header.removeClass('up')
-        @awesome.animate
+        @landing.animate
           'margin-top' : '0'
         , @speed 
         @reasons_content.animate
@@ -135,23 +145,9 @@ class landingPage
       @postitCleanup()
   
   scroll: ->
-    $body = $('body')
-    $html = $('html')
-    
-    if $body.scrollTop() != 0 and $html.scrollTop() == 0
-      element = $body
-    else
-      element = $html
-    
-    if @animations  
-      element.animate
-        scrollTop : 0
-      , @speed
-    else 
-      element.animate
-        scrollTop : 0
-        'margin-top' : '-570px'
-      , @speed
+    $('html, body').animate
+         scrollTop : 0
+       , @speed  
   
   formValidation: (element) ->
     @form.find(".input_field").each ->
