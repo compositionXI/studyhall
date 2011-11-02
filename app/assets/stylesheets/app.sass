@@ -262,9 +262,14 @@ header.topbar
         margin: 0
       img
         border: 1px solid $imgBorder
-        margin: 0 7px 0 0
-      a.dropdown-toggle   
+        margin: 0 7px 0 0 
+      a
         color: $white
+        padding: 5px
+        &:hover
+          background-color: none
+      a.dropdown-toggle
+        
         background: none
         display: inline
         &:active, &:focus
@@ -303,7 +308,7 @@ header.topbar
         display: block
         position: absolute
         top: 42px
-        right: -10px
+        right: -5px
         height: 0px
         min-width: 90px
         max-width: 160px
