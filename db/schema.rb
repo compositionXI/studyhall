@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111101185103) do
+ActiveRecord::Schema.define(:version => 20111102193810) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.string   "course_offering_import_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "schools_count"
+    t.integer  "courses_count"
+    t.integer  "offerings_count"
   end
 
   create_table "courses", :force => true do |t|
@@ -118,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "parent_id"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -170,6 +174,19 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.integer  "parent_id"
     t.boolean  "reported"
   end
+
+  create_table "rails_admin_histories", :force => true do |t|
+    t.text     "message"
+    t.string   "username"
+    t.integer  "item"
+    t.string   "table"
+    t.integer  "month",      :limit => 2
+    t.integer  "year",       :limit => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -247,6 +264,7 @@ ActiveRecord::Schema.define(:version => 20111101185103) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
