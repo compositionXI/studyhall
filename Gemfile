@@ -1,11 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
-
 gem 'mysql2'
-
-gem 'admin_data', :git => 'git://github.com/adamcrown/admin_data.git' 
-# When rails 3.1 pull requests have resolved, you can move this back to: 'git://github.com/bigbinary/admin_data.git'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
@@ -22,6 +18,7 @@ gem 'thumbs_up'
 gem 'kaminari'
 gem 'sunspot_rails'
 gem "remotipart", "~> 1.0"
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -59,3 +56,4 @@ gem 'capistrano-ext'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem "devise"

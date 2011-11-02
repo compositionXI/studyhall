@@ -27,6 +27,7 @@ class landingPage
     #Sign-up Form
     @form = $('#new_user')
     @form_submit = $("input[type='submit']", @form)
+    @form_prefix = $('.url-prefix', @form)
     
     #reasons elements 
     @reasons = $('.reasons').data('state', 'closed') 
@@ -52,6 +53,8 @@ class landingPage
     #Startup the page
     @animateHeader()
     @header_video[0].player.play()
+    @form_prefix.click ->
+      $(this).siblings('.input_field').focus()  
     @reasons_h1.add(@reasons_close).click (e) => 
       @animateReasons()
       e.preventDefault()
