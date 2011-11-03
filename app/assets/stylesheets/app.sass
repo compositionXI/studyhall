@@ -397,18 +397,35 @@ header.topbar
       a.hidden
         display: none
 
-.user_sessions-new  
+.user-session-form  
   .container.narrow
     margin-top: 40px
     min-height: 285px
     margin-bottom: 400px
-  fieldset
-    position: relative
-  legend
-    margin-left: 0px
-  form#new_user_session
+  .user-session-header
+    +clearfix
+    h1 
+      +h3
+      float: left
+      margin: 0 0 12px 0
+    #facebook_login
+      float: right 
+      line-height: 38px  
+  form
     border: 1px solid #DDD
     padding: 20px 80px
+    h2
+      +h3
+      margin: 0 0 12px 0
+    a
+      font-size: 12px 
+    p
+      margin: 0 0 12px
+    ul
+      margin: 0 0 18px 16px
+      li
+        +body-font(normal, 14px, 14px) 
+        color: $red
     input[type="text"], input[type="password"]
       width: 300px
     input[type="submit"]
@@ -418,13 +435,12 @@ header.topbar
       float: left
       input
         margin: 5px 4px 0 0
+    .remember-me-label    
+      line-height: 24px 
+      float: left
   #forgot_link
     float: right
     margin: 5px 5px 0 0
-  #facebook_login
-    position: absolute
-    right: 0
-    top: 0
   
 .alert-message.success
   a
