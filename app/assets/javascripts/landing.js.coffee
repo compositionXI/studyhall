@@ -49,23 +49,23 @@ class landingPage
   
   #Video Setup
   videoSetup: ->
-    @header_video = $('video', @header).mediaelementplayer(
-        defaultVideoWidth: 383
-        defaultVideoHeight: 313
-        loop: true
-        features: ['playpause']
-        enableAutosize: false
-    )
+    self = this
+    @header_video = $('video', @header).mediaelementplayer
+      defaultVideoWidth: 383
+      defaultVideoHeight: 313
+      loop: true
+      features: ['playpause']
+      enableAutosize: false
+
     @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
       defaultVideoWidth: 700
       defaultVideoHeight: 393
       startVolume: 0.4
       features: ['playpause','progress','current','duration','tracks','volume']
-    )
+    )                                                                   
     @video_container = $('.mejs-container', @reasons) || @reasons_video 
     
     $('.mejs-layers, .mejs-controls', @header).remove()
-    @header_video[0].player.play()
   
   #Post-its animations
   postitSetup: ->
@@ -79,21 +79,30 @@ class landingPage
           
   postitCleanup: ->
     self = this   
-    # @postits.removeClass(@postit_classes.join(' '))
+    @postits.removeClass(@postit_classes.join(' '))
     @postit_count = 0
-    @reasons_video[0].pause()  
+    @reasons_video.trigger('pause')  
   
   animatePostit: (element) ->
     self = this
     $postit = $(element)
-    rand = Math.floor(Math.random() * 2)  
-    $postit.addClass(self.postit_classes[rand]).delay(1200).fadeOut 300, ->
-      self.postit_count++
-      if self.postit_count == 8
-        self.video_container.animate
-          opacity: 100
-        , 1000, ->
-        self.reasons_video[0].player.play()
+    
+    if @animations
+      rand = Math.floor(Math.random() * 2)  
+      $postit.addClass(self.postit_classes[rand]).delay(1200).fadeOut 300
+    else 
+      $postit.animate
+        top: parseInt($postit.css('top'), 10) + 700
+      , 1500, 'swing', ->
+        $postit.fadeOut 300
+    
+    self.postit_count++
+    
+    if self.postit_count == 8
+      self.video_container.animate
+        opacity: 100
+      , @speed, ->
+      self.reasons_video.trigger('play')  
   
   animateHeader: ->
     if @transitions
@@ -116,7 +125,7 @@ class landingPage
       
   animateReasons: ->  
     if @reasons.data('state') == 'closed' 
-      @header_video[0].player.pause()
+      @header_video.trigger('pause')
       if @transitions
         @landing.addClass 'slide-open'
       else
@@ -130,7 +139,7 @@ class landingPage
       @reasons.data('state' , 'open')
       @scroll()    
     else
-      @header_video[0].player.play()
+      @header_video.trigger('play')
       if @transitions
         @landing.removeClass 'slide-open'
       else
