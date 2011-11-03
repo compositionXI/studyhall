@@ -94,8 +94,6 @@ class landingPage
       )
       rand = Math.floor(Math.random() * 2)  
       $postit.addClass(self.postit_classes[rand])
-
-
     else 
       $postit.animate
         top: parseInt($postit.css('top'), 10) + 700
@@ -160,21 +158,20 @@ class landingPage
       @reasons.data('state' , 'closed')
       @postitCleanup()
   
-  scroll: ->
-    $('html, body').animate
-         scrollTop : 0
-       , @speed  
-  
   formValidation: (element) ->
     @form.find(".input_field").each ->
       input = $(element)
       if input.twipsy(true) != null
-        input.twipsy("hide")
+        input.twipsy("hide")  
+  
+  scroll: ->
+    $('html, body').animate(
+         scrollTop : 0
+       , @speed)
    
 $ -> 
   landing = new landingPage  
   if $('body').hasClass('home-landing_page')
     landing.setup()
-  
     landing.form_submit.click ->
       landing.formValidation(this)
