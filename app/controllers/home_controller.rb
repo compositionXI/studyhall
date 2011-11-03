@@ -28,9 +28,13 @@ class HomeController < ApplicationController
 
   def pretty_time_label(time)
     today = DateTime.current.beginning_of_day
-    "Today" if time.today?
-    "Yesterday" if time < today && time > today.ago(24*60*60)
-    time.strftime("%B %d")
+    if time.today?
+      "Today"
+    elsif time < today && time > today.ago(24*60*60)
+      "Yesterday"
+    else
+      time.strftime("%B %d")
+    end
   end
 
 end
