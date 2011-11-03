@@ -1526,7 +1526,8 @@ section.course_activity
       height: 118px 
       top: 57px
       z-index: 50
-    .login-button
+    .login-button 
+      display: none // Remove when going live
       +border-radius( $topbarRadius )
       // $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
       // +box-shadow($shadow)               
@@ -1593,7 +1594,7 @@ section.course_activity
         margin: 0 
         position: absolute
         right: 0
-        width: 150px
+        width: auto
       .url-prefix
         +sans-serif-font(normal, 14px, normal)
         color: #aaa
