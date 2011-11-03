@@ -12,6 +12,21 @@ GIT
       rails (~> 3.1)
       remotipart (~> 1.0)
 
+GIT
+  remote: https://github.com/pauldix/feedzirra.git
+  revision: 872a3a264156a082e501f37ec59077b77a29a744
+  specs:
+    feedzirra (0.1.1)
+      activesupport (>= 3.0.8)
+      builder (>= 2.1.2)
+      curb (~> 0.7.15)
+      i18n (>= 0.5.0)
+      loofah (~> 1.2.0)
+      nokogiri (>= 1.4.4)
+      rake (>= 0.9.2)
+      rdoc (~> 3.8)
+      sax-machine (~> 0.1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -76,6 +91,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
+    chronic (0.6.4)
     cocaine (0.2.0)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
@@ -94,6 +110,7 @@ GEM
       capybara (>= 1.1.1)
       cucumber (>= 1.1.0)
       nokogiri (>= 1.5.0)
+    curb (0.7.15)
     database_cleaner (0.6.7)
     devise (1.4.9)
       bcrypt-ruby (~> 3.0)
@@ -132,6 +149,8 @@ GEM
       addressable (~> 2.2.6)
     libv8 (3.3.10.2)
     log4r (1.1.9)
+    loofah (1.2.0)
+      nokogiri (>= 1.4.4)
     macaddr (1.4.0)
       systemu (~> 2.2.0)
     mail (2.3.0)
@@ -264,6 +283,8 @@ GEM
       sass (>= 3.1.4)
       sprockets (~> 2.0.0)
       tilt (~> 1.3.2)
+    sax-machine (0.1.0)
+      nokogiri (> 0.0.0)
     selenium-webdriver (2.7.0)
       childprocess (>= 0.2.1)
       ffi (>= 1.0.7)
@@ -273,7 +294,7 @@ GEM
     sprockets (2.0.1)
       hike (~> 1.2)
       rack (~> 1.0)
-      tilt (!= 1.3.0, ~> 1.1)
+      tilt (~> 1.1, != 1.3.0)
     sunspot (1.2.1)
       escape (= 0.0.4)
       pr_geohash (~> 1.0)
@@ -300,6 +321,9 @@ GEM
       macaddr (~> 1.0)
     warden (1.0.6)
       rack (>= 1.0)
+    whenever (0.7.0)
+      activesupport (>= 2.3.4)
+      chronic (~> 0.6.3)
     will_paginate (3.0.pre2)
     xml-simple (1.1.0)
     xpath (0.1.4)
@@ -321,6 +345,7 @@ DEPENDENCIES
   database_cleaner
   devise
   execjs
+  feedzirra!
   has_mailbox
   httparty
   jquery-rails
@@ -344,3 +369,4 @@ DEPENDENCIES
   therubyracer
   thumbs_up
   uglifier
+  whenever

@@ -4,6 +4,9 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 
+set :whenever_environment, defer { stage }
+require "whenever/capistrano"
+
 set :application, "StudyHall"
 set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
 

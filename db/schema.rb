@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102225352) do
+ActiveRecord::Schema.define(:version => 20111103162329) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -46,9 +46,7 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.string   "course_offering_import_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "schools_count"
-    t.integer  "courses_count"
-    t.integer  "offerings_count"
+    t.integer  "school_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -123,7 +121,6 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.boolean  "deleted",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "parent_id"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -205,6 +202,15 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.datetime "updated_at"
   end
 
+  create_table "rss_entries", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.datetime "pub_date"
+    t.integer  "school_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -267,7 +273,6 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.string   "perishable_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
