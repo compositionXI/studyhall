@@ -35,6 +35,7 @@ html
  
 .main-content
   margin-top: 10px
+  min-height: 100%
   > .container
     @include box-shadow(0 0 5px 2px #EEEEEE)
     background: $white
@@ -55,9 +56,7 @@ html
   @include box-shadow(inset 0px 1px 0px 0px #f9f9f9 )
   background: $footer_background
   border-top: 1px double $footer_background
-  bottom: 0
-  left: 0 
-  height: 100%
+  height: 70px
   width: 100%
   p,a  
     +sans-serif-font(normal, 11px, 18px)
@@ -388,6 +387,8 @@ header.topbar
     position: absolute
     right: 0
     top: 15px
+    .primary
+      line-height: 13px
     &.left
       left: 0
       width: 300px
@@ -422,7 +423,8 @@ header.topbar
     p
       margin: 0 0 12px
     ul
-      margin: 0 0 18px 16px
+      margin: 0 0 18px 0
+      list-style-type: none
       li
         +body-font(normal, 14px, 14px) 
         color: $red
