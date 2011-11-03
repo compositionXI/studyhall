@@ -1,0 +1,11 @@
+var html = "<div class='collapsed_message alert-message warning spam_abuse'> This message has been marked as <%= @message.abuse? ? 'abuse' : 'spam' %>.<div>"
+
+var message_list_item = $("#message_<%= @message.id %>");
+
+function showHideSuccessMessage(){
+  $(message_list_item).fadeOut(500, function(){$(message_list_item).remove()});
+}
+
+message_list_item.find(".collapsed_message").animate({opacity: 0},1000)
+setTimeout(function(){message_list_item.html(html)}, 500);
+setTimeout(function(){showHideSuccessMessage()},2000);

@@ -107,6 +107,8 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_updated_at"
+    t.boolean  "spam",                    :default => false, :null => false
+    t.boolean  "abuse",                   :default => false, :null => false
   end
 
   add_index "message_copies", ["sent_messageable_id", "recipient_id"], :name => "outbox_idx"
@@ -126,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20111102225352) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.string   "attachment_updated_at"
+    t.boolean  "spam",                      :default => false, :null => false
+    t.boolean  "abuse",                     :default => false, :null => false
   end
 
   add_index "messages", ["received_messageable_id", "sender_id"], :name => "inbox_idx"

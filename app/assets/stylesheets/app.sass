@@ -112,7 +112,7 @@ header.topbar
       height: 38px
       width: 191px  
     
-  .nav
+  .primary-nav
     float: left
     margin: 17px  0 0 50px
     li
@@ -157,7 +157,9 @@ header.topbar
           border-left: 1px solid $navCurrentBorder
         &:last-child
           @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
-          border-right: 1px solid $navCurrentBorder
+          border-right: 1px solid $navCurrentBorder 
+          margin: -1px 0 0 0
+          padding: 0 0 0 1px
     #nav_home span
       background-position: 10px 0px 
     #nav_studyhalls span
@@ -236,29 +238,40 @@ header.topbar
               color: $linkColorHover
               text-decoration: underline
     
-  .secondary-nav 
+  .secondary-nav
+    float: right
+    margin: 17px 0 0 10px
     li:last-child
       &:hover, &:active, &:focus
         border: 0
     li.dropdown
       @include border-radius( $topbarRadius )
       @include vertical-gradient($navGradStart, $navGradEnd)
+      +box-shadow(none)               
+      +sans-serif-font(bold, 13px, 13px)
+      border-top: 1px solid #5C4932
+      border-bottom: 1px solid #0a0401 
+      border-left: none
       height: 25px
       padding: 3px
       cursor: pointer
-      &:hover, &:focus, &:active
-        $shadow: inset 0 1px 0 $navBorderTop 
-        +box-shadow($shadow)
-        border-top: none
-        border-bottom: 1px solid $navBorderBottom
-        border-left: 1px solid $navBorderTop
-        border-right: 1px solid $navBorderRight
+      &:hover, &:focus, &:active 
+        @include border-radius( $topbarRadius )
+        border-top: 1px solid #5C4932
+        border-bottom: 1px solid #0a0401 
+        border-left: none  
+        border-right: none
         margin: 0
-        border-radius: 3px
       img
         border: 1px solid $imgBorder
-        margin: 0 7px 0 0
+        margin: 0 7px 0 0 
+      a
+        color: $white
+        padding: 5px
+        &:hover
+          background-color: none
       a.dropdown-toggle
+        
         background: none
         display: inline
         &:active, &:focus
@@ -283,7 +296,8 @@ header.topbar
           display: block 
           height: auto
           padding: 5px 0
-          overflow: visible
+          overflow: visible 
+          visibility: visible
       ul 
         @include vertical-gradient(#ffffff, #f8f8f8)
         @include border-radius(2px)
@@ -296,7 +310,7 @@ header.topbar
         display: block
         position: absolute
         top: 42px
-        right: -10px
+        right: -5px
         height: 0px
         min-width: 90px
         max-width: 160px
@@ -305,6 +319,7 @@ header.topbar
         margin-right: 0
         overflow: hidden
         text-align: left
+        visibility: hidden
         zoom: 1      
         .arrow 
           @include popover-arrow-below(10px,$popoverColor, -8px, auto, 5px)
@@ -424,11 +439,11 @@ header.topbar
   padding-bottom: 12px
   position: relative
   .alert
-    position: absolute
-    right: 266px
-    top: 0
+    float: left
+    width: 390px
     a
-      text-shadow: none         
+      text-shadow: none 
+      text-decoration: none        
 .user_greeting.span4
   float: left
   margin-left: 0
@@ -1544,24 +1559,29 @@ section.course_activity
       input
         width: 290px
     .url-container
-      position: absolute
-      right: 0
-      input 
-        margin: 0 138px 0 0 
-        width: 173px
+      position: relative  
+      width: 319px
+      #user_custom_url
+        padding: 4px 4px 4px 98px
+        width: 66px
         float: left
       input[type="submit"]
         margin: 0 
         position: absolute
         right: 0
-        width: 139px
-         
+        width: 150px
+      .url-prefix
+        +sans-serif-font(normal, 14px, normal)
+        color: #aaa
+        position: absolute
+        left: 7px
+        top: 30px
     #url, .primary
       display: block
       float: left
     #url
       width: 189px
-    .primary
+    .primary 
       height: 37px
       margin: 0 0 0 -2px
       padding: 12px 9px
@@ -1688,7 +1708,7 @@ section.course_activity
   .footer 
     height: auto
 
-.js .awesome-landing
+.js #landing
   +transition(margin 1s ease )
   .header
     h1
@@ -1718,7 +1738,6 @@ section.course_activity
       left: 50% 
       margin: 0 0 0 -350px
       top: 235px
-      visibility: hidden
       video
         +opacity(100)
         position: static
@@ -1726,9 +1745,8 @@ section.course_activity
     .content
       +transition(height 1s ease ) 
     .postits
-      visibility: hidden
                       
-  &.open
+  &.slide-open
     margin: -570px 0 0 0 
     .reasons
       header

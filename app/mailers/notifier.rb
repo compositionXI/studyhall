@@ -56,4 +56,14 @@ class Notifier < ActionMailer::Base
       :date => Time.now
     )
   end
+  
+  def report_message(reporter, message)
+     @reporter, @offender, @message = reporter, message.sender_id, message
+      mail(
+        :subject => "#{reporter.name} reported a post.",
+        :from => "noreply@studyhall.com",
+        :to => "admin@studyhall.com",
+        :date => Time.now
+      )
+  end
 end

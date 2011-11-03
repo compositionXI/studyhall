@@ -1,4 +1,4 @@
-<%= fields_for "messages[]", message do |message_fields| %>
+<% unless message.spam? || message.abuse? %>
   <li id="message_<%= message.id %>" class="message_list_item">
     <div class="collapsed_message <%= 'unread' unless message.opened? %>", data-message-reply-url="<%= new_user_message_path(message.from, :subject => message.subject) %>">
       <%= link_to image_tag(message.from.photo_url(:medium)), message.from, :title => message.from.name %>
@@ -20,6 +20,10 @@
             <% else %>
               <%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %>
             <% end %>
+            &nbsp;-&nbsp;
+            <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %>
+            &nbsp;-&nbsp;
+            <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %>
           </span>
         </div>
         <% if message.attachment? %>

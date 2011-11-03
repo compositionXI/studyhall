@@ -3,5 +3,7 @@ class Message < ActiveRecord::Base
   
   class HasMailbox::Models::Message
     has_attached_file :attachment
+    
+    attr_accessible :spam, :abuse
   end
 end
