@@ -1756,13 +1756,22 @@ section.course_activity
       bottom: 500px
       &.drop
         bottom: -10px
-  .reasons           
+  .reasons
+    .video_shim
+      position: absolute
+      left: 50%
+      height: 393px
+      top: 235px
+      margin: 0 0 0 -350px
+      width: 700px 
+      z-index: 10      
     .mejs-container
       +opacity(20)
       position: absolute
       left: 50% 
       margin: 0 0 0 -350px
       top: 235px
+      z-index: 0
       video
         +opacity(100)
         position: static

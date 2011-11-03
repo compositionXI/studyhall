@@ -10,9 +10,11 @@ class landingPage
     
     #header elements
     @header = $('.header', @landing)
-    @headerElements = $('h1, .login-button, .browser-quad, .browser-main', @header)
+    # @headerElements = $('h1, .login-button, .browser-quad, .browser-main', @header)
+    @headerElements = $('h1, .browser-quad, .browser-main', @header) 
     @header_h1 = $('h1', @header)
-    @header_login = $('.login-button', @header)
+    # @header_login = $('.login-button', @header)
+    @header_login = $()
     @header_quad = $('.browser-quad', @header)
     @header_main = $('.browser-main', @header)
    
@@ -56,7 +58,8 @@ class landingPage
       loop: true
       features: ['playpause']
       enableAutosize: false
-
+    
+    @reasons_shim = $('.video_shim', @reasons)
     @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
       defaultVideoWidth: 700
       defaultVideoHeight: 393
@@ -78,18 +81,21 @@ class landingPage
           self.animatePostit(this) 
           
   postitCleanup: ->
-    self = this   
-    @postits.removeClass(@postit_classes.join(' '))
-    @postit_count = 0
-    @reasons_video.trigger('pause')  
+    self = this
+    @reasons_video[0].player.pause()  
   
   animatePostit: (element) ->
     self = this
     $postit = $(element)
     
     if @animations
+      $postit.bind("animationend", (e) ->
+        $(this).hide()
+      )
       rand = Math.floor(Math.random() * 2)  
-      $postit.addClass(self.postit_classes[rand]).delay(1200).fadeOut 300
+      $postit.addClass(self.postit_classes[rand])
+
+
     else 
       $postit.animate
         top: parseInt($postit.css('top'), 10) + 700
@@ -102,7 +108,8 @@ class landingPage
       self.video_container.animate
         opacity: 100
       , @speed, ->
-      self.reasons_video.trigger('play')  
+      self.reasons_shim.hide()  
+      self.reasons_video[0].player.play()  
   
   animateHeader: ->
     if @transitions
