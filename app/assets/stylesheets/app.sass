@@ -200,9 +200,9 @@ header.topbar
       border: none
       color: #f8f7e6
       padding: 4px 9px
-      margin: 11px 0 0 0
-      height: 24px
-      width: 220px 
+      margin: 10px 0 0 0
+      height: 32px
+      width: 232px 
       &:-moz-placeholder
         color: rgba(255,255,255,.75)
       &::-webkit-input-placeholder
@@ -239,7 +239,7 @@ header.topbar
     
   .secondary-nav
     float: right
-    margin: 17px 0 0 10px
+    margin: 16px 0 0 10px
     li:last-child
       &:hover, &:active, &:focus
         border: 0
@@ -1088,7 +1088,12 @@ form
   background: #fff
   width: inherit
 
-.popover 
+.popover
+  form
+    padding: 0
+    margin: 0
+  .content
+    padding: 15px
   .help_button
     @include border-radius(10px)
     position: absolute
