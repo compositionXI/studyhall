@@ -58,6 +58,8 @@ class landingPage
       loop: true
       features: ['playpause']
       enableAutosize: false
+      success: (mediaElement, domElement) ->
+        mediaElement.play()        
     
     @reasons_shim = $('.video_shim', @reasons)
     @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
@@ -89,7 +91,7 @@ class landingPage
     $postit = $(element)
     
     if @animations
-      $postit.bind("animationend", (e) ->
+      $postit.bind("animationend webkitAnimationEnd", (e) ->
         $(this).hide()
       )
       rand = Math.floor(Math.random() * 2)  
