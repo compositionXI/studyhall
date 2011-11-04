@@ -1,5 +1,7 @@
-var updateMessage = function(url, data, requestType){
+var updateMessage = function(message_list_item, url, data, requestType){
   requestType = typeof requestType != 'undefined' ? requestType : "PUT";
+  var messageType = message_list_item.attr("data-message-type");
+  data.message_type = messageType;
   $.ajax({
     url: url,
     data: data,
@@ -17,11 +19,17 @@ var hideShowMessage = function(message_list_item_id){
   message_list_item.find(".full_message, .message_preview").toggleClass("hide");
 }
 
+var isShowingFullMessage = function(message_list_item_id){
+  var message_list_item = $("#"+message_list_item_id);
+  !message_list_item.find(".full_message, .message_preview").hasClass("hide");
+}
+
 var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
   async = typeof async != 'undefined' ? async : true;
+  var messageType = message_list_item.attr("data-message-type");
   $.ajax({
     url: url,
-    data: {message : {opened : read}},
+    data: {message : {opened : read}, message_type: messageType},
     type: "PUT",
     dataType: "html",
     async: async,
@@ -41,8 +49,10 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
 var ajaxGetReplyForm = function(url, message_list_item_id, async){
   async = typeof async != 'undefined' ? async : true;
   var message_list_item = $("#"+message_list_item_id);
+  data = {parent_id: message_list_item_id.match(/\d*$/)[0]};
   $.ajax({
     url: url,
+    data: data,
     async: async,
     success: function(response){
     message_list_item.find(".reply_fields").html(response);
@@ -95,23 +105,18 @@ $(document).ready(function(){
   });
   
   $("body").delegate(".message_actions .archive, .message_actions .unarchive", "click", function(){
+    var message_list_item = $(this).closest(".message_list_item");
     var url = $(this).attr("data-url");
-    var requestType = $(this).hasClass("archive") ? "DELETE" : "PUT";
-    var data = {};
-    if($(this).hasClass("report_spam")){
-      data = {"message[spam]": true};
-    }
-    else if ($(this).hasClass("report_abuse")){
-      data = {"message[abuse]": true};
-    }
-    updateMessage(url, data, requestType);
+    var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
+    updateMessage(message_list_item, url, data);
   });
   
   $("body").delegate(".message_actions .report_spam, .message_actions .report_abuse", "click", function(){
+    var message_list_item = $(this).closest(".message_list_item");
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("report_spam") ? {"message[spam]": true} : {"message[abuse]": true};
     if( confirm("Are you sure?") ){
-      updateMessage(url, data);
+      updateMessage(message_list_item, url, data);
     }
   });
   

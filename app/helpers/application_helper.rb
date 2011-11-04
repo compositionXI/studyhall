@@ -9,10 +9,18 @@ module ApplicationHelper
 
   def inbox_count
     count = 0
-    current_user.inbox.each do |m|
+    current_user.all_messages.each do |m|
       count += 1 unless m.opened?
     end
-    count > 0 ? count > 99 ? "*" : count : ""
+    
+    case count
+    when count > 99
+      "*"
+    when 0
+      ""
+    else
+      count
+    end
   end
   
   def controller?(*controller)

@@ -1,7 +1,19 @@
+var updateMessageList = function(){
+  if (<%= @message_copy.reply? %>){
+    $("#message_<%= @message_copy.parent_id %> .reply_list").append("<%=j render :partial => 'replies', :locals => {:reply => @message_copy} %>");
+  }
+  else {
+    $(".messages_list").prepend("<%=j render :partial => 'message', :locals => {:message => @message_copy} %>");
+  }
+}
+
 var formContainer = $("#message_new").parent()
 
 function showHideSuccessMessage(){
-  $(formContainer).find(".alert-message").fadeOut(500, function(){$(formContainer).find(".alert-message").remove()});
+  $(formContainer).find(".alert-message").fadeOut(500, function(){
+    $(formContainer).find(".alert-message").remove();
+    updateMessageList();
+  });
   $("#new_message_button").popover("hide");
 }
 

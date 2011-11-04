@@ -200,6 +200,28 @@ class User < ActiveRecord::Base
   def extracurriculars_list
     self.extracurriculars.collect {|e| e.name}.join(",")
   end
+  
+  def all_messages(attributes = {})
+    recieved = Message.where({
+      :received_messageable_id => self.id, 
+      :received_messageable_type => self.class.to_s,
+      :parent_id => nil
+      }.merge(attributes)).order("id desc")
+    
+    sent = MessageCopy.where({
+      :sent_messageable_id => get_sender_id(attributes), 
+      :sent_messageable_type => self.class.to_s,
+      :parent_id => nil
+      }.merge(attributes)).order("id desc")
+    
+    (recieved + sent).sort { |a, b| b.created_at <=> a.created_at }
+  end
+  
+  def get_sender_id(attributes)
+    sender_id = attributes[:sender_id] || self.id
+    attributes.delete :sender_id if attributes[:sender_id]
+    sender_id
+  end
 end
 
 class User::NotAuthorized < StandardError; end

@@ -1,5 +1,8 @@
-var html = "<div class='collapsed_message alert-message warning spam_abuse'> This message has been marked as <%= @message.abuse? ? 'abuse' : 'spam' %>.<div>"
-
+<% if @message.abuse? || @message.spam? %>
+  var html = "<div class='collapsed_message alert-message warning spam_abuse'> This message has been marked as <b><%= @message.abuse? ? 'abuse' : 'spam' %></b>.<div>"
+<% else %>
+  var html = "<div class='collapsed_message alert-message warning spam_abuse'> This message has been moved to your <b><%= @message.deleted? ? 'archive' : 'inbox' %></b>.<div>"
+<% end %>
 var message_list_item = $("#message_<%= @message.id %>");
 
 function showHideSuccessMessage(){

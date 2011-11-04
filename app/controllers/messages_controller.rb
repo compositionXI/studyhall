@@ -10,22 +10,15 @@ class MessagesController < ApplicationController
   def index
     case params[:mailbox]
     when "inbox"
-      @messages = current_user.inbox
+      @messages = current_user.all_messages
       @inbox = true
     when "archive"
-      @messages = current_user.trash
+      @messages = current_user.all_messages({:deleted => true})
     else
       raise ActiveRecord::RecordNotFound.new("Could not find mailbox: #{params[:mailbox]}")
     end
     if request.xhr?
-      params[:message].delete :opened if params[:message][:opened] == "all"
-      if params[:message][:deleted]
-        results_from_trash = current_user.inbox.where(params[:message])
-        results_from_inbox = current_user.trash.where(params[:message])
-        @messages = results_from_trash + results_from_inbox
-      else
-        @messages = current_user.inbox.where(params[:message])
-      end
+      @messages = filter_with(params[:message]) if params[:message]
       render partial: "messages/message", collection: @messages
     end
   end
@@ -59,32 +52,16 @@ class MessagesController < ApplicationController
     body = params[:message].try(:[], :body)
     @success = @sender.send_message?(subject, body, *@receiver)
     if @success
-      @receiver.each_with_index do |r, index|
-        @message_copy = MessageCopy.find(@sender.sent_messages[index])
-        @message_copy.update_attributes(params[:message])
-        @message = Message.find(r.inbox.first.id)
-        @message.update_attributes(params[:message])
-      end
+      save_attachments(@receiver)
     end
-    @success
   end
 
   def update
-    @message = HasMailbox::Models::Message.find(params[:id])
-    if params[:deleted] == "false"
-      @message.undelete 
-      render "destroy"
-    else
-      @message.update_attributes(params[:message])
-      if params[:message][:abuse]
-        Notifier.report_message(current_user, @message).deliver
-        @message.update_attribute(:abuse, true)
-      elsif params[:message][:spam]
-        Notifier.report_message(current_user, @message).deliver 
-        @message.update_attribute(:spam, true)
-      end
-      render partial: "messages/message", :locals => {message: @message} unless @message.spam? || @message.abuse?
-    end
+    @message = (params[:message_type] == "Message") ? Message.find(params[:id]) : MessageCopy.find(params[:id])
+    @message.update_attributes(params[:message])
+    Notifier.report_message(current_user, @message).deliver if params[:message][:abuse]
+    Notifier.report_message(current_user, @message).deliver if params[:message][:spam]
+    render partial: "messages/message", :locals => {message: @message} unless @message.spam? || @message.abuse? || params[:message][:deleted]
   end
 
   def destroy
@@ -117,5 +94,19 @@ class MessagesController < ApplicationController
 
   def find_receiver
     @receiver = User.where(:id => params[:user_id]).first
+  end
+  
+  def filter_with(message_attributes)
+    message_attributes.delete :opened if message_attributes[:opened] == "all"
+    current_user.all_messages(message_attributes)
+  end
+  
+  def save_attachments(receiver)
+    receiver.each_with_index do |r, index|
+      @message_copy = MessageCopy.find(@sender.sent_messages[index])
+      @message_copy.update_attributes(params[:message])
+      @message = Message.find(r.inbox.first.id)
+      @message.update_attributes(params[:message])
+    end
   end
 end

@@ -1,9 +1,11 @@
 .messages_landing_wrapper
   width: 660px
 
+.reply_header
+  border-bottom: 1px solid #D4D4D4
+
 .reply_fields
   #message_new
-    border-top: 1px solid #D4D4D4
     margin-top: 15px
   form
     padding-left: 0px
@@ -28,6 +30,7 @@
     line-height: 20px
     &.reply_body
       width: 540px
+      height: 50px
   #error_explanation
     margin-right: 13px
     &.hidden
@@ -41,15 +44,15 @@
     border-bottom: 1px solid #D4D4D4
     img
       float: left
+      
     .full_message
-      min-height: 55px
-      hight: 400px
-      overflow-y: scroll
       padding-left: 70px
+      overflow-y: scroll
       border-top: 1px solid #D4D4D4
+      max-height: 350px
     .spam_abuse
       margin-top: 18px
-    .collapsed_message
+    .collapsed_message, .reply_header
       padding: 14px 14px 10px
       &.unread
         background-color: #F8F8F8
@@ -75,3 +78,5 @@
       clear both
       padding-top: 10px
       padding-bottom: 10px
+.replies
+  margin-left: -70px
