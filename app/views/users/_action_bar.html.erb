@@ -4,10 +4,10 @@
         <div class="buttons left">
           <% if @user != current_user %>
             <% if current_user.follows?(@user) %>
-              <%= link_to "Unfollow", unfollow_path(current_user.following_for(@user)), :class => "btn small follow_button", :remote => true, :method => :delete %>
+              <%= link_to "Unfollow", unfollow_path(@user), :class => "btn small follow_button", :remote => true, :method => :delete %>
               <%= link_to "Follow", follow_path(:followed_user_id => @user.id), :class => "btn small hidden unfollow_button", :remote => true, :method => :post %>
             <% else %>
-              <%= link_to "Unfollow", unfollow_path(current_user.following_for(@user)), :class => "btn small hidden unfollow_button", :remote => true, :method => :delete %>
+              <%= link_to "Unfollow", unfollow_path(@user), :class => "btn small hidden unfollow_button", :remote => true, :method => :delete %>
               <%= link_to "Follow", follow_path(:followed_user_id => @user.id), :class => "btn small follow_button", :remote => true, :method => :post %>
             <% end %>
             <%= link_to("Message #{@user.first_name}", new_user_message_path(@user), :class => "btn", :id => "new_message_button", "data-title" => "Send #{@user.first_name} a message", :remote => true) %>

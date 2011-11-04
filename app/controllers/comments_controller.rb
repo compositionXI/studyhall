@@ -1,9 +1,11 @@
 class CommentsController < ApplicationController
-  
+ 
+  before_filter :require_user
+ 
   def create
-    @comment = Comment.create(params[:comment])
+    @comment = Comment.new(params[:comment])
     @comment.offering_id = params[:class_id]
-    @comment.user_id = current_user.id
+    @comment.user = current_user
     if @comment.save
       if request.xhr?
         render_posts
