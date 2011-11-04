@@ -66,4 +66,24 @@ class Notifier < ActionMailer::Base
         :date => Time.now
       )
   end
+
+  def user_following(user, followed_user)
+    @follower, @followed = user, followed_user
+    mail(
+      :subject => "#{user.name} is following you.",
+      :from    => "noreply@studyhall.com",
+      :to      => followed_user.email,
+      :date    => Time.now
+    )
+  end
+
+  def new_comment(comment, commenter, author, post)
+    @comment, @commenter, @author, @post = comment, commenter, author, post
+    mail(
+      :subject => "#{@commenter} add new comment on your post.",
+      :from    =>  "noreply@studyhall.com",
+      :to      =>  author.email,
+      :date    =>  Time.now
+    )
+  end
 end

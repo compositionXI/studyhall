@@ -83,8 +83,13 @@ class User < ActiveRecord::Base
 
   #make this person follow the given user
   def follow!(user, attributes = {})
-    attributes[:followed_user_id] = user.id
+    attributes[:followed_user_id] = user.id if user
     followings.create(attributes)
+  end
+
+  def unfollow!(user, attributes = {})
+    attributes[:followed_user_id] = user.id if user
+    followings.where(attributes).delete_all
   end
 
   #find the following object joining this user and the given user
@@ -148,6 +153,10 @@ class User < ActiveRecord::Base
   def deliver_welcome!
     reset_perishable_token!
     Notifier.welcome(self).deliver
+  end
+
+  def deliver_followed_notification!(follower)
+    Notifier.user_following(follower,self).deliver
   end
   
   def avatar_url(size = nil)

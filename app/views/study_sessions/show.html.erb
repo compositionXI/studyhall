@@ -1,7 +1,7 @@
 <%= render :partial => "tokbox_code" %>
 <div id="menubar" class="topbar notes">
   <div class="middle">
-    <h3>StudyHall - <%= @study_session.created_at.strftime("%d/%m/%y") %></h3>
+    <h3><%= @study_session.name || "StudyHall" %></h3>
   </div>
   <div class="right">
     <%= link_to "Invite Others to Study", new_study_session_invite_path(@study_session), id: "invite_button", class: "btn", remote: true %>
@@ -27,8 +27,8 @@
   </div>
 </div>
 
-<% if @study_session.session_files.any? %>
-  <iframe id="whiteboard" src="http://crocodoc.com/<%= @study_session.session_files.first.short_id rescue "" %>?embedded=true" frameborder="1" width="710" height="650"></iframe>
+<% if @session_file && @session_file.embeddable? %>
+  <iframe id="whiteboard" src="<%= @session_file.embed_url %>" frameborder="1" width="710" height="650"></iframe>
 <% else %>
   <% @study_session.session_files.build %>
   <div id="upload_form">

@@ -35,21 +35,7 @@
     </ul>
   </section>  
   <section class="news">
-    <header><h1>Campus News</h1></header>
-    <h2>Yesterday</h2>
-    <ul>
-      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
-      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
-    </ul>
-    <h2>September 17th</h2>
-    <ul>
-      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
-      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
-    </ul>
-    <h2>September 4thth</h2>
-    <ul>
-      <li><h3><a href="#">This is a news item from yesterday. it is long to test ellipsses</a></h3></li>
-    </ul>
+    <%= render :partial => "home/campus_news", :locals => {:rss_entries => @rss_entries} %>
   </section>
 </aside>
 <section class="courses <%= items_layout %>">

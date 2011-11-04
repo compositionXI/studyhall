@@ -13,7 +13,7 @@ form
     border-radius: 3px 
     padding: 30px 0 10px 40px
     input, textarea
-      width: 370px
+      width: 380px
       margin-bottom: 10px
     select
       width: 380px
@@ -91,12 +91,13 @@ input[type=password],
 textarea,
 select,
 .uneditable-input
+  +box-sizing(border-box)
   display: inline-block
   width: 210px
   padding: 4px
   font-size: 14px
-  line-height: 27px
-  height: 27px
+  line-height: 37px
+  height: 37px
   color: #444
   border-width: 1px 
   border-style: solid
@@ -368,7 +369,9 @@ input.disabled
       padding-top: 0
       label
         font-weight: normal
-        padding-top: 0
+        padding-top: 0  
+        span  
+          margin: 0 0 0 5px
   div.error
     padding-top: 10px
     padding-bottom: 10px

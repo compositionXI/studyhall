@@ -12,7 +12,6 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20111103193644) do
-
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
@@ -46,9 +45,7 @@ ActiveRecord::Schema.define(:version => 20111103193644) do
     t.string   "course_offering_import_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "schools_count"
-    t.integer  "courses_count"
-    t.integer  "offerings_count"
+    t.integer  "school_id"
   end
 
   create_table "courses", :force => true do |t|
@@ -208,6 +205,15 @@ ActiveRecord::Schema.define(:version => 20111103193644) do
     t.datetime "updated_at"
   end
 
+  create_table "rss_entries", :force => true do |t|
+    t.string   "title"
+    t.string   "link"
+    t.datetime "pub_date"
+    t.integer  "school_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -223,7 +229,6 @@ ActiveRecord::Schema.define(:version => 20111103193644) do
     t.string   "upload_content_type"
     t.integer  "upload_file_size"
     t.datetime "upload_updated_at"
-    t.string   "session_identifier"
     t.string   "upload_uuid"
     t.string   "short_id"
     t.datetime "created_at"

@@ -38,5 +38,8 @@ module ApplicationHelper
   def activate(active_key, key)
     active_key == key ? " active" : ""
   end
-      
+
+   def custom_url(user)
+     "www.studyhall.com/" + user.custom_url
+   end
 end

@@ -47,6 +47,11 @@ class StudySession < ActiveRecord::Base
     end
   end
 
+  def prepare_session(user)
+    return nil unless session_files.any?
+    session_files.last.retrieve_session_identifier(user)
+  end
+
   def buddy_ids
     users.map(&:id)
   end

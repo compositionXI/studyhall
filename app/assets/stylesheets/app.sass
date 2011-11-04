@@ -35,6 +35,7 @@ html
  
 .main-content
   margin-top: 10px
+  min-height: 100%
   > .container
     @include box-shadow(0 0 5px 2px #EEEEEE)
     background: $white
@@ -55,9 +56,7 @@ html
   @include box-shadow(inset 0px 1px 0px 0px #f9f9f9 )
   background: $footer_background
   border-top: 1px double $footer_background
-  bottom: 0
-  left: 0 
-  height: 100%
+  height: 70px
   width: 100%
   p,a  
     +sans-serif-font(normal, 11px, 18px)
@@ -201,9 +200,9 @@ header.topbar
       border: none
       color: #f8f7e6
       padding: 4px 9px
-      margin: 11px 0 0 0
-      height: 24px
-      width: 220px 
+      margin: 10px 0 0 0
+      height: 32px
+      width: 232px 
       &:-moz-placeholder
         color: rgba(255,255,255,.75)
       &::-webkit-input-placeholder
@@ -240,7 +239,7 @@ header.topbar
     
   .secondary-nav
     float: right
-    margin: 17px 0 0 10px
+    margin: 16px 0 0 10px
     li:last-child
       &:hover, &:active, &:focus
         border: 0
@@ -269,12 +268,12 @@ header.topbar
         color: $white
         padding: 5px
         &:hover
-          background-color: none
+          background-color: transparent
       a.dropdown-toggle
-        
         background: none
         display: inline
-        &:active, &:focus
+        &:hover, &:active, &:focus
+          background-color: transparent
           outline: 0 none
         img
           vertical-align: middle   
@@ -388,6 +387,8 @@ header.topbar
     position: absolute
     right: 0
     top: 15px
+    .primary
+      line-height: 13px
     &.left
       left: 0
       width: 300px
@@ -397,18 +398,36 @@ header.topbar
       a.hidden
         display: none
 
-.user_sessions-new  
+.user-session-form  
   .container.narrow
     margin-top: 40px
     min-height: 285px
     margin-bottom: 400px
-  fieldset
-    position: relative
-  legend
-    margin-left: 0px
-  form#new_user_session
+  .user-session-header
+    +clearfix
+    h1 
+      +h3
+      float: left
+      margin: 0 0 12px 0
+    #facebook_login
+      float: right 
+      line-height: 38px  
+  form
     border: 1px solid #DDD
     padding: 20px 80px
+    h2
+      +h3
+      margin: 0 0 12px 0
+    a
+      font-size: 12px 
+    p
+      margin: 0 0 12px
+    ul
+      margin: 0 0 18px 0
+      list-style-type: none
+      li
+        +body-font(normal, 14px, 14px) 
+        color: $red
     input[type="text"], input[type="password"]
       width: 300px
     input[type="submit"]
@@ -418,19 +437,18 @@ header.topbar
       float: left
       input
         margin: 5px 4px 0 0
+    .remember-me-label    
+      line-height: 24px 
+      float: left
   #forgot_link
     float: right
     margin: 5px 5px 0 0
-  #facebook_login
-    position: absolute
-    right: 0
-    top: 0
   
 .alert-message.success
   a
     color: #FFF
     font-weight: bold
-    text-decoration: underline
+    text-decoration: none
 
 //User Page - Home
 .home-header
@@ -443,7 +461,6 @@ header.topbar
     width: 390px
     a
       text-shadow: none 
-      text-decoration: none        
 .user_greeting.span4
   float: left
   margin-left: 0
@@ -641,7 +658,7 @@ form
       background: url(asset-path('notebook-brown.png','image')) transparent no-repeat
     &.draggable_hovering
       .preview
-        background: url(asset-path('notebook-drop.png','image')) transparent
+        background: url(asset-path('notebook-drop.png','image')) transparent no-repeat
   .notebook_edit_fields
     display: none
 
@@ -860,6 +877,8 @@ form
 
 .full-width
   #menubar
+    a
+      text-shadow: 0 1px 1px white
     a:hover
       color: #404040
     .middle
@@ -1060,18 +1079,23 @@ form
   label
     margin-top: 10px
   input[type="file"]
-    width: 300px
+    width: 306px
   select
     width: 312px
   input[type="text"]
-    width: 300px
+    width: 312px
     
 .popover .inner
   overflow: visible
   background: #fff
   width: inherit
 
-.popover 
+.popover
+  form
+    padding: 0
+    margin: 0
+  .content
+    padding: 15px
   .help_button
     @include border-radius(10px)
     position: absolute
@@ -1502,7 +1526,8 @@ section.course_activity
       height: 118px 
       top: 57px
       z-index: 50
-    .login-button
+    .login-button 
+      display: none // Remove when going live
       +border-radius( $topbarRadius )
       // $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
       // +box-shadow($shadow)               
@@ -1523,7 +1548,7 @@ section.course_activity
       +center-width(398px) 
       +box-shadow(0px 0 10px rgba(0,0,0, .33))
       bottom: 10px         
-      height: 313px
+      height: 314px
       z-index: 40
     .browser-quad
       +center-width(1112px)
@@ -1556,26 +1581,27 @@ section.course_activity
     .email-container, .password-container
       margin-right: 10px                 
     .input
-      input
-        width: 290px
+      input 
+        line-height: normal
+        width: 270px
     .url-container
       position: relative  
-      width: 319px
+      width: 380px
       #user_custom_url
-        padding: 4px 4px 4px 98px
-        width: 66px
+        padding: 4px 10px 4px 98px
+        width: 230px
         float: left
       input[type="submit"]
         margin: 0 
         position: absolute
         right: 0
-        width: 150px
+        width: auto
       .url-prefix
         +sans-serif-font(normal, 14px, normal)
         color: #aaa
         position: absolute
         left: 7px
-        top: 30px
+        bottom: 10px
     #url, .primary
       display: block
       float: left
@@ -1731,13 +1757,23 @@ section.course_activity
       bottom: 500px
       &.drop
         bottom: -10px
-  .reasons           
+  .reasons
+    .video_shim
+      position: absolute
+      left: 50%
+      height: 393px
+      top: 235px
+      margin: 0 0 0 -350px
+      width: 700px 
+      z-index: 10      
     .mejs-container
       +opacity(20)
+      background-color: transparent
       position: absolute
       left: 50% 
       margin: 0 0 0 -350px
       top: 235px
+      z-index: 0
       video
         +opacity(100)
         position: static
