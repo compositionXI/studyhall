@@ -76,36 +76,34 @@ class landingPage
         self.form.removeClass('in')
         self.info_message.addClass('in')       
   
-  headerVideoSetup: -> 
+  headerVideoSetup: ->
+    self = this 
     @header_video = $('video', @header).mediaelementplayer
       defaultVideoWidth: 383
       defaultVideoHeight: 313
       loop: true
       features: ['playpause']
       enableAutosize: false
-      success: (mediaElement, domElement) ->
-        $('.mejs-layers, .mejs-controls', @header).remove()
+      success: (mediaElement, domElement) -> 
+        $('.mejs-layers, .mejs-controls', self.header).remove()
         $('.mejs-container', @header).fadeIn 1000, ->
           mediaElement.play()
-        
-        
-  reasonsvideoSetup: ->
+   
+  reasonsVideoSetup: ->
     self = this      
-    
     @reasons_shim = $('.video_shim', @reasons)
-    @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
+    @reasons_video = $('#studyhall_video', @landing).mediaelementplayer
       defaultVideoWidth: 700
       defaultVideoHeight: 393
       startVolume: 0.4
-      features: ['playpause','progress','current','duration','tracks','volume']
-    )                                                                   
+      features: ['playpause','progress','current','duration','tracks','volume']                                                                 
     @video_container = $('.mejs-container', @reasons) || @reasons_video 
     
-    
-  
+
   #Post-its animations
   postitSetup: ->
-    self = this
+    self = this 
+    @reasonsVideoSetup()
     @reasons_content.mouseleave ->
       $(this).unbind('mouseleave')
       self.postits.each ->
