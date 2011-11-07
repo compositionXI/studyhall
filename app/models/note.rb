@@ -12,5 +12,9 @@ class Note < ActiveRecord::Base
     text :name, :content
     boolean :shareable
   end
+
+  def course_name
+    notebook.course.title if notebook && notebook.course
+  end
   
 end

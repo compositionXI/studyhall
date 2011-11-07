@@ -63,7 +63,7 @@
           </ul>
           <ul id="notes_tab" class="notes notebook_list tab_contents" style="display:none">
             <% @user.notebooks.viewable_by(current_user).each do |notebook| %>
-              <li data-rel="<%= url_for(notebook) %>" class="linked_item notebook">
+              <li data-rel="<%= notebook_notes_url(notebook) %>" class="linked_item notebook">
                 <span><%= notebook.name %></span>
               </li>
             <% end %>

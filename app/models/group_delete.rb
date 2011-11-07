@@ -13,20 +13,39 @@ class GroupDelete
     end
   end
 
+  def object_title
+    if class_name == "study_session"
+      "StudyHall"
+    else
+      class_name
+    end
+  end
+
   def object_class
     return nil if class_name.blank?
     class_name.camelize.constantize
   end
 
   def object_ids_array
-    object_ids.split(",").map(&:strip)
+    @object_ids_array ||= object_ids.split(",").map do |identifier|
+      match = identifier.match(/([a-z_]+)_(\d+)/)
+      if match[1] && Object.const_defined?(match[1].camelize)
+        [match[1].camelize.constantize, match[2]]
+      else
+        raise ArgumentError.new("Invalid object identifier for group delete: #{identifier}")
+      end
+    end
+    @object_ids_array
   end
 
   def process
-    if (object_class.nil? || for_realz == "0")
+    if (object_ids_array.empty? || for_realz == "0")
       return false
     else
-      object_class.delete(object_ids.split(","))
+      object_ids_array.each do |object_id|
+        object_id[0].delete(object_id[1])
+      end
+      true
     end
   end
 

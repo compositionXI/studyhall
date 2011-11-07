@@ -1,29 +1,10 @@
-<h1>Listing notes</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>User</th>
-    <th>Notebook</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @notes.each do |note| %>
-  <tr>
-    <td><%= note.name %></td>
-    <td><%= note.user_id %></td>
-    <td><%= note.notebook_id %></td>
-    <td><%= note.content %></td>
-    <td><%= link_to 'Show', note %></td>
-    <td><%= link_to 'Edit', edit_note_path(note) %></td>
-    <td><%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% if @note_items.any? %>
+  <div class="scroll_pane">
+    <ul class="note_items">
+      <%= render partial: "note_item", collection: @note_items, as: :note_item %>
+    </ul>
+  </div>
+<% else %>
+  <p>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
+  <p>Click the "New Notebook" button to begin taking note.</p>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Note', new_note_path %>

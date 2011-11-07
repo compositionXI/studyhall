@@ -875,6 +875,158 @@ form
       background: url(asset-path('expand.png','image')) no-repeat 
       
 
+.notes-index
+  .scroll_pane
+    height: 700px
+  ul.note_items
+    list-style: none
+    margin: 0 0 0 -5px
+    height: 700px
+    li
+      &.grid
+        float: left
+        position: relative
+        box-sizing: border-box
+        width: 138px
+        height: 160px
+        padding: 42px 15px 0 27px
+        text-align: center
+        margin-left: -4px
+        .background_container
+          display: none
+        .child_notes
+          display: none
+        .notebook_expander
+          visibility: hidden
+        .name
+          display: inline
+        .selector
+          background: url(asset-path('uncheckmark.png','image')) no-repeat
+          height: 16px
+          width: 16px
+          position: absolute
+          top: 20px
+          right: 11px
+        .drag_handle
+          background: url(asset-path('move.png','image')) no-repeat
+          height: 16px
+          width: 16px
+          position: absolute
+          bottom: 10px
+          left: 50%
+          cursor: move
+          visibility: hidden
+        &.show
+          cursor: pointer
+          .selector, .drag_handle
+            visibility: hidden
+        &.edit
+          cursor: default
+          .selector, .drag_handle
+            visibility: visible
+        &.selected
+          .selector
+            background: url(asset-path('checkmark.png','image')) no-repeat
+          &.note
+            background: url(asset-path('selected-note-bg.png','image')) no-repeat
+        &.note
+          background: url(asset-path('note-bg.png','image')) no-repeat
+        &.notebook
+          color: #fff
+          background: url(asset-path('notebook-bg.png','image')) no-repeat
+          &.draggable_hovering
+            +rotate
+        .list_data
+          visibility: hidden
+      &.list
+        position: relative
+        min-height: 94px
+        padding-left: 88px
+        border-bottom: 1px dashed #DDD
+        .background_container
+          position: absolute
+          left: 0
+          top: 0
+          height: 94px
+          width: 80px
+        &.notebook
+          .background_container
+            color: #fff
+            background: url(asset-path('notebook-small-bg.png','image')) no-repeat
+        &.note
+          .background_container
+            background: url(asset-path('note-small-bg.png','image')) no-repeat
+        &.draggable_hovering
+          .background_container
+            +rotate
+          .child_note
+            .background_container
+              +rotate(0)
+        .name
+          display: none
+        .selector
+          visibility: hidden
+        &.selected
+          background: #E8F5FD
+          .list_data
+            .selector
+              background: url(asset-path('checkmark.png','image')) no-repeat
+              visibility: visible
+              display: inline-block
+              height: 16px
+              width: 16px
+              margin-left: 5px
+        .child_notes
+          display: none
+          margin-left: -78px
+          border-top: 1px dashed #EEE
+          li
+            border-bottom: none
+        .notebook_expander
+          visibility: visible
+          @include border-radius(10px)
+          position: absolute
+          right: 10px
+          top: 40px
+          background: #DDD
+          color: #FFF
+          padding: 0 3px
+        .drag_handle
+          background: url(asset-path('move.png','image')) no-repeat
+          height: 16px
+          width: 16px
+          position: absolute
+          top: 35px
+          left: 30px
+          cursor: move
+          visibility: hidden
+        .drop_area
+          padding: 10px
+          margin: 10px 10px 10px 0
+          border: 2px dashed #DDD
+          list-style: none
+          &:hover
+            background: #EEE
+          p
+            margin: 10px 30%
+        .list_data
+          display: block
+          color: #666
+          padding-top: 15px
+          min-height: 60px
+          a
+            font-size: 14px
+            &.name
+              display: inline
+              line-height: 24px
+          p
+            margin: 3px 0 0 0
+            &.date
+              font-size: 11px
+        &.edit
+          .drag_handle
+            visibility: visible
+
 .full-width
   #menubar
     a
@@ -1050,7 +1202,7 @@ form
         .checkbox
           +opacity(70)
           background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
-    &.checked
+    &.selected
       .checkbox
         background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
       &:hover
@@ -1167,200 +1319,201 @@ form
         input
           width: 65px
 
-.profile_edit
-  background-color: $editable_background
-  cursor: pointer 
+.users-show
+  .profile_edit
+    background-color: $editable_background
+    cursor: pointer 
 
-.sidebar_photo
-  text-align: center
-
-.edit_button
-  display: inline
-  &.edit
-    display: none
-
-#profile_sidebar
-  margin-top: 17px
-  .profile_photo
+  .sidebar_photo
     text-align: center
-    padding: 10px 10px 5px 10px
-    .photo_wrapper
-      width: 200px
-      height: 200px
-      overflow-y: hidden
-      margin-bottom: 5px
-      img
-        width: 200px
-    a
+
+  .edit_button
+    display: inline
+    &.edit
       display: none
-    &.edit
-      background: $editable_background
-      margin-bottom: 5px
+
+  #profile_sidebar
+    margin-top: 17px
+    .profile_photo
+      text-align: center
+      padding: 10px 10px 5px 10px
+      .photo_wrapper
+        width: 200px
+        height: 200px
+        overflow-y: hidden
+        margin-bottom: 5px
+        img
+          width: 200px
       a
-        display: block
+        display: none
+      &.edit
+        background: $editable_background
+        margin-bottom: 5px
+        a
+          display: block
 
-.profile_main_content
-  margin-top: 42px
+  .profile_main_content
+    margin-top: 42px
 
-  #profile_personal_info
-    width: 440px
-    margin-right: 20px
-    &.edit
-      background: $editable_background
-      padding: 5px
-  
-  #affiliations_section
-    margin-bottom: 10px
-    &.edit
-      background: $editable_background
-      padding: 5px
+    #profile_personal_info
       width: 440px
-      min-height: 50px
+      margin-right: 20px
+      &.edit
+        background: $editable_background
+        padding: 5px
+    
+    #affiliations_section
+      margin-bottom: 10px
+      &.edit
+        background: $editable_background
+        padding: 5px
+        width: 440px
+        min-height: 50px
 
-  #bio_section
-    &.edit
-      background: $editable_background
-      padding: 5px
-      width: 440px
-      min-height: 100px
+    #bio_section
+      &.edit
+        background: $editable_background
+        padding: 5px
+        width: 440px
+        min-height: 100px
 
-  .profile_ratings
-    width: 220px
+    .profile_ratings
+      width: 220px
 
-    .rating_block
-      background-color: $rating_block_background
-      height: 102px
-      width: 81px
-      margin-bottom: 30px
-      padding: 10px
-      &.gpa
-        text-align: center
-        &.edit
-          background: $editable_background
-        .gpa_score
-          +h3 
-          display: block
-          margin: 30px 0 0 0
-          color: $headings 
-        a.help
-          +opacity(50)
-          display: inline-block
-          height: 16px
-          width: 16px
-          margin: 10px 31px 0
-          background-image: url(asset-path('help_bw.png','image'))
-
-      &.rating
-        text-align: center
-        .net_rating
-          +h3 
-          display: block
-          margin: 30px 0 0 0
-          color: $headings 
-        span
-          margin-bottom: 10px
-          display: block
-        .vote_actions
-          a
+      .rating_block
+        background-color: $rating_block_background
+        height: 102px
+        width: 81px
+        margin-bottom: 30px
+        padding: 10px
+        &.gpa
+          text-align: center
+          &.edit
+            background: $editable_background
+          .gpa_score
+            +h3 
+            display: block
+            margin: 30px 0 0 0
+            color: $headings 
+          a.help
             +opacity(50)
             display: inline-block
             height: 16px
             width: 16px
-            &.current_vote
-              +opacity(100)
-            &:hover
-              +opacity(100)
-            &.downvote
-              background-image: url(asset-path('delete_bw.png','image'))
-              &:hover
-                background-image: url(asset-path('delete.png','image'))
-            &.help
-              margin: 0 12px
-              background-image: url(asset-path('help_bw.png','image'))
-            &.upvote
-              background-image: url(asset-path('add_bw.png','image'))
-              &:hover
-                background-image: url(asset-path('add.png','image'))
+            margin: 10px 31px 0
+            background-image: url(asset-path('help_bw.png','image'))
 
-    .profile_edit
-      background-color: $editable_background
-
-    .gpa
-      margin-right: 15px
-
-    .stats 
-      li
-        background-color: $zebraStriping
-        border-bottom: 1px solid $zebraBorder
-        font-size: 12px
-        font-weight: 300
-        line-height: 37px
-
-        &:nth-child(even) 
-          background-color: $white
-        &:last-child
-          border: none
-        
-      .count 
-        font-size: 14px
-        width: 35px
-        padding-right: 15px
-        text-align: right
-
-  #profile_user_items
-
-    #profile_tabs
-      ul
-        float: none
-        width: auto
-        margin-left: 5px
-        &.tabs
-          border-bottom: 1px solid #C6C0BC
-          li a:hover
-            border-bottom: none
-        &.tab_contents
-          .linked_item
-            float: left
+        &.rating
+          text-align: center
+          .net_rating
+            +h3 
             display: block
-            height: 155px
-            width: 140px
-            text-align: center
-            padding: 40px 5px 0 10px
-            cursor: pointer
-            margin: 0 5px 5px 5px
-            &.course
-              background: url(asset-path('BigGrayBook.png','image'))
-            &.notebook
-              background: url(asset-path('notebook-brown.png','image'))
-            &.study_session
-              height: 130px
-              width: 100px
-              padding-top: 15px
-            span
-              color: #FFF
-            &:hover
-              span, a.name
-                text-decoration: underline
-          &.course_list
-            height: 400px
-            padding: 10px
-            width: 675px
-            overflow-y: scroll
-            .course
-              a
-                display: none
-            &.edit
-              background-color: $editable_background
+            margin: 30px 0 0 0
+            color: $headings 
+          span
+            margin-bottom: 10px
+            display: block
+          .vote_actions
+            a
+              +opacity(50)
+              display: inline-block
+              height: 16px
+              width: 16px
+              &.current_vote
+                +opacity(100)
+              &:hover
+                +opacity(100)
+              &.downvote
+                background-image: url(asset-path('delete_bw.png','image'))
+                &:hover
+                  background-image: url(asset-path('delete.png','image'))
+              &.help
+                margin: 0 12px
+                background-image: url(asset-path('help_bw.png','image'))
+              &.upvote
+                background-image: url(asset-path('add_bw.png','image'))
+                &:hover
+                  background-image: url(asset-path('add.png','image'))
+
+      .profile_edit
+        background-color: $editable_background
+
+      .gpa
+        margin-right: 15px
+
+      .stats 
+        li
+          background-color: $zebraStriping
+          border-bottom: 1px solid $zebraBorder
+          font-size: 12px
+          font-weight: 300
+          line-height: 37px
+
+          &:nth-child(even) 
+            background-color: $white
+          &:last-child
+            border: none
+          
+        .count 
+          font-size: 14px
+          width: 35px
+          padding-right: 15px
+          text-align: right
+
+    #profile_user_items
+
+      #profile_tabs
+        ul
+          float: none
+          width: auto
+          margin-left: 5px
+          &.tabs
+            border-bottom: 1px solid #C6C0BC
+            li a:hover
+              border-bottom: none
+          &.tab_contents
+            .linked_item
+              float: left
+              display: block
+              height: 155px
+              width: 140px
+              text-align: center
+              padding: 40px 5px 0 10px
+              cursor: pointer
+              margin: 0 5px 5px 5px
+              &.course
+                background: url(asset-path('BigGrayBook.png','image'))
+              &.notebook
+                background: url(asset-path('notebook-brown.png','image'))
+              &.study_session
+                height: 130px
+                width: 100px
+                padding-top: 15px
+              span
+                color: #FFF
+              &:hover
+                span, a.name
+                  text-decoration: underline
+            &.course_list
+              height: 400px
+              padding: 10px
+              width: 675px
+              overflow-y: scroll
               .course
-                position: relative
                 a
-                  display: block
-                  width: 16px
-                  height: 16px
-                  background: url(asset-path('delete.png','image'))
-                  position: absolute
-                  bottom: 5px
-                  right: 5px
+                  display: none
+              &.edit
+                background-color: $editable_background
+                .course
+                  position: relative
+                  a
+                    display: block
+                    width: 16px
+                    height: 16px
+                    background: url(asset-path('delete.png','image'))
+                    position: absolute
+                    bottom: 5px
+                    right: 5px
 
 // Course Detail
 section.course_activity

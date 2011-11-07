@@ -2,7 +2,11 @@ Studyhall::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
-  resources :notes
+  resources :notes do
+    member do
+      put 'move'
+    end
+  end
   resources :notebooks do
     collection do
       post "delete_multiple"

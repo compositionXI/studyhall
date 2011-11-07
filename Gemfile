@@ -34,7 +34,7 @@ gem 'httparty'
 gem "nifty-generators", :group => :development
 
 # Gem for parsing RSS/Atom Feeds
-gem 'feedzirra', :git => 'https://github.com/pauldix/feedzirra.git'
+gem 'feedzirra', :git => 'git://github.com/pauldix/feedzirra.git'
 gem 'whenever'
 
 group :test, :development do

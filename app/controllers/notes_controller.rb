@@ -4,13 +4,14 @@ class NotesController < ApplicationController
 
   before_filter :require_user
   before_filter :find_note, except: [:index]
+  before_filter :set_action_bar
   before_filter :find_notebook
 
   def index
     if @notebook
-      @notes = @notebook.notes.all
+      @note_items = NoteItem.init_set(@notebook.notes)
     else
-      @notes = current_user.notes.all
+      @note_items = NoteItem.init_set(Backpack.new(current_user).contents(page: params[:page]))
     end
 
     respond_to do |format|
@@ -80,14 +81,22 @@ class NotesController < ApplicationController
   end
 
   def move
-    @note.notebook_id = @notebook.id
-    @edit_all = true
+    if @notebook && @notebook.id != @note.notebook_id
+      @note.notebook_id = @notebook.id
+    else
+      #Move the note out of a notebook
+      @note.notebook_id = nil
+    end
 
     respond_to do |format|
       if @note.save
         @notebook.reload
         format.json do
-          html = render_to_string(partial: 'notebooks/list_item.html.erb', locals: { notebook: @notebook, collapsed: false })
+          if @note.notebook
+            html = render_to_string(partial: 'notes/child_note.html.erb', locals: { note_item: NoteItem.new(@notebook), note: @note })
+          else
+            html = render_to_string(partial: 'notes/note_item.html.erb', locals: { note_item: NoteItem.new(@note) })
+          end
           render json: { html: html }
         end
       else
@@ -106,14 +115,21 @@ class NotesController < ApplicationController
   end
 
   protected
-  def find_note
-    @note = Note.viewable_by(current_user).find_by_id(params[:id]) || Note.new
-  end
 
-  def find_notebook
-    @notebook = current_user.notebooks.find_by_id(params[:notebook_id]) || @note.try(:notebook)
-    if @note && @note.notebook_id.nil?
-      @note.notebook = @notebook
+    def find_note
+      @note = Note.viewable_by(current_user).find_by_id(params[:id]) || Note.new
     end
-  end
+
+    def find_notebook
+      @notebook = Notebook.viewable_by(current_user).find_by_id(params[:notebook_id]) || @note.try(:notebook)
+      if @note && @note.notebook_id.nil?
+        @note.notebook = @notebook
+      end
+    end
+
+    def set_action_bar
+      return true unless action_name == "index"
+      @action_bar = File.exists?("app/views/#{params[:controller]}/_action_bar.html.erb") ? "#{params[:controller]}/action_bar" : nil
+      flash[:action_bar_message] ||= nil
+    end
 end
