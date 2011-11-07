@@ -1,10 +1,13 @@
 <% if @user.new_record? %>
   <% @user.errors.each do |attr,error| %>
-    $("#user_<%= attr.to_s %>").twipsy({placement: "below",trigger: "manual"});
-    $("#user_<%= attr.to_s %>").twipsy("show");
+    $('#info_message').removeClass('in')
+    $('#new_user').addClass('in')
+    $("#user_<%= attr.to_s %>")
+      .attr('title','<%= attr.to_s %> <%= error %>' )
+      .twipsy({placement: "below", trigger: "manual", animate: false, offset: 2})
+      .twipsy("show");      
   <% end %>
-<% else %>
+<% else %> 
   $("#user_email, #user_passsword, #user_custom_url").twipsy("hide");
-  $("#new_user").fadeOut();
-  $("#success_message").fadeIn();
+  $("#success_message").addClass('in')
 <% end %>

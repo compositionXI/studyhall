@@ -1,6 +1,7 @@
 class landingPage
 
-  setup: ->
+  setup: -> 
+    self = this
     @transitions = Modernizr.csstransitions
     @animations = Modernizr.cssanimations
     
@@ -18,10 +19,13 @@ class landingPage
     @header_quad = $('.browser-quad', @header)
     @header_main = $('.browser-main', @header)
    
-    #Sign-up Form
-    @form = $('#new_user')
+    #Sign-up Form 
+    @signup = $('.signup')
+    @form = $('#new_user', @signup)
     @form_submit = $("input[type='submit']", @form)
     @form_prefix = $('.url-prefix', @form)
+    @info_message = $('#info_message', @signup)
+    @success_message = $('#success_message', @signup)
     
     #reasons elements 
     @reasons = $('.reasons').data('state', 'closed') 
@@ -42,10 +46,20 @@ class landingPage
       e.preventDefault()  
     
     @postitSetup()
-
+    
+    #Form Setup
     @form_prefix.click ->
       $(this).siblings('.input_field').focus()    
+    
+    #Client-side validation so they don't have to wait for a server response
     @form.validate
+      errorPlacement: (error, element) ->
+        $(element)
+          .attr('title', error.text())
+          .twipsy({placement: "below",trigger: "manual", animate: false, offset: 2})
+          .twipsy('show')
+      unhighlight: (element, errorClass) ->
+        $(element).twipsy('hide')  
       rules:
         'user[password]':
           required: true
@@ -56,8 +70,11 @@ class landingPage
           required: "Password is invalid"
           minlength: "Password must be at least 4 characters"
         'user[custom_url]': "URL is invalid"
-  
-  #Video Setup
+    #Hook in to the rails.js events to hide the form and provide an interstitial (info) message.  
+    @form
+      .bind 'ajax:beforeSend', ->
+        self.form.removeClass('in')
+        self.info_message.addClass('in')       
   
   headerVideoSetup: -> 
     @header_video = $('video', @header).mediaelementplayer
