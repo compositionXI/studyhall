@@ -1547,6 +1547,7 @@ section.course_activity
     .browser-main
       +center-width(398px) 
       +box-shadow(0px 0 10px rgba(0,0,0, .33))
+      background: image-url(asset-path('/assets/landing/browser-main.jpg', 'image')) no-repeat 
       bottom: 10px         
       height: 314px
       z-index: 40
@@ -1757,6 +1758,12 @@ section.course_activity
       bottom: 500px
       &.drop
         bottom: -10px
+    video
+      display: none
+    .mejs-container
+      display: none
+      video
+        display: block
   .reasons
     .video_shim
       position: absolute

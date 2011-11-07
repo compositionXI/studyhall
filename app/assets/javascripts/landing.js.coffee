@@ -36,22 +36,30 @@ class landingPage
     @postit_classes = ['hinge-fall-left','hinge-fall-right']
          
     #Startup the page
-    @animateHeader()
-    
-    @form_prefix.click ->
-      $(this).siblings('.input_field').focus()  
-    
+    @animateHeader() 
     @reasons_h1.add(@reasons_close).click (e) => 
       @animateReasons()
       e.preventDefault()  
     
-    @videoSetup()
     @postitSetup()
-    
+
+    @form_prefix.click ->
+      $(this).siblings('.input_field').focus()    
+    @form.validate
+      rules:
+        'user[password]':
+          required: true
+          minlength: 4
+      messages: 
+        'user[email]': "Email is invalid"
+        'user[password]':
+          required: "Password is invalid"
+          minlength: "Password must be at least 4 characters"
+        'user[custom_url]': "URL is invalid"
   
   #Video Setup
-  videoSetup: ->
-    self = this
+  
+  headerVideoSetup: -> 
     @header_video = $('video', @header).mediaelementplayer
       defaultVideoWidth: 383
       defaultVideoHeight: 313
@@ -59,7 +67,13 @@ class landingPage
       features: ['playpause']
       enableAutosize: false
       success: (mediaElement, domElement) ->
-        mediaElement.play()        
+        $('.mejs-layers, .mejs-controls', @header).remove()
+        $('.mejs-container', @header).fadeIn 1000, ->
+          mediaElement.play()
+        
+        
+  reasonsvideoSetup: ->
+    self = this      
     
     @reasons_shim = $('.video_shim', @reasons)
     @reasons_video = $('#studyhall_video', @landing).mediaelementplayer(
@@ -70,7 +84,7 @@ class landingPage
     )                                                                   
     @video_container = $('.mejs-container', @reasons) || @reasons_video 
     
-    $('.mejs-layers, .mejs-controls', @header).remove()
+    
   
   #Post-its animations
   postitSetup: ->
@@ -91,7 +105,7 @@ class landingPage
     $postit = $(element)
     
     if @animations
-      $postit.bind("animationend webkitAnimationEnd", (e) ->
+      $postit.bind("animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd", (e) ->        
         $(this).hide()
       )
       rand = Math.floor(Math.random() * 2)  
@@ -114,6 +128,9 @@ class landingPage
   animateHeader: ->
     if @transitions
       @headerElements.addClass 'drop'
+      @header_main.bind("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", (e) =>        
+        @headerVideoSetup()
+      )
     else
       window.setTimeout =>  
         @header_h1.animate
@@ -127,7 +144,8 @@ class landingPage
         , 650
         @header_main.animate
           'bottom' : "10px"
-        , 750  
+        , 750, 'swing', ->
+          @headerVideoSetup()  
       , @speed     
       
   animateReasons: ->  
@@ -176,4 +194,5 @@ $ ->
   if $('body').hasClass('home-landing_page')
     landing.setup()
     landing.form_submit.click ->
-      landing.formValidation(this)
+      landing.formValidation(this) 
+        
