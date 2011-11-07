@@ -16,7 +16,7 @@ var hide_message = function(selector){
 var hideShowMessage = function(message_list_item_id){
   var message_list_item = $("#"+message_list_item_id);
   message_list_item.find(".collapsed_message").toggleClass("highlighted");
-  message_list_item.find(".full_message, .message_preview").toggleClass("hide");
+  message_list_item.find(".expanded_message, .message_preview").toggleClass("hide");
 }
 
 var isShowingFullMessage = function(message_list_item_id){
@@ -57,6 +57,7 @@ var ajaxGetReplyForm = function(url, message_list_item_id, async){
     success: function(response){
     message_list_item.find(".reply_fields").html(response);
     $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
+    message_list_item.find("#message_new textarea").first().focus();
   }});
 }
 
@@ -94,7 +95,7 @@ $(document).ready(function(){
       var updateUrl = message_list_item.find(".mark_read").attr("data-url");
       ajaxUpdateMessageRead(updateUrl, message_list_item, true, false);
     }
-    if (message_list_item.find(".full_message").hasClass("hide")){
+    if (message_list_item.find(".expanded_message").hasClass("hide")){
       var replyUrl = $(this).attr("data-message-reply-url");
       ajaxGetReplyForm(replyUrl, message_list_item_id, false);
     }

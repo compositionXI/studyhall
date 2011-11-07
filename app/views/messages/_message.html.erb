@@ -37,16 +37,19 @@
         </div>
       </div>
     </div>
-    <div class="body full_message hide">
-      <%= message.body %>
-      <% if message.messages.any? %>
-        <div class="replies">
-          <ul class="unstyled reply_list">
-            <%= render :partial => "replies", :collection => message.messages, :as => :reply %>
-          </ul>
+    <div class="expanded_message hide">
+      <div class="message_content">
+        <div class="body full_message">
+          <% if message.messages.any? %>
+            <div class="replies">
+              <ul class="unstyled reply_list">
+                <%= render :partial => "replies", :collection => ([message] + message.messages), :as => :reply %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="reply_fields"></div>
         </div>
-      <% end %>
-      <div class="reply_fields"></div>
+      </div>
     </div>
   </li>
 <% end %>
