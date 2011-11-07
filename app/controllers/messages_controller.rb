@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   def index
     case params[:mailbox]
     when "inbox"
-      @messages = current_user.all_messages
+      @messages = current_user.all_messages({:deleted => false})
       @inbox = true
     when "archive"
       @messages = current_user.all_messages({:deleted => true})
