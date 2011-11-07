@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new params[:user]
+    school = school_from_email(params[:user][:email])
+    @user.school_id = school.id if school
     @user.roles << Role.find_by_name("Student") if params[:user][:role_ids].nil?
     if @user.save_without_session_maintenance
       @user.deliver_activation_instructions!
@@ -120,5 +122,10 @@ class UsersController < ApplicationController
   
   def require_no_user_or_admin
     require_admin if current_user
+  end
+  
+  def school_from_email(email)
+    domain = email.split("@")[1]
+    School.find_by_domain_name(domain)
   end
 end
