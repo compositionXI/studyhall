@@ -1,6 +1,8 @@
 var updateMessageList = function(){
   if (<%= @message_copy.reply? %>){
     $("#message_<%= @message_copy.parent_id %> .reply_list").append("<%=j render :partial => 'replies', :locals => {:reply => @message_copy} %>");
+    $("#message_<%= @message_copy.parent_id %> .reply_fields").append("<%=j render :partial => 'reply_form' %>");
+    message_list_item.find("#message_new textarea").first().focus();
   }
   else {
     $(".messages_list").prepend("<%=j render :partial => 'message', :locals => {:message => @message_copy} %>");
@@ -19,6 +21,7 @@ function showHideSuccessMessage(){
 
 <% if @success %>
   $("#message_new").animate({opacity: 0},1000)
+  message_list_item = $("#message_new").closest(".message_list_item");
   setTimeout(function(){$("#message_new").parent().html("<div class=\"alert-message success\">Your message was sent.</div>")}, 500);
   setTimeout(function(){showHideSuccessMessage()},2000);
 <% else %>

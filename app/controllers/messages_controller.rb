@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @message = current_user.sent_messages.new(:subject => prepared_subject, :parent_id => params[:parent_id])
+    @message = current_user.sent_messages.new(:subject => prepared_subject(params[:subject]), :parent_id => params[:parent_id])
     respond_to do |format|
       format.html { render :partial => "reply_form" }
       format.js
@@ -52,7 +52,8 @@ class MessagesController < ApplicationController
     body = params[:message].try(:[], :body)
     @success = @sender.send_message?(subject, body, *@receiver)
     if @success
-      save_attachments(@receiver)
+      save_attachments(@receiver, @sender)
+      @message = current_user.sent_messages.new(:subject => prepared_subject(params[:message][:subject]), :parent_id => params[:message][:parent_id])
     end
   end
 
@@ -78,13 +79,13 @@ class MessagesController < ApplicationController
 
   protected
 
-  def prepared_subject
-    if params[:subject].nil?
+  def prepared_subject(subject)
+    if subject.nil?
       ""
-    elsif params[:subject].index("Re:") == 0
-      "#{params[:subject]}"
+    elsif subject.index("Re:") == 0
+      "#{subject}"
     else
-      "Re: #{params[:subject]}"
+      "Re: #{subject}"
     end
   end
 
@@ -101,9 +102,9 @@ class MessagesController < ApplicationController
     current_user.all_messages(message_attributes)
   end
   
-  def save_attachments(receiver)
+  def save_attachments(receiver, sender)
     receiver.each_with_index do |r, index|
-      @message_copy = MessageCopy.find(@sender.sent_messages[index])
+      @message_copy = MessageCopy.find(sender.sent_messages[index])
       @message_copy.update_attributes(params[:message])
       @message = Message.find(r.inbox.first.id)
       @message.update_attributes(params[:message])

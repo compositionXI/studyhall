@@ -17,11 +17,23 @@ var hideShowMessage = function(message_list_item_id){
   var message_list_item = $("#"+message_list_item_id);
   message_list_item.find(".collapsed_message").toggleClass("highlighted");
   message_list_item.find(".expanded_message, .message_preview").toggleClass("hide");
+  message_list_item.find("#message_new textarea").first().focus();
 }
 
 var isShowingFullMessage = function(message_list_item_id){
   var message_list_item = $("#"+message_list_item_id);
   !message_list_item.find(".full_message, .message_preview").hasClass("hide");
+}
+
+var updateMessageCount = function(read){
+  var inboxCount = parseInt($(".inbox_message_count").html());
+  var inboxCount = (inboxCount) ? inboxCount : 0;
+  if (read) {
+    (inboxCount - 1) == 0 ? $(".inbox_message_count").html("") : $(".inbox_message_count").html(inboxCount - 1);
+  }
+  else {
+    $(".inbox_message_count").html(inboxCount + 1);
+  }
 }
 
 var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
@@ -35,13 +47,7 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
     async: async,
     success: function(response){
       message_list_item.replaceWith(response)
-      var inboxCount = parseInt($(".inbox_message_count").html());
-      if (read) {
-        $(".inbox_message_count").html(inboxCount - 1);
-      }
-      else {
-        $(".inbox_message_count").html(inboxCount + 1);
-      }
+      updateMessageCount(read);
     }
   });
 }
@@ -57,7 +63,6 @@ var ajaxGetReplyForm = function(url, message_list_item_id, async){
     success: function(response){
     message_list_item.find(".reply_fields").html(response);
     $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
-    message_list_item.find("#message_new textarea").first().focus();
   }});
 }
 
