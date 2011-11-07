@@ -30,7 +30,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     var toggleActionButtons = function(){
-      if($(".study_session.checked").length > 0){
+      if($(".study_session.selected").length > 0){
         $("#share_button, #delete_button").removeClass("disabled");
       }else{
         $("#share_button, #delete_button").addClass("disabled");
@@ -65,21 +65,25 @@
     });
 
     $("#select_all").click(function(e){
-      $(".study_session").addClass("checked");
+      $(".study_session").addClass("selected");
       $(".buttons .select").toggle();
+      toggleActionButtons();
       e.preventDefault();
     });
     $("#select_none").click(function(e){
-      $(".study_session").removeClass("checked");
+      $(".study_session").removeClass("selected");
       $(".buttons .select").toggle();
+      toggleActionButtons();
       e.preventDefault();
     });
     $("#edit_all").click(function(e){
       $("a.edit").show();
-     $("a.non_edit,#select_none").hide();
+      toggleActionButtons();
+      $("a.non_edit,#select_none").hide();
       $(".study_session").addClass("edit");
       $(".study_session").click(function(e){
-        $(this).toggleClass("checked");
+        $(this).toggleClass("selected");
+        toggleActionButtons();
         e.preventDefault();
       });
       $("h3").toggle();
@@ -88,7 +92,7 @@
     $("#cancel_edit").click(function(e){
       $("a.edit").hide();
       $("a.non_edit").show();
-      $(".study_session").removeClass("edit").removeClass("checked");
+      $(".study_session").removeClass("edit").removeClass("selected");
       $(".study_session a").unbind("click");
       $("h3").toggle();
       e.preventDefault();

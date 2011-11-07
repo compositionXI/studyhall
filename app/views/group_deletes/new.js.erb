@@ -11,8 +11,8 @@ button.popover({trigger: "manual",
 button.popover("show");
 $("select.chzn-select").chosen();
 
-var selected_items = $.makeArray($(".study_session.checked").map(function(){
-  return $(this).prop("id").replace("study_session_","");
+var selected_items = $.makeArray($(".selected").map(function(){
+  return $(this).prop("id");
 }));
 $("#group_delete_object_ids").val(selected_items.join(","));
 

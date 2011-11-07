@@ -4,7 +4,7 @@
       <div class="buttons left narrow">
         <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button non_edit", :id => "new_study_session_button1", :remote => true %>
         <%= link_to "Share", "", id: "share_button", class: "btn edit", style: "display:none", remote: true %>
-        <%= link_to "Delete", new_group_delete_path, id: "delete_button", class: "btn edit", style: "display:none", remote: true %>
+        <%= link_to "Delete", new_group_delete_path(class_name: "study_session"), id: "delete_button", class: "btn edit", style: "display:none", remote: true %>
       </div>
       <% if @filtered_results %>
         <h3><%= link_to "All", study_sessions_path %> &raquo; <%= flash[:action_bar_message] %></h3>

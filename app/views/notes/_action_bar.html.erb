@@ -1,0 +1,41 @@
+<div class="action_bar">
+  <div class="container">
+    <div class="buttons left">
+      <% if action_name == "index" %>
+        <%= link_to "Take Notes", new_note_path, :class => "primary btn show_button" %>
+        <%= link_to "New Notebook", new_notebook_path, :class => "btn popover_button show_button", :id => "new_notebook_button", :remote => true %>
+        <%= link_to "Share", "#", :id => "share_multiple_notebooks_notes", :class => "btn primary hide edit_button action_button disabled" %>
+        <%= link_to "Delete", new_group_delete_path(class_name: "note_items"), id: "delete_button", class: "btn hide edit_button action_button disabled", remote: true %>
+      <% end %>
+    </div>
+    
+    <% if @notebook %>
+      <h3 class="middle">
+        <% if @notebook.owner == current_user %>
+          <span><%= link_to 'All Items', notes_path %> &raquo; <%= @notebook.name %></span>
+        <% else %>
+          <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notes_path %> &raquo; <%= @notebook.name %></span>
+        <% end %>
+      </h3>
+    <% else %>
+      <h3 class="middle">
+        <span>Your Notebooks & Pages</span>
+      </h3>
+    <% end %>
+  
+    <div class="buttons right">
+      <% if @notebook && @notebook.notes.any? %>
+        <a href="" class="btn show_button">Filter</a>
+        <span id="items_layout_switcher">
+          <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button' %>
+          <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button' %>
+        </span>
+      <% end %>
+      <% if @notebook.nil? || @notebook.user == current_user %>
+        <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>
+        <%= link_to "Select All", "#", :class => "btn hide edit_button", :id => "select_all"%>
+        <%= link_to "Select None", "#", :class => "btn hide edit_button", :id => "select_none"%>
+        <%= link_to "Done", "#", :class => "btn hide edit_button", :id => "show_notes" %>
+      <% end %>
+    </div></div>
+</div>
