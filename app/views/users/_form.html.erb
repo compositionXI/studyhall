@@ -1,8 +1,12 @@
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <%= form_for @user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
-  <div id="profile_completion_meter">
-    <%= @user.profile_completion_percentage %>% Complete
+  <div id="profile_completion_meter" class="popover right">
+    <div class="arrow-border"></div>
+    <div class="arrow"></div>      
+    <div class="inner">
+      <div class="content"><p><%= @user.profile_completion_percentage %>% Complete</p></div>
+    </div>
   </div>
   <fieldset>
     <div class="clearfix">

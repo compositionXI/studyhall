@@ -141,5 +141,7 @@ $ ->
   $(".profile_wizard input, .profile_wizard textarea, .profile_wizard select").focus ->
     new_top = $(this).closest(".input").position()
     new_top = if new_top then new_top.top else ""
-    $("#profile_completion_meter").html completion_percentage() + "% Complete"
-    $("#profile_completion_meter").animate {"top": new_top}
+    $("#profile_completion_meter")
+      .find('p').text( completion_percentage() + "% Complete" )
+      .end()
+      .animate {"top": new_top}
