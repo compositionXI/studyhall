@@ -12,16 +12,34 @@ switch_greek_select_box = ()->
     $('.sorority').css("display", "block")
     $('.fraternity').css("display", "none")
 
-completion_percentage = () ->
+# completion_percentage = () ->
+#   count = 0
+#   total_fields = 0
+#   $(".profile_wizard input, .profile_wizard textarea, .profile_wizard select").each ->
+#     if $(this).attr("data-counted") == "true"
+#       count += 1 if $(this).val() != "" && $(this).val() != null
+#       total_fields += 1
+#   if $(".profile_wizard #user_avatar").val() == ""
+#     count += 1
+#   Math.round( count/total_fields * 100 )  
+
+completion_percentage = (top) ->
+  console.log 'complete'
+  $wizard = $('.profile_wizard')
+  $input = $('#user_first_name, #user_last_name, #user_enrollments', $wizard)
   count = 0
-  total_fields = 0
-  $(".profile_wizard input, .profile_wizard textarea, .profile_wizard select").each ->
-    if $(this).attr("data-counted") == "true"
-      count += 1 if $(this).val() != "" && $(this).val() != null
-      total_fields += 1
-  if $(".profile_wizard #user_avatar").val() == "" && $(".profile_wizard .avatar").attr("data-default-url") != "true"
-    count += 1
-  Math.round( count/total_fields * 100 )
+  totalFields = 1 
+  $input.each (i, element) -> 
+    $thisVal = $(this).val()
+    if $thisVal != "" && $thisVal != null then count++
+    totalFields += i
+  if $(".avatar", $wizard).attr("data-default-url") != "true" then count++
+  totalFields + 1
+  percentage = Math.round( count/totalFields * 100 )
+  $("#profile_completion_meter")
+    .find('p').text( percentage + "% Complete" )
+    .end()
+    .animate {"top": top}   
 
 $ ->
   #$("#profile_tabs").tabs()
@@ -133,15 +151,19 @@ $ ->
       $(response.offerings).each (index) ->
         newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
       $("#user_enrollments").html(newOptions).trigger("liszt:updated")
-  
+
   $("#do_this_later").click (e) ->
     $('<input />').attr('type', 'hidden').attr('name', "do_this_later").attr('value', "true").appendTo('form')
     true
   
-  $(".profile_wizard input, .profile_wizard textarea, .profile_wizard select").focus ->
-    new_top = $(this).closest(".input").position()
-    new_top = if new_top then new_top.top else ""
-    $("#profile_completion_meter")
-      .find('p').text( completion_percentage() + "% Complete" )
-      .end()
-      .animate {"top": new_top}
+  
+  
+  $(".profile_wizard").delegate '.chzn-container', 'click focus', ->
+    top = $(this).position().top
+    completion_percentage(top)
+    
+  $("input, textarea, select", ".profile_wizard").bind 'click focus keyup', (e) ->
+    top = $(this).position().top
+    if top == 0
+      top = $(this).parent().position().top
+    completion_percentage(top)
