@@ -12,19 +12,7 @@ switch_greek_select_box = ()->
     $('.sorority').css("display", "block")
     $('.fraternity').css("display", "none")
 
-# completion_percentage = () ->
-#   count = 0
-#   total_fields = 0
-#   $(".profile_wizard input, .profile_wizard textarea, .profile_wizard select").each ->
-#     if $(this).attr("data-counted") == "true"
-#       count += 1 if $(this).val() != "" && $(this).val() != null
-#       total_fields += 1
-#   if $(".profile_wizard #user_avatar").val() == ""
-#     count += 1
-#   Math.round( count/total_fields * 100 )  
-
 completion_percentage = (top) ->
-  console.log 'complete'
   $wizard = $('.profile_wizard')
   $input = $('#user_first_name, #user_last_name, #user_enrollments', $wizard)
   count = 0
@@ -157,13 +145,15 @@ $ ->
     true
   
   
-  
-  $(".profile_wizard").delegate '.chzn-container', 'click focus', ->
-    top = $(this).position().top
-    completion_percentage(top)
+  if $('.profile_wizard')
     
-  $("input, textarea, select", ".profile_wizard").bind 'click focus keyup', (e) ->
-    top = $(this).position().top
-    if top == 0
-      top = $(this).parent().position().top
-    completion_percentage(top)
+  
+    $(".profile_wizard").delegate '.chzn-container', 'click focus', (e) ->
+      top = $(this).position().top
+      completion_percentage(top)
+      
+    $("input, textarea, select", ".profile_wizard").bind 'click focus keyup', (e) ->
+      top = $(this).position().top
+      if top == 0
+        top = $(this).parent().position().top
+      completion_percentage(top)
