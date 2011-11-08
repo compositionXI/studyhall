@@ -19,6 +19,9 @@ gem 'kaminari'
 gem 'sunspot_rails'
 gem "remotipart", "~> 1.0"
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'contacts', :git => 'git://github.com/agentrock/contacts'
+gem 'gdata', :git => 'git://github.com/agentrock/gdata.git'
+gem 'hpricot'
 
 # Gems used only for assets and not required
 # in production environments by default.

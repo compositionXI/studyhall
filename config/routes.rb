@@ -34,6 +34,7 @@ Studyhall::Application.routes.draw do
   #resources :followings, :only => [:create, :destroy]
   post '/followings' => 'followings#create', :as => :follow
   delete '/following/:id' => 'followings#destroy', :as => :unfollow
+  resources :gmail_invites, only: [:create, :update]
 
   namespace :import do
     resources :course_data do

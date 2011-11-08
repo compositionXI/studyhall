@@ -1,0 +1,16 @@
+$("#gmail_invite_modal").html("<%=j @html.html_safe %>");
+$("#gmail_invite_modal .contacts_list").jScrollPane({hideFocus: true});
+$("#gmail_invite_modal .cancel_popover").click(function(){
+  $("#gmail_invite_modal").modal('hide');
+});
+<% if @success %>
+  $("#gmail_invite_name").val($("#user_first_name").val()+" "+$("#user_last_name").val());
+  $("#gmail_invite_modal").delegate("input","change",function(e){
+    if($(".contacts_list input:checked").length > 0 && $("#gmail_invite_name").val() != "")
+      $("#gmail_invite_modal input[type='submit']").removeClass("disabled");
+    else
+      $("#gmail_invite_modal input[type='submit']").addClass("disabled");
+  });
+<% else %>
+  $("#gmail_invite_modal form input[type='text']").first().focus();
+<% end %>

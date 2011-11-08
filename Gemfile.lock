@@ -1,4 +1,17 @@
 GIT
+  remote: git://github.com/agentrock/contacts
+  revision: 1396bef975e3d8cce883f65b2bac9620f3e4532f
+  specs:
+    contacts (1.2.4)
+      json (>= 1.1.1)
+
+GIT
+  remote: git://github.com/agentrock/gdata.git
+  revision: 271d0b49d7dbe97b16969f06104f3e91022c40bc
+  specs:
+    gdata (1.1.1)
+
+GIT
   remote: git://github.com/pauldix/feedzirra.git
   revision: 872a3a264156a082e501f37ec59077b77a29a744
   specs:
@@ -134,6 +147,7 @@ GEM
       will_paginate
     highline (1.6.2)
     hike (1.2.1)
+    hpricot (0.8.4)
     httparty (0.8.0)
       multi_json
       multi_xml
@@ -340,6 +354,7 @@ DEPENDENCIES
   capistrano-ext
   capybara
   coffee-rails (~> 3.1.0)
+  contacts!
   cucumber
   cucumber-rails
   curb (= 0.7.15)
@@ -347,7 +362,9 @@ DEPENDENCIES
   devise
   execjs
   feedzirra!
+  gdata!
   has_mailbox
+  hpricot
   httparty
   jquery-rails
   kaminari
