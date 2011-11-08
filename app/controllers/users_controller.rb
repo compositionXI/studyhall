@@ -86,7 +86,8 @@ class UsersController < ApplicationController
   end
   
   def buddies
-    @users = @current_user.buddies.sort_by(&:name)
+    @user = User.find params[:user_id]
+    @users = @user.buddies.sort_by(&:name)
     @title = "Buddies"
     render "shared/users_list.js.erb"
   end
