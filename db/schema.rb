@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107190210) do
+ActiveRecord::Schema.define(:version => 20111108041733) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(:version => 20111107190210) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
-    t.boolean  "shareable",  :default => false
+    t.boolean  "shareable",  :default => true
   end
 
   create_table "notes", :force => true do |t|
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20111107190210) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "shareable",   :default => false
+    t.boolean  "shareable",   :default => true
   end
 
   create_table "offerings", :force => true do |t|
