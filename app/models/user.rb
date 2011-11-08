@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
+  
+  validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
+  validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
 
   searchable do
     text :name
