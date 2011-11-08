@@ -24,13 +24,11 @@
     <% end %>
   
     <div class="buttons right">
-      <% if @notebook && @notebook.notes.any? %>
-        <a href="" class="btn show_button">Filter</a>
-        <span id="items_layout_switcher">
-          <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button' %>
-          <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button' %>
-        </span>
-      <% end %>
+      <a href="" class="btn show_button">Filter</a>
+      <span id="items_layout_switcher">
+        <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button' %>
+        <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button' %>
+      </span>
       <% if @notebook.nil? || @notebook.user == current_user %>
         <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>
         <%= link_to "Select All", "#", :class => "btn hide edit_button", :id => "select_all"%>
