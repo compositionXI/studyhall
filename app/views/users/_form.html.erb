@@ -10,10 +10,10 @@
   </div>
   <fieldset>
     <div class="clearfix">
-      <%= f.label :first_name %> 
-      <div class="input"><%= f.text_field :first_name %></div>
-      <%= f.label :last_name %> 
-      <div class="input"><%= f.text_field :last_name %></div>
+      <div class="input first-name"><%= f.label :first_name %> 
+      <%= f.text_field :first_name, :class => 'left' %></div>
+      <div class="input last-name"><%= f.label :last_name %> 
+      <%= f.text_field :last_name, :class => 'left' %></div>
     </div>
     <div class="clearfix avatar" <%= "data-default-url='true'" if @user.avatar_file_size.nil? %> >
       <%= image_tag @user.avatar_url(:large) %>

@@ -15,17 +15,4 @@ class HomeController < ApplicationController
     render layout: "landing"
   end
 
-  private
-
-  def pretty_time_label(time)
-    today = DateTime.current.beginning_of_day
-    if time.today?
-      "Today"
-    elsif time < today && time > today.ago(24*60*60)
-      "Yesterday"
-    else
-      time.strftime("%B %d")
-    end
-  end
-
 end
