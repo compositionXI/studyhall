@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
 
   validates_format_of :custom_url, :with => /[a-z]{5,}/
   validate :name_should_be_present
+  validate :email_should_be_present
+  validate :school_should_be_present
 
   searchable do
     text :name
@@ -42,7 +44,16 @@ class User < ActiveRecord::Base
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
 
   def name_should_be_present
-    self.errors[:name] = "cannot be blank" if (name.blank? && read_attribute(:active) == true)
+    self.errors[:first_name] = "cannot be blank" if (first_name.blank? && read_attribute(:active) == true)
+    self.errors[:last_name] = "cannot be blank" if (last_name.blank? && read_attribute(:active) == true)
+  end
+  
+  def school_should_be_present
+    self.errors[:school_id] = "No school was found with that email address." if (school_id.blank? && read_attribute(:active) == true)
+  end
+  
+  def email_should_be_present
+    self.errors[:email] = "cannot be blank" if (email.blank? && read_attribute(:active) == true)
   end
 
   def activity
@@ -57,8 +68,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def first_name
-    @first_name ||= name.split(" ").first
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+  
+  def name
+    full_name
   end
 
   def voted_for?(user)

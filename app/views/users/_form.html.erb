@@ -6,8 +6,10 @@
   </div>
   <fieldset>
     <div class="clearfix">
-      <%= f.label :name %> 
-      <div class="input"><%= f.text_field :name %></div>
+      <%= f.label :first_name %> 
+      <div class="input"><%= f.text_field :first_name %></div>
+      <%= f.label :last_name %> 
+      <div class="input"><%= f.text_field :last_name %></div>
     </div>
     <div class="clearfix avatar" <%= "data-default-url='true'" if @user.avatar_file_size.nil? %> >
       <%= image_tag @user.avatar_url(:large) %>
@@ -17,44 +19,8 @@
       <div class="input"><%= f.file_field :avatar, :class => "input-file", "data-counted" => true %></div>
     </div>
     <div class="clearfix">
-      <%= f.label :bio %> 
-      <div class="input"><%= f.text_area :bio, :class => "xlarge", :rows => 6, "data-counted" => true %></div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :custom_url %> 
-      <div class="input"><%= f.text_field :custom_url, "data-counted" => true %></div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :School %>
-      <div class="input"><%= f.collection_select :school_id, School.all, :id, :name, {:prompt => "Choose a school"}, {:class => "chzn-select", "data-placeholder" => "Choose a school", "data-counted" => true} %></div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :Major %>
-      <div class="input"><%= f.text_field :major, "data-counted" => true %></div>
-    </div>
-    <div class="clearfix">
       <%= f.label :courses %>
       <div class="input"><%= f.collection_select :enrollments, Offering.find_all_by_school_id(@user.school), :id, :course_listing, {:selected => selected_courses_for(@user), :prompt => "Choose courses"}, {:class => "chzn-select", "data-placeholder" => "Choose courses", :multiple => true, :name => "user[offering_ids][]", "data-counted" => true} %></div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :GPA %>
-      <div class="input"><%= f.text_field :gpa, "data-counted" => true %></div>
-    </div>
-    <div class="clearfix gender">
-      <%= f.label :Gender %>
-      <div class="input"><%= f.select( "gender", %w[Male Female], {:prompt => "Select"}, {:class => "chzn-select", "data-counted" => true})%></div>
-    </div>
-    <div class="clearfix fraternity">
-      <%= f.label :Fraternity %>
-      <div class="input"><%= f.text_field :fraternity %></div>
-    </div>
-    <div class="clearfix sorority">
-      <%= f.label :Sorority %>
-      <div class="input"><%= f.text_field :sorority %></div>
-    </div>
-    <div class="clearfix">
-      <%= f.label :sports_and_clubs %>
-      <div class="input"><%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, "data-counted" => true %></div>
     </div>
     <div class="clearfix">
       <label>Invite your friends to StudyHall</label>
