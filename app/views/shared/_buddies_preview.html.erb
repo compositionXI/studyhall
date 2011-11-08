@@ -1,7 +1,7 @@
 <section class="buddies">
   <header>
     <h1 class="left">Your Buddies <small>(<%= user.buddies.count %>)</small></h1>
-    <%= link_to "View All >>", user_buddies_path(@user), :remote => true, :class => "modal_button" %>
+    <%= link_to "View All >>", user_buddies_path(user), :remote => true, :class => "modal_button" %>
   </header>
     <ul>
       <% if user.buddies.any? %>
