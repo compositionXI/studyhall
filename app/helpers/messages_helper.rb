@@ -2,6 +2,10 @@ module MessagesHelper
   def message_subject(message)
     link_to message.subject, message_path(message), class: "#{message.opened? ? 'read' : 'unread'}"
   end
+  
+  def truncated_subject(message)
+    message.subject.length > 30 ? "#{message.subject.slice(0, 30)}..." : message.subject
+  end
 
   def find_new_message_path(recipient)
     if recipient

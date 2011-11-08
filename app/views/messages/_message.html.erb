@@ -5,7 +5,7 @@
       <div class="message_content">
         <div class="meta expand_message">
           <%= link_to message.from.name, message.from, :class => "inner_link" %> - 
-          <%= link_to message.subject, message_path(message), :class => "inner_link" %> - 
+          <%= link_to truncated_subject(message), message_path(message), :class => "inner_link" %> - 
           <span><%= time_ago_in_words message.created_at %> ago</span>
           <span class="message_actions">
             &nbsp;-&nbsp;
