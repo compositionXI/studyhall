@@ -9,7 +9,7 @@ class HomeController < ApplicationController
       flash[:notice] = "Your profile is #{current_user.profile_completion_percentage}% complete!"
     end
     @rss_entries = Hash.new
-    if @current_user.school.rss_link.present?
+    if @current_user.school && @current_user.school.rss_link.present?
       latest_entries = @current_user.school.rss_entries.limit(5).all
       while not latest_entries.empty?
         entry = latest_entries.first
