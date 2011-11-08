@@ -2,7 +2,7 @@
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), edit_user_path(@current_user) %>
     <h3>Hi, 
-    <%= link_to @current_user.name.split.first, @current_user %>!
+    <%= link_to @current_user.name, @current_user %>!
     </h3>
   </div>
   <% if flash[:notice] %>
@@ -35,7 +35,7 @@
     </ul>
   </section>  
   <section class="news">
-    <%= render :partial => "home/campus_news", :locals => {:rss_entries => @rss_entries} %>
+    <%= render :partial => "home/campus_news" %>
   </section>
 </aside>
 <section class="courses <%= items_layout %>">

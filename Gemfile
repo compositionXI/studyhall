@@ -35,6 +35,7 @@ gem "nifty-generators", :group => :development
 
 # Gem for parsing RSS/Atom Feeds
 gem 'feedzirra', :git => 'git://github.com/pauldix/feedzirra.git'
+gem 'curb', '0.7.15' 
 gem 'whenever'
 
 group :test, :development do

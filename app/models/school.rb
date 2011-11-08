@@ -11,4 +11,8 @@ class School < ActiveRecord::Base
   
   scope :has_rss_link, where("rss_link IS NOT NULL")
 
+  def latest_news
+    rss_entries.limit(10).all
+  end
+
 end

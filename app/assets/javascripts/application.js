@@ -42,7 +42,7 @@ var styleFileInputs = function(){
       
       $(".fake-file input").css({width : finalWidth });
       $(".fake-file").click(function(e){
-         $(this).siblings('input').click();
+         $(this).siblings('input').trigger('click');
       });
       $this.change( function () {    
         $this.siblings('.fake-file').find('input').val( this.value )      
