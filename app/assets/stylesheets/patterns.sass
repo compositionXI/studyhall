@@ -514,6 +514,17 @@ input[type=submit].btn
   margin-left: -$arrowWidth
   top: $top
   width: 0
+=arrow-border-left($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto)
+  border-color: transparent $color transparent transparent
+  border-style: solid
+  border-width: $arrowWidth
+  height: 0
+  left: $left
+  right: $right
+  position: absolute
+  margin-top: -$arrowWidth
+  top: $top
+  width: 0  
 
 =popover-arrow-above($arrowWidth: 5px, $color: $white)
   bottom: 0
@@ -542,7 +553,7 @@ input[type=submit].btn
 
 =popover-arrow-right($arrowWidth: 5px, $color: $white)
   top: 50%
-  left: 0
+  left: -$arrowWidth
   margin-top: -$arrowWidth
   border-top: $arrowWidth solid transparent
   border-bottom: $arrowWidth solid transparent
@@ -610,8 +621,12 @@ input[type=submit].btn
   +vertical-gradient(white, #f8f8f8)
   &.above .arrow
     +popover-arrow-above
-  &.right .arrow
-    +popover-arrow-right
+  &.right 
+    .arrow
+      +popover-arrow-right 
+    .arrow-border
+      +arrow-border-left(5px, $popoverBorder, 50%, -10px, auto)
+      // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
   //Modifications in by Jake Mauer / Intridea
   &.below .arrow
     +popover-arrow-below(10px, $popoverColor, -7px, 50%, auto)
