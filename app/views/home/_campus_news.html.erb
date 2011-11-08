@@ -1,10 +1,12 @@
 <header><h1>Campus News</h1></header>
-<% @rss_entries.each { |time_label, entries| %>
-  <h2><%=time_label%></h2>
-  <ul>
-    <% entries.each { |entry| %>
-      <li><h3><a href="<%=entry.link%>"><%=entry.title%></a></h3></li>
-    <% } %>
-</ul>
-<% } %>
+<% if @rss_entries.present? %>
+  <% @rss_entries.each { |time_label, entries| %>
+    <h2><%=time_label%></h2>
+    <ul>
+      <% entries.each { |entry| %>
+        <li><h3><a href="<%=entry.link%>"><%=entry.title%></a></h3></li>
+      <% } %>
+    </ul>
+     <% } %>
+<% end %>
 
