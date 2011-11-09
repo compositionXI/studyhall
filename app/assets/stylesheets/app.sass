@@ -873,12 +873,12 @@ header.topbar
       &.grid
         float: left
         position: relative
-        box-sizing: border-box
         width: 138px
         height: 160px
         padding: 42px 15px 0 27px
         text-align: center
         margin-left: -4px
+        +box-sizing(border-box)
         .background_container
           display: none
         .child_notes
@@ -966,9 +966,10 @@ header.topbar
         .child_notes
           display: none
           margin-left: -78px
-          border-top: 1px dashed #EEE
           li
+            list-style: none
             border-bottom: none
+            border-top: 1px dashed #EEE
         .notebook_expander
           visibility: visible
           @include border-radius(10px)

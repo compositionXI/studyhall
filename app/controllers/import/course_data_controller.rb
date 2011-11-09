@@ -89,9 +89,10 @@ class Import::CourseDataController < ApplicationController
           Offering.create(course_id: course.id, school_id: school.id, instructor_id: instructor.id, term: term)
         end
       end
-      coi.schools_count = (School.count - school_count)
-      coi.courses_count = (Course.count - course_count)
-      coi.offerings_count = (Offering.count - offering_count)
+      #Commenting out since these columns were removed, although except for school count I'd like to add them back
+      #coi.schools_count = (School.count - school_count)
+      #coi.courses_count = (Course.count - course_count)
+      #coi.offerings_count = (Offering.count - offering_count)
       coi.save!
     end
 end
