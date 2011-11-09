@@ -161,12 +161,10 @@ $ ->
     true
   
   
-  if $('.profile_wizard')
+  if $('.profile_wizard').length != 0
     completion = new completion_percentage
-    completion.setup()  
-  
+    completion.setup()   
     completion.wizard.delegate '.chzn-container', 'click focus mouseup', (e) ->
       completion.update(this)
-      
     completion.input.bind 'click focus keyup change', (e) ->
       completion.update(this)
