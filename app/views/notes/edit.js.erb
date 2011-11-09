@@ -1,8 +1,9 @@
 var button = $("#<%=j @modal_link_id %>");
 button.popover({
   trigger: "manual",
-  placement: "below",
+  placement: "below-left",
   offset: 10,
+  horizontalOffset: 25,
   html: true,
   title: function(){return "Edit this note";},
   content: function(){return "<%=j render :partial => 'form' %>";}
