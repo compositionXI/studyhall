@@ -1725,7 +1725,9 @@ section.course_activity
     h1
       +header-font(medium, 40px, 40px)
     .quick-signup
-      padding: 0
+      padding: 0 
+      position: absolute
+      z-index: 10
     .input
       float: left
       margin-left: 0
@@ -1773,12 +1775,14 @@ section.course_activity
       margin-left: -105px  
       top: 85px  
       width: 210px
+      z-index: 0
     #success_message
       position: absolute
       left: 50% 
       top: 85px
       margin-left: -229px
-      width: 400px
+      width: 400px  
+      z-index: 0
   .reasons                                   
     +box-shadow(inset 0 10px 15px rgba(0,0,0, .33))
     background: image-url(asset-path('landing/grid.png','image'))      

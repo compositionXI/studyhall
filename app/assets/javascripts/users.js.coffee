@@ -12,22 +12,38 @@ switch_greek_select_box = ()->
     $('.sorority').css("display", "block")
     $('.fraternity').css("display", "none")
 
-completion_percentage = (top) ->
-  $wizard = $('.profile_wizard')
-  $input = $('#user_first_name, #user_last_name, #user_enrollments', $wizard)
-  count = 0
-  totalFields = 1 
-  $input.each (i, element) -> 
-    $thisVal = $(this).val()
-    if $thisVal != "" && $thisVal != null then count++
-    totalFields += i
-  if $(".avatar", $wizard).attr("data-default-url") != "true" then count++
-  totalFields + 1
-  percentage = Math.round( count/totalFields * 100 )
-  $("#profile_completion_meter")
-    .find('p').text( percentage + "% Complete" )
-    .end()
-    .animate {"top": top}   
+class completion_percentage
+  
+  setup: ->
+    self = this 
+    @wizard = $('.profile_wizard')
+    if $(".avatar", @wizard).attr('data-default-url') == 'true'
+      $('#user_avatar', @wizard ).attr('data-countable', 'true') 
+    
+    @input = $('input[data-countable="true"], select[data-countable="true"]', @wizard)
+    @totalFields = @input.length
+    @meter = $("#profile_completion_meter")
+    self.update(@input.first())
+  
+  update: (element)->
+    self = this
+    @count = 0
+    @input.each (i, field) ->
+      $field = $(field)
+      
+      if $field.val() != '' && $field.val() != null
+        self.count++
+    $el = $(element)   
+    top = $el.position().top
+    if top == 0
+      top = $el.parent().position().top
+   
+    percentage = Math.round( @count/@totalFields * 100 )
+    @meter
+      .find('p').text( percentage + "% Complete" )
+      .end()
+      .stop()
+      .animate {"top": top}   
 
 $ ->
   #$("#profile_tabs").tabs()
@@ -145,15 +161,10 @@ $ ->
     true
   
   
-  if $('.profile_wizard')
-    
-  
-    $(".profile_wizard").delegate '.chzn-container', 'click focus', (e) ->
-      top = $(this).position().top
-      completion_percentage(top)
-      
-    $("input, textarea, select", ".profile_wizard").bind 'click focus keyup', (e) ->
-      top = $(this).position().top
-      if top == 0
-        top = $(this).parent().position().top
-      completion_percentage(top)
+  if $('.profile_wizard').length != 0
+    completion = new completion_percentage
+    completion.setup()   
+    completion.wizard.delegate '.chzn-container', 'click focus mouseup', (e) ->
+      completion.update(this)
+    completion.input.bind 'click focus keyup change', (e) ->
+      completion.update(this)
