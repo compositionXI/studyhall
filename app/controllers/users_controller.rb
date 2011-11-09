@@ -86,13 +86,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def buddies
-    @user = User.find params[:user_id]
-    @users = @user.buddies.sort_by(&:name)
-    @title = "Buddies"
-    render "shared/users_list.js.erb"
-  end
-  
   def drop_class
     enrollment = @current_user.enrollments.find_by_offering_id params[:offering_id]
     offering = Offering.find params[:offering_id]
