@@ -31,7 +31,6 @@ class completion_percentage
     @input.each (i, field) ->
       $field = $(field)
       
-      console.log field, $field.val()
       if $field.val() != '' && $field.val() != null
         self.count++
     $el = $(element)   
