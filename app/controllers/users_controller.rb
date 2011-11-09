@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :require_no_user_or_admin, :only => [:new, :create]
-  before_filter :require_user, :only => [:show, :edit, :update, :account]
+  before_filter :require_user, :only => [:edit, :update, :account]
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard, :account]
   before_filter :set_action_bar, :only => [:show, :edit]
   
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
     @notebooks = Notebook.find_by_user_id @user.id
     flash[:action_bar_message] = "#{@user.name} - #{@user.major}"
   end

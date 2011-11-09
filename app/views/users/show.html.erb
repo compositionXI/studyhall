@@ -57,7 +57,9 @@
             <% @user.offerings.each do |course| %>
               <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
                 <span><%= course.course.title %></span>
-                <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
+                <% if current_user %>
+                  <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
+                <% end %>
               </li>
             <% end %>
           </ul>
@@ -170,18 +172,20 @@
     <% end %>
   </div>
 </div>
-<% @user.offerings.each do |course| %>
-  <div id="course_<%= course.id %>_modal" data-rel="course_<%= course.id %>" class="course_modal modal hide fade" style="display:none">
-    <div class="modal-header">
-      <h2>Are you sure?</h2>
+<% if current_user %>
+  <% @user.offerings.each do |course| %>
+    <div id="course_<%= course.id %>_modal" data-rel="course_<%= course.id %>" class="course_modal modal hide fade" style="display:none">
+      <div class="modal-header">
+        <h2>Are you sure?</h2>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to drop <%= course.course.title %>?</p>
+        <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
+        OR
+        <%= link_to "Cancel", "#", :class => "close_modal", "data-id" => "course_#{course.id}_modal" %>
+      </div>
     </div>
-    <div class="modal-body">
-      <p>Do you want to drop <%= course.course.title %>?</p>
-      <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
-      OR
-      <%= link_to "Cancel", "#", :class => "close_modal", "data-id" => "course_#{course.id}_modal" %>
-    </div>
-  </div>
+  <% end %>
 <% end %>
 <script type="text/javascript">
   var hidePopovers = function(){
