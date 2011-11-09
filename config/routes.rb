@@ -94,7 +94,12 @@ Studyhall::Application.routes.draw do
   match '/activate/:id' => 'activations#create', :as => :activate
   match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
   
-  root :to => "home#index"
+  scope constraints: lambda{|request| !request.session[:user_credentials_id].blank? } do
+    root to: 'home#index'
+  end
+  scope constraints: lambda{|request| request.session[:user_credentials_id].blank? } do
+    root to: 'home#landing_page'
+  end
   
   match "styleguide" => "styleguide#styleguide"
   
