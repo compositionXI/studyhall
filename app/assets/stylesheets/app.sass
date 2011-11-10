@@ -32,10 +32,13 @@ html
     background-color: $standard_background
     color: #9D9D9A
     height: 100% 
- 
+  #wrap
+    height: auto
+    min-height: 100%
+    
 .main-content
   margin-top: 10px
-  min-height: 100%
+  padding-bottom: 70px
   > .container
     @include box-shadow(0 0 5px 2px #EEEEEE)
     background: $white
@@ -56,7 +59,10 @@ html
   @include box-shadow(inset 0px 1px 0px 0px #f9f9f9 )
   background: $footer_background
   border-top: 1px double $footer_background
-  height: 70px
+  clear: both
+  height: 70px      
+  margin-top: -70px                 
+  position: relative
   width: 100%
   p,a  
     +sans-serif-font(normal, 11px, 18px)
@@ -1030,7 +1036,7 @@ header.topbar
         @include body-font(normal, 18px, 32px)
         text-shadow: 0 1px 0 rgba(0,0,0,1)
     section.main-content
-      background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x
+      background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x #939393
       margin-top: -10px
       .clearfix.flat
         margin-bottom: 5px
@@ -1197,6 +1203,20 @@ header.topbar
         .checkbox
           +opacity(100)
           background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
+
+#view_all_buddies
+  ul 
+    height: 300px
+    width: auto
+    margin: 0
+    padding: 0
+    li
+      list-style: none
+      .photo
+        margin-right: 10px
+      .meta
+        a
+          display: block
 
 .users-show
   .popover
@@ -1502,6 +1522,32 @@ header.topbar
                     position: absolute
                     bottom: 5px
                     right: 5px
+
+body.users-profile_wizard
+  .modal
+    width: auto
+#gmail_invite_modal
+  form
+    padding: 0
+    margin: 0
+  .alert-message ul
+    margin: 10px 20px 0
+  textarea
+    height: 60px
+    width: 450px
+  .contacts_list
+    border: 1px solid #ccc
+    background: whitesmoke
+    overflow-y: scroll
+    height: 200px
+    padding: 10px
+    width: 430px
+    label
+      display: block
+      text-transform: none
+      width: 375px
+      text-align: left
+      font-weight: 500
 
 // Course Detail
 section.course_activity

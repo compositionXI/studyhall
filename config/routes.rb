@@ -34,6 +34,7 @@ Studyhall::Application.routes.draw do
   #resources :followings, :only => [:create, :destroy]
   post '/followings' => 'followings#create', :as => :follow
   delete '/following/:id' => 'followings#destroy', :as => :unfollow
+  resources :gmail_invites, only: [:create, :update]
 
   namespace :import do
     resources :course_data do
@@ -93,11 +94,17 @@ Studyhall::Application.routes.draw do
   match '/activate/:id' => 'activations#create', :as => :activate
   match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
   
-  root :to => "home#index"
+  scope constraints: lambda{|request| !request.session[:user_credentials_id].blank? } do
+    root to: 'home#index'
+  end
+  scope constraints: lambda{|request| request.session[:user_credentials_id].blank? } do
+    root to: 'home#landing_page'
+  end
   
   match "styleguide" => "styleguide#styleguide"
   
-  get ':id' => "static_pages#show", :as => :page
+  get ':id' => "static_pages#show", :as => :page, constraints: lambda{|req| StaticPage.where(slug: req.path_parameters[:id]).count > 0 }
+  get ':id' => "users#show", :as => :profile, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

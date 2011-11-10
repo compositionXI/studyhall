@@ -86,4 +86,15 @@ class Notifier < ActionMailer::Base
       :date    =>  Time.now
     )
   end
+
+  def gmail_invite(name, message, recipient)
+    @name, @message = name, message
+    @url = root_url
+    mail(
+      subject: "#{@name} thinks you'd like StudyHall",
+      from:    'noreply@studyhall.com',
+      to:      recipient,
+      date:    Time.now
+    )
+  end
 end

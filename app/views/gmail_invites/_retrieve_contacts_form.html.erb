@@ -1,0 +1,37 @@
+<%= form_for @gmail_invite ||= GmailInvite.new, remote: true, html: {class: 'form-stacked'} do |f| %>
+  <div class="modal-header">
+    <h3>Invite Your Gmail Friends</h3>
+  </div>
+  <div class="modal-body">
+    <% if @gmail_invite.errors.any? %>
+      <div class="alert-message block-message error">
+        <p>There was a problem retrieving your contacts.</p>
+        <ul>
+          <% @gmail_invite.errors.each do |error| %>
+            <li><%= error.html_safe %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="clearfix">
+      <%= f.label :email %>
+      <div class="input">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :password %>
+      <div class="input">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="clearfix">
+      <div class="input">
+        <%= f.submit 'Find Friends', class: 'btn primary' %>
+        <%= link_to 'Cancel', '#', class: 'btn cancel_popover' %>
+      </div>
+    </div>
+  </div>
+<% end %>
