@@ -22,7 +22,7 @@ class MessageCopy < ActiveRecord::Base
   end
   
   def sender_id
-    self.sen_messageable_id
+    self.sent_messageable_id
   end
   
   class HasMailbox::Models::MessageCopy

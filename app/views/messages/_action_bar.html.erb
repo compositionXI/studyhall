@@ -11,6 +11,13 @@
         <% else %>
           <%= link_to "Inbox", mailbox_path(mailbox: "inbox"), :class => "btn" %>
         <% end %>
+        <%= link_to "Edit", "#", :class => "edit btn" %>
+      </div>
+      <div class="edit_message_buttons right hide">
+        <%= select_tag nil, options_for_select(message_edit_options) %>
+        <%= link_to "Select All", "#", :class => "select_all btn"%>
+        <%= link_to "Select None", "#", :class => "select_none btn hide"%>
+        <%= link_to "Cancel", "#", :class => "cancel btn"%>
       </div>
     </div>
     <h3><%= mailbox_title %></h3>

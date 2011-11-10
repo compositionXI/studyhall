@@ -47,4 +47,13 @@ module MessagesHelper
     end
     options
   end
+  
+  def message_edit_options
+    [
+      ["Archive", "#", {:class => "update_messages archive", :'data-update-attribute' => "deleted", :'data-attribute-value' => true}],
+      ["Move to Inbox", "#", {:class => "update_messages unarchive", :'data-update-attribute' => "deleted", :'data-attribute-value' => false}],
+      ["Mark as read", "#", {:class => "update_messages opened", :'data-update-attribute' => "opened", :'data-attribute-value' => true}],
+      ["Mark as unread", "#", {:class => "update_messages unopened", :'data-update-attribute' => "opened", :'data-attribute-value' => false}]
+    ]
+  end
 end
