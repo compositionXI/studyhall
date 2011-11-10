@@ -1,3 +1,17 @@
+var selectAll = function(checked){
+  checked = typeof checked != 'undefined' ? checked : "checked";
+  $(".message_list_item .checkbox input").attr("checked", checked);
+}
+
+var switchInboxView = function(){
+  toggleActionBarButtons();
+  $(".message_list_item .checkbox").toggleClass("hide");
+}
+
+var toggleActionBarButtons = function(){
+  $(".default_message_buttons, .edit_message_buttons").toggleClass("hide");
+}
+
 var updateMessage = function(message_list_item, url, data, requestType){
   requestType = typeof requestType != 'undefined' ? requestType : "PUT";
   var messageType = message_list_item.attr("data-message-type");
@@ -110,6 +124,7 @@ $(document).ready(function(){
     hideShowMessage(message_list_item_id);
   });
   
+  
   $("body").delegate(".message_actions .archive, .message_actions .unarchive", "click", function(){
     var message_list_item = $(this).closest(".message_list_item");
     var url = $(this).attr("data-url");
@@ -137,14 +152,18 @@ $(document).ready(function(){
   });
   
   $(".update_messages").click(function(){
+    var checkedMessages = $(".checkbox :checked");
     var updateAttribute = $(this).attr("data-update-attribute");
     var updateAttributeValue = $(this).attr("data-attribute-value");
-    var updateMultipleForm = $("#save_multiple_messages_notes_form");
-    var attribute = $("<input>").attr("type", "hidden").attr("name", "attribute").val(updateAttribute);
-    var attribiteValue = $("<input>").attr("type", "hidden").attr("name", "attribute_value").val(updateAttributeValue);
-    updateMultipleForm.append($(attribute));
-    updateMultipleForm.append($(attribiteValue));
-    updateMultipleForm.submit();
+    checkedMessages.each(function(){
+      $(this).closest(".edit_message_fields").find("."+updateAttribute).attr("value", updateAttributeValue);
+    });
+    $("#save_multiple_messages_form").submit();
+  });
+  
+  $("body").delegate("#save_multiple_messages_form", "ajax:success", function(evt, data, status, xhr){
+    $('.messages_list').html(xhr.responseText);
+    toggleActionBarButtons();
   });
   
   $("body").delegate(".attachment_link", "click", function(e){
@@ -155,5 +174,14 @@ $(document).ready(function(){
   $("body").delegate("#message_attachment", "change", function(){
     var file = $(this).attr("value");
     $(".file_upload_name").html(file);
+  });
+  
+  $(".default_message_buttons .edit, .edit_message_buttons .cancel").click(function(){
+    switchInboxView();
+  });
+  
+  $(".edit_message_buttons").find(".select_all, .select_none").click(function(){
+    $(this).hasClass("select_all") ? selectAll() : selectAll(false);
+    $(".edit_message_buttons").find(".select_none, .select_all").toggleClass("hide");
   });
 });

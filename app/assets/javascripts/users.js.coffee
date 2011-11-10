@@ -160,7 +160,19 @@ $ ->
     $('<input />').attr('type', 'hidden').attr('name', "do_this_later").attr('value', "true").appendTo('form')
     true
   
-  
+  $("body").delegate ".buddy_list #unfollow_button", "ajax:success", (event, response)->
+    buddy_list_item = $(this).closest(".buddy_list_item")
+    user_href = buddy_list_item.find("a").attr("href")
+    preview_buddy_image = $("section.buddies a[href='"+user_href+"']").closest("li")
+    preview_buddy_image.fadeOut 500
+    buddy_list_item.fadeOut 500, ->
+      $("section.buddies")
+      buddy_list_item.html "<div class=\"alert-message warning\">You are no longer following this user.</div>"
+      buddy_list_item.fadeIn 0
+      setTimeout -> 
+        buddy_list_item.fadeOut(3000)
+      , 3000
+
   if $('.profile_wizard').length != 0
     completion = new completion_percentage
     completion.setup()   
