@@ -1,3 +1,4 @@
+<% @notebook ||= notebook %>
 <%= form_for @notebook, :remote => true, :html => {:class => "form-stacked", :id => "edit_notebook_form", :'data-type' => "html"} do |f| %>
   <% if @notebook.errors.any? %>
     <div id="error_explanation">

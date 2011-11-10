@@ -116,12 +116,29 @@ $(document).ready ->
       e.preventDefault()
       e.stopPropagation()
 
-    $(".note_item")
+    $(".note_items").delegate ".note_item.notebook.edit","dblclick", (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      modal_id = "#notebook_" + $(this).data("id") + "_modal"
+      $(modal_id).modal
+        keyboard: true
+        show: true
+        backdrop: true
+      $(modal_id).find(".cancel_popover").click (e) ->
+        $(modal_id).modal('hide')
+        e.preventDefault()
+    ###
+    This prevents the text from being selected when a notebook is double-clicked
+    ###
+    $(".note_items").delegate ".note_item.notebook.edit", "mousedown", ->
+      return false
 
     $(".action_bar").delegate "#edit_notes","click", (e) ->
       $(".note_item").removeClass("show").addClass("edit")
       $(".show_button").hide()
       $(".edit_button").show().css({display: "inline-block"})
+      $(".action_bar .edit").show()
+      $(".action_bar .show").hide()
       initDragAndDrop()
       e.preventDefault()
 
@@ -129,16 +146,20 @@ $(document).ready ->
       $(".note_item").removeClass("edit").removeClass("selected").addClass("show")
       $(".show_button").show().css({display: "inline-block"})
       $(".edit_button").hide()
+      $(".action_bar .edit").hide()
+      $(".action_bar .show").show()
       tearDownDragAndDrop()
       e.preventDefault()
 
     $(".action_bar").delegate "#select_all","click", (e) ->
       selectAll()
+      $(".action_bar .select").toggle()
       toggleActionButtons()
       e.preventDefault()
 
     $(".action_bar").delegate "#select_none","click", (e) ->
       selectNone()
+      $(".action_bar .select").toggle()
       toggleActionButtons()
       e.preventDefault()
 

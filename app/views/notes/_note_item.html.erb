@@ -16,4 +16,9 @@
       <%= render partial: "child_note", collection: note_item.notes, as: :note, locals: {note_item: note_item} %>
     </ul>
   <% end %>
+  <% if note_item.notebook? %>
+    <div id="notebook_<%= note_item.id %>_modal" class="modal" style="display:none">
+      <%= render partial: "notebooks/modal_form", locals: {notebook: note_item.content} %>
+    </div>
+  <% end %>
 </li>
