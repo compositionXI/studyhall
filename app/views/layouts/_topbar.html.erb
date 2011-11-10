@@ -24,9 +24,6 @@
               <li id="nav_inbox" <% if controller?("messages") %> class="current {inbox_class}" <% end %> >
                 <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %><small class="inbox_message_count"><%= inbox_count %></small><span>Inbox</span><% end %>
               </li>
-              <li id="nav_account" <% if controller?("users") && action?("account") %> class="current {inbox_class}" <% end %> >
-                <%= link_to user_account_path(current_user), title: "Your Account" do %><span>Your Account</span><% end %>
-              </li>
             </ul>
         <% end %>
         </nav>
@@ -50,7 +47,7 @@
                     <li><%= link_to "Study", study_sessions_path %></li>
                     <li><%= link_to "Notes", notes_path %></li>
                     <li><%= link_to "Messages", mailbox_path(:mailbox => "inbox") %></li>
-                    <li><%= link_to "Classes", classes_path %></li>
+                    <li><%= link_to "Account", user_account_path(current_user) %></li>
                     <%- if @current_user.admin? %>
                       <%= render :partial => "/layouts/admin_options"%>
                     <% end %>
