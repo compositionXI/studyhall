@@ -67,10 +67,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.js {
-          @edit_all = true
-          render partial: "list_item", locals: {note: @note, collapsed: true}
-        }
+        format.js {}
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
         format.json { head :ok }
       else

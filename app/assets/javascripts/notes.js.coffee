@@ -93,9 +93,11 @@ $(document).ready ->
     $(".note_item").removeClass("grid list").addClass($(this).data("layout"))
     if($(this).data("layout") == "list")
       $(".note_items").jScrollPane({hideFocus: true})
+      $(".note_items").data("layout","list");
     else
       $(".child_notes").hide()
       $(".note_items").jScrollPane(false)
+      $(".note_items").data("layout","grid");
     e.preventDefault()
 
   $(".note_items").delegate ".notebook_expander","click", (e) ->
@@ -116,21 +118,24 @@ $(document).ready ->
       e.preventDefault()
       e.stopPropagation()
 
-    $(".note_items").delegate ".note_item.notebook.edit","dblclick", (e) ->
+    $(".note_items").delegate ".note_item.edit","dblclick", (e) ->
       e.preventDefault()
       e.stopPropagation()
-      modal_id = "#notebook_" + $(this).data("id") + "_modal"
+      modal_id = "#"+$(this).data("class")+"_" + $(this).data("id") + "_modal"
       $(modal_id).modal
         keyboard: true
         show: true
         backdrop: true
-      $(modal_id).find(".cancel_popover").click (e) ->
-        $(modal_id).modal('hide')
-        e.preventDefault()
+      $(modal_id+" select").addClass("chzn-select").chosen()
+
+    $("body").delegate ".modal .cancel_popover","click", (e) ->
+      $(this).closest(".modal").modal('hide')
+      e.preventDefault()
+
     ###
     This prevents the text from being selected when a notebook is double-clicked
     ###
-    $(".note_items").delegate ".note_item.notebook.edit", "mousedown", ->
+    $(".note_items").delegate ".note_item.edit", "mousedown", ->
       return false
 
     $(".action_bar").delegate "#edit_notes","click", (e) ->

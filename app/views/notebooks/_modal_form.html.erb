@@ -1,4 +1,4 @@
-<%= form_for notebook, :html => {:class => "form-stacked", :id => "edit_notebook_form", :'data-type' => "html"} do |f| %>
+<%= form_for notebook, :remote => true, :html => {:class => "form-stacked", :id => "edit_notebook_form"} do |f| %>
   <div class="modal-header">
     <h2>Notebook Details</h2>
   </div>
