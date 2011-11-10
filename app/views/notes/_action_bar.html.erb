@@ -9,8 +9,9 @@
       <% end %>
     </div>
     
+    <h3 class="edit" style="display:none">Select, share or delete, double-click to edit</h3>
     <% if @notebook %>
-      <h3 class="middle">
+      <h3 class="show middle">
         <% if @notebook.owner == current_user %>
           <span><%= link_to 'All Items', notes_path %> &raquo; <%= @notebook.name %></span>
         <% else %>
@@ -18,7 +19,7 @@
         <% end %>
       </h3>
     <% else %>
-      <h3 class="middle">
+      <h3 class="show middle">
         <span>Your Notebooks & Pages</span>
       </h3>
     <% end %>
@@ -31,8 +32,8 @@
       </span>
       <% if @notebook.nil? || @notebook.user == current_user %>
         <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>
-        <%= link_to "Select All", "#", :class => "btn hide edit_button", :id => "select_all"%>
-        <%= link_to "Select None", "#", :class => "btn hide edit_button", :id => "select_none"%>
+        <%= link_to "Select All", "#", :class => "btn hide edit_button select", :id => "select_all"%>
+        <%= link_to "Select None", "#", :class => "btn hide select", :id => "select_none"%>
         <%= link_to "Done", "#", :class => "btn hide edit_button", :id => "show_notes" %>
       <% end %>
     </div></div>

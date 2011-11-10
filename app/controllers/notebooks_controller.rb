@@ -73,6 +73,7 @@ class NotebooksController < ApplicationController
     @notebook = current_user.notebooks.find(params[:id])
     respond_to do |format|
       if @notebook.update_attributes(params[:notebook])
+        format.js {}
         format.html { 
           if request.xhr?
             @offerings_for_user = Offering.find_all_by_school_id(current_user.school)

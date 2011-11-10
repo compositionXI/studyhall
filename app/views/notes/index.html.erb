@@ -1,6 +1,6 @@
 <% if @note_items.any? %>
   <div class="scroll_pane">
-    <ul class="note_items">
+    <ul class="note_items" data-layout="grid">
       <%= render partial: "note_item", collection: @note_items, as: :note_item %>
     </ul>
   </div>

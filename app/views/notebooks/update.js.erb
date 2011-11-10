@@ -1,0 +1,8 @@
+var modal = $("#notebook_<%= @notebook.id %>_modal");
+modal.modal('hide');
+modal.remove();
+var notebook = $("#notebook_<%= @notebook.id %>");
+var new_notebook = $("<%=j render partial: "notes/note_item", locals: {note_item: NoteItem.new(@notebook)} %>");
+new_notebook.addClass("edit ui-draggable");
+new_notebook.removeClass("grid show").addClass($(".note_items").data("layout"));
+notebook.replaceWith(new_notebook);
