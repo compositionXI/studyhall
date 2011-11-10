@@ -1,6 +1,6 @@
 <section class="buddies">
   <header>
-    <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<%= user.buddies.count %>)</small></h1>
+    <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<span class="total_buddies"><%= user.buddies.count %></span>)</small></h1>
     <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_button' %>
   </header>
     <ul>
@@ -16,7 +16,7 @@
 <div id="view_all_buddies" class="modal" style="display:none">
   <div class="modal-header">
     <% if user == current_user %>
-      <h3>Your Buddies (<%= user.buddies.count %>)</h3>
+      <h3>Your Buddies (<span class="total_buddies"><%= user.buddies.count %></span>)</h3>
     <% else %>
       <h3><%= user.first_name %>'s Buddies</h3>
     <% end %>
@@ -24,14 +24,17 @@
   <div class="modal-body">
     <ul>
       <% user.buddies.each do |user| %>
-        <li class="clearfix">
+        <li class="clearfix buddy_list_item">
           <div class="left photo">
             <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
           </div>
           <div class="left meta">
             <%= link_to user.name, user %>
             <%= user.school.try(&:name) %>
-          <div>
+          </div>
+          <div class="right">
+            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
+          </div>
         </li>
       <% end %>
     </ul>
