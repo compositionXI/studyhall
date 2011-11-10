@@ -873,7 +873,7 @@ RailsAdmin.config do |config|
   #   field :votes, :has_many_association
   #   field :sent_messages, :has_many_association        # Hidden
   #   field :received_messages, :has_many_association        # Hidden
-  #   field :roles, :has_and_belongs_to_many_association
+     field :roles, :has_and_belongs_to_many_association
   #   field :notebooks, :has_many_association
   #   field :notes, :has_many_association
   #   field :enrollments, :has_many_association
@@ -888,37 +888,37 @@ RailsAdmin.config do |config|
   #   field :posts, :has_many_association
   #   field :activity_messages, :has_many_association
   #   # Found columns:
-  #   field :id, :integer
-  #   field :name, :string
-  #   field :gender, :string
-  #   field :school_id, :integer        # Hidden
-  #   field :email, :string
-  #   field :major, :string
-  #   field :gpa, :decimal
-  #   field :fraternity, :string
-  #   field :sorority, :string
-  #   field :extracurriculars, :text
+     field :id, :integer
+     field :name, :string
+     field :gender, :string
+     field :school_id, :integer        # Hidden
+     field :email, :string
+     field :major, :string
+     field :gpa, :decimal
+     field :fraternity, :string
+     field :sorority, :string
+     field :extracurriculars, :text
   #   field :crypted_password, :string
   #   field :password_salt, :string
-  #   field :persistence_token, :string
-  #   field :perishable_token, :string
-  #   field :created_at, :datetime
-  #   field :updated_at, :datetime
-  #   field :role, :string
+     field :persistence_token, :string
+     field :perishable_token, :string
+     field :created_at, :datetime
+     field :updated_at, :datetime
+     field :role, :string
   #   field :avatar_file_name, :string        # Hidden
   #   field :avatar_content_type, :string        # Hidden
   #   field :avatar_file_size, :integer        # Hidden
   #   field :avatar_updated_at, :datetime        # Hidden
-  #   field :avatar, :paperclip_file
-  #   field :custom_url, :string
-  #   field :bio, :text
-  #   field :active, :boolean
-  #   field :shares_with_everyone, :boolean
-  #   field :googleable, :boolean
-  #   field :notify_on_follow, :boolean
-  #   field :notify_on_comment, :boolean
-  #   field :notify_on_share, :boolean
-  #   field :notify_on_invite, :boolean
+     field :avatar, :paperclip_file
+     field :custom_url, :string
+     field :bio, :text
+     field :active, :boolean
+     field :shares_with_everyone, :boolean
+     field :googleable, :boolean
+     field :notify_on_follow, :boolean
+     field :notify_on_comment, :boolean
+     field :notify_on_share, :boolean
+     field :notify_on_invite, :boolean
   #   # Sections:
      list do; end
   #   export do; end
