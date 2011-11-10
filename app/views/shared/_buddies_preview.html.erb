@@ -24,7 +24,7 @@
   <div class="modal-body">
     <ul>
       <% user.buddies.each do |user| %>
-        <li class="clearfix buddy_list_item">
+        <li class="clearfix buddy_list_item <%= cycle('odd','') %>">
           <div class="left photo">
             <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
           </div>

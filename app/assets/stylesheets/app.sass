@@ -1207,16 +1207,25 @@ header.topbar
 #view_all_buddies
   ul 
     height: 300px
-    width: auto
+    width: 400px
     margin: 0
     padding: 0
     li
       list-style: none
+      padding: 5px
+      margin-bottom: 0
+      margin-right: -5px
+      height: 50px
+      &.odd
+        background: whitesmoke
       .photo
         margin-right: 10px
       .meta
+        text-overflow: ellipsis
         a
           display: block
+      .right
+        margin: 10px
 
 .users-show
   .popover
