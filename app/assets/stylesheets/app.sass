@@ -175,7 +175,7 @@ header.topbar
       background-position: -160px 0px 
     #nav_inbox
       span
-        background-position: -228px 0px
+        background-position: -232px 0px
       &.messages
         span 
           background-position: -220px 0px
@@ -1535,25 +1535,36 @@ header.topbar
       #profile_tabs
         ul
           float: none
-          width: auto
+          width: auto 
+          padding: 0 0 7px 0
           margin-left: 5px
           &.tabs
             border-bottom: 1px solid #C6C0BC
-            li a:hover
-              border-bottom: none
+            li
+              margin: 0 30px 0 0
+              a
+                span 
+                  +body-font(normal, 14px, 14px)
+                  color: $smallHeadings  
+                &:hover
+                  border-bottom: none
+              &.active
+                a
+                  color: $headings
           &.tab_contents
+            margin: 0 0 0 -5px
             .linked_item 
               +box-sizing(border-box)
               float: left
               display: block
-              height: 126px 
-              margin: 0 20px 0 0 
-              padding: 0 20px
-              width: 105px
+              height: 156px 
+              margin: 0 20px 20px 0 
+              padding: 0 15px 0 30px
+              width: 132px
               text-align: center
               cursor: pointer
               &.course
-                background: url(asset-path('coursebooks.png','image')) -360px -3px no-repeat transparent
+                background: url(asset-path('notebook-sprite.png','image')) -264px 0px no-repeat transparent
                 &.blue
                   background-position: -120px -3px                  
                 &.green
@@ -1561,22 +1572,26 @@ header.topbar
                 &.red
                   background-position: 0 -3px
               &.notebook
-                background: url(asset-path('notebook-bg-medium.png','image')) no-repeat
+                background: url(asset-path('notebook-sprite.png','image')) no-repeat -660px 0px transparent
+                padding: 0 20px 0 35px
               &.study_session
-                height: 130px
-                width: 100px
                 padding-top: 15px
+                .attendees
+                  margin: 0
+                .date
+                  color: #707070
+                  height: auto
+                  display: inline
               span
                 color: #FFF
                 display: table-cell
-                height: 126px      
+                height: 150px      
                 vertical-align: middle
               &:hover
                 span, a.name
                   text-decoration: underline
             &.course_list
               height: 400px
-              padding: 10px
               width: 675px
               overflow-y: scroll
               .course
