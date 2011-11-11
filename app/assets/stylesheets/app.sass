@@ -1301,7 +1301,7 @@ header.topbar
   label
     margin-top: 10px
   input[type="file"]
-    width: 306px
+    width: 310px
   select
     width: 312px
   input[type="text"]
@@ -1319,15 +1319,18 @@ header.topbar
   .content
     padding: 15px
   .help_button
+    +box-sizing(border-box)
     @include border-radius(10px)
     position: absolute
     top: 15px
     right: 15px
     color: #FFF
-    background: #DDD
-    padding: 2px 7px 0 7px
+    background: #DDD    
+    height: 20px
+    padding: 1px 0 0 7px
     cursor: pointer
     text-decoration: none
+    width: 20px
   .help
     position: absolute
     top: 0
