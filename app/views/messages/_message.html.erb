@@ -21,10 +21,12 @@
               <% else %>
                 <%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %>
               <% end %>
-              &nbsp;-&nbsp;
-              <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %>
-              &nbsp;-&nbsp;
-              <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %>
+              <% if message.sender_id != @current_user.id %>
+                &nbsp;-&nbsp;
+                <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %>
+                &nbsp;-&nbsp;
+                <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %>
+              <% end %>
             </span>
           </div>
           <% if message.attachment? %>

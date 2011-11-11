@@ -1,10 +1,14 @@
 module MessagesHelper
+  
+  MSG_CUTOFF = 80
+  SUBJECT_CUTOFF = 30
+  
   def message_subject(message)
     link_to message.subject, message_path(message), class: "#{message.opened? ? 'read' : 'unread'}"
   end
   
   def truncated_subject(message)
-    message.subject.length > 30 ? "#{message.subject.slice(0, 30)}..." : message.subject
+    message.subject.length > SUBJECT_CUTOFF ? "#{message.subject.slice(0, SUBJECT_CUTOFF)}..." : message.subject
   end
 
   def find_new_message_path(recipient)
@@ -24,12 +28,12 @@ module MessagesHelper
   end
   
   def long_message(message)
-    message.body.length > 125
+    message.body.length > MSG_CUTOFF
   end
   
   def message_body_preview(message)
     message_body = message.body
-    message_body = long_message(message) ? message_body.slice(0, 125).strip << "..." : message_body
+    message_body = long_message(message) ? message_body.slice(0, MSG_CUTOFF).strip << "..." : message_body
     message_body
   end
   

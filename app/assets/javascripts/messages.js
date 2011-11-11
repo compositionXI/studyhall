@@ -30,7 +30,7 @@ var hide_message = function(selector){
 var hideShowMessage = function(message_list_item_id){
   var message_list_item = $("#"+message_list_item_id);
   message_list_item.find(".collapsed_message").toggleClass("highlighted");
-  message_list_item.find(".expanded_message, .message_preview").toggleClass("hide");
+  message_list_item.find(".expanded_message").toggleClass("hide");
   message_list_item.find("#message_new textarea").first().focus();
 }
 
