@@ -91,7 +91,7 @@
 
           that.$element
             .addClass('in')
-            .trigger('shown')
+            .trigger('shown').css({width: "auto"}).css({"margin-left": "-"+($(that.$element).width()/2).toString()+"px"})
         })
 
         return this

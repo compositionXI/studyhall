@@ -93,9 +93,11 @@ $(document).ready ->
     $(".note_item").removeClass("grid list").addClass($(this).data("layout"))
     if($(this).data("layout") == "list")
       $(".note_items").jScrollPane({hideFocus: true})
+      $(".note_items").data("layout","list");
     else
       $(".child_notes").hide()
       $(".note_items").jScrollPane(false)
+      $(".note_items").data("layout","grid");
     e.preventDefault()
 
   $(".note_items").delegate ".notebook_expander","click", (e) ->
@@ -116,12 +118,32 @@ $(document).ready ->
       e.preventDefault()
       e.stopPropagation()
 
-    $(".note_item")
+    $(".note_items").delegate ".note_item.edit","dblclick", (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      modal_id = "#"+$(this).data("class")+"_" + $(this).data("id") + "_modal"
+      $(modal_id).modal
+        keyboard: true
+        show: true
+        backdrop: true
+      $(modal_id+" select").addClass("chzn-select").chosen()
+
+    $("body").delegate ".modal .cancel_popover","click", (e) ->
+      $(this).closest(".modal").modal('hide')
+      e.preventDefault()
+
+    ###
+    This prevents the text from being selected when a notebook is double-clicked
+    ###
+    $(".note_items").delegate ".note_item.edit", "mousedown", ->
+      return false
 
     $(".action_bar").delegate "#edit_notes","click", (e) ->
       $(".note_item").removeClass("show").addClass("edit")
       $(".show_button").hide()
       $(".edit_button").show().css({display: "inline-block"})
+      $(".action_bar .edit").show()
+      $(".action_bar .show").hide()
       initDragAndDrop()
       e.preventDefault()
 
@@ -129,16 +151,20 @@ $(document).ready ->
       $(".note_item").removeClass("edit").removeClass("selected").addClass("show")
       $(".show_button").show().css({display: "inline-block"})
       $(".edit_button").hide()
+      $(".action_bar .edit").hide()
+      $(".action_bar .show").show()
       tearDownDragAndDrop()
       e.preventDefault()
 
     $(".action_bar").delegate "#select_all","click", (e) ->
       selectAll()
+      $(".action_bar .select").toggle()
       toggleActionButtons()
       e.preventDefault()
 
     $(".action_bar").delegate "#select_none","click", (e) ->
       selectNone()
+      $(".action_bar .select").toggle()
       toggleActionButtons()
       e.preventDefault()
 
