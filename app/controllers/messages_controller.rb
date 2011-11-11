@@ -66,11 +66,8 @@ class MessagesController < ApplicationController
   end
   
   def update_multiple
-    if params[:message_copies]
-      MessageCopy.update(params[:message_copies].keys, params[:message_copies].values).reject { |p| p.errors.empty? }
-    elsif params[:messages]
-      Message.update(params[:messages].keys, params[:messages].values).reject { |p| p.errors.empty? }
-    end
+    MessageCopy.update(params[:message_copies].keys, params[:message_copies].values).reject { |p| p.errors.empty? } if params[:message_copies]
+    Message.update(params[:messages].keys, params[:messages].values).reject { |p| p.errors.empty? } if params[:messages]
     if params[:inbox] == "true"
       @messages = current_user.all_messages({:deleted => false})
     else
