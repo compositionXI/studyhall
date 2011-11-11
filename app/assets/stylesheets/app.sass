@@ -483,12 +483,10 @@ header.topbar
   .notebook_list_item
     a
       span
-        +header-font(normal, $basefont, $baseline)
-        font-size: 20px
+        font-size: 16px
   li.add
     a
-      +header-font(normal, $basefont, $baseline)
-      font-size: 20px
+      font-size: 16px 
       
 .sidebar
   +columns(4)
@@ -566,43 +564,47 @@ header.topbar
       &:first-child, &:nth-child(5n)
         margin: 0 0 20px 0
     a
-      background: url(asset-path('BigGrayBook.png','image'))
+      +box-sizing(border-box)
+      background: url(asset-path('notebook-sprite.png','image')) no-repeat -264px 0 transparent
       color: $white
       display: block
-      height: 195px
-      font-size: 18px
-      padding: 0 23px 0 37px
+      height: 156px
+      font-size: 16px
+      padding: 0 15px 0 28px
       text-align: center
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55)
-      width: 100px
+      width: 132px
       &:hover
         text-decoration: none
       span
         display: table-cell
-        height: 195px
+        height: 156px
         vertical-align: middle
     .blue a
-      background: url(asset-path('BigBlueBook.png','image')) 
+      background-position: -132px 0
       color: $darkBookText
       text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
     .green a
-      background: url(asset-path('BigGreenBook.png','image'))
+      background-position: 0 0
       color: $darkBookText
       text-shadow: 0 1px 0 rgba(255,255,255, 0.55)   
     .add
       background: $bgColor
       border: 2px dashed $notebookBorder
       +border-radius(2px)
-      height: 191px
-      width: 156px
+      height: 146px 
+      margin-top: 3px
+      width: 128px
       a
         background: none
         color: $linkColor
-        padding: 0 30px
+        height: auto
+        padding: 0 0 0 17px
         text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
-        
+        width: auto
         span
           margin: 0
+          height: 146px
           .profile_edit
             background-color: $editable_background
             cursor: pointer
@@ -1480,25 +1482,35 @@ header.topbar
             li a:hover
               border-bottom: none
           &.tab_contents
-            .linked_item
+            .linked_item 
+              +box-sizing(border-box)
               float: left
               display: block
-              height: 155px
-              width: 140px
+              height: 126px 
+              margin: 0 20px 0 0 
+              padding: 0 20px
+              width: 105px
               text-align: center
-              padding: 40px 5px 0 10px
               cursor: pointer
-              margin: 0 5px 5px 5px
               &.course
-                background: url(asset-path('BigGrayBook.png','image'))
+                background: url(asset-path('coursebooks.png','image')) -360px -3px no-repeat transparent
+                &.blue
+                  background-position: -120px -3px                  
+                &.green
+                  background-position: -240px -3px
+                &.red
+                  background-position: 0 -3px
               &.notebook
-                background: url(asset-path('notebook-brown.png','image'))
+                background: url(asset-path('notebook-bg-medium.png','image')) no-repeat
               &.study_session
                 height: 130px
                 width: 100px
                 padding-top: 15px
               span
                 color: #FFF
+                display: table-cell
+                height: 126px      
+                vertical-align: middle
               &:hover
                 span, a.name
                   text-decoration: underline
