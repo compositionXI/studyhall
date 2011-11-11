@@ -54,7 +54,11 @@ class UsersController < ApplicationController
         format.js
       end
     else
-      render :action => :account
+      if params[:redirect_back] == "profile_wizard"
+        render :action => :profile_wizard
+      else
+        render :action => :account
+      end
     end
   end
   
@@ -112,7 +116,13 @@ class UsersController < ApplicationController
   
   private
   def fetch_user
-    @user = (params[:id] =~ /^\d+$/) ? User.find(params[:id]) : User.find_by_custom_url(params[:id])
+    if params[:id] =~ /^\d+$/
+      @user =  User.find(params[:id])
+    elsif params[:id] =~ /^[a-z]+$/
+      @user = User.find_by_custom_url(params[:id])
+    elsif params[:user_id]
+      @user =  User.find(params[:user_id])
+    end
   end
   
   def require_no_user_or_admin

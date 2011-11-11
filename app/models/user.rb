@@ -29,7 +29,9 @@ class User < ActiveRecord::Base
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
 
-  validates_format_of :custom_url, :with => /[a-z]{5,}/
+  validates :custom_url, 
+    :format => {:with => /[a-z]{5,}/, :message => "must be at least 5 letters long and may only use lower case letters a-z"},
+    :uniqueness => true  
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
