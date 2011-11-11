@@ -50,6 +50,12 @@ var updateMessageCount = function(read){
   }
 }
 
+var resetMessageCount = function(){
+  unreadCount = $(".message_list_item .unread").length;
+  resetValue = (unreadCount == 0) ? "" : unreadCount;
+  $(".inbox_message_count").html(resetValue);
+}
+
 var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
   async = typeof async != 'undefined' ? async : true;
   var messageType = message_list_item.attr("data-message-type");
@@ -163,6 +169,7 @@ $(document).ready(function(){
   
   $("body").delegate("#save_multiple_messages_form", "ajax:success", function(evt, data, status, xhr){
     $('.messages_list').html(xhr.responseText);
+    resetMessageCount();
     toggleActionBarButtons();
   });
   
