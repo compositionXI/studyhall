@@ -27,8 +27,8 @@
     <div class="buttons right">
       <a href="" class="btn show_button">Filter</a>
       <span id="items_layout_switcher">
-        <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button' %>
-        <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button' %>
+        <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button grid selected' %>
+        <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button list ' %>
       </span>
       <% if @notebook.nil? || @notebook.user == current_user %>
         <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>

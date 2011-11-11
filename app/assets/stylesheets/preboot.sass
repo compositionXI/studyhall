@@ -355,10 +355,11 @@ $analog2: adjust-hue($baseColor, -22)
   background-image: linear-gradient(top, $startColor, $endColor)
   // The standard
 
-=vertical-gradient-image($url: "#", $startColor: #555555, $endColor: #333333)
+=vertical-gradient-image($url: "#", $startColor: #555555, $endColor: #333333, $repeat: repeat)
   //INTRIDEA
   background-color: $endColor
-  background-repeat: repeat
+  background-repeat: $repeat
+  background-position: 0 0 
   background-image: url($url), -khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor))
   // Konqueror
   background-image: url($url), -moz-linear-gradient(top, $startColor, $endColor)
