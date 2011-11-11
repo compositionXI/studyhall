@@ -357,26 +357,33 @@ input[type=submit].btn
       float: left
       width: auto
 
-// Basic Tabs
 .tabs
   width: 100%
-  border-bottom: 1px solid $grayLight
   li
+    display: inline-block
     a
-      margin-bottom: -1px
-      margin-right: 2px
-      padding: 0 15px
-      line-height: $baseline * 2 - 1
-      +border-radius(3px 3px 0 0)
-      &:hover
-        background-color: $grayLighter
-        border-bottom: 1px solid $grayLight
-    &.active a
-      background-color: #fff
-      padding: 0 14px
-      border: 1px solid #ccc
-      border-bottom: 0
-      color: $gray
+      +header-font(normal, 18px, 18px)
+       
+// Basic Tabs
+// .tabs
+//   width: 100%
+//   border-bottom: 1px solid $grayLight
+//   li
+//     a
+//       margin-bottom: -1px
+//       margin-right: 2px
+//       padding: 0 15px
+//       line-height: $baseline * 2 - 1
+//       +border-radius(3px 3px 0 0)
+//       &:hover
+//         background-color: $grayLighter
+//         border-bottom: 1px solid $grayLight
+//     &.active a
+//       background-color: #fff
+//       padding: 0 14px
+//       border: 1px solid #ccc
+//       border-bottom: 0
+//       color: $gray 
 
 // Basic pill nav
 .pills

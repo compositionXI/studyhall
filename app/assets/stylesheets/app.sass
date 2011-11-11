@@ -1535,12 +1535,22 @@ header.topbar
       #profile_tabs
         ul
           float: none
-          width: auto
+          width: auto 
+          padding: 0 0 7px 0
           margin-left: 5px
           &.tabs
             border-bottom: 1px solid #C6C0BC
-            li a:hover
-              border-bottom: none
+            li
+              margin: 0 30px 0 0
+              a
+                span 
+                  +body-font(normal, 14px, 14px)
+                  color: $smallHeadings  
+                &:hover
+                  border-bottom: none
+              &.active
+                a
+                  color: $headings
           &.tab_contents
             margin: 0 0 0 -5px
             .linked_item 
