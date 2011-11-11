@@ -6,14 +6,13 @@
     </div>
   <% end %>
 
-  <fieldset>
     <div class="form_header">
       <h2 class="left">Your Account</h2>
       <%= link_to "Delete your account", current_user, method: :delete, :confirm => "Are you sure?", :class => "delete_account right" %>
     </div>
     <div class="clearfix"></div>
     <div id="user_account_page_inner_wrapper">
-      <%= form_for @current_user, :html => {:class => "form-stacked", method: :put} do |f| %>
+      <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
         <%= f.error_messages %>
         <div class="clearfix">
           <%= f.label :password %>
@@ -105,5 +104,4 @@
         </div>
       <% end %>
     </div>
-  </fieldset>
 </div>
