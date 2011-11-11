@@ -403,7 +403,38 @@ header.topbar
         width: 150px
       a.hidden
         display: none
-
+#items_layout_switcher
+  .btn
+    +ir
+    +vertical-gradient-image(asset-path('filter-buttons.png','image'), #f5f5f5, #eeeeee, no-repeat)  
+    border: 1px solid #777
+    float: left
+    height: 28px
+    width: 35px
+    &.selected
+      +box-shadow(0 1px 0 #3e4447 inset)
+      +vertical-gradient-image(asset-path('filter-buttons.png','image'), #4e5558, #393e40, no-repeat)
+      border-color: #151212
+      border-style: solid
+  .grid 
+    border-radius: 2px 0 0 2px
+    border-right: none
+    background-position: 0 0
+    &.selected 
+      $shadow: 0 1px 0 #3e4447 inset,-1px 0 0 #777 inset 
+      +box-shadow($shadow)
+      background-position: 0 -28px 
+      border-width: 1px 0 1px 1px
+  .list
+    background-position: -40px 0
+    border-radius: 0 2px 2px 0
+    border-left: none
+    &.selected
+      $shadow: 0 1px 0 #3e4447 inset, 1px 0 0 #777 inset 
+      +box-shadow($shadow)
+      background-position: -40px -28px
+      border-width: 1px 1px 1px 0
+      
 .user-session-form  
   .container.narrow
     margin-top: 40px
@@ -887,13 +918,15 @@ header.topbar
     height: 700px
     li
       &.grid
-        float: left
+        float: left 
+        font-size: 12px
+        line-height: 15px
         position: relative
-        width: 138px
-        height: 160px
-        padding: 42px 15px 0 27px
+        width: 132px
+        height: 156px 
+        padding: 0 15px 0 17px
         text-align: center
-        margin-left: -4px
+        margin: 0 20px 20px 0
         +box-sizing(border-box)
         .background_container
           display: none
@@ -903,18 +936,20 @@ header.topbar
           visibility: hidden
         .name
           display: inline
+          width: 100px
         .selector
           background: url(asset-path('uncheckmark.png','image')) no-repeat
-          height: 16px
+          height: 17px
           width: 16px
           position: absolute
-          top: 20px
-          right: 11px
+          bottom: 15px
+          right: 15px
         .drag_handle
           background: url(asset-path('move.png','image')) no-repeat
           height: 16px
           width: 16px
           position: absolute
+          margin: 0 0 0 -11px
           bottom: 10px
           left: 50%
           cursor: move
@@ -931,14 +966,22 @@ header.topbar
           .selector
             background: url(asset-path('checkmark.png','image')) no-repeat
           &.note
-            background: url(asset-path('selected-note-bg.png','image')) no-repeat
+            background: url(asset-path('notebook-sprite.png','image')) no-repeat -924px 0 transparent
         &.note
-          background: url(asset-path('note-bg.png','image')) no-repeat
+          background: url(asset-path('notebook-sprite.png','image')) no-repeat -790px 0 transparent
+          color: #333
+          padding-top: 35px
         &.notebook
           color: #fff
-          background: url(asset-path('notebook-bg.png','image')) no-repeat
+          background: url(asset-path('notebook-sprite.png','image')) no-repeat -660px 0 transparent
+          .name
+            display: table-cell
+            height: 156px  
+            text-align: center
+            vertical-align: middle
           &.draggable_hovering
             +rotate
+            background-position: -528px 0
         .list_data
           visibility: hidden
       &.list
