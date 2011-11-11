@@ -7,10 +7,12 @@
           <%= link_to reply.from.name, reply.from, :class => "inner_link" %> - 
           <span><%= time_ago_in_words reply.created_at %> ago</span>
           <span class="message_actions">
-            &nbsp;-&nbsp;
-            <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(reply) %>
-            &nbsp;-&nbsp;
-            <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(reply) %>
+            <% if reply.sender_id != @current_user.id %>
+              &nbsp;-&nbsp;
+              <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(reply) %>
+              &nbsp;-&nbsp;
+              <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(reply) %>
+            <% end %>
           </span>
         </div>
         <% if reply.attachment? %>
