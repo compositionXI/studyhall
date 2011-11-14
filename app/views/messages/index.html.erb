@@ -16,6 +16,10 @@
     </center>
   <% else %>
   <div class="messages_list_container list">
+    <%= form_tag update_multiple_messages_path, :id => "save_multiple_messages_form", :remote => true, :'data-type' => "html" do %>
+      <%= hidden_field_tag :inbox, @inbox || false %>
+      <%= submit_tag nil, :class => "hide" %>
+    <% end %>
     <ul class="unstyled messages_list">
       <%= render partial: "messages/message", collection: @messages %>
     </ul>

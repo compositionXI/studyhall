@@ -1,3 +1,9 @@
+var selectOptionFrom = function(chznOption){
+  optionIndex = parseInt(chznOption.attr("id").match(/\d+/)[0]);
+  selecteOption = $("#select_action option")[optionIndex];
+  return $(selecteOption);
+}
+
 var selectAll = function(checked){
   checked = typeof checked != 'undefined' ? checked : "checked";
   $(".message_list_item .checkbox input").attr("checked", checked);
@@ -5,7 +11,7 @@ var selectAll = function(checked){
 
 var switchInboxView = function(){
   toggleActionBarButtons();
-  $(".message_list_item .checkbox").toggleClass("hide");
+  $(".message_list_item .checkbox, .message_utilities").toggleClass("hide");
 }
 
 var toggleActionBarButtons = function(){
@@ -131,14 +137,14 @@ $(document).ready(function(){
   });
   
   
-  $("body").delegate(".message_actions .archive, .message_actions .unarchive", "click", function(){
+  $("body").delegate(".message_utilities .archive, .message_utilities .unarchive", "click", function(){
     var message_list_item = $(this).closest(".message_list_item");
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
     updateMessage(message_list_item, url, data);
   });
   
-  $("body").delegate(".message_actions .report_spam, .message_actions .report_abuse", "click", function(){
+  $("body").delegate(".message_utilities .report_spam, .message_utilities .report_abuse", "click", function(){
     var message_list_item = $(this).closest(".message_list_item");
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("report_spam") ? {"message[spam]": true} : {"message[abuse]": true};
@@ -147,24 +153,24 @@ $(document).ready(function(){
     }
   });
   
-  $("body").delegate(".message_actions .mark_read, .message_actions .mark_unread", "click", function(){
+  $("body").delegate(".message_utilities .mark_read, .message_utilities .mark_unread", "click", function(){
     var message_list_item = $(this).closest(".message_list_item")
     var url = $(this).attr("data-url");
     ajaxUpdateMessageRead(url, message_list_item, $(this).hasClass("mark_read"));
   });
   
-  $(".edit_messages, .cancel_message_edit").click(function(){
-    $(".edit_messages, .edit_message_buttons, .default_message_buttons, .edit_checkbox").toggleClass("hide");
-  });
-  
-  $(".update_messages").click(function(){
+  $("body").delegate(".chzn-results li.update_messages", "click", function(){
+    updateMultiForm = $("#save_multiple_messages_form");
     var checkedMessages = $(".checkbox :checked");
-    var updateAttribute = $(this).attr("data-update-attribute");
-    var updateAttributeValue = $(this).attr("data-attribute-value");
+    var updateAttribute = selectOptionFrom($(this)).attr("data-update-attribute");
+    var updateAttributeValue = selectOptionFrom($(this)).attr("data-attribute-value");
     checkedMessages.each(function(){
-      $(this).closest(".edit_message_fields").find("."+updateAttribute).attr("value", updateAttributeValue);
+      var input = $(this).closest(".edit_message_fields").find("."+updateAttribute).attr("value", updateAttributeValue);
+      updateMultiForm.prepend($(this));
+      updateMultiForm.prepend(input);
     });
-    $("#save_multiple_messages_form").submit();
+    updateMultiForm.submit();
+    updateMultiForm.find(".update_multi").remove();
   });
   
   $("body").delegate("#save_multiple_messages_form", "ajax:success", function(evt, data, status, xhr){
