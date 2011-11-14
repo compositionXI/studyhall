@@ -3,6 +3,24 @@ module MessagesHelper
   MSG_CUTOFF = 80
   SUBJECT_CUTOFF = 30
   
+  def from_current_user(message)
+    (message.from == current_user)
+  end
+  
+  def to_from_user(message)
+    from_current_user(message) ? message.to : message.from
+  end
+  
+  def user_photo_for(message)
+    user = to_from_user(message)
+    link_to(image_tag(user.photo_url(:medium)), user, :title => user.name, :class => 'avatar')
+  end
+  
+  def user_name_for(message)
+    user = to_from_user(message)
+    link_to user.name, user, :class => "inner_link"
+  end
+  
   def message_subject(message)
     link_to message.subject, message_path(message), class: "#{message.opened? ? 'read' : 'unread'}"
   end
