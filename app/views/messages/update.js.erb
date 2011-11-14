@@ -3,7 +3,7 @@
 <% else %>
   var html = "<div class='collapsed_message alert-message warning spam_abuse'> This message has been moved to your <b><%= @message.deleted? ? 'archive' : 'inbox' %></b>.<div>"
 <% end %>
-var message_list_item = $("#message_<%= @message.id %>");
+var message_list_item = $("#<%= @message.parent_id ? "reply_#{@message.id}" : "message_#{@message.id}" %>");
 
 function showHideSuccessMessage(){
   $(message_list_item).fadeOut(500, function(){$(message_list_item).remove()});

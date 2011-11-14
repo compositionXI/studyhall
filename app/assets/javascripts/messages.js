@@ -116,7 +116,6 @@ $(document).ready(function(){
   
   $("body").delegate( ".message_list_item .inner_link", "click", function(event){
     event.stopPropagation();
-    return false;
   });
   
   $("body").delegate(".collapsed_message", "click", function(){
@@ -142,6 +141,7 @@ $(document).ready(function(){
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
     updateMessage(message_list_item, url, data);
+    return false;
   });
   
   $("body").delegate(".message_utilities .report_spam, .message_utilities .report_abuse", "click", function(){
@@ -150,6 +150,7 @@ $(document).ready(function(){
     var data = $(this).hasClass("report_spam") ? {"message[spam]": true} : {"message[abuse]": true};
     if( confirm("Are you sure?") ){
       updateMessage(message_list_item, url, data);
+      return false;
     }
   });
   
@@ -157,6 +158,7 @@ $(document).ready(function(){
     var message_list_item = $(this).closest(".message_list_item")
     var url = $(this).attr("data-url");
     ajaxUpdateMessageRead(url, message_list_item, $(this).hasClass("mark_read"));
+    return false;
   });
   
   $("body").delegate(".chzn-results li.update_messages", "click", function(){
