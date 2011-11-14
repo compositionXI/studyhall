@@ -11,11 +11,14 @@
     .form_buttons
       width: 550px
       float: left
-      .input-file
+      input[type=file]
+        filter: alpha(opacity = 0)
+        -khtml-opacity: 0
+        -moz-opacity: 0
+        opacity: 0
         z-index: 2
         position: absolute
         left: 500px
-        opacity: 0
         width: 100px
         &:hover
           cursor: pointer
