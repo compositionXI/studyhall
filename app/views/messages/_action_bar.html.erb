@@ -14,7 +14,7 @@
         <%= link_to "Edit", "#", :class => "edit btn" %>
       </div>
       <div class="edit_message_buttons right hide">
-        <%= select_tag nil, options_for_select(message_edit_options) %>
+        <%= select_tag nil, options_for_select(message_edit_options), :id => 'select_action', :class => 'chzn-select' %>
         <%= link_to "Select All", "#", :class => "select_all btn"%>
         <%= link_to "Select None", "#", :class => "select_none btn hide"%>
         <%= link_to "Cancel", "#", :class => "cancel btn"%>
