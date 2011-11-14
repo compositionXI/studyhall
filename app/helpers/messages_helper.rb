@@ -34,7 +34,17 @@ module MessagesHelper
   def message_body_preview(message)
     message_body = message.body
     message_body = long_message(message) ? message_body.slice(0, MSG_CUTOFF).strip << "..." : message_body
-    message_body
+    sanitize(message_body, tags: [])
+  end
+
+  def htmlize_body(message)
+    contains_no_html = sanitize(message.body, tags: %w{}) == message.body
+    if contains_no_html
+      body = message.body.split("\n").map(&:strip).reject(&:blank?).map{|line| "<p>#{line}</p>" }.join
+    else
+      body = sanitize(message.body, tags: %w{p ul li a})
+    end
+    body.html_safe
   end
   
   def message_action_options(message)
