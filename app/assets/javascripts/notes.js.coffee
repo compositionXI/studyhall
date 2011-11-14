@@ -91,13 +91,16 @@ moveNoteToNotebook = (note, notebook) ->
 $(document).ready ->
   $(".layout_button").click (e) ->
     $(".note_item").removeClass("grid list").addClass($(this).data("layout"))
+    $switcher = $('#items_layout_switcher')
     if($(this).data("layout") == "list")
       $(".note_items").jScrollPane({hideFocus: true})
       $(".note_items").data("layout","list");
+      $switcher.attr('class', 'list')
     else
       $(".child_notes").hide()
       $(".note_items").jScrollPane(false)
       $(".note_items").data("layout","grid");
+      $switcher.attr('class', 'grid')
     e.preventDefault()
 
   $(".note_items").delegate ".notebook_expander","click", (e) ->
