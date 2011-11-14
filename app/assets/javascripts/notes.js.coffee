@@ -28,13 +28,14 @@ initDragAndDrop = ->
       $(".ui-draggable").css({opacity: 1})
       $(this).closest(".droppable").droppable('enable')
       $(".drop_area").slideUp().remove()
+      $(".drag-helper").remove()
       $('.note_items').data('jsp').reinitialise({hideFocus: true})
     handle: '.drag_handle'
     containment: '.note_items'
     revert: 'invalid'
     zIndex: 1000
     helper: ->
-      thing = $(this).clone().removeClass("ui-draggable").css({"list-style": "none", "border-bottom": "none"})
+      thing = $(this).clone().removeClass("ui-draggable").addClass("drag-helper").css({"list-style": "none", "border-bottom": "none"})
       thing.find(".name, .list_data").remove()
       thing
   $(".droppable").droppable('destroy')

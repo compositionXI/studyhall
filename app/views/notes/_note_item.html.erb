@@ -18,11 +18,11 @@
   <% end %>
   <% if note_item.notebook? %>
     <div id="notebook_<%= note_item.id %>_modal" class="modal" style="display:none">
-      <%= render partial: "notebooks/modal_form", locals: {notebook: note_item.content} %>
+      <%= render partial: "notebooks/modal_form.html.erb", locals: {notebook: note_item.content} %>
     </div>
   <% else %>
     <div id="note_<%= note_item.id %>_modal" class="modal" style="display:none">
-      <%= render partial: "notes/modal_form", locals: {note: note_item.content} %>
+      <%= render partial: "notes/modal_form.html.erb", locals: {note: note_item.content} %>
     </div>
   <% end %>
 </li>
