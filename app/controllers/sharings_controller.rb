@@ -19,7 +19,7 @@ class SharingsController < ApplicationController
 
     def send_message(sharing)
       subject = "#{current_user.name} wants to share something with you"
-      body = "#{current_user.name} wants to share something with you.\n\n\"#{sharing.message}\"\n\n#{sharing.objects.map{|obj| url_for obj }.join("\n")}"
+      body = "<p>#{current_user.name} wants to share something with you.</p><p>\"#{sharing.message}\"</p><ul>#{sharing.objects.map{|obj| "<li><a href=\"#{url_for(obj)}\">#{obj.name}</a></li>" }.join()}</ul>"
       current_user.send_message?(subject, body, *sharing.users)
     end
 
