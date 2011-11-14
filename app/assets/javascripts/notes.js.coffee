@@ -168,6 +168,15 @@ $(document).ready ->
       toggleActionButtons()
       e.preventDefault()
 
+    $("body").delegate ".recipient_toggle","click", (e) ->
+      $(".recipient_option").toggle()
+      console.log("click")
+      e.preventDefault()
+
+    $("body").delegate ".cancel_popover","click", (e) ->
+      $(".popover").remove()
+      e.preventDefault()
+
   if $("body").hasClass("notes-edit") || $("body").hasClass("notes-new")
     $('.rte_area').cleditor({width: 936, height: 700, bodyStyle: "padding:50px 130px", useCSS: true, docCSSFile: "/stylesheets/cleditor.css"}).focus()
     $('.cleditorToolbar').hide();

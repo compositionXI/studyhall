@@ -1,0 +1,16 @@
+var button = $("#share_button");
+button.popover({trigger: "manual",
+  placement: "below-right",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){
+    if($(".study_session.checked").length > 1)
+      return "Share your StudyHalls";
+    else
+      return "Share your StudyHall";
+  },
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+
+button.popover("show");

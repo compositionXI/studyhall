@@ -1,0 +1,30 @@
+var button = $("#share_button");
+button.popover({trigger: "manual",
+  placement: "below-right",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "Share notes";},
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+
+var selected_items = $.makeArray($(".selected").map(function(){
+  return $(this).prop("id");
+}));
+$("#sharing_object_ids").val(selected_items.join(","));
+
+var checkRequiredFields = function(){
+  var submit = $("#new_sharing input[type='submit']");
+  shared = $("#sharing_share_all").is(":checked");
+  has_recipients = ($("#sharing_email_addresses").val() != "" || $("#sharing_user_ids option:selected").length > 0);
+  has_message = $("#sharing_message").val().length > 0;
+  if(shared && has_recipients && has_message)
+    submit.removeClass("disabled");
+  else
+    submit.addClass("disabled");
+}
+$("#new_sharing").delegate("input,select,textarea","change",checkRequiredFields);
+$("#new_sharing").delegate("input,textarea","keyup",checkRequiredFields);

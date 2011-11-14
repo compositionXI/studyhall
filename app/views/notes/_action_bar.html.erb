@@ -4,7 +4,7 @@
       <% if action_name == "index" %>
         <%= link_to "Take Notes", new_note_path, :class => "primary btn show_button" %>
         <%= link_to "New Notebook", new_notebook_path, :class => "btn popover_button show_button", :id => "new_notebook_button", :remote => true %>
-        <%= link_to "Share", "#", :id => "share_multiple_notebooks_notes", :class => "btn primary hide edit_button action_button disabled" %>
+        <%= link_to "Share", new_sharing_path, remote: true, id: "share_button", :class => "btn primary hide edit_button action_button disabled" %>
         <%= link_to "Delete", new_group_delete_path(class_name: "note_items"), id: "delete_button", class: "btn hide edit_button action_button disabled", remote: true %>
       <% end %>
     </div>
