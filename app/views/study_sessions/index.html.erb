@@ -4,11 +4,22 @@
       <% if @filtered_results %>
         <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
       <% else %>
-        <p>With study halls you can collaborate with other students, video chat, and edit documents together!</p>
+      <div class="landing_wrapper">
+        <div class="study_session_demo">
+          <div class="attendees">
+              <%= image_tag current_user.avatar_url(:large), :title => current_user.name %>
+          </div>
+           <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_2"), :remote => true, :id => "new_study_session_button_2" %> 
+        </div>        
+          <h2>
+          With study halls you can collaborate with other students, video chat, and edit documents together!
+          </h2>
         <p>
-          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button2"), :remote => true, :id => "new_study_session_button2" %>
+          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_3"), :remote => true, :id => "new_study_session_button_3" %>
            now!
         </p>
+        </div>
+        
       <% end %>
     <% else %>
       <ol class="notebook_list">
