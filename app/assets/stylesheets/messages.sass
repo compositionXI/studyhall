@@ -1,9 +1,6 @@
 .messages_landing_wrapper
   width: 660px
 
-.reply_header
-  border-bottom: 1px solid #D4D4D4
-
 .reply_fields
   margin-left: 70px
   #message_new
@@ -47,8 +44,45 @@
   select
     width: 340px
 
-.messages_list
+.messages_list     
+  color: #444444
+  font-size: 12px
+  line-height: 18px
+  .avatar
+    display: block
+    float: left 
+    height: 50px
+    width: 50px
+  .subject
+    font-size: 15px
+    line-height: 15px
+    display: inline
+    &:after
+      content: " - "
+      margin: 0 5px
+  .message_content
+    position: relative
+  .message_utilities
+    position: absolute
+    top: 0
+    right: 0
+    li
+      float: left  
+      margin: 0 0 7px
+      &:first-child:before
+        content: none
+        margin: 0
+      &:before
+        content: " - "
+        margin: 0 5px
+    .time         
+      clear: left
+      float: right 
+      &:before
+        content: none
+        margin: 0
   li.message_list_item
+    padding: 14px
     position: relative
     border-bottom: 1px solid #D4D4D4
     img
@@ -58,42 +92,49 @@
       top: 13px
       right: 20px
     .full_message
-      overflow-y: scroll
       border-top: 1px solid #D4D4D4
-      max-height: 350px
+      max-height: 350px 
+      overflow-y: scroll
       .alert-message
         margin-top: 15px
     .spam_abuse
-      margin-top: 18px
     .collapsed_message
       &.unread
         background-color: #F8F8F8
       &:hover
         cursor: pointer
-        background-color: #FDFDE0
       &.highlighted
-        background-color: #FDFDE0
+    .message_utilities
+      float: right
+      li
+        display: inline
     .collapsed_message, .reply_header
-      padding: 14px 14px 10px
       .message_content
         margin-left: 55px
         min-height: 55px
-        .meta
-          strong
-            margin-right: 5px
-          span
-            font-size: 11px
-          &.expand_message
         .subject
           strong
             margin-right: 5px
-      .expanded_message
-        &:hover
-          cursor: arrow
-          background-color: white
-        .full_message
+    .expanded_message
+      background-color: #efefef 
+      margin: 10px 0 0 0
+      .avatar, .avatar img
+        height: 35px
+        width: 35px  
+      li
+        border-bottom: 1px solid #D4D4D4 
+        padding: 14px 14px 14px 64px
+      .message_utilities 
+        li
+          border: none
+          padding: 0
     .body
       float: none
       clear both
+      color: #444
+      font-size: 12px
+      line-height: 18px
       padding-top: 10px
       padding-bottom: 10px
+    .full_reply
+      width: 540px

@@ -1,19 +1,18 @@
 <% unless reply.spam? || reply.abuse? %>
   <li id="reply_<%= reply.id %>" class="reply_list_item" data-message-type="<%= reply.class.to_s %>">
     <div class="reply_header">
-      <%= link_to image_tag(reply.from.photo_url(:medium)), reply.from, :title => reply.from.name %>
+      <%= link_to image_tag(reply.from.photo_url(:medium)), reply.from, :title => reply.from.name, :class => 'avatar' %>
       <div class="message_content">
         <div class="meta expand_message">
-          <%= link_to reply.from.name, reply.from, :class => "inner_link" %> - 
-          <span><%= time_ago_in_words reply.created_at %> ago</span>
-          <span class="message_actions">
+          <%= link_to reply.from.name, reply.from, :class => "inner_link" %>
+          <ul class="message_utilities">
             <% if reply.sender_id != @current_user.id %>
-              &nbsp;-&nbsp;
-              <%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(reply) %>
-              &nbsp;-&nbsp;
-              <%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(reply) %>
-            <% end %>
-          </span>
+              <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(reply) %></li>
+              <li><%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(reply) %></li>
+            <% end %> 
+            <li class="time"><%= time_ago_in_words reply.created_at %> ago</li>
+            
+          </ul>
         </div>
         <% if reply.attachment? %>
           <div class="attachment">
