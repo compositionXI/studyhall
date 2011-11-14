@@ -53,6 +53,19 @@ var styleFileInputs = function(){
 };
 
 $(function(){
+  
+  //Mouse cursor alterations during AJAX operations
+  var ajaxCursor;
+  ajaxCursor = function() {
+    return $("html").bind("ajaxStart", function() {
+      return $(this).addClass('busy');
+    }).bind("ajaxStop", function() {
+      return $(this).removeClass('busy');
+    });
+  };
+  
+  ajaxCursor(); 
+  
   $("a").twipsy({
         placement: "below"
       , offset: 10 
