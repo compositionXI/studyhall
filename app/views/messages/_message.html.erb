@@ -2,19 +2,12 @@
   <%= fields_for "#{message.class.to_s == 'Message' ? 'messages' : 'message_copies'}[]", message do |message_fields| %>
     <li id="message_<%= message.id %>" class="message_list_item" data-message-type="<%= message.class.to_s %>">
       <div class="collapsed_message <%= 'unread' unless message.opened? %>" data-message-reply-url="<%= new_user_message_path(message.from, :subject => message.subject) %>">
-        <% if message.from == current_user %>
-          <%= link_to image_tag(message.to.photo_url(:medium)), message.to, :title => message.to.name, :class => 'avatar'%>
-        <% else %>
-          <%= link_to image_tag(message.from.photo_url(:medium)), message.from, :title => message.from.name, :class => 'avatar'%>
-        <% end %>
+        <%= user_photo_for(message) %>
         <div class="message_content">
           <div class="meta expand_message">
-            <h2 class="subject"><%= truncated_subject(message) %></h2> 
-            <% if message.from == current_user %>
-              <%= link_to message.to.name, message.to, :class => "inner_link" %>
-            <% else %>
-              <%= link_to message.from.name, message.from, :class => "inner_link" %>
-            <% end %>
+            <h2 class="subject"><%= truncated_subject(message) %></h2>
+            <%= from_current_user(message) ? "To: " : "From: " %>
+            <%= user_name_for(message) %>
             </div>
           
           <ul class='message_utilities'>

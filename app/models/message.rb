@@ -17,6 +17,10 @@ class Message < ActiveRecord::Base
     User.find(self.recipient_id)
   end
   
+  def to
+    User.find(self.received_messageable_id)
+  end
+  
   def update_replies
     parent_message = self
     parent_message.messages.each do |reply|
