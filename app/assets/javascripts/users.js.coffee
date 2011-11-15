@@ -33,7 +33,6 @@ class completion_percentage
       if $field.val() != '' && $field.val() != null
         self.count++
     $el = $(element) 
-    console.log $el.offsetParent()  
     top = $el.position().top
     if top == 0
       top = $el.parent().position().top
@@ -44,7 +43,12 @@ class completion_percentage
       .end()
       .stop()
     if percentage < 100
-      @meter.fadeIn().animate {"top": top}   
+      @meter
+        .css
+          "display" : "block"
+        .animate
+          "top": top
+          "opacity" : 1
     else
       @meter.fadeOut()
 $ ->
@@ -181,7 +185,7 @@ $ ->
   if $('.profile_wizard').length != 0
     completion = new completion_percentage
     completion.setup()   
-    completion.wizard.delegate '.chzn-container', 'focus mouseup', (e) ->
+    completion.wizard.delegate '.chzn-container', 'click focus mouseup', (e) ->
       completion.update(this)
-    completion.input.bind 'focus keyup', (e) ->
+    completion.input.bind 'click focus keyup change', (e) ->
       completion.update(this)
