@@ -45,6 +45,10 @@ group :test, :development do
     gem 'rspec-rails'
 end
 
+group :development do
+  gem 'foreman'
+end
+
 group :cucumber do
     gem 'capybara'
     gem 'database_cleaner'
