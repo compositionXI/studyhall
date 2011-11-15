@@ -57,37 +57,6 @@ $ ->
   $('.gender select').change ->
     switch_greek_select_box()
   
-  edit_personal_info_modal = $(".edit_personal_info")
-  edit_bio_modal = $(".edit_bio")
-  edit_gpa_modal = $(".edit_gpa")
-  edit_profile_photo_modal = $(".edit_profile_photo")
-  
-  $(".profile_edit_modal").dialog
-    modal: true
-    autoOpen: false
-    open: (event, ui) -> $(".ui-dialog-titlebar-close", ui.dialog).hide()
-  
-  $("#profile_detailed_info").click (e) ->
-    edit_personal_info_modal.dialog("open")
-  
-  $("#profile_bio").click (e) ->
-    edit_bio_modal.dialog("open")
-  
-  $("#profile_edit_gpa").click (e) ->
-    edit_gpa_modal.dialog("open")
-  
-  $("#change_profile_photo").click (e) ->
-    edit_profile_photo_modal.dialog("open")
-  
-  $(".close_modal").click (e) ->
-    $(this).parents(".profile_edit_modal").dialog("close")
-    
-  editModals = [edit_personal_info_modal[0], edit_gpa_modal[0], edit_profile_photo_modal[0], edit_bio_modal[0]]
-  
-  $(editModals).find(".save").click ->
-    modal = $(this).parents(".profile_edit_modal")
-    modal.dialog("close")
-  
   photoSuccess = (result) ->
     edit_profile_photo_modal.dialog("close")
     $("#profile_sidebar #profile_photo").attr("src", result.avatar_url)
@@ -146,19 +115,6 @@ $ ->
       if this.selected
         value = this.value
     value
-  
-  #$("#user_school_id").chosen().change ->
-  #  school_id = getSelectedValue $(this).find("option")
-  #  $.get "/classes/0/offerings_for_school/#{school_id}", (response) ->
-  #    $("#user_enrollments option").remove()
-  #    newOptions = ""
-  #    $(response.offerings).each (index) ->
-  #      newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
-  #    $("#user_enrollments").html(newOptions).trigger("liszt:updated")
-
-  $("#do_this_later").click (e) ->
-    $('<input />').attr('type', 'hidden').attr('name', "do_this_later").attr('value', "true").appendTo('form')
-    true
   
   $("body").delegate ".buddy_list_item .unfollow_button", "ajax:success", (event, response)->
     buddy_list_item = $(this).closest(".buddy_list_item")
