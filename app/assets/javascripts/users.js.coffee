@@ -121,7 +121,7 @@ $ ->
     return split(term).pop()
   
   #Autocomplete for extracurriculars
-  $( "#extracurriculars_list" ).bind "keydown", (event) ->
+  $("body").delegate "#extracurriculars_list", "keydown", (event) ->
     if ( (event.keyCode == $.ui.keyCode.TAB) && $( this ).data( "autocomplete" ).menu.active )
       event.preventDefault()
   .autocomplete {
@@ -147,14 +147,14 @@ $ ->
         value = this.value
     value
   
-  $("#user_school_id").chosen().change ->
-    school_id = getSelectedValue $(this).find("option")
-    $.get "/classes/0/offerings_for_school/#{school_id}", (response) ->
-      $("#user_enrollments option").remove()
-      newOptions = ""
-      $(response.offerings).each (index) ->
-        newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
-      $("#user_enrollments").html(newOptions).trigger("liszt:updated")
+  #$("#user_school_id").chosen().change ->
+  #  school_id = getSelectedValue $(this).find("option")
+  #  $.get "/classes/0/offerings_for_school/#{school_id}", (response) ->
+  #    $("#user_enrollments option").remove()
+  #    newOptions = ""
+  #    $(response.offerings).each (index) ->
+  #      newOptions += "<option value='#{response.offering_ids[index]}'>#{this}</option>"
+  #    $("#user_enrollments").html(newOptions).trigger("liszt:updated")
 
   $("#do_this_later").click (e) ->
     $('<input />').attr('type', 'hidden').attr('name', "do_this_later").attr('value', "true").appendTo('form')

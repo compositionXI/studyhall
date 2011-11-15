@@ -98,8 +98,12 @@
       <input type="hidden" name="form_id" value="affiliations_form">
       <div class="input">
         <%= f.label :School %>
-        <%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "chzn-select" %>
+        <%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "" %>
       </div>
+      <!--div class="input">
+        <%= f.label :sports_and_clubs %>
+        <%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, :class => "extracurriculars_list" %>
+      </div-->
       <div class="input">
         <% if @user.male? %>
           <%= f.label :fraternity %>
@@ -199,6 +203,12 @@
     var form = $("#"+form_id).clone();
     return form.first().html();
   }
+  
+  var initChosen = function(popover){
+    chosenable = $(".popover select#user_school_id");
+    chosenable.addClass("chzn-select");
+    chosenable.chosen();
+  }
 
   $(document).ready(function(){
 
@@ -254,7 +264,8 @@
                           title: function(){return editable.data("title")},
                           content: function(){ return cloneForm(editable)}});
         editable.popover("show");
-        e.stopPropagation();
+        initChosen(editable.popover);
+        //$("select.chzn-select").chosen();
       }
       e.preventDefault();
     });
