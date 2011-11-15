@@ -23,9 +23,9 @@
                 <% if message.sender_id != @current_user.id %>
                   <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %></li>
                   <li><%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %></li>
-                  <li class="time"><%= time_ago_in_words message.created_at %> ago</li>      
-                <% end %>  
-              </ul> 
+                  <li class="time"><%= time_ago_in_words message.created_at %> ago</li>
+                <% end %>
+              </ul>
               
           <% if message.attachment? %>
             <div class="attachment">
@@ -39,9 +39,9 @@
         </div>
       </div>
       <span class="edit_message_fields checkbox hide">
-        <%= check_box_tag "message_ids[]", message.id %>
-        <%= message_fields.hidden_field :opened, {:value => message.opened, :class => "opened"} %>
-        <%= message_fields.hidden_field :deleted, {:value => message.deleted, :class => "deleted"} %>
+        <%= check_box_tag "message_ids[]", message.id, {}, {:class => "update_multi"} %>
+        <%= message_fields.hidden_field :opened, {:value => message.opened, :class => "update_multi opened"} %>
+        <%= message_fields.hidden_field :deleted, {:value => message.deleted, :class => "update_multi deleted"} %>
       </span>
       <div class="expanded_message hide">
         <div class="message_content">
