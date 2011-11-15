@@ -12,6 +12,10 @@ class Message < ActiveRecord::Base
   def from
     User.find(self.sender_id)
   end
+
+  def to
+    User.find(self.recipient_id)
+  end
   
   def to
     User.find(self.received_messageable_id)
