@@ -4,7 +4,10 @@
       <%= render partial: "note_item", collection: @note_items, as: :note_item %>
     </ul>
   </div>
-<% else %>
-  <p>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
-  <p>Click the "New Notebook" button to begin taking note.</p>
+<% else %><div class="landing_wrapper">
+  <div class="note_item_demo">
+      <a class="name" href="/notes/new">Take Notes</a>
+  </div>
+  <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
+  <p>Click the "Take Notes" button to begin taking note.</p></div>
 <% end %>

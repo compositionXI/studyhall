@@ -545,7 +545,7 @@ header.topbar
         font-size: 16px
   li.add
     a
-      font-size: 16px 
+      font-size: 14px 
       
 .sidebar
   +columns(4)
@@ -611,6 +611,39 @@ header.topbar
         margin: 0
 .landing_wrapper
   text-align: center
+  .study_session_demo
+    background: url(asset-path('notebook-sprite.png','image')) no-repeat -396px 0 transparent
+    width: 122px
+    height: 129px
+    margin: 0 auto 
+    text-align: center
+    padding: 25px 0 0 10px
+    position: relative
+    cursor: pointer
+    .attendees
+      margin: 0 auto
+      width: 85px
+      text-align: center
+      padding-right: 5px
+      li
+        margin: 0 1px
+  .note_item_demo
+    background: url(asset-path('notebook-sprite.png','image')) no-repeat -790px 0 transparent
+    color: #333
+    padding-top: 35px
+    font-size: 12px
+    line-height: 15px
+    position: relative
+    width: 132px
+    height: 156px 
+    padding: 20px 0 0
+    text-align: center
+    margin: 0 auto 20px
+    +box-sizing(border-box)
+    a
+      display: block
+      width: 132px
+      height: 136px
 .courses
   float: right
   width: 700px
@@ -629,10 +662,10 @@ header.topbar
       color: $white
       display: block
       height: 156px
-      font-size: 16px
-      padding: 0 15px 0 28px
+      font-size: 14px
+      padding: 0 10px 0 20px
       text-align: center
-      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55)
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55)
       width: 132px
       &:hover
         text-decoration: none
@@ -665,6 +698,7 @@ header.topbar
         span
           margin: 0
           height: 146px
+          width: 132px
           .profile_edit
             background-color: $editable_background
             cursor: pointer
@@ -1321,12 +1355,6 @@ header.topbar
     margin-top: 5px
   label
     margin-top: 10px
-  input[type="file"]
-    width: 310px
-  select
-    width: 312px
-  input[type="text"]
-    width: 312px
     
 .popover .inner
   overflow: visible
@@ -1352,6 +1380,15 @@ header.topbar
     cursor: pointer
     text-decoration: none
     width: 20px
+  input[type="file"]
+    width: 308px
+  select,
+  input[type="text"],
+  textarea
+    width: 312px
+  textarea
+    height: 150px
+    line-height: 20px
   .help
     position: absolute
     top: 0

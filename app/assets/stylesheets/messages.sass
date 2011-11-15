@@ -11,11 +11,14 @@
     .form_buttons
       width: 550px
       float: left
-      .input-file
+      input[type=file]
+        filter: alpha(opacity = 0)
+        -khtml-opacity: 0
+        -moz-opacity: 0
+        opacity: 0
         z-index: 2
         position: absolute
         left: 500px
-        opacity: 0
         width: 100px
         &:hover
           cursor: pointer
@@ -28,12 +31,7 @@
       margin-left: 10px
 
 #message_new
-  input[type="text"]
-    width: 330px
   textarea
-    width: 330px
-    height: 150px
-    line-height: 20px
     &.reply_body
       width: 540px
       height: 50px
@@ -41,8 +39,6 @@
     margin-right: 13px
     &.hidden
       display: none
-  select
-    width: 340px
 
 .messages_list     
   color: #444444
@@ -100,7 +96,7 @@
     .spam_abuse
     .collapsed_message
       &.unread
-        background-color: #F8F8F8
+        background-color: #fafafa
       &:hover
         cursor: pointer
       &.highlighted
