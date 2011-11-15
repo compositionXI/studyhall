@@ -30,21 +30,23 @@ class completion_percentage
     @count = 0
     @input.each (i, field) ->
       $field = $(field)
-      
       if $field.val() != '' && $field.val() != null
         self.count++
-    $el = $(element)   
+    $el = $(element) 
+    console.log $el.offsetParent()  
     top = $el.position().top
     if top == 0
       top = $el.parent().position().top
-   
     percentage = Math.round( @count/@totalFields * 100 )
+    
     @meter
       .find('p').text( percentage + "% Complete" )
       .end()
       .stop()
-      .animate {"top": top}   
-
+    if percentage < 100
+      @meter.fadeIn().animate {"top": top}   
+    else
+      @meter.fadeOut()
 $ ->
   #$("#profile_tabs").tabs()
   # $(".chzn-select").css({"display": "none"})
@@ -179,7 +181,7 @@ $ ->
   if $('.profile_wizard').length != 0
     completion = new completion_percentage
     completion.setup()   
-    completion.wizard.delegate '.chzn-container', 'click focus mouseup', (e) ->
+    completion.wizard.delegate '.chzn-container', 'focus mouseup', (e) ->
       completion.update(this)
-    completion.input.bind 'click focus keyup change', (e) ->
+    completion.input.bind 'focus keyup', (e) ->
       completion.update(this)
