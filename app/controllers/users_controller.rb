@@ -118,7 +118,8 @@ class UsersController < ApplicationController
   def fetch_user
     if params[:id] =~ /^\d+$/
       @user =  User.find(params[:id])
-    elsif params[:id] =~ /^[a-z]+$/
+      redirect_to profile_path(@user.custom_url) if @user && action_name == "show"
+    elsif params[:id] =~ /^[a-z0-9]+$/
       @user = User.find_by_custom_url(params[:id])
     elsif params[:user_id]
       @user =  User.find(params[:user_id])
