@@ -37,23 +37,26 @@ StaticPage.create(
 
 
 ##Create Schools
-#School.create(name: "Harvard University")
-#
+if School.all.empty?
+  School.create(name: "Harvard University", :domain_name => "harvard.edu", :active => true)
+end
+
 ## Create Test Users
-#User.create(
-#  name: "Joe Smith",
-#  gender: "Male",
-#  school: School.first,
-#  email: "Joe@email.com",
-#  major: "Electrical Engineering",
-#  gpa: 3.7,
-#  fraternity: "Delta Kappa Epsilon",
-#  login: "jsmith",
-#  roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
-#  password: "1234",
-#  password_confirmation: "1234",
-#  active: true
-#)
+User.create(
+  first_name: "Joe",
+  last_name: "Smith",
+  custom_url: "joesmith",
+  gender: "Male",
+  school: School.first,
+  email: "Joe@email.com",
+  major: "Electrical Engineering",
+  gpa: 3.7,
+  fraternity: "Delta Kappa Epsilon",
+  roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+  password: "1234",
+  password_confirmation: "1234",
+  active: true
+)
 #
 #User.create(
 #  name: "Jane Doe",
