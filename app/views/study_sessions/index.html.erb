@@ -51,7 +51,7 @@
       toggleActionButtons();
     });
 
-    $("body.study_sessions-index").delegate(".study_session","click",function(){
+    $("body.study_sessions-index").delegate(".study_session","click",function(e){
       if($(this).hasClass("edit"))
         e.preventDefault();
       else
