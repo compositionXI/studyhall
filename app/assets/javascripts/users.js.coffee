@@ -4,14 +4,6 @@
 
 default_profile_image_path = "/assets/generic_avatar_thumb.png"
 
-switch_greek_select_box = ()->
-  if ($('.gender select').attr('value') == "Male")
-    $('.fraternity').css("display", "block")
-    $('.sorority').css("display", "none")
-  else
-    $('.sorority').css("display", "block")
-    $('.fraternity').css("display", "none")
-
 class completion_percentage
   
   setup: ->
@@ -52,10 +44,11 @@ $ ->
     $('.chzn-select.appendable').append('<option>'+this.value+'</option>')
     $('.chzn-select.appendable').trigger('liszt:updated')
   
-  $('.sorority, .fraternity').css("display", "none")
-  switch_greek_select_box()
-  $('.gender select').change ->
-    switch_greek_select_box()
+  #$('.sorority, .fraternity').css("display", "none")
+  #switch_greek_select_box()
+  #$('.gender select').change ->
+  #  console.log "lskdj"
+  #  switch_greek_select_box()
   
   photoSuccess = (result) ->
     edit_profile_photo_modal.dialog("close")

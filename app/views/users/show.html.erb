@@ -104,16 +104,19 @@
         <%= f.label :sports_and_clubs %>
         <%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, :class => "extracurriculars_list" %>
       </div-->
-      <div class="input">
-        <% if @user.male? %>
-          <%= f.label :fraternity %>
-          <%= f.text_field :fraternity %>
-        <% elsif @user.female? %>
-          <%= f.label :sorority %>
-          <%= f.text_field :sorority %>
-        <% end %>
+      <div class="clearfix input gender">
+        <%= f.label :Gender %>
+        <%= f.select( "gender", %w[Male Female], {:prompt => "Select"})%>
       </div>
-      <div class="input">
+      <div class="clearfix input fraternity <%= 'hide' if @user.female? %>">
+        <%= f.label :fraternity %>
+        <%= f.text_field :fraternity %>
+      </div>
+      <div class="clearfix input sorority <%= 'hide' if @user.male? %>">
+        <%= f.label :sorority %>
+        <%= f.text_field :sorority %>
+      </div>
+      <div class="clearfix input">
         <%= f.label :major %>
         <%= f.text_field :major %>
       </div>
@@ -204,10 +207,13 @@
     return form.first().html();
   }
   
-  var initChosen = function(popover){
-    chosenable = $(".popover select#user_school_id");
+  var initChosen = function(){
+    chosenable = $(".popover #user_school_id, .popover #user_gender");
     chosenable.addClass("chzn-select");
     chosenable.chosen();
+    $(".popover #user_gender ").chosen().change(function(){
+      $('.fraternity, .sorority').toggleClass("hide");
+    });
   }
 
   $(document).ready(function(){
