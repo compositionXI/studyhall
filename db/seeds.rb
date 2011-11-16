@@ -37,57 +37,23 @@ StaticPage.create(
 
 
 ##Create Schools
-#School.create(name: "Harvard University")
-#
+if School.all.empty?
+  School.create(name: "Harvard University", :domain_name => "harvard.edu", :active => true)
+end
+
 ## Create Test Users
-#User.create(
-#  name: "Joe Smith",
-#  gender: "Male",
-#  school: School.first,
-#  email: "Joe@email.com",
-#  major: "Electrical Engineering",
-#  gpa: 3.7,
-#  fraternity: "Delta Kappa Epsilon",
-#  login: "jsmith",
-#  roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
-#  password: "1234",
-#  password_confirmation: "1234",
-#  active: true
-#)
-#
-#User.create(
-#  name: "Jane Doe",
-#  gender: "Female",
-#  school: School.first,
-#  email: "Jane@email.com",
-#  major: "Psychology",
-#  gpa: 3.9,
-#  sorority: "Kappa Kappa Gamma",
-#  login: "jdoe",
-#  roles: [Role.find_by_name("Student")],
-#  password: "1234",
-#  password_confirmation: "1234",
-#  active: true
-#)
-#
-## Create About and FAQs static pages
-#StaticPage.create(
-#  title: "About",
-#  text: "Welcome to StudyHall.com! Where studying is social.\n Please take a moment to create a profile and look around.",
-#  slug: "about-us"
-#)
-#
-#StaticPage.create(
-#  title: "FAQs",
-#  text: "What is the most awesome thing about StudyHall.com \nIt's social!",
-#  slug: "faqs"
-#)
-#
-## Create Test Contact
-#Contact.create(
-#  name: "Bob",
-#  email: "bob@email.com",
-#  company_name: "Bob's Business",
-#  phone: "555 123 1234",
-#  message: "This is a greate website!",
-#)
+User.create(
+  first_name: "Joe",
+  last_name: "Smith",
+  custom_url: "joesmith",
+  gender: "Male",
+  school: School.first,
+  email: "Joe@email.com",
+  major: "Electrical Engineering",
+  gpa: 3.7,
+  fraternity: "Delta Kappa Epsilon",
+  roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+  password: "1234",
+  password_confirmation: "1234",
+  active: true
+)

@@ -9,26 +9,27 @@
 # RailsAdmin config file. Generated on November 02, 2011 09:43
 # See github.com/sferik/rails_admin for more informations
 
-RailsAdmin.config do |config|
+if File.basename($0) == 'rake'
+  puts "Skipping RailsAdmin.config..."
+else
+  RailsAdmin.config do |config|
 
-  config.current_user_method { current_user } # auto-generated
+    config.current_user_method { current_user } # auto-generated
   
-  # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
-  config.main_app_name = ['Studyhall', 'Admin']
-  # or for a dynamic name:
-  # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
+    # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
+    config.main_app_name = ['Studyhall', 'Admin']
+    # or for a dynamic name:
+    # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
-  #  ==> Authentication (before_filter)
-  # This is run inside the controller instance so you can setup any authentication you need to.
-  # By default, the authentication will run via warden if available.
-  # and will run on the default user scope.
-  # If you use devise, this will authenticate the same as authenticate_user!
-  # Example Devise admin
-   RailsAdmin.config do |config|
+    #  ==> Authentication (before_filter)
+    # This is run inside the controller instance so you can setup any authentication you need to.
+    # By default, the authentication will run via warden if available.
+    # and will run on the default user scope.
+    # If you use devise, this will authenticate the same as authenticate_user!
+    # Example Devise admin
      config.authenticate_with do
        require_admin
      end
-   end
   # Example Custom Warden
   # RailsAdmin.config do |config|
   #   config.authenticate_with do
@@ -989,87 +990,64 @@ RailsAdmin.config do |config|
        field :id, :integer
        field :first_name, :string
        field :last_name, :string
-       field :gender, :string
-       field :school_id, :integer        # Hidden
-       field :email, :string
-       field :major, :string
-       field :gpa, :decimal
-       field :fraternity, :string
-       field :sorority, :string
-       field :persistence_token, :string
-       field :perishable_token, :string
-       field :created_at, :datetime
-       field :updated_at, :datetime
-       field :avatar, :paperclip_file
-       field :custom_url, :string
-       field :bio, :text
-       field :active, :boolean
-       field :shares_with_everyone, :boolean
-       field :googleable, :boolean
-       field :notify_on_follow, :boolean
-       field :notify_on_comment, :boolean
-       field :notify_on_share, :boolean
-       field :notify_on_invite, :boolean
-     end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
+      end
     end
 
-# All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
-# There can be different reasons for that:
-#  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
-#  - associations are hidden if they have no matchable model found (model not included or non-existant)
-#  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
-# Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
-#  - non-editable columns (:id, :created_at, ..) in edit sections
-#  - has_many/has_one associations in list section (hidden by default for performance reasons)
-# Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
+  # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
+  # There can be different reasons for that:
+  #  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
+  #  - associations are hidden if they have no matchable model found (model not included or non-existant)
+  #  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
+  # Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
+  #  - non-editable columns (:id, :created_at, ..) in edit sections
+  #  - has_many/has_one associations in list section (hidden by default for performance reasons)
+  # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Vote do
-  #   # Found associations:
-  #   field :voteable, :polymorphic_association
-  #   field :voter, :polymorphic_association        # Hidden
-  #   # Found columns:
-  #   field :id, :integer
-  #   field :vote, :boolean
-  #   field :voteable_id, :integer        # Hidden
-  #   field :voteable_type, :string        # Hidden
-  #   field :voter_id, :integer        # Hidden
-  #   field :voter_type, :string        # Hidden
-  #   field :created_at, :datetime
-  #   field :updated_at, :datetime
-  #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  #  end
+    # config.model Vote do
+    #   # Found associations:
+    #   field :voteable, :polymorphic_association
+    #   field :voter, :polymorphic_association        # Hidden
+    #   # Found columns:
+    #   field :id, :integer
+    #   field :vote, :boolean
+    #   field :voteable_id, :integer        # Hidden
+    #   field :voteable_type, :string        # Hidden
+    #   field :voter_id, :integer        # Hidden
+    #   field :voter_type, :string        # Hidden
+    #   field :created_at, :datetime
+    #   field :updated_at, :datetime
+    #   # Sections:
+    #   list do; end
+    #   export do; end
+    #   show do; end
+    #   edit do; end
+    #   create do; end
+    #   update do; end
+    #  end
 
-# All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
-# There can be different reasons for that:
-#  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
-#  - associations are hidden if they have no matchable model found (model not included or non-existant)
-#  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
-# Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
-#  - non-editable columns (:id, :created_at, ..) in edit sections
-#  - has_many/has_one associations in list section (hidden by default for performance reasons)
-# Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
+  # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
+  # There can be different reasons for that:
+  #  - belongs_to _id and _type (polymorphic) columns are hidden in favor of their associations
+  #  - associations are hidden if they have no matchable model found (model not included or non-existant)
+  #  - they are part of a bigger plan in a plugin (Devise/Paperclip) and hidden by contract
+  # Some fields may be hidden depending on the section, if they aren't deemed suitable for display or edition on that section
+  #  - non-editable columns (:id, :created_at, ..) in edit sections
+  #  - has_many/has_one associations in list section (hidden by default for performance reasons)
+  # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Whiteboard do
-  #   # Found associations:
-  #   # Found columns:
-  #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  #  end
+    # config.model Whiteboard do
+    #   # Found associations:
+    #   # Found columns:
+    #   # Sections:
+    #   list do; end
+    #   export do; end
+    #   show do; end
+    #   edit do; end
+    #   create do; end
+    #   update do; end
+    #  end
 
+  end
+
+  # You made it this far? You're looking for something that doesn't exist! Add it to RailsAdmin and send us a Pull Request!
 end
-
-# You made it this far? You're looking for something that doesn't exist! Add it to RailsAdmin and send us a Pull Request!

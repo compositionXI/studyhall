@@ -379,6 +379,22 @@ header.topbar
             cursor: default
             color: $gray
             border-top: 1px solid rgba(0,0,0,.2)
+.login-button 
+  +border-radius( $topbarRadius )            
+  +sans-serif-font(bold, 13px, 13px)
+  +vertical-gradient($navGradStart, $navGradEnd)
+  border-top: 1px solid #5C4932
+  border-bottom: 1px solid #0a0401 
+  color: #ffffff !important    
+  right: 50%
+  margin-right: -470px
+  padding: 10px 15px
+  position: absolute
+  text-shadow: 0 1px 0 rgba(0,0,0, .3)
+  top: 15px 
+  &:hover, &:focus
+    color: $linkColor !important
+    text-decoration: none
         
 //Grid Bar
 .action_bar
@@ -456,12 +472,12 @@ header.topbar
       border-width: 1px 1px 1px 0
 
       
-.user-session-form  
+.single-form  
   .container.narrow
     margin-top: 40px
     min-height: 285px
     margin-bottom: 400px
-  .user-session-header
+  .header
     +clearfix
     h1 
       +h3
@@ -486,7 +502,7 @@ header.topbar
       li
         +body-font(normal, 14px, 14px) 
         color: $red
-    input[type="text"], input[type="password"]
+    input[type="text"], input[type="password"], textarea
       width: 300px
     input[type="submit"]
       width: 100px
@@ -510,11 +526,20 @@ header.topbar
     text-decoration: none
 
 //Static Pages
-.about-info
-  margin-top: 24px
-  .about-bio
-    width: 600px
-    margin-left: 20px
+.about-block
+  clear: both
+  .about-info
+    margin-top: 24px
+    margin-left: 10px
+    float: left
+    width: 445px
+    .about-image
+      width: 150px
+      img
+        width: 150px
+    .about-bio
+      width: 250px
+      margin-left: 20px
 
 //User Page - Home
 .home-header
@@ -1872,24 +1897,7 @@ section.course_activity
       background: image-url(asset-path('landing/masthead.png','image'))
       height: 118px 
       top: 57px
-      z-index: 50
-    .login-button 
-      +border-radius( $topbarRadius )
-      // $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
-      // +box-shadow($shadow)               
-      +sans-serif-font(bold, 13px, 13px)
-      +vertical-gradient($navGradStart, $navGradEnd)
-      border-top: 1px solid #5C4932
-      border-bottom: 1px solid #0a0401 
-      color: #ffffff    
-      right: 50%
-      margin-right: -470px
-      padding: 10px 15px
-      position: absolute
-      text-shadow: 0 1px 0 rgba(0,0,0, .3)
-      top: 15px 
-      &:hover, &:focus
-        text-decoration: none        
+      z-index: 50      
     .browser-main
       +center-width(398px) 
       +box-shadow(0px 0 10px rgba(0,0,0, .33))

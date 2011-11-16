@@ -37,9 +37,9 @@
         
         <% if params[:controller] != 'user_sessions' %>
           <div class="right">
+            <% if @current_user %>
             <ul class="nav secondary-nav">
               <li class="dropdown" data-dropdown="dropdown">
-                <% if @current_user %>
                   <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb")+"   You", "#", :class => "dropdown-toggle")  %>
                   <ul class="dropdown-menu">
                     <div class="arrow-border"></div><div class="arrow"></div>
@@ -54,11 +54,11 @@
                     <li class="divider"></li>
                     <li><%= link_to "Logout", logout_path %></li>
                   </ul>
-                  <% else %>
-                    <%= link_to "Log In", root_path %>
-                  <% end %>
               </li>
             </ul>
+            <% else %>
+              <%= link_to "Log In", login_path, class: "login-button" %>
+            <% end %>
           </div>
        <% end %> 
       </div>
