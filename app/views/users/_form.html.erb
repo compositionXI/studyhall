@@ -1,6 +1,6 @@
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
-<%= form_for @user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
+<%= form_for current_user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field nil, :name => "redirect_back", :value => "profile_wizard" %>
   <div id="profile_completion_meter" class="popover right">
@@ -18,7 +18,7 @@
       <%= f.text_field :last_name, :class => 'left', "data-countable" => true %></div>
     </div>
     <div class="clearfix avatar" <%= "data-default-url='true'" if @user.avatar_file_size.nil? %> >
-      <%= image_tag @user.avatar_url(:large) %>
+      <%= image_tag @user.photo_url(:large) %>
     </div>
     <div class="clearfix">
       <%= f.label :Your_photo %>
