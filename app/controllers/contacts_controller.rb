@@ -2,6 +2,7 @@ class ContactsController < ApplicationController
 
   before_filter :require_admin, :except => [:new, :create]
   before_filter :fetch_contact, :only => [:show, :edit, :update, :destroy]
+  layout "contact" 
 
   def index
     @contacts = Contact.all
