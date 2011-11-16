@@ -30,21 +30,27 @@ class completion_percentage
     @count = 0
     @input.each (i, field) ->
       $field = $(field)
-      
       if $field.val() != '' && $field.val() != null
         self.count++
-    $el = $(element)   
+    $el = $(element) 
     top = $el.position().top
     if top == 0
       top = $el.parent().position().top
-   
     percentage = Math.round( @count/@totalFields * 100 )
+    
     @meter
       .find('p').text( percentage + "% Complete" )
       .end()
       .stop()
-      .animate {"top": top}   
-
+    if percentage < 100
+      @meter
+        .css
+          "display" : "block"
+        .animate
+          "top": top
+          "opacity" : 1
+    else
+      @meter.fadeOut()
 $ ->
   #$("#profile_tabs").tabs()
   # $(".chzn-select").css({"display": "none"})
