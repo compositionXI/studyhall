@@ -80,14 +80,17 @@
                   <%= check_box_tag( "user[notify_on_comment]", "1", @current_user.notify_on_comment?)%>
                   <span>Comments on your posts</span>
                 </label>
-              </li>
+                </li>
+              <!-- 
               <li>
                 <label>
                   <%= f.hidden_field :notify_on_share, :value => "0" %>
                   <%= check_box_tag( "user[notify_on_share]", "1", @current_user.notify_on_share?)%>
                   <span>Shares content with you</span>
                 </label>
-              </li>
+                </li>
+                -->
+              <%= f.hidden_field :notify_on_share, :value => "0" %>
               <li>
                 <label>
                   <%= f.hidden_field :notify_on_invite, :value => "0" %>
