@@ -1,0 +1,100 @@
+University,Course ID,Course Title,Department,Department Code,Professors,Terms,Credits
+Alabama A & M University,203,Introduction to Accounting I,Accounting,ACC,Bonnie D. Mcquitter-Banks; Eric N. Nyako; Gladys A. Ayokanmbi;  Hareshnarayan Khanna; Helen G. Gabre; Horace L. Franklin; Larry D. Word; Rohit Jain; Rufus Gilmore; Sheilah L. Parker; Sherrell M. Price,Fall 11-12,3
+Alabama A & M University,204,Introduction to Accounting II,Accounting,ACC,Bonnie D. Mcquitter-Banks; Eric N. Nyako; Grover B. Wood;  Hareshnarayan Khanna; Helen G. Gabre; Horace L. Franklin; Hwei C. Wang; Larry D. Word; Rohit Jain; Rufus Gilmore,Fall 11-12,3
+Alabama A & M University,219,Managerial Accounting,Accounting,ACC,Bonnie D. Mcquitter-Banks; Eric N. Nyako; Hareshnarayan Khanna;  Helen G. Gabre; Rohit Jain,Fall 11-12,3
+Alabama A & M University,301,Intermediate Accounting I,Accounting,ACC,Bonnie D. Mcquitter-Banks; Rohit Jain; Rufus Gilmore,Fall 11-12,3
+Alabama A & M University,302,Intermediate Accounting II,Accounting,ACC,Eric N. Nyako; Helen G. Gabre; Hwei C. Wang,Fall 11-12,3
+Alabama A & M University,303,Cost Accounting,Accounting,ACC,Anita G. Geinert; Bonnie D. Mcquitter-Banks; Eric N. Nyako;  Hareshnarayan Khanna; Rufus Gilmore,Fall 11-12,3
+Alabama A & M University,306,Intermediate Accounting III,Accounting,ACC,Eric N. Nyako,Fall 11-12,3
+Alabama A & M University,351,Federal Tax Accounting I,Accounting,ACC,Helen G. Gabre,N/A,3
+Alabama A & M University,401,Independent Study,Accounting,ACC,Bonnie D. Mcquitter-Banks,Fall 11-12,3
+Alabama A & M University,421,Advanced Accounting,Accounting,ACC,Bonnie D. Mcquitter-Banks; Helen G. Gabre; Rohit Jain,Fall 11-12,3
+Alabama A & M University,441,Auditing,Accounting,ACC,Charlie L. Rucker; Hwei C. Wang,Fall 11-12,3
+Alabama A & M University,450,Accounting for Non-Profit Org,Accounting,ACC,Eric N. Nyako,N/A,3
+Alabama A & M University,461,Seminar in Intl Accounting,Accounting,ACC,Anita G. Geinert; Aylicia Smith; Bonnie D. Mcquitter-Banks;  Helen G. Gabre,Fall 11-12,3
+Alabama A & M University,472,Accounting Information System,Accounting,ACC,Anita G. Geinert; Helen G. Gabre; Hwei C. Wang,N/A,3
+Alabama A & M University,478,Field Experiences in Acc,Accounting,ACC,Bonnie D. Mcquitter-Banks,Fall 11-12,3
+Alabama A & M University,512,Acc Analysis for Management,Accounting,ACC,Helen G. Gabre,Fall 11-12,3
+Alabama A & M University,571,Tax & Bus Decision Making,Accounting,ACC,Helen G. Gabre,Fall 11-12,3
+Alabama A & M University,572,Accounting Information Systems,Accounting,ACC,Anita G. Geinert; Hwei C. Wang,N/A,3
+Alabama A & M University,577,Special Topics in Accounting,Accounting,ACC,Helen G. Gabre,N/A,3
+Alabama A & M University,102,Intro to Agriculture Careers,Agribusiness Education,AGB,Buddhi R. Gyawali; Swagata Banerjee; Yoseph Befecadu,N/A,1
+Alabama A & M University,199,Computers in Agriculture,Agribusiness Education,AGB,Buddhi R. Gyawali; Celedonio M. Gapasin; Hezekiah S. Jones;  Remus M. Shade; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,211,Metal Fabrication,Agribusiness Education,AGB,Remus M. Shade,N/A,3
+Alabama A & M University,212,Woodworking & Machinery,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,N/A,3
+Alabama A & M University,221,Intro to Agricultural Economic,Agribusiness Education,AGB,James O. Bukenya,Fall 11-12,3
+Alabama A & M University,299,Quant Appl in Agriculture,Agribusiness Education,AGB,James O. Bukenya; Swagata Banerjee,N/A,3
+Alabama A & M University,300,Agribusiness Statistics,Agribusiness Education,AGB,Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,301,Electrical Systems & Machines,Agribusiness Education,AGB,Willie J. Cheatham,N/A,3
+Alabama A & M University,302,Org & Admin of Voc Edu,Agribusiness Education,AGB,Edward E. Williams; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,311,Small Pow Unit & Equipment,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,N/A,3
+Alabama A & M University,314,Small Structure Construction,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,322,Farm Management,Agribusiness Education,AGB,Hezekiah S. Jones; Swagata Banerjee,N/A,3
+Alabama A & M University,323,Agricultural Marketing,Agribusiness Education,AGB,James O. Bukenya; Swagata Banerjee,Fall 11-12,3
+Alabama A & M University,330,Internship in Agribusiness,Agribusiness Education,AGB,Edward E. Williams; Remus M. Shade; Willie J. Cheatham;  Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,333,Commodity Marketing,Agribusiness Education,AGB,Swagata Banerjee,Fall 11-12,3
+Alabama A & M University,401,Methods of Teaching in Agrisci,Agribusiness Education,AGB,Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,405,Extension Methods,Agribusiness Education,AGB,Celedonio M. Gapasin; Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,418,Agricultural Leadership,Agribusiness Education,AGB,Celedonio M. Gapasin; Yoseph Befecadu,N/A,3
+Alabama A & M University,421,Agribusiness Management,Agribusiness Education,AGB,Yoseph Befecadu,N/A,3
+Alabama A & M University,422,Agricultural Financing,Agribusiness Education,AGB,Hezekiah S. Jones; Swagata Banerjee,Fall 11-12,3
+Alabama A & M University,424,International Agricultural Dev,Agribusiness Education,AGB,Swagata Banerjee,Fall 11-12,3
+Alabama A & M University,425,Agricultural Policies,Agribusiness Education,AGB,Duncan M. Chembezi,Fall 11-12,3
+Alabama A & M University,430,Agricultural Prices,Agribusiness Education,AGB,Duncan M. Chembezi,Fall 11-12,3
+Alabama A & M University,433,Agricultural Sales,Agribusiness Education,AGB,Yoseph Befecadu,N/A,3
+Alabama A & M University,443,Economics of Food Distribution,Agribusiness Education,AGB,Swagata Banerjee,N/A,3
+Alabama A & M University,445,Economics of Natural Resources,Agribusiness Education,AGB,James O. Bukenya,Fall 11-12,3
+Alabama A & M University,453,Int Agricultural Marketing,Agribusiness Education,AGB,James O. Bukenya,N/A,3
+Alabama A & M University,490,Special Problems,Agribusiness Education,AGB,Hezekiah S. Jones; Swagata Banerjee; Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,495,Internship,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham; Yoseph Befecadu,Fall 11-12,12
+Alabama A & M University,499,Research in Agribusiness,Agribusiness Education,AGB,James O. Bukenya,Fall 11-12,3
+Alabama A & M University,505,PHIL ADM/SUP VOC ED,Agribusiness Education,AGB,Edward E. Williams; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,508,Plng Org Tchg Agribu Mechanics,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,N/A,3
+Alabama A & M University,509,Advanced Studies,Agribusiness Education,AGB,Hezekiah S. Jones; Willie J. Cheatham; Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,525,Adv Wood Desgin & Assembly,Agribusiness Education,AGB,Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,531,Agricultural Economics,Agribusiness Education,AGB,Duncan M. Chembezi; Hezekiah S. Jones,Fall 11-12,3
+Alabama A & M University,532,Advanced Farm Management,Agribusiness Education,AGB,Hezekiah S. Jones; Swagata Banerjee,N/A,3
+Alabama A & M University,533,Adv Agricultural Marketing,Agribusiness Education,AGB,James O. Bukenya,N/A,3
+Alabama A & M University,590,Research Methods in Agribu,Agribusiness Education,AGB,Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,595,Internship,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,Fall 11-12,6
+Alabama A & M University,599,Master's Thesis,Agribusiness Education,AGB,Hezekiah S. Jones; Willie J. Cheatham; Yoseph Befecadu,Fall 11-12,3
+Alabama A & M University,604,Seminar in Agribus Education,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,608,Voc Youth Organizations,Agribusiness Education,AGB,Edward E. Williams; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,611,Intern in Agribus Education,Agribusiness Education,AGB,Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,611,No Title,Agribusiness Education,AGB,N/A,N/A,N/A
+Alabama A & M University,623,Advanced Agribus Management,Agribusiness Education,AGB,Yoseph Befecadu,N/A,3
+Alabama A & M University,624,Agric Financial Analysis,Agribusiness Education,AGB,Hezekiah S. Jones; Swagata Banerjee,Fall 11-12,3
+Alabama A & M University,625,Advanced Agri Policy,Agribusiness Education,AGB,Duncan M. Chembezi,Fall 11-12,3
+Alabama A & M University,626,AG Modeling & Forecasting,Agribusiness Education,AGB,Duncan M. Chembezi,N/A,3
+Alabama A & M University,698,Action Research I,Agribusiness Education,AGB,Willie J. Cheatham; Yoseph Befecadu,N/A,3
+Alabama A & M University,699,Action Research II,Agribusiness Education,AGB,Willie J. Cheatham; Yoseph Befecadu,N/A,3
+Alabama A & M University,211L,Basic Metal,Agribusiness Education,AGB,Remus M. Shade; Willie J. Cheatham,Fall 11-12,3
+Alabama A & M University,208,Ready-to-Wear Apparel Analysis,Apparel Merchandising Design,AMD,Patricia Y. Young,N/A,2
+Alabama A & M University,302,Historic Costume,Apparel Merchandising Design,AMD,Allison P. Young; Eunice P. Tibbs,N/A,3
+Alabama A & M University,303,Fashion Merchandising I,Apparel Merchandising Design,AMD,Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,305,Housing and Interiors,Apparel Merchandising Design,AMD,Chinella G. Henderson; Patricia S. Henderson,Fall 11-12,3
+Alabama A & M University,306,Fashion Merchandising,Apparel Merchandising Design,AMD,Patricia Y. Young,N/A,3
+Alabama A & M University,308,Visual Merchandising,Apparel Merchandising Design,AMD,Patricia Y. Young,N/A,3
+Alabama A & M University,315,Consumer Textiles I,Apparel Merchandising Design,AMD,Allison P. Young; Linda F. Gardner; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,410,Apparel CAD,Apparel Merchandising Design,AMD,Linda F. Gardner,N/A,3
+Alabama A & M University,411,Directed Field Experience,Apparel Merchandising Design,AMD,Patricia S. Henderson,Fall 11-12,6
+Alabama A & M University,419,Merchandising & Design Seminar,Apparel Merchandising Design,AMD,Patricia Y. Young,Fall 11-12,2
+Alabama A & M University,421,Problems & Independent Study,Apparel Merchandising Design,AMD,Allison P. Young; Patricia S. Henderson; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,422,Fashion Merchandise Study Tour,Apparel Merchandising Design,AMD,Allison P. Young,N/A,2
+Alabama A & M University,527,Consumer Textiles,Apparel Merchandising Design,AMD,Allison P. Young; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,528,Soc Psy & Eco Asp Clothing,Apparel Merchandising Design,AMD,Linda F. Gardner,N/A,3
+Alabama A & M University,530,Special Problems,Apparel Merchandising Design,AMD,Cynthia Smith; Linda F. Gardner; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,533,Historic Costume,Apparel Merchandising Design,AMD,Allison P. Young; Patricia Y. Young,N/A,3
+Alabama A & M University,537,Fashion Mech Study Tour,Apparel Merchandising Design,AMD,Allison P. Young,N/A,2
+Alabama A & M University,618,Textile Economics,Apparel Merchandising Design,AMD,Linda F. Gardner; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,104L,Art & Design,Apparel Merchandising Design,AMD,Patricia S. Henderson,N/A,3
+Alabama A & M University,201L,Basic Clothing Construction,Apparel Merchandising Design,AMD,Eunice P. Tibbs; Linda F. Gardner; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,203L,Consumer Aspects of Clothing,Apparel Merchandising Design,AMD,Allison P. Young; Patricia Y. Young,Fall 11-12,3
+Alabama A & M University,204L,Clothing Throughout Life Cycle,Apparel Merchandising Design,AMD,Eunice P. Tibbs,N/A,3
+Alabama A & M University,307L,Flat Pattern Design,Apparel Merchandising Design,AMD,Linda F. Gardner,Fall 11-12,3
+Alabama A & M University,316L,Consumer Textiles II,Apparel Merchandising Design,AMD,Linda F. Gardner; Patricia Y. Young,N/A,3
+Alabama A & M University,404L,Advanced Clothing & Design,Apparel Merchandising Design,AMD,Linda F. Gardner,N/A,3
+Alabama A & M University,405L,Functional Clothing Design,Apparel Merchandising Design,AMD,Linda F. Gardner; Patricia S. Henderson,Fall 11-12,3
+Alabama A & M University,406L,Draping,Apparel Merchandising Design,AMD,Linda F. Gardner,N/A,3
+Alabama A & M University,534L,Advanced Costume Design,Apparel Merchandising Design,AMD,Cynthia Smith,N/A,3
+Alabama A & M University,101,Art Appreciation,Art,ART,Cara L. Fuller; Joe W. Washington; Louis Argend-Farlow;  Robert E. Bean; Scott L. Smith,Fall 11-12,3
