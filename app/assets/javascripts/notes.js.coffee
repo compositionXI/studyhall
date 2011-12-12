@@ -23,13 +23,13 @@ initDragAndDrop = ->
           drop: (e, ui) ->
             moveNoteOutOfNotebook(ui.draggable)
         $(this).closest(".note_item").after(drop_area)
-        $('.note_items').data('jsp').reinitialise({hideFocus: true})
+        $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
     stop: ->
       $(".ui-draggable").css({opacity: 1})
       $(this).closest(".droppable").droppable('enable')
       $(".drop_area").slideUp().remove()
       $(".drag-helper").remove()
-      $('.note_items').data('jsp').reinitialise({hideFocus: true})
+      $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
     handle: '.drag_handle'
     containment: '.note_items'
     revert: 'invalid'
@@ -86,7 +86,7 @@ moveNoteToNotebook = (note, notebook) ->
         notebook.find(".child_notes li").last().addClass("list")
       else
         notebook.find(".child_notes li").last().addClass("grid")
-      $('.note_items').data('jsp').reinitialise({hideFocus: true})
+      $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
       initDragAndDrop()
 
 $(document).ready ->
@@ -106,7 +106,7 @@ $(document).ready ->
 
   $(".note_items").delegate ".notebook_expander","click", (e) ->
     $("#"+$(this).data("rel")).slideToggle()
-    setTimeout("$('.note_items').data('jsp').reinitialise({hideFocus: true})",1100)
+    setTimeout("$('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})",1100)
     e.stopPropagation()
     e.preventDefault()
 
