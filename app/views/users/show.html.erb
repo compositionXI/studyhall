@@ -118,7 +118,7 @@
       </div>
       <div class="input clearfix">
         <%= f.submit "Save", :class => "btn primary save" %>
-        OR
+        <span class="or">OR</span>
         <%= link_to "Cancel", "#", :class => "close_modal" %>
       </div>
     <% end %>
@@ -133,7 +133,7 @@
       </div>
       <div class="input clearfix">
         <%= f.submit "Save", :class => "btn primary save" %>
-        OR
+        <span class="or">OR</span>
         <%= link_to "Cancel", "#", :class => "close_modal" %>
       </div>
     <% end %>
@@ -148,7 +148,7 @@
       </div>
       <div class="input clearfix">
         <%= f.submit "Save", :class => "btn primary save" %>
-        OR
+        <span class="or">OR</span>
         <%= link_to "Cancel", "#", :class => "close_modal" %>
       </div>
     <% end %>
@@ -169,7 +169,7 @@
       <% end %>
       <div class="input clearfix">
         <%= f.submit "Save", :class => "btn primary save" %>
-        OR
+        <span class="or">OR</span>
         <%= link_to "Cancel", "#", :class => "close_modal" %>
       </div>
     <% end %>
@@ -184,7 +184,7 @@
       <div class="modal-body">
         <p>Do you want to drop <%= course.course.title %>?</p>
         <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
-        OR
+        <span class="or">OR</span>
         <%= link_to "Cancel", "#", :class => "close_modal", "data-id" => "course_#{course.id}_modal" %>
       </div>
     </div>
