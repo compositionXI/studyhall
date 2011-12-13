@@ -13,8 +13,14 @@ class completion_percentage
       $('#user_avatar', @wizard ).attr('data-countable', 'true') 
     
     @input = $('input[data-countable="true"], select[data-countable="true"]', @wizard)
-    @totalFields = @input.length
+    @totalFields = 11 # hard code the total fields which used to check completion
     @meter = $("#profile_completion_meter")
+    @others_count = parseInt($("#others_profile_complete_count").val())
+    if $('div[data-default-url]').length == 0
+      @default_avatar = false
+    else
+      @default_avatar = true
+    
     self.update(@input.first())
   
   update: (element)->
@@ -24,11 +30,15 @@ class completion_percentage
       $field = $(field)
       if $field.val() != '' && $field.val() != null
         self.count++
+    
+    unless @default_avatar
+      @count = @count + 1
+    
     $el = $(element) 
     top = $el.position().top
     if top == 0
       top = $el.parent().position().top
-    percentage = Math.round( @count/@totalFields * 100 )
+    percentage = parseInt( (@count + @others_count)/@totalFields * 100 )
     
     @meter
       .find('p').text( percentage + "% Complete" )
