@@ -215,11 +215,20 @@ class User < ActiveRecord::Base
   def profile_completion_percentage
     count = 0.0
     total = 0.0
-    [self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
-      count += 1 unless member.nil? || member == "/assets/generic_avatar_thumb.png" || member == [] || member == ""
+    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
+      count += 1 unless (member.blank? || member == "/assets/generic_avatar_thumb.png")
       total += 1
     end
     (count/total * 100).to_i
+  end
+  
+  # fields not in profile wizard completion
+  def profile_except_wizard_completion_count
+    count = 0
+    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].each do |member|
+      count += 1 unless member.blank? || member == "/assets/generic_avatar_thumb.png"
+    end
+    count
   end
   
   def profile_complete?
