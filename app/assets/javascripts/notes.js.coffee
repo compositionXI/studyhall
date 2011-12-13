@@ -50,6 +50,7 @@ tearDownDragAndDrop = ->
 
 moveNoteOutOfNotebook = (note) ->
   noteId = note.data("id")
+  notebook = note.parents(".notebook")
   $.ajax
     url: ['notes', noteId, 'move'].join '/'
     type: 'PUT'
@@ -65,6 +66,11 @@ moveNoteOutOfNotebook = (note) ->
       $(".note_items .jspPane li").first().removeClass("grid").addClass("list edit")
       $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
       initDragAndDrop()
+      note.addClass "disabled_draggable"
+      notebook.find(".notebook_expander").hide() if notebook.find(".child_notes .child_note").not('.disabled_draggable').length == 0
+
+has_notes_for = (notebook) ->
+  notebook.find(".child_notes .child_note").each
 
 moveNoteToNotebook = (note, notebook) ->
   notebookId = notebook.data("id")
