@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:notice] = "Account deleted!"
-    redirect_to admin_users_path
+    redirect_to root_path
   end
   
   def account
@@ -119,10 +119,10 @@ class UsersController < ApplicationController
     if params[:id] =~ /^\d+$/
       @user =  User.find(params[:id])
       redirect_to profile_path(@user.custom_url) if @user && action_name == "show"
-    elsif params[:id] =~ /^[a-z0-9]+$/
-      @user = User.find_by_custom_url(params[:id])
     elsif params[:user_id]
       @user =  User.find(params[:user_id])
+    else # (was: elsif params[:id] =~ /^[a-z0-9]+$/)
+      @user = User.find_by_custom_url(params[:id])
     end
   end
   
