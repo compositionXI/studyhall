@@ -9,7 +9,7 @@
     <%= link_to "X", edit_note_back_path, :class => "btn" %>
   </div>
   <div class="middle">
-    <%= @note.name %>
+    <%= truncate @note.name, :length => 95 %>
   </div>
 </div>
 <div class="container">
