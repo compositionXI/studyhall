@@ -8,10 +8,7 @@ module ApplicationHelper
   end
 
   def inbox_count
-    count = 0
-    current_user.all_messages.each do |m|
-      count += 1 unless m.opened?
-    end
+    count = current_user.all_messages({:deleted => false, :opened => false}).count
     
     case count
     when count > 99

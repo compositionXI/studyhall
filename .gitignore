@@ -11,3 +11,4 @@ config/config.yml
 public/system
 public/system/*
 solr
+.DS_Store
