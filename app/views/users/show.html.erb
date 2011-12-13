@@ -1,6 +1,6 @@
 <section>
   <div class="row">
-    <div class="span4 column sidebar left" id="profile_sidebar">
+    <div class="span5 column sidebar left" id="profile_sidebar">
       <div id="photo_section" class="editable profile_photo" data-placement="right" data-title="Change your photo" data-form="photo_form">
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
@@ -12,7 +12,7 @@
         <%= link_to "Block", "#" %>
       </div>
     </div>
-    <div class="span12 column profile_main_content">
+    <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
         <h1><%= @user.name %></h1>
         <div id="affiliations_section" class="editable" data-placement="below" data-title="Affiliation Details" data-form="affiliations_form">
