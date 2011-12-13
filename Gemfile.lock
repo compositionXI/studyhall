@@ -239,7 +239,7 @@ GEM
     polyglot (0.3.2)
     pr_geohash (1.0.0)
     pyu-ruby-sasl (0.0.3.3)
-    rack (1.3.4)
+    rack (1.3.5)
     rack-cache (1.0.3)
       rack (>= 0.4)
     rack-mount (0.8.3)
@@ -379,6 +379,7 @@ DEPENDENCIES
   omniauth
   opentok
   paperclip (~> 2.4)
+  rack (>= 1.3.5)
   rails (= 3.1.0)
   rails3-generators
   rails_admin!
