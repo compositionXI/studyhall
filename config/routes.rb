@@ -83,8 +83,9 @@ Studyhall::Application.routes.draw do
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
   resources :sharings, only: [:new, :create]
-  post "/searches" => "searches#create", :as => "search", :format => :html
-  get "/searches" => "searches#create", :as => "search", :format => :js
+  resources :searches, only: [:show, :create]
+
+  # get "/searches" => "searches#create", :as => "search", :format => :js
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
