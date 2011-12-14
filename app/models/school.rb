@@ -14,5 +14,14 @@ class School < ActiveRecord::Base
   def latest_news
     rss_entries.limit(10).all
   end
-
+  def self.from_email(email)
+    domain = email.split("@")[1] rescue nil
+    found_school = School.find_by_domain_name(domain)
+    return found_school if found_school
+    if Rails.env.development? || Rails.env.staging?
+      School.last
+    else
+      nil
+    end
+  end
 end
