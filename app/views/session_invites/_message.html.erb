@@ -1,3 +1,5 @@
 <p><%= study_session.user.name %> has invited you to a study session.<p>
-<p>"<%= @session_invite.message %>"</p>
+<% unless @session_invite.message.blank? %>
+  <p>"<%= @session_invite.message %>"</p>
+<% end %>
 <p><%= link_to "Start studying!", study_session %></p>
