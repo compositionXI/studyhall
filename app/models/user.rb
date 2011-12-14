@@ -35,7 +35,10 @@ class User < ActiveRecord::Base
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
-  
+  before_validation do
+    self.school = School.from_email self.email if self.email
+    self.roles << Role.find_by_name("Student") if self.role_ids.nil?
+  end
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
 
