@@ -1,0 +1,55 @@
+<section class="classmates">
+  <header>
+    <h1 class="left">Classmates <small>(<%= classmates.count %>)</small></h1>
+    <%= link_to "View All >>", class_classmates_path(:class_id => clazz.id), id: 'view_all_classmates_button' %>
+  </header>
+    <ul>
+      <% if classmates.any? %>
+        <% classmates.each do |mate| %>
+          <li><%= link_to image_tag(mate.photo_url(:medium)), mate, :title => mate.name %></li>
+        <% end %>
+      <% else %>
+        <li></li>
+      <% end %>
+    </ul>
+</section>
+<div id="view_all_classmates" class="modal" style="display:none">
+  <div class="modal-header">
+      <h3>Classmates (<span class="total_classmates"><%= classmates.count %></span>)</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <% classmates.each do |user| %>
+        <li class="clearfix classmate_list_item <%= cycle('odd','') %>">
+          <div class="left photo">
+            <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+          </div>
+          <div class="left meta">
+            <%= link_to user.name, user %>
+            <%= user.school.try(&:name) %>
+          </div>
+          <div class="right">
+            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="cancel_popover btn">Close</a>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var view_all_classmates_modal = $("#view_all_classmates").modal({backdrop: true, keyboard: true});
+    $(".classmates").delegate("#view_all_classmates_button","click",function(e){
+      view_all_classmates_modal.modal("show");
+      $("#view_all_classmates ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#view_all_classmates").delegate(".cancel_popover","click",function(e){
+      $("#view_all_classmates").modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>

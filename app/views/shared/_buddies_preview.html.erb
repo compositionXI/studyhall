@@ -1,7 +1,7 @@
 <section class="buddies">
   <header>
     <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<span class="total_buddies"><%= user.buddies.count %></span>)</small></h1>
-    <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_button' %>
+    <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_buddies_button' %>
   </header>
     <ul>
       <% if user.buddies.any? %>
@@ -45,9 +45,9 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-    var view_all_modal = $("#view_all_buddies").modal({backdrop: true, keyboard: true});
-    $(".buddies").delegate("#view_all_button","click",function(e){
-      view_all_modal.modal("show");
+    var view_all_buddies_modal = $("#view_all_buddies").modal({backdrop: true, keyboard: true});
+    $(".buddies").delegate("#view_all_buddies_button","click",function(e){
+      view_all_buddies_modal.modal("show");
       $("#view_all_buddies ul").jScrollPane({hideFocus: true});
       e.preventDefault();
     });

@@ -10,21 +10,7 @@
       <h1 class="left">Professor: <small><%= "#{@class.instructor.first_name} #{@class.instructor.last_name}" %></small></h1>
     </header>
   </section>
-  <section class="buddies">
-    <header>
-      <h1 class="left">Classmates <small>(<%= @classmates.count %>)</small></h1>
-      <%= link_to "View All >>", class_classmates_path(:class_id => @class.id), :remote => true, :class => "modal_button" %>
-    </header>
-      <ul>
-        <% if @classmates.any? %>
-          <% @classmates.each do |mate| %>
-            <li><%= link_to image_tag(mate.photo_url(:medium)), mate, :title => mate.name %></li>
-          <% end %>
-        <% else %>
-          <li></li>
-        <% end %>
-      </ul>
-  </section>
+  <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class} %>
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
   <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?" %>
 </aside>
