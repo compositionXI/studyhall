@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
     count = 0.0
     total = 0.0
     [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
-      count += 1 unless (member.blank? || member == "/assets/generic_avatar_thumb.png")
+      count += 1 unless (member.blank? || member =~ /\/assets\/generic_avatar\_\w*.png/)
       total += 1
     end
     (count/total * 100).to_i
@@ -224,11 +224,7 @@ class User < ActiveRecord::Base
   
   # fields not in profile wizard completion
   def profile_except_wizard_completion_count
-    count = 0
-    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].each do |member|
-      count += 1 unless member.blank? || member == "/assets/generic_avatar_thumb.png"
-    end
-    count
+    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
   end
   
   def profile_complete?
