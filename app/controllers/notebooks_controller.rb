@@ -25,7 +25,7 @@ class NotebooksController < ApplicationController
     @show = true
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { redirect_to notebook_notes_path(@notebook)}
       format.json { render json: @notebook }
     end
   end
@@ -60,7 +60,7 @@ class NotebooksController < ApplicationController
 
     respond_to do |format|
       if @notebook.save
-        format.html { redirect_to @notebook, notice: 'Notebook was successfully created.' }
+        format.html { redirect_to notebook_notes_path(@notebook), notice: 'Notebook was successfully created.' }
         format.json { render json: @notebook, status: :created, location: @notebook }
       else
         format.html { render action: "new" }
@@ -80,7 +80,7 @@ class NotebooksController < ApplicationController
             @edit_all = true
             render partial: "list_item", locals: {notebook: @notebook, collapsed: true}
           else
-            redirect_to @notebook, notice: 'Notebook was successfully updated.'
+            redirect_to notebook_notes_path(@notebook), notice: 'Notebook was successfully updated.'
           end
         }
         format.json { head :ok }
