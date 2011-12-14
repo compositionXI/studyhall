@@ -14,5 +14,8 @@ class Course < ActiveRecord::Base
   def derived_name
     "#{department} #{number} - #{title}"
   end
-
+  
+  def compact_name
+    "#{department} #{number}"
+  end
 end
