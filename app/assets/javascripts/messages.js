@@ -147,6 +147,7 @@ $(document).ready(function(){
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
     updateMessage(message_list_item, url, data);
+    $(this).hasClass("archive") ? updateMessageCount(true) : updateMessageCount(false);
     return false;
   });
   
