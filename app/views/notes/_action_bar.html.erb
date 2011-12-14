@@ -13,7 +13,7 @@
     <% if @notebook %>
       <h3 class="show middle">
         <% if @notebook.owner == current_user %>
-          <span><%= link_to 'All Items', notes_path %> &raquo; <%= truncate @notebook.name, :length => 50 %></span>
+          <span><%= link_to 'All Items', notes_path %> &raquo; <%= truncate @notebook.name, :length => 45 %></span>
         <% else %>
           <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notes_path %> &raquo; <%= truncate @notebook.name, :length => 30 %></span>
         <% end %>

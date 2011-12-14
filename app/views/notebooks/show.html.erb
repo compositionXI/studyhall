@@ -1,28 +1,3 @@
-<!--div id="menubar" class="topbar">
-  <div class="right">
-    <a href="" class="btn">Filter</a>
-    <div id="items_layout_switcher" class="btn_group">
-      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
-      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
-    </div>
-    <% if current_user.can_edit?(@notebook) %>
-      <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
-      <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
-    <% end %>
-  </div>
-  <div class="left">
-    <%= link_to "Take Notes", new_notebook_note_path(@notebook), :class => "btn" %>
-    <%= link_to 'New Notebook', new_notebook_path, :class => "btn" %>
-  </div>
-  <div class="middle">
-    <% if @notebook.owner == current_user %>
-      <span><%= link_to 'All Items', notebooks_path %> &raquo; <%= @notebook.name %></span>
-    <% else %>
-      <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
-    <% end %>
-  </div>
-</div-->
-
 <div class="notebook_list_container <%= items_layout %>">
   <% if @notebook.notes.viewable_by(current_user).empty? %>
     <div class="centered">
