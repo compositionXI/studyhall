@@ -12,7 +12,7 @@
   <div class="clearfix">
     <%= f.label :study_session_id %>
     <div class="input">
-      <%= f.collection_select :study_session_id, post.user.study_sessions, :id, :created_at_formatted, {:include_blank => true}, {:class => "chzn-select", "data-placeholder" => "Select a studyhall"} %>
+      <%= f.collection_select :study_session_id, post.user.study_sessions, :id, :presentation, {:include_blank => true}, {:class => "chzn-select", "data-placeholder" => "Select a studyhall"} %>
     </div>
   </div>
   <div class="clearfix">
