@@ -21,12 +21,18 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new params[:user]
-    school = school_from_email(params[:user][:email])
-    @user.school_id = school.id if school
-    @user.roles << Role.find_by_name("Student") if params[:user][:role_ids].nil?
     if @user.save_without_session_maintenance
       @user.deliver_activation_instructions!
       flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email."  
+    else
+      @user_with_same_email = User.find_by_email(@user.email) if @user.errors[:email].include?('has already been taken')
+      if @user_with_same_email
+        if @user_with_same_email.active
+          flash[:error] = "This email has already signed up. Click <a href='/password_resets/new'>here</a> to reset your password if you forget it.".html_safe
+        else
+          flash[:error] = "This email has already signed up. Click <a href='/activations/new'>here</a> to get th to get the activation email.".html_safe
+        end
+      end
     end
     respond_to do |format|
       format.html { @user.new_record? ? render(action: :new) : redirect_to(login_url) }
@@ -65,7 +71,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     flash[:notice] = "Account deleted!"
-    redirect_to admin_users_path
+    redirect_to root_path
   end
   
   def account
@@ -119,25 +125,14 @@ class UsersController < ApplicationController
     if params[:id] =~ /^\d+$/
       @user =  User.find(params[:id])
       redirect_to profile_path(@user.custom_url) if @user && action_name == "show"
-    elsif params[:id] =~ /^[a-z0-9]+$/
-      @user = User.find_by_custom_url(params[:id])
     elsif params[:user_id]
       @user =  User.find(params[:user_id])
+    else # (was: elsif params[:id] =~ /^[a-z0-9]+$/)
+      @user = User.find_by_custom_url(params[:id])
     end
   end
   
   def require_no_user_or_admin
     require_admin if current_user
-  end
-  
-  def school_from_email(email)
-    domain = email.split("@")[1]
-    found_school = School.find_by_domain_name(domain)
-    return found_school if found_school
-    if Rails.env.development? || Rails.env.staging?
-      School.last
-    else
-      nil
-    end
   end
 end

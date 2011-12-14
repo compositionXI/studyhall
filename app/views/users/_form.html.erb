@@ -10,6 +10,7 @@
       <div class="content"><p><%= @user.profile_completion_percentage %>% Complete</p></div>
     </div>
   </div>
+  <%= hidden_field_tag :others_profile_complete_count, @user.profile_except_wizard_completion_count %>
   <fieldset>
     <div class="clearfix">
       <div class="input first-name"><%= f.label :first_name %> 

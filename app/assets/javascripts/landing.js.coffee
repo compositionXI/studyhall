@@ -14,7 +14,6 @@ class landingPage
     @headerElements = $('h1, .login-button, .browser-quad, .browser-main', @header)
     @header_h1 = $('h1', @header)
     @header_login = $('.login-button', @header)
-    @header_login = $()
     @header_quad = $('.browser-quad', @header)
     @header_main = $('.browser-main', @header)
    

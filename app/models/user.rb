@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
-  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_thumb.png"
+  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
   has_many :notebooks
   has_many :notes
   has_many :enrollments
@@ -35,7 +35,10 @@ class User < ActiveRecord::Base
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
-  
+  before_validation do
+    self.school = School.from_email self.email if self.email
+    self.roles << Role.find_by_name("Student") if self.role_ids.nil?
+  end
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
 
@@ -215,11 +218,16 @@ class User < ActiveRecord::Base
   def profile_completion_percentage
     count = 0.0
     total = 0.0
-    [self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
-      count += 1 unless member.nil? || member == "/assets/generic_avatar_thumb.png" || member == [] || member == ""
+    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
+      count += 1 unless (member.blank? || member =~ /\/assets\/generic_avatar\_\w*.png/)
       total += 1
     end
     (count/total * 100).to_i
+  end
+  
+  # fields not in profile wizard completion
+  def profile_except_wizard_completion_count
+    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
   end
   
   def profile_complete?

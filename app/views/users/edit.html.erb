@@ -1,6 +1,6 @@
 <section>
   <div class="row">
-      <div class="span4 column sidebar left" id="profile_sidebar">
+      <div class="span5 column sidebar left" id="profile_sidebar">
         <div class="sidebar_photo">
           <%= image_tag @user.avatar_url(:large), id: "profile_photo" %>
           <%= link_to "Change photo", "#", id: "change_profile_photo" %>
@@ -10,7 +10,7 @@
           <%= link_to "Delete Profile", user_path, method: :delete, confirm: "Are you sure you want to delete your profile? All of your information will be lost."  %>
         </div>
       </div>
-      <div class="span12 column profile_main_content">
+      <div class="span11 column profile_main_content">
         <div id="profile_personal_info" class="left">
           <h1><%= @user.name %></h1>
           <div id="profile_detailed_info" class="profile_edit">
@@ -100,7 +100,7 @@
     <%= f.label :sorority %>
     <%= f.text_field :sorority %>
   <% end %>
-  <%= f.label :major %>
+  <%= f.label :major, raw("Major / Minor") %>
   <%= f.text_field :major %>
   <div class="clearfix">
     <%= f.submit "Save", :class => "btn primary save" %>

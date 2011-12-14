@@ -49,10 +49,16 @@ var updateMessageCount = function(read){
   var inboxCount = parseInt($(".inbox_message_count").html());
   var inboxCount = (inboxCount) ? inboxCount : 0;
   if (read) {
-    (inboxCount - 1) == 0 ? $(".inbox_message_count").html("") : $(".inbox_message_count").html(inboxCount - 1);
-  }
-  else {
+    if(inboxCount - 1 == 0) {
+      $(".inbox_message_count").html("");
+      $(".inbox_message_count").addClass('hide');
+    } else {
+      $(".inbox_message_count").html(inboxCount - 1);
+      $(".inbox_message_count").removeClass('hide');
+    }
+  } else {
     $(".inbox_message_count").html(inboxCount + 1);
+    $(".inbox_message_count").removeClass('hide');
   }
 }
 
@@ -72,7 +78,7 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
     dataType: "html",
     async: async,
     success: function(response){
-      message_list_item.replaceWith(response)
+      message_list_item.replaceWith(response);
       updateMessageCount(read);
     }
   });
@@ -141,6 +147,7 @@ $(document).ready(function(){
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
     updateMessage(message_list_item, url, data);
+    $(this).hasClass("archive") ? updateMessageCount(true) : updateMessageCount(false);
     return false;
   });
   
@@ -157,6 +164,7 @@ $(document).ready(function(){
   $("body").delegate(".message_utilities .mark_read, .message_utilities .mark_unread", "click", function(){
     var message_list_item = $(this).closest(".message_list_item")
     var url = $(this).attr("data-url");
+    $(this).bind('click', function() { return false; });//prevent multiple clicking
     ajaxUpdateMessageRead(url, message_list_item, $(this).hasClass("mark_read"));
     return false;
   });

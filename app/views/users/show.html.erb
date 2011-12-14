@@ -1,6 +1,6 @@
 <section>
   <div class="row">
-    <div class="span4 column sidebar left" id="profile_sidebar">
+    <div class="span5 column sidebar left" id="profile_sidebar">
       <div id="photo_section" class="editable profile_photo" data-placement="right" data-title="Change your photo" data-form="photo_form">
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
@@ -12,7 +12,7 @@
         <%= link_to "Block", "#" %>
       </div>
     </div>
-    <div class="span12 column profile_main_content">
+    <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
         <h1><%= @user.name %></h1>
         <div id="affiliations_section" class="editable" data-placement="below" data-title="Affiliation Details" data-form="affiliations_form">
@@ -117,9 +117,8 @@
         <%= f.text_field :major %>
       </div>
       <div class="input clearfix">
-        <%= f.submit "Save", :class => "btn primary save" %>
-        <span class="or">OR</span>
-        <%= link_to "Cancel", "#", :class => "close_modal" %>
+        <%= f.submit "Save Changes", :class => "btn primary save" %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
       </div>
     <% end %>
   </div>
@@ -132,9 +131,8 @@
         <%= f.text_field :gpa %>
       </div>
       <div class="input clearfix">
-        <%= f.submit "Save", :class => "btn primary save" %>
-        <span class="or">OR</span>
-        <%= link_to "Cancel", "#", :class => "close_modal" %>
+        <%= f.submit "Save Changes", :class => "btn primary save" %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
       </div>
     <% end %>
   </div>
@@ -147,9 +145,8 @@
         <%= f.text_area :bio, :rows => 10 %>
       </div>
       <div class="input clearfix">
-        <%= f.submit "Save", :class => "btn primary save" %>
-        <span class="or">OR</span>
-        <%= link_to "Cancel", "#", :class => "close_modal" %>
+        <%= f.submit "Save Changes", :class => "btn primary save" %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
       </div>
     <% end %>
   </div>
@@ -168,9 +165,8 @@
         </div>
       <% end %>
       <div class="input clearfix">
-        <%= f.submit "Save", :class => "btn primary save" %>
-        <span class="or">OR</span>
-        <%= link_to "Cancel", "#", :class => "close_modal" %>
+        <%= f.submit "Save Changes", :class => "btn primary save" %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
       </div>
     <% end %>
   </div>
@@ -184,8 +180,7 @@
       <div class="modal-body">
         <p>Do you want to drop <%= course.course.title %>?</p>
         <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
-        <span class="or">OR</span>
-        <%= link_to "Cancel", "#", :class => "close_modal", "data-id" => "course_#{course.id}_modal" %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal", "data-id" => "course_#{course.id}_modal" %>
       </div>
     </div>
   <% end %>
