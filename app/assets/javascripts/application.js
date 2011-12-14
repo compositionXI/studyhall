@@ -147,5 +147,9 @@ $(document).ready(function(){
       $("#quick_search").slideUp();
     }, 500);
   });
+  
+  if (!Modernizr.input.placeholder) {
+      $("#search_query").placeholder();
+  }
 });
 
