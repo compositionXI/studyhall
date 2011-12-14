@@ -1,6 +1,12 @@
 <li class="<%= note_item.html_class %> show grid" id="<%= note_item.html_id %>" data-class="<%= note_item.class_name %>" data-id="<%= note_item.id %>" data-href="<%= url_for note_item.url_params %>">
   <div class="background_container"></div>
-  <span class="name"><%= truncate note_item.name, :length => 90 %></span>
+  <span class="name">
+    <%= truncate note_item.name, :length => 90 %>
+    <% if note_item.notebook? && !note_item.content.course.nil? %>
+      <br/>
+      <em><%= note_item.content.course.compact_name %></em>
+    <% end %>
+  </span>
   <div class="list_data">
     <%= link_to note_item.name, note_item.url_params, class: 'name' %><a href="#" class="selector"></a>
     <p class="course_name"><%= note_item.course_name %></p>
