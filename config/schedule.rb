@@ -27,3 +27,7 @@ every 30.days do
   runner "rake:campus_news:prune"
 end
 
+every 24.hours do
+  runner "rake:studyhall:remove_old_searches"
+end
+
