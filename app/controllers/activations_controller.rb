@@ -1,9 +1,29 @@
 class ActivationsController < ApplicationController
 
   before_filter :require_no_user
-  before_filter :load_user_using_perishable_token, :only => [:create]
+  before_filter :load_user_using_perishable_token, :only => [:update]
+  
+  def new
+  end
 
   def create
+    @user = User.find_by_email(params[:email])
+    if @user
+      unless @user.active
+        @user.deliver_activation_instructions!
+        flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email."
+        redirect_to root_url
+      else
+        flash[:error] = "The account with this email is already activated."
+        render :action => :new
+      end
+    else
+      flash[:error] = "No user was found with that email address."
+      render :action => :new
+    end
+  end
+
+  def update
     if @user.activate!
       flash[:notice] = "Your account has been activated!"
       UserSession.create(@user, false) # Log user in manually

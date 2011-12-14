@@ -93,9 +93,10 @@ Studyhall::Application.routes.draw do
   
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
-  match '/activate/:id' => 'activations#create', :as => :activate
+  resources :activations, :only => [:new, :update, :create]
+  match '/activate/:id' => 'activations#update', :as => :activate
   match '/admin_data', :to => 'admin_data/home#index', :as => 'admin_data_root'
-  
+
   scope constraints: lambda{|request| !request.session[:user_credentials_id].blank? } do
     root to: 'home#index'
   end

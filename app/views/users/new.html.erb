@@ -1,5 +1,10 @@
 <div class="row show-grid">
   <div class="span8 columns offset4">
+    <% if flash[:error] %>
+      <div class="alert alert-message error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
     <h3>Sign Up</h3>
     <div>
       <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
