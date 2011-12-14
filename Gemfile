@@ -9,7 +9,7 @@ gem 'authlogic'
 gem 'omniauth' # for facebook
 gem 'rails3-generators'
 gem 'opentok'
-gem "paperclip", "~> 2.4"
+gem "paperclip", "~> 2.4.4"
 gem 'aws-s3'
 gem 'rest-client'
 gem 'has_mailbox'

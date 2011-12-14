@@ -8,9 +8,11 @@ class User < ActiveRecord::Base
   acts_as_voteable
   has_mailbox
 
+  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
-  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+
   has_many :notebooks
   has_many :notes
   has_many :enrollments
