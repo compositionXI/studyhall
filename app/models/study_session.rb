@@ -67,4 +67,8 @@ class StudySession < ActiveRecord::Base
   def created_at_formatted(format="%d/%m/%Y")
     self.created_at.strftime(format)
   end
+  
+  def presentation
+    name.blank? ? created_at_formatted : name
+  end
 end

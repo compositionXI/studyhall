@@ -14,7 +14,7 @@
                 Notebook: <%= link_to(post.notebook.try(:name), notebook_notes_path(post.notebook)) %>
               <% end %>
               <% if post.study_session_id && post.study_session %>
-                Studyhall: <%= link_to(post.study_session.created_at.strftime("%d/%m/%Y"), study_session_path(post.study_session)) %>
+                Studyhall: <%= link_to(post.study_session.presentation, study_session_path(post.study_session)) %>
               <% end %>
             </div>
             <div class="post_comment">
