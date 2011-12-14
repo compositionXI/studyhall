@@ -7,12 +7,24 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:school_id, :number]
 
   searchable :auto_index => true, :auto_remove => true do
-    text :title, :department, :derived_name
+    text :title
+    text :department
+    text :derived_name
+    text :school_name
+    text :offering_instructors
     integer :school_id
   end
 
   def derived_name
     "#{department} #{number} - #{title}"
+  end
+  
+  def school_name
+    school.name
+  end
+  
+  def offering_instructors
+    offerings.map {|o| o.instructor.full_name}.join(" ")
   end
 
 end

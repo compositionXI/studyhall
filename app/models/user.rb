@@ -43,9 +43,17 @@ class User < ActiveRecord::Base
 
   searchable :auto_index => true, :auto_remove => true do
     text :name
+    text :school_name
+    text :course_names
+    text :fraternity
+    text :sorority
+    text :extracurriculars
+    text :major
+    text :bio
     string :name
     integer :school_id
     integer :plusminus
+    boolean :shares_with_everyone
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
@@ -81,6 +89,14 @@ class User < ActiveRecord::Base
   
   def name
     full_name
+  end
+  
+  def school_name
+    school.name
+  end
+  
+  def course_names
+    courses.map(&:title).join(" ")
   end
 
   def voted_for?(user)
