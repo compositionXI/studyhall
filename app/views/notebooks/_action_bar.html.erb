@@ -17,9 +17,9 @@
         <% if @notebook.new_record? %>
           <span>New Notebook</span>
         <% elsif @notebook.owner == current_user %>
-          <span><%= link_to 'All Items', notes_path %> &raquo; <%= @notebook.name %></span>
+          <span><%= link_to 'All Items', notes_path %> &raquo; <%= truncate(@notebook.name, :length => 45) %></span>
         <% else %>
-          <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= @notebook.name %></span>
+          <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= truncate(@notebook.name, :length => 30) %></span>
         <% end %>
       </h3>
     <% end %>

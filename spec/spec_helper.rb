@@ -28,11 +28,13 @@ end
 
 def test_user(options={})
   uid = User.last ? (User.last.id + 1) : 1
-  user = User.create(options.merge({:name => "Test User #{uid}", 
-                             :login => "testlogin#{uid}", 
+  user = User.create(options.merge({
+                             :first_name => "Test #{uid}", 
+                             :last_name => "User #{uid}",
                              :email => "test#{uid}@example.com", 
                              :password => "test", 
-                             :password_confirmation => "test"}))
+                             :custom_url => "custom_url_#{uid}"
+                             }))
   raise "Could not save test user: #{user.errors.full_messages}" if user.new_record?
   user
 end

@@ -20,6 +20,11 @@ set :keep_releases, 5
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/deploy/rails_apps/#{application}"
 
+# Set up SSH key forwarding
+set :ssh_options, { :forward_agent => true }
+before "deploy", "deploy:setup_ssh"
+
+
 #role :web, "your web-server here"                          # Your HTTP server, Apache/etc
 #role :app, "your app-server here"                          # This may be the same as your `Web` server
 #role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
@@ -38,6 +43,11 @@ set :deploy_to, "/home/deploy/rails_apps/#{application}"
 # end
 
 namespace :deploy do
+  desc "shell out and setup the keys so they can be forwarded"
+  task :setup_ssh, :except => { :no_release => true } do
+    `ssh-add`
+  end
+
   desc "symlink config files and the solr/ directory"
   task :symlinkconfigs, :roles => :app do
     run <<-CMD
