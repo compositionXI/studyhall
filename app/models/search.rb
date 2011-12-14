@@ -2,11 +2,27 @@ class Search < ActiveRecord::Base
   belongs_to :user
   
   def users
-    @users ||= find_users
+    @users ||= find_users(keywords)
+  end
+  
+  def courses
+    @courses ||= find_courses(keywords)
+  end
+  
+  def notes
+    @notes ||= find_notes(keywords)
   end
   
   def users_count
     users.results.size
+  end
+  
+  def courses_count
+    courses.results.size
+  end
+  
+  def notes_count
+    notes.results.size
   end
   
   def any?
@@ -23,26 +39,24 @@ class Search < ActiveRecord::Base
     return "notes" if notes.results.any?
   end
 
-  private
-
-  def find_users
+  def find_users(query='')
     User.search do
-      fulltext keywords
+      keywords query
       order_by :name, :asc
       paginate :page => 1, :per_page => 10
     end
   end
   
-  def find_courses
+  def find_courses(query='')
     Course.search do
-      fulltext keywords
+      fulltext query
       paginate :page => 1, :per_page => 10
     end
   end
 
-  def find_notes
+  def find_notes(query='')
     Note.search do
-      fulltext keywords
+      fulltext query
       with :shareable, 1
       paginate :page => 1, :per_page => 10
     end

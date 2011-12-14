@@ -1,10 +1,11 @@
 class SearchesController < ApplicationController
   
   def create
-    @search = Search.new(params[:search])
-    @search.models = params[:models]
-    @search.process(:page => params[:page])
-    @results = @search.results
+    if params[:search][:keywords].present?
+      @search = current_user.searches.create!(params[:search])
+    else
+      redirect_to :back
+    end
   end
 
 end

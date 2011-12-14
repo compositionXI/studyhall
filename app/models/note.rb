@@ -8,7 +8,7 @@ class Note < ActiveRecord::Base
   
   scope :unsorted, lambda { Note.where(:notebook_id => nil) }
 
-  searchable do
+  searchable :auto_index => true, :auto_remove => true do
     text :name, :content
     boolean :shareable
   end
