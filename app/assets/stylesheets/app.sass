@@ -1691,9 +1691,14 @@ header.topbar
                   background-position: -240px -3px
                 &.red
                   background-position: 0 -3px
-              &.notebook
-                background: url(asset-path('notebook-sprite.png','image')) no-repeat -660px 0px transparent
-                padding: 0 20px 0 35px
+              &.note
+                background: url(asset-path('notebook-sprite.png','image')) no-repeat -790px 0px transparent
+                padding: 35px 15px 0 17px
+                text-align: center
+                span
+                  color: #333
+                  vertical-align: top
+                  width: 132px
               &.study_session
                 padding-top: 15px
                 .attendees
@@ -1701,7 +1706,7 @@ header.topbar
                 .date
                   color: #707070
                   height: auto
-                  display: inline
+                  display: block 
               span
                 color: #FFF
                 display: table-cell
@@ -1710,10 +1715,10 @@ header.topbar
               &:hover
                 span, a.name
                   text-decoration: underline
-            &.course_list
+            &.scrollPane
               height: 400px
               width: 645px
-              overflow-y: scroll
+            &.course_list
               .course
                 a
                   display: none

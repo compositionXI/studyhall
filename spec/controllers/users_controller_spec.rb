@@ -92,6 +92,53 @@ describe UsersController do
     end
   end
 
+  describe "GET 'show'" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+      @user.stub!(:googleable?).and_return(true)
+      User.stub!(:find_by_custom_url).and_return(@user)
+    end
+    it "should redirect to profile path" do
+      get :show, :id => @user.id
+      response.should redirect_to profile_path(@user.custom_url)
+    end
+    context "when the user is logged in" do
+      before :each do
+        controller.stub!(:current_user).and_return(FactoryGirl.create(:user))
+      end
+      it "should be successful" do
+        get :show, :id => @user.custom_url
+        response.should be_success
+      end
+      it "should render the show template" do
+        get :show, :id => @user.custom_url
+        response.should render_template :show
+      end
+      it "should set the action_bar_message flash" do
+        get :show, :id => @user.custom_url
+        flash[:action_bar_message].should == "#{@user.name} - #{@user.major}"
+      end
+    end
+    context "when the user is not logged in" do
+      before :each do
+        controller.stub!(:current_user).and_return(nil)
+      end
+      context "and when the requested user is not googleable" do
+        before :each do
+          @user.stub!(:googleable?).and_return(false)
+        end
+        it "should redirect to login page" do
+          get :show, :id => @user.custom_url
+          response.should redirect_to login_path
+        end
+        it "should set the notice flash" do
+          get :show, :id => @user.custom_url
+          flash[:notice].should == "You must log in to view that profile"
+        end
+      end
+    end
+  end
+
   private
   def post_user(attributes = {})
     post :create, :user => attributes
