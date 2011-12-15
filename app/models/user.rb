@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_many :study_sessions, :through => :session_invites
   has_many :posts
   has_many :activity_messages
+  
+  has_many :searches
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
@@ -45,11 +47,19 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
 
-  searchable do
+  searchable :auto_index => true, :auto_remove => true do
     text :name
+    text :school_name
+    text :course_names
+    text :fraternity
+    text :sorority
+    text :extracurriculars
+    text :major
+    text :bio
     string :name
     integer :school_id
     integer :plusminus
+    boolean :shares_with_everyone
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
@@ -85,6 +95,14 @@ class User < ActiveRecord::Base
   
   def name
     full_name
+  end
+  
+  def school_name
+    school.name
+  end
+  
+  def course_names
+    courses.map(&:title).join(" ")
   end
 
   def voted_for?(user)

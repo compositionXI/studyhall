@@ -1,8 +1,8 @@
 module SearchesHelper
   def courses_list(user)
     user.offerings.map do |offering|
-      link_to(offering.course.derived_name, class_path(offering)).html_safe
-    end.to_sentence
+      link_to(offering.course.derived_name, class_path(offering))
+    end.to_sentence.html_safe
   end
 
   def offerings_list(course)
