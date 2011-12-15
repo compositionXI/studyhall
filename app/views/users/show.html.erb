@@ -212,8 +212,13 @@
 
     $(".users-show").delegate("a.close_modal","click",function(e){
       hidePopovers();
-      console.log($(this).data("id"));
+      //console.log($(this).data("id"));
       $("#"+$(this).data("id")).modal("hide");
     });
+    
+    <% if params[:mode] == 'edit' %>
+      $(".buttons.left .edit_button").trigger('click');
+    <% end %>
   });
 </script>
+

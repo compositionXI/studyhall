@@ -126,7 +126,7 @@ class UsersController < ApplicationController
   def fetch_user
     if params[:id] =~ /^\d+$/
       @user =  User.find(params[:id])
-      redirect_to profile_path(@user.custom_url) if @user && action_name == "show"
+      redirect_to profile_path(@user.custom_url, :mode => params[:mode]) if @user && action_name == "show"
     elsif params[:user_id]
       @user =  User.find(params[:user_id])
     else # (was: elsif params[:id] =~ /^[a-z0-9]+$/)
