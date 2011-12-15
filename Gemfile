@@ -58,6 +58,7 @@ group :cucumber do
     gem 'cucumber'
     gem 'spork'
     gem 'launchy'
+    gem 'sunspot_test'
 end
 
 # Use unicorn as the web server
