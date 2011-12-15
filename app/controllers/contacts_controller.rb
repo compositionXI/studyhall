@@ -16,9 +16,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
 
     if @contact.save
-      if current_user
-        redirect_to root_path, notice: 'Contact was successfully created.'
-      end
+      redirect_to root_path, notice: 'Contact was successfully created.'
     else
       render action: "new"
     end
