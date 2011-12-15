@@ -109,4 +109,14 @@ class Notifier < ActionMailer::Base
       date:    Time.now
     )
   end
+
+  def contact_form(contact)
+    @contact = contact
+    mail(
+      subject: "StudyHall Contact Form from [#{@contact.name}]",
+      from:    'noreply@studyhall.com',
+      to:      CONTACT_FORM_RECIPIENT,
+      date:    Time.now
+    )
+  end
 end

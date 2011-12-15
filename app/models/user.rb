@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_mailbox
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+  before_post_process :paperclip_hack_filename
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
@@ -26,6 +27,8 @@ class User < ActiveRecord::Base
   has_many :study_sessions, :through => :session_invites
   has_many :posts
   has_many :activity_messages
+  
+  has_many :searches
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
@@ -44,11 +47,19 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
 
-  searchable do
+  searchable :auto_index => true, :auto_remove => true do
     text :name
+    text :school_name
+    text :course_names
+    text :fraternity
+    text :sorority
+    text :extracurriculars
+    text :major
+    text :bio
     string :name
     integer :school_id
     integer :plusminus
+    boolean :shares_with_everyone
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
@@ -84,6 +95,14 @@ class User < ActiveRecord::Base
   
   def name
     full_name
+  end
+  
+  def school_name
+    school.name
+  end
+  
+  def course_names
+    courses.map(&:title).join(" ")
   end
 
   def voted_for?(user)
@@ -256,11 +275,47 @@ class User < ActiveRecord::Base
     (recieved + sent).sort { |a, b| b.created_at <=> a.created_at }
   end
   
+  def alpha_ordered_notebooks
+    compact_names = notebooks.collect{|n| n.course.try(:compact_name)}.uniq.compact.sort
+    ordered_notebooks = []
+    compact_names.each do |cn|
+      notebook_for_course = []
+      notebooks.each do |notebook|
+        notebook_for_course << notebook if notebook.course.try(:compact_name) == cn
+      end
+      ordered_notebooks << notebook_for_course.sort_by!{|n| n.name}
+    end
+    ordered_notebooks << notebooks.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
+    ordered_notebooks.flatten.compact
+  end
+  
   def get_sender_id(attributes)
     sender_id = attributes[:sender_id] || self.id
     attributes.delete :sender_id if attributes[:sender_id]
     sender_id
   end
+
+
+  private
+  # The following two methods are implemnented as a workaround for the issue 
+  # described in Paperclip Issue 603 on Github. 
+  # Namely: nobody wants to make Paperclip responsible for storing URL friendly
+  # filenames because it seems like the wrong place to implement that functioanlity. 
+  # Lazy Thoughtbotters. 
+  def paperclip_hack_filename
+    extension = File.extname(avatar_file_name).gsub(/^\.+/, '')
+    filename = avatar_file_name.gsub(/\.#{extension}$/, '')
+    self.avatar.instance_write(:file_name, "#{hack_filename(filename)}.#{hack_filename(extension)}")
+  end
+  def hack_filename(s)
+    s.downcase!
+    s.gsub!(/'/, '')
+    s.gsub!(/[^A-Za-z0-9]+/, ' ')
+    s.strip!
+    s.gsub!(/\ +/, '-')
+    return s
+  end
+
 end
 
 class User::NotAuthorized < StandardError; end

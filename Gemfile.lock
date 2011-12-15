@@ -326,6 +326,9 @@ GEM
       sunspot (= 1.2.1)
     sunspot_test (0.4.0)
       sunspot_rails (>= 1.2.1)
+    sunspot_with_kaminari (0.1.0)
+      kaminari
+      sunspot_rails
     systemu (2.2.0)
     term-ansicolor (1.0.6)
     therubyracer (0.9.4)
@@ -398,6 +401,7 @@ DEPENDENCIES
   spork
   sunspot_rails
   sunspot_test
+  sunspot_with_kaminari (~> 0.1)
   therubyracer
   thumbs_up
   uglifier

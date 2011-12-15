@@ -4,6 +4,8 @@ class SharingsController < ApplicationController
 
   def new
     @sharing = Sharing.new
+    @position = params[:position] ||= "below-right"
+    @object_id = params[:object_id]
   end
 
   def create

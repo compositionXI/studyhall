@@ -1,6 +1,6 @@
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
-<%= form_for current_user, :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
+<%= form_for (@user || current_user), :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field nil, :name => "redirect_back", :value => "profile_wizard" %>
   <div id="profile_completion_meter" class="popover right">
@@ -40,7 +40,6 @@
     </div>
     <div class="clearfix buttons">
       <%= f.submit "Submit", :class => "btn primary" %>
-      or <%= link_to 'Do This Later', home_index_path %>
     </div>
   </fieldset>
 <% end %>

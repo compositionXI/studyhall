@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:edit, :update, :account]
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard, :account]
   before_filter :set_action_bar, :only => [:show, :edit]
+  before_filter :check_fisrt_last_name, :only => :profile_wizard
+  skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update]
   
   def index
     @users = User.all
@@ -61,7 +63,7 @@ class UsersController < ApplicationController
       end
     else
       if params[:redirect_back] == "profile_wizard"
-        render :action => :profile_wizard
+        render :action => :profile_wizard, :layout => 'plain'
       else
         render :action => :account
       end
@@ -79,6 +81,7 @@ class UsersController < ApplicationController
   end
   
   def profile_wizard
+    render :layout => 'plain'
   end
   
   def completion_percentage
@@ -134,5 +137,11 @@ class UsersController < ApplicationController
   
   def require_no_user_or_admin
     require_admin if current_user
+  end
+  
+  def check_fisrt_last_name
+    unless (current_user.first_name.blank? && current_user.last_name.blank?)
+      redirect_to user_path(current_user)
+    end
   end
 end

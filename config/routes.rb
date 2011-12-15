@@ -45,7 +45,7 @@ Studyhall::Application.routes.draw do
   end
 
   resources :static_pages, :only => [:show]
-  resources :contacts  
+  resources :contacts, :only => [:new, :create,:index]
   get "/messages/:mailbox" => "messages#index", :as => :mailbox, :constraints => {:mailbox => /(inbox|archive)/}
   resources :users do
     get 'extracurriculars'
@@ -83,8 +83,9 @@ Studyhall::Application.routes.draw do
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
   resources :sharings, only: [:new, :create]
-  post "/searches" => "searches#create", :as => "search", :format => :html
-  get "/searches" => "searches#create", :as => "search", :format => :js
+  resources :searches, only: [:show, :create]
+
+  # get "/searches" => "searches#create", :as => "search", :format => :js
 
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'

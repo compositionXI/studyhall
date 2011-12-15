@@ -8,8 +8,8 @@ class Backpack
   def contents(options={})
     @options = options
     @notes = @user.notes.unsorted.select([:id, :created_at]).all.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
-    @notebooks = @user.notebooks.select([:id, :created_at]).all.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
-    @notables = (@notes + @notebooks).sort_by(&:created_at).reverse
+    @notebooks = @user.alpha_ordered_notebooks.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
+    @notables = (@notes.sort_by(&:created_at).reverse + @notebooks)
     @start_index, @end_index = nil, nil
     fetch_contents(@notables[start_index..end_index])
   end

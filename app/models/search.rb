@@ -1,77 +1,37 @@
-class Search
+class Search < ActiveRecord::Base
+  belongs_to :user
   
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
-
-  attr_accessor :query, :results, :models
-
-  def initialize(options={})
-    self.results = Results.new
-    options ||= {}
-    options.each_pair do |key,value|
-      key = "#{key}="
-      self.send(key,value) if self.respond_to? key
-    end
+  def users(page=nil)
+    find_users(keywords, page)
   end
-
-  def process(options)
-    if models.blank?
-      results.users = find_users
-      results.courses = find_courses
-      results.notes = find_notes
-    else
-      models.split(",").each do |model|
-        results.send("#{model}s=", send("find_#{model}s"))
-      end
-    end
+  
+  def courses(page=nil)
+    find_courses(keywords, page)
   end
-
-  def persisted?
-    false
+  
+  def notes(page=nil)
+    find_notes(keywords, page)
   end
-
-  def find_users
-    User.search do
-      keywords query
-      order_by :name, :asc
-      paginate :page => 1, :per_page => 10
-    end
+  
+  def users_count
+    users.results.size
   end
-
-  def find_courses
-    Course.search do
-      fulltext query
-      paginate :page => 1, :per_page => 10
-    end
+  
+  def courses_count
+    courses.results.size
   end
-
-  def find_notes
-    Note.search do
-      fulltext query
-      with :shareable, 1
-      paginate :page => 1, :per_page => 10
-    end
+  
+  def notes_count
+    notes.results.size
   end
-
-end
-
-class Results
-
-  attr_accessor :users, :courses, :notes
-
-  def initialize
-    self.users = []
-    self.courses = []
-    self.notes = []
-  end
-
+  
   def any?
-    (users.size + courses.size + notes.size) > 0
+    size > 0
   end
 
   def size
-    users.size + courses.size + notes.size
-  end
+    users_count + courses_count + notes_count
+  end  
 
   def first_group
     return "people" if users.results.any?
@@ -79,16 +39,27 @@ class Results
     return "notes" if notes.results.any?
   end
 
-  def users_count
-    users.results.size
+  def find_users(query='', page)
+    User.search do
+      keywords query
+      order_by :name, :asc
+      paginate :page => page, :per_page => 1 if page
+    end
+  end
+  
+  def find_courses(query='', page)
+    Course.search do
+      fulltext query
+      paginate :page => page, :per_page => 1 if page
+    end
   end
 
-  def courses_count
-    courses.results.size
+  def find_notes(query='', page)
+    Note.search do
+      fulltext query
+      with :shareable, 1
+      paginate :page => page, :per_page => 1 if page
+    end
   end
-
-  def notes_count
-    notes.results.size
-  end
-
+  
 end
