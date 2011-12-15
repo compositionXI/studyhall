@@ -18,7 +18,7 @@ class School < ActiveRecord::Base
     domain = email.split("@")[1] rescue nil
     found_school = School.find_by_domain_name(domain)
     return found_school if found_school
-    if Rails.env.development? || Rails.env.staging?
+    if Rails.env.development? || Rails.env.test? || Rails.env.staging?
       School.last
     else
       nil

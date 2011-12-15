@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:edit, :update, :account]
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard, :account]
   before_filter :set_action_bar, :only => [:show, :edit]
-  before_filter :check_fisrt_last_name, :only => :profile_wizard
+  before_filter :check_first_last_name, :only => :profile_wizard
   skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update]
   
   def index
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
     require_admin if current_user
   end
   
-  def check_fisrt_last_name
+  def check_first_last_name
     unless (current_user.first_name.blank? && current_user.last_name.blank?)
       redirect_to user_path(current_user)
     end

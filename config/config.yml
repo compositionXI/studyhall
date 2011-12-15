@@ -1,12 +1,12 @@
 development:
-  host: localhost:3001
+  host: localhost:3000
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
   facebook:
-    app_id: 235310463190965
-    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
+    app_id: 212476088833208 
+    app_secret: f19bacc518befd7f113963024b04adf3
 
 test:
   opentok:
@@ -14,8 +14,8 @@ test:
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
   facebook:
-    app_id: 235310463190965
-    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
+    app_id: 212476088833208
+    app_secret: f19bacc518befd7f113963024b04adf3
 
 staging:
   host: studyhall.intridea.com
