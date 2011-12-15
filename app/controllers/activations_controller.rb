@@ -4,6 +4,7 @@ class ActivationsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:update]
   
   def new
+    @email = params[:email] ? params[:email] : nil
   end
 
   def create

@@ -28,9 +28,9 @@ class UsersController < ApplicationController
       @user_with_same_email = User.find_by_email(@user.email) if @user.errors[:email].include?('has already been taken')
       if @user_with_same_email
         if @user_with_same_email.active
-          flash[:error] = "This email has already signed up. Click <a href='/password_resets/new'>here</a> to reset your password if you forget it.".html_safe
+          flash[:error] = "There is already an account with that email address. You can <a href='/password_resets/new'>reset your password</a> if you forget it.".html_safe
         else
-          flash[:error] = "This email has already signed up. Click <a href='/activations/new'>here</a> to get th to get the activation email.".html_safe
+          flash[:error] = "There is already an account with that email address. If you did not receive the activation message, we can <a href='/activations/new?email=#{@user_with_same_email.email}'>send it to you again.</a>".html_safe
         end
       end
     end

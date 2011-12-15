@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111115232346) do
+ActiveRecord::Schema.define(:version => 20111214021915) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -222,6 +222,14 @@ ActiveRecord::Schema.define(:version => 20111115232346) do
     t.string   "rss_link"
     t.string   "domain_name"
     t.boolean  "active"
+  end
+
+  create_table "searches", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "keywords"
+    t.text     "advanced_query"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "session_files", :force => true do |t|
