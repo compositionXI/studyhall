@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_mailbox
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+  before_post_process :paperclip_hack_filename
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
@@ -261,6 +262,28 @@ class User < ActiveRecord::Base
     attributes.delete :sender_id if attributes[:sender_id]
     sender_id
   end
+
+
+  private
+  # The following two methods are implemnented as a workaround for the issue 
+  # described in Paperclip Issue 603 on Github. 
+  # Namely: nobody wants to make Paperclip responsible for storing URL friendly
+  # filenames because it seems like the wrong place to implement that functioanlity. 
+  # Lazy Thoughtbotters. 
+  def paperclip_hack_filename
+    extension = File.extname(avatar_file_name).gsub(/^\.+/, '')
+    filename = avatar_file_name.gsub(/\.#{extension}$/, '')
+    self.avatar.instance_write(:file_name, "#{hack_filename(filename)}.#{hack_filename(extension)}")
+  end
+  def hack_filename(s)
+    s.downcase!
+    s.gsub!(/'/, '')
+    s.gsub!(/[^A-Za-z0-9]+/, ' ')
+    s.strip!
+    s.gsub!(/\ +/, '-')
+    return s
+  end
+
 end
 
 class User::NotAuthorized < StandardError; end
