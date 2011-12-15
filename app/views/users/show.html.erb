@@ -45,11 +45,11 @@
       <div id="profile_user_items">
         <div id="profile_tabs">
           <ul class="tabs">
-            <li class="active"><a data-rel="courses_tab" href="#">Courses <span>(<%= @user.offerings.count %>)</span></a></li>
-            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notebooks.viewable_by(current_user).count %>)</span></a></li>
+            <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
+            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
             <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
           </ul>
-          <ul id="courses_tab" class="courses course_list tab_contents editable">
+          <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">
             <% @user.offerings.each do |course| %>
               <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
                 <span><%= course.course.title %></span>
@@ -59,14 +59,14 @@
               </li>
             <% end %>
           </ul>
-          <ul id="notes_tab" class="notes notebook_list tab_contents" style="display:none">
-            <% @user.notebooks.viewable_by(current_user).each do |notebook| %>
-              <li data-rel="<%= notebook_notes_url(notebook) %>" class="linked_item notebook">
-                <span><%= notebook.name %></span>
+          <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
+            <% @user.notes.viewable_by(current_user).each do |note| %>
+              <li data-rel="<%= note_url(note) %>" class="linked_item note">
+                <span><%= note.name %></span>
               </li>
             <% end %>
           </ul>
-          <ul id="studyhalls_tab" class="studyhalls notebook_list tab_contents" style="display:none">
+          <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
             <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
               <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
                 <div class="attendees">
@@ -207,8 +207,16 @@
     });
   }
 
-  $(document).ready(function(){
+  var decreaseCourseCount = function() {
+    var html = $('.course_count').html();  
+    var courseCount = parseInt(html.slice(1, html.length - 1));
+    var courseCount = (courseCount) ? courseCount : 0;
+    if(courseCount > 0) {
+      $('.course_count').html("(" + (courseCount - 1) + ")");
+    }
+  }
 
+  $(document).ready(function(){
     $(".tabs li").each(function(){
       var li = $(this);
       var link = li.children().first();
@@ -220,11 +228,12 @@
         clicked_link.parent().addClass("active");
         $(".tab_contents").hide();
         $("#"+clicked_link.data("rel")).show();
+        $("#"+clicked_link.data("rel")).jScrollPane();
         e.preventDefault();
       });
     });
 
-    $(".course_list").jScrollPane();
+    $(".scrollPane").jScrollPane();
 
     $(".users-show").delegate(".edit .drop_course_link","click",function(e){
       var modal_id = "#course_" + $(this).data("course_id") + "_modal";
