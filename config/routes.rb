@@ -45,7 +45,7 @@ Studyhall::Application.routes.draw do
   end
 
   resources :static_pages, :only => [:show]
-  resources :contacts  
+  resources :contacts, :only => [:new, :create,:index]
   get "/messages/:mailbox" => "messages#index", :as => :mailbox, :constraints => {:mailbox => /(inbox|archive)/}
   resources :users do
     get 'extracurriculars'
