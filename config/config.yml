@@ -1,4 +1,5 @@
 development:
+  contact_form_recipient: maggie@intridea.com
   host: localhost:3000
   opentok:
     key: 3277692
@@ -9,6 +10,7 @@ development:
     app_secret: f19bacc518befd7f113963024b04adf3
 
 test:
+  contact_form_recipient: maggie@intridea.com
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
@@ -18,6 +20,7 @@ test:
     app_secret: f19bacc518befd7f113963024b04adf3
 
 staging:
+  contact_form_recipient: maggie@intridea.com
   host: studyhall.intridea.com
   opentok:
     key: 5822951
@@ -28,6 +31,7 @@ staging:
     app_secret: 32979dcdcb2f545df4488dc28899ba1e
 
 production:
+  contact_form_recipient: ross@studyhall.com
   host: studyhall.com
   opentok:
     key: 5822951

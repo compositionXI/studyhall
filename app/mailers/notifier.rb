@@ -115,7 +115,7 @@ class Notifier < ActionMailer::Base
     mail(
       subject: "StudyHall Contact Form from [#{@contact.name}]",
       from:    'noreply@studyhall.com',
-      to:      CONTACT_FORM_RECIPIENT,
+      to:      APP_CONFIG['contact_form_recipient'],
       date:    Time.now
     )
   end
