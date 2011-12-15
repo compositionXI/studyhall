@@ -276,16 +276,17 @@ class User < ActiveRecord::Base
   end
   
   def alpha_ordered_notebooks
-    compact_names = notebooks.collect{|n| n.course.compact_name}.uniq.sort
+    compact_names = notebooks.collect{|n| n.course.try(:compact_name)}.uniq.compact.sort
     ordered_notebooks = []
     compact_names.each do |cn|
       notebook_for_course = []
       notebooks.each do |notebook|
-        notebook_for_course << notebook if notebook.course.compact_name == cn
+        notebook_for_course << notebook if notebook.course.try(:compact_name) == cn
       end
       ordered_notebooks << notebook_for_course.sort_by!{|n| n.name}
     end
-    ordered_notebooks.flatten
+    ordered_notebooks << notebooks.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
+    ordered_notebooks.flatten.compact
   end
   
   def get_sender_id(attributes)

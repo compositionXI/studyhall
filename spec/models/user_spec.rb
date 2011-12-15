@@ -111,9 +111,10 @@ describe User do
       let(:course) {Factory.create(:course)}
       let(:notebook1) {Factory.create(:notebook, name: "Chem", course: course, user: user)}
       let(:notebook2) {Factory.create(:notebook, name: "Bio", course: course,  user: user)}
+      let(:notebook3) {Factory.create(:notebook, name: "Accounting", course: nil,  user: user)}
     
     it "should order notebooks alphabetically" do
-      ordered_notebooks = [notebook2, notebook1]
+      ordered_notebooks = [notebook2, notebook1, notebook3]
       user.alpha_ordered_notebooks.should == ordered_notebooks
     end
   end
