@@ -5,28 +5,18 @@ class ContactsController < ApplicationController
   layout "contact" 
 
   def index
-    @contacts = Contact.all
-  end
-
-  def show
+    redirect_to :action => :new
   end
 
   def new
     @contact = Contact.new
   end
 
-  def edit
-  end
-
   def create
     @contact = Contact.new(params[:contact])
 
     if @contact.save
-      if current_user
-        redirect_to @contact, notice: 'Contact was successfully created.'
-      else
-        redirect_to root_path, notice: 'Contact was successfully created.'
-      end
+      redirect_to root_path, notice: 'Contact was successfully created.'
     else
       render action: "new"
     end
