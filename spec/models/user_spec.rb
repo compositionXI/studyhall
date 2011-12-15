@@ -105,5 +105,16 @@ describe User do
       @user3.destroy
     end
   end
+  
+  context "that has notebooks" do
+      let(:user) {Factory.create(:user)}
+      let(:course) {Factory.create(:course)}
+      let(:notebook1) {Factory.create(:notebook, name: "Chem", course: course, user: user)}
+      let(:notebook2) {Factory.create(:notebook, name: "Bio", course: course,  user: user)}
     
+    it "should order notebooks alphabetically" do
+      ordered_notebooks = [notebook2, notebook1]
+      user.alpha_ordered_notebooks.should == ordered_notebooks
+    end
+  end
 end
