@@ -116,7 +116,7 @@ $(document).ready ->
     e.stopPropagation()
     e.preventDefault()
 
-  if $("body").hasClass("notes-index")
+  if $("body").hasClass("notes-index") || $("body").hasClass("notes-show")
     $(".note_items").delegate ".note_item.show","click", (e) ->
       window.location = $(this).data("href")
       e.stopPropagation()

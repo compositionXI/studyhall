@@ -1,6 +1,6 @@
 var button = $("#share_button");
 button.popover({trigger: "manual",
-  placement: "below-right",
+  placement: "<%=j @position %>",
   offset: 10,
   horizontalOffset: 25,
   html: true,
@@ -11,9 +11,13 @@ button.popover({trigger: "manual",
 button.popover("show");
 $("select.chzn-select").chosen();
 
-var selected_items = $.makeArray($(".selected").map(function(){
-  return $(this).prop("id");
-}));
+<% if @object_id %>
+  var selected_items = ["<%=j @object_id %>"];
+<% else %>
+  var selected_items = $.makeArray($(".selected").map(function(){
+    return $(this).prop("id");
+  }));
+<% end %>
 $("#sharing_object_ids").val(selected_items.join(","));
 
 var checkRequiredFields = function(){
