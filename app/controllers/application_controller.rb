@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages
+  before_filter :current_user, :fetch_static_pages, :require_first_last_name
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -45,6 +45,12 @@ class ApplicationController < ActionController::Base
       store_location
       redirect_to home_index_path
       return false
+    end
+  end
+  
+  def require_first_last_name
+    if current_user && (current_user.first_name.blank? || current_user.last_name.blank?)
+      redirect_to profile_wizard_user_path(current_user)
     end
   end
   
