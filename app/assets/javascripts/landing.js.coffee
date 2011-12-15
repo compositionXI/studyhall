@@ -208,4 +208,16 @@ $ ->
     landing.setup()
     landing.form_submit.click ->
       landing.formValidation(this) 
+    $(".email-container").twipsy({
+      placement: 'above'
+      offset: -18
+      title: ->
+        return ".edu email only"
+    })
+    $(".url-container").twipsy({
+      placement: 'above'
+      offset: -18
+      title: ->
+        return "We recommend, first_lastname, or firstlastname"
+    })
         
