@@ -2,8 +2,10 @@
   <%= link_to note.name, note, :class => "note_book" %>
   <div class="info_container">
     <dl class="info narrow">
-      <dt>Owner</dt>
-      <dd><%= link_to note.user.name, note.user %></dd>
+      <% if note.user %>
+        <dt>Owner</dt>
+        <dd><%= link_to note.user.name, note.user %></dd>
+      <% end %>
       <dt>Content</dt>
       <dd><div class="note_content"><%= note.content.html_safe %></div></dd>
     </dl>
