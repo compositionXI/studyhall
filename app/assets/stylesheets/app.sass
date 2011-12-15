@@ -1027,8 +1027,11 @@ header.topbar
         .notebook_expander
           visibility: hidden
         .name
+          font-family: museo-sans, "Helvetica", Arial, Sans-serif
           display: inline
           width: 100px
+          font-weight: bold
+          font-size: 14px
         .selector
           background: url(asset-path('uncheckmark.png','image')) no-repeat
           height: 17px
@@ -1691,9 +1694,14 @@ header.topbar
                   background-position: -240px -3px
                 &.red
                   background-position: 0 -3px
-              &.notebook
-                background: url(asset-path('notebook-sprite.png','image')) no-repeat -660px 0px transparent
-                padding: 0 20px 0 35px
+              &.note
+                background: url(asset-path('notebook-sprite.png','image')) no-repeat -790px 0px transparent
+                padding: 35px 15px 0 17px
+                text-align: center
+                span
+                  color: #333
+                  vertical-align: top
+                  width: 132px
               &.study_session
                 padding-top: 15px
                 .attendees
@@ -1701,7 +1709,7 @@ header.topbar
                 .date
                   color: #707070
                   height: auto
-                  display: inline
+                  display: block 
               span
                 color: #FFF
                 display: table-cell
@@ -1710,10 +1718,10 @@ header.topbar
               &:hover
                 span, a.name
                   text-decoration: underline
-            &.course_list
+            &.scrollPane
               height: 400px
               width: 645px
-              overflow-y: scroll
+            &.course_list
               .course
                 a
                   display: none
@@ -1902,6 +1910,9 @@ section.course_activity
     border-bottom: 5px solid $red
     border-left: 5px solid transparent
     border-right: 5px solid transparent
+  .twipsy.above
+    .twipsy-inner
+      background-color: $white
   footer
     margin: 0
   h1
@@ -1976,7 +1987,7 @@ section.course_activity
         width: 270px
     .url-container
       position: relative  
-      width: 380px
+      width: 300px
       #user_custom_url
         padding: 4px 10px 4px 98px
         width: 230px
@@ -1984,7 +1995,7 @@ section.course_activity
       input[type="submit"]
         margin: 0 
         position: absolute
-        right: 0
+        right: -80px
         width: auto
       .url-prefix
         +sans-serif-font(normal, 14px, normal)

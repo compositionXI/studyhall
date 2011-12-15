@@ -45,11 +45,11 @@
       <div id="profile_user_items">
         <div id="profile_tabs">
           <ul class="tabs">
-            <li class="active"><a data-rel="courses_tab" href="#">Courses <span>(<%= @user.offerings.count %>)</span></a></li>
-            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notebooks.viewable_by(current_user).count %>)</span></a></li>
+            <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
+            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
             <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
           </ul>
-          <ul id="courses_tab" class="courses course_list tab_contents editable">
+          <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">
             <% @user.offerings.each do |course| %>
               <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
                 <span><%= course.course.title %></span>
@@ -59,14 +59,14 @@
               </li>
             <% end %>
           </ul>
-          <ul id="notes_tab" class="notes notebook_list tab_contents" style="display:none">
-            <% @user.notebooks.viewable_by(current_user).each do |notebook| %>
-              <li data-rel="<%= notebook_notes_url(notebook) %>" class="linked_item notebook">
-                <span><%= notebook.name %></span>
+          <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
+            <% @user.notes.viewable_by(current_user).each do |note| %>
+              <li data-rel="<%= note_url(note) %>" class="linked_item note">
+                <span><%= note.name %></span>
               </li>
             <% end %>
           </ul>
-          <ul id="studyhalls_tab" class="studyhalls notebook_list tab_contents" style="display:none">
+          <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
             <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
               <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
                 <div class="attendees">
@@ -90,85 +90,19 @@
 </section>
 <div id="profile_forms" style="display:none">
   <div class="form" id="affiliations_form">
-    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_personal_info_form", :multipart => true} do |f| %>
-      <input type="hidden" name="form_id" value="affiliations_form">
-      <div class="input">
-        <%= f.label :School %>
-        <%= f.collection_select :school_id, School.all, :id, :name, {}, :class => "" %>
-      </div>
-      <!--div class="input">
-        <%= f.label :sports_and_clubs %>
-        <%= text_field_tag "extracurriculars_list", @user.extracurriculars_list, :class => "extracurriculars_list" %>
-      </div-->
-      <div class="clearfix input gender">
-        <%= f.label :Gender %>
-        <%= f.select( "gender", %w[Male Female], {:prompt => "Select"})%>
-      </div>
-      <div class="clearfix input fraternity <%= 'hide' if @user.female? %>">
-        <%= f.label :fraternity %>
-        <%= f.text_field :fraternity %>
-      </div>
-      <div class="clearfix input sorority <%= 'hide' if @user.male? %>">
-        <%= f.label :sorority %>
-        <%= f.text_field :sorority %>
-      </div>
-      <div class="clearfix input">
-        <%= f.label :'major/minor' %>
-        <%= f.text_field :major %>
-      </div>
-      <div class="input clearfix">
-        <%= f.submit "Save Changes", :class => "btn primary save" %>
-        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
-      </div>
-    <% end %>
+    <%= render :partial => 'affiliations_form', :locals => { :user => @user } %>
   </div>
 
   <div class="form" id="gpa_form">
-    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_gpa_form", :multipart => true} do |f| %>
-      <input type="hidden" name="form_id" value="gpa_form">
-      <div class="input">
-        <%= f.label :GPA %>
-        <%= f.text_field :gpa %>
-      </div>
-      <div class="input clearfix">
-        <%= f.submit "Save Changes", :class => "btn primary save" %>
-        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
-      </div>
-    <% end %>
+    <%= render :partial => 'gpa_form', :locals => { :user => @user } %>
   </div>
 
   <div class="form" id="bio_form">
-    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_bio_form", :multipart => true} do |f| %>
-      <input type="hidden" name="form_id" value="bio_form">
-      <div class="input">
-        <%= f.label :bio %>
-        <%= f.text_area :bio, :rows => 10 %>
-      </div>
-      <div class="input clearfix">
-        <%= f.submit "Save Changes", :class => "btn primary save" %>
-        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
-      </div>
-    <% end %>
+    <%= render :partial => 'bio_form', :locals => { :user => @user }  %>
   </div>
 
   <div class="form" id="photo_form">
-    <%= form_for @user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_profile_photo_form", :multipart => true} do |f| %>
-      <input type="hidden" name="form_id" value="photo_form">
-      <div class="input">
-        <%= f.label :Your_photo %>
-        <%= f.file_field :avatar %>
-      </div>
-      <% if @user.has_avatar? %>
-        <div class="input clearfix">
-          <%= f.label "Delete Image" %>
-          <div class="input"><%= check_box_tag :delete_avatar %></div>
-        </div>
-      <% end %>
-      <div class="input clearfix">
-        <%= f.submit "Save Changes", :class => "btn primary save" %>
-        <%= link_to "Cancel", "#", :class => "btn close_modal" %>
-      </div>
-    <% end %>
+    <%= render :partial => 'photo_form', :locals => { :user => @user } %>
   </div>
 </div>
 <% if current_user %>
@@ -207,8 +141,16 @@
     });
   }
 
-  $(document).ready(function(){
+  var decreaseCourseCount = function() {
+    var html = $('.course_count').html();  
+    var courseCount = parseInt(html.slice(1, html.length - 1));
+    var courseCount = (courseCount) ? courseCount : 0;
+    if(courseCount > 0) {
+      $('.course_count').html("(" + (courseCount - 1) + ")");
+    }
+  }
 
+  $(document).ready(function(){
     $(".tabs li").each(function(){
       var li = $(this);
       var link = li.children().first();
@@ -220,11 +162,12 @@
         clicked_link.parent().addClass("active");
         $(".tab_contents").hide();
         $("#"+clicked_link.data("rel")).show();
+        $("#"+clicked_link.data("rel")).jScrollPane();
         e.preventDefault();
       });
     });
 
-    $(".course_list").jScrollPane();
+    $(".scrollPane").jScrollPane();
 
     $(".users-show").delegate(".edit .drop_course_link","click",function(e){
       var modal_id = "#course_" + $(this).data("course_id") + "_modal";

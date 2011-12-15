@@ -64,7 +64,7 @@ describe UsersController do
         before :each do
           @user_with_same_email = User.new(@user_attributes)
           @user.errors.add(:email, 'has already been taken')
-          User.stub!(:from_email).with(@user.email).and_return(@user_with_same_email)
+          User.stub!(:find_by_email).with(@user.email).and_return(@user_with_same_email)
         end
         it "should find out the user with the same email" do
           post_user @user_attributes
@@ -76,7 +76,7 @@ describe UsersController do
           end
           it "should set the error flash" do
             post_user @user_attributes
-            flash[:error].should == "This email has already signed up. Click <a href='/password_resets/new'>here</a> to reset your password if you forget it.".html_safe
+            flash[:error].should == "There is already an account with that email address. You can <a href='/password_resets/new'>reset your password</a> if you forget it.".html_safe
          end
         end
         context "and when the user is not active" do
@@ -85,8 +85,55 @@ describe UsersController do
           end
           it "should set the error flash" do
             post_user @user_attributes
-            flash[:error].should == "This email has already signed up. Click <a href='/activations/new'>here</a> to get th to get the activation email.".html_safe
+            flash[:error] == "There is already an account with that email address. If you did not receive the activation message, we can <a href='/activations/new?email=#{@user_with_same_email.email}'>send it to you again.</a>".html_safe
           end
+        end
+      end
+    end
+  end
+
+  describe "GET 'show'" do
+    before :each do
+      @user = FactoryGirl.create(:user)
+      @user.stub!(:googleable?).and_return(true)
+      User.stub!(:find_by_custom_url).and_return(@user)
+    end
+    it "should redirect to profile path" do
+      get :show, :id => @user.id
+      response.should redirect_to profile_path(@user.custom_url)
+    end
+    context "when the user is logged in" do
+      before :each do
+        controller.stub!(:current_user).and_return(FactoryGirl.create(:user))
+      end
+      it "should be successful" do
+        get :show, :id => @user.custom_url
+        response.should be_success
+      end
+      it "should render the show template" do
+        get :show, :id => @user.custom_url
+        response.should render_template :show
+      end
+      it "should set the action_bar_message flash" do
+        get :show, :id => @user.custom_url
+        flash[:action_bar_message].should == "#{@user.name} - #{@user.major}"
+      end
+    end
+    context "when the user is not logged in" do
+      before :each do
+        controller.stub!(:current_user).and_return(nil)
+      end
+      context "and when the requested user is not googleable" do
+        before :each do
+          @user.stub!(:googleable?).and_return(false)
+        end
+        it "should redirect to login page" do
+          get :show, :id => @user.custom_url
+          response.should redirect_to login_path
+        end
+        it "should set the notice flash" do
+          get :show, :id => @user.custom_url
+          flash[:notice].should == "You must log in to view that profile"
         end
       end
     end

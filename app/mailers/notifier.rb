@@ -10,7 +10,7 @@ class Notifier < ActionMailer::Base
     mail(
       subject: "#{user.name} wants to share with you",
       from: "noreply@studyhall.com",
-      bcc: @sharing.email_addresses,
+      bcc: @sharing.recipient_emails,
       date: Time.now
     )
   end

@@ -79,7 +79,9 @@ var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
     async: async,
     success: function(response){
       message_list_item.replaceWith(response);
-      updateMessageCount(read);
+      if(message_list_item.find('.message_action.unarchive').length == 0) {
+        updateMessageCount(read);
+      }
     }
   });
 }
@@ -147,7 +149,9 @@ $(document).ready(function(){
     var url = $(this).attr("data-url");
     var data = $(this).hasClass("archive") ? {"message[deleted]": true} : {"message[deleted]": false};
     updateMessage(message_list_item, url, data);
-    $(this).hasClass("archive") ? updateMessageCount(true) : updateMessageCount(false);
+    if(message_list_item.find('.message_action.mark_unread').length == 0) {
+      $(this).hasClass("archive") ? updateMessageCount(true) : updateMessageCount(false);
+    }
     return false;
   });
   
@@ -157,6 +161,7 @@ $(document).ready(function(){
     var data = $(this).hasClass("report_spam") ? {"message[spam]": true} : {"message[abuse]": true};
     if( confirm("Are you sure?") ){
       updateMessage(message_list_item, url, data);
+      updateMessageCount(true);
       return false;
     }
   });

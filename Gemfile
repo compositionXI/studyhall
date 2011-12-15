@@ -46,6 +46,7 @@ gem 'whenever'
 group :test, :development do
     gem 'rspec-rails'
     gem 'factory_girl_rails'
+    gem 'faker'
 end
 
 group :development do
@@ -59,6 +60,7 @@ group :cucumber do
     gem 'cucumber'
     gem 'spork'
     gem 'launchy'
+    gem 'sunspot_test'
 end
 
 # Use unicorn as the web server
