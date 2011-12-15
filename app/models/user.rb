@@ -254,6 +254,19 @@ class User < ActiveRecord::Base
     (recieved + sent).sort { |a, b| b.created_at <=> a.created_at }
   end
   
+  def alpha_ordered_notebooks
+    compact_names = notebooks.collect{|n| n.course.compact_name}.uniq.sort
+    ordered_notebooks = []
+    compact_names.each do |cn|
+      notebook_for_course = []
+      notebooks.each do |notebook|
+        notebook_for_course << notebook if notebook.course.compact_name == cn
+      end
+      ordered_notebooks << notebook_for_course.sort_by!{|n| n.name}
+    end
+    ordered_notebooks.flatten
+  end
+  
   def get_sender_id(attributes)
     sender_id = attributes[:sender_id] || self.id
     attributes.delete :sender_id if attributes[:sender_id]
