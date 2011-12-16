@@ -43,14 +43,14 @@ class Search < ActiveRecord::Base
     User.search do
       keywords query
       order_by :name, :asc
-      paginate :page => page, :per_page => 1 if page
+      paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end
   end
   
   def find_courses(query='', page)
     Course.search do
       fulltext query
-      paginate :page => page, :per_page => 1 if page
+      paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end
   end
 
@@ -58,7 +58,7 @@ class Search < ActiveRecord::Base
     Note.search do
       fulltext query
       with :shareable, 1
-      paginate :page => page, :per_page => 1 if page
+      paginate :page => page, :per_page => :APP_CONFIG['per_page'] if page
     end
   end
   
