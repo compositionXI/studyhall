@@ -93,7 +93,7 @@ class Notifier < ActionMailer::Base
   def new_comment(comment, commenter, author, post)
     @comment, @commenter, @author, @post = comment, commenter, author, post
     mail(
-      :subject => "#{@commenter} add new comment on your post.",
+      :subject => "#{@commenter.name} add new comment on your post.",
       :from    =>  "noreply@studyhall.com",
       :to      =>  author.email,
       :date    =>  Time.now
@@ -116,7 +116,7 @@ class Notifier < ActionMailer::Base
     mail(
       subject: "StudyHall Contact Form from [#{@contact.name}]",
       from:    'noreply@studyhall.com',
-      to:      CONTACT_FORM_RECIPIENT,
+      to:      APP_CONFIG['contact_form_recipient'],
       date:    Time.now
     )
   end

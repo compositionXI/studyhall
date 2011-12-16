@@ -2,10 +2,9 @@
   <div class="span8 columns offset4">
     <h3>Complete Your Profile</h3>
     <div>
-      <%= render :partial => 'form' %>
+      <%= render :partial => 'users/form' %>
     </div>
   </div>
 </div>
-<div id="gmail_invite_modal" class="modal fade in" style="display:none">
-  <%= render partial: 'gmail_invites/retrieve_contacts_form' %>
-</div>
+<%= render :partial => "shared/gmail_modal" %>
+

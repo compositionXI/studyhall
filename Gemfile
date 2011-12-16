@@ -6,7 +6,8 @@ gem 'mysql2'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
-gem 'omniauth' # for facebook
+gem 'omniauth', '~> 1.0' # for facebook
+gem 'omniauth-facebook'
 gem 'rails3-generators'
 gem 'opentok'
 gem "paperclip", "~> 2.4.4"

@@ -1,23 +1,29 @@
 development:
-  host: localhost:3001
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
+  host: localhost:3000
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
   facebook:
-    app_id: 235310463190965
-    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
+    app_id: 212476088833208 
+    app_secret: f19bacc518befd7f113963024b04adf3
 
 test:
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
   opentok:
     key: 3277692
     secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
     js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
   facebook:
-    app_id: 235310463190965
-    app_secret: 4069eb82740abf8d2355a6e06dd1b2dd
+    app_id: 212476088833208
+    app_secret: f19bacc518befd7f113963024b04adf3
 
 staging:
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
   host: studyhall.intridea.com
   opentok:
     key: 5822951
@@ -28,6 +34,8 @@ staging:
     app_secret: 32979dcdcb2f545df4488dc28899ba1e
 
 production:
+  per_page: 10
+  contact_form_recipient: ross@studyhall.com
   host: studyhall.com
   opentok:
     key: 5822951

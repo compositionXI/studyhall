@@ -5,6 +5,7 @@
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
+      <%= render :partial => "shared/invite_buddies", :locals => {:user => @user} if current_user == @user %>
       <div>
         <%= link_to "Report this profile", "#" %>
       </div>
@@ -167,8 +168,6 @@
       });
     });
 
-    $(".scrollPane").jScrollPane();
-
     $(".users-show").delegate(".edit .drop_course_link","click",function(e){
       var modal_id = "#course_" + $(this).data("course_id") + "_modal";
       $(modal_id).modal({keyboard: true,
@@ -176,13 +175,6 @@
                          backdrop: true});
       e.stopPropagation();
       e.preventDefault();
-    });
-
-    $(".linked_item").click(function(e){
-      if(!$(this).closest(".editable").hasClass("edit"))
-        window.location = $(this).data("rel");
-      else
-        e.preventDefault();
     });
 
     $(".edit_button").click(function(e){
@@ -212,8 +204,13 @@
 
     $(".users-show").delegate("a.close_modal","click",function(e){
       hidePopovers();
-      console.log($(this).data("id"));
+      //console.log($(this).data("id"));
       $("#"+$(this).data("id")).modal("hide");
     });
+    
+    <% if params[:mode] == 'edit' %>
+      $(".buttons.left .edit_button").trigger('click');
+    <% end %>
   });
 </script>
+

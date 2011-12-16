@@ -33,7 +33,7 @@ def test_user(options={})
                              :last_name => "User #{uid}",
                              :email => "test#{uid}@example.com", 
                              :password => "test", 
-                             :custom_url => "custom_url_#{uid}"
+                             :custom_url => "customurl#{uid}"
                              }))
   raise "Could not save test user: #{user.errors.full_messages}" if user.new_record?
   user

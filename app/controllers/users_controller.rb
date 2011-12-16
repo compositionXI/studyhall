@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_filter :require_user, :only => [:edit, :update, :account]
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard, :account]
   before_filter :set_action_bar, :only => [:show, :edit]
-  before_filter :check_fisrt_last_name, :only => :profile_wizard
+  before_filter :check_first_last_name, :only => :profile_wizard
   skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update]
   
   def index
@@ -126,7 +126,7 @@ class UsersController < ApplicationController
   def fetch_user
     if params[:id] =~ /^\d+$/
       @user =  User.find(params[:id])
-      redirect_to profile_path(@user.custom_url) if @user && action_name == "show"
+      redirect_to profile_path(@user.custom_url, :mode => params[:mode]) if @user && action_name == "show"
     elsif params[:user_id]
       @user =  User.find(params[:user_id])
     else # (was: elsif params[:id] =~ /^[a-z0-9]+$/)
@@ -138,7 +138,7 @@ class UsersController < ApplicationController
     require_admin if current_user
   end
   
-  def check_fisrt_last_name
+  def check_first_last_name
     unless (current_user.first_name.blank? && current_user.last_name.blank?)
       redirect_to user_path(current_user)
     end
