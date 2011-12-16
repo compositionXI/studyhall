@@ -196,7 +196,7 @@ $(document).ready(function(){
   
   $("body").delegate(".attachment_link", "click", function(e){
     e.preventDefault();
-    $(this).closest(".reply_fields").find(".input-file").trigger("click");
+    $(this).closest(".reply_fields").find("input[type='file']").trigger("click");
   });
   
   $("body").delegate("#message_attachment", "change", function(){
