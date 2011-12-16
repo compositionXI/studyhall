@@ -7,8 +7,9 @@ class Notifier < ActionMailer::Base
     @sharing = sharing
     @sender = user
     @object_urls_array = @sharing.objects.map {|o| [o,url_for(o)] }
+    @object_type = @sharing.objects.first.class.to_s
     mail(
-      subject: "#{user.name} wants to share with you",
+      subject: "#{user.name} shared something with you on Studyhall.com!",
       from: "noreply@studyhall.com",
       bcc: @sharing.recipient_emails,
       date: Time.now

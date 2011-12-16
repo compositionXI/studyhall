@@ -4,7 +4,7 @@ button.popover({trigger: "manual",
   offset: 10,
   horizontalOffset: 25,
   html: true,
-  title: function(){return "Share notes";},
+  title: function(){return "Share <%=j @object_to_share %>";},
   content: function(){return "<%=j render :partial => 'form' %>";}
 });
 

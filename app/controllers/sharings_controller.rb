@@ -6,6 +6,7 @@ class SharingsController < ApplicationController
     @sharing = Sharing.new
     @position = params[:position] ||= "below-right"
     @object_id = params[:object_id]
+    @object_to_share = params[:object_to_share]
   end
 
   def create
@@ -20,7 +21,7 @@ class SharingsController < ApplicationController
   private
 
     def send_message(sharing)
-      subject = "#{current_user.name} wants to share something with you"
+      subject = "#{current_user.name} wants to share something with you on Studyhall.com"
       body = "<p>#{current_user.name} wants to share something with you.</p><p>\"#{sharing.message}\"</p><ul>#{sharing.objects.map{|obj| "<li><a href=\"#{url_for(obj)}\">#{obj.name}</a></li>" }.join()}</ul>"
       current_user.send_message?(subject, body, *sharing.users)
     end
