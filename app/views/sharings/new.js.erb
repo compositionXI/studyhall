@@ -24,8 +24,8 @@ var checkRequiredFields = function(){
   var submit = $("#new_sharing input[type='submit']");
   shared = $("#sharing_share_all").is(":checked");
   has_recipients = ($("#sharing_email_addresses").val() != "" || $("#sharing_user_ids option:selected").length > 0);
-  has_message = $("#sharing_message").val().length > 0;
-  if(shared && has_recipients && has_message)
+  //has_message = $("#sharing_message").val().length > 0;
+  if(shared && has_recipients)
     submit.removeClass("disabled");
   else
     submit.addClass("disabled");

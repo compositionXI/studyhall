@@ -42,7 +42,7 @@ class Sharing
   end
 
   def valid?
-    recipients.any? && message.present? && objects.any?
+    recipients.any? && objects.any?
   end
 
   def persisted?

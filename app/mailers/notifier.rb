@@ -3,11 +3,11 @@ class Notifier < ActionMailer::Base
 
   default_url_options[:host] = APP_CONFIG["host"]
   
-  def sharing(sharing, user)
+  def sharing(sharing, object_type, user)
     @sharing = sharing
+    @object_type = object_type
     @sender = user
     @object_urls_array = @sharing.objects.map {|o| [o,url_for(o)] }
-    @object_type = @sharing.objects.first.class.to_s
     mail(
       subject: "#{user.name} shared something with you on Studyhall.com!",
       from: "noreply@studyhall.com",
