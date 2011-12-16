@@ -1,5 +1,5 @@
 <li class="search_result note">
-  <%= link_to note.name, note, :class => "note_book" %>
+  <%= link_to truncate(note.name, length: 100), note, :class => "note_book" %>
   <div class="info_container">
     <dl class="info narrow">
       <% if note.user %>
