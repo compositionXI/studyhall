@@ -15,6 +15,7 @@
 //= require bootstrap-twipsy.js
 //= require bootstrap-popover.js
 //= require bootstrap-modal.js
+//= require bootstrap-tabs.js
 //= require mediaelement_rails
 //= require_tree .
 
@@ -151,5 +152,14 @@ $(document).ready(function(){
   if (!Modernizr.input.placeholder) {
       $("#search_keywords").placeholder();
   }
+  
+  $(".scrollPane").jScrollPane();
+
+  $(".linked_item").click(function(e){
+    if(!$(this).closest(".editable").hasClass("edit"))
+      window.location = $(this).data("rel");
+    else
+      e.preventDefault();
+  });
 });
 
