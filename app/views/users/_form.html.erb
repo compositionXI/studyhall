@@ -1,5 +1,5 @@
-<div id="fb-root"></div>
-<script src="http://connect.facebook.net/en_US/all.js"></script>
+<%= render :partial => 'shared/fb_connect' %>
+
 <%= form_for (@user || current_user), :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field nil, :name => "redirect_back", :value => "profile_wizard" %>
@@ -43,29 +43,4 @@
     </div>
   </fieldset>
 <% end %>
-<script>
-  FB.init({
-    appId  : '<%= APP_CONFIG["facebook"]["app_id"] %>',
-    status : true,
-    cookie : true,
-    oauth: true
-  });
 
-  function sendRequestToManyRecipients() {
-    FB.ui({method: 'apprequests',
-      message: 'Join me on StudyHall!'
-    }, requestCallback);
-  }
-  
-  function requestCallback(response) {
-    // Handle callback here
-  }
-
-  $(document).ready(function(){
-    $("#facebook_invite").click(function(e){
-      console.log("invite!");
-      sendRequestToManyRecipients();
-      e.preventDefault();
-    });
-  });
-</script>

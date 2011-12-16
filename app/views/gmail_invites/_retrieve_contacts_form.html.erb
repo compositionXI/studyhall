@@ -1,3 +1,8 @@
+<script>
+ $("#gmail_invite_modal .cancel_popover").click(function(){
+    $("#gmail_invite_modal").modal('hide');
+  });
+</script>
 <%= form_for @gmail_invite ||= GmailInvite.new, remote: true, html: {class: 'form-stacked'} do |f| %>
   <div class="modal-header">
     <h3>Invite Your Gmail Friends</h3>
