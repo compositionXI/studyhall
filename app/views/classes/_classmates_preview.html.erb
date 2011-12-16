@@ -29,7 +29,8 @@
             <%= user.school.try(&:name) %>
           </div>
           <div class="right">
-            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
+            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small #{current_user.follows?(user) ? '' : 'hidden'} unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
+            <%= link_to "Follow", follow_path(followed_user_id: user.id), :class => "btn small #{current_user.follows?(user) ? 'hidden' : ''} follow_button", :id => "follow_button", :remote => true, :method => :post %>
           </div>
         </li>
       <% end %>
