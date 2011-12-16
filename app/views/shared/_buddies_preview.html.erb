@@ -33,7 +33,7 @@
             <%= user.school.try(&:name) %>
           </div>
           <div class="right">
-            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
+            <%= link_to "Unfollow", unfollow_path(user), :class => "btn small unfollow_button", :id => "unfollow_button", :remote => true, :method => :delete %>
           </div>
         </li>
       <% end %>
