@@ -9,7 +9,7 @@
     <div class="alert alert-message success span7">
         <a class="close" href="#">×</a>
         <%= flash[:notice] %>
-        <%= link_to "Complete Your Profile", profile_wizard_user_path(current_user) unless current_user.try(:profile_complete?) %>
+        <%= link_to "Complete Your Profile", user_path(current_user, :mode => 'edit') unless current_user.try(:profile_complete?) %>
     </div>
   <% else %>
   <% end %>
