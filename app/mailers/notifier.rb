@@ -92,7 +92,7 @@ class Notifier < ActionMailer::Base
   def new_comment(comment, commenter, author, post)
     @comment, @commenter, @author, @post = comment, commenter, author, post
     mail(
-      :subject => "#{@commenter} add new comment on your post.",
+      :subject => "#{@commenter.name} add new comment on your post.",
       :from    =>  "noreply@studyhall.com",
       :to      =>  author.email,
       :date    =>  Time.now
