@@ -22,3 +22,43 @@
     <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts} %>
   </div>
 </section>
+<section class="shared_materials">
+  <header>
+    <h1>Shared Materials</h1>
+  </header>
+  <ul class="tabs" data-tabs="tabs">
+    <li class="active"><a href="#notes">Notes <span>(<%= @shared_notes.count %>)</span></a></li>
+    <li><a href="#studyhalls">Studyhalls <span>(<%= @shared_study_sessions.count %>)</span></a></li>
+  </ul>
+  <div class="tab-content">
+    <ul id="notes" class="active tab-pane scrollPane">
+      <% @shared_notes.each do |note| %>
+        <li class="linked_item note" data-rel="<%= note_url(note) %>">
+          <span><%= note.name %></span>
+        </li>
+      <% end %>
+    </ul>
+    <ul id="studyhalls" class="tab-pane scrollPane">
+      <% @shared_study_sessions.each do |study_session| %>
+        <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
+          <div class="attendees">
+            <% study_session.users.first(3).each do |user| %>
+              <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+            <% end %>
+          </div>
+          <% if study_session.name.blank? %>
+            <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
+          <% else %>
+            <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
+            <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+<script type="text/javascript">
+  $('.tabs').bind('change', function (e) {
+    $('.scrollPane').jScrollPane();
+  });
+</script>

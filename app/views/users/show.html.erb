@@ -167,8 +167,6 @@
       });
     });
 
-    $(".scrollPane").jScrollPane();
-
     $(".users-show").delegate(".edit .drop_course_link","click",function(e){
       var modal_id = "#course_" + $(this).data("course_id") + "_modal";
       $(modal_id).modal({keyboard: true,
@@ -176,13 +174,6 @@
                          backdrop: true});
       e.stopPropagation();
       e.preventDefault();
-    });
-
-    $(".linked_item").click(function(e){
-      if(!$(this).closest(".editable").hasClass("edit"))
-        window.location = $(this).data("rel");
-      else
-        e.preventDefault();
     });
 
     $(".edit_button").click(function(e){
