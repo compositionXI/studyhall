@@ -12,7 +12,7 @@ class ClassesController < ApplicationController
     @classmates = @class.classmates(current_user)
     @posts = @class.posts.recent.top_level
     @shared_study_sessions = @class.study_sessions.viewable_by nil
-    @shared_notes = @class.users.map(&:notes).flatten.select(&:shareable)
+    @shared_notes = @class.notes.viewable_by nil
     flash[:action_bar_message] = @course.title
   end
   
