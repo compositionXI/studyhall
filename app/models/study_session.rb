@@ -60,7 +60,9 @@ class StudySession < ActiveRecord::Base
     @buddy_ids ||= []
     @buddy_ids << user.id unless user.nil?
     @buddy_ids.uniq.each do |buddy_id|
-      self.users << User.find(buddy_id)
+      invitee = User.find(buddy_id)
+      self.users << invitee
+      send_invite(invitee) unless invitee == user
     end
   end
   
@@ -70,5 +72,9 @@ class StudySession < ActiveRecord::Base
   
   def presentation
     name.blank? ? created_at_formatted : name
+  end
+  
+  def send_invite(invitee)
+    Notifier.study_session_invite(user, invitee, self).deliver if invitee.notify_on_invite
   end
 end

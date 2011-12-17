@@ -60,8 +60,7 @@ class MessagesController < ApplicationController
   def update
     @message = (params[:message_type] == "Message") ? Message.find(params[:id]) : MessageCopy.find(params[:id])
     @message.update_attributes(params[:message])
-    Notifier.report_message(current_user, @message).deliver if params[:message][:abuse]
-    Notifier.report_message(current_user, @message).deliver if params[:message][:spam]
+    Notifier.report_message(current_user, @message).deliver if params[:message][:abuse] || params[:message][:spam]
     render partial: "messages/message", :locals => {message: @message} unless @message.spam? || @message.abuse? || params[:message][:deleted]
   end
   

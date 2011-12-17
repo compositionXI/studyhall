@@ -39,4 +39,5 @@ module ApplicationHelper
    def custom_url(user)
      "www.studyhall.com/" + user.custom_url
    end
+   
 end
