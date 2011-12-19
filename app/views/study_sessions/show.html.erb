@@ -28,7 +28,7 @@
 </div>
 
 <% if @session_file && @session_file.embeddable? %>
-  <iframe id="whiteboard" src="<%= @session_file.embed_url %>" frameborder="1" width="710" height="650"></iframe>
+  <iframe id="whiteboard" src="<%= @session_file.embed_url %>" frameborder="1" width="690" height="650"></iframe>
 <% else %>
   <% @study_session.session_files.build %>
   <div id="upload_form">

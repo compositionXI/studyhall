@@ -57,6 +57,8 @@
       publisherDiv.setAttribute('id', 'opentok_publisher');
       parentDiv.appendChild(publisherDiv);
       publisher = session.publish(publisherDiv.id); // Pass the replacement div id to the publish method
+      console.log('start publishing');
+      $(".publisherContainer object").attr('width', 220).attr('height', 160);
       show('unpublishLink');
       hide('publishLink');
     }
@@ -146,8 +148,14 @@
     console.log("...stream added");
     var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
     subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
+    $(subscriberDiv).css('width', 220).css('height', 120);
     document.getElementById("subscribers").appendChild(subscriberDiv);
     subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id);
+    var objects = $("#subscribers object");
+    for(var i=0; i < objects.length; i ++) {
+      objects[i].width = 220;
+      objects[i].height = 160;
+    }
   }
 
   function show(id) {
