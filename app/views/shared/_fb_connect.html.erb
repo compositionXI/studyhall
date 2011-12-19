@@ -1,3 +1,5 @@
+<% message = "'Join me on StudyHall so we can share notes, study online, and swap course information! #{root_url}'"%>
+
 <div id="fb-root"></div>
 <script src="http://connect.facebook.net/en_US/all.js"></script>
 <script>
@@ -10,7 +12,7 @@
 
   function sendRequestToManyRecipients() {
     FB.ui({method: 'apprequests',
-      message: 'Join me on StudyHall!'
+      message: <%= message %>
     }, requestCallback);
   }
   
