@@ -148,10 +148,17 @@
     }
     $("#subscribers p").hide();
     console.log("...stream added");
+    var subscribeContainer = $("<div class='subscribe_container'></div>");
+    /*
     var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
     subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
-    $(subscriberDiv).css('width', 220).css('height', 120);
     document.getElementById("subscribers").appendChild(subscriberDiv);
+    */
+    var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
+    subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
+    $("#subscribers").append(subscribeContainer);
+    $("#subscribers .subscribe_container:last").html($(subscriberDiv));
+    
     subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id);
     var objects = $("#subscribers object");
     for(var i=0; i < objects.length; i ++) {
