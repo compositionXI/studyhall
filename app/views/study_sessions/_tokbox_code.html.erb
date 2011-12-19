@@ -38,6 +38,7 @@
   */
 
   function connect() {
+    $("#connectLink").text("CONNECTING...");
     session.connect(apiKey, token);
   }
 
@@ -88,6 +89,7 @@
     show('disconnectLink');
     show('publishLink');
     hide('connectLink');
+    $("#connectLink").text("CONNECT");
   }
 
   function streamCreatedHandler(event) {
