@@ -10650,7 +10650,7 @@ header.topbar
       h3
         color: #ffffff
         @include body-font(normal, 18px, 32px)
-        text-shadow: 0 1px 0 rgba(0,0,0,1)
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5)
   section.main-content
     background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x
     margin-top: -10px
@@ -10708,6 +10708,9 @@ header.topbar
     width: 450px
     padding: 40px 120px
     background: #FFF
+  iframe
+    border: none
+    background: url(asset-path('http://crocodoc.com/media/images/docviewer/spinner.gif','image')) no-repeat center
   .container
   form.new_whiteboard
     margin-left: 310px
