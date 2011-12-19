@@ -1336,7 +1336,7 @@ header.topbar
         padding-left: 70px
   #video_sidebar
     float: left
-    width: 270px
+    width: 220px
     background: transparent
     margin-right: 15px
     padding: 0 10px 0 0
@@ -1350,30 +1350,38 @@ header.topbar
         margin-right: 5px
         float: left
     .publisherContainer
-      border: 4px solid #FFF
-      height: 199px
-      width: 266px
+      border: 3px solid #FFF
+      height: 160px
+      width: 220px
       background: #FFF
+      @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
       p
-        margin: 60px 40px
+        margin: 53px 40px
     #subscribers
+      width: 230px
       margin-top: 5px
-      width: 266px
-      height: 398px
-      border: solid 4px #FFF
-      background: #FFF
       p
-        margin: 60px 40px
+        background: #fff
+        padding: 60px 35px
+        width: 156px
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
+      .subscribe_container
+        background: #fff
+        padding: 3px
+        width: 220px
+        height: 160px
+        margin-bottom: 5px
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
     #invite_button
       position: absolute
       bottom: 10px
       left: 60px
   #upload_form
-    margin-left: 300px
+    float: right
+    width: 450px
     padding: 40px 120px
     background: #FFF
   .container
-    width: 1010px
   form.new_whiteboard
     margin-left: 310px
     width: 700px
