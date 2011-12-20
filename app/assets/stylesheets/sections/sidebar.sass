@@ -43,7 +43,7 @@
         float: left 
         font-size: 12px
         margin: 0 0 0 15px 
-        width: 140px
+        width: 134px
         a
           float: none
           padding: 0
@@ -60,8 +60,17 @@
         &:last-child
           border: none
     &.news
+      header
+        margin: 0
       ul
-        border: none
+        height: 210px
+        overflow: auto
+        padding: 0
+      li
+      li
+        +clearfix
+        border-bottom: 1px solid $zebraBorder
+        padding: 6px
       h2
         +body-font(500, 12px, 18px)
         color: $newsDate
