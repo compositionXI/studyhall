@@ -47,6 +47,7 @@
     hide('disconnectLink');
     hide('publishLink');
     hide('unpublishLink');
+    $(".publisherContainer p").show();
   }
 
   // Called when user wants to start publishing to the session
@@ -90,6 +91,8 @@
     show('publishLink');
     hide('connectLink');
     $("#connectLink").text("CONNECT");
+    
+    startPublishing();
   }
 
   function streamCreatedHandler(event) {
