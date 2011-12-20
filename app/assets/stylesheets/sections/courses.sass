@@ -126,3 +126,64 @@ section.course_activity
               line-height: 12px
               color: $linkColor
               text-shadow: none
+
+
+
+.courses
+  float: right
+  width: 700px
+  ol
+    list-style: none
+    margin: 0
+    li
+      background: transparent
+      float: left
+      margin: 0 0 20px 20px
+      &:first-child, &:nth-child(4n+1)
+        margin: 0 0 20px 0
+    a
+      +box-sizing(border-box)
+      background: url(asset-path('notebook-sprite.png','image')) no-repeat -264px 0 transparent
+      color: $white
+      display: block
+      height: 156px
+      font-size: 14px
+      padding: 0 10px 0 20px
+      text-align: center
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55)
+      width: 132px
+      &:hover
+        text-decoration: underline 
+      span
+        display: table-cell
+        height: 156px
+        vertical-align: middle
+    .blue a
+      background-position: -132px 0
+      color: $darkBookText
+      text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
+    .green a
+      background-position: 0 0
+      color: $darkBookText
+      text-shadow: 0 1px 0 rgba(255,255,255, 0.55)   
+    .add
+      background: $bgColor
+      border: 2px dashed $notebookBorder
+      +border-radius(2px)
+      height: 146px 
+      margin-top: 3px
+      width: 128px
+      a
+        background: none
+        color: $linkColor
+        height: auto
+        padding: 0
+        text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
+        width: auto
+        span
+          margin: 0
+          height: 146px
+          width: 132px
+          .profile_edit
+            background-color: $editable_background
+            cursor: pointer
