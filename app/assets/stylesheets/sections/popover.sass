@@ -1,0 +1,92 @@
+// Popovers
+.popover #new_study_session
+  p
+    margin-top: 5px
+    &.warning
+      width: 310px
+  label
+    margin-top: 10px
+
+.popover #new_sharing
+  .input
+    input#sharing_email_addresses
+      width: 339px
+  select, textarea
+    width: 339px
+    
+.popover .inner
+  overflow: visible
+  background: #fff
+  width: inherit
+
+.popover
+  form
+    padding: 0
+    margin: 0
+  .content
+    padding: 15px
+  .help_button
+    +box-sizing(border-box)
+    @include border-radius(10px)
+    position: absolute
+    top: 15px
+    right: 15px
+    color: #FFF
+    background: #DDD    
+    height: 20px
+    padding: 1px 0 0 7px
+    cursor: pointer
+    text-decoration: none
+    width: 20px
+  input[type="file"]
+    width: 308px
+  select,
+  input[type="text"],
+  textarea
+    width: 312px
+  textarea
+    height: 150px
+    line-height: 20px
+  .help
+    position: absolute
+    top: 0
+    width: 300px
+    height: inherit
+    background: #FAFAFA
+    border: 1px solid $popoverBorder
+    margin-top: 5px
+    padding: 10px
+    z-index: -1001
+    &.right
+      right: 410px
+    &.left
+      left: 410px
+    .close_help_button
+      @include border-radius(10px)
+      position: absolute
+      top: 15px
+      right: 19px
+      color: #FFF
+      background: #DDD
+      padding: 0 6px 1px 6px
+      cursor: pointer
+      text-decoration: none
+      font-size: 15px
+
+.study_session_modal
+  p
+    margin-top: 5px
+  label
+    margin-top: 10px
+  input[type="file"]
+    width: 280px
+  form
+    .fake-file
+      input[type='text']
+        width: 230px !important
+  select
+    width: 312px
+  input[type="text"]
+    width: 300px
+  input[type="checkbox"]
+    margin: 17px 5px 0 0
