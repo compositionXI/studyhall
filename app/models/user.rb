@@ -164,8 +164,8 @@ class User < ActiveRecord::Base
     User.includes(:followings).where("followings.blocked = ?",true)
   end
 
-  def buddies
-    User.joins("INNER JOIN followings ON users.id = followings.followed_user_id").where("followings.user_id = ? and followings.blocked = ? ", self.id, false)
+  def buddies(count = nil)
+    User.joins("INNER JOIN followings ON users.id = followings.followed_user_id").where("followings.user_id = ? and followings.blocked = ? ", self.id, false).limit(count)
   end
   
   def has_role?(role)
