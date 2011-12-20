@@ -35,7 +35,7 @@ staging:
 
 production:
   per_page: 10
-  contact_form_recipient: ross@studyhall.com
+  contact_form_recipient: support@studyhall.com
   host: studyhall.com
   opentok:
     key: 5822951

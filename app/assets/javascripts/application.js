@@ -54,6 +54,24 @@ var styleFileInputs = function(){
 };
 
 $(function(){
+  initWindowResize = function(){
+    var windowWidth = parseInt($(window).width());
+    var initialLeft = parseInt($(".popover").css("left"));
+    var bodyMinWidth = parseInt($("body").css("min-width"));
+    var leftFromContainer = initialLeft - ((windowWidth - bodyMinWidth) / 2);
+  
+    $(window).bind("resize", function() {
+      var newWidowWidth = parseInt($(window).width());
+      var excessWidth = newWidowWidth - bodyMinWidth;
+      if(excessWidth > 0) {
+        var newLeft = leftFromContainer + (excessWidth / 2);
+        $(".popover").css("left", newLeft);
+      }
+      else {
+        $(".popover").css("left", leftFromContainer);
+      }
+    });
+  }
   
   //Mouse cursor alterations during AJAX operations
   var ajaxCursor;
@@ -161,5 +179,5 @@ $(document).ready(function(){
     else
       e.preventDefault();
   });
+  
 });
-
