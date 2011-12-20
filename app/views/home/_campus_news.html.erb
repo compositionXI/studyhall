@@ -5,7 +5,7 @@
     <ul>
       <% entries.each do |entry| %>
         <li>
-          <h3><%= link_to entry.title, entry.link, title: entry.title %></h3>
+          <h3><%= link_to entry.title, entry.link, title: entry.title, target: '_blank' %></h3>
         </li>
       <% end %>
     </ul>
