@@ -15,7 +15,7 @@ class NotebooksController < ApplicationController
       @index = true
     end
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { redirect_to notes_path }
       format.json { render json: @notebooks }
     end
   end
