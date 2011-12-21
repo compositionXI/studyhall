@@ -6,7 +6,7 @@ describe UsersController do
   end
 
   before(:each) do
-    @mock_user = mock_model(User, :name => "fake", :major => "fake", :gender => "male", :school_id => 1, :gpa => "2", :fraternity => "Omega Moo", :extracurriculars => "Booyah")
+    @mock_user = mock_model(User, :name => "fake", :majors => [mock(Major, :name => "fake")], :gender => "male", :school_id => 1, :gpa => "2", :fraternity => "Omega Moo", :extracurriculars => "Booyah")
     @mock_user.stub!(:googleable?).and_return(true)
     controller.stub!(:current_user).and_return(test_user)
   end
@@ -116,7 +116,7 @@ describe UsersController do
       end
       it "should set the action_bar_message flash" do
         get :show, :id => @user.custom_url
-        flash[:action_bar_message].should == "#{@user.name} - #{@user.major}"
+        flash[:action_bar_message].should == "#{@user.name} - #{@user.majors.map(&:name).join(',')}"
       end
     end
     context "when the user is not logged in" do

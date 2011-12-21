@@ -10,10 +10,14 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
   before_post_process :paperclip_hack_filename
+  
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
-
+  has_and_belongs_to_many :majors
+  has_and_belongs_to_many :sports
+  has_and_belongs_to_many :frat_sororities
+  
   has_many :notebooks
   has_many :notes
   has_many :enrollments
@@ -239,7 +243,7 @@ class User < ActiveRecord::Base
   def profile_completion_percentage
     count = 0.0
     total = 0.0
-    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
+    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.majors, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
       count += 1 unless (member.blank? || member =~ /\/assets\/generic_avatar\_\w*.png/)
       total += 1
     end
@@ -248,7 +252,7 @@ class User < ActiveRecord::Base
   
   # fields not in profile wizard completion
   def profile_except_wizard_completion_count
-    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
+    [self.bio, self.custom_url, self.school_id, self.majors, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
   end
   
   def profile_complete?
