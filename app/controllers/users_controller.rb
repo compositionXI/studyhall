@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   
   def show
     redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
-    flash[:action_bar_message] = "#{@user.name} - #{@user.major}"
+    flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
   end
   
   def new
