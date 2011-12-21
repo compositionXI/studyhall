@@ -71,8 +71,9 @@ class Import::CourseDataController < ApplicationController
           )
         
           parse_instructor_list(instructor_list, course.id, school.id, term)
-        rescue
+        rescue e
           Rails.logger.error "** Error importing line: #{line}"
+          Rails.logger.error "*** #{e.message}"
         end
       end
       coi.save!
