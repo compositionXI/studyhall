@@ -1,3 +1,5 @@
+@import "preboot.sass"
+
 // .tabs
 //   li
 //     a:hover
@@ -6,6 +8,17 @@
 //       a:hover
 //         background: transparent
 //         border-bottom: 0  
+.tabs.categories
+  li
+    background: $silverDark
+    a
+      padding: 4px 6px
+      color: $silverDisabledText
+    &.active
+      background: $blueDisabled
+      a
+        color: $blueDisabledText
+      
 .search_results
   list-style: none
   &.courses

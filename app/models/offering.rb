@@ -15,8 +15,8 @@ class Offering < ActiveRecord::Base
     "#{self.course.department} - #{self.course.number} - #{self.course.title} - #{self.instructor.full_name}"
   end
   
-  def classmates(current_user)
-    self.users.sort_by(&:name) - [current_user]
+  def classmates(current_user, count = nil)
+    self.users.where("email != ?", current_user.email).order("first_name ASC, last_name ASC").limit(count)
   end
 
   def name

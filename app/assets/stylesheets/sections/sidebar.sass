@@ -1,0 +1,87 @@
+.sidebar
+  +columns(4)
+  float: left
+  section
+    header
+      @include clearfix
+      @include sidebar-separator
+      h1
+        margin: 0
+        +h5
+      a
+        float: right
+        font-size: 12px
+        padding: 5px 0 0
+    ul
+      @include clearfix
+      @include sidebar-separator
+      list-style: none
+      border-bottom: 1px solid $hr
+      margin: 0 0 12px 0
+      padding: 0 0 12px 0
+    &.buddies
+      li
+        float: left
+        margin: 0 6px 0 0
+        &:nth-child(4n)
+          margin-right: 0
+      a#gmail_invite 
+        img
+          height: 34px
+          width: auto
+      a#facebook_invite
+        img
+          height: 40px
+          width: auto
+
+    &.activity
+      header
+        margin: 0
+      a
+        float: left
+      p
+        float: left 
+        font-size: 12px
+        margin: 0 0 0 15px 
+        width: 134px
+        a
+          float: none
+          padding: 0
+      ul
+        height: 210px
+        overflow: auto
+        padding: 0
+      li
+        +clearfix
+        border-bottom: 1px solid $zebraBorder
+        padding: 6px
+        &:nth-child(even)
+          background: $zebraStriping
+        &:last-child
+          border: none
+    &.news
+      header
+        margin: 0
+      ul
+        height: 210px
+        overflow: auto
+        padding: 0
+      li
+      li
+        +clearfix
+        border-bottom: 1px solid $zebraBorder
+        padding: 6px
+      h2
+        +body-font(500, 12px, 18px)
+        color: $newsDate
+        margin: 0
+        
+      h3
+        +body-font(500, 14px, 18px)
+        +text-overflow
+        margin: 0
+    &.classmates
+      ul
+        li
+          float: left
+          margin: 0 5px 0 0

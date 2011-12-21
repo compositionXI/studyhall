@@ -1,0 +1,62 @@
+.classes-show
+  .shared_materials
+    width: 700px
+    float: right
+    header
+      zoom: 1
+      margin-bottom: 12px
+      padding-bottom: 12px
+      h1
+        margin: 0
+        line-height: 24px
+        font-size: 18px
+  .tabs
+    border-bottom: 1px solid #C6C0BC
+    li
+      margin: 0 30px 0 0
+      &.active
+        a
+          color: #333
+  .tab-content 
+    .scrollPane
+      height: 400px
+      width: 700px
+    .tab-pane
+      display: none
+      margin-left: 0px
+      .note
+        background: url("/assets/notebook-sprite.png") no-repeat -790px 0px transparent
+        text-align: center
+        span
+          width: 132px
+      .study_session
+        background: url("/assets/notebook-sprite.png") no-repeat -396px 0 transparent
+        padding-top: 15px
+        .name
+          font-family: museo-sans, "Helvetica", Arial, Sans-serif
+          font-size: 14px
+          font-weight: normal
+          line-height: 16px
+          margin-left: -5px
+          padding-bottom: 2px
+        .date
+          color: #707070
+          height: auto
+          display: block
+        .attendees
+          width: 85px
+          text-align: center
+          padding-right: 5px
+      .linked_item
+        float: left
+        height: 156px
+        display: block
+        margin: 0 0px 20px 0
+        padding: 35px 15px 0 17px
+        text-align: center
+        width: 132px
+        +box-sizing(border-box)
+        span
+          width: 132px
+    .active
+      display: block

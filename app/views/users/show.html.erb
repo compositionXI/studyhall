@@ -140,6 +140,9 @@
     $(".popover #user_gender ").chosen().change(function(){
       $('.fraternity, .sorority').toggleClass("hide");
     });
+    $(".popover #user_major_ids").chosen();
+    $(".popover #user_sport_ids").chosen();
+    $(".popover #user_frat_sorority_ids").chosen();
   }
 
   var decreaseCourseCount = function() {

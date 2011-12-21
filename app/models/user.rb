@@ -10,10 +10,14 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
   before_post_process :paperclip_hack_filename
+  
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
-
+  has_and_belongs_to_many :majors
+  has_and_belongs_to_many :sports
+  has_and_belongs_to_many :frat_sororities
+  
   has_many :notebooks
   has_many :notes
   has_many :enrollments
@@ -138,6 +142,7 @@ class User < ActiveRecord::Base
 
   #find the following object joining this user and the given user
   def following_for(user)
+    return nil unless user
     followings.where(:followed_user_id => user.id).first
   end
   
@@ -151,11 +156,13 @@ class User < ActiveRecord::Base
   end
   
   def blocked?(user)
+    return false unless user
     following = Following.where( :user_id => self.id, :followed_user_id => user.id).first
     following.blocked? unless following.nil?
   end
   
   def unblock!(user)
+    return unless user
     following = Following.where :user_id => self.id, :followed_user_id => user.id
     following.first.update_attributes :blocked => false
   end
@@ -164,8 +171,8 @@ class User < ActiveRecord::Base
     User.includes(:followings).where("followings.blocked = ?",true)
   end
 
-  def buddies
-    User.joins("INNER JOIN followings ON users.id = followings.followed_user_id").where("followings.user_id = ? and followings.blocked = ? ", self.id, false)
+  def buddies(count = nil)
+    User.joins("INNER JOIN followings ON users.id = followings.followed_user_id").where("followings.user_id = ? and followings.blocked = ? ", self.id, false).limit(count)
   end
   
   def has_role?(role)
@@ -239,7 +246,7 @@ class User < ActiveRecord::Base
   def profile_completion_percentage
     count = 0.0
     total = 0.0
-    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.major, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
+    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.majors, self.enrollments, self.gpa, self.gender, self.extracurriculars].each do |member|
       count += 1 unless (member.blank? || member =~ /\/assets\/generic_avatar\_\w*.png/)
       total += 1
     end
@@ -248,7 +255,7 @@ class User < ActiveRecord::Base
   
   # fields not in profile wizard completion
   def profile_except_wizard_completion_count
-    [self.bio, self.custom_url, self.school_id, self.major, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
+    [self.bio, self.custom_url, self.school_id, self.majors, self.gpa, self.gender, self.extracurriculars].reject { |member| member.blank? }.count
   end
   
   def profile_complete?

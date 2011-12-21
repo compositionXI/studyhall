@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215011142) do
+ActiveRecord::Schema.define(:version => 20111221031710) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -85,10 +85,36 @@ ActiveRecord::Schema.define(:version => 20111215011142) do
     t.boolean  "blocked",          :default => false
   end
 
+  create_table "frat_sororities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "frat_sororities_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "frat_sorority_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "instructors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "majors", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "majors_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "major_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -247,6 +273,19 @@ ActiveRecord::Schema.define(:version => 20111215011142) do
   create_table "session_invites", :force => true do |t|
     t.integer "study_session_id"
     t.integer "user_id"
+  end
+
+  create_table "sports", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sports_users", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "sport_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "static_pages", :force => true do |t|
