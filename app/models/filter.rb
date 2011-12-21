@@ -6,7 +6,7 @@ class Filter
   extend ActiveModel::Naming
 
   # Add an attr accessor for any attribute you want to use in a form
-  attr_accessor :model_name, :object, :notebooks, :notes, :created_at, :course_id, :name
+  attr_accessor :model_name, :object, :notebooks, :notes, :created_at, :course_id, :name, :user_ids
 
   def initialize(options={})
     options ||= {}

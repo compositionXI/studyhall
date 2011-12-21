@@ -13,7 +13,7 @@
       <% end %>
       <h3 class="edit" style="display:none">Select, share or delete StudyHalls, or double-click to edit</h3>
       <div class="buttons right">
-        <%= link_to "Filter", new_filter_path(:model_name => "study_sessions"), id: "filter_button", class: "btn non_edit", :remote => true %>
+        <%= link_to "Filter", new_filter_path(:model_name => "StudySession"), id: "filter_button", class: "btn non_edit", :remote => true %>
         <%= link_to "Edit", study_sessions_path(:edit_all => true), :class => "btn non_edit", :id => "edit_all" %>
         <%= link_to "Select All", "", id: "select_all", class: "btn edit select", style: "display:none" %>
         <%= link_to "Select None", "", id: "select_none", class: "btn edit select", style: "display:none" %>
