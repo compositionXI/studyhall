@@ -1,7 +1,8 @@
 class FiltersController < ApplicationController
 
   def new
-    @filter = Filter.new(:model_name => "study_sessions")
+    @filter_form = params[:model_name].tableize + "_form"
+    @filter = Filter.new(:model_name => params[:model_name])
   end
 
   def create

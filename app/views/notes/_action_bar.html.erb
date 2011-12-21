@@ -25,7 +25,7 @@
     <% end %>
   
     <div class="buttons right">
-      <a href="" class="btn show_button">Filter</a>
+      <%= link_to "Filter", new_filter_path(:model_name => "Note"), id: "filter_button", class: "btn non_edit", :remote => true  %>
       
       <div id="items_layout_switcher" class="grid">
         <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button grid_btn' %>

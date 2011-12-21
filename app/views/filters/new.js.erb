@@ -5,7 +5,7 @@ button.popover({trigger: "manual",
   horizontalOffset: 25,
   html: true,
   title: function(){return "<%= @filter.title %>";},
-  content: function(){return "<%=j render :partial => 'form' %>";}
+  content: function(){return "<%=j render :partial => @filter_form %>";}
 });
 
 button.popover("show");

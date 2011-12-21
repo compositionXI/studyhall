@@ -11,7 +11,7 @@ class NotesController < ApplicationController
     if @notebook
       @note_items = NoteItem.init_set(@notebook.notes)
     else
-      @note_items = NoteItem.init_set(Backpack.new(current_user).contents(page: params[:page]))
+      @note_items = NoteItem.init_set(Backpack.new(current_user).contents(page: params[:page], filter: params[:filter]))
     end
 
     respond_to do |format|

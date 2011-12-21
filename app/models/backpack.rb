@@ -7,14 +7,53 @@ class Backpack
 
   def contents(options={})
     @options = options
-    @notes = @user.notes.unsorted.select([:id, :created_at]).all.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
-    @notebooks = @user.alpha_ordered_notebooks.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
+    # Need a completely different method for finding filtered notes because you want to find notes that are in notebooks.
+    # What about when note or notebooks is not checked in the filter form
+    @notes = find_notes
+    @notebooks = find_notebooks
     @notables = (@notes.sort_by(&:created_at).reverse + @notebooks)
     @start_index, @end_index = nil, nil
     fetch_contents(@notables[start_index..end_index])
   end
 
   private
+    
+    def create_notables(records)
+      records.map{|n| Notable.new(n.id, n.created_at, n.class.to_s) }
+    end
+    
+    def find_notes
+      if @options[:filter].nil?
+        create_notables @user.notes.unsorted.select([:id, :created_at]).all
+      elsif @options[:filter][:notes] == "1"
+        create_notables filtered_notes
+      else
+        []
+      end
+    end
+    
+    def find_notebooks
+      if @options[:filter].nil?
+        create_notables @user.alpha_ordered_notebooks
+      elsif @options[:filter][:notebooks] == "1" && @options[:filter][:notebook]
+        create_notables filtered_notebooks
+      else
+        []
+      end
+    end
+  
+    def filtered_notes
+      notes = @options[:filter][:note] ? @user.notes.where(@options[:filter][:note]).unsorted : []
+      #if @options[:filter][:course_id]
+      #  course = Course.find(@options[:filter][:course_id])
+      #  notes << @user.notes.select{|n| n if (n.course_name == course.title && n.notebook_id == nil)}
+      #end
+      notes.flatten.uniq
+    end
+    
+    def filtered_notebooks
+      @user.alpha_ordered_notebooks(@options[:filter][:notebook])
+    end
 
     def page
       return 1 if @options[:page].nil?

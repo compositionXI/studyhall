@@ -275,17 +275,18 @@ class User < ActiveRecord::Base
     (recieved + sent).sort { |a, b| b.created_at <=> a.created_at }
   end
   
-  def alpha_ordered_notebooks
-    compact_names = notebooks.collect{|n| n.course.try(:compact_name)}.uniq.compact.sort
+  def alpha_ordered_notebooks(filter_params = {})
+    nbs = notebooks.where(filter_params)
+    compact_names = nbs.collect{|n| n.course.try(:compact_name)}.uniq.compact.sort
     ordered_notebooks = []
     compact_names.each do |cn|
       notebook_for_course = []
-      notebooks.each do |notebook|
+      nbs.each do |notebook|
         notebook_for_course << notebook if notebook.course.try(:compact_name) == cn
       end
       ordered_notebooks << notebook_for_course.sort_by!{|n| n.name}
     end
-    ordered_notebooks << notebooks.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
+    ordered_notebooks << nbs.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
     ordered_notebooks.flatten.compact
   end
   
