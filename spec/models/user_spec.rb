@@ -33,6 +33,53 @@ describe User do
     end
   end
 
+  context "#block!" do 
+    before(:all) do
+      @user1 = test_user
+      @user2 = test_user
+    end
+
+    it "should block another user" do
+      Following.destroy_all
+      @user1.follow!(@user2)
+      Following.count.should == 1
+      @user1.blocked?(@user2).should == false
+      @user1.block!(@user2)
+      @user1.blocked?(@user2).should == true
+    end
+
+    after(:all) do
+      @user1.destroy
+      @user2.destroy
+    end
+  end
+
+  context "blocked?" do 
+    before(:all) do
+      @user1 = test_user
+      @user2 = test_user
+    end
+
+     after(:all) do
+      @user1.destroy
+      @user2.destroy
+    end
+
+
+    it "should block another user" do
+      Following.destroy_all
+      @user1.follow!(@user2)
+      Following.count.should == 1
+      @user1.blocked?(@user2).should == false
+      @user1.block!(@user2)
+      @user1.blocked?(@user2).should == true
+    end
+
+    it "should not throw exceptions when asking about a nil user" do
+      @user1.blocked?(nil).should == false
+    end
+  end
+
   context "#follow!" do
     before(:all) do
       @user1 = test_user
@@ -106,6 +153,16 @@ describe User do
     end
   end
   
+  context "following" do 
+    context "#following_for" do 
+      it "should not fail when nil is passed" do 
+        @user1 = test_user
+        @user1.following_for(nil).should == nil
+      end
+    end
+  end
+
+
   context "that has notebooks" do
       let(:user) {FactoryGirl.create(:user)}
       let(:course) {FactoryGirl.create(:course)}
