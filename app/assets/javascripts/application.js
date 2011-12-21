@@ -97,6 +97,7 @@ $(function(){
     });
   
   $(".activity-list").jScrollPane({hideFocus: true});
+  $(".news-list").jScrollPane({hideFocus: true});
   
   
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
