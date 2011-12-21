@@ -58,18 +58,22 @@ class Import::CourseDataController < ApplicationController
       lines = lines[1...lines.length] #skip headers # FIXME: Do this by initializing CSV correctly instead of this bullshit hardcoded mistake.
       
       lines.each do |line|
-        school_name, course_number, course_title, department, instructor_list, term = line
-        [ school_name, course_number, course_title, department, instructor_list, term ].each { |s| s ? s.strip! : nil} 
+        begin
+          school_name, course_number, course_title, department, instructor_list, term = line
+          [ school_name, course_number, course_title, department, instructor_list, term ].each { |s| s ? s.strip! : nil} 
 
-        school = School.find_or_create_by_name(school_name)
-        course = Course.find_or_create_by_school_id_and_title_and_number_and_department(
-          school.id, 
-          course_title, 
-          course_number, 
-          department
-        )
+          school = School.find_or_create_by_name(school_name)
+          course = Course.find_or_create_by_school_id_and_title_and_number_and_department(
+            school.id, 
+            course_title, 
+            course_number, 
+            department
+          )
         
-        parse_instructor_list(instructor_list, course.id, school.id, term)
+          parse_instructor_list(instructor_list, course.id, school.id, term)
+        rescue
+          Rails.logger.error "** Error importing line: #{line}"
+        end
       end
       coi.save!
     end
