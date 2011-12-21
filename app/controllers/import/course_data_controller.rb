@@ -46,54 +46,47 @@ class Import::CourseDataController < ApplicationController
     redirect_to import_course_data_path
   end
   
+  # TODO: Move this into a library and refactor. Belongs on the Model, and the models needs an "imported?" flag.
+  # TODO: Move the parsing of CSVs and cretion of records form them into a delayed job. 
+  # TODO: Have a better state machine for showing the status of file imports. 
   private
     def parse_csv_file(coi) #FIXME Chill, bro, it's only 40 lines!
-      school_count = School.count
-      course_count = Course.count
-      offering_count = Offering.count
-      require "csv"
-      path_to_file = "public/system/course_offering_imports/#{coi.id}/original/#{coi.course_offering_import_file_name}"
-      lines = CSV.read path_to_file
-      lines = lines[1...lines.length] #skip headers
+      require "csv" # FIXME: Seriously, Brent?
+      path_to_file = "public/system/course_offering_imports/#{coi.id}/original/#{coi.course_offering_import_file_name}" # FIXME: Again. Really?
+      
+      lines = CSV.read path_to_file # FIXME: Use the right iterator here and pass a block. 
+      lines = lines[1...lines.length] #skip headers # FIXME: Do this by initializing CSV correctly instead of this bullshit hardcoded mistake.
       
       lines.each do |line|
-        school_name = line[0].strip
-        course_number = line[1].strip
-        course_title = line[2].strip
-        department = line[3].strip
-        instructor_list = line[5]
-        term = line[6].strip
+        school_name, course_number, course_title, department, instructor_list, term = line
+        [ school_name, course_number, course_title, department, instructor_list, term ].each { |s| s ? s.strip! : nil} 
+
+        school = School.find_or_create_by_name(school_name)
+        course = Course.find_or_create_by_school_id_and_title_and_number_and_department(
+          school.id, 
+          course_title, 
+          course_number, 
+          department
+        )
         
-        school = School.find_by_name(school_name)
-        if school.nil?
-          school = School.create(name: school_name)
-        end
-        
-        course = Course.where("school_id = ? AND title = ? AND number = ? AND department = ?",
-                                school.id, course_title, course_number, department).first
-        if course.nil?
-          course = Course.create(number: course_number,
-                                  title: course_title,
-                                  school_id: school.id, 
-                                  department: department)
-        end
-        
-        instructor_list.split(";").each do |inst_names|
-          inst_names = inst_names.strip.split(/\b/)
-          first_name = inst_names[0]
-          last_name = inst_names[1...inst_names.length].join.strip
-          instructor = Instructor.where("first_name = ? AND last_name = ?", first_name, last_name).first
-          if instructor.nil?
-            instructor = Instructor.create(last_name: last_name, first_name: first_name)
-          end
-          Offering.create(course_id: course.id, school_id: school.id, instructor_id: instructor.id, term: term)
-        end
+        parse_instructor_list(instructor_list, course.id, school.id, term)
       end
-      #Commenting out since these columns were removed, although except for school count I'd like to add them back
-      #coi.schools_count = (School.count - school_count)
-      #coi.courses_count = (Course.count - course_count)
-      #coi.offerings_count = (Offering.count - offering_count)
       coi.save!
     end
+  
+    def parse_instructor_list(instructor_list, course_id, school_id, term)
+      return unless instructor_list
+      instructor_list.split(";").each do |inst_names|
+        inst_names = inst_names.strip.split(/\b/)
+        first_name = inst_names[0]
+        last_name = inst_names[1...inst_names.length].join.strip
+        instructor = Instructor.where("first_name = ? AND last_name = ?", first_name, last_name).first
+        if instructor.nil?
+          instructor = Instructor.create(last_name: last_name, first_name: first_name)
+        end
+        Offering.create(course_id: course_id, school_id: school_id, instructor_id: instructor.id, term: term)
+      end
+   end
+
 end
 
