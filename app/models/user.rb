@@ -142,6 +142,7 @@ class User < ActiveRecord::Base
 
   #find the following object joining this user and the given user
   def following_for(user)
+    return nil unless user
     followings.where(:followed_user_id => user.id).first
   end
   
@@ -155,11 +156,13 @@ class User < ActiveRecord::Base
   end
   
   def blocked?(user)
+    return false unless user
     following = Following.where( :user_id => self.id, :followed_user_id => user.id).first
     following.blocked? unless following.nil?
   end
   
   def unblock!(user)
+    return unless user
     following = Following.where :user_id => self.id, :followed_user_id => user.id
     following.first.update_attributes :blocked => false
   end
