@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111221031710) do
+ActiveRecord::Schema.define(:version => 20111222131945) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20111221031710) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "school_id"
+    t.string   "state"
   end
 
   create_table "courses", :force => true do |t|
@@ -57,6 +58,26 @@ ActiveRecord::Schema.define(:version => 20111221031710) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "courses", ["number"], :name => "index_courses_on_number"
+  add_index "courses", ["school_id"], :name => "index_courses_on_school_id"
+  add_index "courses", ["title"], :name => "index_courses_on_title"
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "enrollments", :force => true do |t|
     t.integer  "offering_id"
@@ -105,6 +126,9 @@ ActiveRecord::Schema.define(:version => 20111221031710) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "instructors", ["first_name"], :name => "index_instructors_on_first_name"
+  add_index "instructors", ["last_name"], :name => "index_instructors_on_last_name"
 
   create_table "majors", :force => true do |t|
     t.string   "name"
@@ -189,6 +213,11 @@ ActiveRecord::Schema.define(:version => 20111221031710) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "offerings", ["course_id"], :name => "index_offerings_on_course_id"
+  add_index "offerings", ["instructor_id"], :name => "index_offerings_on_instructor_id"
+  add_index "offerings", ["school_id"], :name => "index_offerings_on_school_id"
+  add_index "offerings", ["term"], :name => "index_offerings_on_term"
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
