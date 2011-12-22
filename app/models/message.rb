@@ -3,7 +3,12 @@ class Message < ActiveRecord::Base
   
   has_many :messages, :foreign_key => :parent_id
   belongs_to :parent, :class_name => "Message"
+  belongs_to :received_messageable, :class_name => "User", :foreign_key => "received_messageable_id"
   after_save :update_replies
+  
+  def read?(user)
+    opened? || self.sender_id == user.id
+  end
   
   def reply?
     !self.parent_id.nil?

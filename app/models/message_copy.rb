@@ -2,8 +2,13 @@ class MessageCopy < ActiveRecord::Base
   has_attached_file :attachment
   
   has_many :messages, :foreign_key => :parent_id, :class_name => "MessageCopy"
+  belongs_to :sent_messageable, :class_name => "User", :foreign_key => "sent_messageable_id"
   belongs_to :parent, :class_name => "MessageCopy"
   after_save :update_replies
+  
+  def read?(user)
+    self.sent_messageable == user || opened?
+  end
   
   def reply?
     !self.parent_id.nil?
