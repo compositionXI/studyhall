@@ -36,7 +36,7 @@
     <ul id="notes" class="active tab-pane scrollPane">
       <% @shared_notes.each do |note| %>
         <li class="linked_item note" data-rel="<%= note_url(note) %>">
-          <span><%= note.name %></span>
+          <span><%= truncate note.name, :length => 60 %></span>
         </li>
       <% end %>
     </ul>
