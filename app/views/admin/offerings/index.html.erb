@@ -21,7 +21,7 @@
         <td><%= offering.school.name %></td>
         <td><%= offering.course.title %></td>
         <td><%= offering.term %></td>
-        <td><%= offering.instructor.full_name %></td>
+        <td><%= offering.instructor.try(:full_name) %></td>
         <td><%= link_to 'Edit', edit_admin_offering_path(offering), :class => "btn" %></td>
         <td><%= link_to 'Destroy', admin_offering_path(offering), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
       </tr>

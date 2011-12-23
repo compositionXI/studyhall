@@ -5,11 +5,18 @@ class PostsController < ApplicationController
     # if user, look for that user's posts, else all posts for that class
     # then looks for posts with those post params 
     # TODO refactor
-    @users, @users_with_extras = [], []
-    @users = User.where(params[:user]) if params[:user]
-    @users_with_extras = User.has_extracurricular(params[:extracurricular_id].first.to_i) if params[:extracurricular_id]
-    @users = @users.concat(@users_with_extras)
-    @users = User.where(params[:user])
+    # @users, @users_with_extras = [], []
+    # @users = User.where(params[:user]) if params[:user]
+    # @users_with_extras = User.has_extracurricular(params[:extracurricular_id].first.to_i) if params[:extracurricular_id]
+    # @users = @users.concat(@users_with_extras)
+    # @users = User.where(params[:user])
+    if params[:user]
+      sport_id = params[:user].delete(:sport_id)
+      frat_sorority_id = params[:user].delete(:frat_sorority_id)
+      @users = User.where(params[:user])
+      @users = @users.has_sports([sport_id]) if sport_id
+      @users = @users.has_frat_sororities([frat_sorority_id]) if frat_sorority_id
+    end
     
     @class = Offering.find params[:class_id]
     @posts = []
@@ -18,7 +25,7 @@ class PostsController < ApplicationController
         @posts << Post.for_offering(@class).by_user(user).where(params[:post]).recent.top_level
       end
     else
-      @posts = Posts.where(params[:post]).recent.top_level
+      @posts = Postf.where(params[:post]).recent.top_level
     end
     render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts.flatten}
   end

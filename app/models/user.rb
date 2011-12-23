@@ -37,7 +37,9 @@ class User < ActiveRecord::Base
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
   scope :has_extracurricular, lambda { |extracurricular_id| all.collect{|u| u if u.extracurricular_ids.include? extracurricular_id}}
-
+  scope :has_frat_sororities, lambda { |frat_sorority_ids| joins("join frat_sororities_users on frat_sororities_users.user_id = users.id").where({ frat_sororities_users: { frat_sorority_id: frat_sorority_ids}})}
+  scope :has_sports, lambda { |sports_ids| joins("join sports_users on sports_users.user_id = users.id").where({ sports_users: { sport_id: sports_ids}})}
+  
   validates :custom_url, 
     :format => {:with => /^[a-z0-9]+[-a-z0-9]*[a-z0-9]+$/i, :message => "may only use letters and numbers."},
     :uniqueness => true  

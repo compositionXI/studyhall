@@ -25,5 +25,17 @@
     </section>
     <%= render "layouts/footer" %>  
   </div>
+  <% if current_user -%>
+    <%= EnvolveChat::ChatRenderer.get_html(APP_CONFIG["envolve"]["api_key"], 
+        :first_name => current_user.first_name,
+        :last_name => current_user.last_name,
+        :is_admin => false, 
+        :pic => "#{APP_CONFIG["host"]}#{current_user.avatar_url}", 
+        :people_list_header_text => "Chat with other vistors",
+        :people_here_text => "People online",
+        :groups => [{:id => "study", :name => "All Vistors"}]
+      ).html_safe
+    %>
+  <% end -%>
 </body>
 </html>

@@ -88,4 +88,9 @@ module MessagesHelper
       ["Mark as unread", "#", {:class => "update_messages unopened", :'data-update-attribute' => "opened", :'data-attribute-value' => false}]
     ]
   end
+  
+  def message_opened?(message)
+    is_sent_by_current_user = message.is_a?(MessageCopy) && message.sent_messageable == current_user
+    (message.opened? || is_sent_by_current_user) && message.messages.inject(true) { |read, m| read && m.read?(current_user) }
+  end
 end

@@ -15,7 +15,7 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
 
-    if @contact.save
+    if verify_recaptcha(:model => @contact, :message => "Oh! It's error with reCAPTCHA!") && @contact.save
       redirect_to root_path, notice: 'Contact was successfully created.'
     else
       render action: "new"

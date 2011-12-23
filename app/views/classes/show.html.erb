@@ -7,7 +7,7 @@
   </section>
   <section>
     <header>
-      <h1 class="left">Professor: <small><%= "#{@class.instructor.first_name} #{@class.instructor.last_name}" %></small></h1>
+      <h1 class="left">Professor: <small><%= @class.instructor ? "#{@class.instructor.first_name} #{@class.instructor.last_name}" : "Unknown" %></small></h1>
     </header>
   </section>
   <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class} %>
@@ -34,7 +34,7 @@
     <ul id="notes" class="active tab-pane scrollPane">
       <% @shared_notes.each do |note| %>
         <li class="linked_item note" data-rel="<%= note_url(note) %>">
-          <span><%= note.name %></span>
+          <span><%= truncate note.name, :length => 60 %></span>
         </li>
       <% end %>
     </ul>

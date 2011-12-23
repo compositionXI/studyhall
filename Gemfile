@@ -25,6 +25,11 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'contacts', :git => 'git://github.com/agentrock/contacts'
 gem 'gdata', :git => 'git://github.com/agentrock/gdata.git'
 gem 'hpricot'
+gem "transitions", :require => ["transitions", "active_record/transitions"]
+gem 'delayed_job_active_record'
+gem "recaptcha", :require => "recaptcha/rails"
+
+gem "ruby-hmac"
 
 # Gems used only for assets and not required
 # in production environments by default.
