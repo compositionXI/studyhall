@@ -1,3 +1,15 @@
+<%= content_for :chat_widget do -%>
+    <%= EnvolveChat::ChatRenderer.get_html(APP_CONFIG["envolve"]["api_key"], 
+        :first_name => current_user.first_name,
+        :last_name => current_user.last_name,
+        :is_admin => current_user.admin?, 
+        :pic => "#{APP_CONFIG["host"]}#{current_user.photo_url}", 
+        :people_list_header_text => "Chat with other users",
+        :people_here_text => "People Online",
+        :groups => [{:id => "all_site", :name => "All Vistors"}]
+      ).html_safe
+    %>
+<% end -%>
 <header class="home-header row">
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), edit_user_path(@current_user) %>
