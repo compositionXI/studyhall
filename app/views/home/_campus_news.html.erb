@@ -1,4 +1,4 @@
-<header><h1>Campus News <small>(<%= current_user.school.try(:latest_news).try(:count) || 0 %>)</small></h1></header>
+<header><h3>Campus News <small>(<%= current_user.school.try(:latest_news).try(:count) || 0 %>)</small></h3></header>
 <ul class="news-list">
   <% if current_user.school.present? %>
     <% if current_user.school.latest_news.any? %>
