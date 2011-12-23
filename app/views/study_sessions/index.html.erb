@@ -2,7 +2,10 @@
   <div class="notebook_list_container <%= items_layout %>">
     <% if @study_sessions.empty? %>
       <% if @filtered_results %>
-        <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+        <center>
+          <h3 class="title">No Results Found!</h3>
+          <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+        </center>
       <% else %>
       <div class="landing_wrapper">
         <div class="study_session_demo">
