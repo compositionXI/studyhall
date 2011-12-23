@@ -33,6 +33,10 @@
     <%= f.label :message %>
     <div class="input"><%= f.text_area :message %></div>
   </div>
+  <div class="clearfix">
+    <%= f.label "Please enter the captcha in follow picture" %>
+    <%= recaptcha_tags %>
+  </div>
   <div>
     <%= f.submit "Submit", :class => "btn primary" %>
     <%- if @current_user && @current_user.admin?%>
