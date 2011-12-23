@@ -44,27 +44,29 @@
         <label class="add-on">
           <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
         </label>
-        <%= collection_select :extracurricular_id, nil, Extracurricular.all, :id, :name, {:prompt => "Choose a Sport or Club"}, {:class => "chzn-select", :disabled => "true"} %>
+        <%= collection_select :user, :sport_id, Sport.all, :id, :name, {:prompt => "Choose a Sport or Club"}, {:class => "chzn-select", :disabled => "true"} %>
       </div>
     </div>
-    <%= label_tag "Fraternity" %>
+    <%= label_tag "Fraternity/Sorority" %>
     <div class="input select_post_attribute">
       <div class="input-prepend">
         <label class="add-on">
           <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
         </label>
-        <%= collection_select :user, :fraternity, User.with_attribute(:fraternity).compact, :fraternity, :fraternity, {:prompt => "Choose A Fraternity"}, {:class => "chzn-select", :disabled => "true"} %>
+        <%= collection_select :user, :frat_sorority_id, FratSorority.all, :id, :name, {:prompt => "Choose A Fraternity"}, {:class => "chzn-select", :disabled => "true"} %>
       </div>
     </div>
-    <%= label_tag "Sorority" %>
+    <!--
+    <%#= label_tag "Sorority" %>
     <div class="input select_post_attribute">
       <div class="input-prepend">
         <label class="add-on">
-          <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          <%#= check_box_tag nil, nil, false, :class => "activation_check_box" %>
         </label>
-        <%= collection_select :user, :sorority, User.with_attribute(:sorority).compact, :sorority, :sorority, {:prompt => "Choose A Sorority"}, {:class => "chzn-select", :disabled => "true"} %>
+        <%#= collection_select :user, :sorority, User.with_attribute(:sorority).compact, :sorority, :sorority, {:prompt => "Choose A Sorority"}, {:class => "chzn-select", :disabled => "true"} %>
       </div>
     </div>
+    -->
   </div>
   <div class="clearfix">
     <%= submit_tag "Filter", :class => "btn primary" %>
