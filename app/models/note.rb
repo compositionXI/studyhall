@@ -6,7 +6,8 @@ class Note < ActiveRecord::Base
   
   validates_presence_of :user_id
   
-  scope :unsorted, lambda { Note.where(:notebook_id => nil) }
+  scope :unsorted, lambda { where(:notebook_id => nil) }
+  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
 
   searchable :auto_index => true, :auto_remove => true do
     text :name
