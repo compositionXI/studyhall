@@ -13,6 +13,7 @@ class StudySession < ActiveRecord::Base
   scope :as_guest, lambda {|user| user.study_sessions.where(StudySession.arel_table[:user_id].does_not_match(user.id)) }
   scope :for_user, lambda {|user| where(:id => (select(:id).where(:user_id => user.id).map(&:id) + user.session_invites.map(&:study_session_id))) }
   scope :with_users, lambda {|user_ids| where(:id => SessionInvite.where(:user_id => user_ids).select(:study_session_id).all.map(&:study_session_id)) }
+  scope :in_range, lambda {|start_date, end_date| where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day)) unless start_date.blank? || end_date.blank? }
   scope :shared, where(:shared => true)
 
   before_create :init_opentok

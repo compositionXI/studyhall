@@ -6,7 +6,7 @@ class Filter
   extend ActiveModel::Naming
 
   # Add an attr accessor for any attribute you want to use in a form
-  attr_accessor :model_name, :object, :notebooks, :notes, :created_at, :course_id, :name, :user_ids, :start_date, :end_date
+  attr_accessor :model_name, :object, :notebooks, :notes, :created_at, :offering_id, :course_id, :name, :user_ids, :start_date, :end_date
 
   def initialize(options={})
     options ||= {}
@@ -42,6 +42,7 @@ class Filter
   def query_params
     attrs = attributes
     params_for_query = {:filter => {}}
+    not_object_attrs = {}
     case object_name
     when "Note" || "Notebook"
       params_for_query[:filter][:note] = {} if attrs["notes"]
@@ -54,7 +55,15 @@ class Filter
       params_for_query[:filter][:notes] = notes
       params_for_query[:filter][:start_date] = attrs["start_date"] if attrs["start_date"]
       params_for_query[:filter][:end_date] = attrs["end_date"] if attrs["end_date"]
-    when object_name == "StudySession"
+    when "StudySession"
+      params_for_query[:filter][:study_session] = {}
+      attrs.each_pair do |k, v|
+        if attribute_of?(k, StudySession)
+          params_for_query[:filter][:study_session][k] = v unless v.empty?
+        else
+          params_for_query[:filter][k] = v unless v.empty?
+        end
+      end
     end
     params_for_query.to_query
   end

@@ -56,15 +56,23 @@ class StudySessionsController < ApplicationController
   private
   
   def find_study_sessions
-    if params[:user_ids]
-      users = User.select(:name).where(:id => params[:user_ids]).all
-      flash.now[:action_bar_message] = "StudyHalls with #{truncate(users.map(&:name).to_sentence, :length => 50)}"
+    if params[:filter]
       @filtered_results = true
-      current_user.study_sessions.with_users(params[:user_ids])
+      flash.now[:action_bar_message] = "Filtered StudyHalls "
+      study_sessions = current_user.study_sessions.where(params[:filter][:study_session])
+      if params[:filter][:user_ids]
+        users = User.where(:id => params[:filter][:user_ids]).all
+        flash.now[:action_bar_message] << "with #{truncate(users.map(&:full_name).to_sentence, :length => 50)} "
+        study_sessions = study_sessions.with_users(params[:filter][:user_ids])
+      end
+      if params[:filter][:start_date] && params[:filter][:end_date]
+        study_sessions = study_sessions.in_range(params[:filter][:start_date], params[:filter][:end_date])
+      end
     else
       @filtered_results = false
-      current_user.study_sessions
+      study_sessions = current_user.study_sessions
     end
+    study_sessions
   end
 
   def augment_study_session_params
