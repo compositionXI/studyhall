@@ -31,6 +31,8 @@ gem "recaptcha", :require => "recaptcha/rails"
 
 gem "ruby-hmac"
 
+gem "ruby-hmac"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
