@@ -13,40 +13,45 @@
     </div>
   <% else %>
   <% end %>
-  <div class="standard_actions right">
+</header>
+<aside class="sidebar">
+  <div class="standard_actions">
       <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :id => "new_study_session_button1", :class => "btn primary large popover_button", :remote => true %>
       <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
   </div>
-</header>
-<aside class="sidebar">
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
-  <section class="activity">
-    <header>
-      <h1>Your Activity <small>(<%= current_user.activity.count %>)</small></h1>
-    </header>
-    <ul class="activity-list">
-      <% if current_user.activity.any? %>
-        <% current_user.activity.each do |message| %>
-          <%= message.body.html_safe %>
-        <% end %>
-      <% else %>
-        <li><p>No recent activity</p></li>
-      <% end %>
-    </ul>
-  </section>  
-  <section class="news">
-    <%= render :partial => "home/campus_news" %>
-  </section>
 </aside>
-<section class="courses <%= items_layout %>">
-  <ol class="course_list">
-    <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
-    <li class="add">
-      <%= link_to new_class_path(:link_id => "add_course_button"), :id => "add_course_button", :remote => true do %>
-        <span>Add a course</span>
-      <% end %>
-    </li>
-    
-    
-  </ol>
+<div class="main_content">
+  <div class="top clearfix">
+    <section class="activity">
+      <header>
+        <h3>Your Activity <small>(<%= current_user.activity.count %>)</small></h3>
+      </header>
+      <ul class="activity-list">
+        <% if current_user.activity.any? %>
+          <% current_user.activity.each do |message| %>
+            <%= message.body.html_safe %>
+          <% end %>
+        <% else %>
+          <li><p>No recent activity</p></li>
+        <% end %>
+      </ul>
+    </section>  
+    <section class="news">
+      <%= render :partial => "home/campus_news" %>
+    </section>
+  </div>
+  <section class="courses <%= items_layout %>">
+    <header>
+      <h3>Courses</h3>
+    </header>
+    <ol class="course_list">
+      <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
+      <li class="add">
+        <%= link_to new_class_path(:link_id => "add_course_button"), :id => "add_course_button", :remote => true do %>
+          <span>Add a course</span>
+        <% end %>
+      </li>
+    </ol>
+  </section>
 </div>
