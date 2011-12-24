@@ -2,31 +2,35 @@
   <div class="clearfix">
     <div class="input">
       <ul class="inputs-list">
-        <li>
-          <label>
-            <%= radio_button_tag "message[opened]", "all", false %><span>All</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <%= radio_button_tag "message[opened]", 1, false %><span>Read</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <%= radio_button_tag "message[opened]", 0, false %><span>Unread</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <%= radio_button_tag "message[deleted]", 1, false %><span>Archived</span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <%= radio_button_tag "message[deleted]", 0, false %><span>Unarchived</span>
-          </label>
-        </li>
+        <div class="filter_form_button_group">
+          <li>
+            <label>
+              <%= radio_button_tag "message[opened]", "all", false %><span>All</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= radio_button_tag "message[opened]", 1, false %><span>Read</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= radio_button_tag "message[opened]", 0, false %><span>Unread</span>
+            </label>
+          </li>
+        </div>
+        <div class="filter_form_button_group">
+          <li>
+            <label>
+              <%= radio_button_tag "message[deleted]", 1, false %><span>Archived</span>
+            </label>
+          </li>
+          <li>
+            <label>
+              <%= radio_button_tag "message[deleted]", 0, false %><span>Unarchived</span>
+            </label>
+          </li>
+        </div>
       </ul>
     </div>
   </div>
