@@ -32,6 +32,7 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem "ruby-hmac"
 
 gem "ruby-hmac"
+gem 'rchardet19'
 
 # Gems used only for assets and not required
 # in production environments by default.
