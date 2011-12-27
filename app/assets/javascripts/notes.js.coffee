@@ -190,7 +190,7 @@ $(document).ready ->
       e.preventDefault()
 
   if $("body").hasClass("notes-edit") || $("body").hasClass("notes-new")
-    $('.rte_area').cleditor({width: 936, height: 700, bodyStyle: "padding:50px 130px", useCSS: true, docCSSFile: "/stylesheets/cleditor.css"}).focus()
+    $('.rte_area').cleditor({width: 936, height: 700, bodyStyle: "padding:50px 130px; word-wrap: break-word;", useCSS: true, docCSSFile: "/stylesheets/cleditor.css"}).focus()
     $('.cleditorToolbar').hide()
     
     $("body").delegate "#edit_note_form", "ajax:success", (evt, data, status, xhr) ->
