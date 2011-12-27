@@ -83,7 +83,11 @@ Studyhall::Application.routes.draw do
   resources :filters, only: [:new, :create]
   resources :group_deletes, only: [:new, :create]
   resources :sharings, only: [:new, :create]
-  resources :searches, only: [:show, :create]
+  resources :searches, only: [:show, :create] do
+    collection do
+      get :autocomplete
+    end
+  end
 
   # get "/searches" => "searches#create", :as => "search", :format => :js
 

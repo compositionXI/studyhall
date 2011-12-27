@@ -22,8 +22,9 @@
       </ul>
     </div>
   </div>
-  <div>
-    <%= f.submit :class => "btn primary" %>
+  <div class="clearfix">
+    <%= f.submit 'Done', :class => "btn primary" %>
     <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+    <%= f.submit "Quick Save", :class => 'btn primary quick_save_btn' %>
   </div>
 <% end %>
