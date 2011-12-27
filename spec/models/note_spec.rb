@@ -20,4 +20,15 @@ describe Note do
       note.name.should == "Quick Save - #{note.owner.notes.count - 1}"
     end
   end
+  
+  describe "#take_parent_permission" do
+    it "should take parent notebook's permission if note is move into the notebook" do
+      note = Factory(:note, user: user, shareable: false)
+      notebook = Factory(:notebook, user: user, shareable: true)
+      note.notebook = notebook
+      note.save
+      note.shareable.should == true
+      note.notebook_changed.should == true
+    end
+  end
 end

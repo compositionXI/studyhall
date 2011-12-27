@@ -10,6 +10,9 @@ class Note < ActiveRecord::Base
   scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
   
   before_save :check_note_name
+  before_save :take_parent_permission
+  
+  attr_accessor :notebook_changed
   
   searchable :auto_index => true, :auto_remove => true do
     text :name
@@ -37,6 +40,13 @@ class Note < ActiveRecord::Base
     def check_note_name
       if self.name.blank?
         self.name = "Quick Save - #{self.owner.notes.count}"
+      end
+    end
+    
+    def take_parent_permission
+      if self.notebook_id_changed? && self.notebook
+        self.shareable = self.notebook.shareable
+        self.notebook_changed = true
       end
     end
 end
