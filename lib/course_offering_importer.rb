@@ -38,7 +38,7 @@ module CourseOfferingImporter
 
   def convert_charset(s)
     cd = CharDet.detect s
-    p cd.confidence
-    cd.confidence > 0.6 ? Iconv.conv(cd.encoding, "UTF-8", s) : s
+    #cd.confidence > 0.6 ? Iconv.conv("UTF-8", cd.encoding, s) : s
+    Iconv.conv "UTF-8", cd.encoding, s
   end
 end
