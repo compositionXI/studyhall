@@ -52,16 +52,23 @@
     position: absolute
     top: 0
     width: 300px
-    height: inherit
-    background: #FAFAFA
-    border: 1px solid $popoverBorder
-    margin-top: 5px
-    padding: 10px
+    height: 0px
+    background-color: #393E40
+    border: 1px solid #2D2D2D
     z-index: -1001
+    color: #FFF
     &.right
       right: 410px
     &.left
       left: 410px
+    .help_section
+      padding: 18px
+    .title
+      border-bottom: 1px solid black
+      border-radius: 3px 3px 0 0
+      box-shadow: 0 1px 0 grey
+    h3, h4
+      color: #FFF
     .close_help_button
       @include border-radius(10px)
       position: absolute

@@ -70,8 +70,8 @@
   , showHelp: function () {
       var $tip = this.tip();
       var $help_div = $tip.find('.help');
-      $help_div.css({height: $tip.find(".title").height()+$tip.find(".content").height()});
-      var width = $tip.find(".inner").width();
+      $help_div.css({height: $tip.find(".inner").height()+parseInt($tip.find(".inner").css("padding-top"))+parseInt($tip.find(".inner").css("padding-bottom"))});
+      var width = $tip.find(".inner").width()+parseInt($tip.find(".inner").css("padding-left"))+parseInt($tip.find(".inner").css("padding-right"));
       if(this.options.placement == "left" || this.options.placement == "below-left")
         $help_div.animate({right: width});
       else
