@@ -58,8 +58,19 @@ class Search < ActiveRecord::Base
     Note.search do
       fulltext query
       with :shareable, 1
-      paginate :page => page, :per_page => :APP_CONFIG['per_page'] if page
+      paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end
   end
   
+  class << self
+    
+    def autocomplete(query='', page=1)
+      Sunspot.search Note, Course, User do
+        fulltext query
+        with :shareable, 1
+        paginate :page => page, :per_page => 5
+      end
+    end
+    
+  end
 end
