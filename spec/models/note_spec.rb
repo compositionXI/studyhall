@@ -13,4 +13,11 @@ describe Note do
     note = FactoryGirl.create(:note, created_at: 2.week.ago, user: user )
     Note.in_range(3.weeks.ago, 1.week.ago).should == [note]
   end
+  
+  describe "#check_note_name" do
+    it "should assign default name to note if user didn't specify" do
+      note = Factory(:note, name: '', user: user)
+      note.name.should == "Quick Save - #{note.owner.notes.count - 1}"
+    end
+  end
 end

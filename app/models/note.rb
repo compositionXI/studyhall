@@ -8,7 +8,9 @@ class Note < ActiveRecord::Base
   
   scope :unsorted, lambda { where(:notebook_id => nil) }
   scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
-
+  
+  before_save :check_note_name
+  
   searchable :auto_index => true, :auto_remove => true do
     text :name
     text :content
@@ -30,4 +32,11 @@ class Note < ActiveRecord::Base
     user.name
   end
   
+  protected 
+    
+    def check_note_name
+      if self.name.blank?
+        self.name = "Quick Save - #{self.owner.notes.count}"
+      end
+    end
 end
