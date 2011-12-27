@@ -12,6 +12,8 @@ class Note < ActiveRecord::Base
   before_save :check_note_name
   before_save :take_parent_permission
   
+  attr_accessor :notebook_changed
+  
   searchable :auto_index => true, :auto_remove => true do
     text :name
     text :content
@@ -44,6 +46,7 @@ class Note < ActiveRecord::Base
     def take_parent_permission
       if self.notebook_id_changed? && self.notebook
         self.shareable = self.notebook.shareable
+        self.notebook_changed = true
       end
     end
 end

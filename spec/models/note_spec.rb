@@ -28,6 +28,7 @@ describe Note do
       note.notebook = notebook
       note.save
       note.shareable.should == true
+      note.notebook_changed.should == true
     end
   end
 end
