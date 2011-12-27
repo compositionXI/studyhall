@@ -20,15 +20,15 @@
     <%= f.label :course %>
     <div class="input"><%= select :notebook, :course_id, @current_user.offerings.collect {|o| [o.course.title, o.course.id]}, {:prompt => true}, {:class => "chzn-select"} %></div>
   </div>
+  
   <div class="clearfix">
     <div class="input">
-      <ul class="inputs-list">
-        <li>
-          <label>
-            <%= f.check_box :shareable %><span>Shared</span>
-          </label>
-        </li>
-      </ul>
+      <div class="input-prepend">
+        <label class="add-on">
+          <%= f.check_box :shareable, checked: "checked", class: "activation_check_box" %>
+        </label>
+        <%= text_field_tag nil, nil, placeholder: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
+      </div>
     </div>
   </div>
   <div>
