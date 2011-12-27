@@ -181,4 +181,19 @@ $(document).ready(function(){
       e.preventDefault();
   });
   
+  $("#search_keywords").autocomplete({
+    source: function(request, response) {
+      $.ajax({
+        url: '/searches/autocomplete.json',
+        dataType: 'json',
+        data: {keywords: $("#search_keywords").val() },
+        success: function(data) {
+          response(data);
+        }
+      });
+    },
+    select: function(e, ui) {
+      window.location.href = ui.item.url;
+    }
+  })
 });
