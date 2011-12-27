@@ -1,8 +1,16 @@
 var button = $("#<%=j @modal_link_id %>");
 
+var placement = "below";
+var length = $('.course_list').children().length;
+if(1 == length % 4) {
+  placement = "below-left";
+} else if(0 == length % 4) {
+  placement = "below-right";
+}
+
 button.popover({
   trigger: "manual",
-  placement: "below-left",
+  placement: placement,
   offset: 10,
   horizontalOffset: 25,
   html: true,
