@@ -169,7 +169,6 @@ $(document).ready(function(){
   });
   
   if (!Modernizr.input.placeholder) {
-      $("#search_keywords").placeholder();
   }
   
   $(".scrollPane").jScrollPane();
