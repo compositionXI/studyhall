@@ -138,7 +138,14 @@
     chosenable.addClass("chzn-select");
     chosenable.chosen();
     $(".popover #user_gender ").chosen().change(function(){
-      $('.fraternity, .sorority').toggleClass("hide");
+      var gender = $(this).val();
+      if (gender == 'Male') {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity");
+      } else if(gender == 'Female') {
+        $('label[for=user_fraternity_or_sorority]').text("Sorority");
+      } else {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity or Sorority");
+      }
     });
     $(".popover #user_major_ids").chosen();
     $(".popover #user_sport_ids").chosen();
