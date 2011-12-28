@@ -101,7 +101,11 @@ class NotesController < ApplicationController
       end
     end
   end
-
+  
+  def delete
+    @note = current_user.notes.find(params[:id])
+  end
+  
   def destroy
     @note = current_user.notes.find(params[:id])
     @note.destroy

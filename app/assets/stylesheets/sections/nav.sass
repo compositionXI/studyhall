@@ -127,6 +127,12 @@ header.topbar
         color: rgba(255,255,255,.75)
       &.placeholder
         color: #BFC5B8
+      &:focus
+        outline: none
+        border-color: rgba(82, 168, 236, 0.8)
+        -webkit-box-shadow: none
+        -moz-box-shadow: none 
+        @include box-shadow( $shadow )
 
     ul#quick_search
       background: #FFF
