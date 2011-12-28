@@ -5,6 +5,8 @@ Studyhall::Application.routes.draw do
   resources :notes do
     member do
       put 'move'
+      get :delete
+      delete :delete, :action => :destroy
     end
   end
   resources :notebooks do
