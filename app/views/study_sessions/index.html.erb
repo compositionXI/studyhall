@@ -1,35 +1,33 @@
-<div class="container">
-  <div class="notebook_list_container <%= items_layout %>">
-    <% if @study_sessions.empty? %>
-      <% if @filtered_results %>
-        <center>
-          <h3 class="title">No Results Found!</h3>
-          <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
-        </center>
-      <% else %>
-      <div class="landing_wrapper">
-        <div class="study_session_demo">
-          <div class="attendees">
-              <%= image_tag current_user.avatar_url(:thumb), :title => current_user.name %>
-          </div>
-           <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_2"), :remote => true, :id => "new_study_session_button_2" %> 
-        </div>        
-          <h2>
-          With study halls you can collaborate with other students, video chat, and edit documents together!
-          </h2>
-        <p>
-          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_3"), :remote => true, :id => "new_study_session_button_3" %>
-           now!
-        </p>
-        </div>
-        
-      <% end %>
+<div class="notebook_list_container <%= items_layout %>">
+  <% if @study_sessions.empty? %>
+    <% if @filtered_results %>
+      <center>
+        <h3 class="title">No Results Found!</h3>
+        <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+      </center>
     <% else %>
-      <ol class="notebook_list">
-        <%= render @study_sessions %>
-      </ol>
+    <div class="landing_wrapper">
+      <div class="study_session_demo">
+        <div class="attendees">
+            <%= image_tag current_user.avatar_url(:thumb), :title => current_user.name %>
+        </div>
+         <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_2"), :remote => true, :id => "new_study_session_button_2" %> 
+      </div>        
+        <h2>
+        With study halls you can collaborate with other students, video chat, and edit documents together!
+        </h2>
+      <p>
+        <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_3"), :remote => true, :id => "new_study_session_button_3" %>
+         now!
+      </p>
+      </div>
+      
     <% end %>
-  </div>
+  <% else %>
+    <ol class="notebook_list">
+      <%= render @study_sessions %>
+    </ol>
+  <% end %>
 </div>
 <% @study_sessions.each do |study_session| %>
   <div id="study_session_<%= study_session.id %>_modal" data-rel="study_session_<%= study_session.id %>" class="study_session_modal modal hide fade" style="display:none">
