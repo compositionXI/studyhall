@@ -8,7 +8,7 @@
     <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
   <% else %>
     <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
-    <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+    <span class="date name"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
   <% end %>
   <div class="checkbox">
   </div>
