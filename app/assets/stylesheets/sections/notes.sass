@@ -334,12 +334,16 @@
           background: url(asset-path('notebook-brown.png','image')) transparent no-repeat
           .name
             display: table-cell
-            height: 156px  
+            height: 156px
+            width: 150px
             text-align: center
             vertical-align: middle
           &.draggable_hovering
             +rotate
             background-position: -528px 0
+          .name_wrapper
+            word-wrap: break-word
+            width: 130px
         .list_data
           visibility: hidden
       &.list
