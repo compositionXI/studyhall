@@ -5,6 +5,7 @@ button.popover({
   offset: 10,
   horizontalOffset: 25,
   html: true,
+  help: function(){return "<%=j render :partial => 'help' %>";},
   title: function(){return "Edit this note";},
   content: function(){return "<%=j render :partial => 'form' %>";}
 });
@@ -12,3 +13,12 @@ button.popover("show");
 $("#note_content_hidden_field").val($("#rte_area_note_content").val());
 $("#edit_note_form input[type='text']").first().focus();
 $(".chzn-select").chosen({allow_single_deselect : true});
+$(".popover").delegate("a.help_button","click",function(e){
+  button.popover("showHelp");
+  e.preventDefault();
+});
+$(".popover").delegate("a.close_help_button","click",function(e){
+  button.popover("hideHelp");
+  e.preventDefault();
+});
+initWindowResize();
