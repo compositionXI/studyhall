@@ -14,7 +14,7 @@
     <%= f.select( "gender", %w[Male Female], {:prompt => "Select"})%>
   </div>
   <div class="clearfix input fraternity sorority">
-    <%= f.label :fraternity_or_sorority %>
+    <%= f.label :fraternity_or_sorority, fraternity_or_sorority_label(user) %>
     <%= f.collection_select :frat_sorority_ids, FratSorority.all, :id, :name, {}, {'multiple' => true, 'data-placeholder' => 'Select your frat or sorority'} %>
   </div>
   <div class="clearfix input">
