@@ -1,5 +1,16 @@
 module UsersHelper
-
+  
+  def fraternity_or_sorority_label(user)
+    case user.gender
+    when 'Male'
+      'Fraternity'
+    when 'Female'
+      'Sorority'
+    else
+      'Fraternity or Sorority'
+    end
+  end
+  
   def vote_help_text
     "Students can up or down vote their classmates to give others an idea of how helpful they are as a study buddy."
   end
