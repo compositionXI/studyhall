@@ -2,16 +2,25 @@
   <% if study_session.new_record? %>
     <p class="warning">Make sure that your microphone and camera work before you begin.</p>
   <% end %>
-  <%= f.label :name, "Give it a name" %>
-  <%= f.text_field :name %>
-  <%= f.label :buddy_ids, "Invite Your Buddies" %>
-  <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name,{:multiple => true},{:multiple => "multiple", :id => "buddy_id_select_#{study_session.id || 0}", :class => "chzn-select buddy_id_select", "data-placeholder" => "Select buddies"} %>
-  <%= f.label :offering_id, "Course" %>
-  <%= f.collection_select :offering_id, current_user.offerings, :id, :name,{:include_blank => true},{:class => "chzn-select", "data-placeholder" => "No course", :id => "offering_id_select_#{study_session.id || 0}"} %>
+  <div class="clearfix">
+    <%= f.label :name, "Give it a name" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="clearfix">
+    <%= f.label :buddy_ids, "Invite Your Buddies" %>
+    <%= f.collection_select :buddy_ids, current_user.buddies, :id, :name,{:multiple => true},{:multiple => "multiple", :id => "buddy_id_select_#{study_session.id || 0}", :class => "chzn-select buddy_id_select", "data-placeholder" => "Select buddies"} %>
+  </div>
+  <div class="clearfix">
+    <%= f.label :offering_id, "Course" %>
+    <%= f.collection_select :offering_id, current_user.offerings, :id, :name,{:include_blank => true},{:class => "chzn-select", "data-placeholder" => "No course", :id => "offering_id_select_#{study_session.id || 0}"} %>
+  </div>
   <% if study_session.session_files.count > 1 %>
-    <label>Uploaded File</label>
-    <p><%= study_session.session_files.reject(&:new_record?).last.upload.file_name %></p>
+    <div class="clearfix">
+      <label>Uploaded File</label>
+      <p><%= study_session.session_files.reject(&:new_record?).last.upload.file_name %></p>
+    </div>
   <% end %>
+  <div class="clearfix">
   <%= f.fields_for :session_files do |sf| %>
     <% if sf.object.new_record? %>
       <%= sf.label :upload, "Upload A File" %>
@@ -20,7 +29,18 @@
       </div>
     <% end %>
   <% end %>
-  <%= f.check_box :shareable %><%= f.label :shareable, "Shared", :style => "display:inline" %>
+  </div>
+  
+  <div class="clearfix">
+    <div class="input">
+      <div class="input-prepend">
+        <label class="add-on">
+          <%= f.check_box :shareable, checked: "checked", class: "activation_check_box" %>
+        </label>
+        <%= text_field_tag nil, nil, placeholder: "Share this studyhall", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
+      </div>
+    </div>
+  </div>
   <div class="clearfix"></div>
   <%= f.submit (study_session.new_record? ? "Start Studying" : "Save"), :class => "btn primary" %>
   <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
