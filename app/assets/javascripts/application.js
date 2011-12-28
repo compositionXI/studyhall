@@ -195,5 +195,9 @@ $(document).ready(function(){
     select: function(e, ui) {
       window.location.href = ui.item.url;
     }
-  })
+  });
+  
+  $("#gpa_section a.help, #rating a.help").live('click', function(){
+    return false;
+  });
 });
