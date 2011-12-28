@@ -1,8 +1,22 @@
 require 'spec_helper'
 
 describe User do
+  let(:user) {Factory.create(:user)}
+  
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
+  end
+  
+  context "that has been created" do
+    it "should not be able to change school" do
+      school1 = Factory.create(:school)
+      school2 = Factory.create(:school)
+      user = Factory.create(:user, school: school1)
+      orig_school = user.school
+      user.update_attributes school: school2
+      user.save
+      user.school.should == orig_school
+    end
   end
   
   context "#voted_for?" do

@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
   before_post_process :paperclip_hack_filename
-  
 
   has_and_belongs_to_many :extracurriculars
   has_and_belongs_to_many :roles
@@ -24,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :offerings, :through => :enrollments
   has_many :courses, :through => :offerings
   belongs_to :school
+  attr_readonly :school_id
   has_many :followings
   has_many :followed_users, :through => :followings
   has_many :authentications, :dependent => :destroy
@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
+  #validate :forbid_changing_school_id, :on => :update
+  
   before_validation do
     self.school = School.from_email self.email if self.email
     self.roles << Role.find_by_name("Student") if self.role_ids.nil?
@@ -69,6 +71,10 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+  
+  #def forbid_changing_school_id
+  #  errors[:school] = "can not be changed!" if self.school_id_changed?
+  #end
 
   def name_should_be_present
     self.errors[:first_name] = "cannot be blank" if (first_name.blank? && read_attribute(:active) == true)
