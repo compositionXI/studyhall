@@ -32,7 +32,7 @@ module UsersHelper
   end
   
   def html_greek_string_for(user)
-    "a #{sybling_type} #{content_tag(:span, greek_affiliation, :class => 'highlight_text')}"
+    "a #{sybling_type} #{content_tag(:span, user.frat_sororities.map(&:name).join(","), :class => 'highlight_text')}"
   end
   
   def html_school_name_for(user)
@@ -47,17 +47,12 @@ module UsersHelper
     "majors in #{content_tag(:span, user.majors.map(&:name).join(","), :class => 'highlight_text')}"
   end
   
-  def html_frat_sororities_for(user)
-    "attends #{content_tag(:span, user.frat_sororities.map(&:name).join(","), :class => 'highlight_text')}"
-  end
-        
   def html_profile_detailed_info_for(user)
     output = []
-    output << html_greek_string_for(user) if !greek_affiliation.blank?
+    output << html_greek_string_for(user) unless user.frat_sororities.blank?
     output << html_school_name_for(user) if user.school
     output << html_major_string_for(user) unless user.majors.blank?
     output << html_sports_for(user) unless user.sports.blank?
-    output << html_frat_sororities_for(user) unless user.frat_sororities.blank?
     output.join(', ').capitalize.html_safe if !output.empty?
   end
   
