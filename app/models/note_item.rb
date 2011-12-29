@@ -56,6 +56,7 @@ class NoteItem
     @html_class ||= "note_item #{content.class.to_s.downcase}"
     @html_class += " draggable" if note?
     @html_class += " droppable" if notebook?
+    @html_class += " locked " unless shareable?
     @html_class
   end
 

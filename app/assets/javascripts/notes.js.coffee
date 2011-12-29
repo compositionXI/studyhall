@@ -44,6 +44,9 @@ initDragAndDrop = ->
   $(".droppable").droppable
     hoverClass: 'draggable_hovering'
     drop: (e, ui) ->
+      if !ui.draggable.hasClass('locked') && $(this).hasClass('locked')
+        showAlertMessage("An unlocked Note is not allowed to move into a locked Notebook!")
+        return false
       moveNoteToNotebook(ui.draggable, $(this))
 
 tearDownDragAndDrop = ->
@@ -96,6 +99,14 @@ moveNoteToNotebook = (note, notebook) ->
         notebook.find(".child_notes li").last().addClass("grid")
       $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
       initDragAndDrop()
+
+showAlertMessage = (msg) ->
+  html = "<div class='alert-message'>" + msg + "</div>"
+  $(".main-content .container").prepend(html)
+  delay = (ms, func) -> setTimeout func, ms
+  delay 3000, ->
+    $('.alert-message').fadeOut 500, ->
+      $('.alert-message').remove()
 
 $(document).ready ->
   $(".layout_button").click (e) ->
