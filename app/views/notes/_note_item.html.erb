@@ -13,6 +13,9 @@
     <p class="date"><%= formatted_date(note_item.created_at) %></p>
   </div>
   <a href="#" class="selector"></a>
+  <% unless note_item.shareable? %>
+    <%= image_tag "lock.png", :class => "lock_icon icon" %>
+  <% end %>
   <% if note_item.note? %>
     <a href="#" class="drag_handle"></a>
   <% else %>

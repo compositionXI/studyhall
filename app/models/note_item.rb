@@ -36,6 +36,10 @@ class NoteItem
     content.is_a? Note
   end
 
+  def shareable?
+    content.shareable?
+  end
+  
   def notes
     content.notes if notebook?
   end
