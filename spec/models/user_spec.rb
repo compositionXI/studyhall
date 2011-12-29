@@ -8,6 +8,11 @@ describe User do
   end
   
   context "that has been created" do
+    
+    it "should have a school" do
+      user.school.should_not nil
+    end
+    
     it "should not be able to change school" do
       school1 = Factory.create(:school)
       school2 = Factory.create(:school)
