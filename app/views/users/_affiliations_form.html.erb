@@ -1,10 +1,6 @@
 <%= form_for user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_personal_info_form", :multipart => true} do |f| %>
   <input type="hidden" name="form_id" value="affiliations_form">
   <div class="input">
-    <%= f.label :School, style: "display: inline;" %>
-    <span class="right"><%= truncate user.school.name, length: 28 %></span>
-  </div>
-  <div class="input">
     <%= f.label :sports_and_clubs %>
     <%= f.collection_select :sport_ids, Sport.all, :id, :name, {}, {'multiple' => true, 'data-placeholder' => 'Select your sports'} %>
     <%#= text_field_tag "extracurriculars_list", @user.extracurriculars_list, :class => "extracurriculars_list" %>
