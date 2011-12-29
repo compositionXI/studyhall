@@ -14,7 +14,8 @@ initDragAndDrop = ->
   $(".draggable").draggable('destroy')
   $(".draggable").draggable
     start: ->
-      $(".ui-draggable").css({opacity: .5})
+      $(".ui-draggable").css({opacity: .8})
+      $(this).addClass('being_dragging')
       $(this).closest(".droppable").droppable('disable')
       if $(this).hasClass "child_note"
         drop_area = $("<li class='note_item drop_area'><p>Drop your note here to move it out of a Notebook...</p></li>")
@@ -26,6 +27,7 @@ initDragAndDrop = ->
         $('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})
     stop: ->
       $(".ui-draggable").css({opacity: 1})
+      $(this).removeClass('being_dragging')
       $(this).closest(".droppable").droppable('enable')
       $(".drop_area").slideUp().remove()
       $(".drag-helper").remove()
