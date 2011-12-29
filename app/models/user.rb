@@ -46,7 +46,6 @@ class User < ActiveRecord::Base
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
-  #validate :forbid_changing_school_id, :on => :update
   
   before_validation do
     self.school = School.from_email self.email if self.email
@@ -71,10 +70,6 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
-  
-  #def forbid_changing_school_id
-  #  errors[:school] = "can not be changed!" if self.school_id_changed?
-  #end
 
   def name_should_be_present
     self.errors[:first_name] = "cannot be blank" if (first_name.blank? && read_attribute(:active) == true)
