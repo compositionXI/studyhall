@@ -627,6 +627,9 @@ input[type=submit].btn
   z-index: 1000
   display: none
   +vertical-gradient(white, #f8f8f8)
+  border: 1px solid $popoverBorder
+  +border-radius(2px)
+  +box-shadow(0 3px 7px rgba(0, 0, 0, 0.3))
   &.above .arrow
     +popover-arrow-above
   &.right 
@@ -637,17 +640,17 @@ input[type=submit].btn
       // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
   //Modifications in by Jake Mauer / Intridea
   &.below .arrow
-    +popover-arrow-below(10px, $popoverColor, -7px, 50%, auto)
+    +popover-arrow-below(10px, $popoverColor, -8px, 50%, auto)
   &.below .arrow-border
-    +arrow-border(10px, $popoverBorder, -19px, 50%, auto)
+    +arrow-border(10px, $popoverBorder, -20px, 50%, auto)
   &.below-left .arrow
-    +popover-arrow-below(10px, $popoverColor, -7px, auto, 15px)
+    +popover-arrow-below(10px, $popoverColor, -8px, auto, 15px)
   &.below-left .arrow-border
-    +arrow-border(10px, $popoverBorder, -19px, auto, 15px)
+    +arrow-border(10px, $popoverBorder, -20px, auto, 15px)
   &.below-right .arrow
-    +popover-arrow-below(10px, $popoverColor, -7px, 25px, auto)
+    +popover-arrow-below(10px, $popoverColor, -8px, 25px, auto)
   &.below-right .arrow-border
-    +arrow-border(10px, $popoverBorder, -19px, 25px, auto)
+    +arrow-border(10px, $popoverBorder, -20px, 25px, auto)
   //End Modifications
   &.left .arrow
     +popover-arrow-left
@@ -656,11 +659,8 @@ input[type=submit].btn
     width: 0
     height: 0
   .inner
-    border: 1px solid $popoverBorder
     overflow: hidden
     width: 410px
-    +border-radius(2px)
-    +box-shadow(0 3px 7px rgba(0, 0, 0, 0.3))
   .title
     line-height: 1
     +border-radius(3px 3px 0 0)
