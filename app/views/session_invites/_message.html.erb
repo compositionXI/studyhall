@@ -1,4 +1,4 @@
-<p><%= study_session.user.name %> has invited you to a study session.<p>
+<p><%= study_session.user.name.titleize %> has invited you to a study session.<p>
 <% unless @session_invite.message.blank? %>
   <p>"<%= @session_invite.message %>"</p>
 <% end %>
