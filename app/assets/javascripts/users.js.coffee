@@ -126,20 +126,21 @@ $ ->
     value
   
   $("body").delegate ".buddy_list_item .unfollow_button", "ajax:success", (event, response)->
-    buddy_list_item = $(this).closest(".buddy_list_item")
-    user_href = buddy_list_item.find("a").attr("href")
-    preview_buddy_image = $("section.buddies a[href='"+user_href+"']").closest("li")
-    preview_buddy_image.fadeOut 500
-    total_buddies = $("#view_all_buddies .total_buddies")
-    new_buddies_total = parseInt(total_buddies.html()) - 1
-    total_buddies.html(new_buddies_total)
-    $("section.buddies .total_buddies").html(new_buddies_total)
-    buddy_list_item.fadeOut 500, ->
-      buddy_list_item.html "<div class=\"alert-message warning\">You are no longer following this user.</div>"
-      buddy_list_item.fadeIn 0
-      setTimeout -> 
-        buddy_list_item.fadeOut(3000)
-      , 3000
+    unless 0 == $('.action_bar .editable').length
+      buddy_list_item = $(this).closest(".buddy_list_item")
+      user_href = buddy_list_item.find("a").attr("href")
+      preview_buddy_image = $("section.buddies a[href='"+user_href+"']").closest("li")
+      preview_buddy_image.fadeOut 500
+      total_buddies = $("#view_all_buddies .total_buddies")
+      new_buddies_total = parseInt(total_buddies.html()) - 1
+      total_buddies.html(new_buddies_total)
+      $("section.buddies .total_buddies").html(new_buddies_total)
+      buddy_list_item.fadeOut 500, ->
+        buddy_list_item.html "<div class=\"alert-message warning\">You are no longer following this user.</div>"
+        buddy_list_item.fadeIn 0
+        setTimeout -> 
+          buddy_list_item.fadeOut(3000)
+        , 3000
 
   if $('.profile_wizard').length != 0
     completion = new completion_percentage
