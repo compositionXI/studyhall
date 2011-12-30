@@ -40,7 +40,7 @@
         </div>
       </div>
       <span class="edit_message_fields checkbox hide">
-        <%= check_box_tag "message_ids[]", message.id, {}, {:class => "update_multi"} %>
+        <%= check_box_tag "message_ids[]", message.id, false, {:class => "update_multi"} %>
         <%= message_fields.hidden_field :opened, {:value => message.opened, :class => "update_multi opened"} %>
         <%= message_fields.hidden_field :deleted, {:value => message.deleted, :class => "update_multi deleted"} %>
       </span>

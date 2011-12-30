@@ -4,16 +4,16 @@
         :last_name => current_user.last_name,
         :is_admin => current_user.admin?, 
         :pic => "#{APP_CONFIG["host"]}#{current_user.photo_url}", 
-        :people_list_header_text => "Chat with other users",
-        :people_here_text => "People Online",
-        :groups => [{:id => "study_session_#{@study_session.id}", :name => "All Vistors"}]
+        :people_list_header_text => "Chat with other learners",
+        :people_here_text => "People Here",
+        :groups => [{:id => "study_session_#{@study_session.id}", :name => "All Learners In This Session"}]
       ).html_safe
     %>
 <% end -%>
 <%= render :partial => "tokbox_code" %>
 <div id="menubar" class="topbar notes">
   <div class="middle">
-    <h3><%= @study_session.name || "StudyHall" %> - <%= @study_session.created_at_formatted("%m/%d/%y") %></h3>
+    <h3><%= truncate(@study_session.name, length: 32) || "StudyHall" %> - <%= @study_session.created_at_formatted("%m/%d/%y") %></h3>
   </div>
   <div class="right">
     <%= link_to "Invite Others to Study", new_study_session_invite_path(@study_session), id: "invite_button", class: "btn", remote: true %>

@@ -66,6 +66,10 @@ var resetMessageCount = function(){
   unreadCount = $(".message_list_item .unread").length;
   resetValue = (unreadCount == 0) ? "" : unreadCount;
   $(".inbox_message_count").html(resetValue);
+  if(unreadCount == 0)
+    $(".inbox_message_count").hide();
+  else
+    $(".inbox_message_count").show();
 }
 
 var ajaxUpdateMessageRead = function(url, message_list_item, read, async){
