@@ -57,7 +57,14 @@ class UsersController < ApplicationController
       flash[:notice] = "Account updated!"
       @success = true
       respond_to do |format|
-        format.html { redirect_to @user }
+        format.html { 
+          referrer_path = URI(request.referrer).path
+          if referrer_path == user_account_path(@user)
+            redirect_to user_account_path(@user)
+          else
+            redirect_to @user 
+          end
+        }
         format.js
       end
     else
