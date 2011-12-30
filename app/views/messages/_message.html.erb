@@ -31,7 +31,7 @@
           <% if message.attachment? %>
             <div class="attachment">
               <strong>Attachment:</strong>
-              <%=link_to message.attachment_file_name, message.attachment.url(:original, false) %>
+              <%=link_to message.attachment_file_name, message.attachment.url(:original, false), target: '_blank' %>
             </div>
           <% end %>
           <div class="body message_preview">
