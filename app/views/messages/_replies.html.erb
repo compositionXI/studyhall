@@ -17,7 +17,7 @@
         <% if reply.attachment? %>
           <div class="attachment">
             <strong>Attachment:</strong>
-            <%=link_to reply.attachment_file_name, reply.attachment.url(:original, false) %>
+            <%=link_to reply.attachment_file_name, reply.attachment.url(:original, false), target: '_blank' %>
           </div>
         <% end %>
         <div class="body full_reply">
