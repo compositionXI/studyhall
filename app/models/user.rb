@@ -104,6 +104,15 @@ class User < ActiveRecord::Base
     full_name
   end
   
+  def title_name
+    name.titleize
+  end
+  
+  def trunc_name(length, titleize=true)
+    tname = titleize ? title_name : name
+    tname.length > length ? "#{tname.slice(0, length)}..." : tname
+  end
+  
   def school_name
     school.try(:name)
   end

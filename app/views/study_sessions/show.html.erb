@@ -13,7 +13,7 @@
 <%= render :partial => "tokbox_code" %>
 <div id="menubar" class="topbar notes">
   <div class="middle">
-    <h3><%= @study_session.name || "StudyHall" %> - <%= @study_session.created_at_formatted("%m/%d/%y") %></h3>
+    <h3><%= truncate(@study_session.name, length: 32) || "StudyHall" %> - <%= @study_session.created_at_formatted("%m/%d/%y") %></h3>
   </div>
   <div class="right">
     <%= link_to "Invite Others to Study", new_study_session_invite_path(@study_session), id: "invite_button", class: "btn", remote: true %>
