@@ -123,6 +123,13 @@ $(document).ready ->
       $switcher.attr('class', 'grid')
     e.preventDefault()
 
+  $(".note_items").delegate ".lock_icon", "click", (e) ->
+    e.stopPropagation()
+    object_id = $(this).parent().attr('id')
+    $.get('/sharings/new', { object_id: object_id, position: 'below' }, (data) ->
+      eval data
+    )
+
   $(".note_items").delegate ".notebook_expander","click", (e) ->
     $("#"+$(this).data("rel")).slideToggle()
     setTimeout("$('.note_items').jScrollPane().data('jsp').reinitialise({hideFocus: true})",1100)

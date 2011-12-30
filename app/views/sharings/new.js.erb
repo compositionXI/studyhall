@@ -1,4 +1,7 @@
 var button = $("#share_button");
+<% if @object_id %>
+  button = $("#<%= @object_id %>");
+<% end %>
 button.popover({trigger: "manual",
   placement: "<%=j @position %>",
   offset: 10,
