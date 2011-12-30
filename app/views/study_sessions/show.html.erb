@@ -4,9 +4,9 @@
         :last_name => current_user.last_name,
         :is_admin => current_user.admin?, 
         :pic => "#{APP_CONFIG["host"]}#{current_user.photo_url}", 
-        :people_list_header_text => "Chat with other users",
-        :people_here_text => "People Online",
-        :groups => [{:id => "study_session_#{@study_session.id}", :name => "All Vistors"}]
+        :people_list_header_text => "Chat with other learners",
+        :people_here_text => "People Here",
+        :groups => [{:id => "study_session_#{@study_session.id}", :name => "All Learners In This Session"}]
       ).html_safe
     %>
 <% end -%>
