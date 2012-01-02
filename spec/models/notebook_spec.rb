@@ -19,6 +19,6 @@ describe Notebook do
   
   it "should find notebooks within a date range" do
     notebook = FactoryGirl.create(:notebook, created_at: 2.weeks.ago, user: user )
-    Notebook.in_range(3.weeks.ago, 1.week.ago).should == [notebook]
+    Notebook.in_range(3.weeks.ago.to_s, 1.week.ago.to_s).should == [notebook]
   end
 end

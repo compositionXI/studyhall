@@ -7,7 +7,7 @@ class Note < ActiveRecord::Base
   validates_presence_of :user_id
   
   scope :unsorted, lambda { where(:notebook_id => nil) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
+  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y/%m/%d').gsub("/", "-")) unless start_date.blank? || end_date.blank? }
   
   before_save :check_note_name
   before_save :take_parent_permission

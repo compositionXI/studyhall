@@ -11,7 +11,7 @@ describe Note do
   
   it "should find note within a date range" do
     note = FactoryGirl.create(:note, created_at: 2.week.ago, user: user )
-    Note.in_range(3.weeks.ago, 1.week.ago).should == [note]
+    Note.in_range(3.weeks.ago.to_s, 1.week.ago.to_s).should == [note]
   end
   
   describe "#check_note_name" do

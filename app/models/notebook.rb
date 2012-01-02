@@ -7,7 +7,7 @@ class Notebook < ActiveRecord::Base
   has_many :post, :dependent => :destroy
   
   scope :for_course, lambda {|course| where("course_id = ?", course.id) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
+  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y/%m/%d').gsub("/", "-")) unless start_date.blank? || end_date.blank? }
 
   def course_name
     course.title if course
