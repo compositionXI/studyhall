@@ -193,8 +193,13 @@
       e.preventDefault();
     });
 
+    $("a#delete_photo").live('click', function(e){
+      $('#delete_avatar').attr('checked', 'checked');
+      $("form#edit_profile_photo_form").submit();
+    });
+
     $(".users-show").delegate(".editable.edit","click",function(e){
-      if(!$(this).hasClass("tab_contents")){
+      if(!$(this).hasClass("tab_contents") && $(e.target).attr('id') != 'delete_photo'){
         var editable = $(this);
         hidePopovers();
         editable.addClass("active");
@@ -222,6 +227,7 @@
     <% if params[:mode] == 'edit' %>
       $(".buttons.left .edit_button").trigger('click');
     <% end %>
+    
   });
 </script>
 
