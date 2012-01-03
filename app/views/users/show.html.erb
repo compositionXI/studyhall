@@ -6,12 +6,16 @@
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
       <%= render :partial => "shared/invite_buddies", :locals => {:user => @user} if current_user == @user %>
-      <div>
-        <%= link_to "Report this profile", "#" %>
-      </div>
-      <div>
-        <%= link_to "Block", "#" %>
-      </div>
+      <% if current_user != @user %>
+        <div>
+          <%= link_to "Report this profile", "#" %>
+        </div>
+        <div>
+          <%= link_to "Block", "#" %>
+        </div>
+      <% else %>
+        <%= link_to 'Delete Profile', user_account_path(current_user) %>
+      <% end %>
     </div>
     <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
