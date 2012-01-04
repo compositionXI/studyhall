@@ -56,7 +56,7 @@ class Backpack
         name = @options[:filter][:notebook][:name]
         course_id = @options[:filter][:notebook][:course_id]
         notebooks = notebooks.where(["name like ?", "%#{name}%"]) if name
-        notebooks = notebooks.where(["name like ?", course_id]) if course_id
+        notebooks = notebooks.where(["course_id = ?", course_id]) if course_id
       end
       Notebook.alpha_ordered(notebooks.in_range(@options[:filter][:start_date], @options[:filter][:end_date]))
     end
