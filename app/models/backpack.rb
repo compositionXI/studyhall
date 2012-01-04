@@ -32,10 +32,10 @@ class Backpack
       end
     end
     
-    def filtered_notes #THis returns no results when filtering for only notes with no params.
+    def filtered_notes
       notes = @user.notes
       if @options[:filter][:note]
-        notes = @user.notes.where(@options[:filter][:note])
+        notes = @user.notes.where(["name like ?", "%#{@options[:filter][:note][:name]}%"])
       end
       notes.unsorted.in_range(@options[:filter][:start_date], @options[:filter][:end_date]).all.flatten.uniq
     end
@@ -53,13 +53,12 @@ class Backpack
     def filtered_notebooks
       notebooks = @user.notebooks
       if @options[:filter][:notebook]
-        notebooks = notebooks.where(@options[:filter][:notebook])
+        name = @options[:filter][:notebook][:name]
+        course_id = @options[:filter][:notebook][:course_id]
+        notebooks = notebooks.where(["name like ?", "%#{name}%"]) if name
+        notebooks = notebooks.where(["name like ?", course_id]) if course_id
       end
       Notebook.alpha_ordered(notebooks.in_range(@options[:filter][:start_date], @options[:filter][:end_date]))
-    end
-    
-    def filter_date?
-      @options[:filter][:start_date] && @options[:filter][:end_date]
     end
 
     def page

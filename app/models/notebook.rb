@@ -1,13 +1,19 @@
 class Notebook < ActiveRecord::Base
   
   include Ownable
+  BEGINNING_OF_TIME = Time.at(0).strftime('%Y-%m-%d')
+  TODAY = Time.new.strftime('%Y-%m-%d')
 
   belongs_to :course
   has_many :notes, :dependent => :destroy
   has_many :post, :dependent => :destroy
   
   scope :for_course, lambda {|course| where("course_id = ?", course.id) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y/%m/%d').gsub("/", "-")) unless start_date.blank? || end_date.blank? }
+  scope :in_range, lambda {|start_date, end_date|
+    start_date = start_date.blank? ? BEGINNING_OF_TIME : start_date
+    end_date = end_date.blank? ? TODAY : end_date
+    where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
+  }
 
   def course_name
     course.title if course

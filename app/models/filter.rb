@@ -48,20 +48,21 @@ class Filter
       params_for_query[:filter][:note] = {} if attrs["notes"]
       params_for_query[:filter][:notebook] = {} if attrs["notebooks"]
       attrs.each_pair do |k, v|
-        params_for_query[:filter][:note][k] = v if attribute_of?(k, Note) && attrs["notes"] && !v.empty?
-        params_for_query[:filter][:notebook][k] = v if attribute_of?(k, Notebook) && attrs["notebooks"] && !v.empty?
+        unless v.empty?
+          params_for_query[:filter][:note][k] = v if attribute_of?(k, Note) && attrs["notes"]
+          params_for_query[:filter][:notebook][k] = v if attribute_of?(k, Notebook) && attrs["notebooks"]
+          params_for_query[:filter][k] = v if !attribute_of?(k, Note) && !attribute_of?(k, Notebook)
+        end
       end
-      params_for_query[:filter][:notebooks] = notebooks
-      params_for_query[:filter][:notes] = notes
-      params_for_query[:filter][:start_date] = attrs["start_date"] if attrs["start_date"]
-      params_for_query[:filter][:end_date] = attrs["end_date"] if attrs["end_date"]
+      #params_for_query[:filter][:notebooks] = notebooks
+      #params_for_query[:filter][:notes] = notes
     when "StudySession"
       params_for_query[:filter][:study_session] = {}
       attrs.each_pair do |k, v|
         if attribute_of?(k, StudySession)
           params_for_query[:filter][:study_session][k] = v unless v.empty?
         else
-          params_for_query[:filter][k] = v unless v.empty?
+          params_for_query[:filter][k] = v 
         end
       end
     end

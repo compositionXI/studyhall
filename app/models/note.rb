@@ -1,13 +1,19 @@
 class Note < ActiveRecord::Base
   
   include Ownable
+  BEGINNING_OF_TIME = Time.at(0).strftime('%Y-%m-%d')
+  TODAY = Time.new.strftime('%Y-%m-%d')
 
   belongs_to :notebook
   
   validates_presence_of :user_id
   
   scope :unsorted, lambda { where(:notebook_id => nil) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y/%m/%d').gsub("/", "-")) unless start_date.blank? || end_date.blank? }
+  scope :in_range, lambda {|start_date, end_date|
+    start_date = start_date.blank? ? BEGINNING_OF_TIME : start_date
+    end_date = end_date.blank? ? TODAY : end_date
+    where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
+  }
   
   before_save :check_note_name
   before_save :take_parent_permission
