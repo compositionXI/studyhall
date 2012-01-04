@@ -41,6 +41,11 @@ class Note < ActiveRecord::Base
     user.name
   end
   
+  def self.filter_for(user, filter)
+    notes = filter[:note] ? user.notes.where(["name like ?", "%#{filter[:note][:name]}%"]) : user.notes
+    notes.unsorted.in_range(filter[:start_date], filter[:end_date]).all.flatten.uniq
+  end
+  
   protected 
     
     def check_note_name

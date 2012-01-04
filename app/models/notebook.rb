@@ -32,5 +32,16 @@ class Notebook < ActiveRecord::Base
     ordered_notebooks << nbs.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
     ordered_notebooks.flatten.compact
   end
+  
+  def self.filter_for(user, filter)
+    notebooks = user.notebooks
+    if filter[:notebook]
+      name = filter[:notebook][:name]
+      course_id = filter[:notebook][:course_id]
+      notebooks = notebooks.where(["name like ?", "%#{name}%"]) if name
+      notebooks = notebooks.where(["course_id = ?", course_id]) if course_id
+    end
+    Notebook.alpha_ordered(notebooks.in_range(filter[:start_date], filter[:end_date]))
+  end
 
 end

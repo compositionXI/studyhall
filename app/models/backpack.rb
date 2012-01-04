@@ -26,39 +26,20 @@ class Backpack
       if @options[:filter].nil?
         create_notables @user.notes.unsorted.select([:id, :created_at]).all
       elsif @options[:filter][:notes] == "1"
-        create_notables filtered_notes
+        create_notables Note.filter_for(@user, @options[:filter])
       else
         []
       end
-    end
-    
-    def filtered_notes
-      notes = @user.notes
-      if @options[:filter][:note]
-        notes = @user.notes.where(["name like ?", "%#{@options[:filter][:note][:name]}%"])
-      end
-      notes.unsorted.in_range(@options[:filter][:start_date], @options[:filter][:end_date]).all.flatten.uniq
     end
     
     def find_notebooks
       if @options[:filter].nil?
         create_notables @user.alpha_ordered_notebooks
       elsif @options[:filter][:notebooks] == "1"
-        create_notables filtered_notebooks
+        create_notables Notebook.filter_for(@user, @options[:filter])
       else
         []
       end
-    end
-    
-    def filtered_notebooks
-      notebooks = @user.notebooks
-      if @options[:filter][:notebook]
-        name = @options[:filter][:notebook][:name]
-        course_id = @options[:filter][:notebook][:course_id]
-        notebooks = notebooks.where(["name like ?", "%#{name}%"]) if name
-        notebooks = notebooks.where(["course_id = ?", course_id]) if course_id
-      end
-      Notebook.alpha_ordered(notebooks.in_range(@options[:filter][:start_date], @options[:filter][:end_date]))
     end
 
     def page
