@@ -141,7 +141,9 @@ $(document).ready(function(){
     }
   });
 
-  $("select.chzn-select").chosen();
+  // $("select.chzn-select").chosen({
+  //   disable_search_threshold: 15
+  // });
   $("body").delegate("select.chzn-select", "change", function(){$(this).chosen();});
   
   $("body").delegate("a.cancel_popover","click",function(e){
