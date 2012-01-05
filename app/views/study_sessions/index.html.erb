@@ -7,16 +7,26 @@
       </center>
     <% else %>
       <div class="landing_wrapper study_session_demo_wrapper">
-        <div class="study_session_demo">
-          <div class="attendees">
-            <%= image_tag current_user.avatar_url(:thumb), :title => current_user.name %>
-          </div>
-          <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button_2"), :remote => true, :id => "new_study_session_button_2" %> 
-        </div>        
-        <h1>Start A Studyhall now!</h1>
-        <h2>With study halls you can collaborate with other students, video chat, and edit documents together!</h2>
-        <p>Click "Start A Studyhall" button to begin taking note.</p>
-      </div>  
+        <div class="study_session_video">
+          <%= link_to new_study_session_path(:link_id => "new_study_session_button1"), :remote => true, :id => "new_study_session_button1" do %>
+            <video id="browser_video" width="398" height="314" poster="/assets/landing/browser-main.jpg" controls="controls" preload="true">
+              <source type="video/mp4" src="/video/landing.mp4" />
+              <source type="video/webm" src="/video/landing.webm" />
+              <source type="video/ogg" src="/video/landing.theora.ogv" />
+              <object id="studyhall_video_flash" width="398" height="314" type="application/x-shockwave-flash" data="/assets/mediaelement_rails/flashmediaelement.swf">
+                <param name="movie" value="/assets/mediaelement_rails/flashmediaelement.swf" />
+                <param name="flashvars" value="controls=false&poster=/assets/landing/browser-main.jpg&file=/video/landing.mp4" />
+                <img src="/assets/landing/browser-main.jpg" width="398" height="314" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+              </object>
+            </video>
+          <% end %>
+        </div>
+        <div>
+          <h1>Start A Studyhall now!</h1>
+          <h2>With study halls you can collaborate with other students, video chat, and edit documents together!</h2>
+          <p>Click "Start A Studyhall" button to begin taking note.</p>
+        </div>
+      </div>
     <% end %>
   <% else %>
     <ol class="notebook_list">
@@ -88,6 +98,7 @@
       toggleActionButtons();
       $("a.non_edit,#select_none").hide();
       $(".study_session").addClass("edit");
+      $(".study_session").unbind('click');
       $(".study_session").click(function(e){
         $(this).toggleClass("selected");
         toggleActionButtons();

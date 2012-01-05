@@ -1,6 +1,8 @@
 class StudySession < ActiveRecord::Base
 
   include Ownable
+  BEGINNING_OF_TIME = Time.at(0).strftime('%Y-%m-%d')
+  TODAY = Time.new.strftime('%Y-%m-%d')
 
   belongs_to :user
   belongs_to :offering
@@ -13,8 +15,11 @@ class StudySession < ActiveRecord::Base
   scope :as_guest, lambda {|user| user.study_sessions.where(StudySession.arel_table[:user_id].does_not_match(user.id)) }
   scope :for_user, lambda {|user| where(:id => (select(:id).where(:user_id => user.id).map(&:id) + user.session_invites.map(&:study_session_id))) }
   scope :with_users, lambda {|user_ids| where(:id => SessionInvite.where(:user_id => user_ids).select(:study_session_id).all.map(&:study_session_id)) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day)) unless start_date.blank? || end_date.blank? }
-  scope :shared, where(:shared => true)
+  scope :in_range, lambda {|start_date, end_date|
+    start_date = start_date.blank? ? BEGINNING_OF_TIME : start_date
+    end_date = end_date.blank? ? TODAY : end_date
+    where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
+  }
 
   before_create :init_opentok
   after_save :upload_session_files
@@ -77,5 +82,29 @@ class StudySession < ActiveRecord::Base
   
   def send_invite(invitee)
     Notifier.study_session_invite(user, invitee, self).deliver if invitee.notify_on_invite
+  end
+  
+  def self.filter(filter, user)
+    study_sessions = user.study_sessions
+    if filter[:study_session]
+      if filter[:study_session][:name]
+        study_sessions = study_sessions.where(["name like ?", "%#{filter[:study_session][:name]}%"])
+      end
+      if filter[:study_session][:offering_id]
+        study_sessions = study_sessions.where("offering_id = ?", filter[:study_session][:offering_id])
+      end
+    end
+    if filter[:user_ids]
+      users = User.where(:id => filter[:user_ids]).all
+      study_sessions = study_sessions.with_users(filter[:user_ids])
+    end
+    if filter[:start_date] || filter[:end_date]
+      study_sessions = study_sessions.in_range(filter[:start_date], filter[:end_date])
+    end
+    study_sessions
+  end
+  
+  def self.offerings_for(user)
+    user.study_sessions.collect{|s| s.offering}.uniq.compact
   end
 end

@@ -59,15 +59,7 @@ class StudySessionsController < ApplicationController
     if params[:filter]
       @filtered_results = true
       flash.now[:action_bar_message] = "Filtered StudyHalls "
-      study_sessions = current_user.study_sessions.where(params[:filter][:study_session])
-      if params[:filter][:user_ids]
-        users = User.where(:id => params[:filter][:user_ids]).all
-        flash.now[:action_bar_message] << "with #{truncate(users.map(&:full_name).to_sentence, :length => 50)} "
-        study_sessions = study_sessions.with_users(params[:filter][:user_ids])
-      end
-      if params[:filter][:start_date] && params[:filter][:end_date]
-        study_sessions = study_sessions.in_range(params[:filter][:start_date], params[:filter][:end_date])
-      end
+      study_sessions = StudySession.filter(params[:filter], current_user)
     else
       @filtered_results = false
       study_sessions = current_user.study_sessions

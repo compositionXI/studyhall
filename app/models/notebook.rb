@@ -1,13 +1,19 @@
 class Notebook < ActiveRecord::Base
   
   include Ownable
+  BEGINNING_OF_TIME = Time.at(0).strftime('%Y-%m-%d')
+  TODAY = Time.new.strftime('%Y-%m-%d')
 
   belongs_to :course
   has_many :notes, :dependent => :destroy
   has_many :post, :dependent => :destroy
   
   scope :for_course, lambda {|course| where("course_id = ?", course.id) }
-  scope :in_range, lambda {|start_date, end_date| where("created_at between ? and ?", start_date, end_date) unless start_date.blank? || end_date.blank? }
+  scope :in_range, lambda {|start_date, end_date|
+    start_date = start_date.blank? ? BEGINNING_OF_TIME : start_date
+    end_date = end_date.blank? ? TODAY : end_date
+    where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
+  }
 
   def course_name
     course.title if course
@@ -25,6 +31,17 @@ class Notebook < ActiveRecord::Base
     end
     ordered_notebooks << nbs.collect{|n| n if n.course.nil?}.compact.sort_by{|n| n.name}
     ordered_notebooks.flatten.compact
+  end
+  
+  def self.filter_for(user, filter)
+    notebooks = user.notebooks
+    if filter[:notebook]
+      name = filter[:notebook][:name]
+      course_id = filter[:notebook][:course_id]
+      notebooks = notebooks.where(["name like ?", "%#{name}%"]) if name
+      notebooks = notebooks.where(["course_id = ?", course_id]) if course_id
+    end
+    Notebook.alpha_ordered(notebooks.in_range(filter[:start_date], filter[:end_date]))
   end
 
 end

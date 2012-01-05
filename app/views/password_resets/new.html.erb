@@ -5,13 +5,18 @@
   </div>
 <% end %>
 
-<%= form_tag "/password_resets", :method => "POST", :class => "form-stacked" do |f| %>
-  <div class="clearfix">
-    <%= label_tag :Email %> 
-    <div class="input"><%= text_field_tag 'email' %></div>
+<div class="single-form">
+  <div class="header">
+    <h1>Forgot Your Password?</h1>
   </div>
-  <div>
-    <%= submit_tag 'Get Password', :class => "btn primary"%>
-    <%= link_to 'Back', root_path, :class => "btn" %>
-  </div>
-<% end %>
+  <%= form_tag "/password_resets", :method => "POST", :class => "form-stacked" do |f| %>
+    <div class="clearfix">
+      <%= label_tag :Email %> 
+      <div class="input"><%= text_field_tag 'email' %></div>
+    </div>
+    <div>
+      <%= submit_tag 'Get Password', :class => "btn primary"%>
+      <%= link_to 'Back', root_path, :class => "btn" %>
+    </div>
+  <% end %>
+</div>
