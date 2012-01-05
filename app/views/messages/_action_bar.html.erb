@@ -3,7 +3,7 @@
     <div class="buttons left">
       <%= link_to("New Message", new_message_path, :class => "btn primary", :id => "new_message_button", "data-title" => "Send a message", :remote => true) %>
     </div>
-    <div class="buttons right">
+    <div class="buttons right <%= @messages.size == 0 ? 'hide' : '' %>">
       <div class="default_message_buttons right">
         <%= link_to "Filter", filter_messages_path(:link_id => "filter_message_button"), :class => "btn", :id => "filter_message_button", :remote => true %>
         <% if params[:mailbox] == "inbox" %>

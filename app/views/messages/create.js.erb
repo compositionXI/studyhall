@@ -5,6 +5,13 @@ var updateMessageList = function(){
     message_list_item.find("#message_new textarea").first().focus();
   }
   else {
+    if($(".messages_list").length == 0) { 
+      window.location.reload(true); 
+    } else {
+      if($(".buttons.right").hasClass('hide')) {
+        $(".buttons.right").removeClass('hide');
+      }
+    }
     $(".messages_list").prepend("<%=j render :partial => 'message', :locals => {:message => @message_copy} %>");
   }
 }

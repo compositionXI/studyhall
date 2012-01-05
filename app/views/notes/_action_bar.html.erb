@@ -24,7 +24,7 @@
       </h3>
     <% end %>
   
-    <div class="buttons right">
+    <div class="buttons right <%= @note_items.size == 0 ? 'hide' : '' %>">
       <%= link_to "Filter", new_filter_path(:model_name => "Note"), id: "filter_button", class: "btn non_edit", :remote => true  %>
       
       <div id="items_layout_switcher" class="grid">
@@ -37,5 +37,6 @@
         <%= link_to "Select None", "#", :class => "btn hide select", :id => "select_none"%>
         <%= link_to "Done", "#", :class => "btn primary hide edit_button", :id => "show_notes" %>
       <% end %>
-    </div></div>
+    </div>
+  </div>
 </div>
