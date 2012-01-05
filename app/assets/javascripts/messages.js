@@ -204,8 +204,14 @@ $(document).ready(function(){
   });
   
   $("body").delegate("#message_attachment", "change", function(){
-    var file = $(this).attr("value");
-    $(".file_upload_name").html(file);
+    var fileName = $(this).attr("value");
+    var fileNameElement = $(".file_upload_name").css("width", "auto");
+    fileNameElement.parent().find(".appended_elipsis").remove();
+    fileNameElement.html(fileName);
+    if (fileNameElement.width() > 250) {
+      fileNameElement.css("width", 250);
+      fileNameElement.after("<span class='appended_elipsis'>...</span>");
+    }
   });
   
   $(".default_message_buttons .edit, .edit_message_buttons .cancel").click(function(){

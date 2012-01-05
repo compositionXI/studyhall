@@ -57,7 +57,7 @@ module MessagesHelper
   def htmlize_body(message)
     contains_no_html = sanitize(message.body, tags: %w{}) == message.body
     if contains_no_html
-      body = message.body.split("\n").map(&:strip).reject(&:blank?).map{|line| "<p>#{line}</p>" }.join
+      body = message.body.split("\n").map(&:strip).reject(&:blank?).map{|line| "#{line}\n" }.join #Prevent multiple carriage returns
     else
       body = sanitize(message.body, tags: %w{p ul li a})
     end
