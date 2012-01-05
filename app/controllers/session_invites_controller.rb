@@ -21,7 +21,7 @@ class SessionInvitesController < ApplicationController
 
   def generate_invite_message
     study_session = @session_invite.study_session
-    @session_invite.message = render_to_string :partial => "message", :locals => {:study_session => study_session}
+    @session_invite.message = render_to_string :partial => "message", :locals => {:study_session => study_session, sender: current_user}
   end
 
 end
