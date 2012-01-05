@@ -34,7 +34,7 @@ describe Backpack do
       it "should return only the notes for that filter" do
         @note2 = Factory.create(:note, user: @user, name: "Test Note")
         @backpack = Backpack.new(@user)
-        @backpack.contents(filter: {notes: "1", note: {name: "Test Note"}}).include?(@note2).should == true
+        @backpack.contents(filter: {notes: "1", note: {name: @note2.name}}).include?(@note2).should == true
       end
     end
   end
