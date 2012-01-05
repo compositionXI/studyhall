@@ -16,6 +16,7 @@ var switchInboxView = function(){
 
 var toggleActionBarButtons = function(){
   $(".default_message_buttons, .edit_message_buttons").toggleClass("hide");
+  if ($('.message_list_item').length == 0) { $(".buttons.right").addClass('hide') }
 }
 
 var updateMessage = function(message_list_item, url, data, requestType){
@@ -189,7 +190,7 @@ $(document).ready(function(){
       updateMultiForm.prepend(input);
     });
     updateMultiForm.submit();
-    updateMultiForm.find(".update_multi").remove();
+    updateMultiForm.find(".update_multi").remove();    
   });
   
   $("body").delegate("#save_multiple_messages_form", "ajax:success", function(evt, data, status, xhr){

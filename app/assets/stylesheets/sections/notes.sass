@@ -319,12 +319,19 @@
           left: 50%
           cursor: move
           visibility: hidden
-        .lock_icon
+        .lock_icon, .unlock_icon
           height: 25px
           width: 25px
           position: absolute
           bottom: 12px
           right: 120px
+        .locked, .unlocked
+          height: 15px
+          width: 15px
+          position: absolute
+          bottom: 15px
+          right: 120px
+          
         &.show
           cursor: pointer
           .selector, .drag_handle
@@ -347,6 +354,10 @@
             background: url(asset-path('note-bg-shadow.png', 'image')) transparent no-repeat
           &.being_dragging
             background: url(asset-path('note-page-shadow.png', 'image')) transparent no-repeat
+          .locked
+            background: url(asset-path('lock_sprite.png','image')) -35px 0 no-repeat
+          .unlocked
+            background: url(asset-path('lock_sprite.png','image')) -50px 0 no-repeat
         &.notebook
           color: #fff
           background: url(asset-path('notebook-brown.png','image')) transparent no-repeat
@@ -362,6 +373,11 @@
           .name_wrapper
             word-wrap: break-word
             width: 130px
+          .locked
+            background: url(asset-path('lock_sprite.png','image')) 0 0 no-repeat
+          .unlocked
+            background: url(asset-path('lock_sprite.png','image')) -18px 0 no-repeat
+        &.notebook
         .list_data
           visibility: hidden
       &.list

@@ -14,3 +14,5 @@ $ ->
   
   $(".alert .close").click ->
     $(".alert").css "display", "none"
+    
+  $('#home_tabs').tabs()

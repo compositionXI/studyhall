@@ -1,6 +1,6 @@
 <header class="home-header row">
   <div class="user_greeting span4">
-    <%= link_to (image_tag @current_user.avatar_url("medium")), edit_user_path(@current_user) %>
+    <%= link_to (image_tag @current_user.avatar_url("medium")), @current_user %>
     <h3>Hi, 
     <%= link_to @current_user.first_name, @current_user %>!
     </h3>
@@ -22,24 +22,33 @@
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
 </aside>
 <div class="main_content">
-  <div class="top clearfix">
-    <section class="activity">
-      <header>
-        <h3>Your Activity <small>(<%= current_user.activity.count %>)</small></h3>
-      </header>
-      <ul class="activity-list">
-        <% if current_user.activity.any? %>
-          <% current_user.activity.each do |message| %>
-            <%= message.body.html_safe %>
+  <div id="home_tabs">
+    <ul class="tabs">
+      <li class="active"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
+      <li><%= link_to "Campus News <small>(#{current_user.school.try(:latest_news).try(:count) || 0 })</small>".html_safe, '#news_tab' %></li>
+    </ul>
+    <ul id="activities_tab" class="activity-list active">
+      <% if current_user.activity.any? %>
+        <% current_user.activity.each do |message| %>
+          <%= message.body.html_safe %>
+        <% end %>
+      <% else %>
+        <li><p>No recent activity</p></li>
+      <% end %>
+    </ul>
+    <ul id="news_tab" class="news-list">
+      <% if current_user.school.present? %>
+        <% if current_user.school.latest_news.any? %>
+          <% current_user.school.latest_news.each do |news| %>
+            <li><%= link_to news.title, news.link, title: news.title, target: '_blank' %></li>
           <% end %>
         <% else %>
-          <li><p>No recent activity</p></li>
+          <li><p>No recent news</p></li>
         <% end %>
-      </ul>
-    </section>  
-    <section class="news">
-      <%= render :partial => "home/campus_news" %>
-    </section>
+      <% else %>
+        <li><p>No school</p></li>
+      <% end %>
+    </ul>
   </div>
   <section class="courses <%= items_layout %>">
     <header>
