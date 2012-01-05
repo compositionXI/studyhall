@@ -65,7 +65,7 @@
           <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
             <% @user.notes.viewable_by(current_user).each do |note| %>
               <li data-rel="<%= note_url(note) %>" class="linked_item note">
-                <span><%= note.name %></span>
+                <span><%= truncate note.name, length: 55 %></span>
               </li>
             <% end %>
           </ul>
