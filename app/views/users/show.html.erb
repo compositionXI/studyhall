@@ -18,7 +18,7 @@
     <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
         <h1><%= @user.name %></h1>
-        <div id="affiliations_section" class="editable" data-placement="below" data-title="Affiliation Details" data-form="affiliations_form">
+        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form">
           <%= render partial: "affiliations", locals: {user: @user} %>
         </div>
         <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form">
@@ -136,10 +136,11 @@
   }
   
   var initChosen = function(){
-    chosenable = $(".popover #user_school_id, .popover #user_gender");
+    $popover = $('.popover')
+    chosenable = $popover.find("#user_school_id, #user_gender");
     chosenable.addClass("chzn-select");
-    chosenable.chosen();
-    $(".popover #user_gender ").chosen().change(function(){
+    chosenable.chosen({disable_search_threshold: 15  });
+    $("#user_gender ").change(function(){
       var gender = $(this).val();
       if (gender == 'Male') {
         $('label[for=user_fraternity_or_sorority]').text("Fraternity");
