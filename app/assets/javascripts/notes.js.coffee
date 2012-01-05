@@ -123,7 +123,7 @@ $(document).ready ->
       $switcher.attr('class', 'grid')
     e.preventDefault()
 
-  $(".note_items").delegate ".lock_icon", "click", (e) ->
+  $(".note_items").delegate ".locked", "click", (e) ->
     e.stopPropagation()
     object_id = $(this).parent().attr('id')
     $.get('/sharings/new', { object_id: object_id, position: 'below' }, (data) ->
