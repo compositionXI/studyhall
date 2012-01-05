@@ -1,3 +1,62 @@
+// POPOVER ARROWS //INTRIDEA
+// --------------
+
+=arrow-border($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto)
+  border-color: transparent transparent $color
+  border-style: solid
+  border-width: $arrowWidth
+  height: 0
+  left: $left
+  right: $right
+  position: absolute
+  margin-left: -$arrowWidth
+  top: $top
+  width: 0
+=arrow-border-left($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto)
+  border-color: transparent $color transparent transparent
+  border-style: solid
+  border-width: $arrowWidth
+  height: 0
+  left: $left
+  right: $right
+  position: absolute
+  margin-top: -$arrowWidth
+  top: $top
+  width: 0  
+
+=popover-arrow-above($arrowWidth: 5px, $color: $white)
+  bottom: 0
+  left: 50%
+  margin-left: -$arrowWidth
+  border-left: $arrowWidth solid transparent
+  border-right: $arrowWidth solid transparent
+  border-top: $arrowWidth solid $color
+
+=popover-arrow-left($arrowWidth: 5px, $color: $white)
+  top: 50%
+  right: 0
+  margin-top: -$arrowWidth
+  border-top: $arrowWidth solid transparent
+  border-bottom: $arrowWidth solid transparent
+  border-left: $arrowWidth solid $color
+
+=popover-arrow-below($arrowWidth: 5px, $color: $white, $top: 0, $left: 50%, $right: auto)
+  top: $top
+  left: $left
+  right: $right
+  margin-left: -$arrowWidth
+  border-left: $arrowWidth solid transparent
+  border-right: $arrowWidth solid transparent
+  border-bottom: $arrowWidth solid $color
+
+=popover-arrow-right($arrowWidth: 5px, $color: $white)
+  top: 50%
+  left: -$arrowWidth
+  margin-top: -$arrowWidth
+  border-top: $arrowWidth solid transparent
+  border-bottom: $arrowWidth solid transparent
+  border-right: $arrowWidth solid $color
+
 // Popovers
 .popover #new_study_session
   p
@@ -14,9 +73,62 @@
     
 .popover .inner
   overflow: visible
-  background: #fff
   width: inherit
-  padding: 18px
+
+  // POPOVERS
+  // --------
+
+.popover
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 1000
+  display: none
+  +vertical-gradient(white, #f8f8f8)
+  border: 1px solid $popoverBorder
+  +border-radius(2px)
+  +box-shadow(0 3px 7px rgba(0, 0, 0, 0.3))
+  &.above .arrow
+    +popover-arrow-above
+  &.right 
+    .arrow
+      +popover-arrow-right 
+    .arrow-border
+      +arrow-border-left(5px, $popoverBorder, 50%, -10px, auto)
+      // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
+  //Modifications in by Jake Mauer / Intridea
+  &.below .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, 50%, auto)
+  &.below .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, 50%, auto)
+  &.below-left .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, auto, 15px)
+  &.below-left .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, auto, 15px)
+  &.below-right .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, 25px, auto)
+  &.below-right .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, 25px, auto)
+  //End Modifications
+  &.left .arrow
+    +popover-arrow-left
+  .arrow
+    position: absolute
+    width: 0
+    height: 0
+  .inner
+    overflow: hidden
+    width: 410px
+  .title
+    line-height: 1
+    margin: 0
+    font-size: 24px
+  .content
+    padding: 14px
+    +border-radius(0 0 3px 3px)
+    +background-clip(padding-box)
+    p, ul, ol
+      margin-bottom: 0
 
 .popover
   form
@@ -48,6 +160,14 @@
   textarea
     height: 150px
     line-height: 20px
+  .popover-header
+    border-bottom: 1px solid #d1d1d1
+    padding: 20px 
+  .popover-main 
+    padding: 0 20px
+  .popover-footer
+    border-top: 1px solid #d1d1d1 
+    padding: 20px 20px 0 20px 
   .help
     position: absolute
     top: 0
@@ -80,7 +200,7 @@
       cursor: pointer
       text-decoration: none
       font-size: 15px
-
+  
 .study_session_modal
   p
     margin-top: 5px
@@ -96,3 +216,23 @@
     width: 300px
   input[type="checkbox"]
     margin: 17px 5px 0 0
+    
+.users-show
+  .popover
+    .input
+      margin-left: 0
+      margin-bottom: 10px
+      input[type='text']
+        width: 370px
+      textarea
+        width: 300px
+        height: 150px
+      select
+        width: 370px
+    #message_new
+      .input
+        margin-right: 0
+        input[type="text"]
+          width: 313px
+        textarea
+          width: 313px
