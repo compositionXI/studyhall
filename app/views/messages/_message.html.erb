@@ -12,21 +12,22 @@
           
           <ul class='message_utilities'>
             <% if message.deleted %>
-                  <li><%= link_to "Move to Inbox", "#", :class => "message_action unarchive inner_link", :'data-url' => message_path(message, :deleted => false) %></li>
-                <% else %>
-                  <li><%= link_to "Archive", "#", :class => "message_action archive inner_link", :'data-url' => message_path(message) %></li>
-                <% end %>
-                <% if message_opened?(message) %>
-                  <li><%= link_to "Mark as unread", "#", :class => "message_action mark_unread inner_link", :'data-url' => message_path(message) %></li>
-                <% else %>
-                  <li><%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %></li>
-                <% end %>
-                <% if message.sender_id != @current_user.id %>
-                  <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %></li>
-                  <li><%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %></li>
-                  <li class="time"><%= time_ago_in_words message.created_at %> ago</li>
-                <% end %>
-              </ul>
+              <li><%= link_to "Move to Inbox", "#", :class => "message_action unarchive inner_link", :'data-url' => message_path(message, :deleted => false) %></li>
+            <% else %>
+              <li><%= link_to "Archive", "#", :class => "message_action archive inner_link", :'data-url' => message_path(message) %></li>
+            <% end %>
+            <% if message_opened?(message) %>
+              <li><%= link_to "Mark as unread", "#", :class => "message_action mark_unread inner_link", :'data-url' => message_path(message) %></li>
+            <% else %>
+              <li><%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %></li>
+            <% end %>
+            <% if message.sender_id != @current_user.id %>
+              <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %></li>
+              <li><%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(message) %></li>
+              <li class="time"><%= time_ago_in_words message.created_at %> ago</li>
+            <% end %>
+            <li class="time"><%= time_ago_in_words message.created_at %> ago</li>
+          </ul>
               
           <% if message.attachment? %>
             <div class="attachment">
