@@ -2,7 +2,7 @@
 <div class="popover-main">  <input type="hidden" name="form_id" value="photo_form">
   <div class="input">
     <%= f.label :Your_photo %>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, :class => 'upload'%>
   </div>
   <% if @user.has_avatar? %>
     <div class="input clearfix">
@@ -11,7 +11,7 @@
     </div>
   <% end %></div>
 <div class="popover-footer">  <div class="input clearfix">
-    <%= f.submit "Save Changes", :class => "btn primary save" %>
+    <%= f.submit "Save Changes", :class => "btn save" %>
     <%= link_to "Cancel", "#", :class => "btn close_modal" %>
   </div></div>
 <% end %>

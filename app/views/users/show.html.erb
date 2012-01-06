@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="profile_ratings left">
-        <div id="gpa_section" class="rating_block gpa left editable" data-placement="left" data-title="Update Your GPA" data-form="gpa_form">
+        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Update Your GPA" data-form="gpa_form">
           <%= render partial: "gpa", locals: {user: @user} %>
         </div>
         <%= render :partial => "votes/rating", :locals => {:user => @user} %>
@@ -223,6 +223,7 @@
                           content: function(){ return cloneForm(editable)}});
         editable.popover("show");
         initChosen(editable.popover);
+        styleFileInputs($('.popover .upload'));
         //$("select.chzn-select").chosen();
         initWindowResize();
       }
