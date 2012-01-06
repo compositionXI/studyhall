@@ -172,7 +172,9 @@
     +button-gradient($aqua, $aquaDark, $aquaText, $aquaTextShadow, $aquaBorder)
 
 // Base .btn styles
-.btn 
+.btn
+  // Transitions
+  +transition(0.1s linear all) 
   // Button Base
   +box-sizing
   +box-shadow(inset 0 1px 0 #e3e3e3)
@@ -198,24 +200,6 @@
     text-decoration: none
     text-shadow: 0 1px 0 #dfdfdf
     +vertical-gradient(#d8d8d8, #cacaca)
-  // Primary Button Type
-  &.primary 
-    color: $blueText
-    text-shadow: 0 1px 0 $blueTextShadow
-    border-color: $blueBorder
-    +vertical-gradient(#9df0fb, #59baed)
-    &:hover
-      +vertical-gradient(#72cef2, #59baed)
-    &:active, .active
-      +vertical-gradient(#55b3e6, #5dbae8)      
-    &.disabled
-      background: $blueDisabled
-      color: $blueDisabledText
-      border: 1px solid $blueDisabled
-    &:disabled
-      background: $blueDisabled
-      color: $blueDisabledText
-      border: 1px solid $blueDisabled
   &.selected
     color: $pressedText
     text-shadow: 0 1px 0 $pressedTextShadow
@@ -223,8 +207,6 @@
     +vertical-gradient($pressed, $pressedDark)
     $shadow: inset 0 1px 1px rgba(0, 0, 0, .6), 0 1px 2px rgba(0, 0, 0, 0.05)
     +box-shadow($shadow)
-  // Transitions
-  +transition(0.1s linear all)
   // Active and Disabled states
   &.disabled
     cursor: default
@@ -240,9 +222,32 @@
     background: $silverDisabled
     color: $silverDisabledText
     border: 1px solid $silverDisabled
-  &:active, &.active
-    $shadow: inset 0 3px 7px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)
-    +box-shadow($shadow)
+  // Primary Button Type
+  &.primary 
+    +box-shadow(inset 0 1px 0 #b6f4fc)
+    color: $blueText
+    text-shadow: 0 1px 0 $blueTextShadow
+    border-color: $blueBorder
+    +vertical-gradient(#9df0fb, #59baed)
+    &:hover
+      +box-shadow(inset 0 1px 0 #95daf5)
+      +vertical-gradient(#72cef2, #59baed)
+    &:active, .active
+      +box-shadow(inset 0 1px 3px #333333)
+      +vertical-gradient(#55b3e6, #5dbae8)      
+    &.disabled
+      background: $blueDisabled
+      color: $blueDisabledText
+      border: 1px solid $blueDisabled
+    &:disabled
+      background: $blueDisabled
+      color: $blueDisabledText
+      border: 1px solid $blueDisabled
+    &.selected
+      color: #fefefe
+      text-shadow: 0 1px 0 #000000
+      +box-shadow(inset 0 1px 9px #333333)
+      +vertical-gradient(#3b7da1, #4189aa)
   // Button Sizes
   &.larger
     font-size: 16px
