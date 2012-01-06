@@ -195,33 +195,6 @@
   text-transform: uppercase
   white-space: nowrap
   vertical-align: top
-  &:hover
-    color: $silverText
-    text-decoration: none
-    text-shadow: 0 1px 0 #dfdfdf
-    +vertical-gradient(#d8d8d8, #cacaca)
-  &.selected
-    color: $pressedText
-    text-shadow: 0 1px 0 $pressedTextShadow
-    border-color: $pressedBorder
-    +vertical-gradient($pressed, $pressedDark)
-    $shadow: inset 0 1px 1px rgba(0, 0, 0, .6), 0 1px 2px rgba(0, 0, 0, 0.05)
-    +box-shadow($shadow)
-  // Active and Disabled states
-  &.disabled
-    cursor: default
-    background-image: none
-    background: $silverDisabled
-    color: $silverDisabledText
-    border: 1px solid $silverDisabled
-  &:disabled
-    // disabled pseudo can't be included with .disabled
-    // def because IE8 and below will drop it ;_;
-    cursor: default
-    background-image: none
-    background: $silverDisabled
-    color: $silverDisabledText
-    border: 1px solid $silverDisabled
   // Primary Button Type
   &.primary 
     +box-shadow(inset 0 1px 0 #b6f4fc)
@@ -244,10 +217,21 @@
       color: $blueDisabledText
       border: 1px solid $blueDisabled
     &.selected
-      color: #fefefe
-      text-shadow: 0 1px 0 #000000
-      +box-shadow(inset 0 1px 9px #333333)
       +vertical-gradient(#3b7da1, #4189aa)
+  &.green 
+    +box-shadow(inset 0 1px 0 #b6f4fc)
+    color: #000d14
+    text-shadow: 0 1px 0 #b6d977
+    border-color: #203806
+    +vertical-gradient(#badd3c, #80be29)
+    &:hover
+      +box-shadow(inset 0 1px 0 #95daf5)
+      +vertical-gradient(#96c930, #7ebd28)
+    &:active, .active
+      +box-shadow(inset 0 1px 3px #333333)
+      +vertical-gradient(#7dbc28, #89c32c)      
+    &.selected
+      +vertical-gradient(#3b6b0c, #41750d)
   // Button Sizes
   &.larger
     font-size: 16px
@@ -259,7 +243,31 @@
     line-height: normal
     height: 37px
     padding: 12px 15px
-
+  &:hover
+    color: $silverText
+    text-decoration: none
+    text-shadow: 0 1px 0 #dfdfdf
+    +vertical-gradient(#d8d8d8, #cacaca)
+  &.selected
+    color: #fefefe
+    text-shadow: 0 1px 0 #000000
+    +box-shadow(inset 0 1px 9px #333333)
+    border-color: $pressedBorder
+  // Active and Disabled states
+  &.disabled
+    cursor: default
+    background-image: none
+    background: $silverDisabled
+    color: $silverDisabledText
+    border: 1px solid $silverDisabled
+  &:disabled
+    // disabled pseudo can't be included with .disabled
+    // def because IE8 and below will drop it ;_;
+    cursor: default
+    background-image: none
+    background: $silverDisabled
+    color: $silverDisabledText
+    border: 1px solid $silverDisabled
 // Help Firefox not be a jerk about adding extra padding to buttons
 
 button.btn,
