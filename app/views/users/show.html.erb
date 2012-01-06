@@ -19,7 +19,9 @@
     </div>
     <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
-        <h1><%= @user.name %></h1>
+        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form">
+          <%= render partial: "name", locals: {user: @user} %>
+        </div>
         <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form">
           <%= render partial: "affiliations", locals: {user: @user} %>
         </div>
@@ -94,6 +96,10 @@
   </div>
 </section>
 <div id="profile_forms" style="display:none">
+  <div class="form" id="name_form">
+    <%= render :partial => 'name_form', :locals => { :user => @user } %>
+  </div>
+  
   <div class="form" id="affiliations_form">
     <%= render :partial => 'affiliations_form', :locals => { :user => @user } %>
   </div>

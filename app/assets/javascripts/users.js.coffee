@@ -79,15 +79,15 @@ $ ->
       $("#profile_detailed_info #major").html(response.major)
       $(this).animate {opacity: 1}, 200
   
-  $("#edit_gpa_form").bind "ajax:success", (event, response) ->
-    $("#profile_edit_gpa").animate {opacity: 0,}, 200, ->
-      $("#profile_edit_gpa #gpa").html(response.gpa)
-      $(this).animate {opacity: 1}, 200
+  #$("#edit_gpa_form").bind "ajax:success", (event, response) ->
+  #  $("#profile_edit_gpa").animate {opacity: 0,}, 200, ->
+  #    $("#profile_edit_gpa #gpa").html(response.gpa)
+  #    $(this).animate {opacity: 1}, 200
   
-  $("#edit_bio_form").bind "ajax:success", (event, response) ->
-    $("#profile_bio").animate {opacity: 0,}, 200, ->
-      $("#profile_bio #bio").html(response.bio)
-      $(this).animate {opacity: 1}, 200
+  #$("#edit_bio_form").bind "ajax:success", (event, response) ->
+  #  $("#profile_bio").animate {opacity: 0,}, 200, ->
+  #    $("#profile_bio #bio").html(response.bio)
+  #    $(this).animate {opacity: 1}, 200
   
   get_extracurriculars = () ->
     $.getJSON "extracurriculars", (json) ->
