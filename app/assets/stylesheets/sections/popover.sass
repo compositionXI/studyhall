@@ -35,8 +35,7 @@
     .arrow
       +popover-arrow-right 
     .arrow-border
-      +arrow-border-left(6px, $popoverBorder, 50%, -12px, auto)
-      // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
+      +arrow-border-right(6px, $popoverBorder, 50%, -12px, auto)
   //Modifications in by Jake Mauer / Intridea
   &.below .arrow
     +popover-arrow-below(10px, $popoverColor, -8px, 50%, auto)
@@ -51,8 +50,11 @@
   &.below-right .arrow-border
     +arrow-border(10px, $popoverBorder, -20px, 25px, auto)
   //End Modifications
-  &.left .arrow
-    +popover-arrow-left
+  &.left 
+    .arrow
+      +popover-arrow-left
+    .arrow-border
+      +arrow-border-left(6px, $popoverBorder, 50%, auto, -12px)
   .arrow
     position: absolute
     width: 0
@@ -169,8 +171,9 @@
       &.left
         input
           width: 175px
-          &:first-child
-            margin: 0 20px 0 0
+    .first
+      input
+        margin: 0 20px 0 0
     #message_new
       .input
         margin-right: 0
