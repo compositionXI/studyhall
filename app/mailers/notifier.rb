@@ -55,7 +55,7 @@ class Notifier < ActionMailer::Base
     @send_to, @sender = send_to, sender
     @url = study_session_url(study_session)
     mail(
-      :subject => "#{sender.name.titleize} has invited you to a studyhall",
+      :subject => "#{sender.title_name} has invited you to a studyhall",
       :from => "noreply@studyhall.com",
       :to => @send_to.email,
       :date => Time.now
@@ -66,7 +66,7 @@ class Notifier < ActionMailer::Base
     @reporter, @offender, @post = reporter, post.user, post
     @url = "http://#{APP_CONFIG['host']}#{rails_admin.show_path("posts", @post.id)}"
     mail(
-      :subject => "#{reporter.name.titleize} reported a post.",
+      :subject => "#{reporter.title_name} reported a post.",
       :from => "noreply@studyhall.com",
       :to => "admin@studyhall.com",
       :date => Time.now
@@ -78,7 +78,7 @@ class Notifier < ActionMailer::Base
     @reporter, @message = reporter, message
     @url = "http://#{APP_CONFIG['host']}#{rails_admin.show_path(@message.class.to_s.tableize, @message.id)}"
     mail(
-      :subject => "#{reporter.name.titleize} reported a post.",
+      :subject => "#{reporter.title_name} reported a post.",
       :from => "noreply@studyhall.com",
       :to => "admin@studyhall.com",
       :date => Time.now
@@ -88,7 +88,7 @@ class Notifier < ActionMailer::Base
   def user_following(user, followed_user)
     @follower, @followed = user, followed_user
     mail(
-      :subject => "#{user.name.titleize} is following you.",
+      :subject => "#{user.title_name} is following you.",
       :from    => "noreply@studyhall.com",
       :to      => followed_user.email,
       :date    => Time.now

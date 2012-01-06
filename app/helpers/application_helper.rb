@@ -36,8 +36,12 @@ module ApplicationHelper
     active_key == key ? " active" : ""
   end
 
-   def custom_url(user)
-     "www.studyhall.com/" + user.custom_url
-   end
+  def custom_url(user)
+    "www.studyhall.com/" + user.custom_url
+  end
+   
+  def user_missing
+    "No Longer A User"
+  end
    
 end
