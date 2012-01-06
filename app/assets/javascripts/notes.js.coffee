@@ -126,7 +126,7 @@ $(document).ready ->
   $(".note_items").delegate ".locked", "click", (e) ->
     e.stopPropagation()
     object_id = $(this).parent().attr('id')
-    $.get('/sharings/new', { object_id: object_id, position: 'below' }, (data) ->
+    $.get('/sharings/new', { object_id: object_id, position: 'below', object_to_share: 'Notes' }, (data) ->
       eval data
     )
 
