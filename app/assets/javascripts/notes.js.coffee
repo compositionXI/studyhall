@@ -38,7 +38,7 @@ initDragAndDrop = ->
     zIndex: 1000
     helper: ->
       thing = $(this).clone().removeClass("ui-draggable").addClass("drag-helper").css({"list-style": "none", "border-bottom": "none"})
-      thing.find(".name, .list_data").remove()
+      #thing.find(".name, .list_data").remove()
       thing
   $(".droppable").droppable('destroy')
   $(".droppable").droppable
@@ -202,7 +202,6 @@ $(document).ready ->
 
     $("body").delegate ".recipient_toggle","click", (e) ->
       $(".recipient_option").toggle()
-      console.log("click")
       e.preventDefault()
 
     $("body").delegate ".cancel_popover","click", (e) ->
