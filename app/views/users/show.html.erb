@@ -1,7 +1,7 @@
 <section>
   <div class="row">
     <div class="span5 column sidebar left" id="profile_sidebar">
-      <div id="photo_section" class="editable profile_photo" data-placement="right" data-title="Change your photo" data-form="photo_form">
+      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form">
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
