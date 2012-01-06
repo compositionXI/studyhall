@@ -1,1 +1,1 @@
-<span id="bio"><%= user.bio %></span>
+<span id="bio"><%= (user == current_user && user.bio.blank?) ? "Tell your Studyhall buddies about yourself!" : user.bio %></span>
