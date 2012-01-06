@@ -44,7 +44,7 @@
     .arrow
       +popover-arrow-right 
     .arrow-border
-      +arrow-border-left(5px, $popoverBorder, 50%, -10px, auto)
+      +arrow-border-left(6px, $popoverBorder, 50%, -12px, auto)
       // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
   //Modifications in by Jake Mauer / Intridea
   &.below .arrow
@@ -78,6 +78,7 @@
     +border-radius(0 0 3px 3px)
     +background-clip(padding-box)
     p, ul, ol
+      color: #3a3a3a
       margin-bottom: 0
   form
     padding: 0
@@ -174,6 +175,11 @@
         width: 370px
       textarea
         height: 150px
+      &.left
+        input
+          width: 175px
+          &:first-child
+            margin: 0 20px 0 0
     #message_new
       .input
         margin-right: 0
@@ -181,3 +187,4 @@
           width: 313px
         textarea
           width: 313px
+    
