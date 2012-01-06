@@ -283,11 +283,11 @@
         font-size: 12px
         line-height: 17px
         position: relative
-        height: 195px
-        width: 170px
+        height: 170px
+        width: 150px
         padding: 0 15px 0 27px
         text-align: center
-        margin: 0 20px 20px 0
+        margin: 0 0px 20px -8px
         +box-sizing(border-box)
         .background_container
           display: none
@@ -300,22 +300,22 @@
           font-family: museo-sans, "Helvetica", Arial, Sans-serif
           display: inline
           width: 140px
-          font-weight: bold
           font-size: 14px
+          line-height: 15px
         .selector
           background: url(asset-path('uncheckmark.png','image')) no-repeat
           height: 17px
           width: 16px
           position: absolute
-          bottom: 15px
-          right: 15px
+          top: 18px
+          right: 25px
         .drag_handle
           background: url(asset-path('move.png','image')) no-repeat
           height: 16px
           width: 16px
           position: absolute
           margin: 0 0 0 -11px
-          bottom: 10px
+          bottom: 15px
           left: 50%
           cursor: move
           visibility: hidden
@@ -329,8 +329,8 @@
           height: 15px
           width: 15px
           position: absolute
-          bottom: 15px
-          right: 120px
+          top: 18px
+          left: 28px
           
         &.show
           cursor: pointer
@@ -347,32 +347,41 @@
           //  background: url(asset-path('notebook-sprite.png','image')) no-repeat -924px 0 transparent
         &.note
           text-align: left
-          background: url(asset-path('notebook-page.png','image')) transparent  no-repeat
+          background: url(asset-path('note-bg.png','image')) transparent  no-repeat
           color: #333
-          padding-top: 30px
+          padding-top: 43px
+          &:hover
+            background: url(asset-path('note-hover-bg.png', 'image')) transparent no-repeat
           &.ui-draggable-dragging
-            background: url(asset-path('note-bg-shadow.png', 'image')) transparent no-repeat
+            background: url(asset-path('note-bg-dragging.png', 'image')) transparent no-repeat
+            .locked, .unlocked, .selector
+              display: none
           &.being_dragging
-            background: url(asset-path('note-page-shadow.png', 'image')) transparent no-repeat
+            background: url(asset-path('note-plain-shadow-bg.png', 'image')) transparent no-repeat
+            .locked, .unlocked, .selector, .name, .drag_handle
+              display: none
           .locked
             background: url(asset-path('lock_sprite.png','image')) -35px 0 no-repeat
           .unlocked
             background: url(asset-path('lock_sprite.png','image')) -50px 0 no-repeat
         &.notebook
           color: #fff
-          background: url(asset-path('notebook-brown.png','image')) transparent no-repeat
+          background: url(asset-path('notebook-bg.png','image')) transparent no-repeat
           .name
             display: table-cell
             height: 156px
             width: 150px
             text-align: center
             vertical-align: middle
+            em
+              display: block
+              width: 100px
+              word-wrap: break-word
           &.draggable_hovering
-            +rotate
-            background-position: -528px 0
+            background: url(asset-path('notebook-hover-bg.png', 'image')) transparent no-repeat
           .name_wrapper
             word-wrap: break-word
-            width: 130px
+            width: 100px
           .locked
             background: url(asset-path('lock_sprite.png','image')) 0 0 no-repeat
           .unlocked

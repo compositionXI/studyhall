@@ -38,7 +38,7 @@ initDragAndDrop = ->
     zIndex: 1000
     helper: ->
       thing = $(this).clone().removeClass("ui-draggable").addClass("drag-helper").css({"list-style": "none", "border-bottom": "none"})
-      thing.find(".name, .list_data").remove()
+      #thing.find(".name, .list_data").remove()
       thing
   $(".droppable").droppable('destroy')
   $(".droppable").droppable
@@ -126,7 +126,7 @@ $(document).ready ->
   $(".note_items").delegate ".locked", "click", (e) ->
     e.stopPropagation()
     object_id = $(this).parent().attr('id')
-    $.get('/sharings/new', { object_id: object_id, position: 'below' }, (data) ->
+    $.get('/sharings/new', { object_id: object_id, position: 'below', object_to_share: 'Notes' }, (data) ->
       eval data
     )
 
@@ -202,7 +202,6 @@ $(document).ready ->
 
     $("body").delegate ".recipient_toggle","click", (e) ->
       $(".recipient_option").toggle()
-      console.log("click")
       e.preventDefault()
 
     $("body").delegate ".cancel_popover","click", (e) ->

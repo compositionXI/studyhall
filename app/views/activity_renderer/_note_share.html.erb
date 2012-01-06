@@ -1,4 +1,1 @@
-<li class="activity_message">
-  <%= link_to image_tag(user.photo_url(:medium)), user, title: user.title_name %>
-  <p><%= link_to user.title_name, user %> just shared a <%= note.class.to_s.downcase %>: <%= link_to truncate(note.name, length: 20), note %></p>
-</li>
+<p><%= link_to user.title_name, user %> just shared a <%= note.class.to_s.downcase %>: <%= link_to truncate(note.name, length: 20), note %></p>

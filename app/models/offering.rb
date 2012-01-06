@@ -12,7 +12,12 @@ class Offering < ActiveRecord::Base
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
   
   def course_listing
-    "#{self.course.department} - #{self.course.number} - #{self.course.title} - #{self.instructor.full_name}"
+    items = []
+    items << self.course.department
+    items << self.course.number
+    items << self.course.title
+    items << self.instructor.try(:full_name)
+    items.compact.join(" - ")
   end
   
   def classmates(current_user, count = nil)
