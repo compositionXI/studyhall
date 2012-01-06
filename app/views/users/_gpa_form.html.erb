@@ -2,7 +2,7 @@
 <div class="popover-main">  <input type="hidden" name="form_id" value="gpa_form">
   <div class="input">
     <%= f.label :GPA %>
-    <%= f.text_field :gpa %>
+    <%= f.text_field :gpa, :class => 'number' %>
   </div></div>
 <div class="popover-footer">  <div class="input clearfix">
     <%= f.submit "Save Changes", :class => "btn primary save" %>
