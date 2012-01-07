@@ -1,5 +1,5 @@
 <%= form_for @enrollment, :url => classes_path, :remote => true, :html => {:class => "form-stacked", :'data-type' => "html", :id => "add_course_form"} do |f| %>
-  <% if @enrollment.errors.any? %>
+  <div class="popover-main"><% if @enrollment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this contact from being saved:</h2>
 
@@ -14,8 +14,8 @@
   <div class="clearfix">
     <%= f.label :Choose_course %>
     <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
-  </div>
-  <div>
+  </div></div>
+  <div class="popover-footer">
     <%= f.submit "Submit", :class => "btn primary" %>
     <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
   </div>
