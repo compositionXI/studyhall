@@ -7,7 +7,7 @@ module SearchesHelper
 
   def offerings_list(course)
     course.offerings.map do |offering|
-      link_to(offering.instructor.full_name, class_path(offering))
+      link_to(offering.instructor.try(:full_name) || 'N/A', class_path(offering))
     end
   end
 end
