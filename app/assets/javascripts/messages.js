@@ -16,6 +16,7 @@ var switchInboxView = function(){
 
 var toggleActionBarButtons = function(){
   $(".default_message_buttons, .edit_message_buttons").toggleClass("hide");
+  if ($('.message_list_item').length == 0) { $(".buttons.right").addClass('hide') }
 }
 
 var updateMessage = function(message_list_item, url, data, requestType){
@@ -189,7 +190,7 @@ $(document).ready(function(){
       updateMultiForm.prepend(input);
     });
     updateMultiForm.submit();
-    updateMultiForm.find(".update_multi").remove();
+    updateMultiForm.find(".update_multi").remove();    
   });
   
   $("body").delegate("#save_multiple_messages_form", "ajax:success", function(evt, data, status, xhr){
@@ -204,8 +205,14 @@ $(document).ready(function(){
   });
   
   $("body").delegate("#message_attachment", "change", function(){
-    var file = $(this).attr("value");
-    $(".file_upload_name").html(file);
+    var fileName = $(this).attr("value");
+    var fileNameElement = $(".file_upload_name").css("width", "auto");
+    fileNameElement.parent().find(".appended_elipsis").remove();
+    fileNameElement.html(fileName);
+    if (fileNameElement.width() > 250) {
+      fileNameElement.css("width", 250);
+      fileNameElement.after("<span class='appended_elipsis'>...</span>");
+    }
   });
   
   $(".default_message_buttons .edit, .edit_message_buttons .cancel").click(function(){

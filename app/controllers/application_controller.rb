@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     unless logged_in?
       store_location
       flash[:notice] = "You must be logged in to access this page"
-      redirect_to landing_page_home_index_path
+      redirect_to login_path
       return false
     end
   end

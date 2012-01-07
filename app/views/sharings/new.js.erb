@@ -1,4 +1,9 @@
 var button = $("#share_button");
+<% if @object_id %>
+    if($("#<%= @object_id %> .locked").length > 0) {
+      button = $("#<%= @object_id %>");
+    }
+<% end %>
 button.popover({trigger: "manual",
   placement: "<%=j @position %>",
   offset: 10,

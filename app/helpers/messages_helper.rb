@@ -18,7 +18,9 @@ module MessagesHelper
   
   def user_name_for(message)
     user = to_from_user(message)
-    link_to user.name, user, :class => "inner_link"
+    name = sanitize(user.name, tags: [])
+    truncated_name = name.length > 10 ? name.slice(0, 7).strip << "..." : name
+    link_to truncated_name, user, :class => "inner_link", :title => name
   end
   
   def message_subject(message)
@@ -57,7 +59,7 @@ module MessagesHelper
   def htmlize_body(message)
     contains_no_html = sanitize(message.body, tags: %w{}) == message.body
     if contains_no_html
-      body = message.body.split("\n").map(&:strip).reject(&:blank?).map{|line| "<p>#{line}</p>" }.join
+      body = message.body.split("\n").map(&:strip).reject(&:blank?).map{|line| "#{line}\n" }.join #Prevent multiple carriage returns
     else
       body = sanitize(message.body, tags: %w{p ul li a})
     end

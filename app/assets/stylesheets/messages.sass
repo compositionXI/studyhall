@@ -1,5 +1,4 @@
 .messages_list_container
-  width: 800px
   margin: 0 auto
   
 .messages_landing_wrapper
@@ -33,6 +32,8 @@
           border: 0 none
     .file_upload_name
       margin-left: 10px
+      overflow: hidden
+      float: left
 
 #message_new
   textarea
@@ -82,10 +83,10 @@
         content: none
         margin: 0
   li.message_list_item
-    padding: 14px
-    margin: 5px 0
     position: relative
     border-bottom: 1px solid #D4D4D4
+    &.unread
+      background-color: #E1E1E1
     img
       float: left
     .checkbox
@@ -100,7 +101,7 @@
         margin-top: 15px
     .spam_abuse
     .collapsed_message
-      padding: 5px 5px 0 5px
+      padding: 19px 19px 14px 19px
       &.unread
         background-color: #E1E1E1
       &:hover

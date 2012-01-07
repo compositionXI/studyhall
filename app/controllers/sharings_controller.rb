@@ -24,7 +24,7 @@ class SharingsController < ApplicationController
       sharing.users.each do |user|
         sharing.objects.each do |obj|
           message_body = ActivityRenderer.new.generate_message(user, 'sharing', :object => obj, :user => current_user)
-          ActivityMessage.create(:user => user, :body => message_body)
+          ActivityMessage.create(:user => user, :body => message_body, :activist => current_user)
         end
       end
     end

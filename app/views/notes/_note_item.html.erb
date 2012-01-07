@@ -14,7 +14,9 @@
   </div>
   <a href="#" class="selector"></a>
   <% unless note_item.shareable? %>
-    <%= image_tag "lock.png", :class => "lock_icon icon" %>
+    <span class="locked"></span>
+  <% else %>
+    <span class="unlocked"></span>
   <% end %>
   <% if note_item.note? %>
     <a href="#" class="drag_handle"></a>
