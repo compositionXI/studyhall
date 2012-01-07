@@ -30,7 +30,10 @@
     <ul id="activities_tab" class="activity-list active">
       <% if current_user.activity.any? %>
         <% current_user.activity.each do |message| %>
-          <%= message.body.html_safe %>
+          <li class="activity_message">
+            <%= link_to image_tag(message.activist.photo_url(:medium)), message.activist, title: message.activist.title_name if message.activist %>
+            <%= message.body.html_safe %>
+          </li>
         <% end %>
       <% else %>
         <li><p>No recent activity</p></li>
