@@ -1,7 +1,7 @@
 <ul class="unstyled">
   <% posts.each do |post| %>
     <% unless current_user.blocked?(post.user)%>
-      <li class="clearfix">
+      <li class="post_item">
         <div class="class_post">
           <div class="user_photo left">
             <% if post.user %>
@@ -11,8 +11,8 @@
             <% end %>
           </div>
           <div class="post_details left">
-            <%= post.user ? link_to(post.user.name, post.user) : user_missing %>
-            - <%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %> <br/>
+            <%= post.user ? link_to(post.user.title_name, post.user) : user_missing %>
+            <span class="right"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
             <%= post.text %>
             <div>
               <% if post.notebook_id %>
@@ -31,12 +31,13 @@
           </div>
           <%= render partial: "posts/utilities", locals: {post: post} %>
         </div>
-        <div class="clearfix"></div>
-        <div class="comment_list">
-          <ul class="unstyled">
-            <%= render partial: "comments/list_item", collection: post.comments, as: :comment %>
-          </ul>
-        </div>
+        <% if post.has_comments? %>
+          <div class="comment_list">
+            <ul class="unstyled">
+              <%= render partial: "comments/list_item", collection: post.comments, as: :comment %>
+            </ul>
+          </div>
+        <% end %>
       </li>
     <% end %>
   <% end %>

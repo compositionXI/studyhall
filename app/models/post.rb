@@ -15,4 +15,8 @@ class Post < ActiveRecord::Base
   def comment?
     self.class.name == "Comment"
   end
+  
+  def has_comments?
+    comments.collect{|c| c unless c.new_record?}.any?
+  end
 end

@@ -1,7 +1,7 @@
 <section class="classmates">
   <header>
     <h1 class="left">Classmates <small>(<%= classmates.count %>)</small></h1>
-    <%= link_to "View All >>", class_classmates_path(:class_id => clazz.id), id: 'view_all_classmates_button' %>
+    <%= link_to("View All >>", class_classmates_path(:class_id => clazz.id), id: 'view_all_classmates_button') unless classmates.empty? %>
   </header>
     <ul>
       <% if classmates.any? %>
@@ -9,7 +9,7 @@
           <li><%= link_to image_tag(mate.photo_url(:medium)), mate, :title => mate.name %></li>
         <% end %>
       <% else %>
-        <li></li>
+        <li class="clearfix classmate_list_item"><%= empty_list_text %></li>
       <% end %>
     </ul>
 </section>

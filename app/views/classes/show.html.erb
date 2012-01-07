@@ -1,8 +1,8 @@
+<h1 class="class_header"><big><%= truncate "#{@course.department} #{@course.number}" , length: 30 %></big></h1>
 <aside class="sidebar">
   <section>
     <header>
-      <h1><big><%= @course.department %><%= @course.number %></big></h1>
-      <h1><%= @course.title %></h1>
+      <div class="class_subheader"><%= @course.title %></div>
     </header>
   </section>
   <section>
@@ -10,9 +10,9 @@
       <h1 class="left">Professor: <small><%= @class.instructor ? "#{@class.instructor.first_name} #{@class.instructor.last_name}" : "Unknown" %></small></h1>
     </header>
   </section>
-  <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class} %>
+  <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class, empty_list_text: "Doesn't look like anyone's added this class"} %>
   <%= render :partial => "shared/buddies_preview", :locals => {:user => current_user} %>
-  <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?" %>
+  <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?", style: "font-size: 11px;" %>
 </aside>
 <section class="course_activity">
   <header>
@@ -23,9 +23,6 @@
   </div>
 </section>
 <section class="shared_materials">
-  <header>
-    <h1>Shared Materials</h1>
-  </header>
   <ul class="tabs" data-tabs="tabs">
     <li class="active"><a href="#notes">Notes <span>(<%= @shared_notes.count %>)</span></a></li>
     <li><a href="#studyhalls">Studyhalls <span>(<%= @shared_study_sessions.count %>)</span></a></li>
