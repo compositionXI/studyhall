@@ -245,6 +245,7 @@
 
     <% if params[:tour] == 'true' %>
       var initTourMode = function() {
+        $('body').addClass('wizard');
         $($(".edit_button")[0]).trigger('click');
         $("div[data-form='name_form']").trigger('click');
       }
