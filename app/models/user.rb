@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_mailbox
 
   has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+  attr_accessor :delete_avatar
   before_post_process :paperclip_hack_filename
 
   has_and_belongs_to_many :extracurriculars
