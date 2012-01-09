@@ -16,8 +16,7 @@ module UsersHelper
   end
   
   def gpa_help_text
-    # replace this if you got better one
-    "Grade Point Average"
+    "Your GPA is important: it helps you and your fellow students make better decisions about study partners. Please enter your GPA as a 3 digit number on a 4.0 scale. For example: 3.96"
   end
   
   def user_protected_profile?(user, attrubute)
