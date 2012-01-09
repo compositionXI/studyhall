@@ -12,3 +12,4 @@ public/system
 public/system/*
 solr
 .DS_Store
+*.swp

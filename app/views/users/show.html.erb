@@ -238,7 +238,14 @@
     <% if params[:mode] == 'edit' %>
       $(".buttons.left .edit_button").trigger('click');
     <% end %>
-    
+
+    <% if params[:tour] == 'true' %>
+      var initTourMode = function() {
+        $($(".edit_button")[0]).trigger('click');
+        $("div[data-form='name_form']").trigger('click');
+      }
+      initTourMode();
+    <% end %>
   });
 </script>
 
