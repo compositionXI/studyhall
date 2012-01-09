@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) {Factory.create(:user)}
+  let(:user) {FactoryGirl.create(:user)}
   
   it "can be instantiated" do
     User.new.should be_an_instance_of(User)
@@ -14,9 +14,9 @@ describe User do
     end
     
     it "should not be able to change school" do
-      school1 = Factory.create(:school)
-      school2 = Factory.create(:school)
-      user = Factory.create(:user, school: school1)
+      school1 = FactoryGirl.create(:school)
+      school2 = FactoryGirl.create(:school)
+      user = FactoryGirl.create(:user, school: school1)
       orig_school = user.school
       user.update_attributes school: school2
       user.save
