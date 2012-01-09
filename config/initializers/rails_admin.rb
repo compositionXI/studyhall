@@ -13,6 +13,7 @@ if File.basename($0) == 'rake'
   puts "Skipping RailsAdmin.config..."
 else
   RailsAdmin.config do |config|
+    config.audit_with :history, User
 
     config.current_user_method { current_user } # auto-generated
   
@@ -944,7 +945,7 @@ else
        field :perishable_token, :string
        field :created_at, :datetime
        field :updated_at, :datetime
-       field :avatar, :paperclip_file
+       #field :avatar, :paperclip_file
        field :custom_url, :string
        field :bio, :text
        field :active, :boolean
@@ -973,7 +974,7 @@ else
        field :perishable_token, :string
        field :created_at, :datetime
        field :updated_at, :datetime
-       field :avatar, :paperclip_file
+       #field :avatar, :paperclip_file
        field :custom_url, :string
        field :bio, :text
        field :active, :boolean

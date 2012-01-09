@@ -66,7 +66,7 @@ describe Import::CourseDataController do
       end
     end
   end
-  describe "DELETE 'destory'" do
+  describe "DELETE 'destroy'" do
     before :each do
       @course_offering_import = FactoryGirl.create(:course_offering_import)
     end
@@ -86,7 +86,7 @@ describe Import::CourseDataController do
     end
     context "when the resource is not found" do
       it "should not delete the resource" do
-        post :destory, :id => @course_offering_import.id + 1
+        post :destroy, :id => @course_offering_import.id + 1
         CourseOfferingImport.count.should == 1
       end
     end

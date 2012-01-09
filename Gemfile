@@ -1,12 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rack', '>= 1.3.5'
-gem 'rails', '3.1.0'
+gem 'rack', '>= 1.4.0'
+gem 'rails', '~> 3.2.0.rc2'
 gem 'mysql2'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
-gem 'omniauth', '~> 1.0' # for facebook
+#gem 'omniauth', '~> 1.0' # for facebook
+gem 'omniauth', :git => "git://github.com/intridea/omniauth.git"
 gem 'omniauth-facebook'
 gem 'rails3-generators'
 gem 'opentok'
@@ -37,8 +38,8 @@ gem 'rchardet19'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails', "~> 3.2.0"
+  gem 'coffee-rails', "~> 3.2.0"
   gem 'uglifier'
 end
 
