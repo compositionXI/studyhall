@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :fetch_user, :only => [:show, :edit, :update, :destroy, :profile_wizard, :account]
   before_filter :set_action_bar, :only => [:show, :edit]
   before_filter :check_first_last_name, :only => :profile_wizard
-  skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update]
+  skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update, :show]
   
   def index
     @users = User.all

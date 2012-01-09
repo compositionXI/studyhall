@@ -50,7 +50,8 @@ class ApplicationController < ActionController::Base
   
   def require_first_last_name
     if current_user && (current_user.first_name.blank? || current_user.last_name.blank?)
-      redirect_to profile_wizard_user_path(current_user)
+      #redirect_to profile_wizard_user_path(current_user)
+      redirect_to custom_user_path(current_user.custom_url, tour: true)
     end
   end
   
