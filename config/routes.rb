@@ -115,6 +115,7 @@ Studyhall::Application.routes.draw do
   
   get ':id' => "static_pages#show", :as => :page, constraints: lambda{|req| StaticPage.where(slug: req.path_parameters[:id]).count > 0 }
   get ':id' => "users#show", :as => :profile, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
+  get ':id' => "users#show", :as => :custom_user, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
