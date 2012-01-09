@@ -925,9 +925,9 @@ else
      list do
        field :name, :string
        field :custom_url, :string
-       field :role, :string
        field :email, :string
        field :school, :belongs_to_association
+       field :roles, :has_and_belongs_to_many_association
      end
   #   export do; end
      show do
@@ -945,7 +945,7 @@ else
        field :perishable_token, :string
        field :created_at, :datetime
        field :updated_at, :datetime
-       #field :avatar, :paperclip_file
+       field :avatar, :paperclip
        field :custom_url, :string
        field :bio, :text
        field :active, :boolean
@@ -974,7 +974,7 @@ else
        field :perishable_token, :string
        field :created_at, :datetime
        field :updated_at, :datetime
-       #field :avatar, :paperclip_file
+       field :avatar, :paperclip
        field :custom_url, :string
        field :bio, :text
        field :active, :boolean
