@@ -13,7 +13,11 @@ class UsersController < ApplicationController
   
   def show
     redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
-    flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+    if params[:tour]
+      flash[:action_bar_message] = 'Welcome to StudyHall!'
+    else
+      flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+    end
   end
   
   def new
@@ -50,6 +54,7 @@ class UsersController < ApplicationController
   end
   
   def update
+    check_tour_mode
     @user.avatar = nil if params[:delete_avatar] == "1"
     params[:user][:extracurricular_ids] = @user.split_attribute_list(params[:extracurriculars_list], Extracurricular, :extracurricular_ids) if params[:extracurriculars_list].present?
     
@@ -150,4 +155,15 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
+
+  def check_tour_mode
+    if request.referrer.include?('tour')
+      @tour = true
+      rel_form = params[:rel_form]
+      forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form']
+      index = forms.index(rel_form)
+      @next_form = forms[index + 1]
+    end
+  end
+
 end
