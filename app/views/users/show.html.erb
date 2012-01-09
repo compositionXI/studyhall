@@ -138,6 +138,10 @@
   var cloneForm = function(editable){
     var form_id = $(editable).data("form");
     var form = $("#"+form_id).clone();
+    <% if params[:tour] %>
+      form.find("input.btn.save").val("Next");
+      form.find("a.btn.close_modal").hide();
+    <% end%>
     return form.first().html();
   }
   
