@@ -172,38 +172,39 @@
     +button-gradient($aqua, $aquaDark, $aquaText, $aquaTextShadow, $aquaBorder)
 
 // Base .btn styles
-.btn 
+.btn
   // Button Base
   +box-sizing
+  +box-shadow(inset 0 1px 0 #ffffff)
+  +vertical-gradient($silver, $silverDark)
+  +border-radius(2px)
+  +vertical-gradient(#fbfbfb, #efefef)
   cursor: pointer
   display: inline-block
-  +vertical-gradient($silver, $silverDark)
   padding: 7px 9px 7px
   text-shadow: 0 1px 1px $silverTextShadow
   color: $silverText
   font-size: 11px
+  font-weight: 700
   line-height: normal
   height: 28px
   border: 1px solid $silverBorder
-  +border-radius(2px)
-  $shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
-  +box-shadow($shadow)
   text-transform: uppercase
   white-space: nowrap
   vertical-align: top
-  &:hover
-    color: #333
-    text-decoration: none
-    +vertical-gradient($silverDark, $silver)
   // Primary Button Type
   &.primary 
-    +body-font(900, 11px, 11px )
+    +box-shadow(inset 0 1px 0 #b6f4fc)
     color: $blueText
     text-shadow: 0 1px 0 $blueTextShadow
     border-color: $blueBorder
-    +vertical-gradient($blue, $blueDark)
+    +vertical-gradient(#9df0fb, #59baed)
     &:hover
-      +vertical-gradient($blueDark, $blue)
+      +box-shadow(inset 0 1px 0 #95daf5)
+      +vertical-gradient(#72cef2, #59baed)
+    &:active, .active
+      +box-shadow(inset 0 1px 3px #333333)
+      +vertical-gradient(#55b3e6, #5dbae8)      
     &.disabled
       background: $blueDisabled
       color: $blueDisabledText
@@ -212,15 +213,47 @@
       background: $blueDisabled
       color: $blueDisabledText
       border: 1px solid $blueDisabled
+    &.selected
+      +vertical-gradient(#3b7da1, #4189aa)
+  &.green, &.save 
+    +box-shadow(inset 0 1px 0 #b6f4fc)
+    color: #000d14
+    text-shadow: 0 1px 0 #b6d977
+    border-color: #203806
+    +vertical-gradient(#badd3c, #80be29)
+    &:hover
+      +box-shadow(inset 0 1px 0 #95daf5)
+      +vertical-gradient(#96c930, #7ebd28)
+    &:active, .active
+      +box-shadow(inset 0 1px 3px #333333)
+      +vertical-gradient(#7dbc28, #89c32c)      
+    &.selected
+      +vertical-gradient(#3b6b0c, #41750d)
+  // Button Sizes
+  &.larger
+    font-size: 16px
+    height: 44px
+    padding: 9px 14px 9px
+    +border-radius(6px)
+  &.large
+    font-size: 12px
+    line-height: normal
+    height: 37px
+    padding: 12px 15px
+  &:hover
+    color: $silverText
+    text-decoration: none
+    text-shadow: 0 1px 0 #dfdfdf
+    +box-shadow(inset 0 1px 0 #e3e3e3)
+    +vertical-gradient(#d8d8d8, #cacaca)
   &.selected
-    color: $pressedText
-    text-shadow: 0 1px 0 $pressedTextShadow
+    color: #fefefe
+    text-shadow: 0 1px 0 #000000
+    +box-shadow(inset 0 1px 9px #333333)
     border-color: $pressedBorder
-    +vertical-gradient($pressed, $pressedDark)
-    $shadow: inset 0 1px 1px rgba(0, 0, 0, .6), 0 1px 2px rgba(0, 0, 0, 0.05)
-    +box-shadow($shadow)
-  // Transitions
-  +transition(0.1s linear all)
+  &.active, &:active
+    +box-shadow(inset 0 1px 9px #333333)
+    +vertical-gradient(#969696, #a0a0a0)
   // Active and Disabled states
   &.disabled
     cursor: default
@@ -236,21 +269,6 @@
     background: $silverDisabled
     color: $silverDisabledText
     border: 1px solid $silverDisabled
-  &:active
-    $shadow: inset 0 3px 7px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05)
-    +box-shadow($shadow)
-  // Button Sizes
-  &.larger
-    font-size: 16px
-    height: 44px
-    padding: 9px 14px 9px
-    +border-radius(6px)
-  &.large
-    font-size: 12px
-    line-height: normal
-    height: 37px
-    padding: 12px 15px
-
 // Help Firefox not be a jerk about adding extra padding to buttons
 
 button.btn,
@@ -508,6 +526,7 @@ input[type=submit].btn
       &:first-child
         margin: 0
 
+
 // POPOVER ARROWS //INTRIDEA
 // --------------
 
@@ -521,18 +540,7 @@ input[type=submit].btn
   position: absolute
   margin-left: -$arrowWidth
   top: $top
-  width: 0
-=arrow-border-left($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto)
-  border-color: transparent $color transparent transparent
-  border-style: solid
-  border-width: $arrowWidth
-  height: 0
-  left: $left
-  right: $right
-  position: absolute
-  margin-top: -$arrowWidth
-  top: $top
-  width: 0  
+  width: 0 
 
 =popover-arrow-above($arrowWidth: 5px, $color: $white)
   bottom: 0
@@ -544,11 +552,23 @@ input[type=submit].btn
 
 =popover-arrow-left($arrowWidth: 5px, $color: $white)
   top: 50%
-  right: 0
+  right: -$arrowWidth
   margin-top: -$arrowWidth
   border-top: $arrowWidth solid transparent
   border-bottom: $arrowWidth solid transparent
   border-left: $arrowWidth solid $color
+  
+=arrow-border-left($arrowWidth: 10px, $color: $black, $top: -17px, $left: auto, $right: 30px)
+  border-color: transparent transparent transparent $color
+  border-style: solid
+  border-width: $arrowWidth
+  height: 0
+  left: $left
+  right: $right
+  position: absolute
+  margin-top: -$arrowWidth
+  top: $top
+  width: 0
 
 =popover-arrow-below($arrowWidth: 5px, $color: $white, $top: 0, $left: 50%, $right: auto)
   top: $top
@@ -566,6 +586,18 @@ input[type=submit].btn
   border-top: $arrowWidth solid transparent
   border-bottom: $arrowWidth solid transparent
   border-right: $arrowWidth solid $color
+  
+=arrow-border-right($arrowWidth: 10px, $color: $black, $top: -17px, $left: 30px, $right: auto)
+  border-color: transparent $color transparent transparent
+  border-style: solid
+  border-width: $arrowWidth
+  height: 0
+  left: $left
+  right: $right
+  position: absolute
+  margin-top: -$arrowWidth
+  top: $top
+  width: 0
 
 // TWIPSY //INTRIDEA
 // ------
@@ -617,61 +649,4 @@ input[type=submit].btn
   -moz-background-clip: $clip
   background-clip: $clip
 
-// POPOVERS
-// --------
 
-.popover
-  position: absolute
-  top: 0
-  left: 0
-  z-index: 1000
-  display: none
-  +vertical-gradient(white, #f8f8f8)
-  border: 1px solid $popoverBorder
-  +border-radius(2px)
-  +box-shadow(0 3px 7px rgba(0, 0, 0, 0.3))
-  &.above .arrow
-    +popover-arrow-above
-  &.right 
-    .arrow
-      +popover-arrow-right 
-    .arrow-border
-      +arrow-border-left(5px, $popoverBorder, 50%, -10px, auto)
-      // ($arrowWidth: 10px, $color: $black, $top: -17px, $left: -11px, $right: auto)
-  //Modifications in by Jake Mauer / Intridea
-  &.below .arrow
-    +popover-arrow-below(10px, $popoverColor, -8px, 50%, auto)
-  &.below .arrow-border
-    +arrow-border(10px, $popoverBorder, -20px, 50%, auto)
-  &.below-left .arrow
-    +popover-arrow-below(10px, $popoverColor, -8px, auto, 15px)
-  &.below-left .arrow-border
-    +arrow-border(10px, $popoverBorder, -20px, auto, 15px)
-  &.below-right .arrow
-    +popover-arrow-below(10px, $popoverColor, -8px, 25px, auto)
-  &.below-right .arrow-border
-    +arrow-border(10px, $popoverBorder, -20px, 25px, auto)
-  //End Modifications
-  &.left .arrow
-    +popover-arrow-left
-  .arrow
-    position: absolute
-    width: 0
-    height: 0
-  .inner
-    overflow: hidden
-    width: 410px
-  .title
-    line-height: 1
-    +border-radius(3px 3px 0 0)
-    border-bottom: 1px solid #D1D1D1
-    margin: 0
-    padding-bottom: 18px
-    +box-shadow(0 1px 0 #fff)
-    font-size: 24px
-  .content
-    padding: 14px
-    +border-radius(0 0 3px 3px)
-    +background-clip(padding-box)
-    p, ul, ol
-      margin-bottom: 0

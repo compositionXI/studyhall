@@ -1,8 +1,15 @@
 <% if @success %>
   hidePopovers();
-  <% %w{photo affiliations bio gpa}.each do |section| %>
+  <% %w{photo affiliations bio gpa name}.each do |section| %>
     $("#<%= section %>_section").html("<%=j render partial: section, locals: {user: @user} %>");
     $("#<%= section %>_form").html("<%=j render partial: "#{section}_form", locals: {user: @user} %>");
+  <% end %>
+  <% if @tour %>
+    <% unless @next_form.nil? %>
+      $("div[data-form='<%= @next_form %>']").trigger('click');
+    <% else %>
+      window.location.href = '<%= custom_user_url(current_user.custom_url)%>';
+    <% end %>
   <% end %>
 <% else %>
   $("#edit_bio_form").prepend("<h2>Doh!</h2>");

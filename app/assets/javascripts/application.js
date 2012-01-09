@@ -17,11 +17,13 @@
 //= require bootstrap-modal.js
 //= require bootstrap-tabs.js
 //= require mediaelement_rails
+//= require autoNumeric.js
 //= require_tree .
 
 // Code for styling file upload inputs. Needs to be extracted and pluginified
-var styleFileInputs = function(){
-  $(".input-file").each(function(){    
+var styleFileInputs = function(selector){
+  el = selector || $(".input-file")
+  el.each(function(){    
     if(!$(this).hasClass("styled")){
       var $this = $(this)
       ,   origWidth = $this.outerWidth()
@@ -141,7 +143,9 @@ $(document).ready(function(){
     }
   });
 
-  $("select.chzn-select").chosen();
+  // $("select.chzn-select").chosen({
+  //   disable_search_threshold: 15
+  // });
   $("body").delegate("select.chzn-select", "change", function(){$(this).chosen();});
   
   $("body").delegate("a.cancel_popover","click",function(e){

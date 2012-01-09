@@ -1,7 +1,7 @@
 <section>
   <div class="row">
     <div class="span5 column sidebar left" id="profile_sidebar">
-      <div id="photo_section" class="editable profile_photo" data-placement="right" data-title="Change your photo" data-form="photo_form">
+      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form">
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
@@ -17,16 +17,18 @@
     </div>
     <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
-        <h1><%= @user.name %></h1>
-        <div id="affiliations_section" class="editable" data-placement="below" data-title="Affiliation Details" data-form="affiliations_form">
+        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form">
+          <%= render partial: "name", locals: {user: @user} %>
+        </div>
+        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form">
           <%= render partial: "affiliations", locals: {user: @user} %>
         </div>
         <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form">
           <%= render partial: "bio", locals: {user: @user} %>
         </div>
       </div>
-      <div class="profile_ratings left">
-        <div id="gpa_section" class="rating_block gpa left editable" data-placement="left" data-title="Update Your GPA" data-form="gpa_form">
+      <div class="profile_ratings right">
+        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form">
           <%= render partial: "gpa", locals: {user: @user} %>
         </div>
         <%= render :partial => "votes/rating", :locals => {:user => @user} %>
@@ -92,6 +94,10 @@
   </div>
 </section>
 <div id="profile_forms" style="display:none">
+  <div class="form" id="name_form">
+    <%= render :partial => 'name_form', :locals => { :user => @user } %>
+  </div>
+  
   <div class="form" id="affiliations_form">
     <%= render :partial => 'affiliations_form', :locals => { :user => @user } %>
   </div>
@@ -132,14 +138,19 @@
   var cloneForm = function(editable){
     var form_id = $(editable).data("form");
     var form = $("#"+form_id).clone();
+    <% if params[:tour] %>
+      form.find("input.btn.save").val("Next");
+      form.find("a.btn.close_modal").hide();
+    <% end%>
     return form.first().html();
   }
   
   var initChosen = function(){
-    chosenable = $(".popover #user_school_id, .popover #user_gender");
+    $popover = $('.popover')
+    chosenable = $popover.find("#user_school_id, #user_gender");
     chosenable.addClass("chzn-select");
-    chosenable.chosen();
-    $(".popover #user_gender ").chosen().change(function(){
+    chosenable.chosen({disable_search_threshold: 15  });
+    $("#user_gender ").change(function(){
       var gender = $(this).val();
       if (gender == 'Male') {
         $('label[for=user_fraternity_or_sorority]').text("Fraternity");
@@ -214,6 +225,8 @@
                           content: function(){ return cloneForm(editable)}});
         editable.popover("show");
         initChosen(editable.popover);
+        styleFileInputs($('.popover .upload'));
+        $('.number').autoNumeric({vMax: '4.20'});
         //$("select.chzn-select").chosen();
         initWindowResize();
       }
@@ -229,7 +242,15 @@
     <% if params[:mode] == 'edit' %>
       $(".buttons.left .edit_button").trigger('click');
     <% end %>
-    
+
+    <% if params[:tour] == 'true' %>
+      var initTourMode = function() {
+        $('body').addClass('wizard');
+        $($(".edit_button")[0]).trigger('click');
+        $("div[data-form='name_form']").trigger('click');
+      }
+      initTourMode();
+    <% end %>
   });
 </script>
 
