@@ -29,7 +29,8 @@ class ActivationsController < ApplicationController
       flash[:notice] = "Your account has been activated!"
       UserSession.create(@user, false) # Log user in manually
       @user.deliver_welcome!
-      redirect_to profile_wizard_user_url(@user.id)
+      #redirect_to profile_wizard_user_url(@user.id)
+      redirect_to custom_user_path(@user.custom_url, tour: true)
     else
       flash[:error] = 'There was a problem activating your account.'
       redirect_to login_path
