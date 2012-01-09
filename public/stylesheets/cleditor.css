@@ -20,8 +20,4 @@ ul,ol{
 }
 li{
   font-weight: 100;
-  list-style: none;
-}
-li:before{
-  content: "\00BB \0020";
 }
