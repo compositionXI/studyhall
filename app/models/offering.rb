@@ -1,4 +1,6 @@
 class Offering < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :permalink, :use => :slugged
   
   belongs_to :course
   belongs_to :school
@@ -26,5 +28,9 @@ class Offering < ActiveRecord::Base
 
   def name
     course.title
+  end
+
+  def permalink
+    "#{course.number} #{course.title} #{instructor.try(:full_name)}"
   end
 end
