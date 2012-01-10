@@ -28,8 +28,7 @@ class NotesController < ApplicationController
   end
 
   def new
-    @note = Note.new
-    @note.notebook = @notebook if @notebook
+    @note = @notebook ? @notebook.notes.build : Note.new
     @modal_link_id = params[:link_id]
     @remote = false
     respond_to do |format|
