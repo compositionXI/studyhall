@@ -30,9 +30,7 @@ gem 'hpricot'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem 'delayed_job_active_record'
 gem "recaptcha", :require => "recaptcha/rails"
-
-gem "ruby-hmac"
-
+gem "friendly_id", "~> 4.0.0"
 gem "ruby-hmac"
 gem 'rchardet19'
 

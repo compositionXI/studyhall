@@ -10,4 +10,15 @@ namespace :studyhall do
   task :import_courses, [:path] => :environment do |task, args|
     parse_csv_file args[:path]
   end
+
+  desc "Generate slugs for Offering"
+  task :generate_offering_slug => :environment do
+    Offering.find_each(&:save)
+    ActivityMessage.find_each do |message|
+      match = message.body.match(/"\/classes\/(\d*)">/)
+      next if match.nil? || match[1].blank?
+      offering = Offering.find_by_id match[1] 
+      message.update_attribute :body, message.body.sub("/classes/#{offering_id}", "/classes/#{offering.slug}") if offering
+    end
+  end
 end

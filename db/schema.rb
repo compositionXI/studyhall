@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120105122537) do
+ActiveRecord::Schema.define(:version => 20120110041619) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -213,11 +213,13 @@ ActiveRecord::Schema.define(:version => 20120105122537) do
     t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "offerings", ["course_id"], :name => "index_offerings_on_course_id"
   add_index "offerings", ["instructor_id"], :name => "index_offerings_on_instructor_id"
   add_index "offerings", ["school_id"], :name => "index_offerings_on_school_id"
+  add_index "offerings", ["slug"], :name => "index_offerings_on_slug", :unique => true
   add_index "offerings", ["term"], :name => "index_offerings_on_term"
 
   create_table "posts", :force => true do |t|
