@@ -206,6 +206,7 @@
       hidePopovers();
       $(".editable").toggleClass("edit");
       e.preventDefault();
+      $('.action_bar .edit_button').removeClass('active');
     });
 
     $("a#delete_photo").live('click', function(e){
