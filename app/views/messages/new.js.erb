@@ -7,6 +7,7 @@ $("#new_message_button").popover({
   content: function(){return "<%=j render :partial => "messages/form" %>";}
 });
 $("#new_message_button").popover("show");
+$(".chzn-select").chosen();
 if($("#message_new input[type='text']").val().length > 0)
   $("#message_new textarea").first().focus();
 else
@@ -14,7 +15,6 @@ else
 $("#message_new").delegate("input[type='submit']","click",function(){
   $("#message_new #error_explanation").addClass("hidden").html("");
 });
-$(".chzn-select").chosen();
 styleFileInputs();
 $("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
 

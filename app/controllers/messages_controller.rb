@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
   def create
     @receiver = []
     if params[:user_id].is_a?(Array)
-      params[:user_id].each do |i|
+      params[:user_id].reject(&:blank?).each do |i|
         @receiver << User.find(i)
       end
     else
