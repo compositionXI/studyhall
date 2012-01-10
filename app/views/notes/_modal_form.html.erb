@@ -1,6 +1,6 @@
 <%= form_for note, :remote => true, :html => {:class => "form-stacked", :id => "edit_note_form"} do |f| %>
   <div class="modal-header">
-    <h2>Notebook Details</h2>
+    <h2>Note Details</h2>
   </div>
   <div class="modal-body">
     <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
@@ -11,7 +11,7 @@
     <div class="clearfix">
       <%= f.label "Save To Notebook" %>
       <div class="input">
-        <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:prompt => "Choose a notebook", :include_blank => true}, {:class => "hzn-select", "data-placeholder" => "Choose a notebook"} %>
+        <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:selected => note.notebook.try(:id), :prompt => "Choose a notebook"}, {:class => "chzn-select", "data-placeholder" => "Choose a notebook"} %>
       </div>
     </div>
     <div class="clearfix">

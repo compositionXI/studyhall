@@ -8,6 +8,7 @@ new_note.removeClass("grid show").addClass($(".note_items").data("layout"));
 note.replaceWith(new_note);
 
 <% if @note.notebook_changed %>
+  $(new_note).addClass('notebook_changed')
   $(new_note).append("<%= j(render(partial: 'permission_modal', locals: { note: @note})) %>");
   $(new_note).find(".permission_change_modal").modal('show');
   $(".permission_change_modal .close_modal").live('click', function(){
