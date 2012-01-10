@@ -1,7 +1,7 @@
 <div id="menubar" class="topbar notes">
   <div class="right">
     <% if @note.new_record? %>
-      <%= link_to "Save", new_notebook_note_path(@notebook, :link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
+      <%= link_to "Save", @notebook ? new_notebook_note_path(@notebook, :link_id => "save_note_button") : new_note_path(:link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
     <% else %>
       <%= link_to "Save", edit_note_path(:id => @note.id, :link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
     <% end %>
