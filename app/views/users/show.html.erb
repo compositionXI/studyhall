@@ -245,6 +245,24 @@
       $("#"+$(this).data("id")).modal("hide");
     });
     
+    <% if @user == current_user%>
+      $(".activate_invitation").click(function(){
+        var invitation = $(this);
+        var invitations_form = $("#invitations_form").clone();
+        invitations_form.find('#gmail_invite_modal').remove();
+        invitation.popover({
+          trigger: 'manual',
+          placement: 'below-right',
+          html: true,
+          offset: 10,
+          horizontalOffset: 60,
+          title: function() { return "Your buddies <small>We promise not to spam</small>"; },
+          content: function() {return invitations_form.html(); }
+        });  
+        invitation.popover('show');
+      });
+    <% end %>
+
     <% if params[:mode] == 'edit' %>
       $(".buttons.left .edit_button").trigger('click');
     <% end %>

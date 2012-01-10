@@ -7,7 +7,7 @@
       <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'invitation_tour' %>
     </div>
   </div>
-  <div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not so spam</small>">
+  <div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not to spam</small>">
     <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user } %>
   </div>
   <div class="tour_popover " id="activity_tour" data-title="Your Activity<small>Where your ish happens</small>" data-h-offset="65" data-offset='10'>

@@ -5,7 +5,13 @@
   </header>
     <ul>
       <% if user.buddies.size == 0 %>
-        <li><span>Find buddies now!</span></li>
+        <li class="activate_invitation">
+          <% if user == current_user %>
+            <span>Find buddies now!</span>
+          <% else %>
+            <span>No buddies</span>
+          <% end%>
+        </li>
       <% end %>
       <% if user.buddies.any? %>
         <% user.buddies.limit(4).each do |buddy| %>
