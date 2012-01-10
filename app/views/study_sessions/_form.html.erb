@@ -1,5 +1,5 @@
 <%= form_for study_session, :html => {:class => "form-stacked"} do |f| %>
-  <% if study_session.new_record? %>
+  <div class="popover-body"><% if study_session.new_record? %>
     <p class="warning">Make sure that your microphone and camera work before you begin.</p>
   <% end %>
   <div class="clearfix">
@@ -40,8 +40,7 @@
         <%= text_field_tag nil, nil, placeholder: "Share this studyhall", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
       </div>
     </div>
-  </div>
-  <hr/>
-  <%= f.submit (study_session.new_record? ? "Start Studying" : "Save"), :class => "btn primary" %>
-  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+  </div></div>
+<div class="popover-footer">  <%= f.submit (study_session.new_record? ? "Start Studying" : "Save"), :class => "btn primary" %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %></div>
 <% end %>
