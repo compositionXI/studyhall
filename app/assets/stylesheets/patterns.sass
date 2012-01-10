@@ -387,15 +387,16 @@ input[type=submit].btn
       background-color: white
       a
         color: #333333
+        &:hover
+          text-decoration: none
     a
       +header-font(normal, 18px, 50px)
       padding: 0 10px
       &:focus
         outline: none
       small
-        font-size: 14px
-        color: #AFAFAF
-    
+        +body-font(normal, 14px, 14px)
+        color: $smallHeadings 
 
        
 // Basic Tabs
