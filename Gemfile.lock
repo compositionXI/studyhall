@@ -161,6 +161,7 @@ GEM
     foreman (0.31.0)
       term-ansicolor (~> 1.0.5)
       thor (>= 0.13.6)
+    friendly_id (4.0.0)
     gherkin (2.7.2)
       json (>= 1.4.6)
     haml (3.1.4)
@@ -356,6 +357,7 @@ DEPENDENCIES
   faker
   feedzirra!
   foreman
+  friendly_id (~> 4.0.0)
   gdata!
   has_mailbox
   hpricot
