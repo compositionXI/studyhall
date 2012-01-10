@@ -29,6 +29,7 @@ class NotesController < ApplicationController
 
   def new
     @note = Note.new
+    @note.notebook = @notebook if @notebook
     @modal_link_id = params[:link_id]
     @remote = false
     respond_to do |format|
