@@ -377,11 +377,26 @@ input[type=submit].btn
       width: auto
 
 .tabs
+  border-bottom: 1px solid #C6C0BC
   width: 100%
   li
-    display: inline-block
+    background-color: #f6f6f6
+    height: 50px
+    float: left
+    &.active 
+      background-color: white
+      a
+        color: #333333
     a
-      +header-font(normal, 18px, 18px)
+      +header-font(normal, 18px, 50px)
+      padding: 0 10px
+      &:focus
+        outline: none
+      small
+        font-size: 14px
+        color: #AFAFAF
+    
+
        
 // Basic Tabs
 // .tabs
