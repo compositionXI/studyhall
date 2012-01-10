@@ -42,7 +42,8 @@
     });
   };
   var showTourPopover = function(tourable) {
-    var tour_popover = $("#" + tourable.data('popover-id'));
+    var tour_popover = $("#" + tourable.data('popover-id')).clone();
+    tour_popover.find("#gmail_invite_modal").remove()
     var h_offset = tour_popover.data('h-offset') || 110;
     var offset = tour_popover.data('offset') || 5;
     tourable.popover({trigger: "manual",
