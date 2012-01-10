@@ -21,6 +21,7 @@ gem 'thumbs_up'
 gem 'kaminari'
 gem 'sunspot_rails'
 gem "sunspot_with_kaminari", '~> 0.1'
+gem "sunspot_solr"
 gem "remotipart", "~> 1.0"
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'contacts', :git => 'git://github.com/agentrock/contacts'
