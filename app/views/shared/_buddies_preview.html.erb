@@ -1,4 +1,4 @@
-<section class="buddies">
+<section class="buddies invitations">
   <header>
     <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<span class="total_buddies"><%= user.buddies.count %></span>)</small></h1>
     <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_buddies_button' %>

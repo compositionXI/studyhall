@@ -8,7 +8,7 @@
     <% unless @next_form.nil? %>
       $("div[data-form='<%= @next_form %>']").trigger('click');
     <% else %>
-      window.location.href = '<%= custom_user_url(current_user.custom_url)%>';
+      window.location.href = '<%= root_url(tour: true)%>';
     <% end %>
   <% end %>
 <% else %>

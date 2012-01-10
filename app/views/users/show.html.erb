@@ -1,11 +1,10 @@
 <section>
   <div class="row">
     <div class="span5 column sidebar left" id="profile_sidebar">
-      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form">
+      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form" data-bar-title="Add a photo - 400px by 400px and less than 500kb">
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
-      <%= render :partial => "shared/invite_buddies", :locals => {:user => @user} if current_user == @user %>
       <% if current_user != @user %>
         <div>
           <%= link_to "Report this profile", "#" %>
@@ -17,18 +16,18 @@
     </div>
     <div class="span11 column profile_main_content">
       <div id="profile_personal_info" class="left">
-        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form">
+        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
           <%= render partial: "name", locals: {user: @user} %>
         </div>
-        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form">
+        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form" data-bar-title="Add affiliations - Sports, clubs, gender, fraternity or sorority, marjor & minor">
           <%= render partial: "affiliations", locals: {user: @user} %>
         </div>
-        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form">
+        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
           <%= render partial: "bio", locals: {user: @user} %>
         </div>
       </div>
       <div class="profile_ratings right">
-        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form">
+        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form" data-bar-title="Add your GPA - honest values equal better study buddies">
           <%= render partial: "gpa", locals: {user: @user} %>
         </div>
         <%= render :partial => "votes/rating", :locals => {:user => @user} %>
@@ -113,6 +112,9 @@
   <div class="form" id="photo_form">
     <%= render :partial => 'photo_form', :locals => { :user => @user } %>
   </div>
+  <div class="form" id="invitations_form">
+    <%= render :partial => "shared/invite_buddies", :locals => {:user => @user} if current_user == @user %>
+  </div>
 </div>
 <% if current_user %>
   <% @user.offerings.each do |course| %>
@@ -173,7 +175,7 @@
       $('.course_count').html("(" + (courseCount - 1) + ")");
     }
   }
-
+  
   $(document).ready(function(){
     $(".tabs li").each(function(){
       var li = $(this);
@@ -229,6 +231,9 @@
         $('.number').autoNumeric({vMax: '4.20'});
         //$("select.chzn-select").chosen();
         initWindowResize();
+        <% if params[:tour] %>
+          $("div.action_bar h3").text(editable.data('bar-title'));
+        <% end %>
       }
       e.preventDefault();
     });
@@ -246,6 +251,7 @@
     <% if params[:tour] == 'true' %>
       var initTourMode = function() {
         $('body').addClass('wizard');
+        $(".buddies.invitations").addClass('editable').attr('data-form', 'invitations_form').attr('data-placement', 'below-right').attr('data-title', 'Your Buddies <small>We promise not to spam</small>');
         $($(".edit_button")[0]).trigger('click');
         $("div[data-form='name_form']").trigger('click');
       }
