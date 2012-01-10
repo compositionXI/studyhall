@@ -1,6 +1,6 @@
 <% url = @note.new_record? ? notes_path(:format => @remote ? :js : :html) : note_path(@note, :format => @remote ? :js : :html) %>
 <%= form_for @note, url: url, :remote => @remote, :html => {:class => "form-stacked", :id => "edit_note_form", :'data-type' => "html"} do |f| %>
-  <%= f.hidden_field :content, :id => "note_content_hidden_field" %>
+  <div class="popover-body"><%= f.hidden_field :content, :id => "note_content_hidden_field" %>
   <div class="clearfix">
     <%= f.label :name %>
     <div class="input"><%= f.text_field :name %></div>
@@ -20,8 +20,8 @@
         <%= text_field_tag nil, nil, placeholder: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
       </div>
     </div>
-  </div>
-  <div class="clearfix">
+  </div></div>
+  <div class="popover-footer clearfix">
     <%= f.submit 'Done', :class => "btn primary" %>
     <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
     <%= f.submit "Quick Save", :class => 'btn primary quick_save_btn' %>
