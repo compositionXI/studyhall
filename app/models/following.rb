@@ -4,6 +4,7 @@ class Following < ActiveRecord::Base
   belongs_to :user
 
   validate :no_self_following
+  validates :followed_user_id, :uniqueness => { :scope => :user_id }
   
   scope :blocked, lambda {where :blocked => true}
 
