@@ -7,6 +7,8 @@
   <% if @tour %>
     <% unless @next_form.nil? %>
       $("div.editable.edit").removeClass('active');
+      $("div[data-form='<%= @rel_form %>']").removeClass('edit');
+      $("div[data-form='<%= @next_form %>']").addClass('edit');
       $("div[data-form='<%= @next_form %>']").trigger('click');
     <% else %>
       window.location.href = '<%= root_url(tour: true)%>';

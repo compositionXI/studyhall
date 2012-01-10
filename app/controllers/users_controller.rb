@@ -159,9 +159,9 @@ class UsersController < ApplicationController
   def check_tour_mode
     if request.referrer.include?('tour')
       @tour = true
-      rel_form = params[:rel_form]
+      @rel_form = params[:rel_form]
       forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form']
-      index = forms.index(rel_form)
+      index = forms.index(@rel_form)
       @next_form = forms[index + 1]
     end
   end

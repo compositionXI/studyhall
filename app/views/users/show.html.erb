@@ -249,14 +249,15 @@
       $(".buttons.left .edit_button").trigger('click');
     <% end %>
 
-    <% if params[:tour] == 'true' %>
+    <% if params[:tour] == 'true' && current_user == @user %>
       var initTourMode = function() {
         $('body').addClass('wizard');
         $("#topbar_main_nav").hide();
         $(".topbar #new_search").hide();
         $(".buddies.invitations").addClass('editable').attr('data-form', 'invitations_form').attr('data-placement', 'below-right').attr('data-title', 'Your Buddies <small>We promise not to spam</small>');
-        $($(".edit_button")[0]).trigger('click');
+        //$($(".edit_button")[0]).trigger('click');
         $(".edit_button").hide();
+        $("div[data-form='name_form']").toggleClass('edit');
         $("div[data-form='name_form']").trigger('click');
       }
       initTourMode();
