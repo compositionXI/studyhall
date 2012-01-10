@@ -16,7 +16,11 @@ class UsersController < ApplicationController
     if params[:tour]
       flash[:action_bar_message] = 'Welcome to StudyHall!'
     else
-      flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+      if @user.majors.blank?
+        flash[:action_bar_message] = "#{@user.name}"
+      else
+        flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+      end
     end
   end
   
