@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     unless current_user.profile_complete?
       flash.now[:notice] = "Your profile is #{current_user.profile_completion_percentage}% complete!"
     end
+    check_tour_mode
   end
 
   def landing_page
@@ -15,4 +16,9 @@ class HomeController < ApplicationController
     render layout: "landing"
   end
 
+  protected
+    
+    def check_tour_mode
+      @tour = true if params[:tour] == 'true'
+    end
 end

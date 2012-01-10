@@ -1,0 +1,83 @@
+<div id="tour_popovers" style="display: none">
+  <div class="tour_popover " id="standard_actions_tour" data-title="Get started <small>Study with pals or take notes</small>">
+    <div class="popover-body">
+      <p>Start a StudyHall and study with friends without leaving the sofa, Or, Take notes in class, at the library, or on the john.</p>
+    </div>  
+    <div class="popover-footer">
+      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'invitation_tour' %>
+    </div>
+  </div>
+  <div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not so spam</small>">
+    <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user } %>
+  </div>
+  <div class="tour_popover " id="activity_tour" data-title="Your Activity<small>Where your ish happens</small>" data-h-offset="65" data-offset='10'>
+    <div class="popover-body">
+      <p>Coolest place ever. This is where you can see you and your buddy's activity, who they studied with, courses they've added, stuf like that.</p>
+    </div>  
+    <div class="popover-footer">
+      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'campus_news_tour' %>
+    </div>
+  </div>
+  <div class="tour_popover " id="campus_news_tour" data-title="Campus News <small>Where other ish happens</small>" data-h-offset="65" data-offset='10'>
+    <div class="popover-body">
+      <p>Find out what's poppin' on campus - parties,exhibitions, game news, club and even info...</p>
+    </div>  
+    <div class="popover-footer">
+      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'courses_tour' %>
+    </div>
+  </div>
+  <div class="tour_popover " id="courses_tour" data-title="Your Courses <small>Art, Bio, Chem...</small>" data-h-offset="350">
+    <div class="popover-body">
+      <p>Adding courses to your profile allows you to find friends and study buddies and makes it easier to stay in the know.</p>
+    </div>  
+    <div class="popover-footer">
+      <%= submit_tag "Done", :class => 'btn primary tour_button'  %>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  var hideTourPopovers = function() {
+    $(".tourable").each(function(){
+      $(this).popover('hide');
+    });
+  };
+  var showTourPopover = function(tourable) {
+    var tour_popover = $("#" + tourable.data('popover-id'));
+    var h_offset = tour_popover.data('h-offset') || 110;
+    var offset = tour_popover.data('offset') || 5;
+    tourable.popover({trigger: "manual",
+                      placement: 'below-right',
+                      html: true,
+                      offset: offset,
+                      horizontalOffset: h_offset,
+                      title: function(){return tour_popover.data('title');},
+                      content: function(){ return tour_popover.html(); }});
+    tourable.popover("show");
+  };
+  var initTourMode = function() {
+    $("#invitation_tour").find("div.input input.btn").removeClass('save').addClass('primary').val("Next").addClass('tour_button').attr('next_tour_id', 'activity_tour');
+    $("#invitation_tour").find("div.input").removeClass('input');
+    showTourPopover($("div.standard_actions"));
+    $(".tour_button").live('click', function(){
+        hideTourPopovers();
+        var next_tour_id = $(this).attr('next_tour_id'); 
+        if(next_tour_id == null) return false;
+        var tourable = $("div[data-popover-id='"+ next_tour_id +"']");
+        if(tourable.length == 0) {
+          tourable = $("section[data-popover-id='"+ next_tour_id +"']");
+          if(tourable.length == 0) {
+            tourable = $("li[data-popover-id='"+ next_tour_id +"']");
+          }
+        }
+        showTourPopover(tourable);
+        return false;
+    });
+
+    $("a.cancel_popover").click(function(){
+    });
+  };
+
+  $(document).ready(function(){
+    initTourMode();
+  });
+</script>
