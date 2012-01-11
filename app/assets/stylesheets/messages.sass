@@ -63,10 +63,13 @@
       margin: 0 5px
   .message_content
     position: relative
-  .message_utilities
+  .open_message
+    display: none
+  .open_message, .message_utilities
     position: absolute
     top: 0
     right: 0
+  .message_utilities
     li
       float: left  
       margin: 0 0 7px
@@ -76,12 +79,6 @@
       &:before
         content: " - "
         margin: 0 5px
-    .time         
-      clear: left
-      float: right 
-      &:before
-        content: none
-        margin: 0
   li.message_list_item
     position: relative
     border-bottom: 1px solid #D4D4D4
@@ -95,7 +92,13 @@
       .body
         font-size: 13px
       .message_utilities
-        font-size: 13px
+        display: none
+      .open_message
+        display: block
+    .time
+      position: absolute
+      right: 0
+      top: 30px
     img
       float: left
     .checkbox
