@@ -15,7 +15,7 @@ end
 
 if StaticPage.count == 0
   ##Create static pages
-  ["Privacy Policy", "Terms Of Service", "About Us"].each do |title|
+  ["Privacy Policy", "Terms Of Service", "About Us", "FAQ's"].each do |title|
     page = StaticPage.find_by_title(title)
     page.destroy unless page.nil?
   end
@@ -37,9 +37,13 @@ if StaticPage.count == 0
     :slug => "about",
     :text => File.open("./public/static/about_us.html", "r").read
   )
+
+  StaticPage.create(
+    :title => "FAQ's",
+    :slug => "faqs",
+    :text => File.open("./public/static/faqs.html", "r").read
+  )
 end
-
-
 
 ##Create Schools
 if School.all.empty?
