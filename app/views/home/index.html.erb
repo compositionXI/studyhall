@@ -116,9 +116,8 @@
       placement = "below-right";
     }
     
-    $("#add_course_button").popover(popover_attr);
-    
     $("#add_course_button").live('click', function(){
+      $("#add_course_button").popover(popover_attr);
       $("#add_course_button").popover("show");
       $("select.chzn-select").chosen();
       styleFileInputs();
