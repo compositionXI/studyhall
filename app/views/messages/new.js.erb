@@ -8,6 +8,7 @@ $("#new_message_button").popover({
 });
 $("#new_message_button").popover("show");
 $(".chzn-select").chosen();
+styleFileInputs();
 if($("#message_new input[type='text']").val().length > 0)
   $("#message_new textarea").first().focus();
 else
