@@ -16,10 +16,12 @@
             <% else %>
               <li><%= link_to "Archive", "#", :class => "message_action archive inner_link", :'data-url' => message_path(message) %></li>
             <% end %>
-            <% if message_opened?(message) %>
-              <li><%= link_to "Mark as unread", "#", :class => "message_action mark_unread inner_link", :'data-url' => message_path(message) %></li>
-            <% else %>
-              <li><%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %></li>
+            <% if message.is_a? Message %>
+              <% if message_opened?(message) %>
+                <li><%= link_to "Mark as unread", "#", :class => "message_action mark_unread inner_link", :'data-url' => message_path(message) %></li>
+              <% else %>
+                <li><%= link_to "Mark as read", "#", :class => "message_action mark_read inner_link", :'data-url' => message_path(message) %></li>
+              <% end %>
             <% end %>
             <% if message.sender_id != @current_user.id %>
               <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(message) %></li>
