@@ -14,11 +14,6 @@
   right: 0
   z-index: 10000
   overflow: visible
-  // gradient is applied to it's own element because overflow visible is not honored by ie when filter is present
-  .fill
-    background: #222
-    +vertical-gradient(#333333, #222222)
-    $shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1)
   // Links get text shadow
   a
     color: $grayLight
