@@ -201,12 +201,17 @@
       e.stopPropagation();
       e.preventDefault();
     });
-
-    $(".edit_button").click(function(e){
+  
+    var toggleEditMode = function(e) {
       hidePopovers();
       $(".editable").toggleClass("edit");
-      e.preventDefault();
+      if(e)
+        e.preventDefault();
       $('.action_bar .edit_button').removeClass('active');
+    }
+
+    $(".edit_button").click(function(e){
+      toggleEditMode();
     });
 
     $("a#delete_photo").live('click', function(e){
@@ -263,8 +268,8 @@
       });
     <% end %>
 
-    <% if params[:mode] == 'edit' %>
-      $(".buttons.left .edit_button").trigger('click');
+    <% if params[:mode] == 'edit' && current_user == @user %>
+      toggleEditMode();
     <% end %>
 
     <% if params[:tour] == 'true' && current_user == @user %>

@@ -16,3 +16,9 @@ $ ->
     $(".alert").css "display", "none"
     
   $('#home_tabs').tabs()
+  $('#home_tabs').bind(
+    'change',
+     (e)->
+      $($(e.target).attr('href')).jScrollPane({hideFocus: true})
+  )
+  
