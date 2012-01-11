@@ -1,5 +1,5 @@
-<%= form_for @message, :as => 'message', :url => find_new_message_path(@receiver), :remote => true, :html => {:class => "form-stacked", :multipart => true} do |f| %>
-  <% if @message.errors.any? %>
+<%= form_for @message, :as => 'message', :url => find_new_message_path(@receiver), :remote => true, :html => {:class => "form-stacked new_reply", :multipart => true} do |f| %>
+  <!-- <%# if @message.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@message.errors.count, "error") %> prohibited this contact from being saved:</h2>
 
@@ -9,14 +9,14 @@
       <% end %>
       </ul>
     </div>
-  <% else %>
+  <%# else %>
     <div id="error_explanation" class="hidden alert-message block-message error">
       <h2></h2>
       <ul>
         <li></li>
       </ul>
     </div>
-  <% end %>
+  <%# end %> -->
   <% if @receiver.nil? %>
     <div class="clearfix">
       <label>To</label>
