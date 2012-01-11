@@ -164,7 +164,7 @@ class UsersController < ApplicationController
     if request.referrer.include?('tour')
       @tour = true
       @rel_form = params[:rel_form]
-      forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form']
+      forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form', 'invitations_form']
       index = forms.index(@rel_form)
       @next_form = forms[index + 1]
     end

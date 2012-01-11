@@ -254,12 +254,17 @@
       //console.log($(this).data("id"));
       $("#"+$(this).data("id")).modal("hide");
     });
+
+    $(".invite_buddies_save_button").live("click", function(){
+      $(".activate_invitation").popover('hide');
+    });
     
     <% if @user == current_user%>
       $(".activate_invitation").click(function(){
         var invitation = $(this);
         var invitations_form = $("#invitations_form").clone();
         invitations_form.find('#gmail_invite_modal').remove();
+        invitations_form.find('#facebook_connect_modal').remove();
         invitation.popover({
           trigger: 'manual',
           placement: 'below-right',
