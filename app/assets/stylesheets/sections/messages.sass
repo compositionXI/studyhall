@@ -5,7 +5,7 @@
   width: 660px
 
 .reply_fields
-  margin-left: 70px
+  margin-left: 74px
   #message_new
     margin-top: 15px
   form
@@ -39,7 +39,7 @@
   textarea
     &.reply_body
       width: 540px
-      height: 50px
+      height: 100px
   #error_explanation
     margin-right: 13px
     &.hidden
@@ -115,30 +115,36 @@
     .collapsed_message
       padding: 19px 19px 14px 19px
       &.unread
-        background-color: #E1E1E1
+        background-color: #F1F7FB
       &:hover
         cursor: pointer
       &.highlighted
+        background-color: #FAFAFA
     .message_utilities
       float: right
       li
         display: inline
     .collapsed_message, .reply_header
       .message_content
-        margin-left: 55px
+        margin-left: 65px
         min-height: 55px
         .subject
           strong
             margin-right: 5px
+            
     .expanded_message
+      +box-shadow(inset 0 13px 16px -20px black)
       background-color: #efefef 
-      margin: 10px 0 0 0
+      border-top: 1px solid #aaa
       .avatar, .avatar img
         height: 35px
         width: 35px  
       li
         border-bottom: 1px solid #D4D4D4 
-        padding: 14px 14px 14px 64px
+      .reply_header
+        padding: 14px 14px 14px 74px
+        .message_content
+          margin-left: 50px
       .message_utilities 
         li
           border: none
