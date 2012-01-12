@@ -94,6 +94,7 @@ GEM
     bootstrap-sass (1.4.3)
       sass-rails (~> 3.1)
     builder (3.0.0)
+    cap-recipes (0.3.38)
     capistrano (2.9.0)
       highline
       net-scp (>= 1.0.0)
@@ -342,6 +343,7 @@ DEPENDENCIES
   authlogic
   aws-s3
   bcrypt-ruby (= 3.0.0)
+  cap-recipes
   capistrano
   capistrano-ext
   capybara
