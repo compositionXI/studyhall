@@ -31,15 +31,27 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     if @user.save_without_session_maintenance
-      @user.deliver_activation_instructions!
-      flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email."  
+      if @user.school.active
+        @user.deliver_activation_instructions!
+        flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email." 
+      elsif not @user.school.active
+        flash[:notice] = "Access to your school has not been granted yet. Stay Tuned for when we launch at your school." 
+      else
+        flash[:error] = "You must sign up for Studyhall using your school email address (ie. harvard.edu)." 
+      end 
     else
       @user_with_same_email = User.find_by_email(@user.email) if @user.errors[:email].include?('has already been taken')
       if @user_with_same_email
         if @user_with_same_email.active
           flash[:error] = "There is already an account with that email address. You can <a href='/password_resets/new'>reset your password</a> if you forget it.".html_safe
         else
-          flash[:error] = "There is already an account with that email address. If you did not receive the activation message, we can <a href='/activations/new?email=#{@user_with_same_email.email}'>send it to you again.</a>".html_safe
+          if @user_with_same_email.school.active
+            flash[:error] = "There is already an account with that email address. If you did not receive the activation message, we can <a href='/activations/new?email=#{@user_with_same_email.email}'>send it to you again.</a>".html_safe
+          elsif not @user_with_same_email.school.active
+            flash[:error] = "There is already an account with that email address. But access to this school has not been granted yet. Stay Tuned for when we launch at this school." 
+          else
+            flash[:error] = "You must sign up for Studyhall using your school email address (ie. harvard.edu)." 
+          end
         end
       end
     end
