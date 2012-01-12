@@ -7,7 +7,7 @@
   </section>
   <section>
     <header>
-      <h1 class="left">Professor: <small><%= @class.instructor ? "#{@class.instructor.first_name} #{@class.instructor.last_name}" : "Unknown" %></small></h1>
+      <h1 class="professor left">Professor: <small><%= @class.instructor ? "#{@class.instructor.first_name} #{@class.instructor.last_name}" : "Unknown" %></small></h1>
     </header>
   </section>
   <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class, empty_list_text: "Doesn't look like anyone's added this class"} %>
