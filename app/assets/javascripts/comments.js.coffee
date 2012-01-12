@@ -12,6 +12,7 @@ $ ->
       $(".course_activity .jspContainer").height(600)
     pane_api = $('.course_activity_list').data('jsp')
     pane_api.reinitialise()
+    pane_api.scrollToElement($(this).closest('.post_item').find('.comment_form'), true, false)
     
   $("body").delegate ".comment_form .cancel", "click", ->
     $(this).closest(".comment_form").css "display", "none"
