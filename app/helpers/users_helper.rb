@@ -40,6 +40,7 @@ module UsersHelper
   end
   
   def html_school_name_for(user)
+    debugger
     "attends #{content_tag(:span, user.school.try(:name), :class => 'highlight_text')}"
   end
   

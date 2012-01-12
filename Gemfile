@@ -60,6 +60,7 @@ group :test, :development do
     gem 'rspec-rails'
     gem 'factory_girl_rails'
     gem 'faker'
+    gem 'ruby-debug19'
 end
 
 group :development do

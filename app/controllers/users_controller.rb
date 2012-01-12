@@ -74,7 +74,7 @@ class UsersController < ApplicationController
             redirect_to @user 
           end
         }
-        format.js
+        format.js {@user.reload}
       end
     else
       if params[:redirect_back] == "profile_wizard"
