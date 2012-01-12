@@ -15,11 +15,11 @@ class MessageCopy < ActiveRecord::Base
   end
   
   def from
-    User.find(self.sent_messageable_id)
+    User.find_by_id(self.sent_messageable_id)
   end
   
   def to
-    User.find(self.recipient_id)
+    User.find_by_id(self.recipient_id)
   end
   
   def update_replies

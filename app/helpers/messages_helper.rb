@@ -13,14 +13,22 @@ module MessagesHelper
   
   def user_photo_for(message)
     user = to_from_user(message)
-    link_to(image_tag(user.photo_url(:medium)), user, :title => user.name, :class => 'avatar')
+    if user
+      link_to(image_tag(user.photo_url(:medium)), user, :title => user.name, :class => 'avatar')
+    else
+      link_to(image_tag('generic_avatar_medium.png'), '#', :title => "No Longer A User", :class => 'avatar')
+    end
   end
   
   def user_name_for(message)
     user = to_from_user(message)
-    name = sanitize(user.name, tags: [])
-    truncated_name = name.length > 10 ? name.slice(0, 7).strip << "..." : name
-    link_to truncated_name, user, :class => "inner_link", :title => name
+    unless user
+      return "No Longer A User"
+    else
+      name = sanitize(user.name, tags: [])
+      truncated_name = name.length > 10 ? name.slice(0, 7).strip << "..." : name
+      link_to truncated_name, user, :class => "inner_link", :title => name
+    end
   end
   
   def message_subject(message)
