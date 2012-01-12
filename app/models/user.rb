@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   validate :school_should_be_present
   
   before_validation do
-    self.school = School.from_email self.email if self.email
+    self.school = School.from_email self.email if self.email and self.school_id.nil?
     self.roles << Role.find_by_name("Student") if self.role_ids.nil?
   end
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
     integer :school_id
     integer :plusminus
     boolean :shares_with_everyone
+    boolean :active
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)

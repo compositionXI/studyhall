@@ -42,6 +42,7 @@ class Search < ActiveRecord::Base
   def find_users(query='', page)
     User.search do
       keywords query
+      with: :active, true
       order_by :name, :asc
       paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end
