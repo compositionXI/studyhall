@@ -13,10 +13,12 @@
 
   <div class="clearfix">
     <%= f.label :Choose_course %>
-    <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
+    <% cache("school-#{@user.school.id}-offering-course-list") do -%>
+      <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
+    <% end -%>
   </div></div>
   <div class="popover-footer">
     <%= f.submit "Submit", :class => "btn primary" %>
-    <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel_course_popover" %>
   </div>
 <% end %>

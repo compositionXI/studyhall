@@ -14,12 +14,14 @@ class Offering < ActiveRecord::Base
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
   
   def course_listing
-    items = []
-    items << self.course.department
-    items << self.course.number
-    items << self.course.title
-    items << self.instructor.try(:full_name)
-    items.compact.join(" - ")
+    Rails.cache.fetch("course-listing-#{course.updated_at.to_i}-#{instructor.try(:updated_at).to_i}") do
+      items = []
+      items << self.course.department
+      items << self.course.number
+      items << self.course.title
+      items << self.instructor.try(:full_name)
+      items.compact.join(" - ")
+    end
   end
   
   def classmates(current_user, count = nil)
