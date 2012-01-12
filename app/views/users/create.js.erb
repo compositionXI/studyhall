@@ -8,6 +8,7 @@
       .twipsy("show");      
   <% end %>
 <% else %> 
-  $("#user_email, #user_passsword, #user_custom_url").twipsy("hide");
+  $('.twipsy').hide();
+  $("#new_user").remove();
   $("#success_message").addClass('in')
 <% end %>

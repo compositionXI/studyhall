@@ -140,7 +140,8 @@ $(document).ready(function(){
     }
     if (message_list_item.find(".expanded_message").hasClass("hide")){
       var replyUrl = $(this).attr("data-message-reply-url");
-      ajaxGetReplyForm(replyUrl, message_list_item_id, false);
+      if(replyUrl != '')
+        ajaxGetReplyForm(replyUrl, message_list_item_id, false);
     }
     else {
       message_list_item.find(".cancel_reply").trigger("click");
