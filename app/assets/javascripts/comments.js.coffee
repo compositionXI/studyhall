@@ -6,6 +6,10 @@ $ ->
   $("body").delegate ".comment_form_button", "click", ->
     comment_id = $(this).attr("name")
     $("#"+comment_id).css "display", "block"
+    post_item = $(this).closest('.post_item')
+    post_item.find('.collapse_button').addClass('opened').removeClass('closed')
+    post_item.find('.comment_list').show()
+    post_item.find('.comment_form').show()
     if $('.course_activity_list ul').height() < 600
       $(".course_activity .jspContainer").height($('.course_activity_list ul').height())
     else

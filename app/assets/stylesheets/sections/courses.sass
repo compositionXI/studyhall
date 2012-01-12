@@ -35,6 +35,18 @@ section.course_activity
     margin-right: 12px
   .post_details
     width: 550px
+    a.collapse_button
+      width: 16px
+      height: 16px
+      background-image: url(asset-path('collapse_arrows.png', 'image'))
+      &.opened
+        background-position: 0 0
+        &:hover
+          background-position: 16px 0
+      &.closed
+        background-position: 0 -20px
+        &:hover
+          background-position: 16px -20px
   .comment_details
     width: 490px
   
