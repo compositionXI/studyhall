@@ -12,16 +12,20 @@ section.course_activity
   max-height: 600px
   overflow-y: scroll
   margin-bottom: 12px
+  width: 640px
   .post_item
     margin-bottom: 12px
+    // border-bottom: 1px solid #E6E6E6
   .class_post, .class_comment
     padding-bottom: 10px
-    border-bottom: 1px solid #E6E6E6
     display: table
+    width: 100% 
+  
   .class_post
-    width: 625px
+    border-bottom: 1px solid #E6E6E6
   .class_comment
-    width: 565px
+  
+
   .user_photo
     +columns(2)
     width: 50px
@@ -31,21 +35,28 @@ section.course_activity
     font-size: 12px
     margin-right: 12px
   .post_details
-    width: 490px
+    // width: 490px
   .comment_details
-    width: 430px
+    // width: 430px
   
   .post_comment
     margin-top: 5px
   
   .comment_list
-    margin-left: 60px
+    padding-left: 60px
+    border-bottom: 1px solid #E6E6E6
+    &:last-child
+      border-bottom: none
     .comment_item
+      border-bottom: 1px solid #E6E6E6
       margin-top: 12px
+      &:last-child
+        border-bottom: none
     .post_details
       +columns(8)
   .comment_form
     display: none
+    margin: 10px 0 0 40px
     
     textarea
       width: 500px

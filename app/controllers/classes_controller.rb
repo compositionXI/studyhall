@@ -18,7 +18,8 @@ class ClassesController < ApplicationController
   
   def new
     @enrollment = Enrollment.new
-    @offerings = Offering.where(school_id: current_user.school.id).includes(:course, :school, :instructor)
+    #@offerings = Offering.where(school_id: current_user.school.id).includes(:course, :school, :instructor)
+    @offerings = current_user.school.offerings.includes(:course, :instructor)
     @user = @current_user
     respond_to do |format|
       if request.xhr?

@@ -24,9 +24,6 @@
             </div>
             <div class="post_comment">
               <%= link_to "Comment", "#", :class => "comment_form_button", :name => "comment_for_#{post.id}" %>
-              <div class="comment_form", id="comment_for_<%= post.id %>">
-                <%= render "comments/form.html.erb", :comment => post.comments.new, :class_id => post.offering_id %>
-              </div>
             </div>
           </div>
           <%= render partial: "posts/utilities", locals: {post: post} %>
@@ -38,6 +35,9 @@
             </ul>
           </div>
         <% end %>
+        <div class="comment_form", id="comment_for_<%= post.id %>">
+          <%= render "comments/form.html.erb", :comment => post.comments.new, :class_id => post.offering_id %>
+        </div>
       </li>
     <% end %>
   <% end %>
