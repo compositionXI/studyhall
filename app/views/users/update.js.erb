@@ -6,10 +6,17 @@
   <% end %>
   <% if @tour %>
     <% unless @next_form.nil? %>
-      $("div.editable.edit").removeClass('active');
-      $("div[data-form='<%= @rel_form %>']").removeClass('edit');
-      $("div[data-form='<%= @next_form %>']").addClass('edit');
-      $("div[data-form='<%= @next_form %>']").trigger('click');
+      <% if @next_form == 'invitations_form' %>
+        $(".activate_invitation").trigger("click");
+        $("input.invite_buddies_save_button").live('click', function(){
+          window.location.href = '<%= root_url(tour: true)%>';
+        });
+      <% else %>
+        $("div.editable.edit").removeClass('active');
+        $("div[data-form='<%= @rel_form %>']").removeClass('edit');
+        $("div[data-form='<%= @next_form %>']").addClass('edit');
+        $("div[data-form='<%= @next_form %>']").trigger('click');
+      <% end %>
     <% else %>
       window.location.href = '<%= root_url(tour: true)%>';
     <% end %>

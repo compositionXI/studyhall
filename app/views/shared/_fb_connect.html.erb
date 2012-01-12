@@ -21,8 +21,7 @@
   }
 
   $(document).ready(function(){
-    $("#facebook_invite").click(function(e){
-      console.log("invite!");
+    $("#facebook_invite").live('click', function(e){
       sendRequestToManyRecipients();
       e.preventDefault();
     });

@@ -7,9 +7,6 @@
       <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'invitation_tour' %>
     </div>
   </div>
-  <div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not to spam</small>">
-    <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user } %>
-  </div>
   <div class="tour_popover " id="activity_tour" data-title="Your Activity<small>Where your ish happens</small>" data-h-offset="65" data-offset='10'>
     <div class="popover-body">
       <p>Coolest place ever. This is where you can see you and your buddy's activity, who they studied with, courses they've added, stuf like that.</p>
@@ -44,6 +41,7 @@
   var showTourPopover = function(tourable) {
     var tour_popover = $("#" + tourable.data('popover-id')).clone();
     tour_popover.find("#gmail_invite_modal").remove()
+    tour_popover.find("#facebook_connect_modal").remove()
     var h_offset = tour_popover.data('h-offset') || 110;
     var offset = tour_popover.data('offset') || 5;
     tourable.popover({trigger: "manual",
@@ -56,7 +54,7 @@
     tourable.popover("show");
   };
   var initTourMode = function() {
-    $("#invitation_tour").find("div.input input.btn").removeClass('save').addClass('primary').val("Next").addClass('tour_button').attr('next_tour_id', 'activity_tour');
+    $("#invitation_tour").find(".popover-footer div.input input.btn").removeClass('save').addClass('primary').val("Next").addClass('tour_button').attr('next_tour_id', 'activity_tour');
     $("#invitation_tour").find("div.input").removeClass('input');
     showTourPopover($("div.standard_actions"));
     $(".tour_button").live('click', function(){

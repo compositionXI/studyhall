@@ -27,6 +27,7 @@ class StudySessionsController < ApplicationController
     @study_session = StudySession.new
     @study_session.buddy_ids = [params[:id]]
     @study_session.session_files.build
+    @faqs_page = StaticPage.find_by_slug(:faqs)
   end
   
   def create

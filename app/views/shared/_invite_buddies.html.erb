@@ -1,4 +1,6 @@
-<%= render :partial => 'shared/fb_connect' %>
+<div id="facebook_connect_modal">
+  <%= render :partial => 'shared/fb_connect' %>
+</div>
 
 <div class="popover-body">
   <% if user == current_user %>
@@ -15,6 +17,6 @@
 
 <div class="popover-footer">
   <div class="input clearfix">
-    <%= submit_tag "Save", :class => "btn save" %>
+    <%= submit_tag "Save", :class => "btn save invite_buddies_save_button" %>
   </div>
 </div>

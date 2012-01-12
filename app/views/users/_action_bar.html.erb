@@ -15,7 +15,7 @@
         </div>
       <% end %>
       <h3>
-        <%= flash[:action_bar_message] %>
+        <%= truncate flash[:action_bar_message], :length => 60 %>
       </h3>
       <div class="buttons right">
         <% if current_user %>

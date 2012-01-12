@@ -10,9 +10,15 @@ $ ->
   $("body").delegate "#add_course_form", "ajax:success", (evt, data, status, xhr) ->
     $(".popover").remove()
     $('.course_list').html xhr.responseText
-    $('.course_list').append("<li class='add'><a id='add_course_button' data-remote='true' href='/classes/new?link_id=add_course_button' data-original-title=''><span>Add a course</span></a></li>")
+    $('.course_list').append("<li class='add'><a id='add_course_button' href='#' data-original-title=''><span>Add a course</span></a></li>")
   
   $(".alert .close").click ->
     $(".alert").css "display", "none"
     
   $('#home_tabs').tabs()
+  $('#home_tabs').bind(
+    'change',
+     (e)->
+      $($(e.target).attr('href')).jScrollPane({hideFocus: true})
+  )
+  

@@ -60,7 +60,7 @@
     <ol class="course_list">
       <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
       <li class="add">
-        <%= link_to new_class_path(:link_id => "add_course_button"), :id => "add_course_button", :remote => true do %>
+        <%= link_to "#", :id => "add_course_button" do %>
           <span>Add a course</span>
         <% end %>
       </li>
@@ -68,3 +68,67 @@
   </section>
 </div>
 <%= render :partial => 'tour' if @tour %>
+
+<div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not to spam</small>" style="display: none;">
+  <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user } %>
+</div>
+<% unless @tour %>
+  <script type="text/javascript">
+    $(function(){
+      $(".activate_invitation").click(function(){
+        var invitation_tour = $("#invitation_tour").clone();
+        invitation_tour.find("#gmail_invite_modal").remove()
+        invitation_tour.find("#facebook_connect_modal").remove()
+        invitation_tour.find(".popover-footer div.input").removeClass("input");
+        invitation_tour.find("input.save").live('click', function(){
+          $(".activate_invitation").popover('hide');
+        });
+        $(this).popover({trigger: "manual",
+                          placement: 'below-right',
+                          html: true,
+                          offset: 5,
+                          horizontalOffset: 60,
+                          title: function(){return invitation_tour.data('title');},
+                          content: function(){ return invitation_tour.html(); }});
+        $(this).popover("show");
+      });
+    });
+  </script>
+<% end %>
+
+<%= javascript_tag do %>
+  $(document).ready(function(){
+    var popover_attr = {
+      trigger: "manual",
+      placement: placement,
+      offset: 10,
+      horizontalOffset: 25,
+      html: true,
+      title: function(){return "Add A New Course";},
+      content: function(){return "<%=j render :partial => 'classes/form' %>";}
+    };
+
+    var placement = "below";
+    var length = $('.course_list').children().length;
+    if(1 == length % 4) {
+      placement = "below-left";
+    } else if(0 == length % 4) {
+      placement = "below-right";
+    }
+    
+    $("#add_course_button").live('click', function(){
+      $("#add_course_button").popover(popover_attr);
+      $("#add_course_button").popover("show");
+      $("select.chzn-select").chosen();
+      styleFileInputs();
+      $("#new_class_post .fake-file").css({position: "relative", top: "-34px"});
+      initWindowResize();
+      return false;
+    });
+    
+    $('a.cancel_course_popover').live('click', function(){
+      $("#add_course_button").popover("hide");
+      return false;
+    });
+  });
+<% end -%>

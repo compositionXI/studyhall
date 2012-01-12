@@ -65,7 +65,7 @@ class StudySession < ActiveRecord::Base
   def associate_users
     @buddy_ids ||= []
     @buddy_ids << user.id unless user.nil?
-    @buddy_ids.uniq.each do |buddy_id|
+    @buddy_ids.uniq.reject(&:blank?).each do |buddy_id|
       invitee = User.find(buddy_id)
       self.users << invitee
       send_invite(invitee) unless invitee == user

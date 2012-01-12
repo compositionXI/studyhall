@@ -7,7 +7,6 @@
  *= require mediaelement_rails
  *= require mediaelement_rails/mejs-skins
  *= require app
- *= require messages
  *= require search
  *= require_self
 */

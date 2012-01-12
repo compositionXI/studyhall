@@ -5,14 +5,14 @@
   width: 660px
 
 .reply_fields
-  margin-left: 70px
+  margin-left: 74px
   #message_new
     margin-top: 15px
   form
     padding-left: 0px
   .form_actions
     .form_buttons
-      width: 550px
+      width: 540px
       float: left
       input[type=file]
         filter: alpha(opacity = 0)
@@ -35,11 +35,11 @@
       overflow: hidden
       float: left
 
-#message_new
+.new_reply
   textarea
     &.reply_body
       width: 540px
-      height: 50px
+      height: 100px
   #error_explanation
     margin-right: 13px
     &.hidden
@@ -63,10 +63,13 @@
       margin: 0 5px
   .message_content
     position: relative
-  .message_utilities
+  .open_message
+    display: none
+  .open_message, .message_utilities
     position: absolute
     top: 0
     right: 0
+  .message_utilities
     li
       float: left  
       margin: 0 0 7px
@@ -76,17 +79,11 @@
       &:before
         content: " - "
         margin: 0 5px
-    .time         
-      clear: left
-      float: right 
-      &:before
-        content: none
-        margin: 0
   li.message_list_item
     position: relative
     border-bottom: 1px solid #D4D4D4
     &.unread
-      background-color: #E1E1E1
+      background-color: #F1F7FB
       .meta
         font-size: 13px
       .subject
@@ -95,7 +92,13 @@
       .body
         font-size: 13px
       .message_utilities
-        font-size: 13px
+        display: none
+      .open_message
+        display: block
+    .time
+      position: absolute
+      right: 0
+      top: 30px
     img
       float: left
     .checkbox
@@ -112,30 +115,36 @@
     .collapsed_message
       padding: 19px 19px 14px 19px
       &.unread
-        background-color: #E1E1E1
+        background-color: #F1F7FB
       &:hover
         cursor: pointer
       &.highlighted
+        background-color: #FAFAFA
     .message_utilities
       float: right
       li
         display: inline
     .collapsed_message, .reply_header
       .message_content
-        margin-left: 55px
+        margin-left: 65px
         min-height: 55px
         .subject
           strong
             margin-right: 5px
+            
     .expanded_message
+      +box-shadow(inset 0 13px 16px -20px black)
       background-color: #efefef 
-      margin: 10px 0 0 0
+      border-top: 1px solid #aaa
       .avatar, .avatar img
         height: 35px
         width: 35px  
       li
         border-bottom: 1px solid #D4D4D4 
-        padding: 14px 14px 14px 64px
+      .reply_header
+        padding: 14px 14px 14px 74px
+        .message_content
+          margin-left: 50px
       .message_utilities 
         li
           border: none
@@ -149,7 +158,7 @@
       padding-top: 10px
       padding-bottom: 10px
     .full_reply
-      width: 540px
+      width: 490px
       ul
         li
           border-bottom: none

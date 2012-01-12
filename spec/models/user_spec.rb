@@ -24,6 +24,28 @@ describe User do
     end
   end
   
+  context "gpa validation" do
+    it "should be valid if gpa is nil" do
+      user.gpa = nil
+      user.should be_valid
+    end
+
+    [-1.0, 4.1, 4.01].each do |gpa_value|
+      it "should not be valid if gpa is not between 0.0 and 4.0 ex: #{gpa_value}" do
+        user.gpa = gpa_value 
+        user.should_not be_valid
+        user.should have(1).error_on(:gpa)
+      end
+    end
+
+    [0.1, 2.3, 4.000].each do |gpa_value|
+      it "should be valid if gpa is between 0.0 and 4.0 ex: #{gpa_value}" do
+        user.gpa = gpa_value 
+        user.should be_valid
+      end
+    end
+  end
+
   context "#voted_for?" do
     before(:all) do
       @user1 = test_user

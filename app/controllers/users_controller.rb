@@ -16,7 +16,11 @@ class UsersController < ApplicationController
     if params[:tour]
       flash[:action_bar_message] = 'Welcome to StudyHall!'
     else
-      flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+      if @user.majors.blank?
+        flash[:action_bar_message] = "#{@user.name}"
+      else
+        flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+      end
     end
   end
   
@@ -160,7 +164,7 @@ class UsersController < ApplicationController
     if request.referrer.include?('tour')
       @tour = true
       @rel_form = params[:rel_form]
-      forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form']
+      forms = ['name_form', 'affiliations_form', 'bio_form', 'photo_form', 'gpa_form', 'invitations_form']
       index = forms.index(@rel_form)
       @next_form = forms[index + 1]
     end

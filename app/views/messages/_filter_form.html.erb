@@ -1,5 +1,7 @@
 <%= form_tag messages_path(:mailbox => "inbox"), :remote => true, :class => "form-stacked filter_form", :id => "filter_messages_form", :'data-type' => 'html', :method => :get do -%>
-  <div class="clearfix">
+  
+  <div class="popover-body">
+    <div class="clearfix">
     <div class="input">
       <ul class="inputs-list">
         <div class="filter_form_button_group">
@@ -33,7 +35,7 @@
         </div>
       </ul>
     </div>
-  </div>
+    </div>
   <div class="clearfix">
     <%= label_tag "Buddies" %>
     <div class="input">
@@ -45,7 +47,8 @@
       </div>
     </div>
   </div>
-  <div class="clearfix">
+  </div>
+  <div class="popover-footer clearfix">
     <%= submit_tag "Filter", :class => "btn primary" %>
     <%= link_to 'Cancel', messages_path, :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
   </div>
