@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update, :show]
   
   def index
-    @users = User.all
+    @users = User.active_users.all
   end
   
   def show

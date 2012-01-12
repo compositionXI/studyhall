@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   has_many :activity_messages
   
   has_many :searches
+  
+  scope :active_users, where(:active => true)
 
   scope :other_than, lambda {|users| where(User.arel_table[:id].not_in(users.any? ? users.map(&:id) : [0])) }
   scope :with_attribute, lambda {|member| all.collect{|u| u unless u.send(member).nil? || u.send(member).blank? }.compact}
