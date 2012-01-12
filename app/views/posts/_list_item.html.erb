@@ -13,6 +13,7 @@
           <div class="post_details left">
             <%= post.user ? link_to(post.user.title_name, post.user) : user_missing %>
             <span class="right"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
+            <a href="#" class="right collapse_button opened"></a>
             <%= post.text %>
             <div>
               <% if post.notebook_id %>
