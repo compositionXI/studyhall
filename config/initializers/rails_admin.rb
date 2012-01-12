@@ -709,28 +709,37 @@ else
 #  - has_many/has_one associations in list section (hidden by default for performance reasons)
 # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model School do
-  #   # Found associations:
-  #   field :courses, :has_many_association
-  #   field :offerings, :has_many_association
-  #   field :course_offering_imports, :has_many_association
-  #   field :users, :has_many_association
-  #   # Found columns:
-  #   field :id, :integer
-  #   field :name, :string
-  #   field :created_at, :datetime
-  #   field :updated_at, :datetime
-  #   field :rss_link, :string
-  #   field :domain_name, :string
-  #   field :active, :boolean
-  #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  #  end
+  config.model School do
+    # Found associations:
+    # field :courses, :has_many_association
+    # field :offerings, :has_many_association
+    # field :course_offering_imports, :has_many_association
+    # field :users, :has_many_association
+    # Found columns:
+    # field :id, :integer
+    # field :name, :string
+    # field :created_at, :datetime
+    # field :updated_at, :datetime
+    # field :rss_link, :string
+    # field :domain_name, :string
+    # field :active, :boolean
+    # Sections:
+    list do; end
+    export do; end
+    show do; end
+    edit do
+      field :id, :integer
+      field :name, :string
+      field :created_at, :datetime
+      field :updated_at, :datetime
+      field :rss_link, :string
+      field :domain_name, :string
+      field :active, :boolean
+      field :users, :has_many_association
+    end
+    create do; end
+    update do; end
+   end
 
 # All fields marked as 'hidden' won't be shown anywhere in the rails_admin unless you mark them as visible.
 # There can be different reasons for that:
