@@ -155,10 +155,10 @@ $(document).ready ->
       modal_id = "#" + $(this).data("class") + "_" + $(this).data("id") + "_modal"
       $(modal_id).modal
         keyboard: true
-        show: true
+        show: false
         backdrop: true
-      alert modal_id
       $(modal_id + " select").addClass("chzn-select").chosen()
+      $(modal_id).modal('show')
 
     $("body").delegate ".modal .cancel_popover","click", (e) ->
       $(this).closest(".modal").modal('hide')
@@ -183,11 +183,12 @@ $(document).ready ->
       $(".note_item").removeClass("edit").removeClass("selected").addClass("show")
       $(".show_button").removeClass("hide")
       $(".edit_button").addClass("hide")
+      notebook_id = $("#show_notes").data("notebook-id")
+      $(".note:not([data-notebook-id='" + notebook_id + "'])").hide()
       $(".select").addClass("hide")
       $(".action_bar .edit").hide()
       $(".action_bar .edit").hide()
       $(".action_bar .show").show()
-      $(".note.notebook_changed").remove()
       tearDownDragAndDrop()
       e.preventDefault()
 

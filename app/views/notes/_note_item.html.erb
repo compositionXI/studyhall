@@ -1,4 +1,4 @@
-<li class="<%= note_item.html_class %> show grid" id="<%= note_item.html_id %>" data-class="<%= note_item.class_name %>" data-id="<%= note_item.id %>" data-href="<%= url_for note_item.url_params %>">
+<li class="<%= note_item.html_class %> show grid" id="<%= note_item.html_id %>" data-class="<%= note_item.class_name %>" data-id="<%= note_item.id %>" data-notebook-id="<%= note_item.content.notebook.try(:id) if note_item.note? %>" data-href="<%= url_for note_item.url_params %>">
   <div class="background_container"></div>
   <span class="name">
     <div class="name_wrapper"><%= truncate note_item.name, :length => 90 %></div>
