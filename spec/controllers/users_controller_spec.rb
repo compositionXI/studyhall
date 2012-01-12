@@ -39,12 +39,12 @@ describe UsersController do
         @user.stub!(:deliver_activation_instructions!)
       end
       it "should send the activation email" do
-        @user.should_receive(:deliver_activation_instructions!)
+        @user.should_not_receive(:deliver_activation_instructions!)
         post_user @user_attributes
       end
       it "should set the notice message" do
         post_user @user_attributes
-        flash[:notice].should == "Instructions to activate your account have been emailed to you. \nPlease check your email."
+        flash[:notice].should == "Access to your school has not been granted yet. Stay Tuned for when we launch at your school."
       end
       it "should redirect to login url" do
         post_user @user_attributes

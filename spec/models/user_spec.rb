@@ -18,9 +18,9 @@ describe User do
       school2 = FactoryGirl.create(:school)
       user = FactoryGirl.create(:user, school: school1)
       orig_school = user.school
-      user.update_attributes school: school2
+      user.school = school2
       user.save
-      user.school.should == orig_school
+      user.reload.school.should == orig_school
     end
   end
   
