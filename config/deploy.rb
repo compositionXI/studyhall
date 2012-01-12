@@ -8,7 +8,7 @@ set :whenever_environment, defer { stage }
 require "whenever/capistrano"
 
 # this is for memcached server
-require 'cap_recipes/tasks/memcache/manage'
+require 'cap_recipes/tasks/memcache'
 
 set :application, "StudyHall"
 set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
