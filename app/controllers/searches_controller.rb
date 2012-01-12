@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
   
+  before_filter :set_action_bar, :only => [:show]
+
   def create
     if params[:search][:keywords].present?
       @search = current_user.searches.create!(params[:search])
@@ -11,6 +13,11 @@ class SearchesController < ApplicationController
   
   def show
     @search = Search.find_by_id(params[:id])
+    if @search.any?
+      flash[:action_bar_message] = "Search Results for '#{@search.keywords}'"
+    else
+      flash[:action_bar_message] = "No Results for '#{@search.keywords}'"
+    end
   end
   
   include ActionView::Helpers::TextHelper
