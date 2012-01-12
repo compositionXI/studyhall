@@ -115,6 +115,7 @@ describe UsersController do
         response.should render_template :show
       end
       it "should set the action_bar_message flash" do
+        @user.majors << Major.create(:name => 'Accounting')
         get :show, :id => @user.custom_url
         flash[:action_bar_message].should == "#{@user.name} - #{@user.majors.map(&:name).join(',')}"
       end
