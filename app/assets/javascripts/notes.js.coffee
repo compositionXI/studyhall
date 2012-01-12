@@ -149,15 +149,16 @@ $(document).ready ->
       e.preventDefault()
       e.stopPropagation()
 
-    $(".note_items").delegate ".note_item.edit","dblclick", (e) ->
+    $(".note_items").delegate ".note_item.edit", "dblclick", (e) ->
       e.preventDefault()
       e.stopPropagation()
-      modal_id = "#"+$(this).data("class")+"_" + $(this).data("id") + "_modal"
+      modal_id = "#" + $(this).data("class") + "_" + $(this).data("id") + "_modal"
       $(modal_id).modal
         keyboard: true
-        show: true
+        show: false
         backdrop: true
-      $(modal_id+" select").addClass("chzn-select").chosen()
+      $(modal_id + " select").addClass("chzn-select").chosen()
+      $(modal_id).modal('show')
 
     $("body").delegate ".modal .cancel_popover","click", (e) ->
       $(this).closest(".modal").modal('hide')
@@ -182,6 +183,8 @@ $(document).ready ->
       $(".note_item").removeClass("edit").removeClass("selected").addClass("show")
       $(".show_button").removeClass("hide")
       $(".edit_button").addClass("hide")
+      notebook_id = $("#show_notes").data("notebook-id")
+      $(".note:not([data-notebook-id='" + notebook_id + "'])").hide()
       $(".select").addClass("hide")
       $(".action_bar .edit").hide()
       $(".action_bar .edit").hide()
