@@ -36,7 +36,7 @@ module UsersHelper
   end
   
   def html_greek_string_for(user)
-    "a #{sybling_type} #{content_tag(:span, user.frat_sororities.map(&:name).join(","), :class => 'highlight_text')}"
+    "a #{sybling_type} #{content_tag(:span, user.frat_sororities.map(&:name).join(", "), :class => 'highlight_text')}"
   end
   
   def html_school_name_for(user)
@@ -44,11 +44,11 @@ module UsersHelper
   end
   
   def html_sports_for(user)
-    "sports in #{content_tag(:span, user.sports.map(&:name).join(","), :class => 'highlight_text')}"
+    "likes #{content_tag(:span, user.sports.map(&:name).join(", "), :class => 'highlight_text')}"
   end
   
   def html_major_string_for(user)
-    "majors in #{content_tag(:span, user.majors.map(&:name).join(","), :class => 'highlight_text')}"
+    "majors in #{content_tag(:span, user.majors.map(&:name).join(", "), :class => 'highlight_text')}"
   end
   
   def html_profile_detailed_info_for(user)

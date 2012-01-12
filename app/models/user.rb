@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   validates :custom_url, 
     :format => {:with => /^[a-z0-9]+[-a-z0-9]*[a-z0-9]+$/i, :message => "may only use letters and numbers."},
     :uniqueness => true  
+  validates_numericality_of :gpa, :greater_than_or_equal_to => 0.0, :less_than_or_equal_to => 4.0, :allow_nil => true
   validate :name_should_be_present
   validate :email_should_be_present
   validate :school_should_be_present
