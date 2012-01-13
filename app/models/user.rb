@@ -136,6 +136,10 @@ class User < ActiveRecord::Base
     ownable.owner == self
   end
 
+  def can_view?(note)
+    note.user_id == self.id || note.shareable
+  end
+
   #people the follow this user
   def followers
     User.where("users.id = followings.user_id AND followings.followed_user_id = ?",self.id).includes(:followings)
