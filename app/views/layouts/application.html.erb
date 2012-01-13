@@ -29,7 +29,6 @@
     <% if "#{controller_name + '_' + action_name}" == "study_sessions_show" -%>
       <%= yield :chat_widget %>
     <% else -%>
-      <span style="display:none"><%= @url = "#{APP_CONFIG["host"]}#{current_user.photo_url}" %></span>
       <%= 
         EnvolveChat::ChatRenderer.get_html(APP_CONFIG["envolve"]["api_key"], 
           :first_name => current_user.first_name,
