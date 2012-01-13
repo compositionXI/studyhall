@@ -60,7 +60,8 @@
     $(".tour_button").live('click', function(){
         hideTourPopovers();
         var next_tour_id = $(this).attr('next_tour_id'); 
-        if(next_tour_id == null) return false;
+        if(next_tour_id == null) 
+          window.location.href = "<%= home_url %>";
         var tourable = $("div[data-popover-id='"+ next_tour_id +"']");
         if(tourable.length == 0) {
           tourable = $("section[data-popover-id='"+ next_tour_id +"']");
