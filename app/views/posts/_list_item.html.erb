@@ -17,6 +17,8 @@
             <div>
               <% if post.notebook_id %>
                 Notebook: <%= link_to(post.notebook.try(:name), notebook_notes_path(post.notebook)) %>
+              <% elsif post.note_id %>
+                Note: <%= link_to(post.note.try(:name), note_path(post.note)) %>
               <% end %>
               <% if post.study_session_id && post.study_session %>
                 Studyhall: <%= link_to(post.study_session.presentation, study_session_path(post.study_session)) %>

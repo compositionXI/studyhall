@@ -30,6 +30,10 @@ class Note < ActiveRecord::Base
     boolean :shareable
   end
 
+  def course
+    notebook.course if notebook
+  end
+
   def course_name
     notebook.course.title if notebook && notebook.course
   end

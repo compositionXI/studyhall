@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :offering
   belongs_to :user
   belongs_to :notebook
+  belongs_to :note
   belongs_to :study_session
   belongs_to :parent, :class_name => "Post"
   has_many :comments, :foreign_key => :parent_id
