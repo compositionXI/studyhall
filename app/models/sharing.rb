@@ -16,6 +16,7 @@ class Sharing
 
   def users
     return [] if user_ids.blank?
+    user_ids.delete("")
     User.find(user_ids)
   end
 
