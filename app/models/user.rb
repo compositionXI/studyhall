@@ -204,6 +204,10 @@ class User < ActiveRecord::Base
     (self == user) || (user.roles.include?(Role.find_by_name "Admin"))
   end
 
+  def added_course?(course)
+    self.courses.where(id: course.id).any?
+  end
+
   def activate!
     update_attribute(:active, true)
   end
