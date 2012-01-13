@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def record_not_found
     flash[:action_bar_message] = "Page Not Found!"
     @action_bar = "/shared/error_action_bar"
-    render "public/404.html", :status => 404
+    render "public/404.html", :status => 404, :layout => false
   end
   
   def current_user_session

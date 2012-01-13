@@ -1,6 +1,6 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
 <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
-  <%= link_to(class_path(offering), :class => "name") do %>
+<%= link_to("/classes/#{offering.to_param}", :class => "name") do %>
     <span><%= offering.course.title %></span>
   <% end %>
 </li>

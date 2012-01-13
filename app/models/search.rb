@@ -58,7 +58,6 @@ class Search < ActiveRecord::Base
   def find_notes(query='', page)
     Note.search do
       fulltext query
-      with :shareable, 1
       paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end
   end
