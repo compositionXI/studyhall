@@ -18,7 +18,11 @@
 </div>
 
 <div class="popover-footer">
-  <div class="input clearfix">
-    <%= submit_tag "Save", :class => "btn save invite_buddies_save_button" %>
-  </div>
+  <% if @tour %>
+    <%= submit_tag "Next", :class => "btn primary tour_button save invite_buddies_save_button" %>
+  <% else %>
+    <div class="input clearfix">
+      <%= submit_tag "Save", :class => "btn invite_buddies_save_button" %>
+    </div>
+  <% end %> 
 </div>
