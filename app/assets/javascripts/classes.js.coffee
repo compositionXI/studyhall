@@ -17,6 +17,10 @@ $ ->
       e.preventDefault()
   
   $(".post_item a.collapse_button").live('click', (e) ->
-    $(this).siblings('.post_options').toggle()
+    $(this)
+      .toggleClass('active')
+      .siblings('.post_options').toggle()
+      
+    
     return false
   )
