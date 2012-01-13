@@ -22,7 +22,9 @@ class NotesController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        redirect_to notes_path, alert: "The Note you try to visit is not allowed to view or not exist!"  and return if @note.new_record?
+      }
       format.json { render json: @note }
     end
   end

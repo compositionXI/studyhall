@@ -1,4 +1,4 @@
-<p><%= current_user.title_name %> has invited you to <%= current_user == study_session.user ? 'a' : (study_session.user.name + "'s") %> study session.</p>
+<p><%= current_user.title_name %> has invited you to a study session.</p>
 <% unless @session_invite.message.blank? %>
   <p>"<%= @session_invite.message %>"</p>
 <% end %>
