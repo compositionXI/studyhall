@@ -1,4 +1,5 @@
 namespace :campus_news do
+  desc "Get updated news stories"
   task :fetch => :environment do
     School.has_rss_link.each do |school|
       latest_rss_entry = school.rss_entries.first
@@ -18,6 +19,7 @@ namespace :campus_news do
     end
   end
 
+  desc "Remove old news stories"
   task :prune => :environment do
     School.has_rss_link.each do |school|
       rss_entries = school.rss_entries.all
