@@ -1,3 +1,8 @@
+<% if flash[:alert] %>
+  <div class="alert-message warning">
+    <p><%= flash[:alert] %></p>
+  </div> 
+<% end %>
 <% if @note_items.any? %>
   <div class="scroll_pane">
     <ul class="note_items" data-layout="grid">
