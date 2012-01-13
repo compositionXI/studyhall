@@ -61,8 +61,11 @@ group :test, :development do
     gem 'factory_girl_rails'
     gem 'faker'
     gem 'ruby-debug19'
-    gem 'watchr'
-    gem 'autowatchr'
+    gem 'guard'
+    gem 'guard-rspec'
+    gem 'guard-spork'
+    gem 'spork', '>= 0.9.0.rc'
+    gem 'rb-fsevent', :git => 'git://github.com/ttilley/rb-fsevent.git', :branch => 'pre-compiled-gem-one-off' #better support for Mac OS X filesystem
 end
 
 group :development do
@@ -74,7 +77,7 @@ group :cucumber do
     gem 'database_cleaner'
     gem 'cucumber-rails'
     gem 'cucumber'
-    gem 'spork'
+    gem 'spork', '>= 0.9.0.rc'
     gem 'launchy'
     gem 'sunspot_test'
 end
