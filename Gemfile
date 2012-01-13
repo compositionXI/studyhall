@@ -61,6 +61,8 @@ group :test, :development do
     gem 'factory_girl_rails'
     gem 'faker'
     gem 'ruby-debug19'
+    gem 'watchr'
+    gem 'autowatchr'
 end
 
 group :development do
