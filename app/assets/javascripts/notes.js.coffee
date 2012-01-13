@@ -153,6 +153,7 @@ $(document).ready ->
       e.preventDefault()
       e.stopPropagation()
       modal_id = "#" + $(this).data("class") + "_" + $(this).data("id") + "_modal"
+      $(modal_id).modal true
       $(modal_id).modal
         keyboard: true
         show: false
