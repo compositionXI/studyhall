@@ -68,6 +68,7 @@
       $(modal_id).modal({keyboard: true,
                          show: true,
                          backdrop: true});
+      $(modal_id + " select").addClass("chzn-select").chosen();
     });
     
     var closeModal = function(modal){

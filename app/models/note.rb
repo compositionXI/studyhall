@@ -16,7 +16,6 @@ class Note < ActiveRecord::Base
   }
   
   before_save :check_note_name
-  before_save :set_parent_permission
   before_save :take_parent_permission
   
   attr_accessor :notebook_changed
@@ -64,9 +63,5 @@ class Note < ActiveRecord::Base
         self.shareable = self.notebook.shareable
         self.notebook_changed = true
       end
-    end
-
-    def set_parent_permission
-      notebook.update_attribute(:shareable, self.shareable) if notebook
     end
 end

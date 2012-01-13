@@ -22,7 +22,7 @@ class Notebook < ActiveRecord::Base
   end
 
   def set_permission_on_notes
-    notes.each{|note| note.update_attribute(:sharable, self.sharable)}
+    notes.each{|note| note.update_attribute(:shareable, self.shareable)}
   end
   
   def self.alpha_ordered(nbs)
