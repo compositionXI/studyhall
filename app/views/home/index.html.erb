@@ -70,7 +70,7 @@
 <%= render :partial => 'tour' if @tour %>
 
 <div class="tour_popover" id="invitation_tour" data-title="Invite Buddies <small>We promise not to spam</small>" style="display: none;">
-  <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user } %>
+  <%= render :partial => 'shared/invite_buddies_popover', :locals => { :user => current_user } %>
 </div>
 <% unless @tour %>
   <script type="text/javascript">
@@ -87,7 +87,7 @@
                           placement: 'below-right',
                           html: true,
                           offset: 5,
-                          horizontalOffset: 60,
+                          horizontalOffset: 110,
                           title: function(){return invitation_tour.data('title');},
                           content: function(){ return invitation_tour.html(); }});
         $(this).popover("show");

@@ -73,8 +73,12 @@ class UsersController < ApplicationController
     check_tour_mode
     @user.avatar = nil if params[:delete_avatar] == "1"
     params[:user][:extracurricular_ids] = @user.split_attribute_list(params[:extracurriculars_list], Extracurricular, :extracurricular_ids) if params[:extracurriculars_list].present?
-    
     if @user.update_attributes(params[:user])
+      if @user.majors.blank?
+        @action_bar_message = "#{@user.name}"
+      else
+        @action_bar_message = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+      end
       flash[:notice] = "Account updated!"
       @success = true
       respond_to do |format|
