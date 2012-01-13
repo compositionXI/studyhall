@@ -42,13 +42,13 @@ staging:
 production:
   per_page: 10
   contact_form_recipient: support@studyhall.com
-  host: studyhall.com
+  host: www.studyhall.com
   opentok:
     key: 5822951
     secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
     js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
   facebook:
-    app_id: 
-    app_secret: 
+    app_id: 156194921156858 
+    app_secret: c60c562a6107f4481c9ac696d51d87a4
   envolve:
     api_key: 48712-g6QT0AkzEKH8EBenMaoFyj67YkFxPAov
