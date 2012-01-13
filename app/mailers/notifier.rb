@@ -127,4 +127,14 @@ class Notifier < ActionMailer::Base
       date:    Time.now
     )
   end
+
+  def request_note_access(user, note)
+    @user, @note = user, note
+    mail(
+      subject: "#{@user.name} sent request to access the note: #{note.name}",
+      from: 'noreply@studyhall.com',
+      to: note.user.email,
+      date: Time.now
+    )
+  end
 end

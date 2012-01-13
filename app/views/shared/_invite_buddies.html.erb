@@ -2,25 +2,10 @@
   <%= render :partial => 'shared/fb_connect' %>
 </div>
 
-<div class="popover-body">
-  <% if user == current_user %>
-    <section class="buddies">
-      <header>
-        <p lass="left">Find friends using Facebook and Gmail!</p>
-      </header>
-        <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg", width: '150'  %></a>
-        <a href="#" id="gmail_invite" data-controls-modal="gmail_invite_modal" data-backdrop="true" data-keyboard="true"><%= image_tag "gmail-button.png", width: '150' %></a>
-    </section>
-    <%= render :partial => "shared/gmail_modal" %>
-  <% end %>
-</div>
-
-<div class="popover-footer">
-  <% if @tour %>
-    <%= submit_tag "Next", :class => "btn primary tour_button save invite_buddies_save_button" %>
-  <% else %>
-    <div class="input clearfix">
-      <%= submit_tag "Save", :class => "btn invite_buddies_save_button" %>
-    </div>
-  <% end %> 
-</div>
+<% if user == current_user %>
+  <section class="buddies">
+    <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg", width: '150'  %></a>
+    <a href="#" id="gmail_invite" data-controls-modal="gmail_invite_modal" data-backdrop="true" data-keyboard="true"><%= image_tag "gmail-button.png", width: '150' %></a>
+  </section>
+  <%= render :partial => "shared/gmail_modal" %>
+<% end %>

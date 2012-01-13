@@ -10,5 +10,9 @@
 <% else %> 
   $('.twipsy').hide();
   $("#new_user").remove();
-  $("#success_message").addClass('in')
+  <% if flash[:notice].present? || flash[:error].present? %>
+    $("#success_message").addClass('in').html('<p><%= flash[:notice] || flash[:error] %></p>');
+  <% else %>
+    $("#success_message").addClass('in');
+  <% end %>
 <% end %>

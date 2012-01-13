@@ -7,6 +7,7 @@ Studyhall::Application.routes.draw do
       put 'move'
       get :delete
       delete :delete, :action => :destroy
+      get 'request_access'
     end
   end
   resources :notebooks do

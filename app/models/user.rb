@@ -136,6 +136,10 @@ class User < ActiveRecord::Base
     ownable.owner == self
   end
 
+  def can_view?(note)
+    note.user_id == self.id || note.shareable
+  end
+
   #people the follow this user
   def followers
     User.where("users.id = followings.user_id AND followings.followed_user_id = ?",self.id).includes(:followings)
@@ -202,6 +206,10 @@ class User < ActiveRecord::Base
   
   def editable_by?(user)
     (self == user) || (user.roles.include?(Role.find_by_name "Admin"))
+  end
+
+  def added_course?(course)
+    self.courses.where(id: course.id).any?
   end
 
   def activate!

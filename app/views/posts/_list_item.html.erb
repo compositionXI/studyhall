@@ -13,11 +13,12 @@
           <div class="post_details left">
             <%= post.user ? link_to(post.user.title_name, post.user) : user_missing %>
             <span class="right"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
-            <a href="#" class="right collapse_button opened"></a>
             <%= post.text %>
             <div>
               <% if post.notebook_id %>
                 Notebook: <%= link_to(post.notebook.try(:name), notebook_notes_path(post.notebook)) %>
+              <% elsif post.note_id %>
+                Note: <%= link_to(post.note.try(:name), note_path(post.note)) %>
               <% end %>
               <% if post.study_session_id && post.study_session %>
                 Studyhall: <%= link_to(post.study_session.presentation, study_session_path(post.study_session)) %>

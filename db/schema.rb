@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111155332) do
+ActiveRecord::Schema.define(:version => 20120113073006) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -30,22 +30,6 @@ ActiveRecord::Schema.define(:version => 20120111155332) do
   end
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
-
-  create_table "chat_messages", :force => true do |t|
-    t.string   "owner_type"
-    t.integer  "owner_id"
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "chat_rooms", :force => true do |t|
-    t.integer  "study_session_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
@@ -252,7 +236,10 @@ ActiveRecord::Schema.define(:version => 20120111155332) do
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.boolean  "reported"
+    t.integer  "note_id"
   end
+
+  add_index "posts", ["note_id"], :name => "index_posts_on_note_id"
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"

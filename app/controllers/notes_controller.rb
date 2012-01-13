@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   layout "full_width"
 
   before_filter :require_user
-  before_filter :find_note, except: [:index]
+  before_filter :find_note, except: [:index, :request_access]
   before_filter :set_action_bar
   before_filter :find_notebook
 
@@ -115,6 +115,12 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to ( @note.notebook ? notebook_path(@note.notebook.id) : notebooks_path ) }
     end
+  end
+
+  def request_access
+    @note = Note.find(params[:id])
+    Notifier.request_note_access(current_user, @note).deliver
+    render :nothing => true
   end
 
   protected

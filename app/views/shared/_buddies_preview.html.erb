@@ -1,26 +1,25 @@
+<% no_invitation ||= false %>
 <section class="buddies invitations tourable" data-popover-id="invitation_tour">
   <header>
     <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<span class="total_buddies"><%= user.buddies.count %></span>)</small></h1>
     <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_buddies_button' %>
   </header>
+  <% if user.buddies.any? %>
     <ul>
-      <% if user.buddies.size == 0 %>
-        <li class="activate_invitation">
-          <% if user == current_user %>
-            <a>Invite Your Buddies!</a>
-          <% else %>
-            <span>No buddies</span>
-          <% end%>
-        </li>
-      <% end %>
-      <% if user.buddies.any? %>
-        <% user.buddies.limit(4).each do |buddy| %>
-          <li><%= link_to image_tag(buddy.photo_url(:medium)), buddy, :title => buddy.name %></li>
-        <% end %>
-      <% else %>
-        <li></li>
+      <% user.buddies.limit(4).each do |buddy| %>
+        <li><%= link_to image_tag(buddy.photo_url(:medium)), buddy, :title => buddy.name %></li>
       <% end %>
     </ul>
+  <% end %>
+  <% if user == current_user && !no_invitation%>
+    <% if user.buddies.any? %>
+      <div class="activate_invitation">
+        <a>Invite Your Buddies!</a>
+      </div>
+    <% else %>
+      <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user }  %>
+    <% end %>
+  <% end %>
 </section>
 <div id="view_all_buddies" class="modal" style="display:none">
   <div class="modal-header">

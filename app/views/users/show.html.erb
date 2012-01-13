@@ -113,7 +113,7 @@
     <%= render :partial => 'photo_form', :locals => { :user => @user } %>
   </div>
   <div class="form" id="invitations_form">
-    <%= render :partial => "shared/invite_buddies", :locals => {:user => @user} if current_user == @user %>
+    <%= render :partial => "shared/invite_buddies_popover", :locals => {:user => @user} if current_user == @user %>
   </div>
 </div>
 <% if current_user %>
@@ -270,7 +270,7 @@
           placement: 'below-right',
           html: true,
           offset: 10,
-          horizontalOffset: 60,
+          horizontalOffset: 140,
           title: function() { return "Your buddies <small>We promise not to spam</small>"; },
           content: function() {return invitations_form.html(); }
         });  
