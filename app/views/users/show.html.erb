@@ -234,9 +234,9 @@
         editable.popover("show");
         initChosen(editable.popover);
         styleFileInputs($('.popover .upload'));
-        $('.number').autoNumeric({vMax: '4.0000', vMin: '0.0000'});
-        $('.number').keyup(function(){
-          if($(this).val().length == 1) {
+        $('.number').autoNumeric({vMax: '4.00', vMin: '0.00'});
+        $('.number').keyup(function(e){
+          if($(this).val().length == 1 && e.keyCode != 8) {
             $(this).val($(this).val() + ".");
           }
         });

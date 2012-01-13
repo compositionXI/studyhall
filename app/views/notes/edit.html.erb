@@ -15,7 +15,6 @@
     <%= truncate @note.name, :length => 70 %>
   </div>
 </div>
-<div class="clearfix flat"></div>
 <div class="container">
   <%= text_area_tag "content", @note.content, :id => "rte_area_note_content", :class => "rte_area" %>
 </div>

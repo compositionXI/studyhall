@@ -6,12 +6,13 @@ class Notifier < ActionMailer::Base
   default_url_options[:host] = APP_CONFIG["host"]
   
   def sharing(sharing, object_type, user)
-    @sharing = sharing
-    @object_type = object_type
-    @sender = user
-    @object_urls_array = @sharing.objects.map {|o| [o,url_for(o)] }
+    @sharing = sharing;                                               Rails.logger.debug "*****Sharing: #{sharing}"
+    @object_type = object_type;                                       Rails.logger.debug "*****Object Type: #{object_type}"
+    @sender = user;                                                   Rails.logger.debug "*****Sender: #{user.inspect}"
+    @object_urls_array = @sharing.objects.map {|o| [o,url_for(o)] };  Rails.logger.debug "*****URLs: #{@object_urls_array}"
+    Rails.logger.debug "************* Invoking Mail(#{@sender.name.titleize} #{@sharing.recipient_emails})"
     mail(
-      subject: "#{user.name.titleize} shared something with you on Studyhall.com!",
+      subject: "#{@sender.name.titleize} shared something with you on Studyhall.com!",
       from: "noreply@studyhall.com",
       bcc: @sharing.recipient_emails,
       date: Time.now

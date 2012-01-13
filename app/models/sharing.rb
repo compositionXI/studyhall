@@ -24,14 +24,16 @@ class Sharing
   end
 
   def recipient_emails
-    [users.map(&:email).join(','),email_addresses].join(',')
+    r = users.map(&:email).join(',')
+    r = r + "," if r
+    r = r + email_addresses
   end
 
   # Takes the object_ids string like ",note_1,note_2" and converts it to an array of objects [<Note>,<Note>]
   def objects
     return [] if object_ids.blank?
     object_ids.split(",").select(&:present?).map do |object_id|
-      Rails.logger.info object_id
+      Rails.logger.info "** Sharing: #{object_id}"
       match = object_id.match(/([a-z_]+)_(\d+)/)
       if match[1] && Object.const_defined?(match[1].camelize)
         match[1].camelize.constantize.find(match[2])

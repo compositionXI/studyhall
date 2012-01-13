@@ -1,26 +1,26 @@
 <div id="tour_popovers" style="display: none">
   <div class="tour_popover " id="standard_actions_tour" data-title="Get started <small>Study with pals or take notes</small>">
     <div class="popover-body">
-      <p>Start a StudyHall and study with friends without leaving the sofa, Or, Take notes in class, at the library, or on the john.</p>
+      <p>Start a StudyHall and study with friends without leaving the sofa. Or take notes in class, at the library, or on the john.</p>
     </div>  
     <div class="popover-footer">
-      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'invitation_tour' %>
+      <%= submit_tag "Next", :class => 'btn primary tour_button save', :next_tour_id => 'invitation_tour' %>
     </div>
   </div>
-  <div class="tour_popover " id="activity_tour" data-title="Your Activity<small>Where your ish happens</small>" data-h-offset="65" data-offset='10'>
+  <div class="tour_popover " id="activity_tour" data-title="Your Activity <small>Where your ish happens</small>" data-h-offset="65" data-offset='10'>
     <div class="popover-body">
-      <p>Coolest place ever. This is where you can see you and your buddy's activity, who they studied with, courses they've added, stuf like that.</p>
+      <p>Coolest place ever. This is where you can see you and your buddy's activity, who they studied with, courses they've added, stuff like that.</p>
     </div>  
     <div class="popover-footer">
-      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'campus_news_tour' %>
+      <%= submit_tag "Next", :class => 'btn primary tour_button save', :next_tour_id => 'campus_news_tour' %>
     </div>
   </div>
   <div class="tour_popover " id="campus_news_tour" data-title="Campus News <small>Where other ish happens</small>" data-h-offset="65" data-offset='10'>
     <div class="popover-body">
-      <p>Find out what's poppin' on campus - parties,exhibitions, game news, club and even info...</p>
+      <p>Find out what's poppin' on campus - parties, exhibitions, game news, club and event info...</p>
     </div>  
     <div class="popover-footer">
-      <%= submit_tag "Next", :class => 'btn primary tour_button', :next_tour_id => 'courses_tour' %>
+      <%= submit_tag "Next", :class => 'btn primary tour_button save', :next_tour_id => 'courses_tour' %>
     </div>
   </div>
   <div class="tour_popover " id="courses_tour" data-title="Your Courses <small>Art, Bio, Chem...</small>" data-h-offset="350">
@@ -28,7 +28,7 @@
       <p>Adding courses to your profile allows you to find friends and study buddies and makes it easier to stay in the know.</p>
     </div>  
     <div class="popover-footer">
-      <%= submit_tag "Done", :class => 'btn primary tour_button'  %>
+      <%= submit_tag "Done", :class => 'btn primary tour_button save'  %>
     </div>
   </div>
 </div>
@@ -54,8 +54,7 @@
     tourable.popover("show");
   };
   var initTourMode = function() {
-    $("#invitation_tour").find(".popover-footer div.input input.btn").removeClass('save').addClass('primary').val("Next").addClass('tour_button').attr('next_tour_id', 'activity_tour');
-    $("#invitation_tour").find("div.input").removeClass('input');
+    $("#invitation_tour").find(".popover-footer input.btn").val("Next").attr('next_tour_id', 'activity_tour');
     showTourPopover($("div.standard_actions"));
     $(".tour_button").live('click', function(){
         hideTourPopovers();

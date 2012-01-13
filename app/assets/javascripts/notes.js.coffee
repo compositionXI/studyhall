@@ -225,3 +225,7 @@ $(document).ready ->
       $(".formatting_toggle").toggle()
       $(".cleditorToolbar").toggle()
       e.preventDefault()
+  if $(".alert-message.warning").length > 0
+    delay = (ms, func) -> setTimeout func, ms
+    delay 3000, -> $(".alert-message.warning").fadeOut(1000) 
+    

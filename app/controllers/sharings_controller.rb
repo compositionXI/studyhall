@@ -11,11 +11,11 @@ class SharingsController < ApplicationController
 
   def create
     @sharing = Sharing.new(params[:sharing])
-    @success = @sharing.valid?
-    @sharing.objects.each(&:share!)
-    @object_type = (@sharing.objects.first.class.to_s == "StudySession") ? "StudyHall" : @sharing.objects.first.class.to_s
-    send_notifications if @success
-    generate_activity(@sharing)
+    @success = @sharing.valid?;               Rails.logger.debug "********** Did we create a sharing? #{@success}"
+    @sharing.objects.each(&:share!);          Rails.logger.debug "********** Done Sharing Objects"
+    @object_type = (@sharing.objects.first.class.to_s == "StudySession") ? "StudyHall" : @sharing.objects.first.class.to_s;   Rails.logger.debug "********** Sending Notifications: "
+    send_notifications if @success;           Rails.logger.debug "********** Generating Activity Objects"
+    generate_activity(@sharing);              Rails.logger.debug "********** Done"
   end
 
   private
@@ -42,7 +42,9 @@ class SharingsController < ApplicationController
     end
 
     def send_notifications
+      Rails.logger.debug "********** Invoking Notifier"
       Notifier.sharing(@sharing, @object_type, current_user).deliver
+      Rails.logger.debug "********** Calling send_message"
       send_message
     end
 end
