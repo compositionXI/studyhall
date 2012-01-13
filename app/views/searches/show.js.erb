@@ -1,0 +1,1 @@
+$('#<%= params[:category] == 'users' ? 'people' : params[:category] %>_tab a.more_results').replaceWith("<%= j render(params[:category]) %>");
