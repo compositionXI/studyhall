@@ -11,8 +11,8 @@
             <% end %>
           </div>
           <div class="post_details left">
-            <%= post.user ? link_to(post.user.title_name, post.user) : user_missing %>
-            <span class="right"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
+            <%= post.user ? link_to(post.user.title_name, post.user, :class => 'user_name') : user_missing %>
+            <span class="post_time"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
             <%= post.text %>
             <div>
               <% if post.notebook_id %>

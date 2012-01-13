@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe UsersController do
-  before(:all) do
-
-  end
+  let(:school) {FactoryGirl.create(:school, :active => true)}
+  let(:user) {FactoryGirl.create(:user, :school => school)}
 
   before(:each) do
     @mock_user = mock_model(User, :name => "fake", :majors => [mock(Major, :name => "fake")], :gender => "male", :school_id => 1, :gpa => "2", :fraternity => "Omega Moo", :extracurriculars => "Booyah")
@@ -39,13 +38,41 @@ describe UsersController do
         @user.stub!(:deliver_activation_instructions!)
       end
       it "should send the activation email" do
+        @user.stub!(:school).and_return(school)
+        @user.should_receive(:deliver_activation_instructions!)
+        post_user @user_attributes
+      end
+      it "should not send the activation email while school is not active" do
+        school.update_attributes(:active => false)
+        @user.stub!(:school).and_return(school)
         @user.should_not_receive(:deliver_activation_instructions!)
         post_user @user_attributes
       end
+      it "should not send the activation email while school is not exist" do
+        @user.stub!(:school).and_return(nil)
+        @user.should_not_receive(:deliver_activation_instructions!)
+        post_user @user_attributes
+      end
+
       it "should set the notice message" do
+        @user.stub!(:school).and_return(school)
+        post_user @user_attributes
+        flash[:notice].should == "Instructions to activate your account have been emailed to you. \nPlease check your email."
+      end
+      
+      it "should set a differet notice message" do
+        school.update_attributes(:active => false)
+        @user.stub!(:school).and_return(school)
         post_user @user_attributes
         flash[:notice].should == "Access to your school has not been granted yet. Stay Tuned for when we launch at your school."
       end
+      
+      it "should set another differet notice message" do
+        @user.stub!(:school).and_return(nil)
+        post_user @user_attributes
+        flash[:error].should == "You must sign up for Studyhall using your school email address (ie. harvard.edu)."
+      end
+      
       it "should redirect to login url" do
         post_user @user_attributes
         response.should redirect_to login_url
@@ -83,9 +110,23 @@ describe UsersController do
           before :each do
             @user_with_same_email.active = false
           end
-          it "should set the error flash" do
+          
+          it "should set the error flash while the user's school is active" do
+            school.update_attributes(:active => true)
+            @user_with_same_email.stub!(:school).and_return(school)
             post_user @user_attributes
             flash[:error] == "There is already an account with that email address. If you did not receive the activation message, we can <a href='/activations/new?email=#{@user_with_same_email.email}'>send it to you again.</a>".html_safe
+          end
+          it "should set the different error flash while the user's school is not avtive" do
+            school.update_attributes(:active => false)
+            @user_with_same_email.stub!(:school).and_return(school)
+            post_user @user_attributes
+            flash[:error] == "There is already an account with that email address. But access to this school has not been granted yet. Stay Tuned for when we launch at this school."
+          end
+          it "should set another different error flash while the user's school does not exist" do
+            @user_with_same_email.stub!(:school).and_return(nil)
+            post_user @user_attributes
+            flash[:error] == "You must sign up for Studyhall using your school email address (ie. harvard.edu)."
           end
         end
       end

@@ -6,30 +6,21 @@
   </ul>
   <ul id="people_tab" class="people search_results">
     <% if @search.users_count > 0 %>
-      <% @search.users(params[:page] || 1).results.each do |search_result| %>
-        <%= render :partial => "person", :locals => {:user => search_result} %>
-      <% end %>
-      <%= paginate @search.users(params[:page] || 1), params: {category: "people"} %>
+      <%= render 'users' %>
     <% else %>
       <p>No relevant results were found.</p>
     <% end %>
   </ul>
   <ul id="courses_tab" class="courses search_results">
     <% if @search.courses_count > 0 %>
-      <% @search.courses(params[:page] || 1).results.each do |search_result| %>
-        <%= render :partial => "course", :locals => {:course => search_result} %>
-      <% end %>
-      <%= paginate @search.courses(params[:page] || 1), params: {category: "courses"} %>
+      <%= render 'courses' %>
     <% else %>
       <p>No relevant results were found.</p>
     <% end %>
   </ul>
   <ul id="notes_tab" class="notes search_results">
     <% if @search.notes_count > 0 %>
-      <% @search.notes(params[:page] || 1).results.each do |search_result| %>
-        <%= render :partial => "note", :locals => {:note => search_result} %>
-      <% end %>
-      <%= paginate @search.notes(params[:page] || 1), params: {category: "notes"} %>
+      <%= render 'notes' %>
     <% else %>
       <p>No relevant results were found.</p>
     <% end %>
