@@ -4,6 +4,7 @@
     $("#<%= section %>_section").html("<%=j render partial: section, locals: {user: @user} %>");
     $("#<%= section %>_form").html("<%=j render partial: "#{section}_form", locals: {user: @user} %>");
   <% end %>
+  $(".action_bar h3").text("<%= j truncate @action_bar_message, length: 60 %>")
   <% if @tour %>
     <% unless @next_form.nil? %>
       <% if @next_form == 'invitations_form' %>
