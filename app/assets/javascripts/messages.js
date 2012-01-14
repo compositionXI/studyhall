@@ -123,7 +123,7 @@ $(document).ready(function(){
   });
   
   $("body").delegate(".cancel_reply", "click", function(){
-    $(this).closest("#message_new").remove();
+    $(this).closest("#new_message").remove();
     return false;
   });
   
