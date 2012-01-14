@@ -11,6 +11,16 @@ namespace :studyhall do
     parse_csv_file args[:path]
   end
 
+  namespace :import_courses do 
+    desc "Import all course data in db/data/schools/*.csv"
+    task :all => :environment do 
+      Dir[File.join(Rails.root, 'db','data','schools',"*.csv")].each do |file|
+        puts "**** Processing #{file}"
+        parse_csv_file file
+      end
+    end
+  end
+
   desc "Generate slugs for Offering"
   task :generate_offering_slug => :environment do
     Offering.find_each(&:save)
