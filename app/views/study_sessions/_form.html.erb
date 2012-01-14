@@ -12,7 +12,7 @@
   </div>
   <div class="clearfix">
     <%= f.label :offering_id, "Course" %>
-    <%= f.collection_select :offering_id, current_user.offerings, :id, :name,{:include_blank => true},{:class => "chzn-select", "data-placeholder" => "No course", :id => "offering_id_select_#{study_session.id || 0}"} %>
+    <%= f.collection_select :offering_id, current_user.offerings, :id, :name,{:include_blank => "Choose a course"},{:class => "chzn-select", "data-placeholder" => "No course", :id => "offering_id_select_#{study_session.id || 0}"} %>
   </div>
   <% if study_session.session_files.count > 1 %>
     <div class="clearfix">

@@ -15,7 +15,7 @@
     <div class="input">
       <div class="input-prepend">
         <label class="add-on">
-          <%= f.check_box :shareable, checked: "checked", class: "activation_check_box" %>
+          <%= f.check_box :shareable, checked: @note.new_record? ? true : @note.notebook, class: "activation_check_box" %>
         </label>
         <%= text_field_tag nil, nil, placeholder: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
       </div>

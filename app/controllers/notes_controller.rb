@@ -69,6 +69,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
+        @note.set_notebook_shareable
         format.js {}
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
         format.json { head :ok }
@@ -82,6 +83,7 @@ class NotesController < ApplicationController
   def move
     if @notebook && @notebook.id != @note.notebook_id
       @note.notebook_id = @notebook.id
+      @note.sharable = @notebook.shareable
     else
       #Move the note out of a notebook
       @note.notebook_id = nil

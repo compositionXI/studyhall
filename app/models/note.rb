@@ -16,10 +16,16 @@ class Note < ActiveRecord::Base
   }
   
   before_save :check_note_name
-  before_save :set_parent_permission
-  before_save :take_parent_permission
+  before_create do |note|
+    note.notebook.shareable = note.shareable if note.notebook
+  end
   
   attr_accessor :notebook_changed
+  before_save do |note|
+    note.notebook_changed = note.notebook_id_changed?
+    return true
+  end
+  
   
   searchable :auto_index => true, :auto_remove => true do
     text :name
@@ -50,23 +56,17 @@ class Note < ActiveRecord::Base
     notes = filter[:note] ? user.notes.where(["name like ?", "%#{filter[:note][:name]}%"]) : user.notes
     notes.unsorted.in_range(filter[:start_date], filter[:end_date]).all.flatten.uniq
   end
-  
+
+  #we assume that note and its notebook always have the same value of shareable
+  def set_notebook_shareable
+    return unless self.notebook
+    self.notebook.update_attribute(:shareable, self.shareable) unless self.notebook.shareable == self.shareable
+  end
   protected 
     
-    def check_note_name
-      if self.name.blank?
-        self.name = "Quick Save - #{self.owner.notes.count}"
-      end
+  def check_note_name
+    if self.name.blank?
+      self.name = "Quick Save - #{self.owner.notes.count}"
     end
-    
-    def take_parent_permission
-      if self.notebook_id_changed? && self.notebook
-        self.shareable = self.notebook.shareable
-        self.notebook_changed = true
-      end
-    end
-
-    def set_parent_permission
-      notebook.update_attribute(:shareable, self.shareable) if notebook
-    end
+  end
 end
