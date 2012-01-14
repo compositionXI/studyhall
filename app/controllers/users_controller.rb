@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       if @user.majors.blank?
         flash[:action_bar_message] = "#{@user.name}"
       else
-        flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(",")}"
+        flash[:action_bar_message] = "#{@user.name} - #{@user.majors.map(&:name).join(", ")}"
       end
     end
   end
