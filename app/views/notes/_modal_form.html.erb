@@ -15,8 +15,14 @@
       </div>
     </div>
     <div class="clearfix">
-      <%= f.check_box :shareable %>
-      <%= f.label :shareable, "Shared", style: "display:inline" %>
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :shareable, checked: note.new_record? || note.shareable, class: "activiation_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, placeholder: note.notebook ? "Share this notebook" : "Share this note", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

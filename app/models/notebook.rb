@@ -8,7 +8,7 @@ class Notebook < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
   has_many :post, :dependent => :destroy
   
-  after_save :set_permission_on_notes
+  after_update :set_permission_on_notes
 
   scope :for_course, lambda {|course| where("course_id = ?", course.id) }
   scope :in_range, lambda {|start_date, end_date|
@@ -22,7 +22,7 @@ class Notebook < ActiveRecord::Base
   end
 
   def set_permission_on_notes
-    notes.each{|note| note.update_attribute(:shareable, self.shareable)}
+    self.notes.each{|note| note.update_attribute(:shareable, self.shareable)}
   end
   
   def self.alpha_ordered(nbs)
