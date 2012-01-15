@@ -11,8 +11,10 @@
     </header>
   </section>
   <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class, empty_list_text: "Doesn't look like anyone's added this class"} %>
-  <%= render :partial => "shared/buddies_preview", :locals => {:user => current_user} %>
-  <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?", style: "font-size: 11px;" %>
+  <%= render :partial => "shared/buddies_preview", :locals => {:user => current_user, :no_invitation => true } %>
+  <% if current_user.added_course?(@course) %>
+    <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?", style: "font-size: 11px;" %>
+  <% end %>
 </aside>
 <section class="course_activity">
   <header>

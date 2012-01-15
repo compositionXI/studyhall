@@ -19,6 +19,10 @@ bundle exec rake db:setup
 bundle exec rake sunspot:solr:start
 rails server
 
+Getting auto testing running
+--------------------------------
+guard
+
 Setting up your data
 --------------------
 There is an administrative user in the db/seeds.rb file. Use this login to set up 

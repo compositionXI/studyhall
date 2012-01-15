@@ -20,14 +20,14 @@
 # Learn more: http://github.com/javan/whenever
 
 every 12.hour do
-  runner "rake:campus_news:fetch"
+  rake "campus_news:fetch"
 end
 
 every 30.days do
-  runner "rake:campus_news:prune"
+  rake "campus_news:prune"
 end
 
 every 24.hours do
-  runner "rake:studyhall:remove_old_searches"
+  rake "studyhall:remove_old_searches"
 end
 

@@ -17,12 +17,10 @@ $ ->
       e.preventDefault()
   
   $(".post_item a.collapse_button").live('click', (e) ->
-    if $(this).hasClass('opened')
-      $(this).removeClass('opened').addClass('closed')
-      $(this).closest('.post_item').find('.comment_list').hide();      
-      $(this).closest('.post_item').find('.comment_form').hide();      
-    else
-      $(this).addClass('opened').removeClass('closed')
-      $(this).closest('.post_item').find('.comment_list').show();      
-      $(this).closest('.post_item').find('.comment_form').show();      
+    $(this)
+      .toggleClass('active')
+      .siblings('.post_options').toggle()
+      
+    
+    return false
   )

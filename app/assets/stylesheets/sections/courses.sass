@@ -35,24 +35,37 @@ section.course_activity
     margin-right: 12px
   .post_details
     width: 550px
-    a.collapse_button
-      width: 16px
-      height: 16px
-      background-image: url(asset-path('collapse_arrows.png', 'image'))
-      &.opened
-        background-position: 0 0
-        &:hover
-          background-position: 16px 0
-      &.closed
-        background-position: 0 -20px
-        &:hover
-          background-position: 16px -20px
   .comment_details
     width: 490px
   
   .post_comment
     margin-top: 5px
   
+  .user_name, .post_time
+    float: left
+  .post_time
+    color: #aaa
+    &:before
+      content: " \2013 "
+      padding: 0 5px
+  .post_options, a.collapse_button
+    position: absolute
+  .post_options
+    display: none
+    top: 20px
+    right: 5px
+    text-align: right
+  
+  a.collapse_button
+    width: 15px
+    height: 15px
+    background-image: url(asset-path('arrows.png', 'image'))
+    background-position: 0 0
+    top: 1px
+    right: 5px
+    &:hover, &.active
+      background-position: 16px 0
+
   .comment_list
     padding-left: 60px
     border-bottom: 1px solid #E6E6E6
@@ -73,7 +86,6 @@ section.course_activity
       width: 500px
     
   .post_options
-    padding-right: 10px
     font-size: 12px
     .secondary-nav 
       position: relative

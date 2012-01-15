@@ -1,0 +1,4 @@
+<% @search.users(params[:page] || 1).results.each do |search_result| %>
+  <%= render :partial => "person", :locals => {:user => search_result} %>
+<% end %>
+<%= link_to_next_page @search.users(params[:page] || 1).results, "See more results", class: 'more_results', remote: true, params: { category: "users"} %>

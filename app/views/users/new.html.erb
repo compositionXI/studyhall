@@ -5,9 +5,11 @@
         <%= flash[:error] %>
       </div>
     <% end %>
-    <h3>Sign Up</h3>
-    <div>
-      <%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
+    <div class="single-form">
+      <div class="header">
+        <h3>Sign Up</h3>
+      </div>
+      <%= form_for @user, :html => {:class => "form-stacked", :multipart => true} do |f| %>
         <%= f.error_messages %>
         <div class="clearfix">
           <%= f.label :email %> 

@@ -35,10 +35,14 @@ var hide_message = function(selector){
 }
 
 var hideShowMessage = function(message_list_item_id){
-  var message_list_item = $("#"+message_list_item_id);
-  message_list_item.find(".collapsed_message").toggleClass("highlighted");
-  message_list_item.find(".expanded_message").toggleClass("hide");
-  message_list_item.find("#message_new textarea").first().focus();
+  var message_list_item = $("#"+message_list_item_id),
+      open_messages = $('.highlighted').parent()
+  
+  messages = message_list_item.add(open_messages)
+    
+  messages.find(".collapsed_message").toggleClass("highlighted");
+  messages.find(".expanded_message").toggleClass("hide");
+  messages.find("#message_new textarea").first().focus();
 }
 
 var isShowingFullMessage = function(message_list_item_id){
@@ -123,7 +127,7 @@ $(document).ready(function(){
   });
   
   $("body").delegate(".cancel_reply", "click", function(){
-    $(this).closest("#message_new").remove();
+    $(this).closest("#new_message").remove();
     return false;
   });
   

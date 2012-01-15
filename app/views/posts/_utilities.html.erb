@@ -1,4 +1,5 @@
 <% unless post.user == current_user %>
+  <a href="#" class="right collapse_button opened"></a>
   <div class="post_options right">
     <ul class="unstyled">
       <li><%= link_to( "Block", user_block_path(:user_id => current_user, :blocked_user_id => post.user.id), :confirm => "Are you sure?") unless post.user.nil? %></li>

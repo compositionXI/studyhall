@@ -1,0 +1,4 @@
+<% @search.courses(params[:page] || 1).results.each do |search_result| %>
+<%= render :partial => "course", :locals => {:course => search_result} %>
+<% end %>
+<%= link_to_next_page @search.courses(params[:page] || 1).results, "See more results", class: 'more_results', remote: true, params: { category: "courses"} %>

@@ -142,12 +142,14 @@ $(document).ready ->
       window.location = $(this).data("href")
       e.stopPropagation()
       e.preventDefault()
+      return
 
     $(".note_items").delegate ".note_item.edit","click", (e) ->
       $(this).toggleClass("selected")
       toggleActionButtons()
       e.preventDefault()
       e.stopPropagation()
+      return
 
     $(".note_items").delegate ".note_item.edit", "dblclick", (e) ->
       e.preventDefault()
@@ -155,15 +157,22 @@ $(document).ready ->
       modal_id = "#" + $(this).data("class") + "_" + $(this).data("id") + "_modal"
       $(modal_id).modal
         keyboard: true
-        show: false
+        show: true
         backdrop: true
       $(modal_id + " select").addClass("chzn-select").chosen()
-      $(modal_id).modal('show')
+      return
 
     $("body").delegate ".modal .cancel_popover","click", (e) ->
       $(this).closest(".modal").modal('hide')
       e.preventDefault()
+      return
 
+    $(".modal").delegate "select[name='note[notebook_id]']", "change", (e) ->
+      if $(this).val() == ''
+        $(this).closest('.modal-body').find(".prepended_checkbox").attr("placeholder", "Share this note")
+      else
+        $(this).closest('.modal-body').find(".prepended_checkbox").attr("placeholder", "Share this notebook")
+      return
     ###
     This prevents the text from being selected when a notebook is double-clicked
     ###

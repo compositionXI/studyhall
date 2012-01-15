@@ -8,7 +8,7 @@
     <% else %>
       <div class="landing_wrapper study_session_demo_wrapper">
         <div class="study_session_video">
-          <%= link_to new_study_session_path(:link_id => "new_study_session_button1"), :remote => true, :id => "new_study_session_button1" do %>
+          <%= link_to new_study_session_path(:link_id => "new_study_session_button1"), :remote => true do %>
             <video id="browser_video" width="398" height="314" poster="/assets/landing/browser-main.jpg" controls="controls" preload="true">
               <source type="video/mp4" src="/video/landing.mp4" />
               <source type="video/webm" src="/video/landing.webm" />
@@ -68,6 +68,7 @@
       $(modal_id).modal({keyboard: true,
                          show: true,
                          backdrop: true});
+      $(modal_id + " select").addClass("chzn-select").chosen();
     });
     
     var closeModal = function(modal){

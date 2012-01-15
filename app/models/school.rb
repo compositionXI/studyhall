@@ -27,7 +27,7 @@ class School < ActiveRecord::Base
     elsif (inactive_school = School.inactive_schools.find_by_domain_name(domain))
       inactive_school
     elsif domain.is_a?(String) and domain.include?(".edu")
-      inactive_school = School.inactive_schools.create!(:name => "Unknow School", :domain_name => domain)
+      inactive_school = School.inactive_schools.create!(:name => "Inactive School", :domain_name => domain)
     else
       nil
     end

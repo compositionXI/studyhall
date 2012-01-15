@@ -8,6 +8,8 @@ class Notebook < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
   has_many :post, :dependent => :destroy
   
+  after_update :set_permission_on_notes
+
   scope :for_course, lambda {|course| where("course_id = ?", course.id) }
   scope :in_range, lambda {|start_date, end_date|
     start_date = start_date.blank? ? BEGINNING_OF_TIME : start_date
@@ -17,6 +19,10 @@ class Notebook < ActiveRecord::Base
 
   def course_name
     course.title if course
+  end
+
+  def set_permission_on_notes
+    self.notes.each{|note| note.update_attribute(:shareable, self.shareable)}
   end
   
   def self.alpha_ordered(nbs)

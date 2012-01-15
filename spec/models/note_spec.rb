@@ -4,6 +4,7 @@ describe Note do
   
   let(:user) {FactoryGirl.create(:user)}
   let(:note) {FactoryGirl.create(:note, user: user)}
+  let(:notebook) {Factory.create(:notebook, user: user, shareable: true)}
   
   it "can be instantiated" do
     Note.new.should be_an_instance_of(Note)
@@ -51,8 +52,6 @@ describe Note do
   
   describe "#take_parent_permission" do
     it "should take parent notebook's permission if note is move into the notebook" do
-      note = Factory(:note, user: user, shareable: false)
-      notebook = Factory(:notebook, user: user, shareable: true)
       note.notebook = notebook
       note.save
       note.shareable.should == true
