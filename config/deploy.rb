@@ -4,9 +4,6 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 
-set :whenever_environment, defer { stage }
-require "whenever/capistrano"
-
 # this is for memcached server
 require 'cap_recipes/tasks/memcache'
 

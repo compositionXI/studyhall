@@ -1,3 +1,7 @@
+set :whenever_environment, defer { stage }
+require "whenever/capistrano"
+
+
 set :deploy_env, 'staging'
 set :rails_env, 'staging'
 
