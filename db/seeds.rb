@@ -47,25 +47,10 @@ end
 
 ##Create Schools
 if School.all.empty?
-  School.create(name: "Harvard University", :domain_name => "harvard.edu", :active => true)
-end
-
-if User.count == 0
-  ## Create Test Users
-  User.create(
-    first_name: "Joe",
-    last_name: "Smith",
-    custom_url: "joesmith",
-    gender: "Male",
-    school: School.first,
-    email: "Joe@email.com",
-    major: "Electrical Engineering",
-    gpa: 3.7,
-    fraternity: "Delta Kappa Epsilon",
-    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
-    password: "1234",
-    active: true
-  )
+  School.create(name: "Harvard University",     :domain_name => "harvard.edu", :active => true)
+  School.create(name: "Yale University",        :domain_name => "yale.edu",    :active => true)
+  School.create(name: "Cornell University",     :domain_name => "cornell.edu", :active => true)
+  School.create(name: "University of Maryland", :domain_name => "umd.edu",     :active => false)
 end
 
 if Sport.count == 0
@@ -88,3 +73,66 @@ if FratSorority.count == 0
     FratSorority.create(name: name)
   end
 end
+
+
+if User.count == 0
+  ## Create Users
+  User.create(
+    first_name: "Peter",
+    last_name: "Jackson",
+    custom_url: "pete",
+    gender: "Male",
+    school: School.find_by_name('University of Maryland'),
+    email: "pete@intridea.com",
+    majors: [Major.find_by_name("Business School Student (MBA)")],
+    gpa: 3.99,
+    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+    password: "1234",
+    active: true,
+    sports: [Sport.find_by_name('Mountaineering and Climbing')]
+  )
+
+  User.create(
+    first_name: "Ross",
+    last_name: "Blankenship",
+    custom_url: "rossb",
+    gender: "Male",
+    school: School.find_by_name('Cornell University'),
+    email: "ross@studyhall.com",
+    majors: [Major.find_by_name("Government")],
+    gpa: 4.0,
+    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+    password: "studyh@ll",
+    active: true
+  )
+
+  User.create(
+    first_name: "Sam",
+    last_name: "Grondahl",
+    custom_url: "samg",
+    gender: "Male",
+    school: School.find_by_name('Yale University'),
+    email: "sam@studyhall.com",
+    majors: [Major.find_by_name("Economics")],
+    gpa: 4.0,
+    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+    password: "studyh@ll",
+    active: true
+  )
+
+  User.create(
+    first_name: "Ben",
+    last_name: "Winter",
+    custom_url: "benw",
+    gender: "Male",
+    school: School.find_by_name('Cornell University'),
+    email: "ben@studyhall.com",
+    majors: [Major.find_by_name("Marketing")],
+    gpa: 4.0,
+    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+    password: "studyh@ll",
+    active: true
+  )
+end
+
+

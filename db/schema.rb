@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "activist_id"
   end
 
@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "provider"
     t.string   "uid"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
@@ -37,16 +37,16 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "school_name"
     t.string   "phone"
     t.text     "message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "course_offering_imports", :force => true do |t|
     t.string   "course_offering_import_file_name"
     t.string   "course_offering_import_content_type"
     t.string   "course_offering_import_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "school_id"
     t.string   "state"
   end
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "title"
     t.integer  "school_id"
     t.string   "department"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "courses", ["number"], :name => "index_courses_on_number"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -83,15 +83,15 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
   create_table "enrollments", :force => true do |t|
     t.integer  "offering_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "extracurriculars", :force => true do |t|
     t.string   "name"
     t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "extracurriculars_users", :id => false, :force => true do |t|
@@ -102,30 +102,30 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
   create_table "followings", :force => true do |t|
     t.integer  "user_id"
     t.integer  "followed_user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.boolean  "blocked",          :default => false
   end
 
   create_table "frat_sororities", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "frat_sororities_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "frat_sorority_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "instructors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "instructors", ["first_name"], :name => "index_instructors_on_first_name"
@@ -133,15 +133,15 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
 
   create_table "majors", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "majors_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "major_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "message_copies", :force => true do |t|
@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.integer  "recipient_id"
     t.string   "subject"
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -173,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.text     "body"
     t.boolean  "opened",                    :default => false
     t.boolean  "deleted",                   :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -190,8 +190,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.integer  "user_id"
     t.string   "name"
     t.integer  "order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "course_id"
     t.boolean  "shareable",  :default => true
   end
@@ -201,8 +201,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.integer  "user_id"
     t.integer  "notebook_id"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.boolean  "shareable",   :default => true
   end
 
@@ -211,8 +211,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "term"
     t.integer  "school_id"
     t.integer  "instructor_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "slug"
   end
 
@@ -232,8 +232,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "upload_content_type"
     t.string   "upload_file_size"
     t.string   "upload_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "parent_id"
     t.boolean  "reported"
     t.integer  "note_id"
@@ -248,23 +248,23 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "table"
     t.integer  "month",      :limit => 2
     t.integer  "year",       :limit => 8
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer  "role_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "rss_entries", :force => true do |t|
@@ -272,14 +272,14 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "link"
     t.datetime "pub_date"
     t.integer  "school_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "schools", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "rss_link"
     t.string   "domain_name"
     t.boolean  "active"
@@ -289,8 +289,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.integer  "user_id"
     t.string   "keywords"
     t.text     "advanced_query"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "session_files", :force => true do |t|
@@ -301,8 +301,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.datetime "upload_updated_at"
     t.string   "upload_uuid"
     t.string   "short_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "session_invites", :force => true do |t|
@@ -312,31 +312,31 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
 
   create_table "sports", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sports_users", :id => false, :force => true do |t|
     t.integer  "user_id"
     t.integer  "sport_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "static_pages", :force => true do |t|
     t.string   "title"
     t.text     "text"
     t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "study_sessions", :force => true do |t|
     t.string   "name"
     t.integer  "whiteboard_id"
     t.integer  "room_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "tokbox_session_id"
     t.integer  "user_id"
     t.boolean  "shareable"
@@ -356,8 +356,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "password_salt"
     t.string   "persistence_token"
     t.string   "perishable_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                            :null => false
+    t.datetime "updated_at",                                                            :null => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -381,8 +381,8 @@ ActiveRecord::Schema.define(:version => 20120113073006) do
     t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
