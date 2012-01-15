@@ -11,9 +11,10 @@ button.popover({trigger: "manual",
 button.popover("show");
 
 $("#note_<%= @note.id %>_delete_for_realz").live("change",function(){
-  var checkbox = $(this);
+  var checkbox = $(this),
+      submit = checkbox.parents('.content').find(".primary");
   if(checkbox.is(":checked"))
-    checkbox.siblings("input[type='submit']").removeClass("disabled");
+    submit.removeClass("disabled");
   else
-    checkbox.siblings("input[type='submit']").addClass("disabled");
+    submit.addClass("disabled");
 });
