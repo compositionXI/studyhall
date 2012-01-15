@@ -8,7 +8,13 @@ class User < ActiveRecord::Base
   acts_as_voteable
   has_mailbox
 
-  has_attached_file :avatar, :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, :default_url => "/assets/generic_avatar_:style.png"
+  has_attached_file :avatar, 
+    :styles => {:large => "400X400>", :medium => "50x50#", :thumb => "25x25#" }, 
+    :default_url => "/assets/generic_avatar_:style.png",
+    :storage => :s3, 
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :bucket => "studyhall#{Rails.env}"
+
   attr_accessor :delete_avatar
   before_post_process :paperclip_hack_filename
 
