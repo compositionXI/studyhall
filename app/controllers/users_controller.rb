@@ -131,11 +131,11 @@ class UsersController < ApplicationController
   end
   
   def drop_class
-    enrollment = @current_user.enrollments.find_by_offering_id params[:offering_id]
     offering = Offering.find params[:offering_id]
+    enrollment = @current_user.enrollments.find_by_offering_id offering.id
     offering.posts.create(:user_id => current_user.id, :text => "#{@current_user.name} dropped this class.")
     enrollment.delete
-    @course_id = params[:offering_id]
+    @course_id = offering.id
     respond_to do |format|
       format.html { redirect_to root_path flash[:action_bar_message] }
       format.js
