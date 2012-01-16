@@ -4,6 +4,9 @@ set :default_stage, "staging"
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 
+set :whenever_environment, defer { stage } 
+require "whenever/capistrano"
+
 # this is for memcached server
 require 'cap_recipes/tasks/memcache'
 
@@ -76,7 +79,10 @@ namespace :deploy do
       CMD
     end
 
-    before "deploy:update_code","deploy:solr:stop"
-    after "deploy:symlinkconfigs","deploy:solr:start"
+#    before "deploy:update_code","deploy:solr:stop"
+#    after "deploy:symlinkconfigs","deploy:solr:start"
   end
 end
+
+        require './config/boot'
+        require 'airbrake/capistrano'

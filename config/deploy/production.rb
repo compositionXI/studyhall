@@ -1,6 +1,3 @@
-set :whenever_environment, defer { production } 
-require "whenever/capistrano"
-
 set :deploy_env, 'production' 
 set :rails_env, 'production' 
 set :bundle_without, [:development, :test] 
