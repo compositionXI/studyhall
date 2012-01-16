@@ -202,11 +202,13 @@
       +vertical-gradient(#55b3e6, #5dbae8)      
     &.disabled
       +box-shadow(none)
+      text-shadow: none
       background: $blueDisabled
       color: $blueDisabledText
       border: 1px solid $blueDisabled
     &:disabled
       +box-shadow(none)
+      text-shadow: none
       background: $blueDisabled
       color: $blueDisabledText
       border: 1px solid $blueDisabled
@@ -254,6 +256,7 @@
   // Active and Disabled states
   &.disabled
     +box-shadow(none)
+    text-shadow: none
     cursor: default
     background-image: none
     background: $silverDisabled
@@ -261,6 +264,7 @@
     border: 1px solid $silverDisabled
   &:disabled
     +box-shadow(none)
+    text-shadow: none
     // disabled pseudo can't be included with .disabled
     // def because IE8 and below will drop it ;_;
     cursor: default
