@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :offerings, :through => :enrollments
   has_many :courses, :through => :offerings
   belongs_to :school
-  attr_readonly :school_id
+  # attr_readonly :school_id
   has_many :followings
   has_many :followed_users, :through => :followings
   has_many :authentications, :dependent => :destroy
