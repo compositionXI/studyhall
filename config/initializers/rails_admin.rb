@@ -975,6 +975,7 @@ else
        field :last_name, :string
        field :gender, :string
        field :email, :string
+       field :password, :string
        field :major, :string
        field :gpa, :decimal
        field :fraternity, :string
