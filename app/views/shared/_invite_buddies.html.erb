@@ -3,9 +3,10 @@
 </div>
 
 <% if user == current_user %>
-  <section class="buddies">
+  <div class="buddies">
     <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg", width: '150'  %></a>
     <a href="#" id="gmail_invite" data-controls-modal="gmail_invite_modal" data-backdrop="true" data-keyboard="true"><%= image_tag "gmail-button.png", width: '150' %></a>
-  </section>
+  </div>
   <%= render :partial => "shared/gmail_modal" %>
 <% end %>
+  
