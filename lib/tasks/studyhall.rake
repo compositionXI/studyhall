@@ -19,6 +19,19 @@ namespace :studyhall do
         parse_csv_file file
       end
     end
+
+    desc "Find courses with no offering an insert a default offering so that it'll show up in search and Add A Course"
+    task :connect_orphans => :environment do 
+      na = Instructor.find_or_create_by_first_name_and_last_name("Unassigned","Professor")
+      Course.all(:include => :offerings).select { |c| c.offerings.empty? }.each do |orphan|
+        Offering.create(  :school_id      => orphan.school.id,
+                          :course_id      => orphan.id,
+                          :instructor_id  => na.id,
+                          :term           => "N/A"
+        )
+        Rails.logger.info "Connected Course: #{orphan.school.name} - #{orphan.title}"
+      end
+    end
   end
 
   desc "Generate slugs for Offering"
