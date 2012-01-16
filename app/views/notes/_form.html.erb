@@ -17,7 +17,7 @@
         <label class="add-on">
           <%= f.check_box :shareable, checked: @note.new_record? ? true : @note.notebook, class: "activation_check_box" %>
         </label>
-        <%= text_field_tag nil, nil, placeholder: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
+        <%= text_field_tag nil, nil, value: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
       </div>
     </div>
   </div></div>

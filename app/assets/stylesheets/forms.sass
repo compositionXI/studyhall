@@ -90,6 +90,12 @@ select,
 textarea
   +form-font(normal, 14px, normal)
 
+.ie8
+  input[type=text],
+  input[type=password],
+  select
+    line-height: 25px
+
 // Float labels left
 label
   +body-font(700, 12px, 18px)
@@ -173,6 +179,9 @@ textarea
   color: $grayLight
 
 \::-webkit-input-placeholder
+  color: $grayLight
+
+.prepended_checkbox
   color: $grayLight
 
 // Focus states

@@ -169,9 +169,9 @@ $(document).ready ->
 
     $(".modal").delegate "select[name='note[notebook_id]']", "change", (e) ->
       if $(this).val() == ''
-        $(this).closest('.modal-body').find(".prepended_checkbox").attr("placeholder", "Share this note")
+        $(this).closest('.modal-body').find(".prepended_checkbox").attr("value", "Share this note")
       else
-        $(this).closest('.modal-body').find(".prepended_checkbox").attr("placeholder", "Share this notebook")
+        $(this).closest('.modal-body').find(".prepended_checkbox").attr("value", "Share this notebook")
       return
     ###
     This prevents the text from being selected when a notebook is double-clicked
