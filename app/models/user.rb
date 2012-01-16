@@ -242,7 +242,7 @@ class User < ActiveRecord::Base
   end
   
   def avatar_url(size = nil)
-    self.avatar.url(size)
+    photo_url(size)
   end
   
   def has_avatar?
@@ -277,7 +277,7 @@ class User < ActiveRecord::Base
   def profile_completion_percentage
     count = 0.0
     total = 0.0
-    [self.first_name, self.last_name, self.avatar_url, self.bio, self.custom_url, self.school_id, self.majors, self.gpa, self.gender, self.sports, self.frat_sororities].each do |member|
+    [self.first_name, self.last_name, self.photo_url, self.bio, self.custom_url, self.school_id, self.majors, self.gpa, self.gender, self.sports, self.frat_sororities].each do |member|
       count += 1 unless (member.blank? || member =~ /\/assets\/generic_avatar\_\w*.png/)
       total += 1
     end
