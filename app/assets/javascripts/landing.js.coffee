@@ -145,7 +145,8 @@ class landingPage
         @headerVideoSetup()
       )
     else
-      window.setTimeout =>  
+      window.setTimeout => 
+        self = @
         @header_h1.animate
           'top' : 57
         , 500
@@ -158,7 +159,7 @@ class landingPage
         @header_main.animate
           'bottom' : "10px"
         , 750, 'swing', ->
-          @headerVideoSetup()  
+          self.headerVideoSetup()  
       , @speed     
       
   animateReasons: ->  
