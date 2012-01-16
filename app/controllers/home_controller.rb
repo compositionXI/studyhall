@@ -14,6 +14,12 @@ class HomeController < ApplicationController
     check_tour_mode
   end
 
+  def ping
+    Rails.cache.fetch('ping') do
+      @ping = RssEntry.first
+    end
+  end
+
   def landing_page
     @user = User.new
     render layout: "landing"

@@ -81,6 +81,7 @@ Studyhall::Application.routes.draw do
   resources :home do
     collection do
       get "landing_page"
+      get "ping"
     end
   end
   resources :filters, only: [:new, :create]
