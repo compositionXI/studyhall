@@ -65,7 +65,7 @@ else
   # config.excluded_models << [ActivityMessage, Authentication, Comment, Contact, Course, CourseOfferingImport, Enrollment, Extracurricular, Following, Instructor, Message, MessageCopy, Note, Notebook, Offering, Post, Role, Room, School, SessionFile, SessionInvite, StaticPage, StudySession, User, Vote, Whiteboard]
 
   # Add models here if you want to go 'whitelist mode':
-  # config.included_models = [ActivityMessage, Comment, Contact, Course, Enrollment, Following, Instructor, Note, Notebook, Message, MessageCopy, Offering, Post, School, Sport, SessionFile, SessionInvite, StaticPage, StudySession, User, Vote]
+  config.included_models = [ActivityMessage, Comment, Contact, Course, Enrollment, Following, FratSorority, Instructor, Major, Note, Notebook, Message, MessageCopy, Offering, Post, School, Sport, SessionFile, SessionInvite, StaticPage, StudySession, User, Vote]
 
   # Application wide tried label methods for models' instances
   # config.label_methods << [:description] # Default is [:name, :title]
