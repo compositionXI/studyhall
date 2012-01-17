@@ -8,12 +8,15 @@ namespace :campus_news do
       }
       options[:if_modified_since] =  latest_rss_entry.pub_date unless latest_rss_entry.nil?
 
-      Feedzirra::Feed.fetch_and_parse(school.rss_link, options).entries.each do |entry|
-        if (latest_rss_entry && entry.published > latest_rss_entry.pub_date) || latest_rss_entry.nil?
-          RssEntry.new({:school => school,
-                      :title => entry.title,
-                      :pub_date => entry.published,
-                      :link => entry.url}).save
+      feed = Feedzirra::Feed.fetch_and_parse(school.rss_link, options)
+      if feed.respond_to?(:entries) 
+        feed.entries.each do |entry|
+          if (latest_rss_entry && entry.published > latest_rss_entry.pub_date) || latest_rss_entry.nil?
+            RssEntry.new({:school => school,
+                        :title => entry.title,
+                        :pub_date => entry.published,
+                        :link => entry.url}).save
+          end
         end
       end
     end
