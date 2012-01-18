@@ -1,0 +1,25 @@
+<fieldset>
+  <legend><%= @user.name %></legend>
+</fieldset>
+
+<section class="grid-system">
+  <div class="row show-grid">
+    <div class="span5 columns">
+      <%= image_tag @user.avatar_url %>
+    </div>
+    <div class="span5 columns">
+      <ul class="unstyled spaced">
+        <li><b>Role:</b> <%= @user.role %></li>
+        <li><b>Gender:</b> <%= @user.gender %></li>
+        <li><b>Email:</b> <%= @user.email %></li>
+        <li><b>School:</b> <%= @user.school %></li>
+        <li><b>Major:</b> <%= @user.major %></li>
+        <li><b>GPA:</b> <%= @user.gpa %></li>
+        <li><b>Fraternity:</b> <%= @user.fraternity %></li>
+        <li><b>Sorority:</b> <%= @user.sorority %></li>
+      </ul>
+      <%= link_to("Edit", edit_user_path(@user), :class => "btn") if @current_user && @user.editable_by?(@current_user) %> 
+      <%= link_to 'Back', users_path, :class => "btn" if @current_user && @user.admin? %>
+    </div>
+  </div>
+</section>

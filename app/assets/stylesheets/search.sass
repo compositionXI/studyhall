@@ -1,0 +1,108 @@
+@import "preboot.sass"
+
+// .tabs
+//   li
+//     a:hover
+//       background: #EEE
+//     &.active
+//       a:hover
+//         background: transparent
+//         border-bottom: 0  
+.tabs.categories
+  li
+    background: $silverDark
+    a
+      padding: 4px 6px
+      color: $silverDisabledText
+    &.active
+      background: $blueDisabled
+      a
+        color: $blueDisabledText
+      
+.search_results
+  list-style: none
+  a.more_results
+    display: block
+    width: 700px
+    margin: 0 auto
+    padding: 15px 0
+    border: 1px solid $blockBlueBorder
+    color: $headings
+    background-color: $blockBlue
+    text-align: center
+    +border-radius(3px)
+
+  &.courses
+    float: none
+    width: auto
+    .course
+      span.course_book
+        background-image: url(../assets/BigGrayBook.png)
+        display: block
+        float: left
+        height: 155px
+        width: 120px
+        margin-right: 15px
+        padding: 40px 20px 0
+        text-align: center
+        color: white
+      dl
+        float: left
+        dd
+          ul.offerings
+            margin-top: 5px
+            list-style: none
+            margin-left: 0
+            li
+              display: inline
+              background: #EEE
+              padding: 3px
+              margin: 2px
+  &.notes
+    float: none
+    width: auto
+    .note
+      a.note_book
+        background-image: url(../assets/notebook-page.png)
+        display: block
+        float: left
+        height: 155px
+        width: 125px
+        margin-right: 15px
+        padding: 40px 20px 0
+        text-align: center
+        word-wrap: break-word
+      .info_container
+        margin-left: 180px
+        .note_content
+          padding: 0 10px
+          opacity: .9
+          overflow-y: hidden
+  &.people
+    .person
+      border-bottom: 1px dashed #CCC
+      margin-bottom: 15px
+      a.avatar
+        float: left
+      .hidden
+        display: none
+      h3
+        margin-left: 65px
+        margin-bottom: 5px
+      dl
+        display: inline
+        width: 400px
+        float: left
+        margin-bottom: 0px
+        &.narrow
+          margin-left: 15px
+          width: 200px
+
+.searches-show
+  .main-content
+    form.new_search
+      input[type='text']
+        width: 320px
+        margin-bottom: 10px
+      label
+        float: none

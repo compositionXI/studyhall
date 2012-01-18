@@ -1,0 +1,174 @@
+//Study Sessions
+.study_sessions-show
+  #menubar
+    a:hover
+      color: #404040
+    .middle
+      text-align: center
+      h3
+        line-height: 24px
+        margin-bottom: 0
+    .right
+      position: absolute
+      right: 0
+      top: 0
+    .left
+      position: absolute
+      left: 0
+      top: 0
+  #menubar
+    .middle
+      h3
+        color: #ffffff
+        @include body-font(normal, 18px, 32px)
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5)
+  section.main-content
+    background: url(asset-path('note-taking-bg.jpeg','image')) repeat-x
+    margin-top: -10px
+    .clearfix.flat
+      margin-bottom: 5px
+    .container
+      background: transparent
+      box-shadow: none
+      .cleditorToolbar
+        padding-left: 70px
+  #video_sidebar
+    float: left
+    width: 220px
+    background: transparent
+    margin-right: 15px
+    padding: 0 10px 0 0
+    min-height: 632px
+    position: relative
+    text-align: center
+    #links
+      text-align: left
+      height: 31px
+      a.btn
+        margin-right: 5px
+        float: left
+    .publisherContainer
+      border: 3px solid #FFF
+      height: 160px
+      width: 220px
+      background: #FFF
+      @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
+      p
+        margin: 53px 40px
+    #subscribers
+      width: 230px
+      margin-top: 5px
+      p
+        background: #fff
+        padding: 60px 35px
+        width: 156px
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
+      .subscribe_container
+        background: #fff
+        padding: 3px
+        width: 220px
+        height: 160px
+        margin-bottom: 5px
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.15))
+    #invite_button
+      position: absolute
+      bottom: 10px
+      left: 60px
+  #upload_form
+    float: right
+    width: 450px
+    padding: 40px 120px
+    background: #FFF
+  iframe
+    border: none
+    background: url(asset-path('http://crocodoc.com/media/images/docviewer/spinner.gif','image')) no-repeat center
+  .container
+  form.new_whiteboard
+    margin-left: 310px
+    width: 700px
+    height: 300px
+    .inner-form
+      margin: 100px 240px
+      width: 700px
+
+.study_session
+  .preview
+    border: 1px solid grey
+
+.study_sessions-index, .users-show
+  .study_session
+    background: url(asset-path('notebook-sprite.png','image')) no-repeat -396px 0 transparent
+    float: left
+    width: 122px
+    height: 156px
+    margin: 0 0 20px 20px
+    text-align: center
+    padding: 0 0 0 10px
+    position: relative
+    cursor: pointer
+    .attendees
+      margin: 25px auto 0
+      width: 85px
+      text-align: center
+      padding-right: 5px
+      li
+        margin: 0 1px
+    .name_wapper
+      width: 122px
+      float: left
+      word-wrap: break-word
+    .name
+      @include body-font(normal, 14px, 16px)
+      margin-left: -5px
+      padding-bottom: 2px
+    .date
+      @include body-font(normal, 11px, 14px)
+    .checkbox
+      display: none
+      position: absolute
+      right: 14px
+      bottom: 25px
+    &.edit
+      cursor: inherit
+      .checkbox
+        display: block
+        background: url(asset-path('notebook-icons.png','image')) -25px 0 no-repeat
+      &:hover
+        .checkbox
+          +opacity(70)
+          background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
+    &.selected
+      .checkbox
+        background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
+      &:hover
+        .checkbox
+          +opacity(100)
+          background: url(asset-path('notebook-icons.png','image')) -50px 0 no-repeat
+.study_sessions-index
+  .study_session
+    margin: 0 2px 20px 0px
+
+.study_session_demo_wrapper
+  .study_session_video
+    margin: 0 auto
+    width: 398px
+    +box-shadow(0px 0 10px rgba(0,0,0, .33))
+    background: image-url(asset-path('/assets/landing/browser-main.jpg', 'image')) no-repeat 
+    bottom: 10px         
+    height: 314px
+    z-index: 40
+  .mejs-container
+    margin: 0 auto
+  #browser_video
+    display: none
+  h1
+    margin-top: 24px
+  h2
+    width: 780px
+    margin: 0 auto
+    margin-bottom: 24px
+  .study_session_video
+    a
+      #browser_video
+        outline: none
+        border: none

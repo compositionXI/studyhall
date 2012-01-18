@@ -1,0 +1,19 @@
+<div id="menubar" class="topbar notes">
+  <div class="right">
+    <% if current_user.can_edit?(@note) %>
+      <%= link_to "Delete", delete_note_path(@note), method: :get, class: "btn", remote: true, id: "delete_button" %>
+      <%= link_to "Share", new_sharing_path(object_to_share: "Notes", position: "below-left", object_id: "note_#{@note.id}"), remote: true, id: "share_button", :class => "btn primary edit_button action_button" %>
+      <%= link_to "Edit", edit_note_path, class: "btn" %>
+    <% end %>
+    <%= link_to "Print", '', :onclick => 'javascript:print(); return false;', class: 'btn' %>
+  </div>
+  <div class="left">
+    <%= link_to "X", edit_note_back_path, :class => "btn" %>
+  </div>
+  <div class="middle">
+    <%= truncate @note.name, :length => 70 %>
+  </div>
+</div>
+<div class="container">
+  <div id="note_content"><%= @note.content.html_safe %></div>
+</div>

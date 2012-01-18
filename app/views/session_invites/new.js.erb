@@ -1,0 +1,13 @@
+var button = $("#invite_button");
+button.replaceWith(button.clone());
+var button = $("#invite_button");
+
+button.popover({trigger: "manual",
+                placement: "below-left",
+                offset: 10,
+                html: true,
+                title: function(){return "Invite Others";},
+                content: function(){return "<%=j render partial: 'form' %>";}})
+
+button.popover("show");
+$("select.chzn-select").chosen();

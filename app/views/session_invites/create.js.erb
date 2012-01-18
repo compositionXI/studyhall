@@ -1,0 +1,8 @@
+<% if @session_invite.new_record? %>
+  $("#message_new #error_explanation").html("<p><strong>Uh-oh!</strong> There was a problem. Please fill out all fields and try again.</p>");
+  $("#message_new #error_explanation").removeClass("hidden");
+<% else %>
+  $("#session_invite_new").animate({opacity: 0},1000)
+  setTimeout(function(){$("#session_invite_new").parent().html("<div class=\"alert-message success\">Your message was sent.</div>")}, 500);
+  setTimeout(function(){$("#invite_button").popover("hide")},2000);
+<% end %>

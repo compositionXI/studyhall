@@ -1,0 +1,35 @@
+<div class="row show-grid">
+  <div class="span8 columns offset4">
+    <% if flash[:error] %>
+      <div class="alert alert-message error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+    <div class="single-form">
+      <div class="header">
+        <h3>Sign Up</h3>
+      </div>
+      <%= form_for @user, :html => {:class => "form-stacked", :multipart => true} do |f| %>
+        <%= f.error_messages %>
+        <div class="clearfix">
+          <%= f.label :email %> 
+          <div class="input"><%= f.text_field :email %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :password %> 
+          <div class="input"><%= f.password_field :password %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :custom_url %> 
+          <div class="input custom_url_input">
+            <%= f.text_field :custom_url %>
+            <span class="url_prefix">studyhall.com/</span>
+          </div>
+        </div>
+        <div class="clearfix">
+          <%= f.submit "Join StudyHall", :class => "btn primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

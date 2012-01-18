@@ -1,0 +1,8 @@
+<%= form_for Whiteboard.new(:study_session => @study_session) do |f| %>
+  <div class="inner-form">
+    <%= f.hidden_field :study_session_id %>
+    <%= f.file_field :upload %>
+    <br/>
+    <%= f.submit "Upload Document", :class => "btn primary" %>
+  </div>
+<% end %>

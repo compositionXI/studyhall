@@ -1,0 +1,14 @@
+<%= form_for user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_gpa_form", :multipart => true} do |f| %>
+  <%= hidden_field_tag :rel_form, 'gpa_form' %>
+<div class="popover-body">  
+  <p>Being honest about your GPA is important; it allows others to see you as a valuable study partner.</p>
+  <input type="hidden" name="form_id" value="gpa_form">
+  <div class="input">
+    <%= f.label :GPA %>
+    <%= f.text_field :gpa, :class => 'number' %>
+  </div></div>
+<div class="popover-footer">  <div class="input clearfix">
+    <%= f.submit "Save Changes", :class => "btn primary save" %>
+    <%= link_to "Cancel", "#", :class => "btn close_modal" %>
+  </div></div>
+<% end %>

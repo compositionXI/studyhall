@@ -1,0 +1,75 @@
+<%= form_tag class_posts_path(:class_id => offering.id), :remote => true, :class => "form-stacked", :id => "filter_posts_form", :'data-type' => 'html', :method => :get do %>
+  <div class="popover-body"><div class="clearfix">
+      <div class="input">
+        <ul class="inputs-list">
+          <li>
+            <label>
+              <%= check_box_tag "all_posts_checkbox", "all", false %><span>All</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= label_tag "Notebooks" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%= collection_select :post, :notebook_id, notebooks_for(posts), :id, :name, {:prompt => "Choose a notebooks"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      <%= label_tag "Study Halls" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%= collection_select :post, :study_session_id, studyhalls_for(posts), :id, :created_at_formatted, {:prompt => "Choose a study hall"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      <%= label_tag "Classmate" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%= collection_select :user, :id, offering.classmates(current_user), :id, :name, {:prompt => "Choose classmate"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      <%= label_tag "Sports And Clubs" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%= collection_select :user, :sport_id, Sport.all, :id, :name, {:prompt => "Choose a Sport or Club"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      <%= label_tag "Fraternity/Sorority" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%= collection_select :user, :frat_sorority_id, FratSorority.all, :id, :name, {:prompt => "Choose A Fraternity"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      <!--
+      <%#= label_tag "Sorority" %>
+      <div class="input select_post_attribute">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%#= check_box_tag nil, nil, false, :class => "activation_check_box" %>
+          </label>
+          <%#= collection_select :user, :sorority, User.with_attribute(:sorority).compact, :sorority, :sorority, {:prompt => "Choose A Sorority"}, {:class => "chzn-select", :disabled => "true"} %>
+        </div>
+      </div>
+      --></div>
+  </div>
+  <div class="popover-footer clearfix">
+    <%= submit_tag "Filter", :class => "btn primary" %>
+    <%= link_to 'Cancel', class_posts_path, :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+  </div>
+<% end -%>

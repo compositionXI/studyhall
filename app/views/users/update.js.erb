@@ -1,0 +1,44 @@
+<% if @success %>
+  hidePopovers();
+  <% %w{photo affiliations bio gpa name}.each do |section| %>
+    $("#<%= section %>_section").html("<%=j render partial: section, locals: {user: @user} %>");
+    $("#<%= section %>_form").html("<%=j render partial: "#{section}_form", locals: {user: @user} %>");
+  <% end %>
+  $(".action_bar h3").text("<%= j truncate @action_bar_message, length: 60 %>")
+  <% if @tour %>
+    <% unless @next_form.nil? %>
+      <% if @next_form == 'invitations_form' %>
+        if($(".activate_invitation").length > 0) {
+          $(".activate_invitation").trigger("click");
+        } else {
+          var invitation_tour = $(".buddies.tourable.invitations");
+          var invitations_form = $("#invitations_form").clone();
+          invitations_form.find('#gmail_invite_modal').remove();
+          invitations_form.find('#facebook_connect_modal').remove();
+          invitation_tour.popover({
+            trigger: 'manual',
+            placement: 'below-right',
+            html: true,
+            offset: 10,
+            horizontalOffset: 140,
+            title: function() { return "Your buddies <small>We promise not to spam</small>"; },
+            content: function() {return invitations_form.html(); }
+          });  
+          invitation_tour.popover('show');
+        }
+        $("input.invite_buddies_save_button").live('click', function(){
+          window.location.href = '<%= root_url(tour: true)%>';
+        });
+      <% else %>
+        $("div.editable.edit").removeClass('active');
+        $("div[data-form='<%= @rel_form %>']").removeClass('edit');
+        $("div[data-form='<%= @next_form %>']").addClass('edit');
+        $("div[data-form='<%= @next_form %>']").trigger('click');
+      <% end %>
+    <% else %>
+      window.location.href = '<%= root_url(tour: true)%>';
+    <% end %>
+  <% end %>
+<% else %>
+  $("#edit_bio_form").prepend("<h2>Doh!</h2>");
+<% end %>

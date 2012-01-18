@@ -1,0 +1,39 @@
+var updateMessageList = function(){
+  if (<%= @message_copy.reply? %>){
+    $("#message_<%= @message_copy.parent_id %> .reply_list").append("<%=j render :partial => 'replies', :locals => {:reply => @message_copy} %>");
+    $("#message_<%= @message_copy.parent_id %> .reply_fields").append("<%=j render :partial => 'reply_form' %>");
+    message_list_item.find("#message_new textarea").first().focus();
+  }
+  else {
+    if($('body').hasClass('messages-index')) {
+      if($(".messages_list").length == 0) { 
+        window.location.reload(true); 
+      } else {
+        if($(".buttons.right").hasClass('hide')) {
+          $(".buttons.right").removeClass('hide');
+        }
+      }
+    }
+    $(".messages_list").prepend("<%=j render :partial => 'message', :locals => {:message => @message_copy} %>");
+  }
+}
+
+var formContainer = $("#new_message").parent()
+
+function showHideSuccessMessage(){
+  $(formContainer).find(".alert-message").fadeOut(500, function(){
+    $(formContainer).find(".alert-message").remove();
+    updateMessageList();
+  });
+  $("#new_message_button").popover("hide");
+}
+
+<% if @success %>
+  $("#new_message").animate({opacity: 0},1000)
+  message_list_item = $("#new_message").closest(".message_list_item");
+  setTimeout(function(){$("#new_message").parent().html("<div class='popover-body'><div class=\"alert-message success\">Your message was sent.</div></div>")}, 500);
+  setTimeout(function(){showHideSuccessMessage()},2000);
+<% else %>
+  $("#message_new #error_explanation").html("<p><strong>Uh-oh!</strong> There was a problem. Please fill out all fields and try again.</p>");
+  $("#message_new #error_explanation").removeClass("hidden");
+<% end %>

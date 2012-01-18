@@ -1,0 +1,15 @@
+var button = $("#<%=j @modal_link_id %>");
+
+button.popover({trigger: "manual",
+                placement: "below-left",
+                offset: 10,
+                horizontalOffset: 25,
+                html: true,
+                title: function(){return "Share With This Class";},
+                content: function(){return "<%=j render :partial => 'form', :locals => {:post => @post} %>";}});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+styleFileInputs();
+$("#new_class_post .fake-file").css({position: "relative", top: "-34px"});
+initWindowResize();

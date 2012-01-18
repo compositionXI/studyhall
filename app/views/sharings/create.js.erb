@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#new_sharing").replaceWith("<div class=\"alert-message success\" style=\"width:310px\"><p><strong>Success!</strong></p></div>");
+  setTimeout("$(\".popover\").remove();",3000);
+<% else %>
+<% end %>

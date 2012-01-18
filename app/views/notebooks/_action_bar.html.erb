@@ -1,0 +1,45 @@
+<div class="action_bar">
+  <div class="container">
+    <div class="buttons left">
+      <% if @index || @show %>
+        <%= link_to "Take Notes", new_note_path, :class => "btn" %>
+        <%= link_to "New Notebook", new_notebook_path, :class => "btn popover_button", :id => "new_notebook_button", :remote => true %>
+      <% end %>
+      <% if @edit_all %>
+        <%= link_to "Share", "#", :class => "btn primary", :id => "share_multiple_notebooks_notes" %>
+        <%= link_to "Delete", "#", :id => "delete_multiple_notebooks_notes", :class => "btn" %>
+      <% end %>
+    </div>
+    
+
+    <% if @notebook %>
+      <h3 class="middle">
+        <% if @notebook.new_record? %>
+          <span>New Notebook</span>
+        <% elsif @notebook.owner == current_user %>
+          <span><%= link_to 'All Items', notes_path %> &raquo; <%= truncate(@notebook.name, :length => 45) %></span>
+        <% else %>
+          <span><%= link_to "#{@notebook.owner.name}'s Shared Items", notebooks_path %> &raquo; <%= truncate(@notebook.name, :length => 30) %></span>
+        <% end %>
+      </h3>
+    <% end %>
+  
+    <div class="buttons right">
+      <% if @index%>
+        <a href="" class="btn">Filter</a>
+        <span id="items_layout_switcher">
+          <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+          <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
+        </span>
+        <%= link_to "Edit", notebooks_path(:edit_all => true), :class => "btn", :id => "edit_all" %>
+      <% end %>
+      <% if @show && current_user.can_edit?(@notebook) %>
+        <%= link_to "Edit", edit_notebook_path(@notebook), :class => "btn" %>
+        <%= link_to "Delete", notebook_path(@notebook), method: :delete, :class => "btn", :confirm => "Are you sure?" %>
+      <% end %>
+      <% if @edit_all %>
+        <%= link_to "Select All", "#", :class => "btn", :id => "select_all"%>
+        <%= link_to "Save", "#", :class => "btn", :id => "save_multiple_notebooks_notes" %>
+      <% end %>
+    </div></div>
+</div>

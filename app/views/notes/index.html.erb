@@ -1,0 +1,25 @@
+<% if flash[:alert] %>
+  <div class="alert-message warning">
+    <p><%= flash[:alert] %></p>
+  </div> 
+<% end %>
+<% if @note_items.any? %>
+  <div class="scroll_pane">
+    <ul class="note_items" data-layout="grid">
+      <%= render partial: "note_item", collection: @note_items, as: :note_item %>
+    </ul>
+  </div>
+<% elsif params[:filter] %>
+  <div class="note_item_demo">
+      <center>
+        <h3 class="title">No Results Found!</h3>
+        Sorry, we can't find any Notes or Notebooks meeting that criteria.
+      </center>
+  </div>
+<% else %><div class="landing_wrapper">
+  <div class="note_item_demo">
+      <a class="name" href="/notes/new">Take Notes</a>
+  </div>
+  <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
+  <p>Click the "Take Notes" button to begin taking note.</p></div>
+<% end %>

@@ -1,0 +1,202 @@
+// Popovers
+.popover
+  input[type="text"]
+    padding-left: 5px
+  input[disabled="disabled"]
+    &:-moz-placeholder
+      color: #CACFE0
+    &::-webkit-input-placeholder
+      color: #9D9D9A
+
+.popover #new_study_session
+  p
+    margin-top: 5px
+    &.warning
+      width: 310px
+
+.popover #new_sharing
+  .input
+    input#sharing_email_addresses
+      width: 370px
+  select, textarea
+    width: 370px
+    
+.popover .inner
+  overflow: visible
+  width: inherit
+
+  // POPOVERS
+  // --------
+
+.popover
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 1000
+  display: none
+  border: 1px solid $popoverBorder
+  +border-radius(2px)
+  +box-shadow(0 3px 7px rgba(0, 0, 0, 0.3))
+  &.above .arrow
+    +popover-arrow-above
+  &.right 
+    .arrow
+      +popover-arrow-right 
+    .arrow-border
+      +arrow-border-right(6px, $popoverBorder, 50%, -12px, auto)
+  //Modifications in by Jake Mauer / Intridea
+  &.below .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, 50%, auto)
+  &.below .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, 50%, auto)
+  &.below-left .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, auto, 15px)
+  &.below-left .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, auto, 15px)
+  &.below-right .arrow
+    +popover-arrow-below(10px, $popoverColor, -8px, 25px, auto)
+  &.below-right .arrow-border
+    +arrow-border(10px, $popoverBorder, -20px, 25px, auto)
+  //End Modifications
+  &.left 
+    .arrow
+      +popover-arrow-left
+    .arrow-border
+      +arrow-border-left(6px, $popoverBorder, 50%, auto, -12px)
+  .arrow
+    position: absolute
+    width: 0
+    height: 0
+  .inner
+    +vertical-gradient(white, #f8f8f8)
+    width: 410px
+  .title
+    line-height: 1
+    margin: 0
+    font-size: 24px
+  .content
+    padding: 14px
+    +border-radius(0 0 3px 3px)
+    +background-clip(padding-box)
+    p, ul, ol
+      color: #3a3a3a
+      margin-bottom: 0
+  form
+    padding: 0
+    margin: 0
+  .content
+    padding: 15px 0
+  .help_button
+    +box-sizing(border-box)
+    @include border-radius(10px)
+    position: absolute
+    top: 15px
+    right: 15px
+    color: #FFF
+    background: #DDD    
+    height: 20px
+    padding: 1px 0 0 7px
+    cursor: pointer
+    text-decoration: none
+    width: 20px
+  h2
+    margin: 0
+  input[type="file"]
+    width: 308px
+  select,
+  input[type="text"],
+  textarea
+    width: 312px
+  textarea
+    height: 150px
+    line-height: 20px
+  .popover-header
+    border-bottom: 1px solid #d1d1d1
+    padding: 20px 
+  .popover-body 
+    padding: 0 20px
+  .popover-footer
+    border-top: 1px solid #d1d1d1 
+    padding: 20px 20px 0 20px 
+  .help
+    position: absolute
+    top: 0
+    width: 300px
+    height: 0px
+    background-image: url(/assets/help_bg.jpg)
+    z-index: -1001
+    color: #FFF
+    &.right
+      right: 410px
+    &.left
+      left: 410px
+    .help_section
+      padding: 18px
+    .title
+      border-bottom: 1px solid black
+      border-radius: 3px 3px 0 0
+      box-shadow: 0 1px 0 grey
+    h3, h4
+      color: #FFF
+    .close_help_button
+      background-image: url(/assets/close_x.png)
+      height: 17px
+      width: 16px
+      position: absolute
+      top: 15px
+      right: 19px
+      color: #FFF
+      margin: 0 6px 1px 6px
+      cursor: pointer
+      text-decoration: none
+      font-size: 15px
+  .alert-message
+    margin: 0 auto
+  .input
+    margin: 10px 0 
+  input.mini-xfull
+    width: 342px
+  
+.study_session_modal
+  p
+    margin-top: 5px
+  input[type="file"]
+    width: 280px
+  form
+    .fake-file
+      input[type='text']
+        width: 230px !important
+  select
+    width: 312px
+  input[type="text"]
+    width: 300px
+    
+.users-show
+  .popover
+    .input
+      margin-left: 0
+      margin-bottom: 10px
+    input[type='text'], textarea, select
+      width: 370px
+    textarea
+      height: 150px
+    .left
+      input
+        width: 175px
+    .first
+      input
+        margin: 0 20px 0 0
+    input.number
+      width: 60px
+    #message_new
+      .input
+        margin-right: 0
+        input[type="text"]
+          width: 313px
+        textarea
+          width: 313px
+.ie8 .popover
+  .arrow, .arrow-border
+    display: none !important
+  .mini-xfull
+    width: 335px

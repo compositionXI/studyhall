@@ -1,0 +1,78 @@
+<div id="landing"><header class="header">
+  <h1 class="ir">StudyHall.com</h1>
+  <%= link_to "Log In", login_path, class: "login-button" %>
+  <div class="browser-quad"></div> 
+  <div class="browser-main">
+    <video id="browser_video" width="398" height="314" poster="/assets/landing/browser-main.jpg" controls="controls" preload="true">
+    	<source type="video/mp4" src="/video/landing.mp4" />
+    	<source type="video/webm" src="/video/landing.webm" />
+    	<source type="video/ogg" src="/video/landing.theora.ogv" />
+    	<object id="studyhall_video_flash" width="398" height="314" type="application/x-shockwave-flash" data="/assets/mediaelement_rails/flashmediaelement.swf">
+    		<param name="movie" value="/assets/mediaelement_rails/flashmediaelement.swf" />
+    		<param name="flashvars" value="controls=false&poster=/assets/landing/browser-main.jpg&file=/video/landing.mp4" />
+    		<img src="/assets/landing/browser-main.jpg" width="398" height="314" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+    	</object>
+    </video>
+  </div>
+  <div class="zigzag"></div> 
+</header>
+
+<section class="signup">
+  <div class="container">
+    <h1>Sign up and get your study on!</h1>
+      <%= form_for @user, remote: true, html: {class: "quick-signup form-stacked in"} do |f| %>
+        <div class="input email-container">
+          <%= f.label :email, "Your Email" %>
+          <%= f.text_field :email, :title => "Email", :class => "required email input_field" %>
+        </div>
+        <div class="input password-container">
+          <%= f.label :password, "Your Password" %>
+          <%= f.password_field :password, :title => "Password", :class => "required input_field" %>
+        </div>
+        <div class="input url-container">
+          <%= f.label :custom_url, "Your URL" %>
+          <%= f.text_field :custom_url, :title => "Your URL", :class => "required input_field" %>
+          <%= f.submit "Reserve your seat", class: "btn primary" %>
+          <div class="url-prefix">studyhall.com/</div>
+        </div>
+      <% end %>
+      <div class="alert-message info fade" id="info_message" data-alert="close">
+        <p>Sending all your bytes and bits...</p>
+      </div>
+      <div class="alert-message success fade" id="success_message" data-alert="close">
+        <p><strong>Great!</strong> Now watch your inbox for an account activation email...</p>
+      </div>
+   </div>
+</section>
+<section class="reasons">
+  <header class="container">
+    <a href="#" class="btn close" id="close_reasons">x</a>
+    <h1>Check out why StudyHall is awesome</h1>
+    <!-- <a class="btn primary small" target="_blank" href="http://twitter.com?status=Check%20out%20StudyHall%20<%= url_encode(root_url) %>">Share</a>  -->
+  </header>
+  <section class="content container">
+    <ul class="postits">
+      <li class="notes"><p>Take notes during and after class</p></li>
+      <li class="start"><p>Start and online study group</p><p>Secure your notes in a digital locker</p>
+      <li class="share"><p>Share your notes with buddies or whoever...<br>(sports, clubs, frats, and sororities)</p></li>
+      <li class="work"><p>Work on group projects</p><p>Post lecture notes and questions to classmates</p></li>
+      <li class="meet"><p>Meet up online with people you never though you'd study with</p></li>
+      <li class="login"><p>Log in using your Facebook account and connect with your friends</p></li>
+      <li class="collaborate"><p>Collaborate in real-time with your buddies</p><p>View profiles and meet a new study buddy :)</p></li>
+      <li class="free"><p>:) It's free!</p></li>
+    </ul> 
+    <video id="studyhall_video" width="700" height="393" poster="/assets/video-placeholder.jpg" controls="controls" preload="true">
+    	<source type="video/mp4" src="/video/studyhall.mp4" />
+    	<source type="video/webm" src="/video/studyhall.webm" />
+    	<source type="video/ogg" src="/video/studyhall.theora.ogv" />
+    	<object id="studyhall_video_flash" width="700" height="393" type="application/x-shockwave-flash" data="flashmediaelement.swf">
+    		<param name="movie" value="flashmediaelement.swf" />
+    		<param name="flashvars" value="controls=true&poster=/assets/video-placeholder.jpg&file=/video/studyhall.mp4" />
+    		<!-- Image as a last resort -->
+    		<img src="/assets/video-placeholder.jpg" width="700" height="393" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+    	</object>
+    </video>
+    <div class="video_shim"></div>
+  </section>
+</section>
+</div>

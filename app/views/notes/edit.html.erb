@@ -1,0 +1,20 @@
+<div id="menubar" class="topbar notes">
+  <div class="right">
+    <% if @note.new_record? %>
+      <%= link_to "Save", @notebook ? new_notebook_note_path(@notebook, :link_id => "save_note_button") : new_note_path(:link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
+    <% else %>
+      <%= link_to "Save", edit_note_path(:id => @note.id, :link_id => "save_note_button"), :remote => true, :id => "save_note_button", :class => 'btn' %>
+    <% end %>
+  </div>
+  <div class="left">
+    <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
+    <%= link_to('Show formatting', '#', class: 'btn formatting_toggle') %>
+    <%= link_to('Hide formatting', '#', class: 'btn formatting_toggle', style: 'display:none') %>
+  </div>
+  <div class="middle">
+    <%= truncate @note.name, :length => 70 %>
+  </div>
+</div>
+<div class="container">
+  <%= text_area_tag "content", @note.content, :id => "rte_area_note_content", :class => "rte_area" %>
+</div>

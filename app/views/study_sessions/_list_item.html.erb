@@ -1,0 +1,7 @@
+<% collapsed = true unless local_assigns.key? :collapsed %>
+<li class="notebook_list_item<%= ' collapsed' if collapsed %>">
+  <%= div_for study_session do %>
+    <%= render '/study_sessions/grid_view.html', study_session: study_session, collapsed: collapsed %>
+    <%= render '/study_sessions/list_view.html', study_session: study_session, collapsed: collapsed %>
+  <% end %>
+</li>

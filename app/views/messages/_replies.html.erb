@@ -1,0 +1,32 @@
+<% unless reply.spam? || reply.abuse? %>
+  <li id="reply_<%= reply.id %>" class="reply_list_item" data-message-type="<%= reply.class.to_s %>">
+    <div class="reply_header">
+      <% if reply.from %>
+        <%= link_to image_tag(reply.from.photo_url(:medium)), reply.from, :title => reply.from.title_name, :class => 'avatar' %>
+      <% else %>
+        <%= link_to image_tag('generic_avatar_medium.png'), '#', :title => 'No Longer A User', :class => 'avatar' %>
+      <% end %>
+      <div class="message_content">
+        <div class="meta expand_message">
+          <%= link_to reply.from.try(:title_name) || 'No Longer A User', reply.from, :class => "inner_link" %>
+          <ul class="message_utilities">
+            <% if reply.sender_id != @current_user.id %>
+              <li><%= link_to "Report as Spam", "#", :class => "message_action report_spam inner_link", :'data-url' => message_path(reply) %></li>
+              <li><%= link_to "Report as Abuse", "#", :class => "message_action report_abuse inner_link", :'data-url' => message_path(reply) %></li>
+            <% end %>             
+          </ul>
+          <span class="time"><%= time_ago_in_words reply.created_at %> ago</span>
+        </div>
+        <div class="body full_reply">
+          <%= htmlize_body(reply) %>
+        </div>
+        <% if reply.attachment? %>
+          <div class="attachment">
+            <%= image_tag "/assets/file-attachment.png" %>&nbsp;
+            <%=link_to truncate(reply.attachment_file_name, length: 45), reply.attachment.url(:original, false), target: '_blank' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

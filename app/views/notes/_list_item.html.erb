@@ -1,0 +1,19 @@
+<%= fields_for "notes[]", note do |note_fields| %>
+  <li class="note_list_item <%= 'edit_mode' if @edit_all %>">
+    <%= div_for note do %>
+      <% if @edit_all %>
+        <%= link_to "", edit_note_path(note, :link_id => "edit_note_#{note.id}_link", :source => 'index'), :remote => true, :id => "edit_note_#{note.id}_link", :class => "edit_notebook_link"%>
+        <%= render 'notes/grid_view.html', note: note, note_fields: note_fields %>
+        <%= render 'notes/list_view.html', note: note, note_fields: note_fields %>
+      <% else %>
+        <%= render 'notes/grid_view.html', note: note, note_fields: note_fields %>
+        <%= render 'notes/list_view.html', note: note, note_fields: note_fields %>
+      <% end %>
+      <% if @edit_all %>
+        <div class="checkbox">
+          <input type="checkbox" name="note[][id]" value="<%= note.id %>" />
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>

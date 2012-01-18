@@ -1,0 +1,5 @@
+<p><%= current_user.title_name %> has invited you to a study session.</p>
+<% unless @session_invite.message.blank? %>
+  <p>"<%= @session_invite.message %>"</p>
+<% end %>
+<%= link_to "Start studying!", study_session %>

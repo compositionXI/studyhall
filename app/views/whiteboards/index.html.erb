@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>Whiteboard</legend>
+</fieldset>
+<table>
+  <thead>
+  </thead>
+  <tbody>
+  <% @whiteboards.each do |wb| %>
+    <tr>
+      <td><%= link_to wb.name, wb %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create Whiteboard', new_whiteboard_path, :class => "btn" %>

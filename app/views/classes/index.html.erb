@@ -1,0 +1,26 @@
+<fieldset>
+  <legend>My Classes</legend>
+</fieldset>
+
+<%= link_to "Add New Class", new_class_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <th>School</th>
+    <th>Title</th>
+    <th>Number</th>
+    <th>Instructor</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @classes.each do |c| %>
+    <tr>
+      <td><%= c.school.name %></td>
+      <td><%= c.course.title %></td>
+      <td><%= c.course.number %></td>
+      <td><%= c.instructor.try(:full_name) %></td>
+      <td><%= link_to "Delete", class_path(c), method: :delete, :class => "btn" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

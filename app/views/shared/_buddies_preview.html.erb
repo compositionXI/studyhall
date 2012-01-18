@@ -1,0 +1,75 @@
+<% no_invitation ||= false %>
+<section class="buddies invitations tourable" data-popover-id="invitation_tour">
+  <header>
+    <h1 class="left"><%= user == current_user ? "Your" : "#{user.first_name}'s" %> Buddies <small>(<span class="total_buddies"><%= user.buddies.count %></span>)</small></h1>
+    <%= link_to "View All >>", user_buddies_path(user), id: 'view_all_buddies_button' %>
+  </header>
+  <% if user.buddies.any? %>
+    <ul>
+      <% user.buddies.limit(4).each do |buddy| %>
+        <li><%= link_to image_tag(buddy.photo_url(:medium)), buddy, :title => buddy.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if user == current_user && !no_invitation%>
+    <% if user.buddies.any? %>
+      <div class="activate_invitation">
+        <a>Invite Your Buddies!</a>
+      </div>
+    <% else %>
+      <%= render :partial => 'shared/invite_buddies', :locals => { :user => current_user }  %>
+    <% end %>
+  <% end %>
+</section>
+<div id="view_all_buddies" class="modal" style="display:none">
+  <div class="modal-header">
+    <% if user == current_user %>
+      <h3>Your Buddies (<span class="total_buddies"><%= user.buddies.count %></span>)</h3>
+    <% else %>
+      <h3><%= user.first_name %>'s Buddies</h3>
+    <% end %>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <% user.buddies.each do |user| %>
+        <li class="clearfix buddy_list_item <%= cycle('odd','') %>">
+          <div class="left photo">
+            <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+          </div>
+          <div class="left meta">
+            <%= link_to user.name, user %>
+            <%= user.school.try(&:name) %>
+          </div>
+          <div class="right">
+            <% if current_user && user != current_user %>
+              <% if current_user.follows?(user) %>
+                <%= link_to "Unfollow", unfollow_path(user), :class => "btn small unfollow_button", :remote => true, :method => :delete %>
+                <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn small hidden follow_button", :remote => true, :method => :post %>
+              <% else %>
+                <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :remote => true, :method => :delete %>
+                <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn small follow_button", :remote => true, :method => :post %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="cancel_popover btn">Close</a>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var view_all_buddies_modal = $("#view_all_buddies").modal({backdrop: true, keyboard: true});
+    $(".buddies").delegate("#view_all_buddies_button","click",function(e){
+      view_all_buddies_modal.modal("show");
+      $("#view_all_buddies ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#view_all_buddies").delegate(".cancel_popover","click",function(e){
+      $("#view_all_buddies").modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>

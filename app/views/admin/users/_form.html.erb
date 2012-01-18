@@ -1,0 +1,91 @@
+<%= form_for @user, :html => {:class => "form-stacked with_columns", :multipart => true} do |f| %>
+  <div class="row show-grid">
+    <div class="span6 columns offset1">
+      <fieldset>
+        <div class="clearfix">
+          <%= f.label :Login %> 
+          <div class="input"><%= f.text_field :login %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Password %> 
+          <div class="input"><%= f.password_field :password %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Password_Confirmation %>
+          <div class="input"><%= f.password_field :password_confirmation %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Name %>
+          <div class="input"><%= f.text_field :name %></div>
+        </div>
+
+        <%- if @current_user && @current_user.admin? %>
+          <div class="clearfix">
+            <%= f.label :Role %> 
+            <div class="input">
+            <% Role.all.each do |role| %>
+                <%= role.name %>
+                <%= check_box_tag( "user[role_ids][]", role.id, @user.roles.include?(role))%>
+            <% end %>
+            </div>
+          </div>
+        <% end %>
+        <div class="clearfix">
+          <%= f.label :Gender %>
+          <div class="input"><%= f.select( "gender", %w[Male Female] )%></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :School %>
+          <div class="input"><%= f.text_field :school %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Email %>
+          <div class="input"><%= f.text_field :email %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Major %>
+          <div class="input"><%= f.text_field :major %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :GPA %>
+          <div class="input"><%= f.text_field :gpa %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Fraternity %>
+          <div class="input"><%= f.text_field :fraternity %></div>
+        </div>
+        <div class="clearfix">
+          <%= f.label :Sorority %>
+          <div class="input"><%= f.text_field :sorority %></div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="span7 columns offset1">
+      <fieldset>
+        <div class="clearfix">
+          <%= image_tag @user.avatar_url %>
+        </div>
+        <div class="clearfix">
+          <%= f.label :avatar %>
+          <div class="input"><%= f.file_field :avatar %></div>
+        </div>
+        <% if @user.has_avatar? %>
+          <div class="clearfix">
+            <%= f.label "Delete Image" %>
+            <div class="input"><%= check_box_tag :delete_avatar %></div>
+          </div>
+        <% end %>
+      </fieldset>
+    </div>
+  </div>
+  <div class="row show-grid">
+    <div class="span8 columns offset1">
+      <fieldset>
+        <div class="clearfix">
+          <%= f.submit "Submit", :class => "btn primary" %>
+          <%= link_to 'Cancel', users_path, :class => "btn" %>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+<% end %>

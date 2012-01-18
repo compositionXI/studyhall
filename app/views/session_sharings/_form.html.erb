@@ -1,0 +1,11 @@
+<%= form_for @session_sharing, url: session_sharings_path, remote: true, html: {class: 'form-stacked'} do |f| %>
+  <%= f.hidden_field :sender_id %>
+  <%= f.hidden_field :study_session_ids %>
+  <%= f.label :email_addresses, "To" %>
+  <%= f.text_field :email_addresses, :value => "One or more email addresses" %>
+  <%= f.label :message_body %>
+  <%= f.text_area :message_body, rows: 5, cols: 60 %>
+  <div class="clearfix"></div>
+  <%= f.submit "Send", class: 'btn primary' %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => "invite_button" %>
+<% end %>

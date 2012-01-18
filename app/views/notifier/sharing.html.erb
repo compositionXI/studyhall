@@ -1,0 +1,21 @@
+<p>
+  <%= @sender.name.titleize %> shared something with you on <%= link_to "StudyHall.com", "http://www.studyhall.com" %>!
+</p>
+<ul style="margin:20px 0">
+  <% @object_urls_array.each do |object| %>
+    <li style="margin-top: 10px;"><%= link_to object.first.name, object.last %></li>
+  <% end %>
+</ul>
+<%- unless @sharing.message == "" %>
+  <p>
+    <%= @sender.first_name.capitalize %> said,<br/>
+    "<%= @sharing.message %>"
+  </p>
+<% end %>
+<p>
+<%- if @object_type == "Notebook" || @object_type == "Note" %>
+  On StudyHall.com you can take notes online and share them with your friends, classmates, or teammates. Click on a <%= @object_type %> to view it.
+<%- else @object_type == "StudyHall" %>
+  Studyhalls are a great way to study with your friends in real time, take notes together, and have fun. Click on a studyhall to start studying!
+<% end %>
+</p>

@@ -1,0 +1,13 @@
+<fieldset>
+  <legend><%= @static_page.title %></legend>
+</fieldset>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @static_page.text.html_safe %>
+</p>
+
+<%- if @current_user && @current_user.admin? %>
+  <%= link_to 'Edit', edit_admin_static_page_path(@static_page), :class => "btn" %>
+  <%= link_to 'Back', admin_static_pages_path, :class => "btn" %>
+<% end %>

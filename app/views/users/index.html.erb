@@ -1,0 +1,37 @@
+<fieldset>
+  <legend>Users</legend>
+</fieldset>
+<%= link_to "Create New User", new_user_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>School</th>
+    <th>Major</th>
+    <th>GPA</th>
+    <th>Fraternity</th>
+    <th>Sorority</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.name%></td>
+        <td><%= u.email %></td>
+        <td><%= u.gender %></td>
+        <td><%= u.school %></td>
+        <td><%= u.major %></td>
+        <td><%= u.gpa %></td>
+        <td><%= u.fraternity %></td>
+        <td><%= u.sorority %></td>
+        <td><%= link_to 'Show', u, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_user_path(u), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', u, confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<table>

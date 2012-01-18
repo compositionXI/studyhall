@@ -1,0 +1,43 @@
+<%= form_for @sharing, remote: true, html: {class: 'form-stacked'} do |f| %>
+  <%= f.hidden_field :object_ids %>
+  <div class="popover-body">
+    <div class="clearfix">
+      <label>Share with all buddies</label>
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on active">
+            <%= f.check_box :share_all %>
+          </label>
+          <input class="mini-xfull" size="20" disabled="disabled" type="text" value="Let everyone see these"/>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix recipient_option">
+      <label class="right recipient_toggle">Email</label>
+      <%= f.label :user_ids, 'Select Buddies' %>
+      <div class="input">
+        <%= f.collection_select :user_ids, current_user.buddies, :id, :name, {multiple: true}, multiple: 'multiple', class: 'xlarge chzn-select' %>
+      </div>
+    </div>
+    <div class="clearfix recipient_option" style="display:none">
+      <%= f.label :email_addresses, 'Email', class: 'right' %>
+      <label class="recipient_toggle">Select Buddies</label>
+      <div class="input">
+        <%= f.text_field :email_addresses, class: 'xlarge' %>
+      </div>
+      <span class="help-block">Use commas to separate emails</span>
+    </div>
+    <div class="clearfix">
+      <%= f.label :message %>
+      <div class="input">
+        <%= f.text_area :message, rows: 4, class: 'xlarge' %>
+      </div>
+    </div>
+  </div>
+  <div class="popover-footer clearfix">
+    <div class="input">
+      <%= f.submit "Share", class: "btn primary" %>
+      <a href="#" class="cancel_popover btn">Cancel</a>
+    </div>
+  </div>
+<% end %>

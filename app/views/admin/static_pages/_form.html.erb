@@ -1,0 +1,29 @@
+<%= form_for [:admin, @static_page], :html => {:class => "form-stacked"} do |f| %>
+  <% if @static_page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@static_page.errors.count, "error") %> prohibited this static_page from being saved:</h2>
+      
+      <ul>
+      <% @static_page.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="clearfix">
+    <%= f.label :title %>
+  <div class="input"><%= f.text_field :title %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :text %>
+    <div class="input"><%= f.text_area :text %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :slug, "Link" %>
+    <div class="input"><%= f.text_field :slug %></div>
+  </div>
+  <div>
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= link_to 'Back', admin_static_pages_path, :class => "btn" %>
+  </div>
+<% end %>

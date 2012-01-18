@@ -1,0 +1,48 @@
+var button = $("#<%=j @modal_link_id %>");
+
+button.popover({
+  trigger: "manual",
+  placement: "below-left",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "Filter";},
+  content: function(){return "<%=j render :partial => 'filter_form', :locals => {:posts => @class.posts, :offering => @class} %>";}});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+styleFileInputs();
+initWindowResize();
+
+$(".activation_check_box").click(function(e){
+  var checkbox = $(this);
+  var select = checkbox.closest(".select_post_attribute").find("select");
+  var selectId = select.attr("id");
+  var chznSelect = $("#"+selectId+"_chzn");
+  if (checkbox.is(":checked")){
+    select.removeAttr("disabled");
+    chznSelect.removeClass("chzn-disabled");
+    select.trigger("liszt:updated");
+  }
+  else {
+    select.attr("disabled", true);
+    chznSelect.addClass("chzn-disabled");
+  }
+  
+  $("#all_posts_checkbox").click(function(){
+    var checkbox = $(this);
+    var allInputs = $("#filter_posts_form input:not(#all_posts_checkbox, input[type='submit'])");
+    var allSelects = $("#filter_posts_form select");
+    //var chznSelect = $("#"+selectId+"_chzn");
+    if (checkbox.is(":checked")){
+      allInputs.attr("disabled", true);
+      allSelects.attr("disabled", true);
+      allSelects.trigger("liszt:updated");
+    }
+    else {
+      allInputs.removeAttr("disabled");
+      allSelects.removeAttr("disabled");
+      allSelects.trigger("liszt:updated");
+    }
+  });
+});

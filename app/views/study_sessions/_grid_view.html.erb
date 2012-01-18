@@ -1,0 +1,15 @@
+<div class="grid_view">
+  <div class="preview">
+    <div class="fields">
+      <%= link_to study_session.created_at.strftime("%d/%m/%Y"), study_session, class: "name" %>
+      <div>
+        <ul class="attendees">
+          <% study_session.users.each do |user| %>
+            <li><%= link_to image_tag(user.photo_url(:thumb)), user, :title => user.name %></li>
+          <% end %>
+        </ul>
+        <div class="document"></div>
+      </div>
+    </div>
+  </div>
+</div>

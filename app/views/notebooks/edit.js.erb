@@ -1,0 +1,12 @@
+var button = $("#<%=j @modal_link_id %>");
+button.popover({
+  trigger: "manual",
+  placement: "below",
+  offset: 10,
+  html: true,
+  title: function(){return "Edit this notebook";},
+  content: function(){return "<%=j render :partial => 'edit' %>";}
+});
+button.popover("show");
+$("#edit_notebook_form input[type='text']").first().focus();
+$(".chzn-select").chosen();

@@ -1,0 +1,16 @@
+<div class="grid_view">
+  <div class="preview">
+    <div class="fields">
+      <a class="name" href="<%= note_path(note) %>">
+        <span><%= note.name %></span>
+      </a>
+    </div>
+
+    <% unless note.shareable? %>
+      <%= image_tag "lock.png", :class => "lock_icon icon" %>
+    <% end %>
+    <% if @edit_all %>
+      <span class="drag_handle icon">+</span>
+    <% end %>
+  </div>
+</div>

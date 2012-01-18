@@ -1,0 +1,46 @@
+<%= render :partial => 'shared/fb_connect' %>
+
+<%= form_for (@user || current_user), :html => { :multipart => true, :class => "xlarge profile_wizard form-stacked"} do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field nil, :name => "redirect_back", :value => "profile_wizard" %>
+  <div id="profile_completion_meter" class="popover right">
+    <div class="arrow-border"></div>
+    <div class="arrow"></div>      
+    <div class="inner">
+      <div class="content"><p><%= @user.profile_completion_percentage %>% Complete</p></div>
+    </div>
+  </div>
+  <%= hidden_field_tag :others_profile_complete_count, @user.profile_except_wizard_completion_count %>
+  <fieldset>
+    <div class="clearfix">
+      <div class="input first-name"><%= f.label :first_name %> 
+      <%= f.text_field :first_name, :class => 'left', "data-countable" => true %></div>
+      <div class="input last-name"><%= f.label :last_name %> 
+      <%= f.text_field :last_name, :class => 'left', "data-countable" => true %></div>
+    </div>
+    <div class="clearfix avatar" <%= "data-default-url='true'" if @user.avatar_file_size.nil? %> >
+      <%= image_tag @user.photo_url(:large) %>
+    </div>
+    <div class="clearfix">
+      <%= f.label :Your_photo %>
+      <div class="input"><%= f.file_field :avatar, :class => "input-file", "data-countable" => false %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :courses %>
+      <div class="input"><%= f.collection_select :enrollments, Offering.find_all_by_school_id(@user.school), :id, :course_listing, {:selected => selected_courses_for(@user), :prompt => "Choose courses"}, {:class => "chzn-select", "data-placeholder" => "Choose courses", :multiple => true, :name => "user[offering_ids][]", "data-countable" => true} %></div>
+    </div>
+        <!-- <div class="clearfix">
+              <label for="user_courses">Courses</label>
+              <div class="input"><select class="chzn-select" data-countable="true" data-placeholder="Choose courses" id="user_enrollments" multiple="multiple" name="user[offering_ids][]"><option value="">Choose courses</option><option value="option2">Option 2</option><option value="option3">Option 3</option>
+        </select></div>-->
+    <div class="clearfix">
+      <label>Invite your friends to StudyHall</label>
+      <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg" %></a>
+      <a href="#" id="gmail_invite" data-controls-modal="gmail_invite_modal" data-backdrop="true" data-keyboard="true"><%= image_tag "gmail-button.png" %></a>
+    </div>
+    <div class="clearfix buttons">
+      <%= f.submit "Submit", :class => "btn primary" %>
+    </div>
+  </fieldset>
+<% end %>
+

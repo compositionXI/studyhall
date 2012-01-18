@@ -1,0 +1,26 @@
+<div class="grid_view">
+  <div class="preview">
+    <div class="fields">
+      <div class="<%= 'editable' if @edit_all %> text">
+        <% if @edit_all %>
+          <div class="name">
+            <span><%= notebook.name %></span>
+          </div>
+        <% else %>
+          <a class="name" href="<%= notebook_path(notebook) %>">
+            <span><%= notebook.name %></span>
+          </a>
+        <% end %>
+        <span class="course"><%= notebook.course.try(:title) %></span>
+      </div>
+      <% if @edit_all %>
+        <div class="notebook_edit_fields">
+          <span><%= notebook_fields.text_field :name %></span>
+          <div class="course">
+            <%= collection_select "notebooks[#{notebook.id}]", :course_id, Offering.find_all_by_school_id(current_user.school), :id, :course_listing, {:selected => selected_courses_for(current_user), :prompt => "Choose a course"}, {:class => "chzn-select", :id => "notebooks_#{notebook.id}_course_id_grid", "data-placeholder" => "Choose a course"} %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

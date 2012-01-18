@@ -1,0 +1,3 @@
+<p>
+  <%= link_to @commenter.name.titleize, "http://#{APP_CONFIG['host']}/" + @commenter.custom_url %> commented on you post on the <%= link_to @post.offering.course.title, class_url(@post.offering) %> page.
+</p>

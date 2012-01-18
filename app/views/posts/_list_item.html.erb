@@ -1,0 +1,46 @@
+<ul class="unstyled">
+  <% posts.each do |post| %>
+    <% unless current_user.blocked?(post.user)%>
+      <li class="post_item">
+        <div class="class_post">
+          <div class="user_photo left">
+            <% if post.user %>
+              <%= link_to image_tag(post.user.photo_url(:medium)), post.user %>
+            <% else %>
+              <%= link_to image_tag("/assets/generic_avatar_medium.png"), user_missing %>
+            <% end %>
+          </div>
+          <div class="post_details left">
+            <%= post.user ? link_to(post.user.title_name, post.user, :class => 'user_name') : user_missing %>
+            <span class="post_time"><%= post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
+            <%= post.text %>
+            <div>
+              <% if post.notebook_id %>
+                Notebook: <%= link_to(post.notebook.try(:name), notebook_notes_path(post.notebook)) %>
+              <% elsif post.note_id %>
+                Note: <%= link_to(post.note.try(:name), note_path(post.note)) %>
+              <% end %>
+              <% if post.study_session_id && post.study_session %>
+                Studyhall: <%= link_to(post.study_session.presentation, study_session_path(post.study_session)) %>
+              <% end %>
+            </div>
+            <div class="post_comment">
+              <%= link_to "Comment", "#", :class => "comment_form_button", :name => "comment_for_#{post.id}" %>
+            </div>
+          </div>
+          <%= render partial: "posts/utilities", locals: {post: post} %>
+        </div>
+        <% if post.has_comments? %>
+          <div class="comment_list">
+            <ul class="unstyled">
+              <%= render partial: "comments/list_item", collection: post.comments, as: :comment %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="comment_form", id="comment_for_<%= post.id %>">
+          <%= render "comments/form.html.erb", :comment => post.comments.new, :class_id => post.offering_id %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

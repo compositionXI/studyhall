@@ -1,0 +1,54 @@
+development:
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
+  host: studyhall.dev
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 212476088833208 
+    app_secret: f19bacc518befd7f113963024b04adf3
+  envolve:
+    api_key: 49089-9Rhlu7bQ58YOEttkcEV8T1jD1YizKdGD
+
+test:
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
+  opentok:
+    key: 3277692
+    secret: 8905050f8367fa22748f910906d6a1dfe3b035f8
+    js_src: http://staging.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 212476088833208
+    app_secret: f19bacc518befd7f113963024b04adf3
+  envolve:
+    api_key: 47083-oVEyvpMVvdw5PB8nvwdBIffLIOTsw5Wh
+
+staging:
+  per_page: 10
+  contact_form_recipient: maggie@intridea.com
+  host: studyhall.intridea.com
+  opentok:
+    key: 5822951
+    secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
+    js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 178338135584982
+    app_secret: 32979dcdcb2f545df4488dc28899ba1e
+  envolve:
+    api_key: 49088-DsVP7VVnuD6MMOsHBD5BT7o9vJh6GtzH
+
+production:
+  per_page: 10
+  contact_form_recipient: support@studyhall.com
+  host: www.studyhall.com
+  opentok:
+    key: 5822951
+    secret: df6d6a2dd7dd308d72b4b041ac2a2f7866fb985d
+    js_src: https://swww.tokbox.com/v0.91/js/TB.min.js
+  facebook:
+    app_id: 156194921156858 
+    app_secret: c60c562a6107f4481c9ac696d51d87a4
+  envolve:
+    api_key: 48712-g6QT0AkzEKH8EBenMaoFyj67YkFxPAov

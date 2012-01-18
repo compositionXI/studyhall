@@ -1,0 +1,12 @@
+<div id="facebook_connect_modal">
+  <%= render :partial => 'shared/fb_connect' %>
+</div>
+
+<% if user == current_user %>
+  <div class="buddies">
+    <a href="#" id="facebook_invite"><%= image_tag "facebook-button.jpeg", width: '150'  %></a>
+    <a href="#" id="gmail_invite" data-controls-modal="gmail_invite_modal" data-backdrop="true" data-keyboard="true"><%= image_tag "gmail-button.png", width: '150' %></a>
+  </div>
+  <%= render :partial => "shared/gmail_modal" %>
+<% end %>
+  

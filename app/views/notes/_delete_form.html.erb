@@ -1,0 +1,14 @@
+<%= form_tag delete_note_path(note), {class: 'form-stacked', method: 'DELETE'} do %>
+  <div class="popover-body">
+    <h2>Warning!</h2>
+    
+  <p>Deletion is permanent. <br> Are you sure you want to do this?</p>
+  <div class="input">
+  <%= check_box_tag :for_realz, 1, false, :id => "note_#{note.id}_delete_for_realz" %>
+  <%= label_tag :for_realz, "Yes, I want to delete this note", :style => "display:inline" , :for => "note_#{note.id}_delete_for_realz" %></div>
+  </div>
+  <div class="popover-footer clearfix">
+  <%= submit_tag "Delete", class: "btn primary disabled" %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => "delete_button" %>
+  </div>
+<% end %>

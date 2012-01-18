@@ -1,0 +1,25 @@
+var button = $("#delete_button");
+button.popover({trigger: "manual",
+  placement: "below-right",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "<%= @group_delete.title %>";},
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+
+var selected_items = $.makeArray($(".selected").map(function(){
+  return $(this).prop("id");
+}));
+$("#group_delete_object_ids").val(selected_items.join(","));
+
+$("#new_group_delete").delegate("input[type='checkbox']","change",function(){
+  var checkbox = $("#group_delete_for_realz");
+  if(checkbox.is(":checked"))
+    checkbox.siblings("input[type='submit']").removeClass("disabled");
+  else
+    checkbox.siblings("input[type='submit']").addClass("disabled");
+});

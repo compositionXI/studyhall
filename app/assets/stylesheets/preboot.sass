@@ -1,0 +1,573 @@
+/* Preboot.scss
+ * Variables and mixins to pre-ignite any new web development project
+ * ------------------------------------------------------------------
+
+// CUSTOM VARIABLES //INTRIDEA
+// ----------------
+
+// Palette
+$linkColor: #249ee8
+$linkColorHover: darken($linkColor, 10)
+
+$headings: #333333
+$smallHeadings: #afafaf
+$bodyCopy: #444444
+
+$bgColor: #f4f9fc
+$formColor: #707070
+$formBg: #F6F6F6
+
+$zebraStriping: #fafafa
+$zebraBorder: #e7e5e4
+
+$tooltipColor: #50311d
+$emphasis: #e87224
+
+$navGradStart: #392619
+$navGradEnd: #21140c
+$navBorderTop: #7e674f
+$navBorderRight: #1a1817
+$navBorderBottom: #0a0401
+$navBorderLeft: #745d4a
+
+$navCurrentGradStart: #00b8dc
+$navCurrentGradEnd: #008bc6
+$navCurrentBorder: #4dcee7
+$navCurrentLeft: #4db8dd
+
+$navFormGradStart: #412818
+$navFormGradEnd: #4f311e
+
+$imgBorder: #4e301c
+
+$twipsyColor: white
+$twipsyTextColor: black
+
+$popoverColor: white
+$popoverTextColor: #333333
+$popoverBorder: #acb0b9
+
+$modalBorder: #4e4d4d
+$modalInnerBorder: #d2d0d0
+$modalGradStart: #fefef9
+$modalGradEnd: #f8f8f8
+
+$standard_background: #f1f7fb
+$footer_background: #e9e9e9
+$highlight_text: #249EE8
+$editable_background: #fdfde0
+$rating_block_background: #e9e9e9
+
+$scrollBar: #e1e1e1
+$scrollTrack: #a5a5a5
+
+$newsDate:  #044444
+
+$notebookBorder:  #91cef3
+
+// Headers //INTRIDEA
+$h1: 48px
+$h1LineHeight: 48px
+$h1small: 30px
+
+$h2: 30px
+$h2LineHeight: 36px
+
+$h3: 24px
+$h3LineHeight: 30px
+
+$h4: 21px
+$h4LineHeight: 30px
+
+$h5: 18px
+$h5LineHeight: 24px
+
+$h6: 14px
+$h6LineHeight: 24px
+
+$hr:  #c6c0bc
+
+// Topbar //INTRIDEA
+
+$topbarHeight: 73px
+$topbarRadius: 3px
+$margin: 24px
+
+$checkerImage: "/assets/checker_grid.png"
+
+// VARIABLES From Default Bootstrap
+// ---------
+
+// Grays
+$black: black
+$grayDark: lighten($black, 25%)
+$gray: #707070
+$grayLight: #404040
+$grayLighter: #888888
+             
+$white: white
+
+// Accent and Button Colors
+$blue: #72cef2
+$blueDark: #59baed
+$blueBorder: #20546f
+$blueText: #001f2f
+$blueTextShadow: #9fdcf6
+
+$pressed:     #4d5457
+$pressedDark: #393e40
+$pressedText: #ffffff
+$pressedTextShadow: #000000
+$pressedBorder: #151212
+
+$blueDisabled: #86d5ff
+$blueDisabledText: #366882
+
+$silver: #f5f5f5
+$silverDark: #eeeeee
+$silverText: #0e1011
+$silverTextShadow: white
+$silverBorder: #777777
+
+$silverDisabled: #eeeeee
+$silverDisabledText: #777b7d
+
+$red: #f1716e
+$redDark: #eb5856
+$redBorder: #7d1311
+$redText: #2f0000
+$redTextShadow: #f4a1a0
+
+$aqua: #6dd2e7
+$aquaDark: #55c0dd
+$aquaBorder: #1e6b92
+$aquaText: #002934
+$aquaTextShadow: #9fdded
+
+$green: #a2d034
+$greenDark: #7ebd28
+$greenBorder: #1e6b92
+$greenText: #2b460c
+$greenTextShadow: #badb83
+
+
+// Table Colors
+$tableHeader: #463022
+
+$blueTable: $linkColor
+$blueTableBg: #e7f6ff
+
+$greenTable: #49a641
+$greenTableBg: #e8ffe6
+
+$yellowTable: #997e02
+$yellowTableBg: #fffdd9
+          
+// Form Colors
+
+$formBorder: #cacfe0
+
+//General Colors
+$yellow: #ffc40d
+$orange: #f89406
+$pink: #c3325f
+$purple: #7a43b6
+
+// Alert Colors
+$yellowAlertBorder: #d9c476
+$yellowAlert: #fdfda4
+$yellowAlertDark: #f1f096
+
+$redAlert: #f17678
+$redAlertDark: #ec5254
+$redAlertBorder: #d34042
+
+$greenAlert: #9fcf36
+$greenAlertDark: #81be1a
+$greenAlertBorder: #6eaa09
+
+$blueAlert: #77cdf3
+$blueAlertDark: #43bbee
+$blueAlertBorder: #2798d1
+
+// Block Messages
+
+$blockColor: #4a3b01
+
+$blockYellow: #fffed0
+$blockYellowBorder: #e2df66
+
+$blockRed: #ffcecf
+$blockRedBorder: #ffa6a8
+
+$blockGreen: #e3ffbe
+$blockGreenBorder: #c7eb7b
+
+$blockBlue: #ccefff
+$blockBlueBorder: #a3d8f1
+
+//Book colors
+
+$darkBookText: #012a3f 
+
+
+// Baseline grid
+$basefont: 14px
+$baseline: 18px
+
+// Griditude
+$gridColumns: 16
+$gridColumnWidth: 40px
+$gridGutterWidth: 20px
+$extraSpace: 40px
+$siteWidth: $gridColumns * $gridColumnWidth + $gridGutterWidth * ($gridColumns - 1)
+
+// Color Scheme
+$baseColor: $blue
+
+// Set a base color
+$complement: complement($baseColor)
+
+// Determine a complementary color
+$split1: adjust-hue($baseColor, 158)
+
+// Split complements
+$split2: adjust-hue($baseColor, -158)
+$triad1: adjust-hue($baseColor, 135)
+
+// Triads colors
+$triad2: adjust-hue($baseColor, -135)
+$tetra1: adjust-hue($baseColor, 90)
+
+// Tetra colors
+$tetra2: adjust-hue($baseColor, -90)
+$analog1: adjust-hue($baseColor, 22)
+
+// Analogs colors
+$analog2: adjust-hue($baseColor, -22)
+
+// Font Stacks //INTRIDEA
+
+@font-face
+  font-family: 'ChennaiSlabMedium'
+  src: url("/assets/chennaislabmedium-webfont.eot")
+  src: url("/assets/chennaislabmedium-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/chennaislabmedium-webfont.woff") format("woff"), url("/assets/chennaislabmedium-webfont.ttf") format("truetype"), url("/assets/chennaislabmedium-webfont.svg#ChennaiSlabMedium") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'ChennaiSlabMediumOblique'
+  src: url("/assets/chennaislabmediumoblique-webfont.eot")
+  src: url("/assets/chennaislabmediumoblique-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/chennaislabmediumoblique-webfont.woff") format("woff"), url("/assets/chennaislabmediumoblique-webfont.ttf") format("truetype"), url("/assets/chennaislabmediumoblique-webfont.svg#ChennaiSlabMediumOblique") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'MuseoSansItalic'
+  src: url("/assets/museosans-500italic-webfont.eot")
+  src: url("/assets/museosans-500italic-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/museosans-500italic-webfont.woff") format("woff"), url("/assets/museosans-500italic-webfont.ttf") format("truetype"), url("/assets/museosans-500italic-webfont.svg#MuseoSansItalic") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+@font-face
+  font-family: 'MuseoSansRegular'
+  src: url("/assets/museosans-500-webfont.eot")
+  src: url("/assets/museosans-500-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/museosans-500-webfont.woff") format("woff"), url("/assets/museosans-500-webfont.ttf") format("truetype"), url("/assets/museosans-500-webfont.svg#MuseoSansRegular") format("svg")
+  font-weight: normal
+  font-style: normal
+
+
+=shorthand-font($weight: normal, $size: 14px, $lineHeight: 20px)
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+=sans-serif-font($weight: normal, $size: 14px, $lineHeight: 20px)
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+=header-font($weight: normal, $size: 14px, $lineHeight: 20px)
+  font-family: chennai-slab, "Helvetica Neue", Arial, Sans-serif
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+=body-font($weight: 500, $size: 14px, $lineHeight: 20px)
+  font-family: museo-sans, "Helvetica", Arial, Sans-serif
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+=form-font($weight: normal, $size: 14px, $lineHeight: 20px)
+  font-family: Arial, Sans-serif
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+=monospace-font($weight: normal, $size: 12px, $lineHeight: 20px)
+  font-family: "Monaco", Courier New, monospace
+  font-size: $size
+  font-weight: $weight
+  line-height: $lineHeight
+
+// MIXINS
+// ------
+
+// Gradients
+=horizontal-gradient($startColor: #555555, $endColor: #333333)
+  background-color: $endColor
+  background-repeat: repeat-x
+  background-image: -khtml-gradient(linear, left top, right top, from($startColor), to($endColor))
+  // Konqueror
+  background-image: -moz-linear-gradient(left, $startColor, $endColor)
+  // FF 3.6+
+  background-image: -ms-linear-gradient(left, $startColor, $endColor)
+  // IE10
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, $startColor), color-stop(100%, $endColor))
+  // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(left, $startColor, $endColor)
+  // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient(left, $startColor, $endColor)
+  // Opera 11.10
+  background-image: linear-gradient(left, $startColor, $endColor)
+  // Le standard
+
+=vertical-gradient($startColor: #555555, $endColor: #333333)
+  background-color: $endColor
+  background-repeat: repeat-x
+  background-image: -khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor))
+  // Konqueror
+  background-image: -moz-linear-gradient(top, $startColor, $endColor)
+  // FF 3.6+
+  background-image: -ms-linear-gradient(top, $startColor, $endColor)
+  // IE10
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $startColor), color-stop(100%, $endColor))
+  // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(top, $startColor, $endColor)
+  // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient(top, $startColor, $endColor)
+  // Opera 11.10
+  background-image: linear-gradient(top, $startColor, $endColor)
+  // The standard
+
+=vertical-gradient-image($url: "#", $startColor: #555555, $endColor: #333333, $repeat: repeat)
+  //INTRIDEA
+  background-color: $endColor
+  background-repeat: $repeat
+  background-position: 0 0 
+  background-image: url($url)
+  background-image: url($url), -khtml-gradient(linear, left top, left bottom, from($startColor), to($endColor))
+  // Konqueror
+  background-image: url($url), -moz-linear-gradient(top, $startColor, $endColor)
+  // FF 3.6+
+  background-image: url($url), -ms-linear-gradient(top, $startColor, $endColor)
+  // IE10
+  background-image: url($url), -webkit-gradient(linear, left top, left bottom, color-stop(0%, $startColor), color-stop(100%, $endColor))
+  // Safari 4+, Chrome 2+
+  background-image: url($url), -webkit-linear-gradient(top, $startColor, $endColor)
+  // Safari 5.1+, Chrome 10+
+  background-image: url($url), -o-linear-gradient(top, $startColor, $endColor)
+  // Opera 11.10
+  background-image: url($url), linear-gradient(top, $startColor, $endColor)
+  // The standard
+
+=directional-gradient($startColor: #555555, $endColor: #333333, $deg: 45deg)
+  background-color: $endColor
+  background-repeat: repeat-x
+  background-image: -moz-linear-gradient($deg, $startColor, $endColor)
+  // FF 3.6+
+  background-image: -ms-linear-gradient($deg, $startColor, $endColor)
+  // IE10
+  background-image: -webkit-linear-gradient($deg, $startColor, $endColor)
+  // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient($deg, $startColor, $endColor)
+  // Opera 11.10
+  background-image: linear-gradient($deg, $startColor, $endColor)
+  // The standard
+
+=vertical-three-colors-gradient($startColor: #00b3ee, $midColor: #7a43b6, $colorStop: 50%, $endColor: #c3325f)
+  background-color: $endColor
+  background-repeat: no-repeat
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($startColor), color-stop($colorStop, $midColor), to($endColor))
+  background-image: -webkit-linear-gradient($startColor, $midColor $colorStop, $endColor)
+  background-image: -moz-linear-gradient($startColor, $midColor $colorStop, $endColor)
+  background-image: -ms-linear-gradient($startColor, $midColor $colorStop, $endColor)
+  background-image: -o-linear-gradient($startColor, $midColor $colorStop, $endColor)
+  background-image: linear-gradient($startColor, $midColor $colorStop, $endColor)
+
+// Opacity
+=opacity($opacity: 100)
+  filter: alpha(opacity = $opacity)
+  -khtml-opacity: $opacity / 100
+  -moz-opacity: $opacity / 100
+  opacity: $opacity / 100
+
+// Gradient Bar Colors for buttons and alerts
+=gradientBar($primaryColor, $secondaryColor)
+  +vertical-gradient($primaryColor, $secondaryColor)
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+  border-color: $secondaryColor $secondaryColor darken($secondaryColor, 15%)
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) fadein(rgba(0, 0, 0, 0.1), 15%)
+
+//INTRIDEA
+=button-gradient($primaryColor, $secondaryColor, $textColor, $textShadowColor, $borderColor)
+  +vertical-gradient($primaryColor, $secondaryColor)
+  color: $textColor
+  text-shadow: 0px 1px 0px $textShadowColor
+  border-color: $borderColor
+  &:hover
+    +vertical-gradient($secondaryColor, $primaryColor)
+
+=box-sizing($type: border-box)
+  -ms-box-sizing: $type
+  -moz-box-sizing: $type
+  -webkit-box-sizing: $type
+  box-sizing: $type 
+// Clearfix for clearing floats like a boss h5bp.com/q
+=clearfix
+  zoom: 1
+  &:before, &:after
+    display: table
+    content: ""
+  &:after
+    clear: both
+
+.clearfix
+  +clearfix
+
+// Center-align a block level element
+=center-block
+  display: block
+  margin: 0 auto
+
+// Sizing shortcuts
+=size($height: 5px, $width: 5px)
+  height: $height
+  width: $width
+
+=square($size: 5px)
+  +size($size, $size)
+
+// Input placeholder text
+=placeholder($color: $grayLight)
+  \:-moz-placeholder
+    color: $color
+  \::-webkit-input-placeholder
+    color: $color
+
+// Grid System
+=container
+  width: $siteWidth
+  margin: 0 auto
+  +clearfix
+
+.container
+  +container
+
+=columns($columnSpan: 1)
+  width: $gridColumnWidth * $columnSpan + $gridGutterWidth * ($columnSpan - 1)
+
+=offset($columnOffset: 1)
+  margin-left: $gridColumnWidth * $columnOffset + $gridGutterWidth * ($columnOffset - 1) + $extraSpace
+
+// Border Radius
+=border-radius($radius: 5px)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  border-radius: $radius
+
+//INTRIDEA
+=multi-radius($radiusTL: 5px, $radiusTR: 5px, $radiusBR: 5px, $radiusBL: 5px)
+  -moz-border-radius-topleft: $radiusTL
+  -moz-border-radius-topright: $radiusTR
+  -moz-border-radius-bottomright: $radiusBR
+  -moz-border-radius-bottomleft: $radiusBL
+  -webkit-border-radius: $radiusTL $radiusTR $radiusBR $radiusBL
+  border-radius: $radiusTL $radiusTR $radiusBR $radiusBL
+
+// Drop shadows
+=box-shadow($shadow: 0 1px 3px rgba(0, 0, 0, 0.25))
+  -webkit-box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  box-shadow: $shadow
+
+// Transitions
+=transition($transition)
+  -webkit-transition: $transition
+  -moz-transition: $transition
+  transition: $transition
+
+// Background clipping
+=background-clip($clip)
+  -webkit-background-clip: $clip
+  -moz-background-clip: $clip
+  background-clip: $clip
+
+// CSS3 Content Columns
+=content-columns($columnCount, $columnGap: 20px)
+  -webkit-column-count: $columnCount
+  -moz-column-count: $columnCount
+  column-count: $columnCount
+  -webkit-column-gap: $columnGap
+  -moz-column-gap: $columnGap
+  column-gap: $columnGap
+
+// Add an alphatransparency value to any background or border color (via Elyse Holladay)
+=translucent-background($color: $white, $alpha: 1)
+  background-color: hsla(hue($color), saturation($color), lightness($color), $alpha)
+
+=translucent-border($color: $white, $alpha: 1)
+  border-color: hsla(hue($color), saturation($color), lightness($color), $alpha)
+  background-clip: padding-box
+
+/* For image replacement
+
+//INTRIDEA
+.ir
+  display: block
+  border: 0
+  text-indent: -999em
+  overflow: hidden
+  background-color: transparent
+  background-repeat: no-repeat
+  text-align: left
+  direction: ltr
+
+.ir br
+  display: none
+
+=ir
+  display: block
+  border: 0
+  text-indent: -999em
+  overflow: hidden
+  background-color: transparent
+  background-repeat: no-repeat
+  text-align: left
+  direction: ltr
+  br
+    display: none
+    
+=sidebar-separator 
+  border-bottom: 1px solid $hr
+  margin-bottom: 12px
+  padding-bottom: 12px
+  
+=text-overflow($option: ellipsis)
+  -o-text-overflow: $option
+  text-overflow:  $option
+  -moz-binding: url('/xml/ellipsis.xml#ellipsis')
+  overflow: hidden
+  white-space: nowrap
+  
+=rotate($rotation: -5deg)
+  -webkit-transform: rotate($rotation)
+  -moz-transform: rotate($rotation)
+  -o-transform: rotate($rotation)
+  -ms-transform: rotate($rotation)
+  transform: rotate($rotation) 

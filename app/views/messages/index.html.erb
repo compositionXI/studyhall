@@ -1,0 +1,28 @@
+<div class="container">
+  <% if @messages.empty? && @inbox %>
+    <center>
+      <div class="messages_landing_wrapper">
+        <%= image_tag "/assets/MailIconBig.png"%>
+        <p>
+          <h1>Get in touch with your buddies</h1>
+        </p>
+        <p>
+          <h2>
+          With StudyHall.com, you can stay in the know and keep in touch with friends and study buddies
+          </h2>
+        </p>
+        <p>Click "New Message" to begin.</p>
+      </div>
+    </center>
+  <% else %>
+    <div class="messages_list_container list">
+      <%= form_tag update_multiple_messages_path, :id => "save_multiple_messages_form", :remote => true, :'data-type' => "html" do %>
+        <%= hidden_field_tag :inbox, @inbox || false %>
+        <%= submit_tag nil, :class => "hide" %>
+      <% end %>
+      <ul class="unstyled messages_list">
+        <%= render partial: "messages/message", collection: @messages %>
+      </ul>
+    </div>
+  <% end %>
+</div>

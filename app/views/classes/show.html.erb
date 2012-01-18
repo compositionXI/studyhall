@@ -1,0 +1,63 @@
+<h1 class="class_header"><big><%= truncate "#{@course.department} #{@course.number}" , length: 30 %></big></h1>
+<aside class="sidebar">
+  <section>
+    <header>
+      <div class="class_subheader"><%= @course.title %></div>
+    </header>
+  </section>
+  <section>
+    <header>
+      <h1 class="professor left">Professor: <small><%= @class.instructor ? "#{@class.instructor.first_name} #{@class.instructor.last_name}" : "Unknown" %></small></h1>
+    </header>
+  </section>
+  <%= render :partial => "classmates_preview", :locals => {:classmates => @classmates, :clazz => @class, empty_list_text: "Doesn't look like anyone's added this class"} %>
+  <%= render :partial => "shared/buddies_preview", :locals => {:user => current_user, :no_invitation => true } %>
+  <% if current_user.added_course?(@course) %>
+    <%= link_to "Drop this class", user_drop_class_path(:user_id => current_user.id, :offering_id => @class.id), method: :delete, confirm: "Are you sure?", style: "font-size: 11px;" %>
+  <% end %>
+</aside>
+<section class="course_activity">
+  <header>
+    <h1 class="left">Course Activity</h1><%= link_to "SHARE WITH THE CLASS", new_class_post_path(:class_id => @class.id, :user_id => current_user.id), :class => "btn small right", :id => "class_share_button", :remote => true %>
+  </header>
+  <div class="course_activity_list">
+    <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts} %>
+  </div>
+</section>
+<section class="shared_materials">
+  <ul class="tabs" data-tabs="tabs">
+    <li class="active"><a href="#notes">Notes <span>(<%= @shared_notes.count %>)</span></a></li>
+    <li><a href="#studyhalls">Studyhalls <span>(<%= @shared_study_sessions.count %>)</span></a></li>
+  </ul>
+  <div class="tab-content">
+    <ul id="notes" class="active tab-pane scrollPane">
+      <% @shared_notes.each do |note| %>
+        <li class="linked_item note" data-rel="<%= note_url(note) %>">
+          <span><%= truncate note.name, :length => 60 %></span>
+        </li>
+      <% end %>
+    </ul>
+    <ul id="studyhalls" class="tab-pane scrollPane">
+      <% @shared_study_sessions.each do |study_session| %>
+        <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
+          <div class="attendees">
+            <% study_session.users.first(3).each do |user| %>
+              <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+            <% end %>
+          </div>
+          <% if study_session.name.blank? %>
+            <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
+          <% else %>
+            <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
+            <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</section>
+<script type="text/javascript">
+  $('.tabs').bind('change', function (e) {
+    $('.scrollPane').jScrollPane();
+  });
+</script>

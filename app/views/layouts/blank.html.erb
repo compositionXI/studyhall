@@ -1,0 +1,21 @@
+<% @layout = "fixed_width" %>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <title>Studyhall</title>
+  <%= favicon_link_tag %>
+  <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
+  <%= stylesheet_link_tag    "application" %>
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name + "-" + action_name %> fixed-width">
+  <%= yield %>
+</body>
+</html>

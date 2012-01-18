@@ -1,0 +1,165 @@
+.messages_list_container
+  margin: 0 auto
+  
+.messages_landing_wrapper
+  width: 660px
+
+.reply_fields
+  margin-left: 74px
+  #message_new
+    margin-top: 15px
+  form
+    padding-left: 0px
+  .form_actions
+    .form_buttons
+      width: 540px
+      float: left
+      input[type=file]
+        filter: alpha(opacity = 0)
+        -khtml-opacity: 0
+        -moz-opacity: 0
+        opacity: 0
+        z-index: 2
+        position: absolute
+        left: 500px
+        width: 100px
+        &:hover
+          cursor: pointer
+      .attachment_link
+        float: right
+        &.img
+          text-decoration: none
+          border: 0 none
+    .file_upload_name
+      margin-left: 10px
+      overflow: hidden
+      float: left
+
+.new_reply
+  textarea
+    &.reply_body
+      width: 540px
+      height: 100px
+  #error_explanation
+    margin-right: 13px
+    &.hidden
+      display: none
+
+.messages_list     
+  color: #444444
+  font-size: 12px
+  line-height: 18px
+  .avatar
+    display: block
+    float: left 
+    height: 50px
+    width: 50px
+  .subject
+    font-size: 15px
+    line-height: 15px
+    display: inline
+    &:after
+      content: " - "
+      margin: 0 5px
+  .message_content
+    position: relative
+  .open_message
+    display: none
+  .open_message, .message_utilities
+    position: absolute
+    top: 0
+    right: 0
+  .message_utilities
+    li
+      float: left  
+      margin: 0 0 7px
+      &:first-child:before
+        content: none
+        margin: 0
+      &:before
+        content: " - "
+        margin: 0 5px
+  li.message_list_item
+    position: relative
+    border-bottom: 1px solid #D4D4D4
+    &.unread
+      background-color: #F1F7FB
+      .meta
+        font-size: 13px
+      .subject
+        font-size: 16px
+        line-height: 16px
+      .body
+        font-size: 13px
+      .message_utilities
+        display: none
+      .open_message
+        display: block
+    .time
+      position: absolute
+      right: 0
+      top: 30px
+    img
+      float: left
+    .checkbox
+      position: absolute
+      top: 13px
+      right: 20px
+    .full_message
+      border-top: 1px solid #D4D4D4
+      max-height: 350px 
+      overflow-y: scroll
+      .alert-message
+        margin-top: 15px
+    .spam_abuse
+    .collapsed_message
+      padding: 19px 19px 14px 19px
+      &.unread
+        background-color: #F1F7FB
+      &:hover
+        cursor: pointer
+      &.highlighted
+        background-color: #FAFAFA
+    .message_utilities
+      float: right
+      li
+        display: inline
+    .collapsed_message, .reply_header
+      .message_content
+        margin-left: 65px
+        min-height: 55px
+        .subject
+          strong
+            margin-right: 5px
+            
+    .expanded_message
+      +box-shadow(inset 0 13px 16px -20px black)
+      background-color: #efefef 
+      border-top: 1px solid #aaa
+      .avatar, .avatar img
+        height: 35px
+        width: 35px  
+      li
+        border-bottom: 1px solid #D4D4D4 
+      .reply_header
+        padding: 14px 14px 14px 74px
+        .message_content
+          margin-left: 50px
+      .message_utilities 
+        li
+          border: none
+          padding: 0
+    .body
+      float: none
+      clear both
+      color: #444
+      font-size: 12px
+      line-height: 18px
+      padding-top: 10px
+      padding-bottom: 10px
+    .full_reply
+      width: 490px
+      ul
+        li
+          border-bottom: none
+          padding: 0

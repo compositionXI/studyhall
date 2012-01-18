@@ -1,0 +1,300 @@
+<section>
+  <div class="row">
+    <div class="span5 column sidebar left" id="profile_sidebar">
+      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form" data-bar-title="Add a photo - 400px by 400px and less than 500kb">
+        <%= render partial: "photo", locals: {user: @user} %>
+      </div>
+      <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
+      <% if current_user != @user %>
+        <div>
+          <%= link_to "Report this profile", "#" %>
+        </div>
+        <div>
+          <%= link_to "Block", "#" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="span11 column profile_main_content">
+      <div id="profile_personal_info" class="left">
+        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
+          <%= render partial: "name", locals: {user: @user} %>
+        </div>
+        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form" data-bar-title="Add affiliations - Sports, clubs, gender, fraternity or sorority, marjor & minor">
+          <%= render partial: "affiliations", locals: {user: @user} %>
+        </div>
+        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
+          <%= render partial: "bio", locals: {user: @user} %>
+        </div>
+      </div>
+      <div class="profile_ratings right">
+        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form" data-bar-title="Add your GPA - honest values equal better study buddies">
+          <%= render partial: "gpa", locals: {user: @user} %>
+        </div>
+        <%= render :partial => "votes/rating", :locals => {:user => @user} %>
+        <div class="clear"></div>
+        <div class="stats">
+            <ul class="unstyled">
+              <li>
+                <span class="count left"><%= @user.study_sessions.count %></span> Studyhalls Created
+                <div class="clear"></div>
+              </li>
+              <li>
+                <span class="count left"><%= @user.notes.shared.count %></span> Notes Shared 
+                <div class="clear"></div>
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div id="profile_user_items">
+        <div id="profile_tabs">
+          <ul class="tabs">
+            <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
+            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
+            <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
+          </ul>
+          <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">
+            <% @user.offerings.each do |course| %>
+              <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
+                <span><%= course.course.title %></span>
+                <% if current_user %>
+                  <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+          <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
+            <% @user.notes.viewable_by(current_user).each do |note| %>
+              <li data-rel="<%= note_url(note) %>" class="linked_item note">
+                <span><%= truncate note.name, length: 55 %></span>
+              </li>
+            <% end %>
+          </ul>
+          <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
+            <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
+              <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
+                <div class="attendees">
+                  <% study_session.users.first(3).each do |user| %>
+                    <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+                  <% end %>
+                </div>
+                <% if study_session.name.blank? %>
+                  <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
+                <% else %>
+                  <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
+                  <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="profile_forms" style="display:none">
+  <div class="form" id="name_form">
+    <%= render :partial => 'name_form', :locals => { :user => @user } %>
+  </div>
+  
+  <div class="form" id="affiliations_form">
+    <%= render :partial => 'affiliations_form', :locals => { :user => @user } %>
+  </div>
+
+  <div class="form" id="gpa_form">
+    <%= render :partial => 'gpa_form', :locals => { :user => @user } %>
+  </div>
+
+  <div class="form" id="bio_form">
+    <%= render :partial => 'bio_form', :locals => { :user => @user }  %>
+  </div>
+
+  <div class="form" id="photo_form">
+    <%= render :partial => 'photo_form', :locals => { :user => @user } %>
+  </div>
+  <div class="form" id="invitations_form">
+    <%= render :partial => "shared/invite_buddies_popover", :locals => {:user => @user} if current_user == @user %>
+  </div>
+</div>
+<% if current_user %>
+  <% @user.offerings.each do |course| %>
+    <div id="course_<%= course.id %>_modal" data-rel="course_<%= course.id %>" class="course_modal modal hide fade" style="display:none">
+      <div class="modal-header">
+        <h2>Are you sure?</h2>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to drop <%= course.course.title %>?</p>
+        <%= link_to "Yes, drop it!", user_drop_class_path(current_user, course), class: "btn primary", method: :delete, :remote => true %>
+        <%= link_to "Cancel", "#", :class => "btn close_modal", "data-id" => "course_#{course.id}_modal" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<script type="text/javascript">
+  var hidePopovers = function(){
+    $(".editable.edit.active").each(function(){
+      $(this).popover("hide");
+    });
+  }
+
+  var cloneForm = function(editable){
+    var form_id = $(editable).data("form");
+    var form = $("#"+form_id).clone();
+    <% if params[:tour] %>
+      form.find("input.btn.save").val("Next");
+      form.find("a.btn.close_modal").hide();
+    <% end%>
+    return form.first().html();
+  }
+  
+  var initChosen = function(){
+    $popover = $('.popover')
+    chosenable = $popover.find("#user_school_id, #user_gender");
+    chosenable.addClass("chzn-select");
+    chosenable.chosen({disable_search_threshold: 15  });
+    $("#user_gender ").change(function(){
+      var gender = $(this).val();
+      if (gender == 'Male') {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity");
+      } else if(gender == 'Female') {
+        $('label[for=user_fraternity_or_sorority]').text("Sorority");
+      } else {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity or Sorority");
+      }
+    });
+    $(".popover #user_major_ids").chosen();
+    $(".popover #user_sport_ids").chosen();
+    $(".popover #user_frat_sorority_ids").chosen();
+  }
+
+  var decreaseCourseCount = function() {
+    var html = $('.course_count').html();  
+    var courseCount = parseInt(html.slice(1, html.length - 1));
+    var courseCount = (courseCount) ? courseCount : 0;
+    if(courseCount > 0) {
+      $('.course_count').html("(" + (courseCount - 1) + ")");
+    }
+  }
+  
+  $(document).ready(function(){
+    $(".tabs li").each(function(){
+      var li = $(this);
+      var link = li.children().first();
+      if(li.hasClass("active"))
+        $("#"+link.data("rel")).show();
+      link.click(function(e){
+        var clicked_link = $(this);
+        $(".tabs li").removeClass("active");
+        clicked_link.parent().addClass("active");
+        $(".tab_contents").hide();
+        $("#"+clicked_link.data("rel")).show();
+        $("#"+clicked_link.data("rel")).jScrollPane();
+        e.preventDefault();
+      });
+    });
+
+    $(".users-show").delegate(".edit .drop_course_link","click",function(e){
+      var modal_id = "#course_" + $(this).data("course_id") + "_modal";
+      $(modal_id).modal({keyboard: true,
+                         show: true,
+                         backdrop: true});
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  
+    var toggleEditMode = function(e) {
+      hidePopovers();
+      $(".editable").toggleClass("edit");
+      if(e)
+        e.preventDefault();
+      $('.action_bar .edit_button').removeClass('active');
+    }
+
+    $(".edit_button").click(function(e){
+      toggleEditMode();
+    });
+
+    $("a#delete_photo").live('click', function(e){
+      $('#delete_avatar').attr('checked', 'checked');
+      $("form#edit_profile_photo_form").submit();
+    });
+
+    $(".users-show").delegate(".editable.edit","click",function(e){
+      if(!$(this).hasClass("tab_contents") && $(e.target).attr('id') != 'delete_photo'){
+        var editable = $(this);
+        hidePopovers();
+        editable.addClass("active");
+        editable.popover({trigger: "manual",
+                          placement: editable.data("placement"),
+                          html: true,
+                          offset: 10,
+                          horizontalOffset: 10,
+                          title: function(){return editable.data("title")},
+                          content: function(){ return cloneForm(editable)}});
+        editable.popover("show");
+        initChosen(editable.popover);
+        styleFileInputs($('.popover .upload'));
+        $('.number').autoNumeric({vMax: '4.00', vMin: '0.00'});
+        $('.number').keyup(function(e){
+          if($(this).val().length == 1 && e.keyCode != 8) {
+            $(this).val($(this).val() + ".");
+          }
+        });
+        //$("select.chzn-select").chosen();
+        initWindowResize();
+        <% if params[:tour] %>
+          $("div.action_bar h3").text(editable.data('bar-title'));
+        <% end %>
+      }
+      e.preventDefault();
+    });
+
+    $(".users-show").delegate("a.close_modal","click",function(e){
+      hidePopovers();
+      //console.log($(this).data("id"));
+      $("#"+$(this).data("id")).modal("hide");
+    });
+
+    $(".invite_buddies_save_button").live("click", function(){
+      $(".activate_invitation").popover('hide');
+    });
+    
+    <% if @user == current_user%>
+      $(".activate_invitation").click(function(){
+        var invitation = $(this);
+        var invitations_form = $("#invitations_form").clone();
+        invitations_form.find('#gmail_invite_modal').remove();
+        invitations_form.find('#facebook_connect_modal').remove();
+        invitation.popover({
+          trigger: 'manual',
+          placement: 'below-right',
+          html: true,
+          offset: 10,
+          horizontalOffset: 140,
+          title: function() { return "Your buddies <small>We promise not to spam</small>"; },
+          content: function() {return invitations_form.html(); }
+        });  
+        invitation.popover('show');
+      });
+    <% end %>
+
+    <% if params[:mode] == 'edit' && current_user == @user %>
+      toggleEditMode();
+    <% end %>
+
+    <% if params[:tour] == 'true' && current_user == @user %>
+      var initTourMode = function() {
+        $('body').addClass('wizard');
+        $("#topbar_main_nav").hide();
+        $(".topbar #new_search").hide();
+        $(".buddies.invitations").addClass('editable').attr('data-form', 'invitations_form').attr('data-placement', 'below-right').attr('data-title', 'Your Buddies <small>We promise not to spam</small>');
+        //$($(".edit_button")[0]).trigger('click');
+        $(".edit_button").hide();
+        $("div[data-form='name_form']").toggleClass('edit');
+        $("div[data-form='name_form']").trigger('click');
+      }
+      initTourMode();
+    <% end %>
+  });
+</script>
+

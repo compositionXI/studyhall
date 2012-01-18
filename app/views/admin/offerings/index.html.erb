@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>Course Offerings</legend>
+</fieldset>
+
+<%= link_to 'Add New Offering', new_admin_offering_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>School</th>
+      <th>Course</th>
+      <th>Term</th>
+      <th>Instructor</th>
+      <th>Edit</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @offerings.each do |offering| %>
+      <tr>
+        <td><%= offering.school.name %></td>
+        <td><%= offering.course.title %></td>
+        <td><%= offering.term %></td>
+        <td><%= offering.instructor.try(:full_name) %></td>
+        <td><%= link_to 'Edit', edit_admin_offering_path(offering), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_offering_path(offering), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  <tbody>
+</table>

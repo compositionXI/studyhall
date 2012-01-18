@@ -1,0 +1,20 @@
+<%= link_to "Upload New Course Data", new_import_course_datum_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <th>File Name</th>
+    <th>Upload Date</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @course_offering_imports.each do |coi| %>
+      <tr>
+        <td><%= coi.course_offering_import_file_name %></td>
+        <td><%= coi.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= link_to 'Import', import_import_course_datum_path(coi), method: :post,  :class => "btn" %>
+        <%= link_to 'Edit', edit_import_course_datum_path(coi), :class => "btn" %>
+        <%= link_to 'Destroy', import_course_data_path(coi), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<table>

@@ -1,0 +1,11 @@
+<li class="child_note note_item note note_item_<%= note_item.id %> draggable" id="note_<%= note.id %>" data-class="note" data-id="<%= note.id %>">
+  <div class="background_container"></div>
+  <span class="name"><%= note.name %></span>
+  <div class="list_data">
+    <%= link_to note.name, note, class: "name" %><a href="#" class="selector"></a>
+    <p class="course_name"><%= note_item.course_name %></p>
+    <p class="date"><%= formatted_date(note.created_at) %></p>
+  </div>
+  <a href="#" class="selector"></a>
+  <a href="#" class="drag_handle"></a>
+</li>

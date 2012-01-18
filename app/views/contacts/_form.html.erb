@@ -1,0 +1,49 @@
+<div class="single-form">
+<div class="header"><h1>Contact</h1></div>
+<%= form_for @contact, :html => {:class => "form-stacked"} do |f| %>
+  <% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @contact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="clearfix">
+    <%= f.label :name %>
+    <div class="input"><%= f.text_field :name %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :email %>
+    <div class="input"><%= f.text_field :email %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :school_name %>
+    <div class="input"><%= f.text_field :school_name %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :phone %>
+    <div class="input"><%= f.text_field :phone %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label :message %>
+    <div class="input"><%= f.text_area :message %></div>
+  </div>
+  <div class="clearfix">
+    <%= f.label "Please enter the captcha in follow picture" %>
+    <%= recaptcha_tags %>
+  </div>
+  <div>
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%- if @current_user && @current_user.admin?%>
+      <%= link_to 'Show All', contacts_path, :class => "btn" %>
+    <%- else %>
+      <%= link_to 'Cancel', root_path, :class => "btn" %>
+    <% end %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,40 @@
+var button = $("#share_button");
+<% if @object_id %>
+    if($("#<%= @object_id %> .locked").length > 0) {
+      button = $("#<%= @object_id %>");
+    }
+<% end %>
+button.popover({trigger: "manual",
+  placement: "<%=j @position %>",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "Share <%=j @object_to_share %>";},
+  content: function(){return "<%=j render :partial => 'form' %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+
+<% if @object_id %>
+  var selected_items = ["<%=j @object_id %>"];
+<% else %>
+  var selected_items = $.makeArray($(".selected").map(function(){
+    return $(this).prop("id");
+  }));
+<% end %>
+$("#sharing_object_ids").val(selected_items.join(","));
+
+var checkRequiredFields = function(){
+  var submit = $("#new_sharing input[type='submit']");
+  shared = $("#sharing_share_all").is(":checked");
+  has_recipients = ($("#sharing_email_addresses").val() != "" || $("#sharing_user_ids option:selected").length > 0);
+  //has_message = $("#sharing_message").val().length > 0;
+  if(shared || has_recipients)
+    submit.removeClass("disabled");
+  else
+    submit.addClass("disabled");
+}
+$("#new_sharing").delegate("input,select,textarea","change",checkRequiredFields);
+$("#new_sharing").delegate("input,textarea","keyup",checkRequiredFields);
+initWindowResize();

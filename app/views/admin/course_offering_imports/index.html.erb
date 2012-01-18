@@ -1,0 +1,28 @@
+<fieldset>
+  <legend>Course Offering Imports</legend>
+</fieldset>
+
+<%= link_to "Upload New Course Data", new_admin_course_offering_import_path, :class => "btn" %>
+
+<table>
+  <thead>
+    <th>File Name</th>
+    <th>Upload Date</th>
+    <th>Last Edit</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @course_offering_imports.each do |coi| %>
+      <tr>
+        <td><%= coi.course_offering_import_file_name %></td>
+        <td><%= coi.created_at %></td>
+        <td><%= coi.updated_at %></td>
+        <td><%= link_to 'Import', import_admin_course_offering_import_path(coi), method: :post,  :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_admin_course_offering_import_path(coi), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_course_offering_import_path(coi), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+<table>

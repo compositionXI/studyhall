@@ -1,0 +1,22 @@
+development:
+  whiteboard:
+    service: twiddla
+    login: brentmc79
+    password: intridea4me
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  host: localhost:3000
+
+test:
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  host: localhost:3000
+production:
+  whiteboard:
+    service: twiddla
+    login: 
+    password: 
+    hide_components: invite,profile,welcome,url,etherpad,images,bottomtray,email,widgets,math
+  host: shpoc.heroku.com

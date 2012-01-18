@@ -1,0 +1,15 @@
+<% show_notes ||= false %>
+
+<% unless notebooks.nil? %>
+  <% notebooks.each do |notebook| %>
+    <a href="<%= notebook_notes_path(notebook) %>" class="name">
+      <div class="masonry_item notebook">    
+        <span><%= notebook.name %></span>
+        <div class="lock_icon"><%= image_tag "lock.png" unless notebook.shareable? %></div>
+      </div>
+    </a>
+    <% if notebook.notes.any? && show_notes %>
+      <%= render "shared/notes", :notes => notebook.notes %>
+    <% end %>
+  <% end %>
+<% end %>

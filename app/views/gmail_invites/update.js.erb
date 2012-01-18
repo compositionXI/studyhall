@@ -1,0 +1,9 @@
+$("#gmail_invite_modal").html("<%=j @html.html_safe %>");
+$("#gmail_invite_modal .contacts_list").jScrollPane({hideFocus: true});
+$("#gmail_invite_modal .cancel_popover").click(function(){
+  $("#gmail_invite_modal").modal('hide');
+  $("#gmail_invite_modal").html("<%=j render partial: "retrieve_contacts_form" %>");
+  $("#gmail_invite_modal .cancel_popover").click(function(){
+    $("#gmail_invite_modal").modal('hide');
+  });
+});

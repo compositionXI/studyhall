@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+  <div class="alert alert-message success span7">
+    <a class="close" href="#">×</a>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="single-form">
+  <div class="header">
+    <h1>Forgot Your Password?</h1>
+  </div>
+  <%= form_tag "/password_resets", :method => "POST", :class => "form-stacked" do |f| %>
+    <div class="clearfix">
+      <%= label_tag :email %> 
+      <div class="input"><%= text_field_tag 'email' %></div>
+    </div>
+    <div>
+      <%= submit_tag 'Get Password', :class => "btn primary"%>
+      <%= link_to 'Back', root_path, :class => "btn" %>
+    </div>
+  <% end %>
+</div>

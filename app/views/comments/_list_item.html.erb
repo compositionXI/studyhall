@@ -1,0 +1,19 @@
+<% unless comment.new_record? || current_user.blocked?(comment.user)%>
+  <li class="comment_item">
+    <div class="class_comment">
+      <div class="user_photo left">
+        <% if comment.user %>
+          <%= link_to image_tag(comment.user.photo_url(:medium)), comment.user %>
+        <% else %>
+          <%= link_to image_tag("/assets/generic_avatar_medium.png"), user_missing %>
+        <% end %>
+      </div>
+      <div class="comment_details left">
+        <%= comment.user ? link_to(comment.user.title_name, comment.user) : user_missing %> 
+        <span class="right"><%= comment.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></span> <br/>
+        <%= comment.text %>
+      </div>
+      <%= render partial: "posts/utilities", locals: {post: comment} %>
+    </div>
+  </li>
+<% end %>

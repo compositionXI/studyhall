@@ -1,0 +1,30 @@
+<h2>Authentications</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Provider</th>
+      <th>UID</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @authentications.each do |auth| %>
+      <tr>
+        <td><%= auth.provider %></td>
+        <td><%= auth.uid %></td>
+        <td><%= link_to 'Delete', auth, method: :delete, confirm: 'Are you sure?', class: 'danger btn' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>
+  New authentication
+</h3>
+
+<ul>
+  <li><%= link_to "Facebook", '/auth/facebook', :class => "btn facebook" %></li>
+</ul>
+

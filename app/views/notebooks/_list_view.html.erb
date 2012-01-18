@@ -1,0 +1,27 @@
+<div class="list_view">
+  <div class="preview"></div>
+  
+  <div class="fields">
+    <div class="name_wrapper">
+      <% if @edit_all %>
+        <span><%= notebook.name %></span>
+      <% else %>
+        <a class="name" href="<%= notebook_path(notebook) %>">
+          <span><%= notebook.name %></span>
+        </a>
+      <% end %>
+      
+      <% unless notebook.shareable? %>
+        <a href="#" class="lock_icon icon">Share</a>
+      <% end %>
+    </div>
+    <div class="course clear"><%= notebook.course.try(:title) %></div>
+    <div class="date"><%=l notebook.created_at.to_date %></div>
+  </div>
+
+  <% unless notebook.notes.empty? %>
+    <a class="expand_collapse_icon icon" href="<%= notebook_path(notebook) %>">
+      <%= collapsed ? '+' : 'x' %>
+    </a>
+  <% end %>
+</div>

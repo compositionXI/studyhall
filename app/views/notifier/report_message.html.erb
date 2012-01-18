@@ -1,0 +1,9 @@
+<p>
+  A <%= link_to "Message", @url %> was reported by <%= @reporter.name.titleize %>.
+</p>
+<h3>Report details</h3>
+<p>
+  <div><%= @offender.name.titleize %> sent the following message on <%= @message.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></div>
+  <br/>
+  <div><%= htmlize_body(@message) %></div>
+</p>

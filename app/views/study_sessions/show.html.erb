@@ -1,0 +1,69 @@
+<%= content_for :chat_widget do -%>
+    <%= EnvolveChat::ChatRenderer.get_html(APP_CONFIG["envolve"]["api_key"], 
+        :first_name => current_user.first_name,
+        :last_name => current_user.last_name,
+        :is_admin => current_user.admin?, 
+        :pic => "http://#{APP_CONFIG["host"]}#{current_user.photo_url}", 
+        :people_list_header_text => "Chat with other learners",
+        :people_here_text => "People Here",
+        :groups => [{:id => "study_session_#{@study_session.id}", :name => "All Learners In This Session"}]
+      ).html_safe
+    %>
+<% end -%>
+<%= render :partial => "tokbox_code" %>
+<div id="menubar" class="topbar notes">
+  <div class="middle">
+    <h3><%= truncate(@study_session.name, length: 32) || "StudyHall" %> - <%= @study_session.created_at_formatted("%m/%d/%y") %></h3>
+  </div>
+  <div class="right">
+    <%= link_to "Invite Others to Study", new_study_session_invite_path(@study_session), id: "invite_button", class: "btn", remote: true %>
+  </div>
+  <div class="left">
+    <%= link_to("X", study_sessions_path, :class => "btn") %>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div id="video_sidebar">
+  <div id="opentok_console"></div>
+  <div id="links">
+    <a class="btn" value="Connect" id="connectLink" onClick="javascript:connect()">Connect</a>
+    <a class="btn" value="Leave" id="disconnectLink" onClick="javascript:disconnect()" >Leave</a>
+    <a class="btn" value="Start Publishing" id="publishLink" onClick="javascript:startPublishing()">Start Sharing</a>
+    <a class="btn" value="Stop Publishing" id="unpublishLink" onClick="javascript:stopPublishing()">Stop Sharing</a>
+  </div>
+  <div id="myCamera" class="publisherContainer">
+    <p>Click "START SHARING" to join the video chat.</p>
+  </div>
+  <div id="subscribers">
+    <p>Your study buddies' video feeds will show up here.</p>
+  </div>
+</div>
+
+<% if @session_file && @session_file.embeddable? %>
+  <iframe id="whiteboard" src="<%= @session_file.embed_url %>" frameborder="1" width="694" height="650"></iframe>
+<% else %>
+  <% @study_session.session_files.build %>
+  <div id="upload_form">
+    <%= form_for @study_session, :html => {:class => "form-stacked"} do |f| %>
+      <%= f.fields_for :session_files do |sf| %>
+        <%= hidden_field_tag :source, :show_view %>
+        <%= f.label :upload, "Upload a File" %>
+        <%= sf.file_field :upload %>
+        <%= f.submit "Upload", :class => "btn primary" %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+<div class="clearfix"></div>
+
+<script>
+  $(document).ready(function(){
+    show('connectLink');
+    hide("disconnectLink");
+    hide("publishLink");
+    hide("unpublishLink");
+    setTimeout("connect()",500);
+    var wb = $("#whiteboard");
+    wb.attr("src", wb.data("url"));
+  });
+</script>

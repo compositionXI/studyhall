@@ -1,0 +1,29 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <title>Studyhall</title>
+  <%= favicon_link_tag %>
+  <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="topbar">
+    <%= render :partial => "layouts/topbar"%>
+  </div>
+  <section class="main-content">
+    <div class="container admin">
+      <div class="fill">
+        <h2>Course Data Import</h2>
+        <%= yield %>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

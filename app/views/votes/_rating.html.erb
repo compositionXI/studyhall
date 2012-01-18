@@ -1,0 +1,21 @@
+<div id="rating" class="rating_block rating right">
+  <div class="net_rating"><%= user.plusminus %></div>
+  <span>Rating</span>
+  <div class="vote_actions">
+    <% if logged_in? %>
+      <% if current_user == user %>
+        <%= link_to "", "", :class => "help", :title => vote_help_text %>
+      <% elsif current_user.voted_on?(user) %>
+        <%= link_to "", user_downvote_path(user), :method => :delete, :remote => true, :class => "downvote #{current_user.voted_for?(user) ? "" : "current_vote"}" %>
+        <%= link_to "", "", :class => "help", :title => vote_help_text %>
+        <%= link_to "", user_upvote_path(user), :method => :post, :remote => true, :class => "upvote #{current_user.voted_for?(user) ? "current_vote" : ""}" %>
+      <% else %>
+        <%= link_to "", user_downvote_path(user), :method => :delete, :remote => true, :class => "downvote" %>
+        <%= link_to "", "", :class => "help", :title => vote_help_text %>
+        <%= link_to "", user_upvote_path(user), :method => :post, :remote => true, :class => "upvote" %>
+      <% end %>
+    <% else %>
+      <%= link_to "", "", :class => "help", :title => vote_help_text %>
+    <% end %>
+  </div>
+</div>

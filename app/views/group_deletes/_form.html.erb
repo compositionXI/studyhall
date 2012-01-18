@@ -1,0 +1,13 @@
+<%= form_for @group_delete, html: {class: 'form-stacked'} do |f| %>
+<div class="popover-body">  <%= f.hidden_field :class_name %>
+  <%= f.hidden_field :object_ids %>
+  <h2>Warning!</h2>
+  <p>Deletion is permanent. Are you sure you want to do this?</p>
+  <div class="clearfix"></div>
+  <%= f.check_box :for_realz %>
+  <%= f.label :for_realz, "Yes, I want to delete these", :style => "display:inline" %></div>
+  <div class="popover-footer clearfix">
+  <%= f.submit "Delete", class: "btn primary disabled" %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => "delete_button" %>
+  </div>
+<% end %>

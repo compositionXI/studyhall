@@ -1,0 +1,10 @@
+<p>
+  A post was reported by <%= @reporter.title_name %>.
+</p>
+<p><%= link_to "View Post", @url %><p/>
+<h3>Report details</h3>
+<p>
+  <div><%= @offender.try(:title_name) || "Someone who is no longer a user" %> posted this comment <%= @post.created_at.strftime("%a, %b %d %Y at %I:%M%p") %></div>
+  <br/>
+  <div><%= @post.text %></div>
+</p>

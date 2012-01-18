@@ -1,0 +1,13 @@
+<div class="notebook_list_container <%= items_layout %>">
+  <% if @notebook.notes.viewable_by(current_user).empty? %>
+    <div class="centered">
+      <center>
+        <p>Click the "Take Notes" button to begin taking note.</p>
+      </center>
+    </div>
+  <% else %>
+    <ol class="notebook_list">
+      <%= render partial: 'notes/list_item', collection: @notebook.notes.viewable_by(current_user), as: :note %>
+    </ol>
+  <% end %>
+</div>

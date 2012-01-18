@@ -1,0 +1,25 @@
+var button = $("#<%=j @modal_link_id %>");
+button.popover({trigger: "manual",
+  placement: "below",
+  offset: 10,
+  html: true,
+  title: function(){return "Filter";},
+  content: function(){return "<%=j render :partial => 'filter_form' %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+
+$("#buddy_filter").click(function(e){
+  if ($(this).is(":checked")){
+    $("#message_sender_id").removeAttr("disabled");
+    $("#message_sender_id_chzn").removeClass("chzn-disabled");
+    $("#message_sender_id").trigger("liszt:updated");
+  }
+  else {
+    $("#message_sender_id").attr("disabled", true);
+    $("#message_sender_id_chzn").addClass("chzn-disabled");
+  }
+});
+
+initWindowResize();

@@ -1,0 +1,42 @@
+<%= form_for notebook, :remote => true, :html => {:class => "form-stacked", :id => "edit_notebook_form"} do |f| %>
+  <div class="modal-header">
+    <h2>Notebook Details</h2>
+  </div>
+  <div class="modal-body">
+    <% if notebook.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(notebook.errors.count, "error") %> prohibited this notebook from being saved:</h2>
+        <ul>
+        <% notebook.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="clearfix">
+      <%= f.label :name %>
+      <div class="input"><%= f.text_field :name %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :course %>
+      <div class="input"><%= select :notebook, :course_id, current_user.offerings.collect {|o| [o.course.title, o.course.id]}, {:include_blank => "Choose a course", :selected => notebook.course_id}, {:class => "hzn-select"} %></div>
+    </div>
+    <div class="clearfix">
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :shareable, checked: notebook.new_record? || notebook.shareable, class: "activiation_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, value: "Share this notebook", class: "prepended_checkbox disabled", disabled: true, style: "width: 150px;" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div>
+      <%= f.submit :class => "btn primary" %>
+      <%= link_to 'Cancel', "#", :class => "btn cancel_popover" %>
+    </div>
+  </div>
+<% end %>

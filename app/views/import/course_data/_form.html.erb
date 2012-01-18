@@ -1,0 +1,22 @@
+<%= form_for @course_offering_import, :url => import_course_data_path, :html => {:class => "form-stacked"} do |f| %>
+  <% if @course_offering_import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_offering_import.errors.count, "error") %> prohibited this course_offering_import from being saved:</h2>
+      
+      <ul>
+      <% @course_offering_import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="clearfix">
+  <div class="clearfix">
+    <%= f.label :file, "Select a course data file to import" %>
+    <div class="input"><%= f.file_field :course_offering_import %></div>
+  </div>
+  <div>
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= link_to 'Back', import_course_data_path, :class => "btn" %>
+  </div>
+<% end %>

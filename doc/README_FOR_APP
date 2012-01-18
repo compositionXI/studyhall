@@ -1,0 +1,87 @@
+Welcome to Studyhall.com
+------------------------
+This is the developer documentaiton intended to get you up to speed and productive with the 
+Studyhall.com application. 
+
+Purpose of the Application
+--------------------------
+This application is 
+
+Getting your environment up and running
+-------------------------------
+Please have Bundler, RVM, and MySQL installed before you start. With these prerequisites, your
+local installation should bootstrap with the standard Rails 3 setup routine with SOLR. 
+
+cp config/database.yml.example config/database.yml
+vi config/database.yml 
+bundle install
+bundle exec rake db:setup
+bundle exec rake sunspot:solr:start
+rails server
+
+Getting auto testing running
+--------------------------------
+guard
+
+Setting up your data
+--------------------
+There is an administrative user in the db/seeds.rb file. Use this login to set up 
+the course data by selecting the Course Data Import action on the You menu in the 
+top navigation. If you do not see the Course Data Import option, then your user is
+not set up to be an admin user. Change that by adding the admin role in the user 
+table. 
+
+Course data import file: 
+
+db/catalog2.txt
+
+Git Considerations
+------------------
+Work on a branch, then merge your changes to master as the feature is completed.
+Staging deploys from the master branch. 
+
+Important Locations
+-------------------
+Client site: http://studyhall:studyh4ll@clients.intridea.com/studyhall
+Unfuddle: https://intridea.unfuddle.com/a#/projects/155870
+Staging: http://studyhall.intridea.com
+
+Unfuddle Considerations
+-----------------------
+This project is set to launch in production on January 15th, 2012. There are 5 weekly 
+milestones set up in Unfuddle that lead up to that launch date. 
+
+Milestone 1 - Delivery 12/16/2011
+Milestone 2 - Delivery 12/23/2011
+Milestone 3 - Delivery 12/30/2011
+Milestone 4 - Delviery 01/06/2012
+Milestone 5 - Final Delivery 01/13/2012
+
+All tasks in each milestone must be completed each week in order for the delivery date to 
+be reached successfully. Please: 
+
+1. Do not work on any tasks that are not directly related to delivering features that are 
+outlined in tickets in the current Milestone. 
+2. Claim any tickets you will complete. 
+3. Release tickets you are not ACTIVELY working on so that others may claim them. 
+4. Mark a ticket RESOLVED only when you have committed the code, addded necessary test code, and TESTED the feature. 
+
+Documentation
+-------------
+The application blueprint and design comps are located in the /doc folder. You 
+should read these documents and familiarize yourself with the comps. The screens
+should be implemented to spec as outlined in the comps unless technical limitations
+or other documented decisions call for otherwise. 
+
+The Style Guide has most of the CSS styles you'll need embedded within, although
+these styles have been integrated into the SASS/SCSS already. 
+
+Other Stuff?
+------------
+
+Intrideans: contact Pete Jackson with other questions. 
+
+Update this README file if you find mistakes or add important procedures that
+affect maintainability of the application. 
+
+

@@ -1,0 +1,43 @@
+var button = $("#<%=j @modal_link_id %>");
+
+var placement = null;
+if(button.parent().hasClass("right"))
+  placement = "below-left";
+else
+  placement = "below-right";
+
+button.popover({trigger: "manual",
+                placement: placement,
+                offset: 10,
+                horizontalOffset: 25,
+                html: true,
+                help: function(){return "<%=j render :partial => 'help' %>";},
+                title: function(){return "Start A Study Hall";},
+                content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}});
+
+button.popover("show");
+$(".chzn-select").chosen();
+//var select = $(".buddy_id_select");
+//select.chosen({no_results_text: "No results matched"});
+//select.chosen().change(function(){
+//  if(select.val().length > 1){
+//    select.find("option").prop("disabled",true);
+//    select.trigger("liszt:updated");
+//  }else{
+//    select.find("option").prop("disabled",false);
+//    select.trigger("liszt:updated");
+//  }
+//});
+
+styleFileInputs();
+$("#new_study_session .fake-file").css({position: "relative", top: "-34px"});
+
+$(".popover").delegate("a.help_button","click",function(e){
+  button.popover("showHelp");
+  e.preventDefault();
+});
+$(".popover").delegate("a.close_help_button","click",function(e){
+  button.popover("hideHelp");
+  e.preventDefault();
+});
+initWindowResize();

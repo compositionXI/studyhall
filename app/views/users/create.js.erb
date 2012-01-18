@@ -1,0 +1,18 @@
+<% if @user.new_record? %>
+  <% @user.errors.each do |attr,error| %>
+    $('#info_message').removeClass('in')
+    $('#new_user').addClass('in')
+    $("#user_<%= attr.to_s %>")
+      .attr('title','<%= attr.to_s %> <%= error %>' )
+      .twipsy({placement: "below", trigger: "manual", animate: false, offset: 2})
+      .twipsy("show");      
+  <% end %>
+<% else %> 
+  $('.twipsy').hide();
+  $("#new_user").remove();
+  <% if flash[:notice].present? || flash[:error].present? %>
+    $("#success_message").addClass('in').html('<p><%= flash[:notice] || flash[:error] %></p>');
+  <% else %>
+    $("#success_message").addClass('in');
+  <% end %>
+<% end %>

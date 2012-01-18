@@ -1,0 +1,20 @@
+var button = $("#delete_button");
+button.popover({trigger: "manual",
+  placement: "below-right",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "Are you sure?";},
+  content: function(){return "<%=j render :partial => 'delete_form', :locals => { :note => @note} %>";}
+});
+
+button.popover("show");
+
+$("#note_<%= @note.id %>_delete_for_realz").live("change",function(){
+  var checkbox = $(this),
+      submit = checkbox.parents('.content').find(".primary");
+  if(checkbox.is(":checked"))
+    submit.removeClass("disabled");
+  else
+    submit.addClass("disabled");
+});

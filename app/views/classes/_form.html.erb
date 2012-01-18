@@ -1,0 +1,24 @@
+<%= form_for @enrollment, :url => classes_path, :remote => true, :html => {:class => "form-stacked", :'data-type' => "html", :id => "add_course_form"} do |f| %>
+  <div class="popover-body"><% if @enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enrollment.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% @enrollment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="clearfix">
+    <%= f.label :Choose_course %>
+    <% cache("school-#{@user.school.id}-offering-course-list") do -%>
+      <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
+    <% end -%>
+  </div></div>
+  <div class="popover-footer">
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel_course_popover" %>
+  </div>
+<% end %>

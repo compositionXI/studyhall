@@ -1,0 +1,6 @@
+<p>Hey there,</p>
+<p><%= @name %> just joined <a href="<%= @url %>">StudyHall.com</a> and thought you might interested too!</p>
+<% unless @message.blank? %>
+  <p>"<%= @message %>"</p>
+<% end %>
+

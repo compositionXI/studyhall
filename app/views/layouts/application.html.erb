@@ -1,0 +1,46 @@
+<% @layout = "fixed_width" %>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <title>Studyhall</title>
+  <%= favicon_link_tag %>
+  <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
+ <%= stylesheet_link_tag    "application" %>
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller_name + "-" + action_name %> fixed-width">
+  <div id="wrap">  
+    <%= render :partial => "layouts/topbar" %>
+    <%= render :partial => @action_bar if @action_bar %>
+    <section class="main-content">
+      <div class="container"><%= yield %></div>
+    </section>
+    <%= render "layouts/footer" %>  
+  </div>
+  <% if current_user %>
+    <% if "#{controller_name + '_' + action_name}" == "study_sessions_show" -%>
+      <%= yield :chat_widget %>
+    <% else -%>
+      <%= 
+        EnvolveChat::ChatRenderer.get_html(APP_CONFIG["envolve"]["api_key"], 
+          :first_name => current_user.first_name,
+          :last_name => current_user.last_name,
+          :is_admin => current_user.admin?, 
+          :pic => "http://#{APP_CONFIG["host"]}#{current_user.photo_url}", 
+          :people_list_header_text => "Chat with other users",
+          :people_here_text => "People Online",
+          :groups => [{:id => "all_site", :name => "All Vistors"}]
+        ).html_safe
+      %>
+    <% end -%>
+  <% end -%>
+</body>
+</html>

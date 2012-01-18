@@ -1,0 +1,28 @@
+<%= form_for user, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_personal_info_form", :multipart => true} do |f| %>
+  <%= hidden_field_tag :rel_form, 'affiliations_form' %>
+<div class="popover-body">  <input type="hidden" name="form_id" value="affiliations_form">
+  <div class="input">
+    <%= f.label :sports_and_clubs %>
+    <%= f.collection_select :sport_ids, Sport.all, :id, :name, {}, {'multiple' => true, 'data-placeholder' => 'Select your sports'} %>
+    <%#= text_field_tag "extracurriculars_list", @user.extracurriculars_list, :class => "extracurriculars_list" %>
+  </div>
+  <div class="clearfix input gender">
+    <%= f.label :Gender %>
+    <%= f.select( "gender", %w[Male Female], {:prompt => "Select"})%>
+  </div>
+  <div class="clearfix input fraternity sorority">
+    <%= f.label :fraternity_or_sorority, fraternity_or_sorority_label(user) %>
+    <%= f.collection_select :frat_sorority_ids, FratSorority.all, :id, :name, {}, {'multiple' => true, 'data-placeholder' => 'Select your frat or sorority'} %>
+  </div>
+  <div class="clearfix input">
+    <%= f.label :'major/minor' %>
+    <%#= f.text_field :major %>
+    <%= f.collection_select :major_ids, Major.all, :id, :name, {}, {'multiple' => true, 'data-placeholder' => 'Select your majors'} %>
+  </div></div>
+  <div class="popover-footer">
+    <div class="input clearfix">
+      <%= f.submit "Save", :class => "btn save" %>
+      <%= link_to "Cancel", "#", :class => "btn close_modal" %>
+    </div>
+  </div>
+<% end %>

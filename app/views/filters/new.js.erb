@@ -1,0 +1,44 @@
+var button = $("#filter_button");
+button.popover({trigger: "manual",
+  placement: "below-left",
+  offset: 10,
+  horizontalOffset: 25,
+  html: true,
+  title: function(){return "<%= @filter.title %>";},
+  content: function(){return "<%=j render :partial => @filter_form %>";}
+});
+
+button.popover("show");
+$("select.chzn-select").chosen();
+initWindowResize();
+$(".date_picker").datepicker({
+  dateFormat: 'yy-mm-dd'
+});
+
+$(".activation_check_box").click(function(e){
+  var checkbox = $(this);
+  var input = checkbox.closest(".activate_by_select").find(".prepended_checkbox");
+  
+  if (checkbox.is(":checked")){
+    input.attr("disabled", false)
+    if(input.is("select")){
+      var selectId = input.attr("id");
+      var chznSelect = $("#"+selectId+"_chzn");
+      chznSelect.removeClass("chzn-disabled");
+      input.trigger("liszt:updated");
+    }
+  }
+  else {
+    input.attr("disabled", true);
+    if(input.is("select")){
+      var selectId = input.attr("id");
+      var chznSelect = $("#"+selectId+"_chzn");
+      chznSelect.addClass("chzn-disabled");
+      input.trigger("liszt:updated");
+    }
+  }
+  
+  if (checkbox.attr("id") == "filter_for_notebooks") {
+    $("#filter_notebooks_by_class").toggle();
+  }
+});

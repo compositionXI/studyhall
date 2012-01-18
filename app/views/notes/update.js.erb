@@ -1,0 +1,18 @@
+var modal = $("#note_<%= @note.id %>_modal");
+modal.modal('hide');
+modal.remove();
+var note = $("#note_<%= @note.id %>");
+var new_note = $("<%=j render partial: "note_item", locals: {note_item: NoteItem.new(@note)} %>");
+new_note.addClass("edit ui-draggable");
+new_note.removeClass("grid show").addClass($(".note_items").data("layout"));
+note.replaceWith(new_note);
+
+<% if @note.notebook_changed %>
+  $(new_note).addClass('notebook_changed')
+  $(new_note).append("<%= j(render(partial: 'permission_modal', locals: { note: @note})) %>");
+  $(new_note).find(".permission_change_modal").modal('show');
+  $(".permission_change_modal .close_modal").live('click', function(){
+    $(this).closest(".permission_change_modal").modal('hide');
+    $(this).closest(".permission_change_modal").remove();
+  });
+<% end %>

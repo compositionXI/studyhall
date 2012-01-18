@@ -1,0 +1,6 @@
+<% @course_id = @course_id.to_s %>
+var modal_id = "<%=j @course_id %>";
+$("#course_"+modal_id+"_modal").modal("hide");
+$("#course_<%=j @course_id %>").animate({opacity: 0});
+$("#course_<%=j @course_id %>").remove();
+decreaseCourseCount();

@@ -1,0 +1,19 @@
+<li class="search_result note">
+  <%= link_to truncate(note.name, length: 100), note, :class => "note_book" %>
+  <% if current_user.can_view?(note) %>
+    <%= link_to "VIEW", note_path(note), class: 'btn right'%>
+  <% else %>
+    <%= link_to "REQUSET ACCESS", request_access_note_path(note), remote: true, class: 'btn right request_note_access_button' %>
+  <% end %>
+  <div class="info_container">
+    <dl class="info narrow">
+      <% if note.user %>
+        <dt>Owner</dt>
+        <dd><%= link_to note.user.name, note.user %></dd>
+      <% end %>
+      <dt>Content</dt>
+      <dd><div class="note_content"><%= note.content.html_safe %></div></dd>
+    </dl>
+  </div>
+  <div class="clearfix"></div>
+</li>

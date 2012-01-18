@@ -1,0 +1,27 @@
+<div class="gridbar action-bar">
+  <div class="container">
+    <% if @user %>
+      <div class="buttons left">
+        <% if current_user.follows?(@user) %>
+          <%= link_to "Unfollow", unfollow_path(current_user.following_for(@user)), :class => "btn small follow_button", :remote => true, :method => :delete %>
+          <%= link_to "Follow", follow_path(:followed_user_id => @user.id), :class => "btn small hidden unfollow_button", :remote => true, :method => :post %>
+        <% else %>
+          <%= link_to "Unfollow", unfollow_path(current_user.following_for(@user)), :class => "btn small hidden unfollow_button", :remote => true, :method => :delete %>
+          <%= link_to "Follow", follow_path(:followed_user_id => @user.id), :class => "btn small follow_button", :remote => true, :method => :post %>
+        <% end %>
+        <%= link_to("Message #{@user.first_name}", new_user_message_path(@user), :class => "btn", :id => "new_message_button", "data-title" => "Send #{@user.first_name} a message", :remote => true) %>
+      </div>
+    <% elsif @notebooks %>
+      <div class="buttons left">
+        <a href="#" class="btn">Filter</a>
+        <a class="btn primary" title="test" href="#">Primary action</a>
+        <a class="btn selected" href="#">Selected</a>
+      </div>
+    <% end %>
+    <div class="buttons right">
+      <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn' %>
+      <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn' %>
+    </div>
+    <h3>Title and action statements</h3>
+  </div>
+</div>

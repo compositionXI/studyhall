@@ -1,0 +1,32 @@
+<fieldset>
+  <legend>Static Pages</legend>
+</fieldset>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+      <th>Link</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  <thead>
+  <tbody>
+    <% @static_pages.each do |static_page| %>
+      <tr>
+        <td><%= static_page.title %></td>
+        <td><%= static_page.text.html_safe %></td>
+        <td><%= static_page.slug %></td>
+        <td><%= link_to 'Show', static_page, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_admin_static_page_path(static_page), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', admin_static_page_path(static_page), confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Static Page', new_admin_static_page_path, :class => "btn" %>

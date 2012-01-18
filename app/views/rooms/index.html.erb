@@ -1,0 +1,25 @@
+<fieldset>
+  <legend>Chat Rooms</legend>
+</fieldset>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Public</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+	  <% @rooms.each do |r| %>
+  		<tr>
+  		  <td><%= link_to r.name, room_path(r) %></td>
+  		  <td><%= r.public %></td>
+  		  <td><%= link_to 'Show', r, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_room_path(r), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', r, confirm: 'Are you sure?', method: :delete, :class => "btn" %></td>
+  		<td>
+  	<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Create Room', new_room_path, :class => "btn" %>

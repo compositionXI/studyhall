@@ -1,0 +1,20 @@
+<div id="reset_password" class="single-form">
+  <div class="header">
+    <h1>Reset password for <%= @user.title_name %></h1>
+  </div>
+
+  <%= form_for @user, :url => password_reset_path, :html => {:class => "form-stacked"} do |f| %>
+    <div class="alert-message error validation_error" style="display:none;">Passwords must match! Try again!</div>
+    <div class="clearfix">
+      <%= f.label :new_password %>
+      <div class="input"><%= f.password_field :password %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :new_password_confirmation %>
+      <div class="input"><%= password_field_tag "password_confirmation" %></div>
+    </div>
+    <div>
+      <%= f.submit "Submit", :class => "btn primary" %>
+    </div>
+  <% end %>
+</div>
