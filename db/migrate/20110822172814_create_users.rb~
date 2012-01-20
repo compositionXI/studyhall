@@ -19,19 +19,6 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps
     end
-	User.create(
-	    first_name: "Ross",
-	    last_name: "Blankenship",
-	    custom_url: "rossb",
-	    gender: "Male",
-	    school: School.find_by_name('Cornell University'),
-	    email: "ross@studyhall.com",
-	    majors: [Major.find_by_name("Government")],
-	    gpa: 4.0,
-	    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
-	    password: "studyhall",
-	    active: true
-	  )
   end
   
   def down
