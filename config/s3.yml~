@@ -1,12 +1,12 @@
 development:
   bucket: bucket-dev
-  access_key_id: AKIAIWBOZ2PNFJ6DPA6Q
-  secret_access_key: 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
+  access_key_id: AKIAIETU7HT7R2K3PCYQ
+  secret_access_key: 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
 test:
   bucket: bucket-test
-  access_key_id: AKIAIWBOZ2PNFJ6DPA6Q
-  secret_access_key: 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
+  access_key_id: AKIAIETU7HT7R2K3PCYQ
+  secret_access_key: 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
 production:
   bucket: bucket-prod
-  access_key_id: AKIAIWBOZ2PNFJ6DPA6Q
-  secret_access_key: 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
+  access_key_id: AKIAIETU7HT7R2K3PCYQ
+  secret_access_key: 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
