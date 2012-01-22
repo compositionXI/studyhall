@@ -1,5 +1,7 @@
 Studyhall::Application.routes.draw do
 
+  resources :calendars
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   resources :notes do

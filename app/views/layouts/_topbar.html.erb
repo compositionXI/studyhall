@@ -21,6 +21,9 @@
               <li id="nav_profile" <% if controller?("users") && action?("show") %> class='current' <% end %>>
                 <%= link_to user_path(current_user), title: "Profile" do %><span>Profile</span><% end %>
               </li>
+	      <li id="nav_calendar" <% if controller?("calendars") %> class='current' <% end %>>
+		<%= link_to calendars_path, title: "Calendars" do %><span>Calendar</span><% end %>
+	      </li>
               <li id="nav_inbox" <% if controller?("messages") %> class="current {inbox_class}" <% end %> >
                 <%= link_to mailbox_path(:mailbox => "inbox"), title: "Inbox" do %>
                   <small class="inbox_message_count <%= 'hide' unless inbox_count != ''%>"><%= inbox_count %></small>
