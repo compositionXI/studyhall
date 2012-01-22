@@ -1,0 +1,302 @@
+//Nav 
+
+header.topbar
+  z-index: 1000
+
+.topbar
+  position: relative
+  height: auto
+  z-index: 999
+  .fill
+    background: transparent url(asset-path('header_bg.png','image')) repeat-x
+    height: 71px
+    @include box-shadow(0)
+  .logo
+    float: left
+    margin: 17px 0 0 0
+    a
+      @include ir
+      background: transparent url(asset-path('logo.png','image'))
+      color: #ffffff
+      height: 38px
+      width: 191px  
+    
+  .primary-nav
+    float: left
+    margin: 17px  0 0 50px
+    li
+      $shadow: inset 0 1px 0 $navBorderTop, inset -1px 0 0 $navBorderRight 
+      +box-shadow($shadow)
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      border-top: none
+      border-bottom: 1px solid $navBorderBottom
+      border-left: 1px solid $navBorderTop
+      border-right: 1px solid $navBorderRight
+      padding: 0 0 0 1px
+      position: relative
+      &:first-child a, &:last-child a
+        width: 49px
+      &:first-child
+        @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
+      &:last-child
+        @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
+      a
+        background: transparent
+        color: #fff
+        width: 59px
+        span
+          @include ir
+          background: transparent url(asset-path('nav_icons.png','image'))
+          height: 30px
+      &.current, &:hover, &:active
+        $shadow: (0 1px 0 rgba(0,0,0,.25))
+        +box-shadow($shadow) 
+        @include vertical-gradient($navCurrentGradStart, $navCurrentGradEnd)
+        a
+          background: none
+        border-top: 1px solid $navCurrentBorder
+        border-bottom: none
+        border-left: 1px solid $navCurrentLeft
+        border-right: none
+        height: 32px
+        margin: -1px 0 0 -1px
+        padding: 0 1px 0 2px
+        &:first-child
+          @include multi-radius($topbarRadius, 0px, 0px, $topbarRadius)
+          border-left: 1px solid $navCurrentBorder
+        &:last-child
+          @include multi-radius(0px, $topbarRadius, $topbarRadius, 0px)
+          border-right: 1px solid $navCurrentBorder 
+          margin: -1px 0 0 0
+          padding: 0 0 0 1px
+    #nav_home span
+      background-position: 10px 0px 
+    #nav_studyhalls span
+      background-position: -39px 0px 
+    #nav_notes span
+      background-position: -100px 0px  
+    #nav_profile span
+      background-position: -160px 0px 
+    #nav_calendar span
+      background-position: -217px 0px
+    #nav_inbox
+      span
+        background-position: -277px 0px
+      &.messages
+        span 
+          background-position: -265px 0px
+        small      
+          right: 33px
+    #nav_account span
+      background-position: -277px 0px 
+    small      
+      top: -8px
+      right: -8px
+      background: white
+      position: absolute
+      width: 13px
+      +border-radius(14px)
+      padding: 3px
+      color: #032233
+      text-shadow: none
+      font-weight: bold
+      font-size: 12px 
+      text-align: center
+      span
+        text-indent: -99999px 
+        
+  //Nav Search Bar
+  form
+    background: none
+    float: left
+    margin: 7px 0 0 0
+    input
+      @include border-radius(4px)
+      $shadow: 0px 1px 3px rgba(29, 14, 0, 0.9) inset, 0px 1px 2px 0px rgba(255, 255, 255, .15)
+      @include box-shadow( $shadow )
+      @include sans-serif-font(13px, normal, 1)
+      @include vertical-gradient($navFormGradStart, $navFormGradEnd)
+      text-shadow: 0px 1px 0px #1E120B
+      border: none
+      color: #f8f7e6
+      padding: 4px 9px
+      margin: 10px 0 0 0
+      height: 32px
+      width: 232px 
+      &:-moz-placeholder
+        color: rgba(255,255,255,.75)
+      &::-webkit-input-placeholder
+        color: rgba(255,255,255,.75)
+      &.placeholder
+        color: #BFC5B8
+      &:focus
+        outline: none
+        border-color: rgba(82, 168, 236, 0.8)
+        -webkit-box-shadow: none
+        -moz-box-shadow: none 
+        @include box-shadow( $shadow )
+
+    ul#quick_search
+      background: #FFF
+      padding: 5px
+      margin-left: 5px
+      @include box-shadow(0 2px 6px 2px #888)
+      li.user_search_result
+        width: 205px
+        background: #FAFAFA
+        border-bottom: 1px solid #EDECEB
+        padding: 5px
+        margin-top: 5px
+        .clearfix
+          margin-bottom: 0
+        .photo
+          float: left
+        .meta
+          margin-left: 55px
+          span
+            font-size: 11px
+          a
+            color: $linkColor
+            text-decoration: none
+            line-height: inherit
+            font-weight: inherit
+            text-shadow: none
+            line-height: 24px
+            &:hover
+              color: $linkColorHover
+              text-decoration: underline
+    
+  .secondary-nav
+    float: right
+    margin: 16px 0 0 10px
+    li:last-child
+      &:hover, &:active, &:focus
+        border: 0
+    li.dropdown
+      @include border-radius( $topbarRadius )
+      @include vertical-gradient($navGradStart, $navGradEnd)
+      +box-shadow(none)               
+      +sans-serif-font(bold, 13px, 13px)
+      border-top: 1px solid #5C4932
+      border-bottom: 1px solid #0a0401 
+      border-left: none
+      height: 25px
+      padding: 3px
+      cursor: pointer
+      &:hover, &:focus, &:active 
+        @include border-radius( $topbarRadius )
+        border-top: 1px solid #5C4932
+        border-bottom: 1px solid #0a0401 
+        border-left: none  
+        border-right: none
+        margin: 0
+      img
+        border: 1px solid $imgBorder
+        margin: 0 7px 0 0 
+      a
+        color: $white
+        padding: 5px
+        &:hover
+          background-color: transparent
+      a.dropdown-toggle
+        background: none
+        display: inline
+        &:hover, &:active, &:focus
+          background-color: transparent
+          outline: 0 none
+        img
+          vertical-align: middle   
+      a.menu:after, .dropdown-toggle:after
+        border-left: 4px solid transparent
+        border-right: 4px solid transparent
+        border-top: 4px solid white
+        content: "&darr"
+        display: inline-block
+        height: 0
+        margin-left: 4px
+        margin-top: 11px
+        text-indent: -99999px
+        vertical-align: top
+        width: 0
+      &.open
+        ul
+          @include opacity(100) 
+          display: block 
+          height: auto
+          padding: 5px 0
+          overflow: visible 
+          visibility: visible
+      ul 
+        @include vertical-gradient(#ffffff, #f8f8f8)
+        @include border-radius(2px)
+        @include box-shadow(0 3px 7px rgba(0,0,0,0.3))
+        $transition: opacity .15s linear
+        @include transition($transition)
+        @include opacity(0)
+        border: 1px solid $popoverBorder
+        float: left
+        display: block
+        position: absolute
+        top: 42px
+        right: -5px
+        height: 0px
+        min-width: 90px
+        max-width: 160px
+        _width: 90px
+        margin-left: 0
+        margin-right: 0
+        overflow: hidden
+        text-align: left
+        visibility: hidden
+        zoom: 1      
+        .arrow 
+          @include popover-arrow-below(10px,$popoverColor, -8px, auto, 5px)
+          position: absolute
+          width: 0
+          height: 0
+        .arrow-border
+          @include arrow-border(10px,$popoverBorder, -20px, auto, 5px)          
+        li 
+          +box-shadow(none)
+          float: none
+          clear: both
+          display: block
+          background: none
+          font-size: 12px
+          border: none
+          padding: 0 
+          &:hover, &:active, &:focus
+            height: auto
+            margin: 0
+            
+          a 
+            @include vertical-gradient( none)
+            background: none
+            display: block
+            padding: 6px 15px
+            clear: both
+            font-size: 12px
+            font-weight: normal
+            line-height: 12px
+            color: $linkColor
+            text-shadow: none
+            white-space: nowrap
+            
+              
+          // Dividers (basically an hr)
+          &.divider 
+            height: 1px
+            overflow: hidden
+            background: #222
+            background: rgba(0,0,0,.2)
+            border-bottom: 1px solid rgba(255,255,255,.1)
+            margin: 5px 0
+          // Section separaters
+          span 
+            clear: both
+            display: block
+            background: rgba(0,0,0,.2)
+            padding: 6px 15px
+            cursor: default
+            color: $gray
+            border-top: 1px solid rgba(0,0,0,.2)

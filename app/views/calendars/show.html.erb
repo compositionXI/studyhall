@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Gmail address:</b>
+  <%= @calendar.gmail_address %>
+</p>
+
+<p>
+  <b>Gmail password:</b>
+  <%= @calendar.gmail_password %>
+</p>
+
+<p>
+  <b>Schedule:</b>
+  <%= @calendar.schedule_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+<%= link_to 'Back', calendars_path %>
