@@ -23,7 +23,7 @@ class StudySessionsController < ApplicationController
   end
   
   def new
-    #@modal_link_id = params[:link_id]
+    @modal_link_id = params[:link_id]
     @study_session = StudySession.new
     @study_session.buddy_ids = [params[:id]]
     @study_session.session_files.build
@@ -32,14 +32,7 @@ class StudySessionsController < ApplicationController
   
   def create
     @study_session = current_user.study_sessions.new(params[:study_session])
-    if @study_session.calendar?
-      @study_session.addtocalendar
-      if @study_session.save
-         redirect_to @study_session
-      else
-         render action: 'new'
-      end
-    elsif @study_session.save
+    if @study_session.save
       redirect_to @study_session
     else
       render action: "new"
