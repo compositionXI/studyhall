@@ -27,7 +27,7 @@
 @import "sections/static_pages.sass"
 @import "sections/classes.sass"
 @import "sections/messages.sass"
-@import "sections/calendars.sass"
+@import "sections/calendars.css"
 
 .left
   float: left

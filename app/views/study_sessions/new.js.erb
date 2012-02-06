@@ -1,21 +1,16 @@
 var button = $("#new_study_session_button1");
 
-var placement = null;
-if(button.parent().hasClass("right"))
-  placement = "below-left";
-else
-  placement = "below-right";
-
 button.popover({trigger: "manual",
-                placement: placement,
+                placement: "below-right",
                 offset: 10,
                 horizontalOffset: 25,
                 html: true,
                 help: function(){return "<%=j render :partial => 'help' %>";},
                 title: function(){return "Start A Study Hall";},
                 content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}
-		}).click(function() {
+		}).click(function(e) {
 			$(this).popover('show');
+			e.preventDefault();
 		});
 
 var button2 = $("#new_calendar_button");
@@ -27,8 +22,9 @@ button2.popover({trigger: 'manual',
                 html: true,
                 title: function(){return "Schedule a New StudyHall";},
                 content: function(){return "<%=j render :partial => 'calendar_form' %>";}
-		}).click(function() {
+		}).click(function(e) {
 			$(this).popover('show');
+			e.preventDefault();
 		});
 
 //button2.popover("toggle");
