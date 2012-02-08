@@ -35,18 +35,47 @@ class NotesController < ApplicationController
     @remote = false
     respond_to do |format|
       format.html { render "edit" }
-      format.js
       format.json { render json: @note }
+      if params[:upload]
+        format.js {render "upload"}
+      else
+        format.js
+      end
+    end
+  end
+
+  def upload
+    @note = UploadUtils::upload(params[:upload][:file], current_user)
+    respond_to do |format|
+      if @note.save
+        format.html { redirect_to edit_note_path(@note), notice: 'Note was successfully created.' }
+        format.json { render json: @note, status: :created, location: @note }
+      else
+        format.html { render action: :edit }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
-    @note = current_user.notes.find(params[:id])
-    @modal_link_id = params[:link_id]
-    @remote = params[:source].present?
-    respond_to do |format|
-      format.js
-      format.html
+    if(params[:id])
+      @note = current_user.notes.find(params[:id])
+      if params[:upload]
+        @note = params[:upload]
+      end
+      @modal_link_id = params[:link_id]
+      @remote = params[:source].present?
+      respond_to do |format|
+        format.js
+        format.html
+      end
+    else
+      @file = params[:upload][:file]
+      @note = UploadUtils::upload(@file, current_user)
+      respond_to do |format|
+        format.html
+        format.json { render json: @note }
+      end
     end
   end
 

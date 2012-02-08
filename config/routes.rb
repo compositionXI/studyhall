@@ -11,6 +11,10 @@ Studyhall::Application.routes.draw do
       delete :delete, :action => :destroy
       get 'request_access'
     end
+    collection do
+      post 'upload'
+      post 'edit'
+    end
   end
   resources :notebooks do
     collection do

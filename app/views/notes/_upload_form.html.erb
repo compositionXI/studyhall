@@ -1,0 +1,12 @@
+<%= form_for :upload, url: upload_notes_path, :html => {:class => "form-stacked", :id => "upload_note_form", :'data-type' => "html"} do |f| %>
+  <div class="popover-body"><%= f.hidden_field :content, :id => "note_content_hidden_field" %>
+    <div class="clearfix">
+      <%= f.label "Upload a Note" %>
+      <div class="input"><%= f.file_field :file %></div>
+    </div>
+  </div>
+  <div class="popover-footer clearfix">
+    <%= f.submit 'Done', :class => "btn primary" %>
+    <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+  </div>
+<% end %>

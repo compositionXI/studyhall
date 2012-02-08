@@ -1,13 +1,13 @@
 var button = $("#<%=j @modal_link_id %>");
 button.popover({
   trigger: "manual",
-  placement: "below-left",
+  placement: "below-right",
   offset: 10,
   horizontalOffset: 25,
   html: true,
   help: function(){return "<%=j render :partial => 'help' %>";},
   title: function(){return "Edit this note";},
-  content: function(){return "<%=j render :partial => 'form' %>";}
+  content: function(){return "<%=j render :partial => 'upload_form' %>";}
 });
 button.popover("show");
 $("#note_content_hidden_field").val($("#rte_area_note_content").val());
