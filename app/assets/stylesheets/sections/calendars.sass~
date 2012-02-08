@@ -3,7 +3,7 @@ body
   font-size: 14px
 
 #calendar
-  width: 400px
+  width: 100%
   margin: 0 auto
 
 .fc
