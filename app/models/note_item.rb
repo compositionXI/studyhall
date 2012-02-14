@@ -44,6 +44,14 @@ class NoteItem
     content.notes if notebook?
   end
 
+  def doc_preserved
+    content.doc_preserved if note?
+  end
+
+  def doc
+    content.doc if note?
+  end
+
   def id
     content.id
   end

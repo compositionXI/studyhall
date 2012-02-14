@@ -5,11 +5,12 @@ button.popover({
   offset: 10,
   horizontalOffset: 25,
   html: true,
-  help: function(){return "<%=j render :partial => 'help' %>";},
-  title: function(){return "Edit this note";},
+  help: function(){return "<%=j render :partial => 'upload_help' %>";},
+  title: function(){return "Upload a Document";},
   content: function(){return "<%=j render :partial => 'upload_form' %>";}
 });
 button.popover("show");
+styleFileInputs($('.popover .upload'));
 $("#note_content_hidden_field").val($("#rte_area_note_content").val());
 $("#edit_note_form input[type='text']").first().focus();
 $(".chzn-select").chosen();
@@ -20,6 +21,36 @@ $(".popover").delegate("a.help_button","click",function(e){
 $(".popover").delegate("a.close_help_button","click",function(e){
   button.popover("hideHelp");
   e.preventDefault();
+});
+
+$("#upload_note_form").submit(function(e){
+  var file = $("#file_field").val().length > 0;
+  var doc_type = $("#doc_type_field").val().length > 0;
+  if(file && doc_type) {
+    $("#doc_format_field").removeAttr("disabled");
+    return true;
+  } else {
+    if(!file) {
+      $("#error_field").html("You must select a file.");
+    } else {
+      $("#error_field").html("Please select a document type.");
+    }
+    return false;
+  }
+  return false;
+});
+
+$("#file_field").change(function(e){
+  var filename = $("#file_field").val();
+  var ext = filename.substr(filename.lastIndexOf('.') + 1);
+  var preservable = ext == "doc" || ext == "odt" || ext == "docx" || ext == "txt";
+  if(preservable) {
+  	$("#doc_format_field").removeAttr("checked");
+    $("#doc_format_field").removeAttr("disabled");
+  } else {
+    $("#doc_format_field").attr("checked", "checked");
+    $("#doc_format_field").attr("disabled", "disabled");
+  }
 });
 
 initWindowResize();

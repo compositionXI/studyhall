@@ -44,19 +44,6 @@ class NotesController < ApplicationController
     end
   end
 
-  def upload
-    @note = UploadUtils::upload(params[:upload][:file], current_user)
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to edit_note_path(@note), notice: 'Note was successfully created.' }
-        format.json { render json: @note, status: :created, location: @note }
-      else
-        format.html { render action: :edit }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def edit
     if(params[:id])
       @note = current_user.notes.find(params[:id])
@@ -81,14 +68,30 @@ class NotesController < ApplicationController
 
   def create
     @note = current_user.notes.new(params[:note])
-
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render json: @note, status: :created, location: @note }
-      else
-        format.html { render action: :edit }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
+    if @note.upload == "true"
+      @note = UploadUtils::upload(@note)
+      respond_to do |format|
+        if @note.save
+          if @note.doc_preserved
+            format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
+          else
+            format.html { redirect_to @note, notice: 'Note was successfully created.' }
+          end
+          format.json { render json: @note, status: :created, location: @note }
+        else
+          format.html { render action: :edit }
+          format.json { render json: @note.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        if @note.save
+          format.html { redirect_to @note, notice: 'Note was successfully created.' }
+          format.json { render json: @note, status: :created, location: @note }
+        else
+          format.html { render action: :edit }
+          format.json { render json: @note.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

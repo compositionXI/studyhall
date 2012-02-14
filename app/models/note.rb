@@ -4,6 +4,15 @@ class Note < ActiveRecord::Base
   BEGINNING_OF_TIME = Time.at(0).strftime('%Y-%m-%d')
   TODAY = Time.new.strftime('%Y-%m-%d')
 
+  has_attached_file :doc,
+    :default_url => "/assets/generic_avatar_:style.png",
+    :storage => :s3, 
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :bucket => "bucket_dev_sh0" # "studyhall#{Rails.env}"
+
+  attr_accessor :upload
+  before_post_process :paperclip_hack_filename
+
   belongs_to :notebook
   
   validates_presence_of :user_id
@@ -69,4 +78,25 @@ class Note < ActiveRecord::Base
       self.name = "Quick Save - #{self.owner.notes.count}"
     end
   end
+
+  private
+  # The following two methods are implemnented as a workaround for the issue 
+  # described in Paperclip Issue 603 on Github. 
+  # Namely: nobody wants to make Paperclip responsible for storing URL friendly
+  # filenames because it seems like the wrong place to implement that functioanlity. 
+  # Lazy Thoughtbotters. 
+  def paperclip_hack_filename
+    extension = File.extname(doc_file_name).gsub(/^\.+/, '')
+    filename = doc_file_name.gsub(/\.#{extension}$/, '')
+    self.doc.instance_write(:file_name, "#{hack_filename(filename)}.#{hack_filename(extension)}")
+  end
+  def hack_filename(s)
+    s.downcase!
+    s.gsub!(/'/, '')
+    s.gsub!(/[^A-Za-z0-9]+/, ' ')
+    s.strip!
+    s.gsub!(/\ +/, '-')
+    return s
+  end
+
 end

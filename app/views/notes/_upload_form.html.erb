@@ -1,12 +1,35 @@
-<%= form_for :upload, url: upload_notes_path, :html => {:class => "form-stacked", :id => "upload_note_form", :'data-type' => "html"} do |f| %>
+<%= form_for @note, :html => {:class => "form-stacked", :id => "upload_note_form", :'data-type' => "html"} do |f| %>
+  <%= f.hidden_field :upload, :value => "true" %>
   <div class="popover-body"><%= f.hidden_field :content, :id => "note_content_hidden_field" %>
     <div class="clearfix">
-      <%= f.label "Upload a Note" %>
-      <div class="input"><%= f.file_field :file %></div>
+      <%= f.label "Document" %>
+      <div class="input"><%= f.file_field :doc, :id => "file_field", :class => "upload" %></div>
+    </div>
+    <div class="clearfix">
+      <%= f.label "Document Type" %>
+      <div class="input">
+		<%= select(:upload, :doc_type, options_for_select(CSV.read("db/doc_types.csv")), {:include_blank => "Choose a document type"}, :id => "doc_type_field", :class => "chzn-select") %>
+      </div>
+    </div>
+    <div class="clearfix">
+    <%= f.label "Save To Notebook" %>
+    <div class="input">
+      <%= collection_select :note, :notebook_id, current_user.notebooks, :id, :name, {:include_blank => "Choose a notebook"}, {:class => "chzn-select", "data-placeholder" => "Choose a notebook"} %>
+    </div>
+  </div>
+    <div class="clearfix">
+    <div class="input">
+      <div class="input-prepend">
+        <label class="add-on">
+          <%= f.check_box :doc_preserved, checked: @note.new_record? ? true : @note.notebook, class: "activation_check_box", :id => "doc_format_field" %>
+        </label>
+        <%= text_field_tag nil, nil, value: "Upload in Original Format", class: "prepended_checkbox disabled", disabled: true, style: "width: 200px;" %>
+      </div>
     </div>
   </div>
   <div class="popover-footer clearfix">
     <%= f.submit 'Done', :class => "btn primary" %>
     <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+	<span id="error_field" style="padding-left:5px"></span>
   </div>
 <% end %>

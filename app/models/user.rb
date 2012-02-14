@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     :default_url => "/assets/generic_avatar_:style.png",
     :storage => :s3, 
     :s3_credentials => "#{Rails.root}/config/s3.yml",
-    :bucket => "studyhall#{Rails.env}"
+    :bucket => "bucket_dev_sh0" # "studyhall#{Rails.env}"
 
   attr_accessor :delete_avatar
   before_post_process :paperclip_hack_filename
