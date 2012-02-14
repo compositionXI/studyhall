@@ -1,7 +1,4 @@
 class CalendarsController < ApplicationController
-
-  before_filter :require_user
-
   # GET /calendars
   # GET /calendars.json
   def index
