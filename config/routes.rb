@@ -12,7 +12,6 @@ Studyhall::Application.routes.draw do
       get 'request_access'
     end
     collection do
-      post 'upload'
       post 'edit'
     end
   end

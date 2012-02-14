@@ -133,6 +133,21 @@ if User.count == 0
     password: "studyh@ll",
     active: true
   )
+
+  User.create(
+    first_name: "Tom",
+    last_name: "Lemberg",
+    custom_url: "toml",
+    gender: "Male",
+    school: School.find_by_name('Harvard University'),
+    email: "tom@studyhall.com",
+    majors: [Major.find_by_name("Computer Science")],
+    gpa: 4.0,
+    roles: [Role.find_by_name("Admin"), Role.find_by_name("Monitor"), Role.find_by_name("Student")],
+    password: "studyh@ll",
+    active: true
+  )
+
 end
 
 

@@ -1,6 +1,7 @@
 require 'tmpdir'
 require 'fileutils'
 require 'shellwords'
+require 'hpricot'
 
 module UploadUtils
 
@@ -41,28 +42,45 @@ module UploadUtils
 		end
 	end
 
-    def self.upload(doc_model, current_user)
+	def self.reduce_html(html)
+		doc = Hpricot(html)
+		doc.search("*").each do |e|
+			if e.elem?
+				e.search("b").wrap('<font style="font-weight: bold;">')
+			end
+		end
+		doc.to_html.to_s
+	end
 
+    def self.upload(note)
+
+      doc_model = note.doc.uploaded_file
       tmp = doc_model.tempfile
 
-      dir = File.join("public", current_user.id.to_s)
+      dir = File.join("public/upload_tmp", note.user_id.to_s)
       FileUtils.mkdir_p dir unless File.exists?(dir)
 
       filename_doc = File.join(dir, doc_model.original_filename)
-      FileUtils.cp tmp.path, filename_doc
-      extract_html(filename_doc, :output => dir)
-
       ext = File.extname(filename_doc)
       basename = File.basename(filename_doc, ext)
+      
+      note.name = "#{basename}"
+      note.doc_format = "#{ext[1, ext.length - 1]}"
 
-      filename_html = File.join(dir, "#{basename}.html")
-      html = File.open(filename_html, "rb")
+      if !note.doc_preserved
+        FileUtils.cp tmp.path, filename_doc
+        extract_html(filename_doc, :output => dir)
 
-      FileUtils.rm(filename_doc)
-      FileUtils.rm(filename_html)
+        filename_html = File.join(dir, "#{basename}.html")
+        html = File.open(filename_html, "rb")
 
-      contents = html.read
-      return current_user.notes.new(:content => contents, :name => "#{basename}")
+        FileUtils.rm(filename_doc)
+        FileUtils.rm(filename_html)
+
+        note.content = reduce_html(html.read)
+      end
+
+      note
 
     end
 
