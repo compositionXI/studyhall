@@ -43,7 +43,8 @@ class StudySessionsController < ApplicationController
       @study_session.addtocalendar
       if @study_session.save
         @local_cal = current_user.calendars.new
-        @local_cal.update_attributes({ :date_start => @study_session.time_start, :date_end => @study_session.time_end })
+        @local_cal.update_attributes({ :date_start => @study_session.time_start, :time_start => @study_session.time_end, :schedule_id => @study_session.id })
+        #@local_cal.study_session = @study_session
         redirect_to @study_session
       else
         render action: 'new'

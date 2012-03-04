@@ -2,19 +2,20 @@
  <div class="popover-body form-stacked">
   <p>Add a study session to your calendar. It's great to procrastinate.</p> <br/>
   <div class="clearfix">
+    <%= f.label 'Email Address' %>
     <%= 'samuel.grondahl@yale.edu' %>
   </div>
   <div class="clearfix">
-    <%= f.label :gmail_password %>
+    <%= f.label 'Email Password' %>
     <%= f.text_field :gmail_password %>
   </div>
   <div class="clearfix">
-    <%= f.label :time_start %>
-    <%= f.text_field :time_start %>
+    <%= f.label :name, "Set a time" %>
+    <%= f.text_field :time_start, id: "dater", class: "datepicker", style: "width: 154px;", value: "Date" %>
+    <%= f.text_field :time_end, class: "", style: "width: 154px;", value: "Time" %>
   </div>
   <div class="clearfix">
-    <%= f.label :time_end %>
-    <%= f.text_field :time_end %>
+
   </div>
 <div class="clearfix">
     <%= f.label :name, "Give it a name" %>
@@ -34,4 +35,5 @@
     <%= f.submit 'Schedule Studyhall', class: 'btn primary' %>
     <%= link_to 'Cancel', '#', class: 'btn cancel_popover', 'data-link-id' => 'new_calendar_button' %>
   </div>
+
 <% end %>

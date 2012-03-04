@@ -11,6 +11,7 @@ class StudySession < ActiveRecord::Base
   belongs_to :offering
   has_many :session_files
   has_many :session_invites
+  has_many :calendars
   has_many :users, :through => :session_invites
   has_many :posts, :dependent => :destroy
 

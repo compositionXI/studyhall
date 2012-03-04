@@ -1,6 +1,4 @@
-var button = $("#new_calendar_button");
-
-button.popover({trigger: 'manual',
+$("#new_calendar_button").popover({trigger: 'manual',
                 placement: "below-right",
                 offset: 10,
                 horizontalOffset: 25,
@@ -9,7 +7,7 @@ button.popover({trigger: 'manual',
                 content: function(){return "<%=j render :partial => 'calendar_form' %>";}
 		})
 
-button.popover('show');
+$("#new_calendar_button").popover('show');
 $(".chzn-select").chosen();
-styleFileInputs();
 initWindowResize();
+$('.datepicker').datepicker();
