@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201005751) do
+ActiveRecord::Schema.define(:version => 20120219224326) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -35,8 +35,14 @@ ActiveRecord::Schema.define(:version => 20120201005751) do
     t.string   "gmail_address"
     t.string   "gmail_password"
     t.integer  "schedule_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "user_id"
+    t.integer  "study_session_id"
+    t.string   "date_start"
+    t.string   "time_start"
+    t.string   "date_end"
+    t.string   "time_end"
   end
 
   create_table "contacts", :force => true do |t|
@@ -209,9 +215,16 @@ ActiveRecord::Schema.define(:version => 20120201005751) do
     t.integer  "user_id"
     t.integer  "notebook_id"
     t.text     "content"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "shareable",   :default => true
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "shareable",        :default => true
+    t.string   "doc_type"
+    t.string   "doc_format"
+    t.boolean  "doc_preserved"
+    t.string   "doc_file_name"
+    t.string   "doc_content_type"
+    t.integer  "doc_file_size"
+    t.datetime "doc_updated_at"
   end
 
   create_table "offerings", :force => true do |t|

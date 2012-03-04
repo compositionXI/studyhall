@@ -10,17 +10,17 @@
 		$('#calendar').fullCalendar({
 			//theme: true,
 			header: {
-				left: 'prev,next today',
-				center: 'title',
+				left: 'title prev,next today',
+				center: '',
 				right: 'month,agendaWeek,agendaDay'
-			},	// US Holidays
-			events: 'http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic',
-			
-			eventClick: function(event) {
-				// opens events in a popup window
-				window.open(event.url, 'gcalevent', 'width=700,height=600');
-				return false;
-			},
+			},	
+			events: [
+				{
+					title: "<%= Calendar.find(26).date_start %>", 
+					start: new Date(2012,02,20),
+					end: new Date(2012,02,21),
+				}
+				],
 			
 			loading: function(bool) {
 				if (bool) {
