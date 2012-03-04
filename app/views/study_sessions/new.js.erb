@@ -8,24 +8,10 @@ button.popover({trigger: "manual",
                 help: function(){return "<%=j render :partial => 'help' %>";},
                 title: function(){return "Start A Study Hall";},
                 content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}
-		}).click(function(e) {
-			$(this).popover('show');
-			e.preventDefault();
-		});
+		})
 
-var button2 = $("#new_calendar_button");
+button.popover('show');
 
-button2.popover({trigger: 'manual',
-                placement: "below-right",
-                offset: 10,
-                horizontalOffset: 25,
-                html: true,
-                title: function(){return "Schedule a New StudyHall";},
-                content: function(){return "<%=j render :partial => 'calendar_form' %>";}
-		}).click(function(e) {
-			$(this).popover('show');
-			e.preventDefault();
-		});
 
 //button2.popover("toggle");
 

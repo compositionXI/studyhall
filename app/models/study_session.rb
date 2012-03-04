@@ -11,6 +11,7 @@ class StudySession < ActiveRecord::Base
   belongs_to :offering
   has_many :session_files
   has_many :session_invites
+  has_many :calendars
   has_many :users, :through => :session_invites
   has_many :posts, :dependent => :destroy
 
@@ -112,6 +113,7 @@ class StudySession < ActiveRecord::Base
   end
 
   def addtocalendar
+=begin
     begin
       invitearray = []
       @buddy_ids.uniq.reject(&:blank?).each do |buddy_id|
@@ -119,7 +121,7 @@ class StudySession < ActiveRecord::Base
         invitearray << {:name => calinvite.first_name, :email => calinvite.email}
       end
       service = GCal4Ruby::Service.new
-      service.authenticate(self.gmail_address, self.gmail_password)
+      service.authenticate(user.email, self.gmail_password)
       cal = GCal4Ruby::Calendar.find(service, {:title => 'studyhall'})
       if cal.empty?
 	 newCal = GCal4Ruby::Calendar.new(service, {:title => 'studyhall', :summary => 'studyhall'})
@@ -128,13 +130,14 @@ class StudySession < ActiveRecord::Base
          event.save
       else
          event = GCal4Ruby::Event.new(service, {:calendar => cal.first, :title => self.name, :start_time => self.time_start, :end_time => self.time_end, :attendees => invitearray})
-         event.reminder = [{:minutes => 40320, :method => "email"}]
+         event.reminder = [{:minutes => 2000, :method => "email"}]
 	 event.save
       end
     rescue GData4Ruby::HTTPRequestFailed => e
       Rails.logger.info("Failed to authenticate #{gmail_address} with Gmail")
       false
     end
+=end
   end
 
   def calendar?

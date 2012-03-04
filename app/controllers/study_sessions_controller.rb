@@ -28,6 +28,13 @@ class StudySessionsController < ApplicationController
     @study_session.buddy_ids = [params[:id]]
     @study_session.session_files.build
     @faqs_page = StaticPage.find_by_slug(:faqs)
+    respond_to do |format|
+      if params[:calendar]
+        format.js {render "calendar"}
+      else
+        format.js
+      end
+    end
   end
   
   def create
@@ -35,14 +42,16 @@ class StudySessionsController < ApplicationController
     if @study_session.calendar?
       @study_session.addtocalendar
       if @study_session.save
-         redirect_to @study_session
+        @local_cal = current_user.calendars.new({ :date_start => @study_session.time_start, :date_end => @study_session.time_end })
+        @local_cal.update_attributes
+        redirect_to @study_session
       else
-         render action: 'new'
+        render action: 'new'
       end
     elsif @study_session.save
       redirect_to @study_session
     else
-      render action: "new"
+      render action: 'new'
     end
   end
 
