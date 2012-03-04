@@ -9,6 +9,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js { render "index" }
       format.json { render json: @calendars }
     end
   end
