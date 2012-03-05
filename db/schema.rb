@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219224326) do
+ActiveRecord::Schema.define(:version => 20120304190313) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -367,6 +367,7 @@ ActiveRecord::Schema.define(:version => 20120219224326) do
     t.string   "time_start"
     t.string   "time_end"
     t.boolean  "calendar"
+    t.integer  "calendar_id"
   end
 
   create_table "users", :force => true do |t|

@@ -9,9 +9,9 @@ class StudySession < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :offering
+  has_many :calendars
   has_many :session_files
   has_many :session_invites
-  has_many :calendars
   has_many :users, :through => :session_invites
   has_many :posts, :dependent => :destroy
 
@@ -25,8 +25,8 @@ class StudySession < ActiveRecord::Base
     where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
   }
 
-  before_create :init_opentok
-  after_save :upload_session_files
+  #before_create :init_opentok
+  #after_save :upload_session_files
   after_create :associate_users
 
   accepts_nested_attributes_for :session_files
@@ -142,6 +142,22 @@ class StudySession < ActiveRecord::Base
 
   def calendar?
     self.calendar
+  end
+
+  def other_user_json(user)
+    study_seshs = user.study_sessions
+    cal_seshs = []
+    study_seshs.each do |sss|
+      cal_seshs << Calendar.where(:schedule_id => sss.id)
+    end
+    json_cal  = "["
+    cal_seshs.each do |cal|
+      json_cal << "{ title: #{cal.date_start},"
+      json_cal << "start: #{cal.date_start},"
+      json_cal << "end: #{cal.date_start} }"
+    end
+    json_cal << "]"
+    json_cal
   end
 
 end

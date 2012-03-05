@@ -5,15 +5,17 @@ class CalendarsController < ApplicationController
   # GET /calendars
   # GET /calendars.json
   def index
-    @calendars = Calendar.all
+    #@calendars = Calendar.all
+    @user_cals = Calendar.other_user_json(current_user)
+    flash.now[:notice] = "Your profile is #{current_user.profile_completion_percentage}% complete!"
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js
-      format.json { render json: @calendars }
+      format.js { render "index" }
+      #format.json { render json: @calendars }
     end
   end
-
+=begin
   # GET /calendars/1
   # GET /calendars/1.json
   def show
@@ -84,4 +86,5 @@ class CalendarsController < ApplicationController
       format.json { head :no_content }
     end
   end
+=end
 end
