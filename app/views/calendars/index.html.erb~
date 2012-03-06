@@ -20,8 +20,10 @@ $('#calendar').fullCalendar({
     if (confirm("Are you sure you want to reschedule this Studyhall for " + eventDate + " at " + eventTime + " ?")) {
       calId = event.url.match(/\?\d+/i)[0].substr(1);
       eventMonthInt = newEvent.getMonth() + 1;
+      alert(eventMonthInt + 'month');
       if(eventMonthInt < 10){ eventMonth = '0' + eventMonthInt; }else{ eventMonth = eventMonthInt + ''; }
-      eventDayInt = newEvent.getDate();
+      eventDayInt = newEvent.getDay();
+      alert(eventDayInt + 'day');
       if(eventDayInt < 10){ eventDay = '0' + eventDayInt; }else{ eventDay = eventDayInt + ''; }
       eventYear = newEvent.getYear() + 1900;
       newDate = eventMonth + '/' + eventDay + '/' + eventYear;

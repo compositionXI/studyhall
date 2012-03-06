@@ -1,5 +1,5 @@
 //Study Sessions
-#study_session_time_end
+.timeSelect
   width: 100px
 
 .study_sessions-show

@@ -22,7 +22,6 @@ class Calendar < ActiveRecord::Base
         end
         mdy = cal.date_start.to_s.scan(/\d+/)
         mdy[0] = mdy[0].to_i - 1
-        mdy[1] = mdy[1].to_i - 1
         hmampm = cal.time_start.to_s.split(' ')
         hm = hmampm[0].scan(/\d+/);
         if hmampm[1] == 'pm'
