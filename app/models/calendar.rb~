@@ -38,7 +38,7 @@ class Calendar < ActiveRecord::Base
         if full_date
           end_hour = hm[0].to_i + 1
           date_string_end = mdy[2].to_s+','+mdy[0].to_s+','+mdy[1].to_s+','+end_hour.to_s+','+hm[1].to_s
-          all_day_string = ', allDay = false'
+          all_day_string = ', allDay: false'
         else
           date_string_end = date_string
           all_day_string = ''

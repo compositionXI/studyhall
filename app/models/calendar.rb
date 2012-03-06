@@ -46,7 +46,7 @@ class Calendar < ActiveRecord::Base
         json_cal << " { title: '#{sesh_name}', "
         json_cal << "start: new Date(#{date_string}), "
         json_cal << "end: new Date(#{date_string_end}), "
-        json_cal << "url: 'localhost:3000/study_sessions/#{cal.schedule_id}'#{all_day_string} },"
+        json_cal << "url: 'http://localhost:3000/study_sessions/#{cal.schedule_id}'#{all_day_string} },"
       end
     json_cal << " ]"
     json_cal
