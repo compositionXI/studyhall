@@ -1,13 +1,20 @@
 <%= form_for(@study_session) do |f| %>
  <div class="popover-body form-stacked">
   <p>Add a study session to your calendar. It's great to procrastinate.</p> <br/>
-  <div class="clearfix">
-    <%= f.label 'Email Address' %>
-    <%= 'samuel.grondahl@yale.edu' %>
+  <div class="gmail-toggle">
+    <div class="clearfix">
+      <a href="javascript:showGmail();">Add to Google Calendar</a>
+    </div>
   </div>
-  <div class="clearfix">
-    <%= f.label 'Email Password' %>
-    <%= f.text_field :gmail_password %>
+  <div class="gmail-add" style="display: none;">
+    <div class="clearfix">
+      <%= f.label 'Email Address' %>
+      <%= 'samuel.grondahl@yale.edu' %>
+    </div>
+    <div class="clearfix">
+      <%= f.label 'Email Password' %>
+      <%= f.text_field :gmail_password %>
+    </div>
   </div>
   <div class="clearfix">
     <%= f.label :name, "Set a date and time" %>
