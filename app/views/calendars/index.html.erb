@@ -7,15 +7,12 @@
   <% end %>
 
 <div id='calendar'></div>
-<div id="confirm_update" style="display:none;">
-</div>
-<div id="updated_ajax" style="display:none;"></div>
+<div id="confirm_update" style="display:none;"></div>
 
 <script type="text/javascript">
 $(document).ready(function() {
 
 var close_button = 0;
-
 
 function modalDialog(confirm_text, cal_id, new_date, event_time, revertFunc)
 {
@@ -52,13 +49,6 @@ function confirmCallback(dialog_ret, cal_id, new_date, event_time, revertFunc)
         url: ['calendars', cal_id].join('/'),
         type: 'PUT',
         data: "newDate=" + new_date + "&newTime=" + event_time
-      });
-      $('#updated_ajax').html("Successfully updated study session.");
-      $('#updated_ajax').dialog({
-        title: "Woot!",
-        resizable: false,
-			  draggable: false,
-			  height:100
       });
     }else{
       revertFunc();

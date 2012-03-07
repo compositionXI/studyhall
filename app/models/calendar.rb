@@ -9,16 +9,25 @@ class Calendar < ActiveRecord::Base
 
   def Calendar.other_user_json(user)
     study_seshs = user.study_sessions
-    cal_seshs = []
-    study_seshs.each do |sss|
-      cal_seshs += Calendar.where(:schedule_id => sss.id)
+    study_seshs_ids = []
+    study_seshs.each do |ss|
+      study_seshs_ids << ss.id
     end
+    cal_seshs = Calendar.where(:schedule_id => study_seshs_ids)
+    cal_seshs_ss_ids = []
+    cal_seshs.each do |cs|
+      cal_seshs_ss_ids << cs.schedule_id
+    end
+#    study_seshs.each do |sss|
+#      cal_seshs += Calendar.where(:schedule_id => sss.id)
+#    end
+    study_seshs_w_cal = StudySession.where(:id => cal_seshs_ss_ids)
     json_cal  = "["
       cal_seshs.each do |cal|
-        if StudySession.find(cal.schedule_id).name.to_s == ''
+        if study_seshs_w_cal.where(:id => cal.schedule_id).name.to_s == ''
           sesh_name = 'Study Session ' + cal.schedule_id.to_s
         else
-          sesh_name = StudySession.find(cal.schedule_id).name
+          sesh_name = study_seshs_w_cal.where(:id => cal.schedule_id).name
         end
         mdy = cal.date_start.to_s.scan(/\d+/)
         mdy[0] = mdy[0].to_i - 1
