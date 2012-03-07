@@ -1,7 +1,70 @@
+  <% if flash[:notice] %>
+    <div class="alert alert-message success span7" style="text-align: center;">
+        <a class="close" href="#">×</a>
+        <%= flash[:notice] %>
+    </div>
+  <% else %>
+  <% end %>
+
 <div id='calendar'></div>
+<div id="confirm_update" style="display:none;">
+</div>
+<div id="updated_ajax" style="display:none;"></div>
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+var close_button = 0;
+
+
+function modalDialog(confirm_text, cal_id, new_date, event_time, revertFunc)
+{
+    close_button = 0;
+    $('#confirm_update').html(confirm_text)
+    $('#confirm_update').dialog({
+      title: "Confirm Update",
+			resizable: false,
+			draggable: false,
+			height:200,
+			modal: true,
+			buttons: {
+				"Confirm": function() {
+				  close_button = 1;
+				  confirmCallback(1, cal_id, new_date, event_time, revertFunc);
+				  $( this ).dialog('close');
+				},
+				Cancel: function() {
+				  close_button = 1;
+					confirmCallback(0, cal_id, new_date, event_time, revertFunc);
+					$( this ).dialog('close');
+				}
+			},
+			close: function() {
+			  if(close_button == 0){ confirmCallback(0, cal_id, new_date, event_time, revertFunc); }
+			}
+		});
+}
+
+function confirmCallback(dialog_ret, cal_id, new_date, event_time, revertFunc)
+{
+  if (dialog_ret == 1) {
+      $.ajax({
+        url: ['calendars', cal_id].join('/'),
+        type: 'PUT',
+        data: "newDate=" + new_date + "&newTime=" + event_time
+      });
+      $('#updated_ajax').html("Successfully updated study session.");
+      $('#updated_ajax').dialog({
+        title: "Woot!",
+        resizable: false,
+			  draggable: false,
+			  height:100
+      });
+    }else{
+      revertFunc();
+    }
+}
+
 	
 $('#calendar').fullCalendar({
   editable: true,
@@ -17,30 +80,20 @@ $('#calendar').fullCalendar({
     eventMinuteInt = newEvent.getMinutes();
     if(eventMinuteInt < 10){ eventMinute = "0" + eventMinuteInt; }else{ eventMinute = eventMinuteInt; }
     eventTime = eventHour + ':' + eventMinute + amPm;
-    if (confirm("Are you sure you want to reschedule this Studyhall for " + eventDate + " at " + eventTime + " ?")) {
-      calId = event.url.match(/\?\d+/i)[0].substr(1);
-      eventMonthInt = newEvent.getMonth() + 1;
-      if(eventMonthInt < 10){ eventMonth = '0' + eventMonthInt; }else{ eventMonth = eventMonthInt + ''; }
-      eventDayInt = newEvent.getDate();
-      if(eventDayInt < 10){ eventDay = '0' + eventDayInt; }else{ eventDay = eventDayInt + ''; }
-      eventYear = newEvent.getYear() + 1900;
-      newDate = eventMonth + '/' + eventDay + '/' + eventYear;
-      $.ajax({
-        url: ['calendars', calId].join('/'),
-        type: 'PUT',
-        data: "newDate=" + newDate + "&newTime=" + eventTime
-      }).done(function( msg ) {
-        alert( "Data Saved: " + msg );
-      });
-    }else{
-      revertFunc();
-    }
+    calId = event.url.match(/\?\d+/i)[0].substr(1);
+    eventMonthInt = newEvent.getMonth() + 1;
+    if(eventMonthInt < 10){ eventMonth = '0' + eventMonthInt; }else{ eventMonth = eventMonthInt + ''; }
+    eventDayInt = newEvent.getDate();
+    if(eventDayInt < 10){ eventDay = '0' + eventDayInt; }else{ eventDay = eventDayInt + ''; }
+    eventYear = newEvent.getYear() + 1900;
+    newDate = eventMonth + '/' + eventDay + '/' + eventYear;
+    modalDialog("Are you sure you want to reschedule this Studyhall for " + eventDate + " at " + eventTime + " ?", calId, newDate, eventTime, revertFunc);
 
   },
   header: {
     left: 'title prev,next today',
     center: '',
-    right: 'month,agendaWeek,agendaDay'
+    right: 'month,agendaWeek'
   },	
   events: <%= @user_cals %>,
 	

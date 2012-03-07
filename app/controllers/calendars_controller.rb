@@ -1,14 +1,16 @@
 class CalendarsController < ApplicationController
 
   before_filter :require_user
+  before_filter :set_action_bar, except: [:show]
 
   # GET /calendars
   # GET /calendars.json
   def index
     #@calendars = Calendar.all
     @user_cals = Calendar.other_user_json(current_user)
-    flash.now[:notice] = "Studyhall scheduled successfully "
-
+    if(params[:new_schedule] == 1)
+      flash.now[:notice] = "Studyhall #{params[:schedule_name]} scheduled successfully."
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.js { render "index" }

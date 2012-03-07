@@ -113,8 +113,12 @@ class StudySession < ActiveRecord::Base
   end
 
   def addtocalendar
-=begin
+  # TODO update with new fields eg time date start w new format etc
     begin
+      begintime = self.time_start + ' at ' + self.time_end
+      houradder = self.time_end.split(':')[0].to_i + 1
+      endhour = houradder.to_s + ':' + self.time_end.split(':')[1].to_s
+      endtime = self.time_start + ' at ' + endhour
       invitearray = []
       @buddy_ids.uniq.reject(&:blank?).each do |buddy_id|
         calinvite = User.find(buddy_id)
@@ -122,22 +126,24 @@ class StudySession < ActiveRecord::Base
       end
       service = GCal4Ruby::Service.new
       service.authenticate(user.email, self.gmail_password)
+      Rails.logger.info("Trying to authenticate #{user.email} with #{self.gmail_password}")
       cal = GCal4Ruby::Calendar.find(service, {:title => 'studyhall'})
       if cal.empty?
-	 newCal = GCal4Ruby::Calendar.new(service, {:title => 'studyhall', :summary => 'studyhall'})
-	 newCal.save
-	 event = GCal4Ruby::Event.new(service, {:calendar => newCal, :title => self.name, :start_time => self.time_start, :end_time => self.time_end, :attendees => invitearray})
-         event.save
+	      newCal = GCal4Ruby::Calendar.new(service, {:title => 'studyhall', :summary => 'studyhall'})
+	      newCal.save
+	      event = GCal4Ruby::Event.new(service, {:calendar => newCal, :title => self.name, :start_time => begintime, :end_time => endtime, :attendees => invitearray})
+        event.save
+        Rails.logger.info("Successfully authenticated #{gmail_address} with Gmail, added #{self.name} at #{begintime}")
       else
-         event = GCal4Ruby::Event.new(service, {:calendar => cal.first, :title => self.name, :start_time => self.time_start, :end_time => self.time_end, :attendees => invitearray})
-         event.reminder = [{:minutes => 2000, :method => "email"}]
-	 event.save
+        event = GCal4Ruby::Event.new(service, {:calendar => cal.first, :title => self.name, :start_time => begintime, :end_time => endtime, :attendees => invitearray})
+        event.reminder = [{:hours => 24, :method => "email"}]
+	      event.save
+	      Rails.logger.info("Successfully authenticated #{gmail_address} with Gmail, added #{self.name} at #{begintime}")
       end
     rescue GData4Ruby::HTTPRequestFailed => e
       Rails.logger.info("Failed to authenticate #{gmail_address} with Gmail")
       false
     end
-=end
   end
 
   def calendar?
