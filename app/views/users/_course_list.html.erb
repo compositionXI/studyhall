@@ -1,6 +1,6 @@
 <% collapsed = true unless local_assigns.key? :collapsed %>
 <li class="notebook_list_item<%= ' collapsed' if collapsed %>">
 <%= link_to("/classes/#{offering.to_param}", :class => "name") do %>
-    <div class="<%= offering.course.title_has_long_word? ? 'long_course_title' : 'normal_course_title' %>"><%= truncate(offering.course.title, :length => 85, :separator => ' ') %></div>
+    <span><%= truncate(offering.course.title, :length => 85, :separator => ' ') %></span>
   <% end %>
 </li>
