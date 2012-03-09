@@ -44,23 +44,23 @@ class CalendarsController < ApplicationController
   def edit
     @calendar = Calendar.find(params[:id])
   end
+=end
 
   # POST /calendars
   # POST /calendars.json
   def create
-    @calendar = Calendar.new(params[:calendar])
+    @calendar = Calendar.new
+    @calendar.update_attributes({ :days => params[:days], :time_start => params[:start_time], :time_end => params[:end_time], :course_id => params[:course_id], :user_id => current_user.id, :course_name => params[:course_name] })
 
     respond_to do |format|
       if @calendar.save
-        format.html { redirect_to @calendar, notice: 'Calendar was successfully created.' }
-        format.json { render json: @calendar, status: :created, location: @calendar }
+        format.html { redirect_to calendar_url }
       else
-        format.html { render action: "new" }
-        format.json { render json: @calendar.errors, status: :unprocessable_entity }
+        format.html { redirect_to home_url }
       end
     end
   end
-=end
+
 
   # PUT /calendars/1
   # PUT /calendars/1.json

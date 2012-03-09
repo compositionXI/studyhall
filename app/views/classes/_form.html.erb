@@ -11,14 +11,16 @@
     </div>
   <% end %>
 
-  <div class="clearfix">
-    <%= f.label :Choose_course %>
-    <% cache("school-#{@user.school.id}-offering-course-list") do -%>
-      <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
-    <% end -%>
-  </div></div>
+    <div class="clearfix">
+      <%= f.label :Choose_course %>
+      <% cache("school-#{@user.school.id}-offering-course-list") do -%>
+        <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
+      <% end -%>
+    </div>
+    <%= render :partial => 'calendars/course_schedule' %>
+  </div>
   <div class="popover-footer">
-    <%= f.submit "Submit", :class => "btn primary" %>
+    <%= f.submit "Submit", :class => "btn primary add_course_final" %>
     <%= link_to 'Cancel', "#", :class => "btn cancel_course_popover" %>
   </div>
 <% end %>

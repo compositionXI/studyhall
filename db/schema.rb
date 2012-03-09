@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304190313) do
+ActiveRecord::Schema.define(:version => 20120308220648) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(:version => 20120304190313) do
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "calendars", :force => true do |t|
-    t.string   "gmail_address"
-    t.string   "gmail_password"
     t.integer  "schedule_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
@@ -41,8 +39,10 @@ ActiveRecord::Schema.define(:version => 20120304190313) do
     t.integer  "study_session_id"
     t.string   "date_start"
     t.string   "time_start"
-    t.string   "date_end"
     t.string   "time_end"
+    t.string   "days"
+    t.integer  "course_id"
+    t.string   "course_name"
   end
 
   create_table "contacts", :force => true do |t|

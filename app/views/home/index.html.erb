@@ -98,6 +98,12 @@
 
 <%= javascript_tag do %>
   $(document).ready(function(){
+
+    var placement = "right";
+    var length = $('.course_list').children().length;
+    var bottom_size = length % 4;
+    if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
+    
     var popover_attr = {
       trigger: "manual",
       placement: placement,
@@ -108,13 +114,6 @@
       content: function(){return "<%=j render :partial => 'classes/form' %>";}
     };
 
-    var placement = "below";
-    var length = $('.course_list').children().length;
-    if(1 == length % 4) {
-      placement = "below-left";
-    } else if(0 == length % 4) {
-      placement = "below-right";
-    }
     
     $("#add_course_button").live('click', function(){
       $("#add_course_button").popover(popover_attr);
@@ -129,6 +128,31 @@
     $('a.cancel_course_popover').live('click', function(){
       $("#add_course_button").popover("hide");
       return false;
+    });
+    
+    $('.add_course_final').live('click', function(){
+      length = $('.course_list').children().length;
+      bottom_size = length % 4;
+      if(bottom_size == 0){ placement = "right"; }else{ placement = "left"; }
+      popover_attr['placement'] = placement;
+      var days = '';
+      if($('#d1').prop('checked')){ days += '1'; };
+      if($('#d2').prop('checked')){ days += '2'; };
+      if($('#d3').prop('checked')){ days += '3'; };
+      if($('#d4').prop('checked')){ days += '4'; };
+      if($('#d5').prop('checked')){ days += '5'; };
+      var start = $('#class_start_time').val();
+      var end = $('#class_end_time').val();
+      var course_name = $('.chzn-single span').html();
+      var option_selector = "option:contains('"+course_name+"')";
+      var course = $(option_selector).val();
+      if(days != '' && start != end){
+        $.ajax({
+          url: '/calendars',
+          type: 'POST',
+          data: "days=" + days + "&start_time=" + start + "&end_time=" + end + "&course_id=" + course + "&course_name=" + course_name
+        });
+      };
     });
   });
 <% end -%>
