@@ -59,7 +59,7 @@ class Calendar < ActiveRecord::Base
         json_cal << " { title: '#{sesh_name}', "
         json_cal << "start: new Date(#{date_string}), "
         json_cal << "end: new Date(#{date_string_end}), "
-        json_cal << "url: 'http://localhost:3000/study_sessions/#{cal.schedule_id}?#{cal.id}'#{all_day_string} },"
+        json_cal << "url: 'http://www.studyhall.com/study_sessions/#{cal.schedule_id}?#{cal.id}'#{all_day_string} },"
       end
     
     class_cal = Calendar.where(!:course_id.nil?)
@@ -100,7 +100,7 @@ class Calendar < ActiveRecord::Base
             json_cal << " { title: '#{course_name[0]} #{course_name[1]}', "
             json_cal << "start: new Date(#{date_string_start}), "
             json_cal << "end: new Date(#{date_string_end}), "
-            json_cal << "url: 'http://localhost:3000/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
+            json_cal << "url: 'http://www.studyhall.com/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
           end
         end
         if day == '2'
@@ -110,7 +110,7 @@ class Calendar < ActiveRecord::Base
             json_cal << " { title: '#{course_name[0]} #{course_name[1]}', "
             json_cal << "start: new Date(#{date_string_start}), "
             json_cal << "end: new Date(#{date_string_end}), "
-            json_cal << "url: 'http://localhost:3000/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
+            json_cal << "url: 'http://www.studyhall.com/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
           end
         end
         if day == '3'
@@ -120,7 +120,7 @@ class Calendar < ActiveRecord::Base
             json_cal << " { title: '#{course_name[0]} #{course_name[1]}', "
             json_cal << "start: new Date(#{date_string_start}), "
             json_cal << "end: new Date(#{date_string_end}), "
-            json_cal << "url: 'http://localhost:3000/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
+            json_cal << "url: 'http://www.studyhall.com/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
           end
         end
         if day == '4'
@@ -130,7 +130,7 @@ class Calendar < ActiveRecord::Base
             json_cal << " { title: '#{course_name[0]} #{course_name[1]}', "
             json_cal << "start: new Date(#{date_string_start}), "
             json_cal << "end: new Date(#{date_string_end}), "
-            json_cal << "url: 'http://localhost:3000/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
+            json_cal << "url: 'http://www.studyhall.com/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
           end
         end
         if day == '5'
@@ -140,7 +140,7 @@ class Calendar < ActiveRecord::Base
             json_cal << " { title: '#{course_name[0]} #{course_name[1]}', "
             json_cal << "start: new Date(#{date_string_start}), "
             json_cal << "end: new Date(#{date_string_end}), "
-            json_cal << "url: 'http://localhost:3000/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
+            json_cal << "url: 'http://www.studyhall.com/classes/#{ccl.course_id}', allDay: false, editable: false, color: 'gray' },"
           end
         end
       end
