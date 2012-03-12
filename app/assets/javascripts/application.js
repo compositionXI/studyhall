@@ -117,7 +117,8 @@ $(function(){
     e.stopPropagation();
   });
   
-  $("#sortTableExample").tablesorter();
+  $("#sortTableExample").tablesorter(); 
+
 });
 
 var quickSearch = function(){
@@ -135,6 +136,7 @@ var quickSearch = function(){
 }
 
 $(document).ready(function(){
+
   //Disable following any anchor tag with the "disabled" class
   $("body").delegate("a,input[type='submit']","click", function(e){
     if($(this).hasClass("disabled")){
@@ -203,4 +205,5 @@ $(document).ready(function(){
   $("#gpa_section a.help, #rating a.help").live('click', function(){
     return false;
   });
+
 });

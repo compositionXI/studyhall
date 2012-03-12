@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages, :require_first_last_name
+  before_filter :current_user, :fetch_static_pages, :require_first_last_name, :initial_broadcasts
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -91,6 +91,37 @@ class ApplicationController < ActionController::Base
   def deny_access
     path = request.referrer || root_path
     redirect_to path, error: "You don't have permissoin to view that page"
+  end
+
+  def push_broadcast(intent, options = {})
+    if current_user
+      case intent
+      when :studyhall_created
+        message = "#{current_user.name} created the Studyhall \"#{options[:name]}\"" if options.key?(:name)
+      when :message_sent
+        message = "#{current_user.name} sent you a message."
+      end
+      uri = URI.parse("http://localhost:9292/faye")
+      if options[:users]
+        options[:users].each do |u|
+          data = {:user_id => u.id, :message => message, :intent => intent.to_s, :args => options}
+          serialized_data = data.to_json
+          notification = {:channel => "/broadcasts/user/#{u.id}", :data => serialized_data}
+          Net::HTTP.post_form(uri, :message => notification.to_json) if Broadcast.create(data)
+        end
+      else
+        Following.where("followed_user_id = ?", current_user.id).each do |f|
+          data = {:user_id => f.user_id, :message => message, :intent => intent.to_s, :args => options}
+          serialized_data = data.to_json
+          notification = {:channel => "/broadcasts/user/#{f.user_id}", :data => serialized_data}
+          Net::HTTP.post_form(uri, :message => notification.to_json) if Broadcast.create(data)
+        end
+      end 
+    end
+	end
+
+  def initial_broadcasts
+    @broadcasts = Broadcast.where("user_id = ?", current_user.id) if current_user
   end
 
 end

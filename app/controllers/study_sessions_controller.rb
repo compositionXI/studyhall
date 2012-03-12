@@ -35,13 +35,17 @@ class StudySessionsController < ApplicationController
     if @study_session.calendar?
       @study_session.addtocalendar
       if @study_session.save
+         push_broadcast(:studyhall_created, :name => @study_session.name, :id => @study_session.id)
          redirect_to @study_session
       else
          render action: 'new'
       end
     elsif @study_session.save
+      push_broadcast(:studyhall_created, :name => @study_session.name, :id => @study_session.id)
+      @notification_pushable = true
       redirect_to @study_session
     else
+      @notification_pushable = true
       render action: "new"
     end
   end

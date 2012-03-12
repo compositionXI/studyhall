@@ -1,0 +1,8 @@
+<% if current_user %>
+  <script type="text/javascript">
+    var current_user = new Object();
+    current_user.id = <%= current_user.id %>;
+    current_user.first_name = "<%= current_user.first_name %>";
+    current_user.last_name = "<%= current_user.last_name %>";
+  </script>
+<% end %>

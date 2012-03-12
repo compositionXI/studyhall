@@ -52,6 +52,7 @@ class MessagesController < ApplicationController
     body = params[:message].try(:[], :body)
     @success = @sender.send_message?(subject, body, *@receiver)
     if @success
+      push_broadcast(:message_sent, :users => @receiver)
       save_attachments(@receiver, @sender)
       @message = current_user.sent_messages.new(:subject => prepared_subject(params[:message][:subject]), :parent_id => params[:message][:parent_id])
     end
