@@ -1,12 +1,12 @@
 development:
-  bucket: bucket_dev_sh
+  bucket: bucket_dev_sh0
   access_key_id: AKIAIETU7HT7R2K3PCYQ
   secret_access_key: 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
 test:
-  bucket: bucket_test_sh
+  bucket: bucket_test_sh0
   access_key_id: AKIAIETU7HT7R2K3PCYQ
   secret_access_key: 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
 production:
-  bucket: bucket_prod_sh
+  bucket: bucket_prod_sh0
   access_key_id: AKIAIETU7HT7R2K3PCYQ
   secret_access_key: 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

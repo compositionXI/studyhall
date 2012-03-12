@@ -98,3 +98,5 @@ gem 'cap-recipes'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "devise"
+
+gem "faye"
