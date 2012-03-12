@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
   has_many :study_sessions, :through => :session_invites
   has_many :posts
   has_many :activity_messages
+  has_many :calendars
   
   has_many :searches
   

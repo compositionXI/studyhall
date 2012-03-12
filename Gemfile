@@ -3,6 +3,8 @@ source 'http://rubygems.org'
 gem 'rack', '>= 1.4.0'
 gem 'rails', '~> 3.2.0.rc2'
 gem 'mysql2'
+gem 'thin'
+gem 'activesupport'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
@@ -48,12 +50,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'mediaelement_rails'
+gem "mediaelement_rails", git: "git://github.com/tobsch/mediaelement_rails.git"
 gem 'httparty'
 gem "nifty-generators", :group => :development
 
 # Gem for parsing RSS/Atom Feeds
-gem 'feedzirra', :git => 'git://github.com/pauldix/feedzirra.git'
+gem 'feedzirra' #, :git => 'git://github.com/pauldix/feedzirra.git'
 gem 'curb', '0.7.15' 
 gem 'whenever'
 

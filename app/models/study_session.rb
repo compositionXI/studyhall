@@ -9,6 +9,7 @@ class StudySession < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :offering
+  has_many :calendars
   has_many :session_files
   has_many :session_invites
   has_many :users, :through => :session_invites
@@ -24,8 +25,8 @@ class StudySession < ActiveRecord::Base
     where("created_at >= ? and created_at <= ?", start_date, (Time.parse(end_date) + 1.day).strftime('%Y-%m-%d'))
   }
 
-  before_create :init_opentok
-  after_save :upload_session_files
+  #before_create :init_opentok
+  #after_save :upload_session_files
   after_create :associate_users
 
   accepts_nested_attributes_for :session_files
@@ -112,24 +113,32 @@ class StudySession < ActiveRecord::Base
   end
 
   def addtocalendar
+  # TODO update with new fields eg time date start w new format etc
     begin
+      begintime = self.time_start + ' at ' + self.time_end
+      houradder = self.time_end.split(':')[0].to_i + 1
+      endhour = houradder.to_s + ':' + self.time_end.split(':')[1].to_s
+      endtime = self.time_start + ' at ' + endhour
       invitearray = []
       @buddy_ids.uniq.reject(&:blank?).each do |buddy_id|
         calinvite = User.find(buddy_id)
         invitearray << {:name => calinvite.first_name, :email => calinvite.email}
       end
       service = GCal4Ruby::Service.new
-      service.authenticate(self.gmail_address, self.gmail_password)
+      service.authenticate(user.email, self.gmail_password)
+      Rails.logger.info("Trying to authenticate #{user.email} with #{self.gmail_password}")
       cal = GCal4Ruby::Calendar.find(service, {:title => 'studyhall'})
       if cal.empty?
-	 newCal = GCal4Ruby::Calendar.new(service, {:title => 'studyhall', :summary => 'studyhall'})
-	 newCal.save
-	 event = GCal4Ruby::Event.new(service, {:calendar => newCal, :title => self.name, :start_time => self.time_start, :end_time => self.time_end, :attendees => invitearray})
-         event.save
+	      newCal = GCal4Ruby::Calendar.new(service, {:title => 'studyhall', :summary => 'studyhall'})
+	      newCal.save
+	      event = GCal4Ruby::Event.new(service, {:calendar => newCal, :title => self.name, :start_time => begintime, :end_time => endtime, :attendees => invitearray})
+        event.save
+        Rails.logger.info("Successfully authenticated #{gmail_address} with Gmail, added #{self.name} at #{begintime}")
       else
-         event = GCal4Ruby::Event.new(service, {:calendar => cal.first, :title => self.name, :start_time => self.time_start, :end_time => self.time_end, :attendees => invitearray})
-         event.reminder = [{:minutes => 40320, :method => "email"}]
-	 event.save
+        event = GCal4Ruby::Event.new(service, {:calendar => cal.first, :title => self.name, :start_time => begintime, :end_time => endtime, :attendees => invitearray})
+        event.reminder = [{:hours => 24, :method => "email"}]
+	      event.save
+	      Rails.logger.info("Successfully authenticated #{gmail_address} with Gmail, added #{self.name} at #{begintime}")
       end
     rescue GData4Ruby::HTTPRequestFailed => e
       Rails.logger.info("Failed to authenticate #{gmail_address} with Gmail")
@@ -140,5 +149,7 @@ class StudySession < ActiveRecord::Base
   def calendar?
     self.calendar
   end
+
+
 
 end

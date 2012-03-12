@@ -135,11 +135,12 @@ class UsersController < ApplicationController
     enrollment = @current_user.enrollments.find_by_offering_id offering.id
     offering.posts.create(:user_id => current_user.id, :text => "#{@current_user.name} dropped this class.")
     enrollment.delete
-    @course_id = offering.id
-    respond_to do |format|
-      format.html { redirect_to root_path flash[:action_bar_message] }
-      format.js
+    #@course_id = offering.id
+    @calendar = Calendar.where(:course_id => offering.id.to_s)
+    @calendar.each do |cal|
+      cal.update_attributes(:days => 'deleted')
     end
+    redirect_to home_url
   end
 
   def block

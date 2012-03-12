@@ -1,0 +1,17 @@
+$("#new_calendar_button").popover({trigger: 'manual',
+                placement: "below-right",
+                offset: 10,
+                horizontalOffset: 25,
+                html: true,
+                title: function(){return "Schedule a New StudyHall";},
+                content: function(){return "<%=j render :partial => 'calendar_form' %>";}
+		})
+
+$("#new_calendar_button").popover('show');
+$(".chzn-select").chosen();
+initWindowResize();
+$('.datepicker').datepicker();
+function showGmail(){
+  $('.gmail-toggle').hide();
+  $('.gmail-add').show();
+  }

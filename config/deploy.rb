@@ -1,17 +1,18 @@
 set :stages, %w(production staging)
 set :default_stage, "staging"
+set :branch, "master"
 
 require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 
-set :whenever_environment, defer { stage } 
+set :whenever_environment, defer { production } 
 require "whenever/capistrano"
 
 # this is for memcached server
 require 'cap_recipes/tasks/memcache'
 
 set :application, "StudyHall"
-set :repository,  "git@intridea.unfuddle.com:intridea/studyhall.git"
+set :repository,  "git@github.com:sgrondahl/studyhall.git"
 
 set :scm, :git
 set :scm_username, 'brent'

@@ -1,0 +1,8 @@
+<div class="action_bar">
+  <div class="container">
+      <div class="buttons left">
+	      <%= link_to "Schedule A Studyhall", new_study_session_path(:link_id => "new_calendar_button", :calendar => "true"), :class => "btn popover_button non_edit", :id => "new_calendar_button", :remote => true %>
+      </div>
+      <h3 class="edit" style="display:none">Drag any studyhall to reschedule, or click to enter study session.</h3>
+  </div>
+</div>

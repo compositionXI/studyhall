@@ -5,11 +5,10 @@ log/*.log.lck
 tmp/
 .sass-cache/
 vendor/bundle
-config/database.yml
 config/s3.yml
+config/database.yml
 config/config.yml
 public/system
 public/system/*
-solr
 .DS_Store
 *.swp

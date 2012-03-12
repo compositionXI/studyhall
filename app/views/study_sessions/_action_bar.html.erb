@@ -3,7 +3,7 @@
     <% if @index %>
       <div class="buttons left">
         <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :class => "btn primary popover_button non_edit", :id => "new_study_session_button1", :remote => true %>
-	<%= link_to "Schedule A Studyhall", new_study_session_path(:link_id => "new_calendar_button"), :class => "btn popover_button non_edit", :id => "new_calendar_button", :remote => true %>
+	<%= link_to "Schedule A Studyhall", new_study_session_path(:link_id => "new_calendar_button", :calendar => "true"), :class => "btn popover_button non_edit", :id => "new_calendar_button", :remote => true %>
         <%= link_to "Share", new_sharing_path(object_to_share: "StudyHalls"), id: "share_button", class: "btn primary edit", style: "display:none", remote: true %>
         <%= link_to "Delete", new_group_delete_path(class_name: "study_session"), id: "delete_button", class: "btn edit", style: "display:none", remote: true %>
       </div>
