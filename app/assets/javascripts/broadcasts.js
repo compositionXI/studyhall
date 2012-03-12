@@ -3,7 +3,6 @@ $(document).ready(function() {
     if(typeof(Faye) == 'object') {
       var faye_client = new Faye.Client('http://localhost:9292/faye');
       faye_client.subscribe('/broadcasts/user/' + current_user.id, function(serialized_data) {
-        alert("got it!");
         var data = $.parseJSON(serialized_data); 
         interpret_broadcast(data);
   	  });
@@ -25,6 +24,5 @@ interpret_broadcast = function(data) {
   }
 
   var item = "<li><a href='" + link + "' id='notification-" + link + "' data-original-title>" + data.message + "</a></li><li class='divider'></li>";
-  alert(item);
   $("#notifications_queue").append(item);
 }

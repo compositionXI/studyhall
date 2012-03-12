@@ -20,6 +20,7 @@
 <body class="<%= controller_name + "-" + action_name %> full-width">
   <%= render :partial => "layouts/topbar" %>
   <%= render :partial => @action_bar if @action_bar %>
+  <%= render :partial => "layouts/fetch_info" %>
   <section class="main-content">
     <div class="container"><%= yield %></div>
   </section>
