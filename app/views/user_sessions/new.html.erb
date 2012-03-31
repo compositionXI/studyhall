@@ -6,7 +6,7 @@
 <% end %>
   <div class="single-form">
   <div class="header"><h1>Welcome Back!</h1>
-  <%= link_to "Log in using Facebook", "/auth/facebook", id: "facebook_login" %></div>
+  <% link_to "Log in using Facebook", "/auth/facebook", id: "facebook_login" %></div>
   <%= form_for @user_session, :url => {:action => "create"}, :html => {:class => "form-stacked"} do |f| %>
     <%= f.error_messages %>
     <div class="clearfix">
