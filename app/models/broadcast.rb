@@ -6,9 +6,9 @@ class Broadcast < ActiveRecord::Base
   def link
     case self.intent.to_sym
     when :studyhall_created
-      link = study_sessions_path
+      link = study_sessions_path(:clear_broadcasts => true)
     when :message_sent
-      link = mailbox_path(:mailbox => "inbox")
+      link = mailbox_path(:mailbox => "inbox", :clear_broadcasts => true)
     end
     link
   end

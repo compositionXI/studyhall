@@ -1,0 +1,29 @@
+<table class="group_post_table">
+  <tr><td>
+    <ul class="group_posts_bar">
+      <li class="left"><h4>Shared documents</h4></li>
+      <li class="right">
+        <%= link_to "Post a Message", make_post_group_posts_path(:link_id => "post_message_button", :group_id => @group.id), :class => "btn", :id => "post_message_button", :remote => true %>
+      </li>
+    </ul>
+  </td></tr>
+  <tr><td>
+    <div id="group_posts_tab">
+      <div>
+        <% if @root_posts.length == 0 %>
+          There is currently no group activity.
+        <% else %>
+          <ul style="height:200px">
+            <% @root_posts.each do |post| %>
+              <%= render :partial => "group_post", :locals => {:post => post, :group => @group} %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </td></tr>
+</table>
+
+<script type="text/javascript">
+  $("#group_posts_tab ul").jScrollPane({hideFocus: true});
+</script>

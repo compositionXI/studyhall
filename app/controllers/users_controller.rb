@@ -6,6 +6,16 @@ class UsersController < ApplicationController
   before_filter :set_action_bar, :only => [:show, :edit]
   before_filter :check_first_last_name, :only => :profile_wizard
   skip_before_filter :require_first_last_name, :only => [:profile_wizard, :update, :show]
+
+  def make_admin
+    @modal_link_id = params[:modal_link_id]
+    @group = Group.find(params[:group_id])
+    @user = User.find(params[:user_id])
+    @group.admins << User.find(@user)
+    respond_to do |format|
+      format.js
+    end
+  end
   
   def index
     @users = User.active_users.all

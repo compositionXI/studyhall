@@ -1,0 +1,4 @@
+<% @search.groups(params[:page] || 1).results.each do |search_result| %>
+  <%= render :partial => "group", :locals => {:group => search_result} %>
+<% end %>
+<%= link_to_next_page @search.groups(params[:page] || 1).results, "See more results", class: 'more_results', remote: true, params: { category: "groups"} %>

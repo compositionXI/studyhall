@@ -1,0 +1,12 @@
+<%= form_for group, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_bio_form", :multipart => true} do |f| %>
+<div class="popover-body">  <input type="hidden" name="form_id" value="bio_form">
+  <%= hidden_field_tag :rel_form, 'bio_form' %>
+  <div class="input">
+    <%= f.label :bio %>
+    <%= f.text_area :bio, :rows => 10 %>
+  </div></div>
+<div class="popover-footer">  <div class="input clearfix">
+    <%= f.submit "Save Changes", :class => "btn save" %>
+    <%= link_to "Cancel", "#", :class => "btn close_modal" %>
+  </div></div>
+<% end %>

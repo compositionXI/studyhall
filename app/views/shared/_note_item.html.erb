@@ -1,0 +1,39 @@
+<li class="<%= note_item.html_class %> show grid" id="<%= note_item.html_id %>" data-class="<%= note_item.class_name %>" data-id="<%= note_item.id %>" data-notebook-id="<%= note_item.content.notebook.try(:id) if note_item.note? %>" data-href="<%= note_item.doc_preserved ? note_item.doc.url : (url_for note_item.url_params) %>">
+  <div class="background_container"></div>
+  <span class="name">
+    <div class="name_wrapper"><%= truncate note_item.name, :length => 60 %></div>
+    <% if note_item.notebook? && !note_item.content.course.nil? %>
+      <br/>
+      <em><%= note_item.content.course.compact_name %></em>
+    <% end %>
+  </span>
+  <div class="list_data">
+    <%= link_to note_item.name, note_item.url_params, class: 'name' %><a href="#" class="selector"></a>
+    <p class="course_name"><%= note_item.course_name %></p>
+    <p class="date"><%= formatted_date(note_item.created_at) %></p>
+  </div>
+  <a href="#" class="selector"></a>
+  <% unless note_item.shareable? %>
+    <span class="locked"></span>
+  <% else %>
+    <span class="unlocked"></span>
+  <% end %>
+  <% if note_item.note? %>
+    <a href="#" class="drag_handle"></a>
+  <% else %>
+    <a href="#" class="notebook_expander<%= note_item.notes.any? ? "" : " hide" %>" data-rel="notebook_<%= note_item.id %>_children">+</a>
+    <div class="clearfix"></div>
+    <ul class="child_notes" id="notebook_<%= note_item.id %>_children">
+      <%= render partial: "notes/child_note", collection: note_item.notes, as: :note, locals: {note_item: note_item} %>
+    </ul>
+  <% end %>
+  <% if note_item.notebook? %>
+    <div id="notebook_<%= note_item.id %>_modal" class="modal" style="display:none">
+      <%= render partial: "notebooks/modal_form.html.erb", locals: {notebook: note_item.content} %>
+    </div>
+  <% else %>
+    <div id="note_<%= note_item.id %>_modal" class="modal" style="display:none">
+      <%= render partial: "notes/modal_form.html.erb", locals: {note: note_item.content} %>
+    </div>
+  <% end %>
+</li>

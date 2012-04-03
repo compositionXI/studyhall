@@ -1,0 +1,211 @@
+<section>
+  <div class="row">
+    <div class="span5 column sidebar left" id="profile_sidebar">
+      <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form" data-bar-title="Add a photo - 400px by 400px and less than 500kb">
+        <%= render partial: "photo", locals: {group: @group} %>
+      </div>
+      <div id="profile_personal_info" class="left" style="margin-bottom:20px">
+        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
+          <%= render partial: "name", locals: {group: @group} %>
+        </div>
+        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
+          <%= render partial: "bio", locals: {group: @group} %>
+        </div>
+      </div>
+      <%= render :partial => "buddies_preview", :locals => {:group => @group} %>
+      <%= render :partial => "admins_preview", :locals => {:group => @group} %>
+    </div>
+    <div class="span11 column profile_main_content">
+      <div class="clear"></div>
+      <div id="profile_user_items1">
+        <%= render :partial => "group_posts" %>
+        <%= render :partial => "documents" %>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="profile_forms" style="display:none">
+  <div class="form" id="name_form">
+    <%= render :partial => 'name_form', :locals => { :group => @group } %>
+  </div>
+
+  <div class="form" id="bio_form">
+    <%= render :partial => 'bio_form', :locals => { :group => @group }  %>
+  </div>
+
+  <div class="form" id="photo_form">
+    <%= render :partial => 'photo_form', :locals => { :group => @group } %>
+  </div>
+  <div class="form" id="invitations_form">
+    <%= render :partial => "invite_buddies_popover", :locals => {:group => @group} if @group.admin?(current_user) %>
+  </div>
+</div>
+<script type="text/javascript">
+  var hidePopovers = function(){
+    $(".editable.edit.active").each(function(){
+      $(this).popover("hide");
+    });
+  }
+
+  var cloneForm = function(editable){
+    var form_id = $(editable).data("form");
+    var form = $("#"+form_id).clone();
+    <% if params[:tour] %>
+      form.find("input.btn.save").val("Next");
+      form.find("a.btn.close_modal").hide();
+    <% end%>
+    return form.first().html();
+  }
+  
+  var initChosen = function(){
+    $popover = $('.popover')
+    chosenable = $popover.find("#user_school_id, #user_gender");
+    chosenable.addClass("chzn-select");
+    chosenable.chosen({disable_search_threshold: 15  });
+    $("#user_gender ").change(function(){
+      var gender = $(this).val();
+      if (gender == 'Male') {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity");
+      } else if(gender == 'Female') {
+        $('label[for=user_fraternity_or_sorority]').text("Sorority");
+      } else {
+        $('label[for=user_fraternity_or_sorority]').text("Fraternity or Sorority");
+      }
+    });
+    $(".popover #user_major_ids").chosen();
+    $(".popover #user_sport_ids").chosen();
+    $(".popover #user_frat_sorority_ids").chosen();
+  }
+
+  var decreaseCourseCount = function() {
+    var html = $('.course_count').html();  
+    var courseCount = parseInt(html.slice(1, html.length - 1));
+    var courseCount = (courseCount) ? courseCount : 0;
+    if(courseCount > 0) {
+      $('.course_count').html("(" + (courseCount - 1) + ")");
+    }
+  }
+  
+  $(document).ready(function(){
+    $(".tabs li").each(function(){
+      var li = $(this);
+      var link = li.children().first();
+      if(li.hasClass("active"))
+        $("#"+link.data("rel")).show();
+      link.click(function(e){
+        var clicked_link = $(this);
+        $(".tabs li").removeClass("active");
+        clicked_link.parent().addClass("active");
+        $(".tab_contents").hide();
+        $("#"+clicked_link.data("rel")).show();
+        $("#"+clicked_link.data("rel")).jScrollPane();
+        e.preventDefault();
+      });
+    });
+
+    $(".users-show").delegate(".edit .drop_course_link","click",function(e){
+      var modal_id = "#course_" + $(this).data("course_id") + "_modal";
+      $(modal_id).modal({keyboard: true,
+                         show: true,
+                         backdrop: true});
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  
+    var toggleEditMode = function(e) {
+      hidePopovers();
+      $(".editable").toggleClass("edit");
+      if(e)
+        e.preventDefault();
+      $('.action_bar .edit_button').removeClass('active');
+    }
+
+    $(".edit_button").click(function(e){
+      toggleEditMode();
+    });
+
+    $("a#delete_photo").live('click', function(e){
+      $('#delete_avatar').attr('checked', 'checked');
+      $("form#edit_profile_photo_form").submit();
+    });
+
+    $(".users-show").delegate(".editable.edit","click",function(e){
+      if(!$(this).hasClass("tab_contents") && $(e.target).attr('id') != 'delete_photo'){
+        var editable = $(this);
+        hidePopovers();
+        editable.addClass("active");
+        editable.popover({trigger: "manual",
+                          placement: editable.data("placement"),
+                          html: true,
+                          offset: 10,
+                          horizontalOffset: 10,
+                          title: function(){return editable.data("title")},
+                          content: function(){ return cloneForm(editable)}});
+        editable.popover("show");
+        initChosen(editable.popover);
+        styleFileInputs($('.popover .upload'));
+        $('.number').autoNumeric({vMax: '4.00', vMin: '0.00'});
+        $('.number').keyup(function(e){
+          if($(this).val().length == 1 && e.keyCode != 8) {
+            $(this).val($(this).val() + ".");
+          }
+        });
+        //$("select.chzn-select").chosen();
+        initWindowResize();
+        <% if params[:tour] %>
+          $("div.action_bar h3").text(editable.data('bar-title'));
+        <% end %>
+      }
+      e.preventDefault();
+    });
+
+    $(".users-show").delegate("a.close_modal","click",function(e){
+      hidePopovers();
+      //console.log($(this).data("id"));
+      $("#"+$(this).data("id")).modal("hide");
+    });
+
+    $(".invite_buddies_save_button").live("click", function(){
+      $(".activate_invitation").popover('hide');
+    });
+    
+    <% if @user == current_user%>
+      $(".activate_invitation").click(function(){
+        var invitation = $(this);
+        var invitations_form = $("#invitations_form").clone();
+        invitations_form.find('#gmail_invite_modal').remove();
+        invitations_form.find('#facebook_connect_modal').remove();
+        invitation.popover({
+          trigger: 'manual',
+          placement: 'below-right',
+          html: true,
+          offset: 10,
+          horizontalOffset: 140,
+          title: function() { return "Your buddies <small>We promise not to spam</small>"; },
+          content: function() {return invitations_form.html(); }
+        });  
+        invitation.popover('show');
+      });
+    <% end %>
+
+    <% if params[:mode] == 'edit' && current_user == @user %>
+      toggleEditMode();
+    <% end %>
+
+    <% if params[:tour] == 'true' && current_user == @user %>
+      var initTourMode = function() {
+        $('body').addClass('wizard');
+        $("#topbar_main_nav").hide();
+        $(".topbar #new_search").hide();
+        $(".buddies.invitations").addClass('editable').attr('data-form', 'invitations_form').attr('data-placement', 'below-right').attr('data-title', 'Your Buddies <small>We promise not to spam</small>');
+        //$($(".edit_button")[0]).trigger('click');
+        $(".edit_button").hide();
+        $("div[data-form='name_form']").toggleClass('edit');
+        $("div[data-form='name_form']").trigger('click');
+      }
+      initTourMode();
+    <% end %>
+  });
+
+</script>
+

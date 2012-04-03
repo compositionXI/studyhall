@@ -12,8 +12,12 @@ class NotesController < ApplicationController
       @note_items = NoteItem.init_set(@notebook.notes)
     else
       @note_items = NoteItem.init_set(Backpack.new(current_user).contents(page: params[:page], filter: params[:filter]))
+      @documents = Array.new
+      types = CSV.read("db/doc_types.csv").unshift ["All", "0"]
+      types.each do |type|
+        @documents << NoteItem.init_set(Backpack.new(current_user).contents(page: params[:page], filter: params[:filter], doc_type: type[1]))
+      end
     end
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @notes }
@@ -31,6 +35,7 @@ class NotesController < ApplicationController
 
   def new
     @note = @notebook ? @notebook.notes.build : Note.new
+    @group = params[:group]
     @modal_link_id = params[:link_id]
     @remote = false
     respond_to do |format|
@@ -68,6 +73,10 @@ class NotesController < ApplicationController
 
   def create
     @note = current_user.notes.new(params[:note])
+    if !@note.share_choice
+      @note.users = []
+      @note.groups = []
+    end
     if @note.upload == "true"
       @note = UploadUtils::upload(@note)
       respond_to do |format|

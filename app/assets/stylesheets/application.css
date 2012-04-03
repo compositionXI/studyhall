@@ -8,6 +8,8 @@
  *= require mediaelement_rails/mejs-skins
  *= require app
  *= require search
+ *= require groups
+ *= require broadcasts
  *= require_self
 */
 	

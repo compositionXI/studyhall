@@ -23,7 +23,7 @@
 // Code for styling file upload inputs. Needs to be extracted and pluginified
 var styleFileInputs = function(selector){
   el = selector || $(".input-file")
-  el.each(function(){    
+  el.each(function(){
     if(!$(this).hasClass("styled")){
       var $this = $(this)
       ,   origWidth = $this.outerWidth()

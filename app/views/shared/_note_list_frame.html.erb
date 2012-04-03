@@ -1,0 +1,18 @@
+<div id="document_tabs">
+  <ul class="tabs">
+    <% types = CSV.read("db/doc_types.csv").unshift ["All", 0] %>
+    <% types.pop %>
+    <% types.each do |type| %>
+      <li <%= "class='active'" if type[1] == 0 %>><a data-rel="doc_type_tab_<%= type[1] %>" href="#"><%= type[0] %></a></li>
+    <% end %>
+  </ul>
+  <% types.each do |type| %>
+    <ul id="doc_type_tab_<%= type[1] %>" class="tab_contents" <%= "style='display:none'" if type[1] != 0 %>>
+      <%= render :partial => "shared/note_list", :locals => {:note_items => documents[Integer(type[1])]} %>
+    </ul>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  $(".tab_contents").css("height", "200px");
+</script>

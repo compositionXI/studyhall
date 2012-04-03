@@ -10,7 +10,7 @@ class Backpack
     # Need a completely different method for finding filtered notes because you want to find notes that are in notebooks.
     # What about when note or notebooks is not checked in the filter form
     @notes = find_notes
-    @notebooks = find_notebooks
+    @notebooks = (@typed || @user.is_a?(Group)) ? [] : find_notebooks
     @notables = (@notes.sort_by(&:created_at).reverse + @notebooks)
     @start_index, @end_index = nil, nil
     fetch_contents(@notables[start_index..end_index])
@@ -24,7 +24,12 @@ class Backpack
     
     def find_notes
       if @options[:filter].nil?
-        create_notables @user.notes.unsorted.select([:id, :created_at]).all
+        if @options[:doc_type].nil? || @options[:doc_type] == "0"
+          create_notables @user.notes.unsorted.select([:id, :created_at]).all
+        else
+          @typed = true
+          create_notables @user.documents(@options[:doc_type]).unsorted.select([:id, :created_at]).all
+        end
       elsif @options[:filter][:notes] == "1"
         create_notables Note.filter_for(@user, @options[:filter])
       else

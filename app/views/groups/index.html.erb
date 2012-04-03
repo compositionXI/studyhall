@@ -1,0 +1,7 @@
+<% if current_user.groups && !current_user.groups.empty? %>
+  <ul id="people_tab" class="people search_results">
+    <%= render 'list' %>
+  </ul>
+<% else %>
+  <h2>You don't currently belong to any groups.</h2>
+<% end %>

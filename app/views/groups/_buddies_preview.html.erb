@@ -1,0 +1,59 @@
+<% no_invitation ||= false %>
+<section class="buddies invitations tourable" data-popover-id="invitation_tour">
+  <header>
+    <h1 class="left">Members <small>(<span class="total_buddies"><%= group.members.count %></span>)</small></h1>
+    <%= link_to "View All >>", nil, id: 'view_all_buddies_button' %>
+  </header>
+  <% if group.members.any? %>
+    <ul>
+      <% group.members.limit(4).each do |member| %>
+        <li><%= link_to image_tag(member.photo_url(:medium)), member, :title => member.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<div id="buddies1">
+<div id="view_all_buddies" class="modal" style="display:none">
+  <div class="modal-header">
+    <h3>Members</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <% group.members.each do |user| %>
+        <li class="clearfix buddy_list_item <%= cycle('odd','') %>">
+          <div class="left photo">
+            <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+          </div>
+          <div class="left meta">
+            <%= link_to user.name, user %>
+            <%= user.school.try(&:name) %>
+          </div>
+          <div class="right">
+            <% if current_user && group.admin?(current_user) && !group.admin?(user) %>
+              <%= link_to "Make Admin", user_make_admin_path(:modal_link_id => "make_admin_button#{user.id}", :user_id => user.id, :group_id => group.id), :class => "btn small", :remote => true, :id => "make_admin_button#{user.id}" %>
+            <% end %>
+            <span><%= Admin if (current_user && group.admin?(user)) %></span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="cancel_popover btn">Close</a>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var view_all_buddies_modal = $("#buddies1 #view_all_buddies").modal({backdrop: true, keyboard: true});
+    $(".buddies").delegate("#view_all_buddies_button","click",function(e){
+      view_all_buddies_modal.modal("show");
+      $("#view_all_buddies ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#buddies1 #view_all_buddies").delegate(".cancel_popover","click",function(e){
+      view_all_buddies_modal.modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>

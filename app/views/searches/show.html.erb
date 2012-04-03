@@ -3,6 +3,7 @@
     <li class="<%= activate(params[:category] || @search.first_group, "people") %>"><a data-rel="people_tab" href="#">People (<%= @search.users_count %>)</a></li>
     <li class="<%= activate(params[:category] || @search.first_group, "courses") %>"><a data-rel="courses_tab" href="#">Courses (<%= @search.courses_count %>)</a></li>
     <li class="<%= activate(params[:category] || @search.first_group, "notes") %>"><a data-rel="notes_tab" href="#">Notes (<%= @search.notes_count %>)</a></li>
+    <li class="<%= activate(params[:category] || @search.first_group, "groups") %>"><a data-rel="groups_tab" href="#">Groups (<%= @search.groups_count %>)</a></li>
   </ul>
   <ul id="people_tab" class="people search_results">
     <% if @search.users_count > 0 %>
@@ -21,6 +22,13 @@
   <ul id="notes_tab" class="notes search_results">
     <% if @search.notes_count > 0 %>
       <%= render 'notes' %>
+    <% else %>
+      <p>No relevant results were found.</p>
+    <% end %>
+  </ul>
+  <ul id="groups_tab" class="people search_results">
+    <% if @search.groups_count > 0 %>
+      <%= render 'groups' %>
     <% else %>
       <p>No relevant results were found.</p>
     <% end %>

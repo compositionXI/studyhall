@@ -1,0 +1,22 @@
+<% user = User.find(post.user_id) %>
+<li class="clearfix group_post">
+  <div class="left photo">
+    <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+  </div>
+  <div class="left meta" style="width:520px">
+    <%= link_to user.name, user_path(user) %> - <%= l post.created_at, :format => :short %><br>
+    <div class="post"><%= post.message %></div>
+    <div class="comments">
+      <% post.comments.each do |comment| %>
+        <% commenter = comment.user %>
+        <div class="comment">
+          <div class="left photo">
+            <%= link_to image_tag(commenter.photo_url(:thumb)), commenter, :title => commenter.name %>
+          </div>
+          <div class="text"><%= comment.message %></div>
+        </div>
+      <% end %>
+    </div>
+    <div class="comment_button"><%= link_to "Comment", make_post_group_posts_path(:link_id => "comment_button#{post.id}", :group_id => group.id, :comment_id => post.id), :id => "comment_button#{post.id}", :remote => true %></div>
+  </div>
+</li>

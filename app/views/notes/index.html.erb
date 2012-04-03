@@ -3,23 +3,27 @@
     <p><%= flash[:alert] %></p>
   </div> 
 <% end %>
-<% if @note_items.any? %>
-  <div class="scroll_pane">
-    <ul class="note_items" data-layout="grid">
-      <%= render partial: "note_item", collection: @note_items, as: :note_item %>
-    </ul>
-  </div>
-<% elsif params[:filter] %>
-  <div class="note_item_demo">
-      <center>
-        <h3 class="title">No Results Found!</h3>
-        Sorry, we can't find any Notes or Notebooks meeting that criteria.
-      </center>
-  </div>
-<% else %><div class="landing_wrapper">
-  <div class="note_item_demo">
-      <a class="name" href="/notes/new">Take Notes</a>
-  </div>
-  <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
-  <p>Click the "Take Notes" button to begin taking note.</p></div>
+<% if @notebook %>
+  <%= render :partial => "shared/note_list", :locals => {:note_items => @note_items} %>
+<% else %>
+  <%= render :partial => "shared/note_list_frame", :locals => {:documents => @documents} %>
 <% end %>
+
+<script type="text/javascript">
+$("#document_tabs .tabs li").each(function(){
+  var li = $(this);
+  var link = li.children().first();
+  if(li.hasClass("active")) {
+    $("#"+link.data("rel")).show();
+  }
+  link.click(function(e){
+    var clicked_link = $(this);
+    $("#document_tabs .tabs li").removeClass("active");
+    clicked_link.parent().addClass("active");
+    $("#document_tabs .tab_contents").hide();
+    $("#"+clicked_link.data("rel")).show();
+    //$("#"+clicked_link.data("rel")).jScrollPane();
+    e.preventDefault();
+  });
+});
+</script>

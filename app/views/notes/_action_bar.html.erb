@@ -29,8 +29,8 @@
       <%= link_to "Filter", new_filter_path(:model_name => "Note"), id: "filter_button", class: "btn non_edit", :remote => true  %>
       
       <div id="items_layout_switcher" class="grid">
-        <%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button grid_btn' %>
-        <%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button list_btn' %>
+        <!--<%= link_to 'Grid', { layout: :grid }, 'data-layout' => 'grid', :class => 'btn show_button layout_button grid_btn' %>-->
+        <!--<%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button list_btn' %>-->
       </div>
       <% if @notebook.nil? || @notebook.user == current_user %>
         <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>

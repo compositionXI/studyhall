@@ -23,7 +23,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :majors
   has_and_belongs_to_many :sports
   has_and_belongs_to_many :frat_sororities
-  
+  has_and_belongs_to_many :groups, :join_table => :members_groups
+
+  has_many :broadcasts
   has_many :notebooks
   has_many :notes
   has_many :enrollments
@@ -82,6 +84,14 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+
+  def current_broadcasts
+    Broadcast.where("user_id = ? AND current = ?", self.id, true)
+  end
+
+  def documents(type=nil)
+    type ? Note.where("user_id = ? AND doc_type = ?", self.id, type) : self.notes
+  end
 
   def name_should_be_present
     self.errors[:first_name] = "cannot be blank" if (first_name.blank? && read_attribute(:active) == true)

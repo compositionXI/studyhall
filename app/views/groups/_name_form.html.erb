@@ -1,0 +1,16 @@
+<%= form_for group, :remote => true, :html => {:class => "form-stacked with_columns", :id => "edit_name_form", :multipart => true} do |f| %>
+  <%= hidden_field_tag :rel_form, 'name_form' %>
+  <div class="popover-body clearfix">  <input type="hidden" name="form_id" value="bio_form">
+    <p>No one wants to study with a stranger. Complete your profile and start studying with friends today!</p>
+    <div class="input left first">
+      <%= f.label :group_name %>
+      <%= f.text_field :group_name %>
+    </div>
+  </div>
+  <div class="popover-footer"> 
+    <div class="input clearfix">
+      <%= f.submit "Save", :class => "btn save" %>
+      <%= link_to "Cancel", "#", :class => "btn close_modal" %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,95 @@
+<div class="action_bar">
+  <div class="container">
+    <div class="buttons left">
+      <% if action_name == "index" %>
+        <%= link_to "Create Group", new_group_path, :class => "btn popover_button show_button", :id => "new_group_button", :remote => true %>
+      <% elsif action_name == "show" %>
+        <% if @group.admin?(current_user) && @member_requests.length > 0 %>
+          <%= link_to "Member requests (#{@member_requests.length})", "#", :id => 'member_requests_button', :class => "btn small" %>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <h3 class="edit" style="display:none">Select, share or delete, double-click to edit</h3>
+    <% if @notebook %>
+      <h3 class="show middle">
+        <% if @notebook.owner == current_user %>
+          <span><%= link_to 'All Items', notes_path %> &raquo; <%= truncate @notebook.name, :length => 25 %></span>
+        <% else %>
+          <span><%= link_to "#{@notebook.owner.title_name}'s Shared Items", notes_path %> &raquo; <%= truncate @notebook.name, :length => 25 %></span>
+        <% end %>
+      </h3>
+    <% else %>
+      <h3 class="show middle">
+        <span><%= action_name == "show" ? "#{@group.group_name} Group Page" : "Your Groups" %></span>
+      </h3>
+    <% end %>
+  
+    <div class="buttons right">
+        <% if current_user %>
+          <% if params[:action] == "show" && !@group.admin?(current_user) %>
+            <%= link_to "Request to Join Group", member_requests_place_path(:group_id => @group.id, :link_id => "join_group_button"), :id => "join_group_button", :class => "btn small", :remote => true %>
+            <div class="btn-box small" style="display:none">Studly</div>
+          <% elsif params[:action] == "show" %>
+             <%= link_to("Edit", "#", :class => "btn editable edit_button") if @group.admin?(current_user) %> 
+             <%= link_to "All Done!", "#", :class => "btn small editable edit_button edit" %>
+          <% end %>
+        <% end %>
+      </div>
+  </div>
+</div>
+
+<% if action_name == "index" %>
+<div id="create_group" class="modal" style="display:none">
+  <div class="modal-header">
+    <h3>Create Group</h3>
+  </div>
+  <% if action_name == "index" %>
+    <%= render :partial => "form", locals: {entity: @group} %>
+  <% end %>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    styleFileInputs($("#file_field"));
+    var create_group_modal = $("#create_group").modal({backdrop: true, keyboard: true});
+    
+    $(this).delegate("#new_group_button","click",function(e){
+      create_group_modal.modal("show");
+      //$("#create_group ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#create_group").delegate(".cancel_popover","click",function(e){
+      $("#create_group").modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>
+<% elsif action_name == "show" %>
+<div id="buddies_member_requests">
+<div id="view_all_buddies" class="modal" style="display:none">
+  <div class="modal-header">
+    <h3>Member Requests</h3>
+  </div>
+  <div class="modal-body">
+    <%= render :partial => "member_requests", :locals => {:group => @group} %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="cancel_popover btn">Close</a>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var view_all_buddies_modal = $("#buddies_member_requests #view_all_buddies").modal({backdrop: true, keyboard: true});
+    $(this).delegate("#member_requests_button","click",function(e){
+      view_all_buddies_modal.modal("show");
+      $("#view_all_buddies ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#buddies_member_requests #view_all_buddies").delegate(".cancel_popover","click",function(e){
+      view_all_buddies_modal.modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>
+<% end %>

@@ -42,6 +42,7 @@ class StudySessionsController < ApplicationController
     if @study_session.calendar?
       @study_session.addtocalendar
       if @study_session.save
+        push_broadcast :studyhall_created, :name => @study_session.name
         @local_cal = current_user.calendars.new
         @local_cal.update_attributes({ :date_start => @study_session.time_start, :time_start => @study_session.time_end, :schedule_id => @study_session.id })
         redirect_to calendars_url, :notice => "Study session '#{@study_session.name}' scheduled successfully for #{@study_session.time_start} at #{@study_session.time_end}."
@@ -49,6 +50,7 @@ class StudySessionsController < ApplicationController
         render action: 'new'
       end
     elsif @study_session.save
+      push_broadcast :studyhall_created, :name => @study_session.name
       redirect_to @study_session
     else
       render action: 'new'

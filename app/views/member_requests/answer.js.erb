@@ -1,0 +1,12 @@
+var accept_button = $("#<%= j @link_id %>");
+var reject_button = accept_button.next();
+var answer_span = reject_button.next();
+accept_button.css("display", "none");
+reject_button.css("display", "none");
+<% if @accept %>
+  answer_span.html("Accepted");
+<% else %>
+  answer_span.html("Declined");
+<% end %>
+
+$("#member_requests_button").html("Member requests (<%= "#{@n_pending}" %>)");

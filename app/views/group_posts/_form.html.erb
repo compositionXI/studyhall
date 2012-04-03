@@ -1,0 +1,17 @@
+<%= form_for @group_post, :html => {:class => "form-stacked", :id => "group_post_form", :'data-type' => "html"} do |f| %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.hidden_field :group_id, :value => @group.id %>
+  <%= f.hidden_field :comment_id, :value => @comment_id %>
+  <%= f.hidden_field :root, :value => @root %>
+  
+  <div class="popover-body">
+    <div class="clearfix">
+      <%= f.label :message %>
+      <div class="input"><%= f.text_area :message %></div>
+    </div>
+    <div class="popover-footer clearfix">
+      <%= f.submit 'Share with class', :class => "btn primary" %>
+      <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @link_id %>
+    </div>
+  </div>
+<% end %>

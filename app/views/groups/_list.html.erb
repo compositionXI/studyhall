@@ -1,0 +1,4 @@
+<% current_user.groups.page(params[:page] || 1).per(5).each do |group| %>
+  <%= render :partial => "list_item", :locals => {:group => group} %>
+<% end %>
+<%= link_to_next_page current_user.groups.page(params[:page] || 1).per(5), "See more groups", class: 'more_results' %>

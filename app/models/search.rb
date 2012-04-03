@@ -12,6 +12,10 @@ class Search < ActiveRecord::Base
   def notes(page=nil)
     find_notes(keywords, page)
   end
+
+  def groups(page=nil)
+    find_groups(keywords, page)
+  end
   
   def users_count
     users.results.size
@@ -24,13 +28,18 @@ class Search < ActiveRecord::Base
   def notes_count
     notes.results.size
   end
+
+  def groups_count
+    groups.results.size
+  end
   
   def any?
     size > 0
   end
 
   def size
-    users_count + courses_count + notes_count
+    logger.info("ZEEE#{users_count + courses_count + notes_count + groups_count}")
+    users_count + courses_count + notes_count + groups_count
   end  
 
   def first_group
@@ -57,6 +66,13 @@ class Search < ActiveRecord::Base
 
   def find_notes(query='', page)
     Note.search do
+      fulltext query
+      paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
+    end
+  end
+
+  def find_groups(query='', page)
+    Group.search do
       fulltext query
       paginate :page => page, :per_page => APP_CONFIG['per_page'] if page
     end

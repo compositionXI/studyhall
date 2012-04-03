@@ -1,0 +1,8 @@
+var button = $("#<%=j @link_id %>");
+button.html("Membership pending");
+button.attr("href", "#");
+button.css("display","none");
+
+var box = button.next();
+box.css("display","");
+box.html("Membership pending");

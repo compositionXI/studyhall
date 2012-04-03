@@ -1,0 +1,14 @@
+<div class="broadcast_container">
+  <% if @broadcasts.empty? %>
+    <div class="notification_empty_div">You have no new notifications.</div>
+  <% else %>
+    <ul class="notification_list">
+      <% @broadcasts.each do |b| %>
+        <li class="notification_item"><%= link_to b.message, b.link, :clear_broadcasts => true %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+<div class="popover-footer clearfix">
+  <%= link_to 'Cancel', "", :class => "btn cancel_popover", "data-link-id" => @link_id, :style => "margin-bottom: -10px" %>
+</div>

@@ -1,0 +1,64 @@
+<% no_invitation ||= false %>
+<section class="buddies invitations tourable" data-popover-id="invitation_tour">
+  <header>
+    <h1 class="left">Administrators <small>(<span class="total_buddies"><%= group.admins.count %></span>)</small></h1>
+    <%= link_to "View All >>", nil, id: 'view_all_admins_button' %>
+  </header>
+  <% if group.admins.any? %>
+    <ul>
+      <% group.admins.limit(4).each do |member| %>
+        <li><%= link_to image_tag(member.photo_url(:medium)), member, :title => member.name %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
+<div id="buddies2">
+<div id="view_all_buddies" class="modal" style="display:none">
+  <div class="modal-header">
+    <h3>Administrators</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <% group.admins.each do |user| %>
+        <li class="clearfix buddy_list_item <%= cycle('odd','') %>">
+          <div class="left photo">
+            <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+          </div>
+          <div class="left meta">
+            <%= link_to user.name, user %>
+            <%= user.school.try(&:name) %>
+          </div>
+          <div class="right">
+            <% if current_user && user != current_user %>
+              <% if current_user.follows?(user) %>
+                <%= link_to "Unfollow", unfollow_path(user), :class => "btn small unfollow_button", :remote => true, :method => :delete %>
+                <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn small hidden follow_button", :remote => true, :method => :post %>
+              <% else %>
+                <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden unfollow_button", :remote => true, :method => :delete %>
+                <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn small follow_button", :remote => true, :method => :post %>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="cancel_popover btn">Close</a>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var view_all_admins_modal = $("#buddies2 #view_all_buddies").modal({backdrop: true, keyboard: true});
+    $(".buddies").delegate("#view_all_admins_button","click",function(e){
+      view_all_admins_modal.modal("show");
+      $("#view_all_admins ul").jScrollPane({hideFocus: true});
+      e.preventDefault();
+    });
+    $("#buddies2 #view_all_buddies").delegate(".cancel_popover","click",function(e){
+      view_all_admins_modal.modal('hide');
+      e.preventDefault();
+    });
+  });
+</script>

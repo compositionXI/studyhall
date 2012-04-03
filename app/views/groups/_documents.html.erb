@@ -1,0 +1,19 @@
+<table class="group_post_table">
+  <tr><td>
+    <ul class="group_posts_bar">
+      <li class="left"><h4>Shared Documents</h4></li>
+      <li class="right">
+        <%= link_to "Share Documents", notes_path, :class => "btn" %>
+      </li>
+    </ul>
+  </td></tr>
+  <tr><td>
+    <div class="notes-index" style="height:300px">
+      <div id="profile_user_items">
+        <div id="profile_tabs">
+          <%= render :partial => "shared/note_list_frame", :locals => {:documents => @documents} %>
+        </div>
+      </div>
+    </div>
+  </td></tr>
+</table>

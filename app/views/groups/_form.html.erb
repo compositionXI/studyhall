@@ -1,0 +1,102 @@
+<%= form_for(entity) do |f| %>
+
+  <%= f.hidden_field :owner_id, :value => current_user.id %>
+  <%= f.hidden_field :active, :value => "true" %>
+
+<div class="modal-body">
+
+  <div class="clearfix">
+    <%= f.label "Group Name" %>
+    <div class="input"><%= f.text_field :group_name %></div>
+  </div>
+
+    <div class="clearfix">
+      <%= f.label "Privacy" %>
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :privacy_open, checked: false, class: "activation_check_box", :id => "privacy_open_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, value: "Open (Anyone can see activity)", disabled: true, class: "prepended_checkbox disabled" %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :privacy_closed, checked: true, class: "activation_check_box", :id => "privacy_closed_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, value: "Closed (Anyone can see, but not view)", disabled: true, class: "prepended_checkbox disabled" %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :privacy_secret, checked: false, class: "activation_check_box", :id => "privacy_secret_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, value: "Secret (Only members can see activity)", disabled: true, class: "prepended_checkbox disabled" %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label "Membership Aproval" %>
+      <div class="input">
+        <div class="input-prepend">
+          <label class="add-on">
+            <%= f.check_box :admin_approval, checked: false, class: "activation_check_box" %>
+          </label>
+          <%= text_field_tag nil, nil, value: "Members must be approved", disabled: true, class: "prepended_checkbox disabled" %>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label "Group Photo" %>
+      <div class="input"><%= f.file_field :avatar, :id => "file_field", :class => "upload" %></div>
+    </div>
+    <div class="clearfix">
+    <%= f.label "Group Description" %>
+    <div class="input"><%= f.text_field :bio %></div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <%= f.submit 'Done', :class => "btn primary" %>
+  <a href="#" class="cancel_popover btn">Close</a>
+</div>
+<% end %>
+<script type="text/javascript">
+$(document).ready(function(){
+  var opts = ["open", "closed", "secret"];
+  for(a in opts) {
+    var target = "#privacy_" + opts[a] + "_check_box";
+    $(target).on("click", function(e) {
+      target = "#" + e.delegateTarget.id;
+      var checked = $(target).attr("checked") != undefined;
+      var sustain = true;
+      for(b in opts) {
+        var other = "#privacy_" + opts[b] + "_check_box";
+        if(other != target && $(other).attr("checked") != undefined) {
+          sustain = false;
+          break;
+        }
+      }
+      if(sustain) {
+        $(target).attr("checked", "checked");
+      } else {
+        $(other).removeAttr("checked");
+      }
+      e.stopImmediatePropagation();
+    });
+  }
+
+  /*$("#privacy_open_check_box").on("change", function(e) {
+    checked = $("#privacy_open_check_box").attr("checked") != undefined;
+    $("#privacy_closed_check_box").removeAttr("checked");
+    $("#privacy_secret_check_box").removeAttr("checked");
+    e.stopImmediatePropagation();
+  });*/
+});
+</script>

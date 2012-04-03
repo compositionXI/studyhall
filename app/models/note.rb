@@ -13,6 +13,9 @@ class Note < ActiveRecord::Base
   attr_accessor :upload
   before_post_process :paperclip_hack_filename
 
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :groups
+
   belongs_to :notebook
   
   validates_presence_of :user_id
@@ -43,6 +46,18 @@ class Note < ActiveRecord::Base
     text :notebook_name
     text :course_name
     boolean :shareable
+  end
+
+  def privacy_option
+    if self.private
+      :private
+    elsif self.share_all
+      :all
+    elsif self.share_school
+      :school
+    else
+      :select
+    end
   end
 
   def course

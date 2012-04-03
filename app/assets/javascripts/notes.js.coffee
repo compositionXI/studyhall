@@ -137,7 +137,7 @@ $(document).ready ->
     e.stopPropagation()
     e.preventDefault()
 
-  if $("body").hasClass("notes-index") || $("body").hasClass("notes-show") || $("body").hasClass("study_sessions-index")
+  if $("body").hasClass("notes-index") || $("body").hasClass("notes-show") || $("body").hasClass("study_sessions-index") || $("body").hasClass("groups-show")
     $(".note_items").delegate ".note_item.show","click", (e) ->
       window.location = $(this).data("href")
       e.stopPropagation()

@@ -53,6 +53,7 @@
                     <li><%= link_to "Study", study_sessions_path %></li>
                     <li><%= link_to "Notes", notes_path %></li>
                     <li><%= link_to "Messages", mailbox_path(:mailbox => "inbox") %></li>
+                    <li><%= link_to "Groups", groups_path %></li>
                     <li><%= link_to "Account", user_account_path(current_user) %></li>
                     <%- if @current_user.admin? %>
                       <%= render :partial => "/layouts/admin_options"%>
@@ -63,19 +64,11 @@
               </li>
             </ul>
             <ul class="nav secondary-nav">
-              <li class="dropdown" data-dropdown="dropdown">
-                  <%= link_to(image_tag(@current_user.avatar_url(:thumb), :class => "avatar_thumb"), "#", :class => "dropdown-toggle")  %>
-                  <ul class="dropdown-menu" id="notifications_queue">
-                    <div class="arrow-border"></div><div class="arrow"></div>
-                    <% if @broadcasts && @broadcasts.length > 0 %>
-                      <% @broadcasts.each do |b| %>
-                        <li><%= link_to b.message, b.link %></li><li class="divider"></li>
-                      <% end %>
-                    <% else %>
-                      You have no new messages.
-                    <% end %>
-                  </ul>
+              <li class="notifications">
+                <%= link_to(image_tag(@current_broadcasts.empty? ? "notifications_none.png" : "notifications_some.png"), broadcast_index_path, :id => "notifications_link_id", :class => "dropdown-toggle", :remote => true)  %>
+                <span style="display:none"></span>
               </li>
+              <li style="display:none"></li>
             </ul>
             <% else %>
               <%= link_to "Log In", login_path, class: "login-button" %>

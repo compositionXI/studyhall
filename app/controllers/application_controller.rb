@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages, :require_first_last_name, :initial_broadcasts
+  before_filter :current_user, :fetch_static_pages, :require_first_last_name, :initial_broadcasts, :clear_broadcasts
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
@@ -104,16 +104,17 @@ class ApplicationController < ActionController::Base
       uri = URI.parse("http://localhost:9292/faye")
       if options[:users]
         options[:users].each do |u|
-          data = {:user_id => u.id, :message => message, :intent => intent.to_s, :args => options}
+          data = {:user_id => u.id, :message => message, :intent => intent.to_s, :current => true, :args => options}
           serialized_data = data.to_json
           notification = {:channel => "/broadcasts/user/#{u.id}", :data => serialized_data}
           Net::HTTP.post_form(uri, :message => notification.to_json) if Broadcast.create(data)
         end
       else
         Following.where("followed_user_id = ?", current_user.id).each do |f|
-          data = {:user_id => f.user_id, :message => message, :intent => intent.to_s, :args => options}
+          data = {:user_id => f.user_id, :message => message, :intent => intent.to_s, :current => true, :args => options}
           serialized_data = data.to_json
           notification = {:channel => "/broadcasts/user/#{f.user_id}", :data => serialized_data}
+          logger.info("BIZZ:#{data}")
           Net::HTTP.post_form(uri, :message => notification.to_json) if Broadcast.create(data)
         end
       end 
@@ -122,6 +123,20 @@ class ApplicationController < ActionController::Base
 
   def initial_broadcasts
     @broadcasts = Broadcast.where("user_id = ?", current_user.id) if current_user
+    @current_broadcasts = []
+    if @broadcasts
+      @broadcasts.each do |b|
+        @current_broadcasts << b if b.current
+      end
+    end
+  end
+
+  def clear_broadcasts
+    if params[:clear_broadcasts]
+      current_user.broadcasts.each do |b|
+        b.update_attribute(:current, false)
+      end
+    end
   end
 
 end

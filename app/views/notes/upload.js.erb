@@ -1,13 +1,13 @@
 var button = $("#<%=j @modal_link_id %>");
 button.popover({
   trigger: "manual",
-  placement: "below-right",
+  placement: "<%= @group ? "below-left" : "below-right" %>",
   offset: 10,
   horizontalOffset: 25,
   html: true,
-  help: function(){return "<%=j render :partial => 'upload_help' %>";},
+  help: function(){return "<%=j render :partial => 'shared/upload_help' %>";},
   title: function(){return "Upload a Document";},
-  content: function(){return "<%=j render :partial => 'upload_form' %>";}
+  content: function(){return "<%=j render :partial => 'shared/upload_form' %>";}
 });
 button.popover("show");
 styleFileInputs($('.popover .upload'));
@@ -54,3 +54,94 @@ $("#file_field").change(function(e){
 });
 
 initWindowResize();
+
+$("#upload_tabs .tabs li").each(function(){
+  var li = $(this);
+  if(li.data("rel") == "1"){
+    var link = li.children().first();
+    if(li.hasClass("active")) {
+      $("#"+link.data("rel")).show();
+    }
+    link.click(function(e){
+      var clicked_link = $(this);
+      $("#upload_tabs .tabs li").removeClass("active");
+      clicked_link.parent().addClass("active");
+      $("#upload_tabs .tab_contents").hide();
+      $("#"+clicked_link.data("rel")).show();
+      //$("#"+clicked_link.data("rel")).jScrollPane();
+      e.preventDefault();
+    });
+  }
+});
+
+var select_buddies_modal = $("#select_buddies").modal({backdrop: true, keyboard: true});
+$(".select_share").delegate("#select_buddies_button","click",function(e){
+  select_buddies_modal.modal("show");
+  $("#select_buddies ul").jScrollPane({hideFocus: true});
+  e.preventDefault();
+});
+$("#select_buddies").delegate(".cancel_modal","click",function(e){
+  $("#select_buddies").modal('hide');
+  e.preventDefault();
+});
+
+var select_groups_modal = $("#select_groups").modal({backdrop: true, keyboard: true});
+$(".select_share").delegate("#select_groups_button","click",function(e){
+  select_groups_modal.modal("show");
+  $("#select_groups ul").jScrollPane({hideFocus: true});
+  e.preventDefault();
+});
+$("#select_groups").delegate(".cancel_modal","click",function(e){
+  $("#select_groups").modal('hide');
+  e.preventDefault();
+});
+
+  var opts = ["private", "all", "school", "select"];
+  for(a in opts) {
+    var target = "#privacy_" + opts[a] + "_check_box";
+    $(target).on("click", function(e) {
+      target = "#" + e.delegateTarget.id;
+      var checked = $(target).attr("checked") != undefined;
+      var sustain = true;
+      for(b in opts) {
+        var other = "#privacy_" + opts[b] + "_check_box";
+        if(other != target && $(other).attr("checked") != undefined) {
+          sustain = false;
+          break;
+        }
+      }
+      if(sustain) {
+        $(target).attr("checked", "checked");
+      } else {
+        $(other).removeAttr("checked");
+      }
+      e.stopImmediatePropagation();
+      if($("#privacy_select_check_box").attr("checked") != undefined) {
+        $("#select_buddies_button").css("display", "");
+        $("#select_groups_button").css("display", "");
+      } else {
+        $("#select_buddies_button").css("display", "none");
+        $("#select_groups_button").css("display", "none");
+      }
+    });
+  }
+
+<% current_user.buddies.each do |user| %>
+  $("#select_buddies").delegate("#buddy_check_box<%= user.id %>","click",function(e){
+    if($("#buddy_check_box<%= user.id %>").attr("checked") != undefined) {
+      $("#buddy_check_box_hidden<%= user.id %>").attr("checked", "checked");
+    } else {
+      $("#buddy_check_box_hidden<%= user.id %>").removeAttr("checked");
+    }
+  });
+<% end %>
+
+<% current_user.groups.each do |group| %>
+  $("#select_groups").delegate("#group_check_box<%= group.id %>","click",function(e){
+    if($("#group_check_box<%= group.id %>").attr("checked") != undefined) {
+      $("#group_check_box_hidden<%= group.id %>").attr("checked", "checked");
+    } else {
+      $("#group_check_box_hidden<%= group.id %>").removeAttr("checked");
+    }
+  });
+<% end %>

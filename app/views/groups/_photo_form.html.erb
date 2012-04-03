@@ -1,0 +1,20 @@
+<%= form_for group, :html => {:class => "form-stacked with_columns", :id => "edit_profile_photo_form", :multipart => true} do |f| %>
+  <%= f.hidden_field :update_group_id, :value => group.id %>
+  <%= hidden_field_tag :rel_form, 'photo_form' %>
+<div class="popover-body">  <input type="hidden" name="form_id" value="photo_form">
+  <p>JPG, GIF, and PNG files are cool. Try and keep it below 400px wide and 500px. Thx.</p>
+  <div class="input">
+    <%= f.label :Your_photo %>
+    <%= f.file_field :avatar, :class => 'upload'%>
+  </div>
+  <% if group.has_avatar? %>
+    <div class="input clearfix">
+      <%= f.label "Delete Image" %>
+      <div class="input"><%= check_box_tag :delete_avatar %></div>
+    </div>
+  <% end %></div>
+<div class="popover-footer">  <div class="input clearfix">
+    <%= f.submit "Save Changes", :class => "btn save" %>
+    <%= link_to "Cancel", "#", :class => "btn close_modal" %>
+  </div></div>
+<% end %>

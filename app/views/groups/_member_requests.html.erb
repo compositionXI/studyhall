@@ -1,0 +1,19 @@
+<ul>
+  <% @group.unanswered_member_requests.each do |r| %>
+    <% user = User.find(r.user_id) %>
+    <li class="clearfix buddy_list_item <%= cycle('odd','') %>">
+      <div class="left photo">
+        <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
+      </div>
+      <div class="left meta">
+        <%= link_to user.name, user %>
+        <%= user.school.try(&:name) %>
+      </div>
+      <div class="right">
+        <%= link_to "Accept", member_requests_answer_path(:request_id => r.id, :accept => true, :link_id => "message_request_accept_button#{r.id}"), :class => "btn small request_accept_button", :remote => true, :id => "message_request_accept_button#{r.id}" %>
+        <%= link_to "Decline", member_requests_answer_path(:request_id => r.id, :accept => false, :link_id => "message_request_accept_button#{r.id}"), :class => "btn small request_reject_button", :remote => true %>
+        <span></span>
+      </div>
+    </li>
+  <% end %>
+</ul>
