@@ -1,5 +1,26 @@
 Studyhall::Application.routes.draw do
 
+  resources :group_posts do
+    collection do
+      get 'make_post'
+    end
+  end
+
+  resources :join_requests
+
+  get "member_requests/place"
+
+  get "member_requests/answer"
+
+  get "join_requests/perform"
+
+  get "join_requests/respond"
+
+  get "broadcast/index"
+  get "/broadcasts" => "broadcast#index"
+
+  resources :groups
+
   resources :calendars
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -68,6 +89,7 @@ Studyhall::Application.routes.draw do
     resources :messages, only: [:new, :create]
     post '/votes' => 'votes#create', :as => :upvote
     delete '/votes' => 'votes#destroy', :as => :downvote
+    get 'make_admin'
   end
   resources :messages, except: [:edit] do
     collection do
