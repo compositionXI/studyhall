@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308220648) do
+ActiveRecord::Schema.define(:version => 20120320011658) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(:version => 20120308220648) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "activist_id"
+  end
+
+  create_table "admins_groups", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
   end
 
   create_table "authentications", :force => true do |t|
@@ -30,6 +35,14 @@ ActiveRecord::Schema.define(:version => 20120308220648) do
   end
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "broadcasts", :id => false, :force => true do |t|
+    t.string  "user_id"
+    t.string  "message"
+    t.string  "intent"
+    t.string  "args"
+    t.boolean "current"
+  end
 
   create_table "calendars", :force => true do |t|
     t.integer  "schedule_id"
@@ -134,6 +147,38 @@ ActiveRecord::Schema.define(:version => 20120308220648) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "group_posts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "comment_id"
+    t.string   "message"
+    t.boolean  "root"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups", :force => true do |t|
+    t.integer  "owner_id"
+    t.string   "bio"
+    t.boolean  "active"
+    t.string   "group_name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.boolean  "admin_approval"
+    t.boolean  "privacy_open"
+    t.boolean  "privacy_closed"
+    t.boolean  "privacy_secret"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "groups_notes", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "note_id"
+  end
+
   create_table "instructors", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -156,6 +201,20 @@ ActiveRecord::Schema.define(:version => 20120308220648) do
     t.integer  "major_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "member_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.boolean  "answered"
+    t.boolean  "accepted"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "members_groups", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
   end
 
   create_table "message_copies", :force => true do |t|
@@ -225,6 +284,15 @@ ActiveRecord::Schema.define(:version => 20120308220648) do
     t.string   "doc_content_type"
     t.integer  "doc_file_size"
     t.datetime "doc_updated_at"
+    t.boolean  "private"
+    t.boolean  "share_all"
+    t.boolean  "share_school"
+    t.boolean  "share_choice"
+  end
+
+  create_table "notes_users", :id => false, :force => true do |t|
+    t.integer "note_id"
+    t.integer "user_id"
   end
 
   create_table "offerings", :force => true do |t|
