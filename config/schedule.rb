@@ -33,3 +33,7 @@ every 24.hours do
   rake "studyhall:remove_old_searches"
 end
 
+every 1.day, :at => '4:00 am' do
+  runner "Recommendation.list_all"
+end
+
