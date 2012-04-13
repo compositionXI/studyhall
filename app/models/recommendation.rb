@@ -10,7 +10,7 @@ class Recommendation < ActiveRecord::Base
     if(rec.nil?)
       return [41,51,61]
     end
-    reclist = reclist.rank_cda.to_s
+    reclist = rec.rank_cda.to_s
     if(reclist == "-1" || reclist.nil? || reclist.empty?)
       return [41,51,61]
     else
