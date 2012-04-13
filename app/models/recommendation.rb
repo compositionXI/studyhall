@@ -6,7 +6,11 @@ class Recommendation < ActiveRecord::Base
   attr_accessible :conn_cda, :user_id, :school_id, :rank_cda
   
   def Recommendation.populate_rec_bar(current_user_id)
-    reclist = Recommendation.find_by_user_id(current_user_id).rank_cda.to_s
+    rec = Recommendation.find_by_user_id(current_user_id)
+    if(reclist.nil?)
+      return [41,51,61]
+    end
+    reclist = reclist.rank_cda.to_s
     if(reclist == "-1" || reclist.nil? || reclist.empty?)
       return [41,51,61]
     else
