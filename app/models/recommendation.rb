@@ -5,6 +5,21 @@ class Recommendation < ActiveRecord::Base
   
   attr_accessible :conn_cda, :user_id, :school_id, :rank_cda
   
+  def Recommendation.populate_rec_bar(current_user_id)
+    reclist = Recommendation.find_by_user_id(current_user_id).rank_cda
+    if(reclist == "-1")
+      return [1,2,3,4]
+    else
+      reclist = reclist.split(',')
+      reclist.pop
+      reclist.collect{|i| i.to_i}
+      if(reclist.length > 4)
+        reclist = reclist[0,4]
+      end
+      return reclist
+    end
+  end
+  
   def Recommendation.initial_spawn(current_user_id)
     return Recommendation.find_by_user_id(current_user_id).nil?
   end
@@ -88,6 +103,7 @@ class Recommendation < ActiveRecord::Base
   def Recommendation.list_all
     schools = School.all
     schools.each do |school|
+      Rails.logger.info("Logging #{school.name} now.")
       Recommendation.generate_ranked_list(school.id)
     end
   end

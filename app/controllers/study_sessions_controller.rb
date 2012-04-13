@@ -45,6 +45,7 @@ class StudySessionsController < ApplicationController
     buddyids_w_current = [current_user.id.to_s] + buddyids
     Recommendation.populate_user(buddyids_w_current)
     Recommendation.connect_new(current_user.id, buddyids, 1)
+    #Recommendation.list_all
     if @study_session.calendar?
       @study_session.addtocalendar
       if @study_session.save
