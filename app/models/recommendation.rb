@@ -7,7 +7,7 @@ class Recommendation < ActiveRecord::Base
   
   def Recommendation.populate_rec_bar(current_user_id)
     rec = Recommendation.find_by_user_id(current_user_id)
-    if(reclist.nil?)
+    if(rec.nil?)
       return [41,51,61]
     end
     reclist = reclist.rank_cda.to_s
