@@ -9,18 +9,19 @@ class Recommendation < ActiveRecord::Base
     rec = Recommendation.find_by_user_id(current_user_id)
     if(rec.nil?)
       return [41,51,61]
-    end
-    reclist = rec.rank_cda.to_s
-    if(reclist == "-1" || reclist.nil? || reclist.empty?)
-      return [41,51,61]
     else
-      reclist = reclist.split(',')
-      reclist.pop
-      reclist.collect{|i| i.to_i}
-      if(reclist.length > 4)
-        reclist = reclist[0,4]
+      reclist = rec.rank_cda.to_s
+      if(reclist == "-1" || reclist.nil? || reclist.empty?)
+        return [41,51,61]
+      else
+        reclist = reclist.split(',')
+        reclist.pop
+        reclist.collect{|i| i.to_i}
+        if(reclist.length > 4)
+          reclist = reclist[0,4]
+        end
+        return reclist
       end
-      return reclist
     end
   end
   
