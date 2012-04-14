@@ -24,10 +24,11 @@ class Calendar < ActiveRecord::Base
     study_seshs_w_cal = StudySession.where(:id => cal_seshs_ss_ids)
     json_cal  = "["
       cal_seshs.each do |cal|
-        if study_seshs_w_cal.where(:id => cal.schedule_id).name.to_s == ''
-          sesh_name = 'Study Session ' + cal.schedule_id.to_s
-        else
-          sesh_name = study_seshs_w_cal.where(:id => cal.schedule_id).name
+        sesh_temp = study_seshs_w_cal.to_ary
+        sesh_name_obj = sesh_temp.find { |st| st.id == cal.schedule_id }
+        sesh_name = ' ' + sesh_name_obj.name
+        if sesh_name == ' '
+          sesh_name = ' Study Session ' + cal.schedule_id.to_s
         end
         mdy = cal.date_start.to_s.scan(/\d+/)
         mdy[0] = mdy[0].to_i - 1
@@ -35,7 +36,7 @@ class Calendar < ActiveRecord::Base
         hm = hmampm[0].scan(/\d+/);
         if hm[0].to_i == 12
           if hmampm[1] == 'am'
-            hm[0].to_i -= 12
+            hm[0] = hm[0].to_i - 12
           end
         elsif hmampm[1] == 'pm'
           hm[0] = hm[0].to_i + 12

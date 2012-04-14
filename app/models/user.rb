@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups, :join_table => :members_groups
 
   has_many :broadcasts
+  has_many :recommendations
   has_many :notebooks
   has_many :notes
   has_many :enrollments

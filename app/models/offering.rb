@@ -13,6 +13,8 @@ class Offering < ActiveRecord::Base
   
   validates_uniqueness_of :course_id, :scope => [:term, :instructor_id]
   
+  attr_accessible :users, :enrollments
+  
   def course_listing
     Rails.cache.fetch("course-listing-#{course.id}-#{course.updated_at.to_i}-#{instructor.try(:updated_at).to_i}") do
       items = []

@@ -31,6 +31,15 @@ class ClassesController < ApplicationController
   
   def create
     @enrollment = Enrollment.new params[:enrollment]
+    offerid = params[:enrollment][:offering_id]
+    enroll = Enrollment.where(:offering_id => offerid)
+    allstuds = [current_user.id.to_s]
+    enroll.each do |enr|
+      allstuds += [enr.user_id.to_s]
+    end
+    Recommendation.populate_user(allstuds)
+    allstuds.shift
+    Recommendation.connect_new(current_user.id, allstuds, 1)
     @enrollment.user_id = @current_user.id
     
     if @enrollment.save

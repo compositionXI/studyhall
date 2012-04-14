@@ -5,6 +5,7 @@ class School < ActiveRecord::Base
   has_many :course_offering_imports
   has_many :users
   has_many :rss_entries
+  has_many :recommendations
   
   scope :active_schools, where(:active => true)
   scope :inactive_schools, where(:active => false)

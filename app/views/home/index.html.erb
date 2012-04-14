@@ -146,7 +146,7 @@
       var course_name = $('.chzn-single span').html();
       var option_selector = "option:contains('"+course_name+"')";
       var course = $(option_selector).val();
-      if(days != '' && start != end){
+      if(days != '' && start != end && course_name != 'Select an Option'){
         $.ajax({
           url: '/calendars',
           type: 'POST',
