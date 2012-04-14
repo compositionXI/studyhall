@@ -8,11 +8,11 @@ class Recommendation < ActiveRecord::Base
   def Recommendation.populate_rec_bar(current_user_id)
     rec = Recommendation.find_by_user_id(current_user_id)
     if(rec.nil?)
-      return [41,51,61]
+      return [1,2,3]
     else
       reclist = rec.rank_cda.to_s
       if(reclist == "-1" || reclist.nil? || reclist.empty?)
-        return [41,51,61]
+        return [1,2,3]
       else
         reclist = reclist.split(',')
         reclist.pop
