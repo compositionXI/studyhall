@@ -74,29 +74,18 @@ $("#upload_tabs .tabs li").each(function(){
   }
 });
 
-var select_buddies_modal = $("#select_buddies").modal({backdrop: true, keyboard: true});
-$(".select_share").delegate("#select_buddies_button","click",function(e){
-  select_buddies_modal.modal("show");
-  $("#select_buddies ul").jScrollPane({hideFocus: true});
-  e.preventDefault();
-});
-$("#select_buddies").delegate(".cancel_modal","click",function(e){
-  $("#select_buddies").modal('hide');
-  e.preventDefault();
-});
-
-var select_groups_modal = $("#select_groups").modal({backdrop: true, keyboard: true});
+var select_groups_modal = $("#view_all_buddies").modal({backdrop: true, keyboard: true});
 $(".select_share").delegate("#select_groups_button","click",function(e){
   select_groups_modal.modal("show");
-  $("#select_groups ul").jScrollPane({hideFocus: true});
+  $("#view_all_buddies ul").jScrollPane({hideFocus: true});
   e.preventDefault();
 });
-$("#select_groups").delegate(".cancel_modal","click",function(e){
-  $("#select_groups").modal('hide');
+$("#view_all_buddies").delegate(".cancel_modal","click",function(e){
+  $("#view_all_buddies").modal('hide');
   e.preventDefault();
 });
 
-  var opts = ["private", "all", "school", "select"];
+  var opts = ["select"];
   for(a in opts) {
     var target = "#privacy_" + opts[a] + "_check_box";
     $(target).on("click", function(e) {
@@ -111,9 +100,9 @@ $("#select_groups").delegate(".cancel_modal","click",function(e){
         }
       }
       if(sustain) {
-        $(target).attr("checked", "checked");
+        //$(target).attr("checked", "checked");
       } else {
-        $(other).removeAttr("checked");
+        //$(other).removeAttr("checked");
       }
       e.stopImmediatePropagation();
       if($("#privacy_select_check_box").attr("checked") != undefined) {
@@ -126,18 +115,8 @@ $("#select_groups").delegate(".cancel_modal","click",function(e){
     });
   }
 
-<% current_user.buddies.each do |user| %>
-  $("#select_buddies").delegate("#buddy_check_box<%= user.id %>","click",function(e){
-    if($("#buddy_check_box<%= user.id %>").attr("checked") != undefined) {
-      $("#buddy_check_box_hidden<%= user.id %>").attr("checked", "checked");
-    } else {
-      $("#buddy_check_box_hidden<%= user.id %>").removeAttr("checked");
-    }
-  });
-<% end %>
-
 <% current_user.groups.each do |group| %>
-  $("#select_groups").delegate("#group_check_box<%= group.id %>","click",function(e){
+  $("#view_all_buddies").delegate("#group_check_box<%= group.id %>","click",function(e){
     if($("#group_check_box<%= group.id %>").attr("checked") != undefined) {
       $("#group_check_box_hidden<%= group.id %>").attr("checked", "checked");
     } else {

@@ -2,73 +2,17 @@
   <div class="input">
     <div class="input-prepend">
       <label class="add-on">
-        <%= f.check_box :private, checked: true, class: "activation_check_box", id: "privacy_private_check_box" %>
-      </label>
-      <%= text_field_tag nil, nil, value: "Private (only you can view this document)", class: "prepended_checkbox disabled", disabled: true %>
-    </div>
-  </div>
-  <div class="input">
-    <div class="input-prepend">
-      <label class="add-on">
-        <%= f.check_box :share_all, checked: false, class: "activation_check_box", :id => "doc_format_field", id: "privacy_all_check_box" %>
-      </label>
-      <%= text_field_tag nil, nil, value: "Share with all users", class: "prepended_checkbox disabled", disabled: true %>
-    </div>
-  </div>
-  <div class="input">
-    <div class="input-prepend">
-      <label class="add-on">
-        <%= f.check_box :share_school, checked: false, class: "activation_check_box", :id => "doc_format_field", id: "privacy_school_check_box" %>
-      </label>
-      <%= text_field_tag nil, nil, value: "Share with all #{current_user.school_name} users", class: "prepended_checkbox disabled", disabled: true %>
-    </div>
-  </div>
-  <div class="input">
-    <div class="input-prepend">
-      <label class="add-on">
         <%= f.check_box :share_choice, checked: false, class: "activation_check_box", :id => "doc_format_field", id: "privacy_select_check_box" %>
       </label>
       <%= text_field_tag nil, nil, value: "Share with select groups and buddies", class: "prepended_checkbox disabled", disabled: true %>
     </div>
   </div>
   <div class="select_share">
-    <%= link_to "Select buddies", "#", :class => "btn", :id => "select_buddies_button", :disabled => true, :style => "display:none" %>
     <%= link_to "Select groups", "#", :class => "btn", :id => "select_groups_button", :disabled => true, :style => "display:none" %>
   </div>
 </div>
 
-<div id="select_buddies" class="modal" style="display:none">
-  <div class="modal-header">
-    <h3>Buddies</h3>
-  </div>
-  <div class="modal-body">
-    <ul style="height:300px">
-      <% current_user.buddies.each do |user| %>
-        <li class="clearfix buddy_list_item <%= cycle('odd','') %> " style="width:400px">
-          <div class="left photo">
-            <%= check_box_tag nil, user.id, false, :id => "buddy_check_box#{user.id}" %>
-            <%= link_to image_tag(user.photo_url(:medium)), user, :title => user.name %>
-          </div>
-          <div class="left meta">
-            <%= link_to user.name, user %>
-            <%= user.school.try(&:name) %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn cancel_modal">Close</a>
-  </div>
-</div>
-
-<div id="select_buddies_hidden" style="display:none">
-  <% current_user.buddies.each do |user| %>
-    <%= check_box_tag "note[user_ids][]", user.id, false, :id => "buddy_check_box_hidden#{user.id}" %>
-  <% end %>
-</div>
-
-<div id="select_groups" class="modal" style="display:none">
+<div id="view_all_buddies" class="modal" style="display:none">
   <div class="modal-header">
     <h3>Groups</h3>
   </div>
@@ -76,9 +20,13 @@
     <ul style="height:300px">
       <% current_user.groups.each do |group| %>
         <li class="clearfix buddy_list_item <%= cycle('odd','') %> " style="width:400px">
-          <div class="left photo">
-            <%= check_box_tag nil, group.id, false, :id => "group_check_box#{group.id}" %>
-            <%= link_to image_tag(group.photo_url(:medium)), group, :title => group.group_name %>
+          <div class="left">
+            <div class="checker">
+              <%= check_box_tag nil, group.id, false, :id => "group_check_box#{group.id}" %>
+            </div>
+            <div class="photo">
+              <%= link_to image_tag(group.photo_url(:medium)), group, :title => group.group_name %>
+            </div>
           </div>
           <div class="left meta">
             <%= link_to group.group_name, group %>

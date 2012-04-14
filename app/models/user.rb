@@ -212,6 +212,10 @@ class User < ActiveRecord::Base
   def buddies(count = nil)
     User.joins("INNER JOIN followings ON users.id = followings.followed_user_id").where("followings.user_id = ? and followings.blocked = ? ", self.id, false).limit(count).order("first_name ASC, last_name ASC")
   end
+
+  def mutual?(user)
+    user.follows(self)
+  end
   
   def has_role?(role)
     self.roles.include? role

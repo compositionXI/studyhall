@@ -1,3 +1,4 @@
+<% if !(@group && !@group.member?(current_user)) %>
 <li class="<%= note_item.html_class %> show grid" id="<%= note_item.html_id %>" data-class="<%= note_item.class_name %>" data-id="<%= note_item.id %>" data-notebook-id="<%= note_item.content.notebook.try(:id) if note_item.note? %>" data-href="<%= note_item.doc_preserved ? note_item.doc.url : (url_for note_item.url_params) %>">
   <div class="background_container"></div>
   <span class="name">
@@ -37,3 +38,4 @@
     </div>
   <% end %>
 </li>
+<% end %>

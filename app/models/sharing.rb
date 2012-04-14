@@ -3,7 +3,7 @@ class Sharing
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :user_ids, :email_addresses, :message, :object_ids, :share_all
+  attr_accessor :user_ids, :email_addresses, :message, :object_ids, :share_all, :group_ids
 
   def initialize(options={})
     self.share_all = true
@@ -12,6 +12,12 @@ class Sharing
       key = "#{key}="
       self.send(key,value) if self.respond_to? key
     end
+  end
+
+  def groups
+    return [] if group_ids.blank?
+    group_ids.delete("")
+    Group.find(group_ids)
   end
 
   def users

@@ -20,12 +20,17 @@
       </div>
     </div>
     <div class="clearfix recipient_option" style="display:none">
-      <%= f.label :email_addresses, 'Email', class: 'right' %>
-      <label class="recipient_toggle">Select Buddies</label>
+      <label class="recipient_toggle">Share with Groups</label>
       <div class="input">
         <%= f.text_field :email_addresses, class: 'xlarge' %>
       </div>
       <span class="help-block">Use commas to separate emails</span>
+    </div>
+    <div class="clearfix">
+      <label>Share with groups</label>
+      <div class="input select_share">
+        <%= link_to "Select groups", "#", :class => "btn", :id => "select_groups_button", :disabled => true %>
+      </div>
     </div>
     <div class="clearfix">
       <%= f.label :message %>
@@ -40,4 +45,39 @@
       <a href="#" class="cancel_popover btn">Cancel</a>
     </div>
   </div>
+
+<div id="view_all_buddies" class="modal" style="display:none">
+  <div class="modal-header">
+    <h3>Groups</h3>
+  </div>
+  <div class="modal-body">
+    <ul style="height:300px">
+      <% current_user.groups.each do |group| %>
+        <li class="clearfix buddy_list_item <%= cycle('odd','') %> " style="width:400px">
+          <div class="left">
+            <div class="checker">
+              <%= check_box_tag nil, group.id, false, :id => "group_check_box#{group.id}" %>
+            </div>
+            <div class="photo">
+              <%= link_to image_tag(group.photo_url(:medium)), group, :title => group.group_name %>
+            </div>
+          </div>
+          <div class="left meta">
+            <%= link_to group.group_name, group %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn cancel_modal">Close</a>
+  </div>
+</div>
+
+<div id="select_groups_hidden"	 style="display:none">
+  <% current_user.groups.each do |group| %>
+    <%= check_box_tag "sharing[group_ids][]", group.id, false, :id => "group_check_box_hidden#{group.id}" %>
+  <% end %>
+</div>
+
 <% end %>
