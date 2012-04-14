@@ -10,9 +10,7 @@
   <title>Studyhall</title>
   <%= favicon_link_tag %>
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
- <%= stylesheet_link_tag    "application" %>
-  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
   <%= javascript_include_tag :defaults, "http://localhost:9292/faye.js" %>
@@ -45,5 +43,8 @@
       %>
     <% end -%>
   <% end -%>
+
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
 </html>

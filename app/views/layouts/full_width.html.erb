@@ -11,8 +11,6 @@
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
   <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag "print/print", :media => 'print' %>
-  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <%= javascript_include_tag "application", "http://staging.tokbox.com/v0.91/js/TB.min.js", "jquery.rte.js" %>
   <%= javascript_include_tag :defaults, "http://localhost:9292/faye.js" %>
   <%= csrf_meta_tags %>
@@ -38,5 +36,8 @@
       ).html_safe
     %>
   <% end -%>
+
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
 </html>
