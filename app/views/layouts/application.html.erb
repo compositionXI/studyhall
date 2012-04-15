@@ -16,7 +16,7 @@
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
-  <%= javascript_include_tag :defaults, "http://localhost:9292/faye.js" %>
+  <%= javascript_include_tag :defaults, "http://app02.c45577.blueboxgrid.com:9292/faye.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= flash[:imitates] || (controller_name + "-" + action_name) %> fixed-width">
