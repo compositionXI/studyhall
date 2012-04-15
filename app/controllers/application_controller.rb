@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
       when :class_post
         message = "#{current_user.name} posted to the class \"#{options[:name]}\"."
       end
-      uri = URI.parse("http://localhost:9292/faye")
+      uri = URI.parse("http://app02.c45577.blueboxgrid.com:9292/faye")
       if options[:users]
         options[:users].each do |u|
           data = {:user_id => u.id, :message => message, :intent => intent.to_s, :current => true, :args => options}

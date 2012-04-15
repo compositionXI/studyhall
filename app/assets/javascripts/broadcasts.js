@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if(typeof(current_user) == 'object') {
     if(typeof(Faye) == 'object') {
-      var faye_client = new Faye.Client('http://localhost:9292/faye');
+      var faye_client = new Faye.Client('http://app02.c45577.blueboxgrid.com:9292/faye');
       faye_client.subscribe('/broadcasts/user/' + current_user.id, function(serialized_data) {
         var data = $.parseJSON(serialized_data); 
         interpret_broadcast(data);
