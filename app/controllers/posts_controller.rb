@@ -42,6 +42,7 @@ class PostsController < ApplicationController
     @post.offering_id = params[:class_id]
     @post.user_id = current_user.id
     if @post.save
+      push_broadcast :class_post, :course_id => @post.offering.course_id, :name => @post.offering.course.title
       if request.xhr?
         render_posts
       end
