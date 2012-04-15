@@ -73,6 +73,7 @@ class NotesController < ApplicationController
 
   def create
     @note = current_user.notes.new(params[:note])
+    logger.info("LIZZY: #{params[:note][:group_ids]}!")
     if !@note.share_choice
       @note.users = []
       @note.groups = []

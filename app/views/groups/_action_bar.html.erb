@@ -27,10 +27,10 @@
   
     <div class="buttons right">
         <% if current_user %>
-          <% if params[:action] == "show" && !@group.admin?(current_user) %>
+          <% if params[:action] == "show" && !@group.member?(current_user) %>
             <%= link_to "Request to Join Group", member_requests_place_path(:group_id => @group.id, :link_id => "join_group_button"), :id => "join_group_button", :class => "btn small", :remote => true %>
             <div class="btn-box small" style="display:none">Studly</div>
-          <% elsif params[:action] == "show" %>
+          <% elsif params[:action] == "show" && @group.admin?(current_user) %>
              <%= link_to("Edit", "#", :class => "btn editable edit_button") if @group.admin?(current_user) %> 
              <%= link_to "All Done!", "#", :class => "btn small editable edit_button edit" %>
           <% end %>

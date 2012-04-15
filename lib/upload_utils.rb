@@ -77,7 +77,7 @@ module UploadUtils
         FileUtils.rm(filename_doc)
         FileUtils.rm(filename_html)
 
-        note.content = reduce_html(html.read)
+        note.content = reduce_html(html.read).sub("#0000ff", "#000000")
       end
 
       note

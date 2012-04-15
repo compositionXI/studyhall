@@ -235,3 +235,63 @@ section.course_activity
           .profile_edit
             background-color: $editable_background
             cursor: pointer
+
+.courses2
+  float: left
+  width: 271px
+  margin: 0 38px 0 0
+  ol
+    list-style: none
+    margin: 0
+    li
+      background: transparent
+      float: left
+      margin: 5px
+      &:first-child, &:nth-child(4n+1)
+        margin: 5px
+    a
+      +box-sizing(border-box)
+      background: url(asset-path('notebook-sprite.png','image')) no-repeat -264px 0 transparent
+      color: $white
+      display: block
+      height: 145px
+      font-size: 14px
+      padding: 0 10px 0 20px
+      text-align: center
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55)
+      width: 118px
+      &:hover
+        text-decoration: underline 
+      span
+        display: table-cell
+        height: 156px
+        vertical-align: middle
+    .blue a
+      background-position: -132px 0
+      color: $darkBookText
+      text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
+    .green a
+      background-position: 0 0
+      color: $darkBookText
+      text-shadow: 0 1px 0 rgba(255,255,255, 0.55)   
+    .add
+      background: $bgColor
+      border: 2px dashed $notebookBorder
+      +border-radius(2px)
+      height: 145px 
+      margin-top: 3px
+      width: 118px
+      a
+        background: none
+        color: $linkColor
+        height: auto
+        padding: 0
+        text-shadow: 0 1px 0 rgba(255,255,255, 0.55)
+        width: auto
+        span
+          margin: 0
+          height: 145px
+          width: 118px
+          .profile_edit
+            background-color: $editable_background
+            cursor: pointer

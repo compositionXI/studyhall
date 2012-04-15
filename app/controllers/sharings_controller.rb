@@ -11,8 +11,13 @@ class SharingsController < ApplicationController
 
   def create
     @sharing = Sharing.new(params[:sharing])
+    logger.info("1IZZY: #{params[:sharing][:group_ids]}!")
+    logger.info("2IZZY: #{@sharing.group_ids}")
     @success = @sharing.valid?;               Rails.logger.debug "********** Did we create a sharing? #{@success}"
     @sharing.objects.each(&:share!);          Rails.logger.debug "********** Done Sharing Objects"
+    @sharing.objects.each do |o|
+      o.groups << @sharing.groups
+    end
     @object_type = (@sharing.objects.first.class.to_s == "StudySession") ? "StudyHall" : @sharing.objects.first.class.to_s;   Rails.logger.debug "********** Sending Notifications: "
     send_notifications if @success;           Rails.logger.debug "********** Generating Activity Objects"
     generate_activity(@sharing);              Rails.logger.debug "********** Done"

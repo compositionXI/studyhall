@@ -56,6 +56,10 @@ class Group < ActiveRecord::Base
     admins.include?(user)
   end
 
+  def member?(user)
+    members.include?(user)
+  end
+
   def avatar_url(size = nil)
     photo_url(size)
   end

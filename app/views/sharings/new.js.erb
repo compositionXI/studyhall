@@ -38,3 +38,24 @@ var checkRequiredFields = function(){
 $("#new_sharing").delegate("input,select,textarea","change",checkRequiredFields);
 $("#new_sharing").delegate("input,textarea","keyup",checkRequiredFields);
 initWindowResize();
+
+var select_groups_modal = $("#view_all_buddies").modal({backdrop: true, keyboard: true});
+$(".select_share").delegate("#select_groups_button","click",function(e){
+  select_groups_modal.modal("show");
+  $("#view_all_buddies ul").jScrollPane({hideFocus: true});
+  e.preventDefault();
+});
+$("#view_all_buddies").delegate(".cancel_modal","click",function(e){
+  $("#view_all_buddies").modal('hide');
+  e.preventDefault();
+});
+
+<% current_user.groups.each do |group| %>
+  $("#view_all_buddies").delegate("#group_check_box<%= group.id %>","click",function(e){
+    if($("#group_check_box<%= group.id %>").attr("checked") != undefined) {
+      $("#group_check_box_hidden<%= group.id %>").attr("checked", "checked");
+    } else {
+      $("#group_check_box_hidden<%= group.id %>").removeAttr("checked");
+    }
+  });
+<% end %>
