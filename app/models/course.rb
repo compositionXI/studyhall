@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   validates_presence_of :title, :number, :school_id, :department
   validates_uniqueness_of :title, :scope => [:school_id, :number]
 
-  searchable :auto_index => true, :auto_remove => true do
+  searchable :auto_index => false, :auto_remove => true do
     text :title
     text :department
     text :derived_name
