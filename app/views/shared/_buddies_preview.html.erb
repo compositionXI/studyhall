@@ -11,7 +11,7 @@
       <% end %>
     </ul>
   <% end %>
-  <header><h1 class="left"> People You Might Like to Study With </h1></header>
+  <header><h1 class="left">Your Recommended Study Buddies</h1></header>
     <% user_recs = User.where(:id => Recommendation.populate_rec_bar(current_user.id)) %>
     <ul>
       <% user_recs.each do |rec| %>

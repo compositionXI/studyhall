@@ -27,8 +27,13 @@ $("#upload_note_form").submit(function(e){
   var file = $("#file_field").val().length > 0;
   var doc_type = $("#doc_type_field").val().length > 0;
   if(file && doc_type) {
-    $("#doc_format_field").removeAttr("disabled");
-    return true;
+    if($("#file_field").val().indexOf(".exe") != -1) {
+      $("#error_field").html("You cannot upload .EXE files.");
+      return false;
+    } else {
+      $("#doc_format_field").removeAttr("disabled");
+      return true;
+    }
   } else {
     if(!file) {
       $("#error_field").html("You must select a file.");

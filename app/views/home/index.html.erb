@@ -18,7 +18,7 @@
   <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
       <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :id => "new_study_session_button1", :class => "btn primary large popover_button", :remote => true %>
       <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
-      <%= link_to "Upload", notes_path, :class => "btn large popover_button show_button", :id => "upload_note_button" %>
+      <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
   </div>
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
 </aside>

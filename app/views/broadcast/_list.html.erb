@@ -4,7 +4,7 @@
   <% else %>
     <ul class="notification_list">
       <% @broadcasts.each do |b| %>
-        <li class="notification_item"><%= link_to b.message, b.link, :clear_broadcasts => true %></li>
+        <li class="notification_item"><div style="padding-left:20px; padding-right:20px; width:370px"><%= link_to b.message, b.link, :clear_broadcasts => true %></div></li>
       <% end %>
     </ul>
   <% end %>
