@@ -100,6 +100,8 @@ class ApplicationController < ActionController::Base
         message = "#{current_user.name} created the Studyhall \"#{options[:name]}\"" if options.key?(:name)
       when :message_sent
         message = "#{current_user.name} sent you a message."
+      when :class_post
+        message = "#{current_user.name} posted to the class \"#{options[:name]}\"."
       end
       uri = URI.parse("http://app02.c45577.blueboxgrid.com:9292/faye")
       if options[:users]
@@ -122,7 +124,7 @@ class ApplicationController < ActionController::Base
 	end
 
   def initial_broadcasts
-    @broadcasts = Broadcast.where("user_id = ?", current_user.id) if current_user
+    @broadcasts = Broadcast.where("user_id = ?", current_user.id).limit(4) if current_user
     @current_broadcasts = []
     if @broadcasts
       @broadcasts.each do |b|
@@ -132,11 +134,11 @@ class ApplicationController < ActionController::Base
   end
 
   def clear_broadcasts
-    if params[:clear_broadcasts]
-      current_user.broadcasts.each do |b|
-        b.update_attribute(:current, false)
-      end
-    end
+    #if params[:clear_broadcasts]
+    #  current_user.broadcasts.each do |b|
+    #    b.update_attribute(:current, false)
+    #  end
+    #end
   end
 
 end

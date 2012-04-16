@@ -9,6 +9,8 @@ class Broadcast < ActiveRecord::Base
       link = study_sessions_path(:clear_broadcasts => true)
     when :message_sent
       link = mailbox_path(:mailbox => "inbox", :clear_broadcasts => true)
+    when :class_post
+      link = class_path(:id => self.args[:course_id])
     end
     link
   end

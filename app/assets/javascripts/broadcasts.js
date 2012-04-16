@@ -21,6 +21,9 @@ interpret_broadcast = function(data) {
   case "message_sent" :
     link = "/messages/inbox";
     break;
+  case "class_post" :
+    link = "/classes/" + data.args.course_id;
+    break;
   }
 
   var item = "<li><a href='" + link + "' id='notification-" + link + "' data-original-title>" + data.message + "</a></li><li class='divider'></li>";
