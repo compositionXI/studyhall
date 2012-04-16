@@ -37,3 +37,6 @@ every 12.hours do
   runner "Recommendation.list_all"
 end
 
+every 2.hours do
+	rake "sunspot:index_recently_modified"
+end

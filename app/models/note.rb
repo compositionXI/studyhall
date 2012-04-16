@@ -39,7 +39,7 @@ class Note < ActiveRecord::Base
   end
   
   
-  searchable :auto_index => true, :auto_remove => true do
+  searchable :auto_index => false, :auto_remove => true do
     text :name
     text :content
     text :owner_name
