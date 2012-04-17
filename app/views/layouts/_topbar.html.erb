@@ -16,7 +16,7 @@
                 <%= link_to study_sessions_path, title: "Studyhalls" do %><span>StudyHalls</span><% end %>
               </li>
               <li id="nav_notes" <% if controller?("notebooks") || controller?("notes") %> class='current' <% end %>>
-                <%= link_to notes_path, title: "Notes" do %><span>Take Notes</span><% end %>
+                <%= link_to notes_path, title: "Documents" do %><span>Take Notes</span><% end %>
               </li>
               <li id="nav_profile" <% if controller?("users") && action?("show") %> class='current' <% end %>>
                 <%= link_to user_path(current_user), title: "Profile" do %><span>Profile</span><% end %>
@@ -51,7 +51,7 @@
                     <div class="arrow-border"></div><div class="arrow"></div>
                     <li><%= link_to "Profile", @current_user %></li>
                     <li><%= link_to "Study", study_sessions_path %></li>
-                    <li><%= link_to "Notes", notes_path %></li>
+                    <li><%= link_to "Documents", notes_path %></li>
                     <li><%= link_to "Messages", mailbox_path(:mailbox => "inbox") %></li>
                     <li><%= link_to "Groups", groups_path %></li>
                     <li><%= link_to "Account", user_account_path(current_user) %></li>

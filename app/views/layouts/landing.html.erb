@@ -11,13 +11,12 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <%= csrf_meta_tags %>
 </head>
 <body class="static_pages-landing awesome-landing <%= controller_name + "-" + action_name %> fixed-width">
   <%= yield %>
   <%= render "layouts/footer" %>
-
-  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
 </html>

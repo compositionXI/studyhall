@@ -50,7 +50,7 @@
         <div id="profile_tabs">
           <ul class="tabs">
             <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
-            <li><a data-rel="notes_tab" href="#">Notes <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
+            <li><a data-rel="notes_tab" href="#">Documents <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
             <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
           </ul>
           <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">

@@ -8,7 +8,7 @@
         <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
           <%= render partial: "name", locals: {group: @group} %>
         </div>
-        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
+        <div id="bio_section" class="left" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
           <%= render partial: "bio", locals: {group: @group} %>
         </div>
       </div>
@@ -18,8 +18,12 @@
     <div class="span11 column profile_main_content">
       <div class="clear"></div>
       <div id="profile_user_items1">
-        <%= render :partial => "group_posts" %>
-        <%= render :partial => "documents" %>
+        <% if !@group.member?(current_user) && @group.privacy_secret %>
+          <h3>You must be a member of this group to see its activity.</h3>
+        <% else %>
+          <%= render :partial => "group_posts" %>
+          <%= render :partial => "documents" %>
+        <% end %>
       </div>
     </div>
   </div>

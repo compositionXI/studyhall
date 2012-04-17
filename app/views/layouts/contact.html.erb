@@ -12,6 +12,8 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
+  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name + "-" + action_name %> fixed-width">
@@ -36,8 +38,5 @@
       ).html_safe
     %>
   <% end -%>
-
-  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
 </html>
