@@ -14,8 +14,12 @@ module UploadUtils
 	office ||= "/usr/lib/openoffice" if File.exists? '/usr/lib/openoffice'
 	office ||= "/usr/lib/openoffice.org3" if File.exists? '/usr/lib/openoffice.org3'
 	office ||= "/usr/lib/libreoffice" if File.exists? '/usr/lib/libreoffice'
+	
+	upload_log ||= Logger.new("#{Rails.root}/log/upload.log")
+	upload_log.info("Found office? #{office}")
 
 	OFFICE = RUBY_PLATFORM.match(/darwin/i) ? '' : "-Doffice.home=#{office}"
+	upload_log.info("Office match? #{OFFICE}")
 
 	puts("#{CLASSPATH}")
 
