@@ -12,10 +12,9 @@ module UploadUtils
 	LOGGING = "-Djava.util.logging.config.file=#{ROOT}/vendor/logging.properties"
 
 	office ||= "/usr/lib/openoffice" if File.exists? '/usr/lib/openoffice'
-	office ||= "/usr/lib/openoffice.org3" if File.exists? '/usr/lib/openoffice.org3'
 	office ||= "/usr/lib/libreoffice" if File.exists? '/usr/lib/libreoffice'
 
-	OFFICE = RUBY_PLATFORM.match(/darwin/i) ? '' : "-Doffice.home=#{office}"
+	OFFICE = RUBY_PLATFORM.match(/darwin/i) ? '' : "-Doffice.home=#{office}
 
 	puts("#{CLASSPATH}")
 
