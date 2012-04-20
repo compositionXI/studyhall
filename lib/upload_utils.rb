@@ -23,6 +23,8 @@ module UploadUtils
 	def self.run(command, pdfs, opts, return_output=false)
 		pdfs = [pdfs].flatten.map{|pdf| "\"#{pdf}\""}.join(' ')
 		cmd = "java #{HEADLESS} #{LOGGING} #{OFFICE} -cp #{CLASSPATH} #{command} #{pdfs} 2>&1"
+    log = Logger.new('uploads.txt')
+    log.info("COMMM:#{cmd}")
 		result = `#{cmd}`.chomp
 		raise ExtractionFailed, result if $? != 0
 		return return_output ? (result.empty? ? nil : result) : true
