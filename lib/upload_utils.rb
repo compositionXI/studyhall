@@ -14,7 +14,7 @@ module UploadUtils
 
 	office ||= "/usr/lib/openoffice" if File.exists? '/usr/lib/openoffice'
 	office ||= "/usr/lib/libreoffice" if File.exists? '/usr/lib/libreoffice'
-  office ||= "/usr/lib64/openoffice.org" if File.exists? "/usr/lib64/openoffice.org"
+  office ||= "/usr/lib64/openoffice.org3" if File.exists? "/usr/lib64/openoffice.org"
 
 	OFFICE = RUBY_PLATFORM.match(/darwin/i) ? '' : "-Doffice.home=#{office}"
 
