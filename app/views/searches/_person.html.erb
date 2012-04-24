@@ -14,7 +14,7 @@
     <dt>Rating</dt><dd><%= user.plusminus %></dd>
     <dt>Shared Notes</dt><dd><%= user.notes.shared.count %></dd>
   </dl>
-  <dl class="info">
+  <dl class="info w_grad_year">
     <dt>School</dt>
       <dd>
        <%= "#{user.school.name} #{user.grad_year}" if user.school %>
