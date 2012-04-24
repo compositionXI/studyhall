@@ -3,6 +3,8 @@ db/*.sqlite3
 log/*.log
 log/*.log.lck
 tmp/
+solr/pids
+solr/data
 .sass-cache/
 vendor/bundle
 config/s3.yml

@@ -162,6 +162,7 @@
         $('label[for=user_fraternity_or_sorority]').text("Fraternity or Sorority");
       }
     });
+    $(".popover #user_grad_year").chosen();
     $(".popover #user_major_ids").chosen();
     $(".popover #user_sport_ids").chosen();
     $(".popover #user_frat_sorority_ids").chosen();
@@ -276,6 +277,10 @@
         });  
         invitation.popover('show');
       });
+      /*$('.invite_buddies_save_button').live('click', function(e){
+        invitation.popover('hide');
+        e.preventDefault();
+      });*/
     <% end %>
 
     <% if params[:mode] == 'edit' && current_user == @user %>

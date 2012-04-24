@@ -944,6 +944,7 @@ else
        field :first_name, :string
        field :last_name, :string
        field :gender, :string
+       field :grad_year, :integer
        field :school_id, :integer        # Hidden
        field :email, :string
        field :major, :string
@@ -974,6 +975,7 @@ else
        field :first_name, :string
        field :last_name, :string
        field :gender, :string
+       field :grad_year, :integer
        field :email, :string
        field :password, :string
        field :major, :string

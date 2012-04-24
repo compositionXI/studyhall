@@ -41,6 +41,8 @@
       </div>
     </div>
   </div></div>
-<div class="popover-footer">  <%= f.submit (study_session.new_record? ? "Start Studying" : "Save"), :class => "btn primary" %>
-  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %></div>
+<div class="popover-footer">  
+  <%= f.submit (study_session.new_record? ? "Start Studying" : "Save"), :class => "btn primary" %>
+  <%= link_to 'Cancel', "#", :class => "btn cancel_popover", "data-link-id" => @modal_link_id %>
+</div>
 <% end %>

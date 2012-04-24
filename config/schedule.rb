@@ -19,7 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :environment, 'production'
+
 job_type :rake,    "cd :path && RAILS_ENV=:environment rvm_trust_rvmrcs_flag=1 bundle exec rake :task --silent :output"
+job_type :runner, "cd :path && script/rails runner -e :environment ':task' :output"
 
 every 12.hour do
   rake "campus_news:fetch"

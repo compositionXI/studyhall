@@ -13,6 +13,7 @@ class HomeController < ApplicationController
     end
     check_tour_mode
   end
+  
 
   def ping
     Rails.cache.fetch('ping') do
