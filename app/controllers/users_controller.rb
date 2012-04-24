@@ -17,10 +17,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def index
-    @users = User.active_users.all
-  end
-  
   def show
     redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
     if params[:tour]
