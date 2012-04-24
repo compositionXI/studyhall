@@ -17,8 +17,7 @@
   <dl class="info">
     <dt>School</dt>
       <dd>
-       <%= user.school.name if user.school %>
-       <%= ', class of #{user.grad_year}' if user.grad_year %>
+       <%= "#{user.school.name} #{user.grad_year}" if user.school %>
       </dd>
     <dt>Courses</dt><dd><%= courses_list(user) %><dd>
   </dl>
