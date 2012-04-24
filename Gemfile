@@ -5,6 +5,7 @@ gem 'rails', '~> 3.2.0.rc2'
 gem 'mysql2'
 gem 'thin'
 gem 'activesupport'
+gem 'wicked_pdf'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
