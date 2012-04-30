@@ -1,6 +1,6 @@
 <% if @googleview %>
   <div class="row">
-    <div class="span8 offset4 promo_googleview">Limited profile shown.<br/><br/><%= link_to "Join", new_user_path %> Studyhall.com or <%= link_to "Login", login_path %> to view full profiles<br/>and connect with your friends!</div>
+    <div class="span8 offset4 promo_googleview" style="text-align: center; background-color: #EEE; border: 1px solid black; padding: 5px 0 5px 0;">Limited profile shown.<br/><br/><%= link_to "Join", new_user_path %> Studyhall.com or <%= link_to "Login", login_path %> to view full profiles<br/>and connect with your friends!</div>
   </div>
 <% end %>
 <section>
@@ -20,7 +20,7 @@
       <% end %>
     </div>
     <div class="span11 column profile_main_content">
-      <div itemscope itemtype="http://http://www.schema.org/Person">
+      <div itemscope itemtype="http://www.schema.org/Person">
         <div id="profile_personal_info" class="left">
           <div class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
             <%= render partial: "name", locals: {user: @user} %>
