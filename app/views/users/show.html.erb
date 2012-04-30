@@ -4,6 +4,7 @@
   </div>
 <% end %>
 <section>
+<div class="vcard">
   <div class="row">
     <div class="span5 column sidebar left" id="profile_sidebar">
       <div id="photo_section" class="editable profile_photo" data-placement="below-right" data-title="Change your photo" data-form="photo_form" data-bar-title="Add a photo - 400px by 400px and less than 500kb">
@@ -20,7 +21,7 @@
       <% end %>
     </div>
     <div class="span11 column profile_main_content">
-      <div itemscope itemtype="http://www.schema.org/Person">
+        <span class="role" style="display:none;">Student</span>
         <div id="profile_personal_info" class="left">
           <div class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
             <%= render partial: "name", locals: {user: @user} %>
@@ -98,9 +99,10 @@
           </div>
         </div>
         <% end %>
-      </div>
+
     </div>
   </div>
+</div>
 </section>
 <div id="profile_forms" style="display:none">
   <div class="form" id="name_form">

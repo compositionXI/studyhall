@@ -40,7 +40,7 @@ module UsersHelper
   end
   
   def html_school_name_for(user)
-    "#{content_tag(:span, user.school.try(:name), :class => 'highlight_text')}"
+    "#{content_tag(:span, user.school.try(:name), :class => 'org')}"
   end
   
   def html_sports_for(user)
