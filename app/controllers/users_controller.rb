@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     if @user.save_without_session_maintenance
-      Recommendation.populate_user(@user)
+      Recommendation.populate_user([@user.id])
       if @user.school and @user.school.active
         @user.deliver_activation_instructions!
         flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email." 
