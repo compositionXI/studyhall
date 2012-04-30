@@ -19,6 +19,9 @@ class UsersController < ApplicationController
   
   def show
     redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
+    if !current_user
+      @googleview = true
+    end
     if params[:tour]
       flash[:action_bar_message] = 'Welcome to StudyHall!'
     else

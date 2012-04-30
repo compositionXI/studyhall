@@ -1,3 +1,8 @@
+<% if @googleview %>
+  <div class="row">
+    <div class="span8 offset4 promo_googleview">Limited profile shown.<br/><br/><%= link_to "Join", new_user_path %> Studyhall.com or <%= link_to "Login", login_path %> to view full profiles<br/>and connect with your friends!</div>
+  </div>
+<% end %>
 <section>
   <div class="row">
     <div class="span5 column sidebar left" id="profile_sidebar">
@@ -5,7 +10,7 @@
         <%= render partial: "photo", locals: {user: @user} %>
       </div>
       <%= render :partial => "shared/buddies_preview", :locals => {:user => @user} %>
-      <% if current_user != @user %>
+      <% if current_user != @user && !@googleview %>
         <div>
           <%= link_to "Report this profile", "#" %>
         </div>
@@ -15,79 +20,84 @@
       <% end %>
     </div>
     <div class="span11 column profile_main_content">
-      <div id="profile_personal_info" class="left">
-        <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
-          <%= render partial: "name", locals: {user: @user} %>
+      <div itemscope itemtype="http://http://www.schema.org/Person">
+        <div id="profile_personal_info" class="left">
+          <div class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
+            <%= render partial: "name", locals: {user: @user} %>
+          </div>
+          <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form" data-bar-title="Add affiliations - Sports, clubs, gender, fraternity or sorority, marjor & minor">
+            <%= render partial: "affiliations", locals: {user: @user} %>
+          </div>
+          <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
+            <%= render partial: "bio", locals: {user: @user} %>
+          </div>
         </div>
-        <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form" data-bar-title="Add affiliations - Sports, clubs, gender, fraternity or sorority, marjor & minor">
-          <%= render partial: "affiliations", locals: {user: @user} %>
+        <div class="profile_ratings right">
+          <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form" data-bar-title="Add your GPA - honest values equal better study buddies">
+            <%= render partial: "gpa", locals: {user: @user} %>
+          </div>
+          <%= render :partial => "votes/rating", :locals => {:user => @user} %>
+          <div class="clear"></div>
+          <div class="stats">
+              <ul class="unstyled">
+                <li>
+                  <span class="count left"><%= @user.study_sessions.count %></span> Studyhalls Created
+                  <div class="clear"></div>
+                </li>
+                <li>
+                  <span class="count left"><%= @user.notes.shared.count %></span> Notes Shared 
+                  <div class="clear"></div>
+                </li>
+              </ul>
+          </div>
         </div>
-        <div id="bio_section" class="left editable" data-placement="below" data-title="Personal Bio" data-form="bio_form" data-bar-title="Tell us about yourself - try to keep brief">
-          <%= render partial: "bio", locals: {user: @user} %>
-        </div>
-      </div>
-      <div class="profile_ratings right">
-        <div id="gpa_section" class="rating_block gpa left editable" data-placement="below-left" data-title="Your GPA <small>4.1? Really?</small>" data-form="gpa_form" data-bar-title="Add your GPA - honest values equal better study buddies">
-          <%= render partial: "gpa", locals: {user: @user} %>
-        </div>
-        <%= render :partial => "votes/rating", :locals => {:user => @user} %>
         <div class="clear"></div>
-        <div class="stats">
-            <ul class="unstyled">
-              <li>
-                <span class="count left"><%= @user.study_sessions.count %></span> Studyhalls Created
-                <div class="clear"></div>
-              </li>
-              <li>
-                <span class="count left"><%= @user.notes.shared.count %></span> Notes Shared 
-                <div class="clear"></div>
-              </li>
+        <% if !@googleview %>
+        <div id="profile_user_items">
+          <div id="profile_tabs">
+            <ul class="tabs">
+              <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
+
+              <li><a data-rel="notes_tab" href="#">Documents <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
+              <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
             </ul>
-        </div>
-      </div>
-      <div class="clear"></div>
-      <div id="profile_user_items">
-        <div id="profile_tabs">
-          <ul class="tabs">
-            <li class="active"><a data-rel="courses_tab" href="#">Courses <span class="course_count">(<%= @user.offerings.count %>)</span></a></li>
-            <li><a data-rel="notes_tab" href="#">Documents <span>(<%= @user.notes.viewable_by(current_user).count %>)</span></a></li>
-            <li><a data-rel="studyhalls_tab" href="#">Studyhalls <span>(<%= @user.study_sessions.viewable_by(current_user).count %>)</span></a></li>
-          </ul>
-          <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">
-            <% @user.offerings.each do |course| %>
-              <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
-                <span><%= course.course.title %></span>
-                <% if current_user %>
-                  <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-          <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
-            <% @user.notes.viewable_by(current_user).each do |note| %>
-              <li data-rel="<%= note_url(note) %>" class="linked_item note">
-                <span><%= truncate note.name, length: 55 %></span>
-              </li>
-            <% end %>
-          </ul>
-          <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
-            <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
-              <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
-                <div class="attendees">
-                  <% study_session.users.first(3).each do |user| %>
-                    <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+            <ul id="courses_tab" class="courses course_list tab_contents editable scrollPane">
+              <% @user.offerings.each do |course| %>
+                <li data-rel="<%= class_url(course) %>" id="course_<%= course.id %>" class="linked_item course">
+                  <span><%= course.course.title %></span>
+                  <% if current_user %>
+                    <%= link_to "", user_drop_class_path(current_user,course), class: "drop_course_link", "data-course_id" => course.id %>
                   <% end %>
-                </div>
-                <% if study_session.name.blank? %>
-                  <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
-                <% else %>
-                  <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
-                  <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
+                </li>
+              <% end %>
+            </ul>
+            <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
+              <% @user.notes.viewable_by(current_user).each do |note| %>
+                <li data-rel="<%= note_url(note) %>" class="linked_item note">
+                  <span><%= truncate note.name, length: 55 %></span>
+                </li>
+              <% end %>
+            </ul>
+            <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
+              <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
+                <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
+                  <div class="attendees">
+                    <% study_session.users.first(3).each do |user| %>
+                      <%= link_to image_tag(user.avatar_url(:thumb)), user, :title => user.name %>
+                    <% end %>
+                  </div>
+                  <% if study_session.name.blank? %>
+                    <%= link_to study_session.created_at.strftime("%m/%d/%Y"), study_session, class: "name" %>
+                  <% else %>
+                    <%= link_to truncate(study_session.name, length: 28), study_session, class: "name" %>
+                    <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
