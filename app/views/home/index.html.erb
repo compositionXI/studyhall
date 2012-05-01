@@ -131,6 +131,18 @@
       return false;
     });
     
+    var top_choice = 0
+    $('#.dept_choose .chzn-results li').live('click', function(){
+      top_choice = $('#class_department_chzn a span');
+      $.get('/classes/show',
+        { dept_name: top_choice.html() },
+        function(data){
+          $('.number_choose').html('<select id="class_number" name="class[number][]" style="width: 130px; visibility:hidden;"></select>');
+          $('#class_number').html( data );
+          $('#class_number').css('visibility','visible').addClass('chzn-select').chosen();
+      });
+    });
+    
     $('.add_course_final').live('click', function(){
       length = $('.course_list').children().length;
       bottom_size = length % 4;
@@ -155,10 +167,12 @@
         });
       };
     });
-  });
+
 
   var trigger_hide_modal = function() {
     $("#view_all_buddies").modal('hide');
   }
+  
+  });
 
 <% end -%>

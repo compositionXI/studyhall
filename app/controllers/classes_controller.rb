@@ -7,19 +7,30 @@ class ClassesController < ApplicationController
   end
   
   def show
-    @class = Offering.find(params[:id])
-    @course = @class.course
-    @classmates = @class.classmates(current_user)
-    @posts = @class.posts.recent.top_level
-    @shared_study_sessions = @class.study_sessions.viewable_by nil
-    @shared_notes = @class.notes.viewable_by nil
-    flash[:action_bar_message] = @course.title
+    if request.xhr?
+      dept_name = params[:dept_name]
+      course_nos = Course.select(:number).where(:school_id => @current_user.school.id, :department => dept_name).uniq.collect{|c| c.number }
+      course_nos = course_nos.map{|cn| cn.to_i }.sort!
+      course_no_string = ''
+      course_nos.each do |cn|
+        course_no_string << '<option value="' + cn.to_s + '">' + cn.to_s + '</option>'
+      end
+      render :text => course_no_string
+    else
+      @class = Offering.find(params[:id])
+      @course = @class.course
+      @classmates = @class.classmates(current_user)
+      @posts = @class.posts.recent.top_level
+      @shared_study_sessions = @class.study_sessions.viewable_by nil
+      @shared_notes = @class.notes.viewable_by nil
+      flash[:action_bar_message] = @course.title
+    end
   end
   
   def new
     @enrollment = Enrollment.new
     #@offerings = Offering.where(school_id: current_user.school.id).includes(:course, :school, :instructor)
-    @offerings = current_user.school.offerings.includes(:course, :instructor)
+    #@offerings = current_user.school.offerings.includes(:course, :instructor)
     @user = @current_user
     respond_to do |format|
       if request.xhr?
@@ -30,17 +41,21 @@ class ClassesController < ApplicationController
   end
   
   def create
-    @enrollment = Enrollment.new params[:enrollment]
-    offerid = params[:enrollment][:offering_id]
-    enroll = Enrollment.where(:offering_id => offerid)
-    allstuds = [current_user.id.to_s]
-    enroll.each do |enr|
-      allstuds += [enr.user_id.to_s]
+    #@enrollment = Enrollment.new params[:enrollment]
+    department = params[:class][:department]
+    number = params[:class][:number]
+    @course = Course.where(:department => department, :number => number, :school_id => current_user.school.id).first
+    @offering = Offering.where(:course_id => @course.id).first
+    if(@offering.nil?)
+      @offering = Offering.new
+      @offering.course = @course
+      @offering.school = current_user.school
+      @offering.save
     end
-    Recommendation.populate_user(allstuds)
-    allstuds.shift
-    Recommendation.connect_new(current_user.id, allstuds, 1)
-    @enrollment.user_id = @current_user.id
+    @enrollment = Enrollment.new
+    @enrollment.offering = @offering
+    @enrollment.user = current_user
+    Rails.logger.info(@enrollment)
     
     if @enrollment.save
       if request.xhr?
@@ -48,8 +63,17 @@ class ClassesController < ApplicationController
       else
         redirect_to classes_path
       end
+      enroll = Enrollment.where(:offering_id => @offering.id)
+      allstuds = [current_user.id.to_s]
+      enroll.each do |enr|
+        allstuds += [enr.user_id.to_s]
+      end
+      Recommendation.populate_user(allstuds)
+      allstuds.shift
+      Recommendation.connect_new(current_user.id, allstuds, 1)
       
     else
+      @user = current_user
       render action: "new"
     end
   end

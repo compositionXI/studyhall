@@ -13,9 +13,16 @@
 
     <div class="clearfix">
       <%= f.label :Choose_course %>
-      <% cache("school-#{@user.school.id}-offering-course-list") do -%>
-        <div class="input"><%= select "enrollment", "offering_id", @offerings.collect {|o| [o.course_listing, o.id]}, {}, :class => 'chzn-select' %></div>
-      <% end -%>
+      <table>
+        <tr>
+          <td>
+            <div class="input dept_choose" style="width:150px;"><%= select "class", "department", Course.select(:department).where(:school_id => @user.school.id).uniq.order(:department).collect{|c| c.department}, {}, :class => 'chzn-select', :style => 'width:180px;' %></div>
+          </td>
+          <td>
+            <div class="input number_choose" style="width: 120px; position:relative; left: -20px;"><select id="class_number" name="class[number][]" style="width: 130px; visibility:hidden;"></select></div>
+          </td>
+        </tr>
+      </table>    
     </div>
     <%= render :partial => 'calendars/course_schedule' %>
   </div>
