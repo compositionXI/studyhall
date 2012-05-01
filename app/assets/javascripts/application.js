@@ -98,10 +98,22 @@ $(function(){
       , horizontalOffset: 25
     });
   
-  $(".activity-list").jScrollPane({hideFocus: true});
-  $(".news-list").jScrollPane({hideFocus: true});
+  //remove the loading bar after scroll panes added
+  function show_cont() {
+      $(".loading_bar").hide();
+      $(".main_content").fadeIn();
+      $("#user_activity a").trigger("click");
+    }
   
+  function scroll_panes() {
+    $(".activity-list").jScrollPane({hideFocus: true});
+    $(".news-list").jScrollPane({hideFocus: true});
+    $(".tourable").toggleClass("active");
+    setTimeout(show_cont, 300);
+  }
   
+  scroll_panes();
+    
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
   
   var d = 'a.menu, .dropdown-toggle', clearMenus = function() { 

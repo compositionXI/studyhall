@@ -57,7 +57,7 @@ class StudySessionsController < ApplicationController
         render action: 'new'
       end
     elsif @study_session.save
-      push_broadcast :studyhall_created, :name => @study_session.name
+      #push_broadcast :studyhall_created, :name => @study_session.name
       redirect_to @study_session
     else
       render action: 'new'

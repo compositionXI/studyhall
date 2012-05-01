@@ -30,10 +30,10 @@
 <div class="main_content" style="display:none;">
   <div id="home_tabs">
     <ul class="tabs">
-      <li class="active tourable" data-popover-id="activity_tour"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
+      <li class="active tourable" data-popover-id="activity_tour" id="user_activity"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
       <li class="tourable" data-popover-id="campus_news_tour"><%= link_to "Campus News <small>(#{current_user.school.try(:latest_news).try(:count) || 0 })</small>".html_safe, '#news_tab' %></li>
     </ul>
-    <ul id="activities_tab" class="activity-list active" style="width:700px; height: 250px; overflow-y:hidden;">
+    <ul id="activities_tab" class="activity-list active" >
       <% if current_user.activity.any? %>
         <% current_user.activity.each do |message| %>
           <li class="activity_message">
@@ -108,21 +108,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-  
-    function show_cont() {
-      $(".loading_bar").hide();
-      $(".main_content").fadeIn();
-    }
-    
-    $(window).load(function(){
-      setTimeout(show_cont, 300);
-    });
 
     var placement = "right";
     var length = $('.course_list').children().length;
     var bottom_size = length % 4;
     if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
-    //updating course select
     
     var course_select_content = $("#course_select_container").clone();
     var popover_attr = {
@@ -176,7 +166,9 @@
       if($('#d5').prop('checked')){ days += '5'; };
       var start = $('#class_start_time').val();
       var end = $('#class_end_time').val();
-      var course_name = $('.chzn-single span').html();
+      var course_name = $('.chzn-single span').hPage Not Found!
+
+tml();
       var option_selector = "option:contains('"+course_name+"')";
       var course = $(option_selector).val();
       if(days != '' && start != end && course_name != 'Select an Option'){

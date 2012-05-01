@@ -43,8 +43,8 @@ class ClassesController < ApplicationController
   def create
     #@enrollment = Enrollment.new params[:enrollment]
     department = params[:class][:department]
-    number = params[:class][:number]
-    @course = Course.where(:department => department, :number => number, :school_id => current_user.school.id).first
+    number = params[:class][:number][0]
+    @course = Course.where(:department => department, :number => number.to_s, :school_id => current_user.school.id).first
     @offering = Offering.where(:course_id => @course.id).first
     if(@offering.nil?)
       @offering = Offering.new
@@ -55,9 +55,21 @@ class ClassesController < ApplicationController
     @enrollment = Enrollment.new
     @enrollment.offering = @offering
     @enrollment.user = current_user
-    Rails.logger.info(@enrollment)
+    
+    #add the calendar event
+    days = ''
+    days << '1' if(params[:mon] == 'on')
+    days << '2' if(params[:tue] == 'on')
+    days << '3' if(params[:wed] == 'on')
+    days << '4' if(params[:thu] == 'on')
+    days << '5' if(params[:fri] == 'on')
+    
+    @calendar = Calendar.new
+    @calendar.update_attributes({ :days => days, :course_id => @course.id, :time_start => params[:class_start][:time], :time_end => params[:class_end][:time], :user_id => current_user.id, :course_name => @course.title })
+    
     
     if @enrollment.save
+      @calendar.save
       if request.xhr?
         render partial: 'users/course_list', collection: current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"}
       else
