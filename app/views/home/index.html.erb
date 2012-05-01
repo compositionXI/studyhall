@@ -28,7 +28,7 @@
       <li class="active tourable" data-popover-id="activity_tour"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
       <li class="tourable" data-popover-id="campus_news_tour"><%= link_to "Campus News <small>(#{current_user.school.try(:latest_news).try(:count) || 0 })</small>".html_safe, '#news_tab' %></li>
     </ul>
-    <ul id="activities_tab" class="activity-list active">
+    <ul id="activities_tab" class="activity-list active" style="width:700px; height: 250px; overflow-y:hidden;">
       <% if current_user.activity.any? %>
         <% current_user.activity.each do |message| %>
           <li class="activity_message">
@@ -97,6 +97,10 @@
   </script>
 <% end %>
 
+<div id="course_select_container" style="display:none;">
+  <%= render :partial => 'classes/form' %>
+</div>
+
 <script type="text/javascript">
   $(document).ready(function(){
 
@@ -106,6 +110,7 @@
     if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
     //updating course select
     
+    var course_select_content = $("#course_select_container").clone();
     var popover_attr = {
       trigger: "manual",
       placement: placement,
@@ -113,7 +118,7 @@
       horizontalOffset: 25,
       html: true,
       title: function(){return "Add A New Course";},
-      content: function(){return "<%=j render :partial => 'classes/form' %>";}
+      content: function(){return course_select_content.html();}
     };
 
     
