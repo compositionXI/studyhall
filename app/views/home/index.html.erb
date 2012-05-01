@@ -97,13 +97,14 @@
   </script>
 <% end %>
 
-<%= javascript_tag do %>
+<script type="text/javascript">
   $(document).ready(function(){
 
     var placement = "right";
     var length = $('.course_list').children().length;
     var bottom_size = length % 4;
     if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
+    //updating course select
     
     var popover_attr = {
       trigger: "manual",
@@ -175,4 +176,4 @@
   
   });
 
-<% end -%>
+</script>
