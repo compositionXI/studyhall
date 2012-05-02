@@ -141,7 +141,7 @@
       return false;
     });
     
-    var top_choice = 0
+    var top_choice;
     $('#.dept_choose .chzn-results li').live('click', function(){
       top_choice = $('#class_department_chzn a span');
       $.get('/classes/show',
@@ -151,6 +151,11 @@
           $('#class_number').html( data );
           $('#class_number').css('visibility','visible').addClass('chzn-select').chosen();
       });
+    });
+    
+    $('#.number_choose .chzn-results li').live('click', function(){
+      alert('click numba');
+      
     });
 
 

@@ -65,7 +65,7 @@ class ClassesController < ApplicationController
     days << '5' if(params[:fri] == 'on')
     
     @calendar = Calendar.new
-    @calendar.update_attributes({ :days => days, :course_id => @course.id, :time_start => params[:class_start][:time], :time_end => params[:class_end][:time], :user_id => current_user.id, :course_name => @course.title })
+    @calendar.update_attributes({ :days => days, :course_id => @offering.id, :time_start => params[:class_start][:time], :time_end => params[:class_end][:time], :user_id => current_user.id, :course_name => @course.title })
     
     
     if @enrollment.save
