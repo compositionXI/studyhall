@@ -145,7 +145,7 @@
     $('#.dept_choose .chzn-results li').live('click', function(){
       top_choice = $('#class_department_chzn a span');
       $.get('/classes/show',
-        { dept_name: top_choice.html() },
+        { dept_name: top_choice.html(), number: 'none' },
         function(data){
           $('.number_choose').html('<select id="class_number" name="class[number][]" style="width: 130px; visibility:hidden;"></select>');
           $('#class_number').html( data );
@@ -153,9 +153,14 @@
       });
     });
     
+    var second_choice;
     $('#.number_choose .chzn-results li').live('click', function(){
-      alert('click numba');
-      
+      second_choice = $('#class_number_chzn a span');
+      $.get('/classes/show',
+        { dept_name: top_choice.html(), number: second_choice.html() },
+        function(data){
+          $('.course_label').html( data ).css('text-align','center');
+      }); 
     });
 
 
