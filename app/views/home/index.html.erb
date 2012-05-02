@@ -152,33 +152,6 @@
           $('#class_number').css('visibility','visible').addClass('chzn-select').chosen();
       });
     });
-    
-    $('.add_course_final').live('click', function(){
-      length = $('.course_list').children().length;
-      bottom_size = length % 4;
-      if(bottom_size == 0){ placement = "right"; }else{ placement = "left"; }
-      popover_attr['placement'] = placement;
-      var days = '';
-      if($('#d1').prop('checked')){ days += '1'; };
-      if($('#d2').prop('checked')){ days += '2'; };
-      if($('#d3').prop('checked')){ days += '3'; };
-      if($('#d4').prop('checked')){ days += '4'; };
-      if($('#d5').prop('checked')){ days += '5'; };
-      var start = $('#class_start_time').val();
-      var end = $('#class_end_time').val();
-      var course_name = $('.chzn-single span').hPage Not Found!
-
-tml();
-      var option_selector = "option:contains('"+course_name+"')";
-      var course = $(option_selector).val();
-      if(days != '' && start != end && course_name != 'Select an Option'){
-        $.ajax({
-          url: '/calendars',
-          type: 'POST',
-          data: "days=" + days + "&start_time=" + start + "&end_time=" + end + "&course_id=" + course + "&course_name=" + course_name
-        });
-      };
-    });
 
 
   var trigger_hide_modal = function() {
