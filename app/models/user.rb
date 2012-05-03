@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
   end
   validates_attachment_content_type :avatar, :content_type =>  ["image/jpeg", "image/jpg", "image/x-png", "image/pjpeg", "image/png", "image/gif"], :message => "Oops! Make sure you are uploading an image file." 
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
+  
+  after_create do
+    Recommendation.populate_user([self.id])
+  end
 
   searchable :auto_index => false, :auto_remove => true do
     text :name

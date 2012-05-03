@@ -17,8 +17,19 @@ class UsersController < ApplicationController
     end
   end
   
+  def index
+    if current_user
+      redirect_back_or_default current_user
+    else
+      redirect_to login_path
+    end
+  end
+  
   def show
     redirect_to login_path, flash: {notice: "You must log in to view that profile"} unless @user.googleable? || current_user
+    if !current_user
+      @googleview = true
+    end
     if params[:tour]
       flash[:action_bar_message] = 'Welcome to StudyHall!'
     else
@@ -37,7 +48,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new params[:user]
     if @user.save_without_session_maintenance
-      Recommendation.populate_user(@user)
       if @user.school and @user.school.active
         @user.deliver_activation_instructions!
         flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email." 
@@ -62,6 +72,7 @@ class UsersController < ApplicationController
         end
       end
     end
+    
     respond_to do |format|
       format.html { @user.new_record? ? render(action: :new) : redirect_to(login_url) }
       format.js
