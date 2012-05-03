@@ -8,8 +8,8 @@
   </div>
   <div class="left">
     <%= link_to("X", edit_note_back_path, :class => "btn", :confirm => "Are you sure you want to leave? Unsaved changes will be lost!") %>
-    <%= link_to('Show formatting', '#', class: 'btn formatting_toggle') %>
-    <%= link_to('Hide formatting', '#', class: 'btn formatting_toggle', style: 'display:none') %>
+    <%= link_to('Hide formatting', '#', class: 'btn formatting_toggle') %>
+    <%= link_to('Show formatting', '#', class: 'btn formatting_toggle', style: 'display:none') %>
   </div>
   <div class="middle">
     <%= truncate @note.name, :length => 70 %>
