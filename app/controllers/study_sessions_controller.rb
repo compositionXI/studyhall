@@ -28,7 +28,7 @@ class StudySessionsController < ApplicationController
     @study_session.buddy_ids = [params[:id]]
     #Recommendation.connect_new(current_user.id, @study_session.buddy_ids, 5)
     @study_session.session_files.build
-    @faqs_page = StaticPage.find_by_slug(:faqs)
+    #@faqs_page = StaticPage.find_by_slug(:faqs)
     respond_to do |format|
       if params[:calendar]
         format.js {render "calendar"}
@@ -40,6 +40,7 @@ class StudySessionsController < ApplicationController
   
   def create
     @study_session = current_user.study_sessions.new(params[:study_session])
+    @study_session.init_opentok
     buddyids = params[:study_session][:buddy_ids]
     buddyids.shift
     buddyids_w_current = [current_user.id.to_s] + buddyids
