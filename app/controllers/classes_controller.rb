@@ -103,7 +103,7 @@ class ClassesController < ApplicationController
     @enrollment = @current_user.enrollments.find_by_offering_id params[:id]
     @enrollment.destroy
     respond_to do |format|
-      format.html { redirect_to classes_path }
+      format.html { redirect_to :controller => "home", :action => "index" }
       format.js
     end
   end
