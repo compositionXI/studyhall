@@ -158,7 +158,7 @@ class UsersController < ApplicationController
     @calendar.each do |cal|
       cal.update_attributes(:days => 'deleted')
     end
-    redirect_to home_url
+    redirect_to :controller => "home", :action => "index"
   end
 
   def block
