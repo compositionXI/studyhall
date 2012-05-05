@@ -186,7 +186,7 @@ $(document).ready(function(){
       $(".activity-list").jScrollPane({hideFocus: true});
       $(".news-list").jScrollPane({hideFocus: true});
       $(".tourable").toggleClass("active");
-      setTimeout(show_cont, 3000);
+      setTimeout(show_cont, 300);
     }
     
     scroll_panes();
