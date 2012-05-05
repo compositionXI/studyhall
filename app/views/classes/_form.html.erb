@@ -15,7 +15,7 @@
       <div class="course_label">
         <%= f.label :Choose_course %>
       </div>
-      <table>
+      <table id="dept_num_table">
         <tr>
           <td>
             <div class="input dept_choose" style="width:150px;"><%= select "class", "department", Course.select(:department).where(:school_id => @user.school.id).uniq.order(:department).collect{|c| c.department}, {}, :class => 'chzn-select', :style => 'width:180px;' %></div>
@@ -26,7 +26,9 @@
         </tr>
       </table>    
     </div>
-    <%= render :partial => 'calendars/course_schedule' %>
+    <div id="calendar_partial" style="display:none;">
+      <%= render :partial => 'calendars/course_schedule' %>
+    </div>
   </div>
   <div class="popover-footer">
     <%= f.submit "Submit", :class => "btn primary add_course_final" %>

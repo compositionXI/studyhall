@@ -20,7 +20,7 @@ Studyhall::Application.routes.draw do
   get "/broadcasts" => "broadcast#index"
 
   resources :groups
-
+  resources :textbooks
   resources :calendars
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'

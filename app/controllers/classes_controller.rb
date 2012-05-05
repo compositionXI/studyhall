@@ -12,14 +12,14 @@ class ClassesController < ApplicationController
       number = params[:number]
       if(number == 'none')
         course_nos = Course.select(:number).where(:school_id => @current_user.school.id, :department => dept_name).uniq.collect{|c| c.number }
-        course_nos = course_nos.map{|cn| cn.to_i }.sort!
+        course_nos = course_nos.map{|cn| cn }.sort!
         course_no_string = ''
         course_nos.each do |cn|
           course_no_string << '<option value="' + cn.to_s + '">' + cn.to_s + '</option>'
         end
         render :text => course_no_string
       else
-        course_name = Course.select(:title).where(:school_id => @current_user.school.id, :department => dept_name, :number => number).collect{|c| c.title }
+        course_name = Course.select(:title).where(:school_id => @current_user.school.id, :department => dept_name, :number => number).collect{|c| c.title }   
         render :text => dept_name + ' ' + number + ': ' + course_name.first
       end
     else

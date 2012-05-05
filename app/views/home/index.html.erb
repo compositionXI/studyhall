@@ -106,6 +106,8 @@
   <%= render :partial => 'classes/form' %>
 </div>
 
+<div id="textbook_modal" class="modal" style="display:none; width: 300px;"></div>
+
 <script type="text/javascript">
   $(document).ready(function(){
 
@@ -154,13 +156,28 @@
     });
     
     var second_choice;
+    var data_split;
     $('#.number_choose .chzn-results li').live('click', function(){
       second_choice = $('#class_number_chzn a span');
       $.get('/classes/show',
         { dept_name: top_choice.html(), number: second_choice.html() },
         function(data){
           $('.course_label').html( data ).css('text-align','center');
-      }); 
+          $('#dept_num_table').fadeOut();
+          $('#calendar_partial').fadeIn();
+      }).done( function() {
+        $.get('/textbooks/show',
+          { dept_name: top_choice.html(), number: second_choice.html() },
+          function(data){
+            $("#textbook_modal").html('<div class="modal-header"><button class="close" data-dismiss="modal" style="background:none;">×</button><h3>Buy them books!</h3></div><div class="modal-body">' + data + '</div>' );
+        });
+      });
+    });
+    
+    $('.add_course_final').live('click', function(){
+      if($("#textbook_modal .modal-body").html() != 'no_text'){
+        $("#textbook_modal").modal({ backdrop: true }).modal('show');
+      }
     });
 
 

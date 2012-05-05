@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423225413) do
+ActiveRecord::Schema.define(:version => 20120502155851) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -529,6 +529,15 @@ ActiveRecord::Schema.define(:version => 20120423225413) do
   add_index "study_sessions", ["tokbox_session_id"], :name => "index_study_sessions_on_tokbox_session_id"
   add_index "study_sessions", ["user_id"], :name => "index_study_sessions_on_user_id"
   add_index "study_sessions", ["whiteboard_id"], :name => "index_study_sessions_on_whiteboard_id"
+
+  create_table "textbooks", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "offering_id"
+    t.string   "isbn"
+    t.text     "users_w_book"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "gender"
