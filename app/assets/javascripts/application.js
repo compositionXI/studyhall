@@ -101,7 +101,7 @@ $(function(){
   //remove the loading bar after scroll panes added
   function show_cont() {
       $(".loading_bar").hide();
-      $(".main_content").fadeIn();
+      $(".main_content").show();
       $("#user_activity a").trigger("click");
     }
   

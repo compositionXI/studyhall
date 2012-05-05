@@ -17,7 +17,9 @@ class Textbook < ActiveRecord::Base
     if isbns != 'error'
       isbns.each do |isbn|
         item_url, image_url, lowest_price = Textbook.generate_amazon_links(isbn)
-        item_link << '<tr><td class="text_img" style="width:80px;margin:10px 5px 10px 0;"><img src="' + image_url + '" /></td><td class="text_desc" style="width:200px;margin:10px 5px 10px 0;"><a href="' + item_url + '" style="margin: 0 0 4px 0;" target="_blank">' + titles[item_iter] + '</a><br/><a href="' + item_url + '" style="margin: 0 0 0 0;" target="_blank">Buy for ' + lowest_price + '</a></td></tr>'
+        if(item_url != '')
+          item_link << '<tr><td class="text_img" style="width:80px;margin:10px 5px 10px 0;"><img src="' + image_url + '" /></td><td class="text_desc" style="width:200px;margin:10px 5px 10px 0;"><a href="' + item_url + '" style="margin: 0 0 4px 0;" target="_blank">' + titles[item_iter] + '</a><br/><a href="' + item_url + '" style="margin: 0 0 0 0;" target="_blank">Buy for ' + lowest_price + '</a></td></tr>'
+        end
         item_iter += 1
       end
       item_link << '</table>'
@@ -69,6 +71,7 @@ class Textbook < ActiveRecord::Base
       campus_data.each do |cdata|
         if(cdata['name'] == $current_term)
           term_id = cdata['id']
+          break
         end
       end
       #now get division
@@ -92,7 +95,7 @@ class Textbook < ActiveRecord::Base
         else
           temp_dept = temp_dept[1]
         end
-        if dept == temp_dept[0,3]
+        if dept == temp_dept.split(')')[0]
           dept_id = dj['id']
           break
         end
@@ -152,7 +155,7 @@ class Textbook < ActiveRecord::Base
       else
         top_result = res.items.first
         item_url = top_result.get('DetailPageURL')
-        image_url = top_result.get_hash('SmallImage').nil? ? "/assets/textbook_temp.gif" : top_result.get_hash('SmallImage')
+        image_url = top_result.get_hash('SmallImage').nil? ? "/assets/textbook_temp.gif" : top_result.get('SmallImage/URL')
         lowest_new = top_result.get('OfferSummary/LowestNewPrice/Amount').to_i
         lowest_used = top_result.get('OfferSummary/LowestUsedPrice/Amount').to_i
         lowest_price = (lowest_new < lowest_used ? lowest_new.to_s : lowest_used.to_s)
