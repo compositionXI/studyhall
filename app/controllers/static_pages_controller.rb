@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController    
 
+  caches_page :show
+
   def show
     find_page
     

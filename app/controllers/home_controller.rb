@@ -2,6 +2,8 @@ class HomeController < ApplicationController
 
   before_filter :require_user, only: [:index]
 
+  caches_page :landing_page
+  
   def index
     #@notebooks = @current_user.notebooks
     #@unsorted_notes = @current_user.notes.unsorted

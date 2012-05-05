@@ -27,6 +27,9 @@ Studyhall::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
-  
+
+  # Uncomment to test caching in development
+  # config.action_controller.perform_caching = true
+
   Paperclip.options[:command_path] = "/usr/local/bin/"
 end

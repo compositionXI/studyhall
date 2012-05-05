@@ -2,20 +2,20 @@ namespace :campus_news do
   desc "Get updated news stories"
   task :fetch => :environment do
     School.has_rss_link.each do |school|
-      latest_rss_entry = school.rss_entries.first
-      options = {
-        :on_failure => lambda {|url, response_code, response_header, response_body| Rails.logger.error "fail to fetch #{url}, the response code #{response_code}, header: #{response_header}, body: #{response_body}" }
-      }
-      options[:if_modified_since] =  latest_rss_entry.pub_date unless latest_rss_entry.nil?
+      latest_rss_entry            = school.rss_entries.first
+      options                     = {}
+      options[:on_failure]        = lambda { |url, code, header, body| Rails.logger.error "fail to fetch #{url}, the response code #{code}, header: #{header}, body: #{body}" }
+      options[:if_modified_since] = latest_rss_entry.pub_date unless latest_rss_entry.nil?
 
       feed = Feedzirra::Feed.fetch_and_parse(school.rss_link, options)
-      if feed.respond_to?(:entries) 
+      if feed.respond_to?(:entries)
         feed.entries.each do |entry|
           if (latest_rss_entry && entry.published > latest_rss_entry.pub_date) || latest_rss_entry.nil?
-            RssEntry.new({:school => school,
-                        :title => entry.title,
-                        :pub_date => entry.published,
-                        :link => entry.url}).save
+            Rails.logger.info "creating new rss entry for #{school.name}: #{entry.title}"
+            RssEntry.create( :school => school,
+                             :title => entry.title,
+                             :pub_date => entry.published,
+                             :link => entry.url )
           end
         end
       end
