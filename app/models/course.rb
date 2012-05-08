@@ -30,4 +30,12 @@ class Course < ActiveRecord::Base
   def offering_instructors
     offerings.map {|o| o.instructor.full_name}.join(" ")
   end
+  
+  def title_has_long_word?(n=14)
+    title.split(" ").each do |word|
+      return true if word.size.to_i > n
+    end
+    return false
+  end
+
 end

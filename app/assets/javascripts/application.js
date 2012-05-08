@@ -97,22 +97,6 @@ $(function(){
       , placement:        "below-left"
       , horizontalOffset: 25
     });
-  
-  //remove the loading bar after scroll panes added
-  function show_cont() {
-      $(".loading_bar").hide();
-      $(".main_content").show();
-      $("#user_activity a").trigger("click");
-    }
-  
-  function scroll_panes() {
-    $(".activity-list").jScrollPane({hideFocus: true});
-    $(".news-list").jScrollPane({hideFocus: true});
-    $(".tourable").toggleClass("active");
-    setTimeout(show_cont, 300);
-  }
-  
-  scroll_panes();
     
   // Code for Secondary Nav Dropdowns. Also needs to be pluginified.
   
@@ -190,6 +174,22 @@ $(document).ready(function(){
   }
   
   $(".scrollPane").jScrollPane();
+  
+  //remove the loading bar after scroll panes added
+    function show_cont() {
+        $(".loading_bar").hide();
+        $("div #home_tabs").fadeIn();
+        $("#user_activity a").trigger("click");
+      }
+    
+    function scroll_panes() {
+      $(".activity-list").jScrollPane({hideFocus: true});
+      $(".news-list").jScrollPane({hideFocus: true});
+      $(".tourable").toggleClass("active");
+      setTimeout(show_cont, 300);
+    }
+    
+    scroll_panes();
 
   $(".linked_item").click(function(e){
     if(!$(this).closest(".editable").hasClass("edit"))
