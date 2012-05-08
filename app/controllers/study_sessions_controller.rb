@@ -23,7 +23,7 @@ class StudySessionsController < ApplicationController
   end
   
   def new
-    #@modal_link_id = params[:link_id]
+    @modal_link_id = params[:link_id]
     @study_session = StudySession.new
     @study_session.buddy_ids = [params[:id]]
     #Recommendation.connect_new(current_user.id, @study_session.buddy_ids, 5)
