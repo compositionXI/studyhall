@@ -1,4 +1,4 @@
-var button = $("#new_study_session_button");
+var button = $("#invite_study_session_button");
 
 button.popover({trigger: "manual",
                 placement: "below-left",
@@ -6,7 +6,7 @@ button.popover({trigger: "manual",
                 horizontalOffset: 25,
                 html: true,
                 help: function(){return "<%=j render :partial => 'help' %>";},
-                title: function(){return "Start A Study Hall";},
+                title: function(){return "Invite To A Study Hall";},
                 content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}
 		})
 
