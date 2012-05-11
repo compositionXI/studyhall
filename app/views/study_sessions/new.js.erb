@@ -7,7 +7,7 @@ button.popover({trigger: "manual",
                 html: true,
                 help: function(){return "<%=j render :partial => 'help' %>";},
                 title: function(){return "Invite To A Study Hall";},
-                content: function(){return "<%=j render :partial => 'form', :locals => {:study_session => @study_session} %>";}
+                content: function(){return "<%=j render :partial => 'invite', :locals => {:study_session => @study_session} %>";}
 		})
 
 button.popover('show');
