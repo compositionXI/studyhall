@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   before_filter :require_user, only: [:index]
 
-  caches_page :landing_page
+  caches_page :landing_page, :privacy, :terms, :faqs, :about
   
   def index
     #@notebooks = @current_user.notebooks
@@ -16,6 +16,17 @@ class HomeController < ApplicationController
     check_tour_mode
   end
   
+  def privacy
+  end
+
+  def terms
+  end
+
+  def faqs
+  end
+
+  def about
+  end
 
   def ping
     Rails.cache.fetch('ping') do

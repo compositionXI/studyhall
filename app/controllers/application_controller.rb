@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user
   
-  before_filter :current_user, :fetch_static_pages, :require_first_last_name, :initial_broadcasts, :clear_broadcasts
+  before_filter :current_user, :require_first_last_name, :initial_broadcasts, :clear_broadcasts
   
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 

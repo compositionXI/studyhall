@@ -3,9 +3,10 @@
       <p>
         &copy; StudyHall.com All rights reserved
         <%= link_to "Contact", new_contact_path %>
-        <% @static_pages.each do |static_page| %>
-          <%= link_to static_page.title, page_path(static_page.slug) %>
-        <% end %>   
+        <%= link_to "Privacy Policy", "/privacy" %>
+        <%= link_to "Terms Of Service", "/terms" %>
+        <%= link_to "About Us", "/about" %>
+        <%= link_to "FAQ's", "/faqs" %>
       </p>      
   </div>
 </footer>
