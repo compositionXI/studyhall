@@ -11,13 +11,13 @@
   <%= favicon_link_tag %>
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= ga_tag %>
 </head>
 <body class="static_pages-landing awesome-landing <%= controller_name + "-" + action_name %> fixed-width">
   <%= yield %>
   <%= render "layouts/footer" %>
+  <%= javascript_include_tag "application" %>
   <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>
