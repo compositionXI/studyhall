@@ -2,7 +2,7 @@ require 'net/http'
 require 'amazon/ecs'
 
 class Textbook < ActiveRecord::Base
-  attr_accessible :course_id, :isbn, :offering_id, :users_w_book
+  attr_accessible :course_id, :textbook_html, :offering_id, :users_w_book
   
   $current_term = 'SUMMER 2012'
   

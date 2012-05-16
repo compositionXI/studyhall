@@ -20,6 +20,12 @@
       <% end %>
     </ul> 
   <% end %>
+  <% if @textbook %>
+    <header><h1 class="left">Get at them books!</h1></header>
+    <div style="width:280px; overflow:hidden">
+    <%= @textbook.textbook_html.html_safe if @textbook.textbook_html %>  
+    </div>
+  <% end %>
   <% if user == current_user && !no_invitation%>
     <% if user.buddies.any? %>
       <div class="activate_invitation">

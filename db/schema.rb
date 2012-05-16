@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502155851) do
+ActiveRecord::Schema.define(:version => 20120506082159) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -533,10 +533,10 @@ ActiveRecord::Schema.define(:version => 20120502155851) do
   create_table "textbooks", :force => true do |t|
     t.integer  "course_id"
     t.integer  "offering_id"
-    t.string   "isbn"
     t.text     "users_w_book"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "textbook_html"
   end
 
   create_table "users", :force => true do |t|
