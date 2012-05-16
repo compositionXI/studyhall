@@ -20,10 +20,10 @@
       <% end %>
     </ul> 
   <% end %>
-  <% if @course %>
+  <% if @textbook %>
     <header><h1 class="left">Get at them books!</h1></header>
     <div style="width:280px; overflow:hidden">
-    <%= Textbook.where(:course_id => @course.id).first.textbook_html.html_safe %>  
+    <%= @textbook.textbook_html.html_safe if @textbook.textbook_html %>  
     </div>
   <% end %>
   <% if user == current_user && !no_invitation%>

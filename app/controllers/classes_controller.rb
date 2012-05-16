@@ -25,6 +25,7 @@ class ClassesController < ApplicationController
     else
       @class = Offering.find(params[:id])
       @course = @class.course
+      @textbook = Textbook.where(:course_id => @course.id).first
       @classmates = @class.classmates(current_user)
       @posts = @class.posts.recent.top_level
       @shared_study_sessions = @class.study_sessions.viewable_by nil
