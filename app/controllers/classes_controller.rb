@@ -50,7 +50,7 @@ class ClassesController < ApplicationController
   def create
     #@enrollment = Enrollment.new params[:enrollment]
     department = params[:class][:department]
-    number = params[:class][:number][0]
+    number = params[:class][:number].first
     @course = Course.where(:department => department, :number => number.to_s, :school_id => current_user.school.id).first
     @offering = Offering.where(:course_id => @course.id).first
     if(@offering.nil?)
