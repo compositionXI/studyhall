@@ -4,7 +4,7 @@ require 'amazon/ecs'
 class Textbook < ActiveRecord::Base
   attr_accessible :course_id, :textbook_html, :offering_id, :users_w_book
   
-  $current_term = 'SUMMER 2012'
+  $current_term = 'FALL 2012'
   
   def self.get_isbn(user, dept, num)
     campus = Textbook.get_campus(user)
