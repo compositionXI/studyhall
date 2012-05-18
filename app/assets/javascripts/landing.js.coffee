@@ -41,9 +41,7 @@ class landingPage
     @animateHeader() 
     @reasons_h1.add(@reasons_close).click (e) => 
       @animateReasons()
-      e.preventDefault()  
-    
-    @postitSetup()
+      e.preventDefault()
     
     #Form Setup
     @form_prefix.click ->
@@ -85,58 +83,7 @@ class landingPage
       success: (mediaElement, domElement) -> 
         $('.mejs-layers, .mejs-controls', self.header).remove()
         $('.mejs-container', @header).fadeIn 1000, ->
-          mediaElement.play()
-   
-  reasonsVideoSetup: ->
-    self = this      
-    @reasons_shim = $('.video_shim', @reasons)
-    @reasons_video = $('#studyhall_video', @landing).mediaelementplayer
-      defaultVideoWidth: 700
-      defaultVideoHeight: 393
-      startVolume: 0.4
-      features: ['playpause','progress','current','duration','tracks','volume']                                                                 
-    @video_container = $('.mejs-container', @reasons) || @reasons_video 
-    
-
-  #Post-its animations
-  postitSetup: ->
-    self = this 
-    @reasonsVideoSetup()
-    @reasons_content.mouseleave ->
-      $(this).unbind('mouseleave')
-      self.postits.each ->
-        $(this).mouseenter ->
-          $(this).unbind('mouseenter') 
-          self.animatePostit(this) 
-          
-  postitCleanup: ->
-    self = this
-    @reasons_video[0].player.pause()  
-  
-  animatePostit: (element) ->
-    self = this
-    $postit = $(element)
-    
-    if @animations
-      $postit.bind("animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd", (e) ->        
-        $(this).hide()
-      )
-      rand = Math.floor(Math.random() * 2)  
-      $postit.addClass(self.postit_classes[rand])
-    else 
-      $postit.animate
-        top: parseInt($postit.css('top'), 10) + 700
-      , 1500, 'swing', ->
-        $postit.fadeOut 300
-    
-    self.postit_count++
-    
-    if self.postit_count == 8
-      self.video_container.animate
-        opacity: 100
-      , @speed, ->
-      self.reasons_shim.hide()  
-      self.reasons_video[0].player.play()  
+          mediaElement.play()  
   
   animateHeader: ->
     if @transitions
@@ -164,7 +111,6 @@ class landingPage
       
   animateReasons: ->  
     if @reasons.data('state') == 'closed' 
-      @header_video.trigger('pause')
       if @transitions
         @landing.addClass 'slide-open'
       else
@@ -178,7 +124,6 @@ class landingPage
       @reasons.data('state' , 'open')
       @scroll()    
     else
-      @header_video.trigger('play')
       if @transitions
         @landing.removeClass 'slide-open'
       else
@@ -190,13 +135,12 @@ class landingPage
           'height' : 0
         , @speed
       @reasons.data('state' , 'closed')
-      @postitCleanup()
   
   formValidation: (element) ->
     @form.find(".input_field").each ->
       input = $(element)
       if input.twipsy(true) != null
-        input.twipsy("hide")  
+        input.twipsy("hide")
   
   scroll: ->
     $('html, body').animate(
