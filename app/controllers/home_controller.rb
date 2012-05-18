@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   before_filter :require_user, only: [:index]
 
-  caches_page :landing_page, :privacy, :terms, :faqs, :about
+  caches_page :landing_page
   
   def index
     #@notebooks = @current_user.notebooks
@@ -14,18 +14,6 @@ class HomeController < ApplicationController
       flash.now[:notice] = "Your profile is #{current_user.profile_completion_percentage}% complete!"
     end
     check_tour_mode
-  end
-  
-  def privacy
-  end
-
-  def terms
-  end
-
-  def faqs
-  end
-
-  def about
   end
 
   def ping

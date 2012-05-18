@@ -6,11 +6,6 @@ Studyhall::Application.routes.draw do
     end
   end
 
-  match "/privacy" => "home#privacy"
-  match "/terms"   => "home#terms"
-  match "/about"   => "home#about"
-  match "/faqs"    => "home#faqs"
-
   resources :join_requests
 
   get "member_requests/place"
@@ -79,6 +74,7 @@ Studyhall::Application.routes.draw do
     end
   end
 
+  resources :static_pages, :only => [:show]
   resources :contacts, :only => [:new, :create,:index]
   get "/messages/:mailbox" => "messages#index", :as => :mailbox, :constraints => {:mailbox => /(inbox|archive)/}
   resources :users do
@@ -148,6 +144,7 @@ Studyhall::Application.routes.draw do
   
   match "styleguide" => "styleguide#styleguide"
 
+  get ':id' => "static_pages#show", :as => :page, constraints: lambda{|req| StaticPage.where(slug: req.path_parameters[:id]).count > 0 }
   get ':id' => "users#show", :as => :profile, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
   get ':id' => "users#show", :as => :custom_user, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
 
