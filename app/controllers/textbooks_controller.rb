@@ -9,7 +9,9 @@ class TextbooksController < ApplicationController
       books_html = Textbook.get_isbn(current_user, params[:dept_name], params[:number])
       @textbook.update_attributes(:course_id => course.id, :offering_id => course.offerings.first.id, :textbook_html => books_html)
     end
-    render :text => @textbook.textbook_html
+    #double check in case error checking in model missed something
+    xhr_out = @textbook.textbook_html.nil? ? 'no_text' : @textbook.textbook_html
+    render :text => xhr_out
   end
   
 end
