@@ -40,7 +40,7 @@ module UsersHelper
   end
   
   def html_school_name_for(user)
-    "attends #{content_tag(:span, user.school.try(:name), :class => 'highlight_text')}"
+    "#{content_tag(:span, user.school.try(:name), :class => 'org')}"
   end
   
   def html_sports_for(user)
@@ -51,10 +51,15 @@ module UsersHelper
     "majors in #{content_tag(:span, user.majors.map(&:name).join(", "), :class => 'highlight_text')}"
   end
   
+  def html_grad_year_for(user)
+    "class of #{content_tag(:span, user.grad_year, :class => 'highlight_text')}"
+  end
+  
   def html_profile_detailed_info_for(user)
     output = []
-    output << html_greek_string_for(user) unless user.frat_sororities.blank?
     output << html_school_name_for(user) if user.school
+    output << html_grad_year_for(user) if user.grad_year
+    output << html_greek_string_for(user) unless user.frat_sororities.blank?
     output << html_major_string_for(user) unless user.majors.blank?
     output << html_sports_for(user) unless user.sports.blank?
     output.join(', ').capitalize.html_safe if !output.empty?

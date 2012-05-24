@@ -1,0 +1,21 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require mediaelement_rails
+ *= require mediaelement_rails/mejs-skins
+ *= require app
+ *= require_self
+*/
+
+.wf-loading h1, h2, label {
+  visibility: hidden; 
+}
+
+.wf-active h1, h2, label {
+  visibility: visible;
+}
+
+.wf-inactive h1, h2, label {
+  visibility: visible;
+}

@@ -16,19 +16,24 @@
 </header>
 <aside class="sidebar">
   <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
-      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "new_study_session_button1"), :id => "new_study_session_button1", :class => "btn primary large popover_button", :remote => true %>
+      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %>
       <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
-      <%= link_to "Upload", notes_path, :class => "btn large popover_button show_button", :id => "upload_note_button" %>
+      <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
   </div>
   <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
 </aside>
-<div class="main_content">
-  <div id="home_tabs">
+<div class="loading_bar" style="width: 100%; text-align:center; margin: 100px 0 0 0;">
+  <div style="display:inline-block;">Loading</div>
+  <br/>
+  <div style="display:inline-block;"><%= image_tag "ajax-loader.gif" %></div>
+</div>
+<div class="main_content" >
+  <div id="home_tabs" style="display:none;">
     <ul class="tabs">
-      <li class="active tourable" data-popover-id="activity_tour"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
+      <li class="active tourable" data-popover-id="activity_tour" id="user_activity"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
       <li class="tourable" data-popover-id="campus_news_tour"><%= link_to "Campus News <small>(#{current_user.school.try(:latest_news).try(:count) || 0 })</small>".html_safe, '#news_tab' %></li>
     </ul>
-    <ul id="activities_tab" class="activity-list active">
+    <ul id="activities_tab" class="activity-list active" >
       <% if current_user.activity.any? %>
         <% current_user.activity.each do |message| %>
           <li class="activity_message">
@@ -97,7 +102,13 @@
   </script>
 <% end %>
 
-<%= javascript_tag do %>
+<div id="course_select_container" style="display:none;">
+  <%= render :partial => 'classes/form' %>
+</div>
+
+<div id="textbook_modal" class="modal" style="display:none; width: 300px;"></div>
+
+<script type="text/javascript">
   $(document).ready(function(){
 
     var placement = "right";
@@ -105,6 +116,7 @@
     var bottom_size = length % 4;
     if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
     
+    var course_select_content = $("#course_select_container").clone();
     var popover_attr = {
       trigger: "manual",
       placement: placement,
@@ -112,7 +124,7 @@
       horizontalOffset: 25,
       html: true,
       title: function(){return "Add A New Course";},
-      content: function(){return "<%=j render :partial => 'classes/form' %>";}
+      content: function(){return course_select_content.html();}
     };
 
     
@@ -131,34 +143,50 @@
       return false;
     });
     
-    $('.add_course_final').live('click', function(){
-      length = $('.course_list').children().length;
-      bottom_size = length % 4;
-      if(bottom_size == 0){ placement = "right"; }else{ placement = "left"; }
-      popover_attr['placement'] = placement;
-      var days = '';
-      if($('#d1').prop('checked')){ days += '1'; };
-      if($('#d2').prop('checked')){ days += '2'; };
-      if($('#d3').prop('checked')){ days += '3'; };
-      if($('#d4').prop('checked')){ days += '4'; };
-      if($('#d5').prop('checked')){ days += '5'; };
-      var start = $('#class_start_time').val();
-      var end = $('#class_end_time').val();
-      var course_name = $('.chzn-single span').html();
-      var option_selector = "option:contains('"+course_name+"')";
-      var course = $(option_selector).val();
-      if(days != '' && start != end && course_name != 'Select an Option'){
-        $.ajax({
-          url: '/calendars',
-          type: 'POST',
-          data: "days=" + days + "&start_time=" + start + "&end_time=" + end + "&course_id=" + course + "&course_name=" + course_name
-        });
-      };
+    var top_choice;
+    $('#.dept_choose .chzn-results li').live('click', function(){
+      top_choice = $('#class_department_chzn a span');
+      $.get('/classes/show',
+        { dept_name: top_choice.html(), number: 'none' },
+        function(data){
+          $('.number_choose').html('<select id="class_number" name="class[number][]" style="width: 130px; visibility:hidden;"></select>');
+          $('#class_number').html( data );
+          $('#class_number').css('visibility','visible').addClass('chzn-select').chosen();
+      });
     });
-  });
+    
+    var second_choice;
+    var data_split;
+    var is_text = false;
+    $('#.number_choose .chzn-results li').live('click', function(){
+      second_choice = $('#class_number_chzn a span');
+      $.get('/classes/show',
+        { dept_name: top_choice.html(), number: second_choice.html() },
+        function(data){
+          $('.course_label').html( data ).css('text-align','center');
+          $('#dept_num_table').fadeOut();
+          $('#calendar_partial').fadeIn();
+      }).done( function() {
+        $.get('/textbooks/show',
+          { dept_name: top_choice.html(), number: second_choice.html() },
+          function(data){
+            $("#textbook_modal").html('<div class="modal-header"><button class="close" data-dismiss="modal" style="background:none;">×</button><h3>Buy them books!</h3></div><div class="modal-body">' + data + '</div>' );
+            if(data != "no_text"){ is_text = true; }
+        });
+      });
+    });
+    
+    $('.add_course_final').live('click', function(){
+      if(is_text){
+        $("#textbook_modal").modal({ backdrop: true }).modal('show');
+      }
+    });
+
 
   var trigger_hide_modal = function() {
     $("#view_all_buddies").modal('hide');
   }
+  
+  });
 
-<% end -%>
+</script>

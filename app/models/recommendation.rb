@@ -31,8 +31,8 @@ class Recommendation < ActiveRecord::Base
 
   #call this when creating a new user; maybe also run it initially because of existing db users without a rec attached
   def Recommendation.populate_user(all_users_ids)
-    all_users_ids.each do |current_user_id|
-      cui = current_user_id.to_i
+    all_users_ids.each do |curr_user_id|
+      cui = curr_user_id.to_i
       if(Recommendation.initial_spawn(cui))
         rankings = ''
         #generates list for every single user, not restricted to school - limits to first 5000 users

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415001545) do
+ActiveRecord::Schema.define(:version => 20120506082159) do
 
   create_table "activity_messages", :force => true do |t|
     t.integer  "user_id"
@@ -42,14 +42,12 @@ ActiveRecord::Schema.define(:version => 20120415001545) do
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
-  create_table "broadcasts", :force => true do |t|
-    t.string   "user_id"
-    t.string   "message"
-    t.string   "intent"
-    t.string   "args"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "current"
+  create_table "broadcasts", :id => false, :force => true do |t|
+    t.string  "user_id"
+    t.string  "message"
+    t.string  "intent"
+    t.string  "args"
+    t.boolean "current"
   end
 
   add_index "broadcasts", ["user_id"], :name => "index_broadcasts_on_user_id"
@@ -532,6 +530,15 @@ ActiveRecord::Schema.define(:version => 20120415001545) do
   add_index "study_sessions", ["user_id"], :name => "index_study_sessions_on_user_id"
   add_index "study_sessions", ["whiteboard_id"], :name => "index_study_sessions_on_whiteboard_id"
 
+  create_table "textbooks", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "offering_id"
+    t.text     "users_w_book"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "textbook_html"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "gender"
     t.integer  "school_id"
@@ -562,6 +569,7 @@ ActiveRecord::Schema.define(:version => 20120415001545) do
     t.boolean  "notify_on_invite",                                   :default => true,  :null => false
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "grad_year"
   end
 
   add_index "users", ["school_id"], :name => "index_users_on_school_id"

@@ -2,9 +2,9 @@
   <div class="container">
     <div class="buttons left">
       <% if action_name == "index" %>
-        <%= link_to "Take Notes", @notebook ? new_notebook_note_path(@notebook) : new_note_path, :class => "primary btn show_button" %>
+        <%= link_to "Take Notes", @notebook ? new_notebook_note_path(@notebook) : new_note_path, :class => "btn show_button" %>
         <%= link_to "New Notebook", new_notebook_path(object_to_share: "Notes"), :class => "btn popover_button show_button", :id => "new_notebook_button", :remote => true %>
-		<%= link_to "Upload", new_note_path(:link_id => "upload_note_button", :upload => "true"), :class => "btn popover_button show_button", :id => "upload_note_button", :remote => true %>
+        <%= link_to "Upload", new_note_path(:link_id => "upload_note_button", :upload => "true"), :class => "primary btn popover_button show_button", :id => "upload_note_button", :remote => true %>
         <%= link_to "Share", new_sharing_path, remote: true, id: "share_button", :class => "btn hide edit_button action_button disabled" %>
         <%= link_to "Delete", new_group_delete_path(class_name: "note_items"), id: "delete_button", class: "btn hide edit_button action_button disabled", remote: true %>
       <% end %>
@@ -21,7 +21,7 @@
       </h3>
     <% else %>
       <h3 class="show middle">
-        <span>Your Notebooks & Notes</span>
+        <span>Your Documents</span>
       </h3>
     <% end %>
   
@@ -33,7 +33,7 @@
         <!--<%= link_to 'List', { layout: :list }, 'data-layout' => 'list', :class => 'btn show_button layout_button list_btn' %>-->
       </div>
       <% if @notebook.nil? || @notebook.user == current_user %>
-        <%= link_to "Edit", "#", :class => "btn show_button", :id => "edit_notes" %>
+        <%= link_to "Share Documents", "#", :class => "btn show_button", :id => "edit_notes" %>
         <%= link_to "Select All", "#", :class => "btn hide edit_button select", :id => "select_all"%>
         <%= link_to "Select None", "#", :class => "btn hide select", :id => "select_none"%>
         <%= link_to "Done", "#", :class => "btn primary hide edit_button", :id => "show_notes", :"data-notebook-id" => "#{@notebook.try(:id)}" %>

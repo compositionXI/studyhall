@@ -5,3 +5,5 @@ require 'rails_admin'
 
 # Initialize the rails application
 Studyhall::Application.initialize!
+
+TYPEKIT_ID = 'vmy7sbk'

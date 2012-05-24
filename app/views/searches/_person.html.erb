@@ -14,8 +14,11 @@
     <dt>Rating</dt><dd><%= user.plusminus %></dd>
     <dt>Shared Notes</dt><dd><%= user.notes.shared.count %></dd>
   </dl>
-  <dl class="info">
-    <dt>School</dt><dd><%= user.school.name if user.school %></dd>
+  <dl class="info w_grad_year">
+    <dt>School</dt>
+      <dd>
+       <%= "#{user.school.name} #{user.grad_year}" if user.school %>
+      </dd>
     <dt>Courses</dt><dd><%= courses_list(user) %><dd>
   </dl>
   <div class="clearfix"></div>

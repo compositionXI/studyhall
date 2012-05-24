@@ -1,5 +1,5 @@
 <div class="photo_wrapper">
-  <%= image_tag user.avatar_url(:large), :id => "profile_photo" %>
+    <%= image_tag user.avatar_url(:large), :id => "profile_photo", :class => "photo" %>
 </div>
 <%= link_to 'Delete Photo', '', :id => 'delete_photo' %>
 <%= link_to "Change Photo", "" %>

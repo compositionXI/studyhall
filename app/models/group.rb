@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   attr_accessor :delete_avatar
   attr_accessor :update_group_id
 
-  searchable :auto_index => true, :auto_remove => true do
+  searchable :auto_index => false, :auto_remove => true do
     text :group_name
     text :bio
     boolean :active

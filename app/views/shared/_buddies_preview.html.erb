@@ -11,13 +11,21 @@
       <% end %>
     </ul>
   <% end %>
-  <header><h1 class="left"> People You Might Like to Study With </h1></header>
+  <% if current_user %>
+  <header><h1 class="left">Your Recommended Study Buddies</h1></header>
     <% user_recs = User.where(:id => Recommendation.populate_rec_bar(current_user.id)) %>
     <ul>
       <% user_recs.each do |rec| %>
         <li><%= link_to image_tag(rec.photo_url(:medium)), rec, :title => rec.name %></li>
       <% end %>
     </ul> 
+  <% end %>
+  <% if @textbook %>
+    <header><h1 class="left">Get at them books!</h1></header>
+    <div style="width:280px; overflow:hidden">
+    <%= @textbook.textbook_html.html_safe if @textbook.textbook_html %>  
+    </div>
+  <% end %>
   <% if user == current_user && !no_invitation%>
     <% if user.buddies.any? %>
       <div class="activate_invitation">

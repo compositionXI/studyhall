@@ -18,9 +18,10 @@ Studyhall::Application.routes.draw do
 
   get "broadcast/index"
   get "/broadcasts" => "broadcast#index"
+  
+  get "textbooks/show"
 
   resources :groups
-
   resources :calendars
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -105,6 +106,7 @@ Studyhall::Application.routes.draw do
     resources :session_invites, as: "invites"
   end
   resources :session_sharings, only: [:new, :create]
+
   resources :home do
     collection do
       get "landing_page"
@@ -141,7 +143,7 @@ Studyhall::Application.routes.draw do
   end
   
   match "styleguide" => "styleguide#styleguide"
-  
+
   get ':id' => "static_pages#show", :as => :page, constraints: lambda{|req| StaticPage.where(slug: req.path_parameters[:id]).count > 0 }
   get ':id' => "users#show", :as => :profile, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }
   get ':id' => "users#show", :as => :custom_user, constraints: lambda{|req| User.where(custom_url: req.path_parameters[:id]).count > 0 }

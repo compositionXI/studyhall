@@ -3,21 +3,21 @@
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js wf-loading" lang="en"> <!--<![endif]-->
 <head>
-  <title>Studyhall</title>
+  <%= typekit_loader_tag %>
+  <title>Studyhall.com | Study, Share, Connect with Your Classmates.</title>
+  <meta name="robots" content="NOODP">
+  <meta name="description" content="Study, share and connect with your classmates.  Join now.  Free.  Be Part of the Social Learning Revolution.">
   <%= favicon_link_tag %>
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
+  <%= stylesheet_link_tag "custom-landing" %>
   <%= csrf_meta_tags %>
+  <%= ga_tag %>
 </head>
 <body class="static_pages-landing awesome-landing <%= controller_name + "-" + action_name %> fixed-width">
   <%= yield %>
   <%= render "layouts/footer" %>
-
-  <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <%= javascript_include_tag "custom-landing" %>
 </body>
 </html>

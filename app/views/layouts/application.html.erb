@@ -4,21 +4,25 @@
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js wf-loading" lang="en"> <!--<![endif]-->
 
 <head>
-  <title>Studyhall</title>
+  <title>Studyhall.com | Study, Share, Connect with Your Classmates.</title>
+  <meta name="robots" content="NOODP">
+  <meta name="description" content="Study, share and connect with your classmates.  Join now.  Free.  Be Part of the Social Learning Revolution.">
   <%= favicon_link_tag %>
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
+  <%= stylesheet_link_tag "print/print", :media => 'print' %>
   <%= stylesheet_link_tag    "application" %>
-  <%= stylesheet_link_tag    "dashboard" %>
+  <%# stylesheet_link_tag    "dashboard" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag APP_CONFIG["opentok"]["js_src"] %>
-  <%= javascript_include_tag :defaults, "http://app02.c45577.blueboxgrid.com:9292/faye.js" %>
+  <%= javascript_include_tag "http://app02.c45577.blueboxgrid.com:9292/faye.js" %>
   <%= csrf_meta_tags %>
+  <%= ga_tag %>
 </head>
 <body class="<%= flash[:imitates] || (controller_name + "-" + action_name) %> fixed-width">
-  <div id="wrap">  
+  <div id="wrap">
     <%= render :partial => "layouts/topbar" %>
     <%= render :partial => @action_bar if @action_bar %>
     <%= render :partial => "layouts/fetch_info" %>
@@ -44,7 +48,6 @@
       %>
     <% end -%>
   <% end -%>
-
   <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </body>

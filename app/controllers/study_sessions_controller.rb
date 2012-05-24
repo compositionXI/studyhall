@@ -23,12 +23,12 @@ class StudySessionsController < ApplicationController
   end
   
   def new
-    #@modal_link_id = params[:link_id]
+    @modal_link_id = params[:link_id]
     @study_session = StudySession.new
     @study_session.buddy_ids = [params[:id]]
     #Recommendation.connect_new(current_user.id, @study_session.buddy_ids, 5)
     @study_session.session_files.build
-    @faqs_page = StaticPage.find_by_slug(:faqs)
+    #@faqs_page = StaticPage.find_by_slug(:faqs)
     respond_to do |format|
       if params[:calendar]
         format.js {render "calendar"}
@@ -40,6 +40,7 @@ class StudySessionsController < ApplicationController
   
   def create
     @study_session = current_user.study_sessions.new(params[:study_session])
+    @study_session.init_opentok
     buddyids = params[:study_session][:buddy_ids]
     buddyids.shift
     buddyids_w_current = [current_user.id.to_s] + buddyids
@@ -49,7 +50,7 @@ class StudySessionsController < ApplicationController
     if @study_session.calendar?
       @study_session.addtocalendar
       if @study_session.save
-        push_broadcast :studyhall_created, :name => @study_session.name
+        #push_broadcast :studyhall_created, :name => @study_session.name
         @local_cal = current_user.calendars.new
         @local_cal.update_attributes({ :date_start => @study_session.time_start, :time_start => @study_session.time_end, :schedule_id => @study_session.id })
         redirect_to calendars_url, :notice => "Study session '#{@study_session.name}' scheduled successfully for #{@study_session.time_start} at #{@study_session.time_end}."
@@ -57,7 +58,7 @@ class StudySessionsController < ApplicationController
         render action: 'new'
       end
     elsif @study_session.save
-      push_broadcast :studyhall_created, :name => @study_session.name
+      #push_broadcast :studyhall_created, :name => @study_session.name
       redirect_to @study_session
     else
       render action: 'new'

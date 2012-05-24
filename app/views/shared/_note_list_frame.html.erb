@@ -8,7 +8,7 @@
   </ul>
   <% types.each do |type| %>
     <ul id="doc_type_tab_<%= type[1] %>" class="tab_contents" <%= "style='display:none'" if type[1] != 0 %>>
-      <%= render :partial => "shared/note_list", :locals => {:note_items => documents[Integer(type[1])]} %>
+      <%= render :partial => "shared/note_list", :locals => {:note_items => documents[Integer(type[1])], :tab_id => "#{type[1]}"} %>
     </ul>
   <% end %>
 </div>

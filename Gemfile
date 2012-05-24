@@ -5,6 +5,7 @@ gem 'rails', '~> 3.2.0.rc2'
 gem 'mysql2'
 gem 'thin'
 gem 'activesupport'
+gem 'amazon-ecs'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
@@ -40,7 +41,7 @@ gem 'rchardet19'
 gem "airbrake"
 gem 'newrelic_rpm'
 gem 'gcal4ruby'
-
+gem 'rack-canonical-host'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

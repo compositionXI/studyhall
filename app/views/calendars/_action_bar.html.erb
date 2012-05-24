@@ -3,6 +3,9 @@
       <div class="buttons left">
 	      <%= link_to "Schedule A Studyhall", new_study_session_path(:link_id => "new_calendar_button", :calendar => "true"), :class => "btn popover_button non_edit", :id => "new_calendar_button", :remote => true %>
       </div>
-      <h3 class="edit" style="display:none">Drag any studyhall to reschedule, or click to enter study session.</h3>
+      <h3 class="edit">Drag any studyhall to reschedule, or click to enter study session.</h3>
+      <div class="buttons right">
+        <%= link_to "Print", '', :onclick => 'javascript:print(); return false;', class: 'btn' %>
+      </div>
   </div>
 </div>

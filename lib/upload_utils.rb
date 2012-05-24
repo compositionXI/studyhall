@@ -2,6 +2,7 @@ require 'tmpdir'
 require 'fileutils'
 require 'shellwords'
 require 'hpricot'
+require 'logger'
 
 module UploadUtils
 
@@ -13,6 +14,7 @@ module UploadUtils
 
 	office ||= "/usr/lib/openoffice" if File.exists? '/usr/lib/openoffice'
 	office ||= "/usr/lib/libreoffice" if File.exists? '/usr/lib/libreoffice'
+  office ||= "/usr/lib64/openoffice.org3" if File.exists? "/usr/lib64/openoffice.org"
 
 	OFFICE = RUBY_PLATFORM.match(/darwin/i) ? '' : "-Doffice.home=#{office}"
 
@@ -22,7 +24,8 @@ module UploadUtils
 	def self.run(command, pdfs, opts, return_output=false)
 		pdfs = [pdfs].flatten.map{|pdf| "\"#{pdf}\""}.join(' ')
 		cmd = "java #{HEADLESS} #{LOGGING} #{OFFICE} -cp #{CLASSPATH} #{command} #{pdfs} 2>&1"
-		puts "CMD: #{cmd}"
+    log = Logger.new('uploads.txt')
+    log.info("COMMM:#{cmd}")
 		result = `#{cmd}`.chomp
 		raise ExtractionFailed, result if $? != 0
 		return return_output ? (result.empty? ? nil : result) : true

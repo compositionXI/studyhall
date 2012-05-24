@@ -11,10 +11,31 @@
         Sorry, we can't find any Notes or Notebooks meeting that criteria.
       </center>
   </div>
-<% else %><div class="landing_wrapper">
+<% else %>
+
+<% if tab_id == '0' %>
+<div class="landing_wrapper">
   <div class="note_item_demo">
       <a class="name" href="/notes/new">Take Notes</a>
   </div>
   <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
-  <p>Click the "Take Notes" button to begin taking note.</p></div>
+  <p>Click the "Take Notes" button to begin taking note.</p>
+</div>
+<% else %>
+<div class="landing_wrapper">
+  <div class="note_item_demo">
+      <a class="name upload_trig" href="/notes">Upload<br />Documents</a>
+  </div>
+  <h3><b>Upload</b> your notes, articles/research, exams, problem sets, and more.  <b>Share</b> with your classmates and get the help <b>you need.</b></h3>
+</div>
+<%end%>
+
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".upload_trig").on("click", function() {
+    $("#upload_note_button").click();
+  });
+});
+</script>
