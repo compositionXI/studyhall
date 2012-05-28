@@ -51,4 +51,6 @@ Studyhall::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  #require 'rack/ssl'
+  #config.middleware.use Rack::SSL
 end

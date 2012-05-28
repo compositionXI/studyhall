@@ -63,10 +63,17 @@ gem 'whenever'
 # memcached client 
 gem 'dalli'
 
-group :test, :development do
+
+#the title for this originally looked like:
+#group :test, :development do
+#You changed it such that it is 
+#group :development do
+group :development do
     gem 'rspec-rails'
     gem 'factory_girl_rails'
     gem 'faker'
+	#foreman was not originally here
+    gem 'foreman'
     gem 'ruby-debug19'
     gem 'guard'
     gem 'guard-rspec'
@@ -75,9 +82,12 @@ group :test, :development do
     gem 'rb-fsevent', :git => 'git://github.com/ttilley/rb-fsevent.git', :branch => 'pre-compiled-gem-one-off' #better support for Mac OS X filesystem
 end
 
-group :development do
-  gem 'foreman'
-end
+#this was commented out
+#group :development do
+ # gem 'foreman'
+	#general debug framework
+ # gem 'ruby-debug19'
+#end
 
 group :cucumber do
     gem 'capybara'
@@ -98,8 +108,12 @@ gem 'capistrano-ext'
 gem 'cap-recipes'
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+#this line was commented out
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "devise"
 
 gem "faye"
+
+#ssl fix
+#gem 'rack-ssl'
