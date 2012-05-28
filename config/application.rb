@@ -43,6 +43,11 @@ module Studyhall
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    #SSL configuration
+    # config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
+
+    config.force_ssl = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
     
