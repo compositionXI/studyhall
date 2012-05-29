@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_many :offerings, :through => :enrollments
   has_many :courses, :through => :offerings
   #originally just belongs_to
-  belongs_to :schools
+  belongs_to :school
   #has_and_belongs_to_many :schools
   # attr_readonly :school_id
   has_many :followings
@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
     string :name
     integer :school_id
     integer :plusminus
+    #integer :grad_year
     boolean :shares_with_everyone
     boolean :active
   end

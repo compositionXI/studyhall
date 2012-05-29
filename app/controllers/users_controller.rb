@@ -1,4 +1,4 @@
-class UsersController &lt; ApplicationController
+class UsersController < ApplicationController
   
   before_filter :require_no_user_or_admin, :only => [:new, :create]
   before_filter :require_user, :only => [:edit, :update, :account]
