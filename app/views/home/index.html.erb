@@ -1,3 +1,17 @@
+<script type="text/javascript">
+("#invite_study_session_button").click(function() {
+    // This sends us an event every time a user clicks the button
+    mixpanel.track("Studyhall session started"); 
+});
+("#upload_note_button").click(function() {
+    // This sends us an event every time a user clicks the button
+    mixpanel.track("Note uploaded"); 
+});
+("#add_course_button").click(function() {
+    // This sends us an event every time a user clicks the button
+    mixpanel.track("Course added"); 
+});
+<</script>
 <header class="home-header row">
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), @current_user %>
@@ -16,10 +30,7 @@
 </header>
 <aside class="sidebar">
   <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
-      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %>
-      <script type="text/javascript">
-	 mixpanel.track("StudyHall Started")
-      </script>
+      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %> 
       <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
       <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
   </div>
