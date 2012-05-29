@@ -2,7 +2,7 @@
   <div class="container">
     <div class="buttons left">
       <% if action_name == "index" %>
-        <%= link_to "Take Notes", @notebook ? new_notebook_note_path(@notebook) : new_note_path, :class => "btn show_button" %>
+        <%= link_to "Take Notes", @notebook ? new_notebook_note_path(@notebook) : new_note_path, :class => "btn show_button", :id => "take_notes_button" %>
         <%= link_to "New Notebook", new_notebook_path(object_to_share: "Notes"), :class => "btn popover_button show_button", :id => "new_notebook_button", :remote => true %>
         <%= link_to "Upload", new_note_path(:link_id => "upload_note_button", :upload => "true"), :class => "primary btn popover_button show_button", :id => "upload_note_button", :remote => true %>
         <%= link_to "Share", new_sharing_path, remote: true, id: "share_button", :class => "btn hide edit_button action_button disabled" %>

@@ -18,7 +18,6 @@
 //= require bootstrap-tabs.js
 //= require mediaelement_rails
 //= require autoNumeric.js
-//= require mixpanel.js
 //= require_tree .
 
 // Code for styling file upload inputs. Needs to be extracted and pluginified

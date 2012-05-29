@@ -1,17 +1,4 @@
-<script type="text/javascript">
-("#invite_study_session_button").click(function() {
-    // This sends us an event every time a user clicks the button
-    mixpanel.track("Studyhall session started"); 
-});
-("#upload_note_button").click(function() {
-    // This sends us an event every time a user clicks the button
-    mixpanel.track("Note uploaded"); 
-});
-("#add_course_button").click(function() {
-    // This sends us an event every time a user clicks the button
-    mixpanel.track("Course added"); 
-});
-<</script>
+
 <header class="home-header row">
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), @current_user %>
