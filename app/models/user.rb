@@ -32,7 +32,9 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :offerings, :through => :enrollments
   has_many :courses, :through => :offerings
-  belongs_to :school
+  #originally just belongs_to
+  belongs_to :schools
+  #has_and_belongs_to_many :schools
   # attr_readonly :school_id
   has_many :followings
   has_many :followed_users, :through => :followings

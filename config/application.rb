@@ -46,7 +46,7 @@ module Studyhall
     #SSL configuration
     # config.middleware.insert_before ActionDispatch::Cookies, Rack::SSL
 
-    config.force_ssl = true
+    config.force_ssl = false
 
     # Enable the asset pipeline
     config.assets.enabled = true
