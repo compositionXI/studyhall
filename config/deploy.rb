@@ -12,7 +12,7 @@ require "whenever/capistrano"
 require 'cap_recipes/tasks/memcache'
 
 set :application, "StudyHall"
-set :repository,  "git@github.com:sgrondahl/studyhall.git"
+set :repository,  "git@github.com:studyhall/studyhall.git"
 
 set :scm, :git
 set :scm_username, 'brent'

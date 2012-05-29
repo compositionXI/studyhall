@@ -51,6 +51,8 @@ class UsersController < ApplicationController
       if @user.school and @user.school.active
         @user.deliver_activation_instructions!
         flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email." 
+	Notifier.signup_email(@user).deliver
+	redirect_to(@user, :notice => "User created")
       elsif @user.school and not @user.school.active
         flash[:notice] = "Access to your school has not been granted yet. Stay Tuned for when we launch at your school." 
       else

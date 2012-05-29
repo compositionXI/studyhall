@@ -1,3 +1,4 @@
+
 <header class="home-header row">
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), @current_user %>
@@ -22,6 +23,7 @@
 	  </div>	
 	</div>
 </header>
+<<<<<<< HEAD
 <aside class="sidebar"><!--referenced in both user_page_home.sass and sidebar.sass -->
 	<section class="tourable courses <%#= items_layout %>" data-popover-id="courses_tour">
 		<div class="heading">
@@ -36,6 +38,15 @@
 	      </li>
 	    </ol>
 	</section>
+=======
+<aside class="sidebar">
+  <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
+      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %> 
+      <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
+      <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
+  </div>
+  <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
+>>>>>>> e14c5a82e2702177ac5f3201598b4397a151d0de
 </aside>
 <div class="main_content">
 	<%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
