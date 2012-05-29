@@ -58,7 +58,8 @@ module UsersHelper
   def html_profile_detailed_info_for(user)
     output = []
     output << html_school_name_for(user) if user.school
-    output << html_grad_year_for(user) if user.grad_year
+    #the line below was not commented out originally
+    #output << html_grad_year_for(user) if user.grad_year
     output << html_greek_string_for(user) unless user.frat_sororities.blank?
     output << html_major_string_for(user) unless user.majors.blank?
     output << html_sports_for(user) unless user.sports.blank?

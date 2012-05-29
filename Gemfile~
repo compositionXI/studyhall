@@ -116,4 +116,4 @@ gem "devise"
 gem "faye"
 
 #ssl fix
-gem 'rack-ssl'
+#gem 'rack-ssl'

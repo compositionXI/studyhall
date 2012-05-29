@@ -103,7 +103,7 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem 'capistrano', '=2.12.0'
 gem 'capistrano-ext'
 gem 'cap-recipes'
 
