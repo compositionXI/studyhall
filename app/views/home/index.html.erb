@@ -17,6 +17,9 @@
 <aside class="sidebar">
   <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
       <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %>
+      <script type="text/javascript">
+	 mixpanel.track("StudyHall Started")
+      </script>
       <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
       <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
   </div>
