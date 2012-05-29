@@ -51,7 +51,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "mediaelement_rails", git: "git://github.com/tobsch/mediaelement_rails.git"
+gem "mediaelement_rails", :git => "git://github.com/tobsch/mediaelement_rails.git"
 gem 'httparty'
 gem "nifty-generators", :group => :development
 

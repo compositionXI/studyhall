@@ -11,4 +11,5 @@
  *= require groups
  *= require broadcasts
  *= require_self
+ *= require dashboard
 */
