@@ -92,6 +92,15 @@ class User < ActiveRecord::Base
   end
 
   PROTECTED_PROFILE_ATTRBUTES = %w(email)
+  
+  def self.index_sitemap
+    all_users = User.all
+    File.open("#{Rails.root}/public/sitemap.txt", "w") do |f|
+      all_users.each do |u|
+        f.puts "http://www.studyhall.com/#{u.custom_url}"
+      end
+    end
+  end
 
   def current_broadcasts
     Broadcast.where("user_id = ? AND current = ?", self.id, true)

@@ -36,8 +36,12 @@ every 24.hours do
   rake "studyhall:remove_old_searches"
 end
 
-every :hour do
+every 12.hours do
   runner "Recommendation.list_all"
+end
+
+every 7.days do
+  runner "User.index_sitemap"
 end
 
 every 2.hours do

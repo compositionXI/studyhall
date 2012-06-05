@@ -23,6 +23,7 @@ Studyhall::Application.routes.draw do
 
   resources :groups
   resources :calendars
+  resources :uploads
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
