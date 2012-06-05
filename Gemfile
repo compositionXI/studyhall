@@ -51,7 +51,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "mediaelement_rails", :git => "git://github.com/tobsch/mediaelement_rails.git"
+gem "mediaelement_rails", git: "git://github.com/tobsch/mediaelement_rails.git"
 gem 'httparty'
 gem "nifty-generators", :group => :development
 
@@ -63,17 +63,10 @@ gem 'whenever'
 # memcached client 
 gem 'dalli'
 
-
-#the title for this originally looked like:
-#group :test, :development do
-#You changed it such that it is 
-#group :development do
-group :development do
+group :test, :development do
     gem 'rspec-rails'
     gem 'factory_girl_rails'
     gem 'faker'
-	#foreman was not originally here
-    gem 'foreman'
     gem 'ruby-debug19'
     gem 'guard'
     gem 'guard-rspec'
@@ -82,12 +75,9 @@ group :development do
     gem 'rb-fsevent', :git => 'git://github.com/ttilley/rb-fsevent.git', :branch => 'pre-compiled-gem-one-off' #better support for Mac OS X filesystem
 end
 
-#this was commented out
-#group :development do
- # gem 'foreman'
-	#general debug framework
- # gem 'ruby-debug19'
-#end
+group :development do
+  gem 'foreman'
+end
 
 group :cucumber do
     gem 'capybara'
@@ -103,17 +93,13 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '=2.12.0'
+gem 'capistrano'
 gem 'capistrano-ext'
 gem 'cap-recipes'
 
 # To use debugger
-#this line was commented out
-gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem "devise"
 
 gem "faye"
-
-#ssl fix
-#gem 'rack-ssl'

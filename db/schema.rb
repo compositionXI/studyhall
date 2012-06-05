@@ -42,14 +42,12 @@ ActiveRecord::Schema.define(:version => 20120506082159) do
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
-  create_table "broadcasts", :force => true do |t|
-    t.string   "user_id"
-    t.string   "message"
-    t.string   "intent"
-    t.string   "args"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.boolean  "current"
+  create_table "broadcasts", :id => false, :force => true do |t|
+    t.string  "user_id"
+    t.string  "message"
+    t.string  "intent"
+    t.string  "args"
+    t.boolean "current"
   end
 
   add_index "broadcasts", ["user_id"], :name => "index_broadcasts_on_user_id"
