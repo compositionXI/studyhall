@@ -18,7 +18,7 @@ class UploadsController < ApplicationController
         caring = "0"
       end
       #dubs check - first should be ok and speeds up check (maybe?), but double here in case of 1337 h4x0rz
-      if params[:ok_doc][is] == "1" && (file.content_type == "application/pdf" || file.content_type == "text/plain" || file.content_type == "application/vnd.oasis.opendocument.text" || file.content_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+      if params[:ok_doc][is] == "1" && (file.content_type == "application/pdf" || file.content_type == "text/plain" || file.content_type == "application/vnd.oasis.opendocument.text" || file.content_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.content_type == "application/msword")
         @note = current_user.notes.new(
           :upload => "true",
           :content => "",
