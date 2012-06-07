@@ -48,13 +48,10 @@ class UsersController < ApplicationController
   def create #@user.deliver_activation_instructions!
     @user = User.new params[:user]
     if @user.save_without_session_maintenance
-      debugger
       if @user.school and @user.school.active # I need to make a school or something active so I can test it.. do this tomorrow
         flash[:notice] = "Instructions to activate your account have been emailed to you. Please check your email." 
       elsif @user.school and not @user.school.active
         flash[:notice] = "Access to your school has not been granted yet. Stay Tuned for when we launch at your school." 
-      elsif !@user.school
-        flash[:error] = "this could help"
       else
         flash[:error] = "You must sign up for Studyhall using your school email address (ie. georgetown.edu)." 
       end 
