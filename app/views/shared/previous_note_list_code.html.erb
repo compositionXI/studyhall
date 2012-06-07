@@ -1,0 +1,21 @@
+<% if tab_id == '1' || tab_id == '4' %>
+<div class="landing_wrapper">
+  <div class="note_item_demo">
+      <a class="name" href="/notes/new">Take Notes</a>
+  </div>
+  <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
+  <p>Click the "Take Notes" button to begin taking note.</p>
+</div>
+<% else %>
+<div class="landing_wrapper">
+  <div class="note_item_demo">
+      <%= link_to "Upload Documents", '', 
+  :onclick => 'javascript:window.location.href = "/uploads"; return false;', class: "name upload_trig" %>
+
+      <!--<a class="name upload_trig" href="/notes">Upload<br />Documents</a>-->
+  </div>
+  <h3><b>Upload</b> your notes, articles/research, exams, problem sets, and more.  <b>Share</b> with your classmates and get the help <b>you need.</b></h3>
+</div>
+<%end%>
+
+<% end %>

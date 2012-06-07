@@ -2,7 +2,7 @@
   <div class="notebook_list_container <%= items_layout %>">
     <% if @unsorted_notes.empty? && @notebooks.empty? %>
           <p>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</p>
-          <p>Click the "New Notebook" button to begin taking note.</p>
+          <p>Click the "New Notebook" button to begin taking notes.</p>
     <% else %>
       <%= form_tag update_multiple_notebooks_path, :id => "save_multiple_notebooks_notes_form" do %>
         <ol class="notebook_list <%= 'edit_notebook' if @edit_all %>">
