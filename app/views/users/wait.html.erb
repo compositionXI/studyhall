@@ -1,0 +1,22 @@
+<div class="row show-grid">
+  <div class="span8 columns offset4">
+    <% if flash[:error] %>
+      <div class="alert alert-message error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+	<% if flash[:notice] %>
+      <div class="alert alert-message error">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <div class="single-form">
+      <div class="header">
+        <h3>Sign Up</h3>
+      </div>
+      <div>
+	Sorry, We're exclusive. We've sent you a welcome letter but we still need to decide if you're up to par
+	  </div>
+    </div>
+  </div>
+</div>

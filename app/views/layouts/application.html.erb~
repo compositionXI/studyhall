@@ -7,7 +7,10 @@
 <!--[if gt IE 9]><!--> <html class="no-js wf-loading" lang="en"> <!--<![endif]-->
 
 <head>
+<<<<<<< HEAD
   <script src="javascripts/chartbeat_head.js"></script>
+=======
+>>>>>>> 9af31c66384d8367d776b1f6c1de74a1fa585262
   <title>Studyhall.com | Study, Share, Connect with Your Classmates.</title>
   <meta name="robots" content="NOODP">
   <meta name="description" content="Study, share and connect with your classmates.  Join now.  Free.  Be Part of the Social Learning Revolution.">
@@ -21,6 +24,8 @@
   <%= javascript_include_tag "http://app02.c45577.blueboxgrid.com:9292/faye.js" %>
   <%= csrf_meta_tags %>
   <%= ga_tag %>
+<<<<<<< HEAD
+=======
   <script src="http://scripts.embed.ly/jquery.embedly.min.js"></script>
   <script type="text/javascript">
     $('document').ready(function(){
@@ -40,6 +45,7 @@ key:'12cfaa8a77a211e191004040d3dc5c07'
   mixpanel.track_links('#add_course_button', 'Course added');
   mixpanel.track_links('#take_notes_button', 'Note taking session started');
   </script><!-- end Mixpanel -->
+>>>>>>> 9af31c66384d8367d776b1f6c1de74a1fa585262
 </head>
 <body class="<%= flash[:imitates] || (controller_name + "-" + action_name) %> fixed-width">
   <div id="wrap">
@@ -70,6 +76,9 @@ key:'12cfaa8a77a211e191004040d3dc5c07'
   <% end -%>
   <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <script type="text/javascript" src="javascripts/chartbeat_body.js"></script>
+<<<<<<< HEAD
+  <script type="text/javascript" src="javascripts/chartbeat_body.js">
+=======
+>>>>>>> 9af31c66384d8367d776b1f6c1de74a1fa585262
 </body>
 </html>

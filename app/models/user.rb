@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, :less_than => 10.megabyte, :message => "Max Size of the image is 10M"
   
   after_create do
-    Recommendation.populate_user([self.id])
+    #Recommendation.populate_user([self.id])
   end
 
   searchable :auto_index => false, :auto_remove => true do

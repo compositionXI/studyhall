@@ -191,21 +191,24 @@ section.course_activity
         margin: 0 0 20px 0
     a
       +box-sizing(border-box)
+      position: relative
       background: url(asset-path('notebook-sprite.png','image')) no-repeat -264px 0 transparent
       color: $white
       display: block
-      height: 156px
+      height: 130px
       font-size: 14px
       padding: 0 10px 0 20px
       text-align: center
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55)
-      width: 132px
+      width: 115px
       &:hover
         text-decoration: underline 
       span
         display: table-cell
-        height: 156px
-        vertical-align: middle
+        height: 130px
+        /*vertical-align: middle*/
+        position: absolute
+        top: 0px
     .blue a
       background-position: -132px 0
       color: $darkBookText
@@ -278,7 +281,7 @@ section.course_activity
       background: $bgColor
       border: 2px dashed $notebookBorder
       +border-radius(2px)
-      height: 145px 
+      height: 145px
       margin-top: 3px
       width: 118px
       a

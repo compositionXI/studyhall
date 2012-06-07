@@ -1,6 +1,7 @@
 <header class="home-header row">
   <div class="user_greeting span4">
     <%= link_to (image_tag @current_user.avatar_url("medium")), @current_user %>
+	<%#= image_tag ('generic_avatar_medium.png')%> <!--this is solely for display when the user.image isn't working-->
     <h3>Hi, 
     <%= link_to @current_user.first_name, @current_user %>!
     </h3>
@@ -13,21 +14,36 @@
     </div>
   <% else %>
   <% end %>
+	<div class="links-holder">
+	  <div class="row">
+	  <%= link_to content_tag(:span, 'Start a Studyhall'), new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary", :remote => true %>
+	  <%= link_to content_tag(:span, "Upload A Document"), notes_path(:trigger_upload => 1), :class => "btn primary", :id => "upload_note_button" %> 
+	  <%= link_to content_tag(:span, "Take Notes"), new_note_path, :class => "btn primary" %>
+	  </div>
+	</div>
 </header>
 <aside class="sidebar">
-  <div class="standard_actions tourable" data-popover-id="standard_actions_tour">
-      <%= link_to "Start a Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary large popover_button", :remote => true %>
-      <%= link_to "Take Notes", new_note_path, :class => "btn large" %>
-      <%= link_to "Upload", notes_path(:trigger_upload => 1), :class => "btn large popover_button show_button", :id => "upload_note_button" %>
-  </div>
-  <%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
+	<section class="tourable courses <%#= items_layout %>" data-popover-id="courses_tour">
+		<div class="heading">
+		    <h5 class="left">Your Courses</h5>
+		</div>
+	    <ol class="course_list">
+	      <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
+	      <li class="add">
+	        <%= link_to "#", :id => "add_course_button" do %>
+	          <span>Add a Course</span>
+	        <% end %>
+	      </li>
+	    </ol>
+	</section>
 </aside>
-<div class="loading_bar" style="width: 100%; text-align:center; margin: 100px 0 0 0;">
-  <div style="display:inline-block;">Loading</div>
-  <br/>
-  <div style="display:inline-block;"><%= image_tag "ajax-loader.gif" %></div>
-</div>
-<div class="main_content" >
+<div class="main_content">
+	<%= render :partial => "shared/buddies_preview", :locals => {:user => @current_user} %>
+	<div class="loading_bar" style="width: 100%; text-align:center; margin: 100px 0 0 0;">
+	  <div style="display:inline-block;">Loading</div>
+	  <br/>
+	  <div style="display:inline-block;"><%= image_tag "ajax-loader.gif" %></div>
+	</div>
   <div id="home_tabs" style="display:none;">
     <ul class="tabs">
       <li class="active tourable" data-popover-id="activity_tour" id="user_activity"><%= link_to "Your Activity <small>(#{current_user.activity.count})</small>".html_safe, '#activities_tab' %></li>
@@ -37,8 +53,11 @@
       <% if current_user.activity.any? %>
         <% current_user.activity.each do |message| %>
           <li class="activity_message">
-            <%= link_to image_tag(message.activist.photo_url(:medium)), message.activist, title: message.activist.title_name if message.activist %>
-            <%= message.body.html_safe %>
+            <div id="message-section">
+				<%= link_to image_tag(message.activist.photo_url(:medium)), message.activist, title: message.activist.title_name if message.activist %>
+            	<%= message.body.html_safe %>
+			</div>
+			<div class="time"><%= time_ago_in_words message.created_at %> ago</div>
           </li>
         <% end %>
       <% else %>
@@ -59,19 +78,6 @@
       <% end %>
     </ul>
   </div>
-  <section class="tourable courses <%= items_layout %>" data-popover-id="courses_tour">
-    <header>
-      <h3>Courses</h3>
-    </header>
-    <ol class="course_list">
-      <%= render partial: 'users/course_list', collection: @current_user.offerings, as: :offering, :locals => {:wrapper_class => "wrapper_large"} %>
-      <li class="add">
-        <%= link_to "#", :id => "add_course_button" do %>
-          <span>Add a course</span>
-        <% end %>
-      </li>
-    </ol>
-  </section>
 </div>
 <%= render :partial => 'tour' if @tour %>
 
@@ -114,7 +120,7 @@
     var placement = "right";
     var length = $('.course_list').children().length;
     var bottom_size = length % 4;
-    if(bottom_size == 1){ placement = "right"; }else{ placement = "left"; }
+    if(bottom_size == 1){ placement = "right"; }else{ placement = "right"; }
     
     var course_select_content = $("#course_select_container").clone();
     var popover_attr = {

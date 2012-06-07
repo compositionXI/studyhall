@@ -45,16 +45,18 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
   end
   
-  def create
+  def create #@user.deliver_activation_instructions!
     @user = User.new params[:user]
     if @user.save_without_session_maintenance
-      if @user.school and @user.school.active
-        @user.deliver_activation_instructions!
-        flash[:notice] = "Instructions to activate your account have been emailed to you. \nPlease check your email." 
+      debugger
+      if @user.school and @user.school.active # I need to make a school or something active so I can test it.. do this tomorrow
+        flash[:notice] = "Instructions to activate your account have been emailed to you. Please check your email." 
       elsif @user.school and not @user.school.active
         flash[:notice] = "Access to your school has not been granted yet. Stay Tuned for when we launch at your school." 
+      elsif !@user.school
+        flash[:error] = "this could help"
       else
-        flash[:error] = "You must sign up for Studyhall using your school email address (ie. harvard.edu)." 
+        flash[:error] = "You must sign up for Studyhall using your school email address (ie. georgetown.edu)." 
       end 
     else
       @user_with_same_email = User.find_by_email(@user.email) if @user.errors[:email].include?('has already been taken')
@@ -73,10 +75,17 @@ class UsersController < ApplicationController
       end
     end
     
-    respond_to do |format|
-      format.html { @user.new_record? ? render(action: :new) : redirect_to(login_url) }
+    
+    respond_to do |format| #this is what format the client wants the page in
+      format.html{ @user.new_record? ? render(:action => 'new') : render(:action => 'wait') } #redirect_to(login_url) }
+       #if user.new_record? = true, redirect to the login_url, else render a new view - why action: :new?
+       # new_record? return true if it's a new record, false if it isn't
       format.js
     end
+  end
+  
+  def wait
+    
   end
   
   def edit

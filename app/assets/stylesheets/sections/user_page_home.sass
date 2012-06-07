@@ -7,22 +7,48 @@
 
 .home-header
   @include sidebar-separator 
-  margin: 0 0 18px
-  padding-bottom: 28px
+  margin: 0 0 2px
+  padding-bottom: 18px
   position: relative
   vertical-align: middle
   .alert
     float: left
     width: 390px
-    margin-bottom: 0px
-    margin-top: 7px
+    margin-bottom: 5px
+    margin-top: 5px
+    margin-left: 175px
     a
       text-shadow: none 
       &.close
         text-shadow: 0 1px 0 rgba(0,0,0,1)
   .standard_actions
     margin-top: 7px
-
+  .links-holder
+    .row
+      width: 704px
+      overflow: hidden
+      margin: 0 0 9px
+      float: right
+      .btn
+        text-shadow: none !important
+        height: 40px
+        float: right
+        height: 40px
+        text-align: center
+        padding: 0 0 0 0
+        text-transform: uppercase
+        color: #0f1011
+        margin: 0 0 0 22px
+        font: 13px/17px MuseoSansbold, Arial, sans-serif
+        width: 210px
+        font-weight: bold
+        &:last-child
+          margin: 0
+      span
+        float: left
+        padding: 11px 7px 0 13px
+        height: 26px
+        min-width: 197px
 .user_greeting.span4
   float: left
   margin-left: 0
@@ -36,24 +62,97 @@
     font-size: 30px
 .home-index
   .sidebar
+    .courses
+      margin: 0 0 0 -5px
+      float: left
+      width: 235px
+      .small_font
+        font-size: 16px
+      h3
+        margin-bottom: 10px
+      li.notebook_list_item
+        margin: 0
+        a
+          span
+            font-size: 16px
+      li.add
+        position: relative
+        margin-top: 4px 
+        width: 105px
+        height: 123px
+        margin-left: 7px
+        /*&:nth-child(2n)
+          margin-left: 6px*/
+        span
+          position: absolute
+          text-align: center
+          vertical-align: middle
+          height: 125px
+          width: 105px
+          line-height: 125px
+        a
+          font: 18px Chennai Slab Medium
+      .popover
+        .popover-body
+          padding: 0 20px 15px 20px
+      .heading
+        width: 235px
+        height: 38px
+        text-align: center
+      h5
+        margin: 0 !important
+        text-align: center
+        width: 265px
+        height: 38px
+        line-height: 38px
     .standard_actions
       a.btn
         margin-bottom: 10px
         width: 220px
         text-align: center
-    .buddies
-      p.fb_gmail
-        margin-bottom: 5px
   .main_content
+    width: 672px
     float: right
-    width: 700px
+    ul
+      list-style: none
+      border-bottom: 1px solid $hr
+      margin: 0 0 12px 0
+      padding: 0 0 12px 0
+    .buddies
+      width: 650px
+      .small_font
+        font-size: 16px
+      .yr-buddies
+        width: 300px
+        height: 100px
+        float: left
+        .heading
+      .rec-buddies
+        width: 300px
+        height: 100px
+        float: left
+      ul.buddies-list
+        height: 80px
+      li
+        float: left
+        margin: 0 6px 0 0
+        &:nth-child(4n)
+          margin-right: 0
+      .heading
+        width: 300px
+        height: 40px
+        h5
+          line-height: 38px
     #home_tabs
+      float: left
+      width: 600px
+      margin: 40px 0 0 0
       #activities_tab
         display: none
         &.active
           display: block
         &.activity-list
-          height: 250px
+          height: 350px
           margin: 0 0 18px 0px
           list-style: none
           li.activity_message
@@ -65,31 +164,39 @@
               background: $zebraStriping
             &:last-child
               border: none
+            #message-section
+              width: 480px
+              height: 100%
+              float: left
+            #date-section
+              width: 80px
+              height: 100%
+              float: right
+              margin: 8px
             a
               float: left
               margin-right: 10px
             p
-              a
+              a/*:first-child/ this is what I fucked with*/
                 float: none
       #news_tab
-        width: 700px
-        height: 250px
+        width: 600px
+        height: 350px
         display: none
         &.active
           display: block
-          height: 250px
+          height: 350px
         &.news-list
           list-style: none
           margin: 0 0 18px 0
           li
+            height: 35px
             border-bottom: 1px solid $zebraBorder
             padding: 6px
             &:nth-child(even)
               background: $zebraStriping
             &:last-child
               border: none
-    .courses
-      float: none
     .news
       float: right
       margin-left: 10px
@@ -106,23 +213,6 @@
             background: $zebraStriping
           &:last-child
             border: none
-    .courses
-      h3
-        margin-bottom: 10px
-  .notebook_list_item
-    a
-      span
-        font-size: 16px
-  li.add
-    margin-left: 26px
-    width: 120px
-    &:nth-child(4n+1)
-      margin-left: 6px
-    a
-      font: 18px Chennai Slab Medium
-  .popover
-    .popover-body
-      padding: 0 20px 15px 20px
 
 .users-new
   .custom_url_input

@@ -6,7 +6,6 @@
 <!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]--> 
 <!--[if gt IE 9]><!--> <html class="no-js wf-loading" lang="en"> <!--<![endif]-->
 <head>
-  <script type="text/javascript" src="javascripts/chartbeat_head.js"></script>
   <title>Studyhall</title>
   <%= favicon_link_tag %>
   <%= favicon_link_tag 'apple-icon.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
@@ -27,6 +26,5 @@
   
   <script type="text/javascript" src="http://use.typekit.com/vmy7sbk.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <script type="text/javascript" src="javascripts/chartbeat_body.js"></script>
 </body>
 </html>

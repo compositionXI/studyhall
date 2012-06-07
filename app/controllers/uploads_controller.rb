@@ -7,7 +7,6 @@ class UploadsController < ApplicationController
   end
 
   def create
-    Rails.logger.info(params[])
     notes_array = []
     files_iter = 0
     params[:files].each do |file|
