@@ -221,7 +221,7 @@ GEM
       jquery-rails
       will_paginate
     hashie (1.2.0)
-    highline (1.6.11)
+    highline (1.6.12)
     hike (1.2.1)
     hpricot (0.8.6)
     http_parser.rb (0.5.3)
