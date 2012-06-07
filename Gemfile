@@ -6,6 +6,7 @@ gem 'mysql2'
 gem 'thin'
 gem 'activesupport'
 gem 'amazon-ecs'
+gem 'rails_autolink'
 
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'

@@ -1,8 +1,3 @@
-<% types = CSV.read("db/doc_types.csv").unshift ["All", 0] %>
-<% types.each do |type| 
-  tab_id = "#{type[1]}" 
- end %>
-
 <% if note_items.any? %>
   <div class="scroll_pane">
     <ul class="note_items" data-layout="grid">
@@ -18,6 +13,7 @@
   </div>
 <% else %>
 
+<% if tab_id == '0' %>
 <div class="landing_wrapper">
   <div class="note_item_demo">
       <a class="name" href="/notes/new">Take Notes</a>
@@ -25,20 +21,14 @@
   <h2>Taking notes has never been easier! With StudyHall.com you can create notebooks, take notes, and share them with your friends!</h2>
   <p>Click the "Take Notes" button to begin taking note.</p>
 </div>
-<<<<<<< HEAD
-=======
 <% else %>
 <div class="landing_wrapper">
   <div class="note_item_demo">
-  <%= link_to "Upload     Documents", '', 
-  :onclick => 'javascript:window.location.href = "/uploads"; 	return false;', class: "name upload_trig" %>
-
-      <!--<a class="name upload_trig" href="/notes">Upload<br />Documents</a>-->
+      <a class="name upload_trig" href="/notes">Upload<br />Documents</a>
   </div>
   <h3><b>Upload</b> your notes, articles/research, exams, problem sets, and more.  <b>Share</b> with your classmates and get the help <b>you need.</b></h3>
 </div>
 <%end%>
->>>>>>> de6341a0125136b21f680ab468cd05443922bf08
 
 <% end %>
 
