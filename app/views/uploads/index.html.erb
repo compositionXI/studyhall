@@ -2,13 +2,13 @@
     <%= form_tag "/uploads", :id => "docs_form", :remote => true do %>
         <div class="row fileupload-buttonbar">
             <span class="file_input" style="position: relative;">
-                <input type="file" name="files[]" multiple class="real_filez" style="opacity: 0; background: none;">
+                <input id="loadFiles" type="file" name="files[]" multiple class="real_filez" style="opacity: 0; background: none;">
                 <div class="btn fileinput-button" style="position: absolute; left: 20px;">
                   <span>Add files</span>
                 </div>
             </span>
             <div class="right">
-              <input type="submit" class="btn btn-primary get_uploading" value="Start upload"/>
+              <input id="loadSubmit" type="submit" class="btn btn-primary get_uploading" value="Start upload"/>
             </div>
         </div>
         <div class="drop_zone" style="width: 900px; padding: 20px 20px 20px 20px; text-align: center">
@@ -67,6 +67,7 @@ $(document).ready(function(){
     $("#output_list").html('<br><br><table style="width: 900px;"><tr><th>Document</th><th>Size</th><th>Document Type</th><th>Shareable?</th><th>Acceptable File</th></tr>' + output.join('') + '</table>');
     $(".chzn-select").chosen();
     drop_zone.hide();
+    alert(files);
   }
   
   function ignoreDrag(e) {
@@ -93,6 +94,8 @@ $(document).ready(function(){
     $("#output_list").html('<br><table style="width: 900px;"><tr><th>Document</th><th>Size</th><th>Document Type</th><th>Shareable?</th><th>Acceptable File</th></tr>' + output.join('') + '</table>');
     $(".chzn-select").chosen();
     drop_zone.hide();
+    $("#loadFiles").attr("files", files);
+    alert(document.getElementById("loadFiles").files);
   }
 
   $(".real_filez").change(handleFileSelect);
@@ -114,6 +117,18 @@ $(document).ready(function(){
   }
   
   $("#docs_form").bind("ajax:beforeSend", loadBar);
+  
+  /*
+  $("#loadSubmit").bind("click", function(e) {
+    e.preventDefault();
+    var allFiles = files;
+    alert(files.serialize());
+    $.post("/uploads", { files: "John", time: "test" },
+       function(data) {
+         alert("Data Loaded: " + data);
+       });
+  });
+  */
     
 });
 </script>

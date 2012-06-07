@@ -9,7 +9,6 @@ solr/data
 vendor/bundle
 config/s3.yml
 config/database.yml
-config/config.yml
 public/system
 public/system/*
 .DS_Store
