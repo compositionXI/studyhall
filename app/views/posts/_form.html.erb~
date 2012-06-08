@@ -3,7 +3,7 @@
     <div class="clearfix">
       <%= f.label :mess, "Comment" %>
       <%= hidden_field_tag 'class_id', classid %>
-      <%= hidden_field_tag 'course', course %>
+      <%= hidden_field_tag 'group_post', group_post %>
       <div class="input"><%= text_area_tag :message, nil, :rows => 5, :style => "overflow-y: auto; width: 600px;" %></div>
     </div>
   </div>

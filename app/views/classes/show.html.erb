@@ -21,7 +21,7 @@
     <tr><td>
       <ul class="group_posts_bar">
         <h4>Course Activity</h4>
-          <%= render :partial => 'posts/form', :locals => {:post => Post.new, :classid => @class.id, :course => @course}%>
+          <%= render :partial => 'posts/form', :locals => {:post => Post.new, :classid => @class.id, :group_post => false}%>
       </ul>
     </td></tr>
     <tr><td>

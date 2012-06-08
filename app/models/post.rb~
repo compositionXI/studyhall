@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   
   belongs_to :offering
+  belongs_to :group
   belongs_to :user
   #belongs_to :notebook
   #belongs_to :note
