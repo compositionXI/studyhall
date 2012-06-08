@@ -49,6 +49,11 @@ Studyhall::Application.routes.draw do
       end
     end
   end
+  resources :posts do
+    member do
+      get "filter"
+    end
+  end
   resources :classes do
     resources :posts do
       member do
