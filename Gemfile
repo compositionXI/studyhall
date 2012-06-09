@@ -94,9 +94,9 @@ end
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
-gem 'capistrano-ext'
-gem 'cap-recipes'
+gem 'capistrano', '= 2.11.2'
+gem 'capistrano-ext', '= 1.2.1'
+gem 'cap-recipes', '= 0.3.39'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
