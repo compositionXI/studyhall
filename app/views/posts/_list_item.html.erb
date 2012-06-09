@@ -28,7 +28,7 @@
           </div>
         <% end %>
         <div class="comment_form", id="comment_for_<%= post.id %>">
-          <%= render "comments/form", :comment => post.comments.new, :class_id => post.offering_id %>
+          <%= render "comments/form", :comment => post.comments.new, :class_id => post.offering_id, :group_id => post.group_id, :post_type => post_type %>
         </div>
       </li>
     <% end %>

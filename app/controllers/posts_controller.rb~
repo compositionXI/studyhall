@@ -32,7 +32,6 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
-    @group_post_bool = params[:group_post]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @group_post }
@@ -40,12 +39,13 @@ class PostsController < ApplicationController
   end
   
   def create
+    @post_type = params[:post_type]
     @class = Offering.find params[:class_id]
     @post = Post.new
     @post.user_id = current_user.id
     @post.text = params[:message]
     @post.reported = 0
-    if params[:group_post]
+    if @post_type == 'group'
       @post.post_type = 'group'
       @post.group_id = params[:class_id]
     else
@@ -53,11 +53,12 @@ class PostsController < ApplicationController
       @post.offering_id = params[:class_id]
     end
     if @post.save
-      if params[:group_post]
+      if @post_type == 'group'
         redirect_to "/groups/#{params[:class_id]}"
       else
         redirect_to "/classes/#{@class.to_param}" 
-      end #push_broadcast :class_post, :class_id => @post.offering_id, :name => @post.offering.course.title
+      end 
+      #push_broadcast :class_post, :class_id => @post.offering_id, :name => @post.offering.course.title
 #      if request.xhr?
 #        render_posts
 #      end
@@ -85,11 +86,11 @@ class PostsController < ApplicationController
   private
   
   def render_posts
-    if params[:group_post]
-      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
-    else
+    if @post_type == 'group'
       @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'group').recent.top_level
+    else
+      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
     end
-    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts}
+    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => params[:post_type]}
   end
 end

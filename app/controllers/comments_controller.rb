@@ -3,14 +3,14 @@ class CommentsController < ApplicationController
   before_filter :require_user
  
   def create
+    @post_type = params[:post_type]
     @comment = Comment.new(params[:comment])
-    @comment.offering_id = params[:class_id]
-    @comment.user = current_user
     if params[:group_post]
-      @post.post_type = 'group'
+      @comment.group_id = params[:group_id]
     else
-      @post.post_type = 'class'
+      @comment.offering_id = params[:class_id]
     end
+    @comment.user = current_user
     if @comment.save
       if request.xhr?
         render_posts
@@ -36,6 +36,6 @@ class CommentsController < ApplicationController
     else
       @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'group').recent.top_level
     end
-    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts}
+    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => params[:post_type]}
   end
 end

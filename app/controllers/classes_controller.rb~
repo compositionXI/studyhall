@@ -7,6 +7,7 @@ class ClassesController < ApplicationController
   end
   
   def show
+    @group_post = false
     if request.xhr?
       dept_name = params[:dept_name]
       number = params[:number]

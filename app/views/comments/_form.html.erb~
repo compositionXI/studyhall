@@ -1,4 +1,11 @@
 <%= form_for comment, :url => comments_path(class_id), :remote => true, :html => {:class => "form-stacked", :"data-type" => "html"} do |f| %>
+  <%if post_type == 'class' %>
+    <%= hidden_field_tag 'post_type', 'class' %>
+    <%= hidden_field_tag 'class_id', class_id %>
+  <%else%>
+    <%= hidden_field_tag 'post_type', 'group' %>
+    <%= hidden_field_tag 'group_id', group_id %>
+  <%end%>
   <%= f.hidden_field :parent_id %>
   <div class="clearfix">
     <%= f.label :text, "Your Comments" %>
