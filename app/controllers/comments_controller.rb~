@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
  
   def create
     @post_type = params[:post_type]
-    debugger
     @comment = Comment.new(params[:comment])
     if @post_type == 'group'
       @comment.group_id = params[:group_id]
@@ -32,7 +31,6 @@ class CommentsController < ApplicationController
   private
   
   def render_posts
-    debugger
     if @post_type == 'group'
       @posts = Group.find(params[:group_id]).posts.where("post_type <= ?", 'group').recent.top_level
     else
