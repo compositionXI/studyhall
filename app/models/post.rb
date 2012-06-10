@@ -14,7 +14,6 @@ class Post < ActiveRecord::Base
   scope :for_offering, lambda {|offering| where :offering_id => offering.id}
   scope :by_user, lambda { |user| where :user_id => user.id}
   
-  attr_accessible :post_type
   
   def comment?
     self.class.name == "Comment"

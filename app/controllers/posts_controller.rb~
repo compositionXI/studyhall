@@ -87,7 +87,7 @@ class PostsController < ApplicationController
   
   def render_posts
     if @post_type == 'group'
-      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'group').recent.top_level
+      @posts = Group.find(params[:class_id]).posts.where("post_type <= ?", 'group').recent.top_level
     else
       @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
     end

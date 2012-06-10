@@ -18,7 +18,6 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @group_post = true
     @group = Group.find(params[:id])
     @member_requests = @group.unanswered_member_requests
     @posts = @group.posts.where("post_type <= ?", 'group').recent.top_level

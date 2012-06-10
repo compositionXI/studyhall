@@ -4,8 +4,9 @@ class CommentsController < ApplicationController
  
   def create
     @post_type = params[:post_type]
+    debugger
     @comment = Comment.new(params[:comment])
-    if params[:group_post]
+    if @post_type == 'group'
       @comment.group_id = params[:group_id]
     else
       @comment.offering_id = params[:class_id]
@@ -31,11 +32,12 @@ class CommentsController < ApplicationController
   private
   
   def render_posts
-    if params[:group_post]
-      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
+    debugger
+    if @post_type == 'group'
+      @posts = Group.find(params[:group_id]).posts.where("post_type <= ?", 'group').recent.top_level
     else
-      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'group').recent.top_level
+      @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
     end
-    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => params[:post_type]}
+    render :partial => '/posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => @post_type}
   end
 end

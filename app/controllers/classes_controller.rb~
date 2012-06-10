@@ -1,7 +1,6 @@
 class ClassesController < ApplicationController
 
   before_filter :set_action_bar
-  
   def index
     @classes = @current_user.offerings
   end

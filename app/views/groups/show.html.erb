@@ -21,12 +21,12 @@
             <tr><td>
               <ul class="group_posts_bar">
                 <h4>Group Activity</h4>
-                <%= render :partial => 'posts/form', :locals => {:post => Post.new, :classid => @group.id, :post_type => 'class'}%>
+                <%= render :partial => 'posts/form', :locals => {:post => Post.new, :classid => @group.id, :post_type => 'group'}%>
               </ul>
             </td></tr>
             <tr><td>
               <div class="course_activity_list">
-              <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts , :post_type => 'class'} %>
+              <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts , :post_type => 'group'} %>
               </div>
             </td></tr>
           </table>

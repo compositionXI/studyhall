@@ -18,7 +18,6 @@
               <%= link_to "Comment", "#", :class => "comment_form_button", :name => "comment_for_#{post.id}" %>
             </div>
           </div>
-          <%#= render partial: "posts/utilities", locals: {post: post} %>
         </div>
         <% if post.has_comments? %>
           <div class="comment_list">
