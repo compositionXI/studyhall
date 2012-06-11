@@ -53,11 +53,9 @@ class PostsController < ApplicationController
       @post.offering_id = params[:class_id]
     end
     if @post.save
-      if @post_type == 'group'
-        redirect_to "/groups/#{params[:class_id]}"
-      else
-        redirect_to "/classes/#{@class.to_param}" 
-      end 
+      if request.xhr?
+        render_posts
+      end
       #push_broadcast :class_post, :class_id => @post.offering_id, :name => @post.offering.course.title
 #      if request.xhr?
 #        render_posts
@@ -68,7 +66,9 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes params[:post]
-      Notifier.report_post(current_user, @post).deliver if params[:reported]
+      Not<script type="text/javascript">
+    alert('hi');
+</script>ifier.report_post(current_user, @post).deliver if params[:reported]
       if request.xhr?
         render_posts
       end
@@ -91,6 +91,6 @@ class PostsController < ApplicationController
     else
       @posts = Offering.find(params[:class_id]).posts.where("post_type <= ?", 'class').recent.top_level
     end
-    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => params[:post_type]}
+    render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :class_id => params[:class_id], :post_type => params[:post_type]}
   end
 end

@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    $('#posttext').val('')
+</script>
 <ul class="unstyled">
   <% posts.each do |post| %>
     <% unless current_user.blocked?(post.user)%>
