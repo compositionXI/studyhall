@@ -66,9 +66,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes params[:post]
-      Not<script type="text/javascript">
-    alert('hi');
-</script>ifier.report_post(current_user, @post).deliver if params[:reported]
+      Notifier.report_post(current_user, @post).deliver if params[:reported]
       if request.xhr?
         render_posts
       end
