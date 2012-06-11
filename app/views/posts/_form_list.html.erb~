@@ -1,0 +1,15 @@
+<section class="course_activity">
+  <table class="group_post_table">
+    <tr><td>
+      <ul class="group_posts_bar">
+        <h4>Course Activity</h4>
+          <%= render :partial => 'posts/form', :locals => {:post => Post.new, :classid => @class.id, :post_type => 'class'}%>
+      </ul>
+    </td></tr>
+    <tr><td>
+      <div class="course_activity_list">
+        <%= render :partial => 'posts/list_item.html.erb', :locals => {:posts => @posts, :post_type => 'class'} %>
+      </div>
+    </td></tr>
+  </table>
+</section>
