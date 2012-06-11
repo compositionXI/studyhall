@@ -376,7 +376,6 @@ ActiveRecord::Schema.define(:version => 20120608185527) do
     t.integer  "parent_id"
     t.boolean  "reported"
     t.string   "post_type"
-    t.integer  "note_id"
     t.integer  "group_id"
   end
 

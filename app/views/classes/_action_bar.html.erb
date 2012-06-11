@@ -6,7 +6,11 @@
     </div>
     <h3><%= flash[:action_bar_message] %></h3>
     <div class="buttons right">
-      <%= link_to "Filter", filter_class_post_path(@class.id, :link_id => "filter_posts_button"), remote: true, :class => "btn", :title => "Filter", :id => "filter_posts_button" %>
+      <!--Xinyi will review this code -->
+      <% unless (current_user.added_course?(@course)) %>
+      <%= link_to "Add this class", user_add_class_path(:user_id => current_user.id, 
+       :offering_id => @class.id), method: :create, confirm: "Are you sure?", style: "font-size: 11px;", :class => " btn" %>
+    <% end %>
     </div>
   </div>
 </div>

@@ -60,7 +60,8 @@ class NotebooksController < ApplicationController
 
     respond_to do |format|
       if @notebook.save
-        format.html { redirect_to notebook_notes_path(@notebook), notice: 'Notebook was successfully created.' }
+	#old code: redirect_to notebook_notes_path(@notebook) 
+        format.html { redirect_to notebooks_path, notice: 'Notebook was successfully created.' }
         format.json { render json: @notebook, status: :created, location: @notebook }
       else
         format.html { render action: "new" }

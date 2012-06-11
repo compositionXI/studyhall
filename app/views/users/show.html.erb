@@ -23,7 +23,8 @@
     <div class="span11 column profile_main_content">
         <span class="role" style="display:none;">Student</span>
         <div id="profile_personal_info" class="left">
-          <div class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
+          <!-- Here are some more features for Xinyi to review -->
+          <div id="name_section" class="editable" data-placement="below" data-title="Your Profile <small>What's your name?</small>" data-form="name_form" data-bar-title="Welcome to StudyHall!">
             <%= render partial: "name", locals: {user: @user} %>
           </div>
           <div id="affiliations_section" class="editable" data-placement="below" data-title="Your Affiliations <small>Sports, clubs, frats?</small>" data-form="affiliations_form" data-bar-title="Add affiliations - Sports, clubs, gender, fraternity or sorority, marjor & minor">
@@ -73,13 +74,22 @@
               <% end %>
             </ul>
             <ul id="notes_tab" class="notes tab_contents scrollPane" style="display:none">
+	      <% if current_user.follows?(@user) %>
               <% @user.notes.viewable_by(current_user).each do |note| %>
                 <li data-rel="<%= note_url(note) %>" class="linked_item note">
                   <span><%= truncate note.name, length: 55 %></span>
                 </li>
-              <% end %>
+                <% end %>
+	      <% else %>
+                <% @user.notes.viewable_by(current_user).each do |note| %>
+                <li class="note">
+		  <span><%= truncate note.name, length: 55 %></span>
+                </li>
+                <% end %>
+              <% end %>              
             </ul>
             <ul id="studyhalls_tab" class="studyhalls tab_contents scrollPane" style="display:none">
+              <% if current_user.follows?(@user) %>
               <% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
                 <li data-rel="<%= url_for(study_session) %>" class="linked_item study_session">
                   <div class="attendees">
@@ -94,6 +104,23 @@
                     <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
                   <% end %>
                 </li>
+              <% end %>
+              <% else %>
+		<% @user.study_sessions.viewable_by(current_user).each do |study_session| %>
+                <li class="study_session">
+                  <div class="attendees">
+                    <% study_session.users.first(3).each do |user| %>
+                      <%= image_tag(user.avatar_url(:thumb)) %>
+                    <% end %>
+                  </div>
+                  <% if study_session.name.blank? %>
+                    <%= study_session.created_at.strftime("%m/%d/%Y") %>
+                  <% else %>
+                      <%= truncate(study_session.name, length: 28) %>
+                      <span class="date"><%= study_session.created_at.strftime("%m/%d/%Y") %></span>
+                  <% end %>
+                </li>
+              <% end %>
               <% end %>
             </ul>
           </div>

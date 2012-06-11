@@ -167,6 +167,31 @@ class UsersController < ApplicationController
     redirect_to :controller => "home", :action => "index"
   end
 
+  def add_class
+    @offering = Offering.find params[:offering_id]
+    #appropriate_class = @offering.course
+  #  current_user.courses.create(:id => appropriate_class.id, :number => appropriate_class.number, :title => appropriate_class.title, :school_id => appropriate_class.school_id, :department => appropriate_class.department, :created_at => appropriate_class.created_at, :updated_at => appropriate_class.created_at)
+   
+    @offering.enrollments.create(:user_id => current_user.id)
+    #@current_user.enrollments.new(params[offering]
+    #enrollment = @current_user.enrollments.find_by_offering_id offering.id
+    #@offering.posts.create(:user_id => current_user.id, :text => "#{@current_user.name} added this class.")
+    #@current_user.add_course(offering)
+    #@enrollment = @current_user.offerings.create(:id => @offering.id, 
+    #              :term => @offering.term, :school_id => @offering.school_id, :instructor_id => 
+    #		  @offering.instructor_id, :created_at => @offering.created_at, 
+    #              :updated_at => @offering.updated_at, :slug => @offering.slug)
+      #if @enrollment.save
+    redirect_to "/classes/#{@offering.slug}"
+      #end
+    #@course_id = offering.id
+    #@calendar = Calendar.where(:course_id => offering.id.to_s)
+    #@calendar.each do |cal|
+     # cal.update_attributes(:days => 'added')
+    #end
+    #redirect_to "/classes/#{@offering.slug}"
+  end
+
   def block
     store_location
     blocked_user = User.find params[:blocked_user_id]
