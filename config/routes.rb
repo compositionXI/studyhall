@@ -5,7 +5,7 @@ Studyhall::Application.routes.draw do
       get 'make_post'
     end
   end
-
+  resources :etherpads
   resources :join_requests
 
   get "member_requests/place"

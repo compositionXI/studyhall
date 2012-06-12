@@ -5,7 +5,7 @@ Studyhall::Application.routes.draw do
       get 'make_post'
     end
   end
-
+  resources :etherpads
   resources :join_requests
 
   get "member_requests/place"
@@ -89,6 +89,7 @@ Studyhall::Application.routes.draw do
     get 'extracurriculars'
     get "buddies"
     delete "drop_class/:offering_id", :action => "drop_class", :as => "drop_class"
+    post "add_class/:offering_id", :action => "add_class", :as => "add_class"
     get "block/:blocked_user_id", :action => "block", :as => "block"
     get "account"
     member do

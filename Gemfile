@@ -7,7 +7,7 @@ gem 'thin'
 gem 'activesupport'
 gem 'amazon-ecs'
 gem 'rails_autolink'
-
+gem 'etherpad-lite'
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
 #gem 'omniauth', '~> 1.0' # for facebook

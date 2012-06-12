@@ -1,0 +1,120 @@
+<div class="notebook_list_container <%= items_layout %>">
+  <% if @study_sessions.empty? %>
+    <% if @filtered_results %>
+      <center>
+        <h3 class="title">No Results Found!</h3>
+        <p>Sorry, we can't find any StudyHalls meeting that criteria.</p>
+      </center>
+    <% else %>
+      <div class="landing_wrapper study_session_demo_wrapper">
+        <div class="study_session_video">
+          <%= link_to new_study_session_path(:link_id => "new_study_session_button1"), :remote => true do %>
+            <video id="browser_video" width="398" height="314" poster="/assets/landing/browser-main.jpg" controls="controls" preload="true">
+              <source type="video/mp4" src="/video/landing.mp4" />
+              <source type="video/webm" src="/video/landing.webm" />
+              <source type="video/ogg" src="/video/landing.theora.ogv" />
+              <object id="studyhall_video_flash" width="398" height="314" type="application/x-shockwave-flash" data="/assets/mediaelement_rails/flashmediaelement.swf">
+                <param name="movie" value="/assets/mediaelement_rails/flashmediaelement.swf" />
+                <param name="flashvars" value="controls=false&poster=/assets/landing/browser-main.jpg&file=/video/landing.mp4" />
+                <img src="/assets/landing/browser-main.jpg" width="398" height="314" title="Still image from video - displayed because your browser does not support HTML5 video or Adobe Flash" />
+              </object>
+            </video>
+          <% end %>
+        </div>
+        <div>
+          <h1>Start A Studyhall now!</h1>
+          <h2>With study halls you can collaborate with other students, video chat, and edit documents together!</h2>
+          <p>Click "Start A Studyhall" button to begin taking note.</p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <ol class="notebook_list">
+      <%= render @study_sessions %>
+    </ol>
+  <% end %>
+</div>
+<% @study_sessions.each do |study_session| %>
+  <div id="study_session_<%= study_session.id %>_modal" data-rel="study_session_<%= study_session.id %>" class="study_session_modal modal hide fade" style="display:none">
+    <div class="modal-header">
+      <h2>Edit your StudyHall</h2>
+    </div>
+    <div class="modal-body">
+      <%= render :partial => "form", :locals => {:study_session => study_session} %>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var toggleActionButtons = function(){
+      if($(".study_session.selected").length > 0){
+        $("#share_button, #delete_button").removeClass("disabled");
+      }else{
+        $("#share_button, #delete_button").addClass("disabled");
+      }
+    }
+    $("body").delegate(".container","click",function(){
+      toggleActionButtons();
+    });
+
+    $("body.study_sessions-index").delegate(".study_session","click",function(e){
+      if($(this).hasClass("edit"))
+        e.preventDefault();
+      else
+        window.location = $(this).find("a.name").prop("href");
+    });
+    $("body.study_sessions-index").delegate(".study_session.edit","dblclick",function(){
+      var modal_id = "#" + $(this).prop("id") + "_modal";
+      $(modal_id).modal({keyboard: true,
+                         show: true,
+                         backdrop: true});
+      $(modal_id + " select").addClass("chzn-select").chosen();
+    });
+    
+    var closeModal = function(modal){
+      modal.modal("hide");
+    };
+
+    $(".study_session_modal a.cancel_popover").click(function(e){
+      var button = $(this);
+      var modal = button.closest(".study_session_modal");
+      closeModal(modal);
+      e.preventDefault();
+    });
+
+    $("#select_all").click(function(e){
+      $(".study_session").addClass("selected");
+      $(".buttons .select").toggle();
+      toggleActionButtons();
+      e.preventDefault();
+    });
+    $("#select_none").click(function(e){
+      $(".study_session").removeClass("selected");
+      $(".buttons .select").toggle();
+      toggleActionButtons();
+      e.preventDefault();
+    });
+    $("#edit_all").click(function(e){
+      $("a.edit").show();
+      toggleActionButtons();
+      $("a.non_edit,#select_none").hide();
+      $(".study_session").addClass("edit");
+      $(".study_session").unbind('click');
+      $(".study_session").click(function(e){
+        $(this).toggleClass("selected");
+        toggleActionButtons();
+        e.preventDefault();
+      });
+      $("h3").toggle();
+      e.preventDefault();
+    });
+    $("#cancel_edit").click(function(e){
+      $("a.edit").hide();
+      $("a.non_edit").show();
+      $(".study_session").removeClass("edit").removeClass("selected");
+      $(".study_session a").unbind("click");
+      $("h3").toggle();
+      e.preventDefault();
+    });
+  });
+</script>
