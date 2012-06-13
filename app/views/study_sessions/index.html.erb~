@@ -1,4 +1,5 @@
 <div class="notebook_list_container <%= items_layout %>">
+  <%= link_to "Start A Studyhall", new_study_session_path(:link_id => "invite_study_session_button"), :class => "btn primary popover_button non_edit", :id => "invite_study_session_button", :remote => true %>
   <% if @study_sessions.empty? %>
     <% if @filtered_results %>
       <center>

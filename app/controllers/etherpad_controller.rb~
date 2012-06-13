@@ -1,20 +1,5 @@
 
 class EtherpadController < ApplicationController
-    # /etherpad
-    def index
-      # The idea is that your users are probably members of some kind of groups.
-      # These groups can be mapped to EtherpadLite Groups. List all the user's groups.
-      @app_groups = current_user.study_session
-    end
-
-    # /etherpad/groups/:id
-    def group
-      ether = EtherpadLite.connect('http://localhost:3333', 'SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
-      @app_group = StudySession.find(params[:id])
-      # Map your app's group to an EtherpadLite Group, and list all its pads
-      group = ether.group("my_app_group_#{@app_group.id}")
-      @pads = group.pads
-    end
 
     # /etherpad/pads/:ep_group_id/:ep_pad_name
     def pad
@@ -32,7 +17,8 @@ class EtherpadController < ApplicationController
       end
       session[:ep_sessions][@group.id] = sess.id
       # Set the EtherpadLite session cookie. This will automatically be picked up by the jQuery plugin's iframe.
-      cookies[:sessionID] = {:value => sess.id, :domain => ".yourdomain.com"}
+      cookies[:sessionID] = {:value => sess.id, :domain => ".localhost:3000"}
+      $('#etherpad').pad({'padId':"<%= pad.name() %>"});
     end
   end
 end

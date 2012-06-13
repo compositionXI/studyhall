@@ -16,12 +16,13 @@
   <% end %>
 	<div class="links-holder">
 	  <div class="row">
-	  <%= link_to content_tag(:span, 'Start a Studyhall'), new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary", :remote => true %>
 	  <%= link_to content_tag(:span, "Upload A Document"), notes_path(:trigger_upload => 1), :class => "btn primary", :id => "upload_note_button" %> 
-	  <%= link_to content_tag(:span, "Take Notes"), new_note_path, :class => "btn primary" %>
+	  <%= link_to content_tag(:span, "Take Notes"), new_note_path, :class => "btn primary" %> 
+	  <%= link_to content_tag(:span, 'Start a Studyhall'), new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary", :remote => true %>
 	  </div>
 	</div>
 </header>
+		  <%= link_to content_tag(:span, 'Start a Studyhall'), new_study_session_path(:link_id => "invite_study_session_button"), :id => "invite_study_session_button", :class => "btn primary", :remote => true %>
 <aside class="sidebar">
 	<section class="tourable courses <%#= items_layout %>" data-popover-id="courses_tour">
 		<div class="heading">

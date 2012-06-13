@@ -20,10 +20,30 @@ class StudySessionsController < ApplicationController
     raise User::NotAuthorized unless @study_session.joinable_by?(current_user)
     @token = @study_session.generate_token(current_user)
     @show = true
+    
+    ether = EtherpadLite.connect('http://localhost:3333', 'SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
+    # Get the EtherpadLite Group and Pad by id
+    @etherpad_group = ether.group(@study_session.id)
+    @pad = @etherpad_group.get_pad(@study_session.id)
+    debugger
+    author = ether.author("my_app_user_#{current_user.id}", :name => current_user.name)
+      # Get or create an hour-long session for this Author in this Group
+    if session[:ep_sessions][@etherpad_group.id] == nil
+      sess = @etherpad_group.create_session(author, 60)
+    else
+      sess = ether.get_session(session[:ep_sessions][@etherpad_group.id])
+    end 
+    if sess.expired?
+      sess.delete
+      sess = @etherpad_group.create_session(author, 60)
+    end
+      session[:ep_sessions][@etherpad_group.id] = sess.id
+      # Set the EtherpadLite session cookie. This will automatically be picked up by the jQuery plugin's iframe.
+      debugger
+      cookies[:sessionID] = {:value => sess.id}
   end
   
   def new
-    debugger
     @modal_link_id = params[:link_id]
     @study_session = StudySession.new
     @study_session.buddy_ids = [params[:id]]
@@ -41,6 +61,7 @@ class StudySessionsController < ApplicationController
   
   def create
     @study_session = current_user.study_sessions.new(params[:study_session])
+    #Create a new etherpad for the study session using Ruby client for etherpad, see http://jordanhollinger.com/docs/ruby-etherpad-lite/   
     @study_session.init_opentok
     buddyids = params[:study_session][:buddy_ids]
     buddyids.shift
@@ -59,6 +80,12 @@ class StudySessionsController < ApplicationController
         render action: 'new'
       end
     elsif @study_session.save
+      #Connect to etherpadlite instance
+      ether = EtherpadLite.connect('http://localhost:3333', 'SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
+      #Create etherpad group
+      @etherpad_group = ether.create_group({:mapper => @study_session.id})
+      @pad = @etherpad_group.create_pad(@study_session.id, {:text => 'asdasds'})
+      debugger
       #push_broadcast :studyhall_created, :name => @study_session.name
       redirect_to @study_session
     else

@@ -39,15 +39,16 @@
   </div>
 </div>
 <%
-ether = EtherpadLite.connect('http://localhost:3333', 'SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
-pad = ether.pad(6)
 %>
 <div id="upload_form">
   <div id="etherpad">
   </div>    
 </div>
 <script>
-  $('#etherpad').pad({'padId':"<%= pad.name() %>"});
+<% @name = @pad.id
+debugger
+%>
+  $('#etherpad').pad({'padId':'<%= @name %>'});
 </script>
 <div class="clearfix"></div>
 

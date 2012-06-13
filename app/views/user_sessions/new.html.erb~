@@ -1,0 +1,31 @@
+<% if flash[:notice] %>
+  <div class="alert alert-message success span7">
+    <a class="close" href="#">×</a>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+  <div class="single-form">
+  <div class="header"><h1>Welcome Back!</h1>
+  <% link_to "Log in using Facebook", "/auth/facebook", id: "facebook_login" %></div>
+  <%= form_for @user_session, :url => {:action => "create"}, :html => {:class => "form-stacked"} do |f| %>
+    <%= f.error_messages %>
+    <div class="clearfix">
+      <%= f.label :email %>
+      <div class="input"><%= f.text_field :email %></div>
+    </div>
+    <div class="clearfix" style="position:relative">
+      <%= f.label :password%>
+      <div class="input"><%= f.password_field :password%></div>
+    </div>
+    <div class="clearfix">
+      <div class="input checkbox"><%= f.check_box :remember_me %></div>
+      <%= f.label :remember_me, :class => 'remember-me-label'%>
+      <%= link_to "Forgot?", new_password_reset_path, :id => "forgot_link" %>
+    </div>
+    <div>
+      <%= f.submit "Log In", :class => "btn primary" %>
+      <%= link_to "Sign Up", new_user_path, :class => "sign-up" if @current_user.nil? || @current_user.admin? %>
+    </div> 
+  <% end %>
+  </div>
+  
