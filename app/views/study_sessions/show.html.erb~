@@ -40,13 +40,10 @@
 </div>
 <%
 %>
-<div id="upload_form">
-  <div id="etherpad">
-  </div>    
-</div>
+<div id="etherpad">
+</div>    
 <script>
 <% @name = @pad.id
-debugger
 %>
   $('#etherpad').pad({'padId':'<%= @name %>'});
 </script>

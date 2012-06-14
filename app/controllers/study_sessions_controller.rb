@@ -25,7 +25,6 @@ class StudySessionsController < ApplicationController
     # Get the EtherpadLite Group and Pad by id
     @etherpad_group = ether.group(@study_session.id)
     @pad = @etherpad_group.get_pad(@study_session.id)
-    debugger
     author = ether.author("my_app_user_#{current_user.id}", :name => current_user.name)
       # Get or create an hour-long session for this Author in this Group
     if session[:ep_sessions][@etherpad_group.id] == nil
@@ -39,7 +38,6 @@ class StudySessionsController < ApplicationController
     end
       session[:ep_sessions][@etherpad_group.id] = sess.id
       # Set the EtherpadLite session cookie. This will automatically be picked up by the jQuery plugin's iframe.
-      debugger
       cookies[:sessionID] = {:value => sess.id}
   end
   
@@ -85,7 +83,6 @@ class StudySessionsController < ApplicationController
       #Create etherpad group
       @etherpad_group = ether.create_group({:mapper => @study_session.id})
       @pad = @etherpad_group.create_pad(@study_session.id, {:text => 'asdasds'})
-      debugger
       #push_broadcast :studyhall_created, :name => @study_session.name
       redirect_to @study_session
     else

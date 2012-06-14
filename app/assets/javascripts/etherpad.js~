@@ -5,14 +5,14 @@
       'host'              : 'http://localhost:3333',
       'baseUrl'           : '/p/',
       'showControls'      : true,
-      'showChat'          : false,
+      'showChat'          : true,
       'showLineNumbers'   : false,
-      'userName'          : 'unnamed',
+      'userName'          : current_user.first_name + ' ' + current_user.last_name,
       'useMonospaceFont'  : false,
       'noColors'          : false,
       'hideQRCode'        : false,
-      'width'             : 800,
-      'height'            : 650,
+      'width'             : 640,
+      'height'            : 720,
       'border'            : 0,
       'borderStyle'       : 'solid',
       'toggleTextOn'      : 'Disable Rich-text',
@@ -46,7 +46,7 @@
           iFrameLink = iFrameLink +'; border-style:'+settings.borderStyle;
 //          iFrameLink = iFrameLink +'; width:'+settings.width;
 //          iFrameLink = iFrameLink +'; height:'+settings.height;
-          iFrameLink = iFrameLink +';" width="'+ '100%';//settings.width;
+          iFrameLink = iFrameLink +';" width="'+ settings.width;
           iFrameLink = iFrameLink +'" height="'+ settings.height; 
           iFrameLink = iFrameLink +'"></iframe>';
       
