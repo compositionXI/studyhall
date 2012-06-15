@@ -83,6 +83,7 @@
     height: 720px
     padding: 0px
     background: #FFF
+    border-radius: 3px
   .container
 
 .study_session
@@ -166,3 +167,6 @@
       #browser_video
         outline: none
         border: none
+iframe
+  scrollbar-face-color: #75EA00
+  scrollbar-track-color: #000
