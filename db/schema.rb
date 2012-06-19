@@ -134,6 +134,11 @@ ActiveRecord::Schema.define(:version => 20120608185527) do
   add_index "enrollments", ["offering_id"], :name => "index_enrollments_on_offering_id"
   add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
 
+  create_table "etherpads", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "extracurriculars", :force => true do |t|
     t.string   "name"
     t.string   "type"

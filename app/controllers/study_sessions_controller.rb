@@ -21,8 +21,8 @@ class StudySessionsController < ApplicationController
     @token = @study_session.generate_token(current_user)
     @show = true
     
-    ether = EtherpadLite.connect('staging01.c45577.blueboxgrid.com:9001', '
-WTMWI8sTBWnpthKl1o6KUSe9rN4O6zq6')
+    ether = EtherpadLite.connect('localhost:3333', '
+SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
     # Get the EtherpadLite Group and Pad by id
     @etherpad_group = ether.group(@study_session.id)
     @pad = @etherpad_group.get_pad(@study_session.id)
@@ -80,8 +80,8 @@ WTMWI8sTBWnpthKl1o6KUSe9rN4O6zq6')
     elsif @study_session.save
       #Connect to etherpadlite instance - please see http://jordanhollinger.com/docs/ruby-etherpad-lite/ for detailed documentation
       #args are host, APIKEY
-      ether = EtherpadLite.connect('staging01.c45577.blueboxgrid.com:9001', '
-WTMWI8sTBWnpthKl1o6KUSe9rN4O6zq6')
+      ether = EtherpadLite.connect('localhost:3333', '
+SvN2OzdQaMhYGrZ8iDVAWw60XETVRJu6')
       #Create etherpad group
       @etherpad_group = ether.create_group({:mapper => @study_session.id})
       @pad = @etherpad_group.create_pad(@study_session.id, {:text => ' '})

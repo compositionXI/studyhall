@@ -57,6 +57,7 @@ Studyhall::Application.routes.draw do
     end
   end
   resources :classes do
+    get :autocomplete_course_title, :on => :collection
     resources :posts do
       member do
         get "filter"

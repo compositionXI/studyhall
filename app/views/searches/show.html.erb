@@ -40,7 +40,7 @@
       <%= f.label "Search" %>
     </div>
     <div>
-      <%= f.text_field :keywords, autocomplete: "off" %>
+      <%= f.text_field :keywords, :autocomplete => welcome_autocomplete_course_title_path %>
     </div>
     <div>
       <%= f.submit "Search", class: 'btn primary' %>

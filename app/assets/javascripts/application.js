@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require autocomplete-rails
 //= require jquery.remotipart
 //= require jquery.expander.min.js
 //= require jquery.remotipart

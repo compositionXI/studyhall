@@ -1,6 +1,5 @@
 class SearchesController < ApplicationController
-  
-  before_filter :set_action_bar, :only => [:show]
+  autocomplete :course, :title  before_filter :set_action_bar, :only => [:show]
 
   def create
     if params[:search][:keywords].present?
