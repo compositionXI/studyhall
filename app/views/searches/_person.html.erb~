@@ -1,0 +1,25 @@
+<li class="search_result person">
+  <%= link_to image_tag(user.avatar_url(:medium)), user, :class => "avatar" %>
+  <h3>
+    <%= link_to user.name, user %>
+  </h3>
+  <% if current_user.follows?(user) %>
+    <%= link_to "Unfollow", unfollow_path(user), :class => "btn small unfollow_button right", :remote => true, :method => :delete %>
+    <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn small hidden follow_button right", :remote => true, :method => :post %>
+  <% else %>
+    <%= link_to "Unfollow", unfollow_path(user), :class => "btn small hidden right unfollow_button", :remote => true, :method => :delete %>
+    <%= link_to "Follow", follow_path(:followed_user_id => user.id), :class => "btn right small follow_button", :remote => true, :method => :post %>
+  <% end %>
+  <dl class="info narrow">
+    <dt>Rating</dt><dd><%= user.plusminus %></dd>
+    <dt>Shared Notes</dt><dd><%= user.notes.shared.count %></dd>
+  </dl>
+  <dl class="info w_grad_year">
+    <dt>School</dt>
+      <dd>
+       <%= "#{user.school.name} #{user.grad_year}" if user.school %>
+      </dd>
+    <dt>Courses</dt><dd><%= courses_list(user) %><dd>
+  </dl>
+  <div class="clearfix"></div>
+</li>

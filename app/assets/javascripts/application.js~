@@ -7,7 +7,6 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require autocomplete-rails
 //= require jquery.remotipart
 //= require jquery.expander.min.js
 //= require jquery.remotipart
@@ -133,8 +132,14 @@ var quickSearch = function(){
   }
 }
 
-$(document).ready(function(){
+function get_results(request, response){
+  var params = {keywords: request.term};
+  $.get("/searches/autocomplete", params, function(data){ response(data);}, "json");
+}
 
+$(document).ready(function(){
+  $("#keywords").autocomplete({ source: get_results, minLength: 2 }); 
+  $("#topbar_keywords").autocomplete({ source: get_results, minLength: 2 }); 
   //Disable following any anchor tag with the "disabled" class
   $("body").delegate("a,input[type='submit']","click", function(e){
     if($(this).hasClass("disabled")){

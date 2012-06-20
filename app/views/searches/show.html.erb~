@@ -37,10 +37,9 @@
   <h2>Sorry, we couldn't find that. Try again</h2>
   <%= form_for Search.new, :url => searches_path do |f| %>
     <div>
-      <%= f.label "Search" %>
     </div>
     <div>
-      <%= f.text_field :keywords, :autocomplete => welcome_autocomplete_course_title_path %>
+      <%= f.text_field :keywords, :id => "keywords", :class => "ui-autocomplete-input" %>
     </div>
     <div>
       <%= f.submit "Search", class: 'btn primary' %>
