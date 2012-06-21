@@ -2,7 +2,7 @@
   <%= link_to image_tag(user.avatar_url(:medium)), user, :class => "avatar" %>
   <div class="main_info">
     <h3><%= link_to user.name, user %></h3>
-    <label margin-left="15px"><h6><%= user.school.name if user.school%></h6></label>
+    <label><h6><%= user.school.name if user.school%></h6></label>
   </div>
   <% if current_user.follows?(user) %>
     <%= link_to "Unfollow", unfollow_path(user), :class => "btn small unfollow_button right", :remote => true, :method => :delete %>
