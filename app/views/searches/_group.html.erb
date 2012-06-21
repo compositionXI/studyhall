@@ -1,19 +1,21 @@
-<li class="search_result person">
+<li class="search_result group">
   <%= link_to image_tag(group.avatar_url(:medium)), group, :class => "avatar" %>
-  <h3>
-    <%= link_to group.group_name, group %>
-  </h3>
-  <dl class="info narrow">
-    <dt>Group Members</dt><dd><%= group.members.count %></dd>
-  </dl>
-  <dl class="info narrow">
-    <dt>Shared Documents</dt><dd><%= group.notes.count %></dd>
-  </dl>
-  <dl class="info narrow">
-    <dt>Administrators</dt><dd><%= group.admins.count %></dd>
-  </dl>
-  <dl class="info narrow">
-    <dt>Privacy</dt><dd><%= group.privacy_option.to_s.capitalize! %><dd>
-  </dl>
+  <div class="main_info">
+  <h3><%= link_to group.group_name, group %></h3>
+  <label margin-left="15px"><h6>Created by <%= link_to(group.owner.name, group.owner) %></h6></label>
+  </div>
+    <div></div>
+    <dl class="info narrow">
+      <dt>Members</dt><dd><%= group.members.count %></dd>
+    </dl>
+    <dl class="info narrow">
+      <dt>Documents</dt><dd><%= group.notes.count %></dd>
+    </dl>
+    <dl class="info narrow">
+      <dt>Admins</dt><dd><%= group.admins.count %></dd>
+    </dl>
+    <dl class="info narrow">
+      <dt>Privacy</dt><dd><%= group.privacy_option.to_s.capitalize! %><dd>
+    </dl>
   <div class="clearfix"></div>
 </li>

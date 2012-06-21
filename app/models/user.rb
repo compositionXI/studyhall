@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   has_many :calendars
   
   has_many :searches
+  has_one :group, :foreign_key => :owner_id
   
   scope :active_users, where(:active => true)
 

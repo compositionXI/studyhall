@@ -90,6 +90,7 @@ Studyhall::Application.routes.draw do
     get 'extracurriculars'
     get "buddies"
     delete "drop_class/:offering_id", :action => "drop_class", :as => "drop_class"
+    delete "drop_class_searches/:offering_id", :action => "drop_class_searches", :as => "drop_class_searches"
     post "add_class/:offering_id", :action => "add_class", :as => "add_class"
     get "block/:blocked_user_id", :action => "block", :as => "block"
     get "account"

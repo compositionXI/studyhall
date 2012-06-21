@@ -3,11 +3,18 @@
   <h3><%= link_to("#{offering.course.title} ", "/classes/#{offering.to_param}", :class => "name")%></h3>
   <label><h6><%= offering.term%></h6></label>
   <% if offering.instructor.first_name = "undefined" %>
-    <label><h6>No Instructor Listed</h6></label>
+  <label><h6>No Instructor Listed</h6></label>
   <% else %>  
   <label><h6><%= "Prof " + offering.instructor.first_name[0,1] + ". " + offering.instructor.last_name%></h6></label>
   <% end %>
   </div>
+  <% if current_user.courses.exists?(offering.course.id) %>
+    <%= link_to "Drop this class","/users/171/drop_class_searches/#{offering.id}", :class => "btn right", :id => "add_class_#{offering.id}", :remote => true, :method => :delete %>
+    <%= link_to "Add this class", "/users/171/add_class/#{offering.id}", :class => "btn hidden right", :id => "drop_class_#{offering.id}", :remote => true, :method => :post %>
+  <% else %>
+    <%= link_to "Drop this class", "/users/171/drop_class_searches/#{offering.id}", :class => "btn hidden right", :id => "drop_class_#{offering.id}", :remote => true, :method => :delete %>
+    <%= link_to "Add this class","/users/171/add_class/#{offering.id}", :class => "btn right", :id => "add_class_#{offering.id}", :remote => true, :method => :post %>
+  <%end%>
     <dl class="info narrow">
       <dt>Course Number</dt><dd><%= offering.course.number %></dd>
       <dt>Department</dt><dd><%= offering.course.department %></dd>

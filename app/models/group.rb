@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
 
   has_many :member_requests
   has_many :posts
+  belongs_to :owner, :class_name => "User"
 
   has_and_belongs_to_many :notes
   has_and_belongs_to_many :members, :join_table => :members_groups, :class_name => "User"

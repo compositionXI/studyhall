@@ -1,14 +1,18 @@
 <li class="search_result note">
   <div>
   <h3><%= link_to truncate(note.name, length: 100), note%></h3>
-  <label><h6><%=note.created_at.strftime("Authored %m/%d/%Y by ")%><%= link_to(note.user.name, note.user) %></h6></label>
+  <label><h6>Authored by <%= link_to(note.user.name, note.user) %></h6></label>
   <% if current_user.can_view?(note) %>
     <%= link_to "VIEW", note_path(note), class: 'btn right'%>
   <% else %>
-    <%= link_to "REQUSET ACCESS", request_access_note_path(note), remote: true, class: 'btn right request_note_access_button' %>
+    <%= link_to "REQUEST ACCESS", request_access_note_path(note), remote: true, class: 'btn right request_note_access_button' %>
   <% end %>
   </div>
   <p>
+    <dl class="info narrow">
+      <dt>Authored</dt>
+      <dd><%= note.created_at.strftime("%m/%d/%Y") %></dd>
+    </dl>
     <dl class="info narrow">
       <dt>Notebook</dt>
       <% if note.notebook.shareable %>
@@ -19,7 +23,7 @@
     </dl>
     <dl class="info narrow">
       <dt>Course</dt>
-      <dd><div class="note_content"><%= note.course.title %></div></dd>
+      <dd><%= note.course.title %></dd>
     </dl>
   </p>
   <div class="clearfix"></div>

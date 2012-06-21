@@ -7,7 +7,11 @@
 //     &.active
 //       a:hover
 //         background: transparent
-//         border-bottom: 0  
+//         border-bottom: 0 
+.hidden
+  display: none 
+h6
+  font-size: 1.3em
 .tabs.categories
   li
     background: $silverDark
@@ -66,8 +70,11 @@
     float: none
     width: auto
     .note
+      p
+        margin: 0px
       div
         height: 70px
+        margin-bottom: 0px
       border-bottom: 1px dashed #CCC
       margin-bottom: 15px
       dl
@@ -88,10 +95,47 @@
           padding: 0 10px
           opacity: .9
           overflow-y: hidden
+  .group
+    float: none
+    width: auto
+    .main_info
+      float: left
+      width: 300px
+      height: 50px
+    .avatar
+      float: left
+      padding-right: 30px
+    p
+      margin: 0px
+    div
+      height: 70px
+    div.clearfix
+      height: 40px
+    border-bottom: 1px dashed #CCC
+    margin-bottom: 15px
+    dl
+      padding-right: 15px
+      float: left
+      width: 200px
+      margin-bottom: 0px
+      dd
+        margin: 0px
+        ul
+          margin: 0px
+    li
+      display: inline
+      background: #EEE
+      padding: 3px
+      margin: 2px
+      
   &.people
     .person
       border-bottom: 1px dashed #CCC
       margin-bottom: 15px
+      div
+        height: 70px
+      div.clearfix
+        height: 50px
       a.avatar
         float: left
       .hidden

@@ -1,0 +1,2 @@
+$("#drop_class_<%=@offering.id%>}").addClass("hidden");
+$("#add_class_<%=@offering.id%>}").removeClass("hidden");
