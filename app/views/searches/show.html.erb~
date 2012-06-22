@@ -20,8 +20,9 @@
     <% end %>
   </ul>
   <ul id="notes_tab" class="notes search_results">
+    <%= render :partial =>'sort_form', :locals => {:type => 'note', :keywords => @search.keywords}%>
     <% if @search.notes_count > 0 %>
-      <%= render 'notes' %>
+      <%= render 'notes'%>
     <% else %>
       <p>No relevant results were found.</p>
     <% end %>
@@ -63,7 +64,7 @@
         e.preventDefault();
       });
     });
-    
+    <% @sorted = @search.notes(params[:page]).results.sort_by {|note| note.name} %>
     $(".note_content").expander();
   });
 </script>

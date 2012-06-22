@@ -134,7 +134,7 @@ Studyhall::Application.routes.draw do
   end
 
   # get "/searches" => "searches#create", :as => "search", :format => :js
-
+  match '/searches/sort' => "searches#sort"
   resources :authentications
   match '/auth/:provider/callback' => 'authentications#create'
   match '/auth/failure' => 'user_sessions#new'

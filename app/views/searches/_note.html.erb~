@@ -1,7 +1,7 @@
 <li class="search_result note">
   <div>
   <h3><%= link_to truncate(note.name, length: 100), note%></h3>
-  <label><h6>Authored By <%= link_to(note.user.name, note.user) %></h6></label>
+  <label><h6>Authored by <%= link_to(note.user.name, note.user) %></h6></label>
   <% if current_user.can_view?(note) %>
     <%= link_to "VIEW", note_path(note), class: 'btn right'%>
   <% else %>

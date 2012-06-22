@@ -1,3 +1,4 @@
+
 <% @search.notes(params[:page] || 1).results.each do |search_result| %>
   <%= render :partial => "note", :locals => {:note => search_result} %>
 <% end %>

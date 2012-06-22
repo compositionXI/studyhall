@@ -46,6 +46,10 @@ class Note < ActiveRecord::Base
     text :notebook_name
     text :course_name
     boolean :shareable
+    string :name
+    string :course_name
+    string :owner_name
+    time :created_at
   end
 
   def privacy_option

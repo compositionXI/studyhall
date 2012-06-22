@@ -1,0 +1,6 @@
+<%= form_tag({:controller => "searches", :action => "sort"}, :remote => true) do %>
+  <%= hidden_field_tag 'keywords', keywords %>
+  <%= hidden_field_tag 'type', type %>
+  <%= select_tag "options", options_for_select([["Title","name"],["Author","owner"],["Course","course"],["Date authored","created"]]) %>
+  <%= submit_tag "Sort", :class => "btn primary"%>
+<% end %>

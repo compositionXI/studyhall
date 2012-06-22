@@ -1,3 +1,4 @@
+<%debugger%>
 <% @search.courses(params[:page] || 1).results.each do |search_result| %>
   <% search_result.offerings.each do |offering| %>
         <%= render :partial => "course", :locals => {:offering => offering} %>

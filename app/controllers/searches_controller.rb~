@@ -25,6 +25,33 @@ class SearchesController < ApplicationController
   
   include ActionView::Helpers::TextHelper
   
+  def sort
+    debugger
+    @type = params[:type]
+    @field = params[:options]
+    @keywords = params[:keywords]
+    if @type = 'notes'
+      @search = Sunspot.search Note do 
+        fulltext params[:keywords]
+        order_by :created_at, :desc
+        paginate :page => 1, :per_page => 5
+      end
+      #if @field = 'name'
+      #  @search = @search.results.sort_by {|note| note.name}
+      #elsif @field = 'owner'
+      #  @search = @search.results.sort_by {|note| note.owner.last_name}
+      #elsif @field = 'course'
+      #  @search = @search.results.sort_by {|note| note.course.title}
+      #else 
+      #  @search = @search.sort_by {|note| note.created_at}
+      #end
+    end
+    debugger
+    respond_to do |format|
+      format.html {render @type}
+      format.js 
+    end
+  end 
   def autocomplete
     @search = Sunspot.search Course, User do
       fulltext params[:keywords]
