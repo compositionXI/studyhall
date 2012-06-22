@@ -1,4 +1,1 @@
-<%debugger%>
-$(".notes").replace("<%= escape_javascript(
-  render "notes_sorted", :locals => {:search => @search, :keywords => @keywords}
-) %>");
+$(".notes").html("<%= escape_javascript(render "notes_sorted") %>");

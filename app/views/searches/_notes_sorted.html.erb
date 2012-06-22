@@ -1,5 +1,3 @@
-<%= render :partial =>'sort_form', :locals => {:type => 'note', :keywords => @keywords}%>
-<% @search.results.each do |search_result| %>
+<% @sorted.each do |search_result| %>
   <%= render :partial => "note", :locals => {:note => search_result} %>
 <% end %>
-<%= link_to_next_page @search.results, "See more results", class: 'more_results', remote: true, params: { category: "notes"} %>

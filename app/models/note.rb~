@@ -49,6 +49,7 @@ class Note < ActiveRecord::Base
     string :name
     string :course_name
     string :owner_name
+    string :notebook_name
     time :created_at
   end
 

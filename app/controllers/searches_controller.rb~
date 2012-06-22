@@ -26,25 +26,32 @@ class SearchesController < ApplicationController
   include ActionView::Helpers::TextHelper
   
   def sort
-    debugger
     @type = params[:type]
     @field = params[:options]
     @keywords = params[:keywords]
     if @type = 'notes'
-      @search = Sunspot.search Note do 
+      @search = Note.search do 
         fulltext params[:keywords]
-        order_by :created_at, :desc
+        if @field == 'name'
+          order_by :name, :asc
+        elsif @field == 'owner' 
+          order_by :owner_name, :asc
+        elsif @field == 'course'
+          order_by :course_name, :asc
+        else
+          order_by :created_at, :asc
+        end
         paginate :page => 1, :per_page => 5
       end
-      #if @field = 'name'
-      #  @search = @search.results.sort_by {|note| note.name}
-      #elsif @field = 'owner'
-      #  @search = @search.results.sort_by {|note| note.owner.last_name}
-      #elsif @field = 'course'
-      #  @search = @search.results.sort_by {|note| note.course.title}
-      #else 
-      #  @search = @search.sort_by {|note| note.created_at}
-      #end
+      if @field == 'name'
+        @sorted = @search.results.sort_by {|note| note.name}
+      elsif @field == 'owner'
+        @sorted = @search.results.sort_by {|note| note.owner.last_name}
+      elsif @field == 'course'
+        @sorted = @search.results.sort_by {|note| note.course.title}
+      else 
+        @sorted = @search.results.sort_by {|note| note.created_at}
+      end
     end
     debugger
     respond_to do |format|
