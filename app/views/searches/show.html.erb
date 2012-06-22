@@ -13,6 +13,7 @@
     <% end %>
   </ul>
   <ul id="courses_tab" class="courses search_results">
+    <%= render :partial =>'sort_form', :locals => {:type => 'course', :keywords => @search.keywords}%>
     <% if @search.courses_count > 0 %>
       <%= render 'courses' %>
     <% else %>

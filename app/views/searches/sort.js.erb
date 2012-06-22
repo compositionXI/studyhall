@@ -1,1 +1,5 @@
-$(".notes").html("<%= escape_javascript(render "notes_sorted") %>");
+<% if @type == "note" %>
+  $(".notes").html("<%= escape_javascript(render "notes_sorted") %>");
+<% elsif @type == "course" %>
+  $(".courses").html("<%= escape_javascript(render "courses_sorted") %>");
+<% end %>

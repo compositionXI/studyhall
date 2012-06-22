@@ -1,6 +1,10 @@
 <%= form_tag({:controller => "searches", :action => "sort"}, :remote => true) do %>
   <%= hidden_field_tag 'keywords', keywords %>
   <%= hidden_field_tag 'type', type %>
-  <%= select_tag "options", options_for_select([["Title","name"],["Author","owner"],["Course","course"],["Date authored","created"]]) %>
+  <%if type == "course"%>
+    <%= select_tag "c_options", options_for_select([["Course title","title"],["Department name","dept"]], ["Course title","title"]) %>
+  <%elsif type == "note"%>
+    <%= select_tag "n_options", options_for_select([["Note name","name"],["Author name","owner"],["Course title","course"],["Date authored","created"]], ["Note name","name"]) %>  <%end%>
   <%= submit_tag "Sort", :class => "btn primary"%>
 <% end %>
+

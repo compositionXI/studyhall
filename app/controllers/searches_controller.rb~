@@ -27,38 +27,71 @@ class SearchesController < ApplicationController
   
   def sort
     @type = params[:type]
-    @field = params[:options]
     @keywords = params[:keywords]
-    if @type = 'notes'
-      @search = Note.search do 
-        fulltext params[:keywords]
-        if @field == 'name'
-          order_by :name, :asc
-        elsif @field == 'owner' 
-          order_by :owner_name, :asc
-        elsif @field == 'course'
-          order_by :course_name, :asc
-        else
-          order_by :created_at, :asc
-        end
-        paginate :page => 1, :per_page => 5
-      end
-      if @field == 'name'
-        @sorted = @search.results.sort_by {|note| note.name}
-      elsif @field == 'owner'
-        @sorted = @search.results.sort_by {|note| note.owner.last_name}
-      elsif @field == 'course'
-        @sorted = @search.results.sort_by {|note| note.course.title}
-      else 
-        @sorted = @search.results.sort_by {|note| note.created_at}
-      end
+    if @type == "note"
+      @field = params[:n_options]
+      sort_notes
+    elsif @type == "course"
+      @field = params[:c_options]
+      sort_courses
     end
     debugger
     respond_to do |format|
       format.html {render @type}
       format.js 
     end
+    @id = params[:id]
   end 
+  
+  def sort_notes
+    if @field == "name"
+      @search = Note.search do 
+        fulltext params[:keywords]
+        order_by :name, :asc
+        paginate :page => params[:page], :per_page => 5
+      end
+    elsif @field == "created"
+      @search = Note.search do 
+        fulltext params[:keywords]
+        order_by :created_at, :desc
+        paginate :page => params[:page], :per_page => 5
+      end
+    elsif @field == "owner"
+      @search = Note.search do 
+        fulltext params[:keywords]
+        order_by :owner_name, :desc
+        paginate :page => params[:page], :per_page => 5
+      end
+    elsif @field == "course"
+      @search = Note.search do 
+        fulltext params[:keywords]
+        order_by :course_name, :asc
+        paginate :page => params[:page], :per_page => 5
+      end
+    else
+      @field = "BAD"
+    end
+    @search
+  end
+  def sort_courses
+    if @field == "title"
+      @search = Course.search do 
+        fulltext params[:keywords]
+        order_by :title, :asc
+        paginate :page => params[:page], :per_page => 5
+      end
+    elsif @field == "dept"
+      @search = Course.search do 
+        fulltext params[:keywords]
+        order_by :department, :asc
+        paginate :page => params[:page], :per_page => 5
+      end
+    else
+      @field = "BAD"
+    end
+    @search
+  end
+  
   def autocomplete
     @search = Sunspot.search Course, User do
       fulltext params[:keywords]

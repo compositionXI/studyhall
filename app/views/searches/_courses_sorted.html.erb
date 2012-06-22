@@ -1,0 +1,12 @@
+<%= form_tag({:controller => "searches", :action => "sort"}, :remote => true) do %>
+  <%= hidden_field_tag 'keywords', @keywords %>
+  <%= hidden_field_tag 'type', 'course' %>
+  <%= select_tag "c_options", options_for_select([["Course title","title"],["Department name","dept"]], ["Course title","title"]) %>
+  <%= submit_tag "Sort", :class => "btn primary"%>
+<% end %>
+<% @search.results.each do |search_result| %>
+  <% search_result.offerings.each do |offering| %>
+        <%= render :partial => "course", :locals => {:offering => offering} %>
+  <% end %>
+<% end %>
+<%= paginate @search.results, :remote => true%>

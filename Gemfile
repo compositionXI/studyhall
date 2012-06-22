@@ -1,5 +1,4 @@
 source 'http://rubygems.org'
-
 gem 'rack', '>= 1.4.0'
 gem 'rails', '~> 3.2.0.rc2'
 gem 'mysql2'
@@ -8,6 +7,7 @@ gem 'activesupport'
 gem 'amazon-ecs'
 gem 'rails_autolink'
 gem 'etherpad-lite'
+gem 'will_paginate', '~> 3.0.0'
 gem 'bcrypt-ruby', '= 3.0.0' # pinned to 3.0.0 until the 3.0.1 segfault is resolved.
 gem 'authlogic'
 #gem 'omniauth', '~> 1.0' # for facebook

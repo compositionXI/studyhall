@@ -15,6 +15,29 @@ class Offering < ActiveRecord::Base
   
   attr_accessible :users, :enrollments, :instructor_id
   
+  searchable :auto_remove => true do
+    text :name
+    text :department do
+      course.department
+    end
+    text :derived_name do
+      course.derived_name
+    end
+    text :school
+    text :instructor do
+      instructor.full_name
+    end
+    string :name
+    string :department do
+      course.department
+    end
+    string :school
+    string :instructor_last_name do
+      instructor.last_name
+    end
+  end
+  
+  
   def course_listing
     Rails.cache.fetch("course-listing-#{course.id}-#{course.updated_at.to_i}-#{instructor.try(:updated_at).to_i}") do
       items = []
@@ -33,6 +56,7 @@ class Offering < ActiveRecord::Base
   def name
     course.title
   end
+  
 
   def permalink
     "#{course.number} #{course.title} #{instructor.try(:full_name)}"

@@ -490,3 +490,4 @@ DEPENDENCIES
   transitions
   uglifier
   whenever
+  will_paginate (~> 3.0.0)

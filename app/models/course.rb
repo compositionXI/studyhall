@@ -12,6 +12,8 @@ class Course < ActiveRecord::Base
     text :derived_name
     text :school_name
     text :offering_instructors
+    string :title
+    string :department
     integer :school_id
   end
 

@@ -40,16 +40,20 @@ class Note < ActiveRecord::Base
   
   
   searchable :auto_remove => true do
-    text :name
+    text :name do
+      name.downcase
+    end
     text :content
     text :owner_name
     text :notebook_name
     text :course_name
     boolean :shareable
-    string :name
+    string :name do
+      name.downcase
+    end
     string :course_name
     string :owner_name
-    string :notebook_name
+    string :notebook_name 
     time :created_at
   end
 
